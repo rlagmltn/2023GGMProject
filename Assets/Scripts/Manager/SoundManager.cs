@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : Manager<SoundManager>
+public class SoundManager : MonoBehaviour
 {
-    protected override void Awake()
+    protected void Awake()
     {
 
     }
 
-    protected override void Start()
+    protected void Start()
     {
 
     }

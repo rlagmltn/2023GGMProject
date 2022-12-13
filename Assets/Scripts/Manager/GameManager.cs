@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : Manager<GameManager>
+public class GameManager : MonoBehaviour
 {
-    protected override void Awake()
+    protected void Awake()
     {
 
     }
 
-    protected override void Start()
+    protected void Start()
     {
 
     }
 
-    protected override void Update()
+    protected void Update()
     {
 
     }

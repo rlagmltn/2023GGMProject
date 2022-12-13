@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : Manager<InputManager>
+public class InputManager : MonoBehaviour
 {
-    protected override void Awake()
+    protected void Awake()
     {
 
     }
 
-    protected override void Start()
+    protected void Start()
     {
 
     }

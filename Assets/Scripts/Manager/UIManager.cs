@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : Manager<UIManager>
+public class UIManager : MonoBehaviour
 {
-    protected override void Awake()
+    protected void Awake()
     {
 
     }
 
-    protected override void Start()
+    protected void Start()
     {
 
     }
