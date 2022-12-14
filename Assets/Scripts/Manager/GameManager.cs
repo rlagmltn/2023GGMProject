@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void Init()
+    {
+
+    }
     protected void Update()
     {
 

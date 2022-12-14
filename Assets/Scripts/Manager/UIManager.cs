@@ -8,7 +8,10 @@ public class UIManager : MonoBehaviour
     {
 
     }
+    public void Init()
+    {
 
+    }
     protected void Start()
     {
 

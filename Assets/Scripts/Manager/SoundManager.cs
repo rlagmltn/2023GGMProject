@@ -8,7 +8,10 @@ public class SoundManager : MonoBehaviour
     {
 
     }
+    public void Init()
+    {
 
+    }
     protected void Start()
     {
 

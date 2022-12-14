@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Define
 {
-    private static GameManager gameManager;
+
 }

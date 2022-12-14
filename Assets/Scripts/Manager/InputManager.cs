@@ -8,6 +8,10 @@ public class InputManager : MonoBehaviour
     {
 
     }
+    public void Init()
+    {
+
+    }
 
     protected void Start()
     {
