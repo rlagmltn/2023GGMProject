@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Managers : MonoBehaviour
 {
@@ -16,10 +17,10 @@ public class Managers : MonoBehaviour
     #region CORE
 
     // 변수
-    private UIManager _uiManager = new UIManager();
-    private InputManager _inputManager = new InputManager();
-    private SoundManager _soundManager = new SoundManager();
-    private ButtonManager _buttonManager = new ButtonManager();
+    private UIManager _uiManager;
+    private InputManager _inputManager;
+    private SoundManager _soundManager;
+    private ButtonManager _buttonManager;
 
     // 프로퍼티 
     public static UIManager UIManager { get { return Instance._uiManager; } }
@@ -32,14 +33,22 @@ public class Managers : MonoBehaviour
     private void Start()
     {
         Init();
+        Setinst();
     }
-
+    void Setinst()
+    {
+        _uiManager = GetComponent<UIManager>();
+        _inputManager = GetComponent<InputManager>();
+        _soundManager = GetComponent<SoundManager>();
+        _buttonManager = GetComponent<ButtonManager>();
+    }
     private void Update()
     {
         //_inputManager.OnUpdate();
     }
     static void Init()
     {
+        DOTween.Init(false, false, LogBehaviour.Default).SetCapacity(100, 20);
         if (s_instance == null)
         {
             GameObject go = GameObject.Find("Managers");
