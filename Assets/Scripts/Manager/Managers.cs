@@ -19,11 +19,14 @@ public class Managers : MonoBehaviour
     private UIManager _uiManager = new UIManager();
     private InputManager _inputManager = new InputManager();
     private SoundManager _soundManager = new SoundManager();
+    private ButtonManager _buttonManager = new ButtonManager();
 
     // 프로퍼티 
     public static UIManager UIManager { get { return Instance._uiManager; } }
     public static InputManager InputManager { get { return Instance._inputManager; } }
     public static SoundManager SoundManager { get { return Instance._soundManager; } }
+    public static ButtonManager ButtonManager { get { return Instance._buttonManager; } }
+
     #endregion
 
     private void Start()
@@ -39,10 +42,10 @@ public class Managers : MonoBehaviour
     {
         if (s_instance == null)
         {
-            GameObject go = GameObject.Find("@Managers");
+            GameObject go = GameObject.Find("Managers");
             if (go == null)
             {
-                go = new GameObject("@Managers");
+                go = new GameObject("Managers");
                 go.AddComponent<Managers>();
             }
             DontDestroyOnLoad(go);
