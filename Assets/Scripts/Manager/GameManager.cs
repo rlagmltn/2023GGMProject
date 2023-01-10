@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public enum SCENE
+    {
+        TITLE,
+        MAIN,
+        GAME
+    }
     protected void Awake()
     {
 
