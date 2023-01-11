@@ -26,37 +26,60 @@ public class BattleManager : MonoSingleton<BattleManager>
 
     private void CrashResult()
     {
-        a.BeforeBattle?.Invoke(); //
-        b.BeforeBattle?.Invoke(); //공격 직전 발동하는 트리거
+        if(a.isBlueTeam!=b.isBlueTeam)
+        {
+            a.BeforeBattle?.Invoke(); //
+            b.BeforeBattle?.Invoke(); //공격 직전 발동하는 트리거
+        }
 
         if (a.lastVelocity.magnitude > b.lastVelocity.magnitude)
         {
-            a.BeforeAttack?.Invoke();
-            b.BeforeDefence?.Invoke();
+            if (a.isBlueTeam != b.isBlueTeam)
+            {
+                a.BeforeAttack?.Invoke();
+                b.BeforeDefence?.Invoke();
+            }
+
             if (DamageCalculate())
             {
                 var reflect = Vector2.Reflect(a.lastVelocity.normalized, aNomal);
                 a.rigid.velocity = (reflect);
                 b.rigid.velocity = (-reflect + a.lastVelocity / 2);
             }
-            a.AfterAttack?.Invoke();
-            b.AfterDefence?.Invoke();
+            if (a.isBlueTeam != b.isBlueTeam)
+            {
+                a.AfterAttack?.Invoke();
+                b.AfterDefence?.Invoke();
+            }
+                
         }
         else if (a.lastVelocity.magnitude < b.lastVelocity.magnitude)
         {
-            b.BeforeAttack?.Invoke();
-            a.BeforeDefence?.Invoke();
+            if (a.isBlueTeam != b.isBlueTeam)
+            {
+                b.BeforeAttack?.Invoke();
+                a.BeforeDefence?.Invoke();
+            }
+
             if (DamageCalculate())
             {
                 var reflect = Vector2.Reflect(b.lastVelocity.normalized, bNomal);
                 b.rigid.velocity = (reflect);
                 a.rigid.velocity = (-reflect + b.lastVelocity / 2);
             }
-            b.AfterAttack?.Invoke();
-            a.AfterDefence?.Invoke();
+            if (a.isBlueTeam != b.isBlueTeam)
+            {
+                b.AfterAttack?.Invoke();
+                a.AfterDefence?.Invoke();
+            }
+
         }
-        a.AfterBattle?.Invoke(); //
-        b.AfterBattle?.Invoke(); // 공격 직후 발동하는 트리거
+        if (a.isBlueTeam != b.isBlueTeam)
+        {
+            a.AfterBattle?.Invoke(); //
+            b.AfterBattle?.Invoke(); // 공격 직후 발동하는 트리거
+        }
+
         a.AttackFinish();
         b.AttackFinish();
         a = null;
@@ -65,6 +88,7 @@ public class BattleManager : MonoSingleton<BattleManager>
 
     private bool DamageCalculate()
     {
+        if (a.isBlueTeam == b.isBlueTeam) return true;
         float aFinalDamage = a.ATK; //
         float bFinalDamage = b.ATK; //여기에 패시브스킬 등으로 변하는 데미지 계산
         if (a.isDoubleAttack)
