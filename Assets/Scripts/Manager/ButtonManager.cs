@@ -9,13 +9,16 @@ using UnityEngine.Events;
 public class ButtonManager : MonoBehaviour
 {
     [SerializeField] private GameObject background;
-    private int[] doMovePos = { 1, 0, -1 };
+    private int[] doMovePos = { 1440, 0, -1440 };
     bool isBackgroundMove = false;
+    public STATE state = STATE.MAIN;
 
 
+    [Header("Buttons")]
     [SerializeField] Button InventoryButton;
     [SerializeField] Button MainButton;
     [SerializeField] Button ShopButton;
+    [SerializeField] Button StartButton;
 
 
     public enum STATE
@@ -24,13 +27,12 @@ public class ButtonManager : MonoBehaviour
         MAIN,
         SHOP
     }
-    public STATE state = STATE.MAIN;
-
     private void Awake()
     {
         ButtonEventPlus(InventoryButton, InventoryButtonClick);
         ButtonEventPlus(ShopButton, ShopButtonClick);
         ButtonEventPlus(MainButton, MainButtonClick);
+        ButtonEventPlus(StartButton, StartButtonClick);
     }
     public void GotoMainScene()
     {
@@ -54,13 +56,17 @@ public class ButtonManager : MonoBehaviour
         state = STATE.SHOP;
         MoveBackGround();
     }
+    public void StartButtonClick()
+    {
+        SceneManager.LoadScene("GameScene");
+    }
     private void MoveBackGround()
     {
         isBackgroundMove = true;
-        background.transform.DOMoveX(transform.localPosition.x + -((int)state - 1) * 5.62f, 0.2f);
+        background.transform.DOLocalMoveX(doMovePos[(int)state], 0.2f);
         isBackgroundMove = false;
     }
-
+    
     void ButtonEventPlus(Button button, UnityAction action)
     {
         button.onClick.RemoveAllListeners();
