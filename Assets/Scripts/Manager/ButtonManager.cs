@@ -15,6 +15,7 @@ public class ButtonManager : MonoBehaviour
 
 
     [Header("Buttons")]
+    [SerializeField] Button TitleButton;
     [SerializeField] Button InventoryButton;
     [SerializeField] Button MainButton;
     [SerializeField] Button ShopButton;
@@ -34,32 +35,28 @@ public class ButtonManager : MonoBehaviour
         ButtonEventPlus(MainButton, MainButtonClick);
         ButtonEventPlus(StartButton, StartButtonClick);
     }
-    public void GotoMainScene()
-    {
-        SceneManager.LoadScene("MainScene");
-    }
+    public void ChangeState(STATE _state) => state = _state; 
+    public bool CompareState(STATE _state) => state == _state;
+    public void TitleButtonClick() => SceneManager.LoadScene("MainScene");
     public void InventoryButtonClick()
     {
-        if (state == STATE.INVENTORY || isBackgroundMove) return;
-        state = STATE.INVENTORY;
+        if (CompareState(STATE.INVENTORY) || isBackgroundMove) return;
+        ChangeState(STATE.INVENTORY);
         MoveBackGround();
     }
     public void MainButtonClick()
     {
-        if (state == STATE.MAIN || isBackgroundMove) return;
-        state = STATE.MAIN;
+        if (CompareState(STATE.MAIN) || isBackgroundMove) return;
+        ChangeState(STATE.MAIN);
         MoveBackGround();
     }
     public void ShopButtonClick()
     {
-        if (state == STATE.SHOP || isBackgroundMove) return;
-        state = STATE.SHOP;
+        if (CompareState(STATE.SHOP) || isBackgroundMove) return;
+        ChangeState(STATE.SHOP);
         MoveBackGround();
     }
-    public void StartButtonClick()
-    {
-        SceneManager.LoadScene("GameScene");
-    }
+    public void StartButtonClick() => SceneManager.LoadScene("GameScene");
     private void MoveBackGround()
     {
         isBackgroundMove = true;
