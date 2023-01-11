@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using static Define;
 
 public class GameManager : MonoBehaviour
 {
-    public enum SCENE
-    {
-        TITLE,
-        MAIN,
-        GAME
-    }
+    public SCENE scene;
+    public Scene[] scenes;
     protected void Awake()
     {
-
+        ContainScene();
+        CheckScene();
     }
 
     protected void Start()
@@ -25,6 +24,18 @@ public class GameManager : MonoBehaviour
 
     }
     protected void Update()
+    {
+
+    }
+    public void ContainScene()
+    {
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            scenes[i] = SceneManager.GetSceneAt(i);
+            Debug.Log(scenes[i].name);
+        }
+    }
+    public void CheckScene()
     {
 
     }

@@ -5,6 +5,7 @@ using DG.Tweening;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using static Define;
 
 public class ButtonManager : MonoBehaviour
 {
@@ -21,19 +22,19 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] Button ShopButton;
     [SerializeField] Button StartButton;
 
-
-    public enum STATE
-    {
-        INVENTORY,
-        MAIN,
-        SHOP
-    }
-    private void Awake()
+    private void Start()
     {
         ButtonEventPlus(InventoryButton, InventoryButtonClick);
         ButtonEventPlus(ShopButton, ShopButtonClick);
         ButtonEventPlus(MainButton, MainButtonClick);
-        ButtonEventPlus(StartButton, StartButtonClick);
+        //ButtonEventPlus(StartButton, StartButtonClick);
+    }
+    public void AddButtonEvent(SCENE _scene)
+    {
+        if (_scene == SCENE.TITLE)
+        {
+            
+        }
     }
     public void ChangeState(STATE _state) => state = _state; 
     public bool CompareState(STATE _state) => state == _state;
@@ -63,7 +64,6 @@ public class ButtonManager : MonoBehaviour
         background.transform.DOLocalMoveX(doMovePos[(int)state], 0.2f);
         isBackgroundMove = false;
     }
-    
     void ButtonEventPlus(Button button, UnityAction action)
     {
         button.onClick.RemoveAllListeners();
