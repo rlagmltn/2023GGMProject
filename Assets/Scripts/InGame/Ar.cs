@@ -32,6 +32,7 @@ public class Ar : PoolObject
 
     public bool isFirstAttack { get; protected set; }
     public bool isDoubleAttack { get; protected set; }
+    public bool isBlueTeam;
 
     public UnityEvent MouseUp;
     public UnityEvent BeforeCrash;
@@ -161,6 +162,7 @@ public class Ar : PoolObject
     public override void Pooling()
     {
         StatReset();
+        TurnManager.Instance.ArDie(this);
         base.Pooling();
     }
 
