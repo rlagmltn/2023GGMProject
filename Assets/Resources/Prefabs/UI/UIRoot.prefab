@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 831111348570461220}
   - component: {fileID: 831111348570461221}
   - component: {fileID: 831111348570461226}
-  - component: {fileID: 1913307115856371103}
-  - component: {fileID: 195638996064225067}
+  - component: {fileID: 9099926467354316132}
+  - component: {fileID: 8651430902662035874}
   m_Layer: 5
   m_Name: UIRoot
   m_TagString: Untagged
@@ -31,6 +31,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 831111348851205659}
   - {fileID: 831111349063503621}
@@ -103,7 +104,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1913307115856371103
+--- !u!114 &9099926467354316132
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,7 +116,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff8779f33c4b4833b1a41b86ed4608e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &195638996064225067
+  blackPannel: {fileID: 831111348851205658}
+  isPaused: 0
+--- !u!114 &8651430902662035874
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,7 +147,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &831111348851205659
 RectTransform:
   m_ObjectHideFlags: 0
@@ -155,6 +158,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 831111348570461223}
   m_RootOrder: 0
@@ -230,6 +234,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -640, y: -214.2167, z: 0}
   m_LocalScale: {x: 0.88336784, y: 0.88336784, z: 0.88336784}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 831111348570461223}
   m_RootOrder: 1
@@ -261,6 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit

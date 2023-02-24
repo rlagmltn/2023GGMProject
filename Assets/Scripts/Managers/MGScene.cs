@@ -13,22 +13,22 @@ public class MGScene : MonoBehaviour
     {
         get
         {
-            if(_instance == null)
+            if (_instance == null)
             {
                 _instance = FindObjectOfType(typeof(MGScene)) as MGScene;
-                if(_instance == null)
+                if (_instance == null)
                 {
                     GameObject obj = new GameObject();
-                    //obj.hideFlags = HideFlags.HideAndDontSave;
+                    obj.hideFlags = HideFlags.HideAndDontSave; //안보이게 하기
                     _instance = obj.AddComponent<MGScene>();
                 }
             }
 
-             return _instance;
+            return _instance;
         }
     }
 
-    public void Generate() {}
+    public void Generate() { }
 
     public Canvas rootCvs;
     public Transform rootTrm;
@@ -38,7 +38,7 @@ public class MGScene : MonoBehaviour
 
     private StringBuilder _sb;
 
-    private void Awake() 
+    private void Awake()
     {
         if (_instance == null)
         {
@@ -52,11 +52,11 @@ public class MGScene : MonoBehaviour
 
         _sb = new StringBuilder();
 
-        //this.gameObject.hideFlags = HideFlags.HideAndDontSave;    
+        this.gameObject.hideFlags = HideFlags.HideAndDontSave;    //안보이게 하기
 
         // 씬 매니져 호출시 UIRoot 생성
         GameObject obj = GameObject.Instantiate(Global.prefabsDic[ePrefabs.UIRoot]) as GameObject;
-        if(obj != null)
+        if (obj != null)
         {
             print("UIRoot 생성!");
             rootCvs = obj.GetComponent<Canvas>();
@@ -85,10 +85,19 @@ public class MGScene : MonoBehaviour
         SceneManager.LoadScene(_sb.ToString());
 
         // 로딩화면이 필요한경우와 아닌 경우를 구분
-        if(curScene == eSceneName.Title)
-            ChangeUi(eSceneName.Title);
-        else
-            ChangeUi(eSceneName.Loading);
+
+        eSceneName useScene = curScene switch
+        {
+            eSceneName.Title => eSceneName.Title,
+            _ => eSceneName.Loading,
+        };
+
+        ChangeUi(useScene);
+
+        //if (curScene == eSceneName.Title)
+        //    ChangeUi(eSceneName.Title);
+        //else
+        //    ChangeUi(eSceneName.Loading);
     }
 
     void ChangeUi(eSceneName inScene)
@@ -97,22 +106,23 @@ public class MGScene : MonoBehaviour
         _sb.Remove(0, _sb.Length);
         _sb.AppendFormat("UIRoot{0}", inScene.ToString());
         ePrefabs addUiPrefab = (ePrefabs)(Enum.Parse(typeof(ePrefabs), _sb.ToString()));
+        //Debug.Log(inScene.ToString());
 
         // 기존에 생성된 UI가 있다면 초기화
-        if(addUiTrm != null)
+        if (addUiTrm != null)
         {
             addUiTrm.SetParent(null);
             GameObject.Destroy(addUiTrm.gameObject);
         }
 
-        // 새로운씬의 UI프리팹 생성
+        // 새로운씬의 UI프리팹 생성 //UIoot 안에 UIGame이나 UITitle만드는 용도
         GameObject obj = GameObject.Instantiate(Global.prefabsDic[addUiPrefab]) as GameObject;
         addUiTrm = obj.transform;
         addUiTrm.SetParent(rootTrm, false);
         addUiTrm.localPosition = Vector3.zero;
-        addUiTrm.localScale = new Vector3(1,1,1);
+        addUiTrm.localScale = new Vector3(1, 1, 1);
 
-        if(inScene >= eSceneName.Loading)
+        if (inScene >= eSceneName.Loading)
         {
             RectTransform rts = obj.GetComponent<RectTransform>();
             rts.offsetMax = new Vector2(0, 0);
@@ -125,10 +135,11 @@ public class MGScene : MonoBehaviour
         prevScene = curScene;
         ChangeUi(curScene);
 
-        if(curScene == eSceneName.Game)
+        if (curScene == eSceneName.Game)
         {
             GameObject.Instantiate(Global.prefabsDic[ePrefabs.PoolManager]);
             GameObject.Instantiate(Global.prefabsDic[ePrefabs.GameManager]);
+            GameObject.Instantiate(Global.prefabsDic[ePrefabs.SpawnManager]);
         }
     }
 }

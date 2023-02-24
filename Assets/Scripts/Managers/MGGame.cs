@@ -29,20 +29,20 @@ public class MGGame : MonoBehaviour
 
     void InitCamera()
     {
-        Debug.Log("실행됨");
+        Global.gMainCamTrm = FindObjectOfType<Camera>().transform;
 
         if (Global.gMainCamTrm == null)
         {
             Global.gMainCamTrm = ((GameObject.Instantiate(Global.prefabsDic[ePrefabs.MainCamera])) as GameObject).transform;
+        }
 
-            if (Global.gMainCamTrm != null)
+        if (Global.gMainCamTrm != null) //카메라 2개면 오류생길듯?
+        {
+            Global.mainCam = Global.gMainCamTrm.GetComponent<Camera>();
+            if (Global.mainCam == null)
             {
-                Global.mainCam = Global.gMainCamTrm.GetComponent<Camera>();
-                if (Global.mainCam == null)
-                {
-                    Debug.LogWarning("Global.mainCam in null");
-                    return;
-                }
+                Debug.LogWarning("Global.mainCam in null");
+                return;
             }
         }
     }

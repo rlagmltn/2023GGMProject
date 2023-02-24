@@ -24,18 +24,27 @@ public enum ePrefabs
 {
     None = -1,
     MainCamera,
+
     HEROS = 1000,
     HeroMan,
     HeroGirl,
+
     MANAGERS = 2000,
     GameManager,
     PoolManager,
+    SpawnManager,
+
     UI = 3000,
     UIRoot,
     UIRootLoading,
     UIRootTitle,
     UIRootGame,
-    Cube = 4000
+
+    Object = 4000,
+    EmptyObj,
+    StageObj,
+    EnemyObj1,
+    EnemyObj2,
 }
 
 public enum eSceneName
@@ -52,8 +61,6 @@ public class GameSceneClass
 
     public static MGGame gMGGame;
     public static MGPool gMGPool;
-
-
 }
 
 public enum eGameState

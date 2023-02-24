@@ -2,13 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class MGPool : MonoBehaviour
+public class MGPool : MonoSingleton<MGPool>
 {
     // 생성한 오브젝트를 MGPool오브젝트의 자식으로 넣기위해
     public Transform myTrm;
 
     // 풀매니져의 전체 오브젝트들을 ePrefabs키로, List<CONEntity>를 값으로 저장
-    private Dictionary<ePrefabs, List<CONEntity>> poolListDic;
+    public Dictionary<ePrefabs, List<CONEntity>> poolListDic;
 
     // 모든 종류의 게임오브젝트를 담아둠
     public List<GameObject> poolAllObjList;
@@ -90,13 +90,19 @@ public class MGPool : MonoBehaviour
                 Debug.LogWarning(" **** Entity Controller Needed **** ");
                 continue;
             }
-            
+
             myKind = myEn.myKind;
             poolListDic[myKind] = new List<CONEntity>();
+
+            //풀매니저 밑에 정렬시키기
+            GameObject emptyObj = InstantiateObj(ePrefabs.EmptyObj);
+            emptyObj.transform.SetParent(this.transform);
+            emptyObj.name = myKind.ToString() + 's';
 
             for (int j = 0; j < poolAllObjCountList[i]; j++)
             {
                 myEn = (InstantiateObj(myKind)).GetComponent<CONEntity>();
+                myEn.transform.SetParent(emptyObj.transform);
                 myEn.SetActive(false);
                 myEn.SetPosition(Vector3.zero);
                 poolListDic[myKind].Add(myEn);
@@ -104,6 +110,11 @@ public class MGPool : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 글로벌에 있는 프리팹 Dictionary 에서 프리팹을 들고옴
+    /// </summary>
+    /// <param name="inObj"></param>
+    /// <returns></returns>
     private GameObject InstantiateObj(ePrefabs inObj)
     {
         GameObject myGo = GameObject.Instantiate(Global.prefabsDic[inObj]) as GameObject;
@@ -111,7 +122,7 @@ public class MGPool : MonoBehaviour
         return myGo;
     }
 
-    public CONEntity CreateObj(ePrefabs inObj , Vector3 inPos)
+    public CONEntity CreateObj(ePrefabs inObj, Vector3 inPos)
     {
         CONEntity createdEn = null;
         bool bNotEnough = true;
@@ -124,13 +135,13 @@ public class MGPool : MonoBehaviour
                 createdEn.SetActive(true);
                 bNotEnough = false;
                 break;
-            }            
+            }
         }
 
         if (bNotEnough)
         {
             createdEn = InstantiateObj(inObj).GetComponent<CONEntity>();
-            poolListDic[inObj].Add(createdEn);    
+            poolListDic[inObj].Add(createdEn);
         }
 
         if (createdEn != null)
