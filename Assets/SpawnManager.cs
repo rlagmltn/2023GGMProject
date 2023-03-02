@@ -15,6 +15,13 @@ public class SpawnManager : MonoBehaviour
         _SpawnObjDic = new Dictionary<ePrefabs, List<CONEntity>>();
 
         LoadPrefabs();
+
+        //_SpawnObjDic[ePrefabs.EnemyObj1][0].SetActive(true);
+    }
+
+    private void Update()
+    {
+        ClearCheck();
     }
 
     /// <summary>
@@ -32,5 +39,31 @@ public class SpawnManager : MonoBehaviour
                 EnemyCount++;
             }
         }
+    }
+
+    void StageSet()
+    {
+
+    }
+
+    /// <summary>
+    /// true일때 스테이지 클리어
+    /// </summary>
+    /// <returns></returns>
+    void ClearCheck() //나중에 bool로 바꿔서 쓰면됨
+    {
+        foreach(ePrefabs prefab in enemyKinds)
+        {
+            foreach(CONEntity con in _SpawnObjDic[prefab])
+            {
+                if(con.IsActive())
+                {
+                    Debug.Log("Don't Clear");
+                    //return false;
+                }
+            }
+        }
+
+        //return true;
     }
 }
