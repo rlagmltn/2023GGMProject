@@ -113,6 +113,6 @@ public class UIRootLoading : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(loadingState);
+        //Debug.Log(loadingState);
     }
 }
