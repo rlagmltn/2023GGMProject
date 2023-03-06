@@ -5,6 +5,9 @@ using UnityEngine.Events;
 
 public class Player : Ar
 {
+    public int ar_id;
+    public string ar_name;
+
     public UnityEvent MouseUp;
 
     private float dragAngle;
@@ -12,6 +15,18 @@ public class Player : Ar
 
     private float power;
     private Vector2 angle;
+
+    public Player()
+    {
+        ar_id = -1;
+        ar_name = "";
+    }
+
+    public Player(ItemObj itemObj)
+    {
+        ar_id = itemObj.itemData.ar_id;
+        ar_name = itemObj.itemData.ar_name;
+    }
 
     protected override void StatReset()
     {

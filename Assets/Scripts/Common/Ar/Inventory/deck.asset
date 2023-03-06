@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd4f9eb369b3fa249ae7ce716cdc1151, type: 3}
+  m_Name: deck
+  m_EditorClassIdentifier: 
+  itemDBObj: {fileID: 11400000, guid: adbb120e3de34ea4fb19ec1521dd2f5f, type: 2}
+  type: 0
+  inventory:
+    inventorySlots:
+    - itemTypes: 
+      item: {fileID: 5042380115964156597, guid: 7c70bd19e0561294c95b2c8e13e6fe78, type: 3}
+      itemCnt: 1
+    - itemTypes: 
+      item: {fileID: 5042380115964156597, guid: 7c70bd19e0561294c95b2c8e13e6fe78, type: 3}
+      itemCnt: 1
+    - itemTypes: 
+      item: {fileID: 5042380115964156597, guid: 7c70bd19e0561294c95b2c8e13e6fe78, type: 3}
+      itemCnt: 1
