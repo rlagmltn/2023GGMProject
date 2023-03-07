@@ -52,11 +52,12 @@ public enum ePrefabs
 public enum eSceneName
 {
     None = -1,
-    LoadingScene,
-    TitleScene,
-    MainScene,
-    MapScene,
-    GameScene,
+    Boss,
+    Game,
+    Loading,
+    Main,
+    Map,
+    Title,
 }
 
 public class GameSceneClass
