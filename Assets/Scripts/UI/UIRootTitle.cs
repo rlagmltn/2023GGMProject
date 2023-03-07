@@ -8,11 +8,16 @@ public class UIRootTitle : MonoBehaviour
 
     private void Awake()
     {
-        InitFirst();
+        Init();
     }
 
-    void InitFirst()
+    void Init()
     {
-        startButton.onClick.AddListener(() => MGScene.Instance.ChangeScene(eSceneName.Game));
+        AddButtonEvent();
+    }
+
+    void AddButtonEvent()
+    {
+        startButton.onClick.AddListener(() => MGScene.Instance.ChangeScene(eSceneName.Loading));
     }
 }

@@ -77,6 +77,7 @@ public class MGScene : MonoBehaviour
 
     public void ChangeScene(eSceneName inScene)
     {
+        Debug.Log(inScene.ToString());
         curScene = inScene;
 
         _sb.Remove(0, _sb.Length);
