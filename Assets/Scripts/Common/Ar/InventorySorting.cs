@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+using UnityEngine.Events;
 
-public class InventorySorting : MonoBehaviour
+public class InventorySorting : MonoSingleton<InventorySorting>
 {
     [SerializeField] Transform content;
 
@@ -20,18 +22,39 @@ public class InventorySorting : MonoBehaviour
 
     void SetButtons()
     {
-        foreach (Image image in content.GetComponentsInChildren<Image>()) //transform바꾸자
+        int num = 0;
+        foreach (Button button in content.GetComponentsInChildren<Button>()) //transform바꾸자
         {
-            Buttons.Add(image.transform);
-            image.transform.gameObject.SetActive(false);
+            Buttons.Add(button.transform);
+
+            ImageHolder img = button.GetComponent<ImageHolder>();
+            img.num = num;
+
+            AddButtonEvent(button, img.ClickArButton);
+            button.transform.gameObject.SetActive(false);
+            num++;
         }
+
+        //Buttons = content.GetComponentsInChildren<Button>();
+
+        //for(int num = 0; num < Buttons.Length; num++)
+        //{
+        //    Buttons[num].onClick.AddListener(() => ClickArButton(num));
+        //    Buttons[num].gameObject.SetActive(false);
+        //}
     }
 
+
+    /// <summary>
+    /// 인벤토리를 정렬 해주는 함수
+    /// </summary>
     void SortInventory()
     {
         int takeCount = 0;
         int buttonCount = 0;
         bool canClick = false;
+        Color color = Color.white;
+        Image image;
 
         foreach (ArSO ar in ArList.list)
         {
@@ -45,17 +68,35 @@ public class InventorySorting : MonoBehaviour
         for (int i = 0; i < buttonCount; i++)
         {
             Buttons[i].gameObject.SetActive(true);
-            //color = Color.gray;
+            color = new Color(0.7843f, 0.7843f, 0.7843f, 0.5f);
             canClick = false;
 
-            if (i < takeCount) canClick = true;
+            if (i < takeCount) 
+            {
+                canClick = true;
+                color = Color.white;
+            }
 
-            ActiveClick(Buttons[i], canClick);
+            image = Buttons[i].GetComponent<ImageHolder>().image;
+            image.color = color;
+            image.sprite = ArList.list[i].Image;
+
+            ActiveClick(Buttons[i].transform, canClick);
         }
     }
 
     void ActiveClick(Transform button, bool canClick)
     {
         button.gameObject.GetComponent<Button>().interactable = canClick;
+    }
+    
+    void AddButtonEvent(Button button, UnityAction action)
+    {
+        button.onClick.AddListener(action);
+    }
+
+    public ArSO returnAr(int num)
+    {
+        return ArList.list[num];
     }
 }
