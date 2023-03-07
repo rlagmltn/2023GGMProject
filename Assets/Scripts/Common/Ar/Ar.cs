@@ -8,6 +8,7 @@ public class Ar : MonoBehaviour
     public float MaxHP { get; set; }
     public float HP { get; set; }
     public float ATK { get; set; }
+    public Sprite arSprite { get; set; }
 
     protected float minDragPower = 1.25f;
     protected float maxDragPower = 6;
@@ -38,6 +39,7 @@ public class Ar : MonoBehaviour
         line = transform.GetChild(0).gameObject;
         hpBar = transform.GetChild(1).GetChild(0);
         hpImage = hpBar.GetComponentInChildren<SpriteRenderer>();
+        arSprite = transform.GetComponent<SpriteRenderer>().sprite;
     }
 
     protected virtual void StatReset() // 수치 초기화

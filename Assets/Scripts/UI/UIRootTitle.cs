@@ -13,6 +13,6 @@ public class UIRootTitle : MonoBehaviour
 
     void InitFirst()
     {
-        startButton.onClick.AddListener(() => MGScene.Instance.ChangeScene(eSceneName.Game));
+        startButton.onClick.AddListener(() => MGScene.Instance.ChangeScene(eSceneName.GameScene));
     }
 }

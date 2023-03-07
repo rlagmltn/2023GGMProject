@@ -13,6 +13,7 @@ public class Global
 
     // 현재 게임상태
     public static eGameState gameState = eGameState.None;
+    public static eSceneName sceneName = eSceneName.None;
 
     // 메인카메라
     public static Transform gMainCamTrm;
@@ -51,9 +52,11 @@ public enum ePrefabs
 public enum eSceneName
 {
     None = -1,
-    Loading,
-    Title,
-    Game,
+    LoadingScene,
+    TitleScene,
+    MainScene,
+    MapScene,
+    GameScene,
 }
 
 public class GameSceneClass
