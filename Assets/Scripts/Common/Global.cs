@@ -40,6 +40,7 @@ public enum ePrefabs
     UIRootLoading,
     UIRootTitle,
     UIRootGame,
+    UIRootMap,
 
     Object = 4000,
     EmptyObj,

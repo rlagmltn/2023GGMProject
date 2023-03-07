@@ -10,7 +10,7 @@ public class GameUI : MonoBehaviour
 
     private void Start()
     {
-        //Init();
+        Init();
     }
 
     /// <summary>
