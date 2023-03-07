@@ -6,6 +6,7 @@ using DG.Tweening;
 public class CameraMove : MonoSingleton<CameraMove>
 {
     private Transform target;
+    bool isDoMove = false;
 
     public void MovetoTarget(Player target)
     {
@@ -22,7 +23,7 @@ public class CameraMove : MonoSingleton<CameraMove>
 
     public void ChaseTarget()
     {
-        if (target != null)
+        if (target != null && isDoMove)
         {
             transform.position = target.position;
             transform.position += new Vector3(0, 0, -10);
@@ -32,7 +33,9 @@ public class CameraMove : MonoSingleton<CameraMove>
     private IEnumerator SetTarget(Transform _target)
     {
         target = null;
-        yield return new WaitForSeconds(0.31f);
+        isDoMove = true;
+        yield return new WaitForSeconds(0.25f);
+        isDoMove = false;
         target = _target;
     }
 
