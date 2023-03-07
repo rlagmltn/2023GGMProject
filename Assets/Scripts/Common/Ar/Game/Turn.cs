@@ -17,13 +17,11 @@ public class Turn : MonoBehaviour
     {
         turnImage.color = Color.green;
         active = true;
-        Debug.Log("enable");
     }
 
     public void DisableTurn()
     {
         turnImage.color = Color.gray;
         active = false;
-        Debug.Log("disable");
     }
 }

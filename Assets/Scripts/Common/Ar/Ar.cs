@@ -29,6 +29,7 @@ public class Ar : MonoBehaviour
     public UnityEvent AfterAttack;
     public UnityEvent BeforeDefence;
     public UnityEvent AfterDefence;
+    public UnityEvent AfterMove;
     public UnityEvent OnOutDie;
     public UnityEvent OnBattleDie;
 
@@ -46,11 +47,6 @@ public class Ar : MonoBehaviour
         HP = MaxHP;
         //hpBar.localScale = new Vector3(Mathf.Clamp(HP / MaxHP, 0, 1), 1, 1);
     }
-
-    /*protected void OnMouseDown()
-    {
-        ArInfoManager.Instance.ShowBulletInfo(this);
-    }*/
 
     protected void FixedUpdate()
     {

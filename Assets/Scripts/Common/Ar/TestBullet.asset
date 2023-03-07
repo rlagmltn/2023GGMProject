@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d36b803e7612a004d92f91a3e5b78d77, type: 3}
-  m_Name: itemDB
+  m_Script: {fileID: 11500000, guid: e73e429114775cc4db40d8e91f1067b0, type: 3}
+  m_Name: TestBullet
   m_EditorClassIdentifier: 
-  itemObjects:
-  - {fileID: 11400000, guid: c134376475cb9574ca05904d7e14f701, type: 2}
-  - {fileID: 11400000, guid: a457dfb46d116d547a11651b7dde373a, type: 2}
+  Name: TestBullet
+  teamType: 0
+  rangeType: 0
+  bulletType: 0
+  damage: 10
+  radius: 1.7
+  lifeTime: 0.3

@@ -96,9 +96,9 @@ GameObject:
   - component: {fileID: 2964456124361536159}
   - component: {fileID: 2964456124361536157}
   - component: {fileID: -5021712272542343328}
-  - component: {fileID: 5042380115964156597}
+  - component: {fileID: -7492601626047040128}
   m_Layer: 0
-  m_Name: Player1
+  m_Name: Warrior
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,7 +162,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 6a7d2d60f5151b54e98bf9274b1aafe0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f5cecdc77987c4564ad8b7d175af4518, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -210,7 +210,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
---- !u!114 &5042380115964156597
+--- !u!114 &-7492601626047040128
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2964456124361536144}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 550b5411b4740fe4792c2f5310860d0f, type: 3}
+  m_Script: {fileID: 11500000, guid: f2b1661581c950c47a19dde89f287829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   BeforeCrash:
@@ -255,12 +255,13 @@ MonoBehaviour:
   OnBattleDie:
     m_PersistentCalls:
       m_Calls: []
-  ar_id: 0
+  ar_id: -1
   ar_name: 
   isSellected: 0
   MouseUp:
     m_PersistentCalls:
       m_Calls: []
+  slash: {fileID: 3460581898712811296, guid: 4e09552e74d13164189ca6e8a995c306, type: 3}
 --- !u!1 &4725181591716604985
 GameObject:
   m_ObjectHideFlags: 0

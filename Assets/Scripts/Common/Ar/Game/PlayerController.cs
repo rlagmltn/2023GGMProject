@@ -69,5 +69,6 @@ public class PlayerController : MonoSingleton<PlayerController>
         sellectPlayer = null;
         moveStick.gameObject.SetActive(false);
         skillStick.gameObject.SetActive(false);
+        DisableQuickSlots();
     }
 }

@@ -36,7 +36,7 @@ public class Player : Ar
         base.StatReset();
         MaxHP = 100;
         ATK = 10;
-        minDragPower = 0.4f;
+        minDragPower = 0.2f;
         maxDragPower = 1.5f;
         pushPower = 15;
     }
@@ -56,9 +56,7 @@ public class Player : Ar
     public void DragEnd(float charge, Vector2 angle)
     {
         power = Mathf.Clamp(charge, minDragPower, maxDragPower);
-        if (power <= minDragPower) return;
 
-        Debug.Log(power);
         rigid.velocity = (angle * power)*pushPower;
         MouseUp?.Invoke(); // 발사 직후 발동하는 트리거
     }
