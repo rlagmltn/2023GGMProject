@@ -12,14 +12,34 @@ public class ArFSM : MonoBehaviour
     {
         fsmManager = new StateMachine<ArFSM>(this, new StateIdle());
         fsmManager.AddStateList(new StateMove());
-        fsmManager.AddStateList(new StateAtk());
     }
 
     public virtual Transform SearchAr()
     {
-        
+        Ar[] ars = FindObjectsOfType<Ar>();
+        float distance;
+        float minDistance = float.MaxValue;
+        int minIndex = 0;
+        Vector2 v = Vector2.zero;
 
-        return transform;
+        for (int i = 0; i < ars.Length; i++)
+        {
+            distance = Vector2.Distance(transform.position, ars[i].transform.position);
+            if(distance < minDistance)
+            {
+                minDistance = distance;
+                minIndex = i;
+            }
+        }
+
+        return ars[minIndex].transform;
+    }
+
+    public virtual void MoveToTarget()
+    {
+        Vector3 dir = SearchAr().position - transform.position;
+        transform.position += dir * 5f * Time.deltaTime;
+
     }
 
 }
