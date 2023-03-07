@@ -33,22 +33,22 @@ public class MGUI : MonoSingleton<MGUI>
 
     public void MoveToTitleScene()
     {
-        SceneManager.LoadScene(eSceneName.Title.ToString());
+        SceneManager.LoadScene(eSceneName.Title.ToString() + "Scene");
     }
 
     public void MoveToMapScene()
     {
-        SceneManager.LoadScene(eSceneName.Map.ToString());
+        SceneManager.LoadScene(eSceneName.Map.ToString() + "Scene");
     }
 
     public void MoveToMainScene()
     {
-        SceneManager.LoadScene(eSceneName.Main.ToString());
+        SceneManager.LoadScene(eSceneName.Main.ToString() + "Scene");
     }
 
     public void MoveToLoadingScene()
     {
-        SceneManager.LoadScene(eSceneName.Loading.ToString());
+        SceneManager.LoadScene(eSceneName.Loading.ToString() + "Scene");
     }
 
     public void ExitGame()
