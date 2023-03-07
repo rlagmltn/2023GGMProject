@@ -72,15 +72,16 @@ public class MGScene : MonoBehaviour
     void InitFirstScene()
     {
         prevScene = eSceneName.None;
-        ChangeScene(eSceneName.TitleScene);
+        ChangeScene(eSceneName.Title);
     }
 
     public void ChangeScene(eSceneName inScene)
     {
+        Debug.Log(inScene.ToString());
         curScene = inScene;
 
         _sb.Remove(0, _sb.Length);
-        _sb.AppendFormat("{0}Scene", eSceneName.LoadingScene);
+        _sb.AppendFormat("{0}Scene", eSceneName.Loading);
 
         SceneManager.LoadScene(_sb.ToString());
 
@@ -88,8 +89,8 @@ public class MGScene : MonoBehaviour
 
         eSceneName useScene = curScene switch
         {
-            eSceneName.TitleScene => eSceneName.TitleScene,
-            _ => eSceneName.LoadingScene,
+            eSceneName.Title => eSceneName.Title,
+            _ => eSceneName.Loading,
         };
 
         ChangeUi(useScene);
@@ -122,7 +123,7 @@ public class MGScene : MonoBehaviour
         addUiTrm.localPosition = Vector3.zero;
         addUiTrm.localScale = new Vector3(1, 1, 1);
 
-        if (inScene >= eSceneName.LoadingScene)
+        if (inScene >= eSceneName.Loading)
         {
             RectTransform rts = obj.GetComponent<RectTransform>();
             rts.offsetMax = new Vector2(0, 0);
@@ -135,7 +136,7 @@ public class MGScene : MonoBehaviour
         prevScene = curScene;
         ChangeUi(curScene);
 
-        if (curScene == eSceneName.GameScene)
+        if (curScene == eSceneName.Game)
         {
             GameObject.Instantiate(Global.prefabsDic[ePrefabs.PoolManager]);
             GameObject.Instantiate(Global.prefabsDic[ePrefabs.GameManager]);
