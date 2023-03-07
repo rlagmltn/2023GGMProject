@@ -11,9 +11,6 @@ public class Player : Ar
 
     public UnityEvent MouseUp;
 
-    private float dragAngle;
-    private Vector2 dis;
-
     private float power;
 
     public Player()
@@ -41,7 +38,7 @@ public class Player : Ar
         ATK = 10;
         minDragPower = 0.4f;
         maxDragPower = 1.5f;
-        pushPower = 10;
+        pushPower = 15;
     }
 
     public void Drag()

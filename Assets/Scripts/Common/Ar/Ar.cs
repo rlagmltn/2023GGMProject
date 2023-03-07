@@ -66,7 +66,7 @@ public class Ar : MonoBehaviour
         }
         else if (collision.transform.CompareTag("Object"))
         {
-            rigid.velocity = Vector2.Reflect(lastVelocity.normalized, collision.contacts[0].normal) * pushPower;
+            rigid.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal);
             AfterCrash?.Invoke();
         }
     }
