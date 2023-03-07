@@ -14,7 +14,6 @@ public class Ar : MonoBehaviour
     protected float maxDragPower = 1.5f;
     protected float pushPower;
 
-    protected Vector2 defaultScale = new Vector2(0.5f, 0.5f);
     protected GameObject line;
     protected Transform hpBar;
     protected SpriteRenderer hpImage;

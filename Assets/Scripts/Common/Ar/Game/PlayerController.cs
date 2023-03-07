@@ -41,7 +41,7 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     public void DragEnd(float power, Vector2 angle)
     {
-        if (sellectPlayer == null) return;
+        if (sellectPlayer != null && TurnManager.Instance.UseTurn())
         sellectPlayer.DragEnd(power, angle);
     }
 }

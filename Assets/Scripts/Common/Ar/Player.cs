@@ -59,13 +59,7 @@ public class Player : Ar
     public void DragEnd(float charge, Vector2 angle)
     {
         power = Mathf.Clamp(charge, minDragPower, maxDragPower);
-        line.transform.localScale = defaultScale;
         if (power <= minDragPower) return;
-
-        /*
-        TurnManager.Instance.AddTrun();
-        Debug.Log(TurnManager.Turn);
-        */
 
         Debug.Log(power);
         rigid.velocity = (angle * power)*pushPower;
