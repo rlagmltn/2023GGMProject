@@ -10,9 +10,9 @@ public class Ar : MonoBehaviour
     public float ATK { get; set; }
     public Sprite arSprite { get; set; }
 
-    protected float minDragPower = 1.25f;
-    protected float maxDragPower = 6;
-    protected float pushPower = 2;
+    protected float minDragPower = 0.4f;
+    protected float maxDragPower = 1.5f;
+    protected float pushPower;
 
     protected Vector2 defaultScale = new Vector2(0.5f, 0.5f);
     protected GameObject line;
@@ -45,7 +45,7 @@ public class Ar : MonoBehaviour
     protected virtual void StatReset() // 수치 초기화
     {
         HP = MaxHP;
-        hpBar.localScale = new Vector3(Mathf.Clamp(HP / MaxHP, 0, 1), 1, 1);
+        //hpBar.localScale = new Vector3(Mathf.Clamp(HP / MaxHP, 0, 1), 1, 1);
     }
 
     /*protected void OnMouseDown()
