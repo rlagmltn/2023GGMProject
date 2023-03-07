@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7588513470611909677}
   - component: {fileID: 2008529546013538315}
   - component: {fileID: 766089774272475613}
+  - component: {fileID: 3009103957167386615}
   m_Layer: 0
   m_Name: EnemyObj1
   m_TagString: Untagged
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -100,3 +101,45 @@ MonoBehaviour:
   myKind: 4003
   myTrm: {fileID: 0}
   myVelocity: {x: 0, y: 0, z: 0}
+--- !u!114 &3009103957167386615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5322681207458324851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc92368d2e1f5864bb23ff25d96fda65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BeforeCrash:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterCrash:
+    m_PersistentCalls:
+      m_Calls: []
+  BeforeBattle:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterBattle:
+    m_PersistentCalls:
+      m_Calls: []
+  BeforeAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  BeforeDefence:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterDefence:
+    m_PersistentCalls:
+      m_Calls: []
+  OnOutDie:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBattleDie:
+    m_PersistentCalls:
+      m_Calls: []

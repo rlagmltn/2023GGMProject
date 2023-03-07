@@ -6,12 +6,16 @@ public class MGGame : MonoBehaviour
 {
     // public MGTeam gTeamManager;
     // public MGStage gStageManager;
+    public Object[] enemies;
+    public Object[] freindly;
 
     void Awake()
     {
         GameSceneClass.gMGGame = this;
 
         InitCamera();
+        enemies = FindObjectsOfType(typeof(Enemy));
+        freindly = FindObjectsOfType(typeof(Player));
 
         // gTeamManager = new MGTeam();
         // gStageManager = new MGStage();
@@ -45,5 +49,27 @@ public class MGGame : MonoBehaviour
                 return;
             }
         }
+    }
+
+    void CheckGameDone()
+    {
+        if (enemies.Length == 0)
+        {
+            GameClear();
+        }
+        if (freindly.Length == 0)
+        {
+            GameOver();
+        }
+    }
+
+    private void GameOver()
+    {
+        MGUI.Instance.GameOver();
+    }
+
+    private void GameClear()
+    {
+
     }
 }

@@ -55,4 +55,9 @@ public class MGUI : MonoSingleton<MGUI>
     {
         Application.Quit();
     }
+
+    public void GameOver()
+    {
+
+    }
 }
