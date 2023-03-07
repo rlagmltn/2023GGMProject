@@ -66,10 +66,11 @@ public class MGGame : MonoBehaviour
     private void GameOver()
     {
         MGUI.Instance.GameOver();
+
     }
 
     private void GameClear()
     {
-
+        MGUI.Instance.GameClear();
     }
 }
