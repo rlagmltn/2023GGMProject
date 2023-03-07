@@ -112,7 +112,7 @@ public abstract class UIInventory : MonoBehaviour
 
         if(MouseTransformData.mouseInventory == null)
         {
-            uiSlotLists[gameObj].DestoryItem();
+            //uiSlotLists[gameObj].DestoryItem();
         }
         else if( MouseTransformData.mouseSlot )
         {
@@ -132,8 +132,8 @@ public abstract class UIInventory : MonoBehaviour
         GameObject imgDrags = new GameObject();
 
         RectTransform rectTransform = imgDrags.AddComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(50, 50);
-        imgDrags.transform.SetParent(transform.parent);
+        rectTransform.sizeDelta = new Vector2(175, 175);
+        imgDrags.transform.SetParent(transform.parent.parent.parent);
 
         Image image = imgDrags.AddComponent<Image>();
         image.sprite = uiSlotLists[gameObj].ItemObject.itemIcon;

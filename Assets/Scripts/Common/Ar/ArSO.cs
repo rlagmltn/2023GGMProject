@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ArSO", menuName = "SO/ArSO")]
 public class ArSO : ScriptableObject
 {
+    [SerializeField] private Sprite image;
+    public Sprite Image => image;
+
     [SerializeField] private string nameString;
     public string Name => nameString;
 
@@ -24,4 +27,7 @@ public class ArSO : ScriptableObject
     public float currentWeight;
 
     public bool isTake = false;
+
+    [Multiline(5)]
+    public string Explanation;
 }
