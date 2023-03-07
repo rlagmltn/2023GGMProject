@@ -7,16 +7,20 @@ public class ArFSM : MonoBehaviour
     protected StateMachine<ArFSM> fsmManager;
     public StateMachine<ArFSM> FsmManager => fsmManager;
 
-
     private void Start()
     {
         fsmManager = new StateMachine<ArFSM>(this, new StateIdle());
         fsmManager.AddStateList(new StateMove());
     }
 
+    private void Update()
+    {
+        fsmManager.Update(Time.deltaTime);
+    }
+
     public virtual Transform SearchAr()
     {
-        Ar[] ars = FindObjectsOfType<Ar>();
+        Ar[] ars = FindObjectsOfType<Player>();
         float distance;
         float minDistance = float.MaxValue;
         int minIndex = 0;
@@ -38,7 +42,14 @@ public class ArFSM : MonoBehaviour
     public virtual void MoveToTarget()
     {
         Vector3 dir = SearchAr().position - transform.position;
-        transform.position += dir * 5f * Time.deltaTime;
+        transform.position += dir * 1f * Time.deltaTime;
+
+    }
+
+    public virtual void SelectTurn()
+    {
+        
+
 
     }
 

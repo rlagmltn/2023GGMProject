@@ -18,13 +18,15 @@ public class StateMove : State<ArFSM>
     public override void OnStart()
     {
         Debug.Log(ar);
+        Vector2 angle = stateMachineClass.SearchAr().position;
+
+        rigid.velocity = (angle * 1.5f) * 5f;
+
+        stateMachine.ChangeState<StateIdle>();
     }
 
     public override void OnUpdate(float deltaTime)
     {
-        Vector2 dir = stateMachineClass.SearchAr().position;
-
-        
 
     }
 
