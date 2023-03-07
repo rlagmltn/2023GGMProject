@@ -54,7 +54,6 @@ public class JoyStick : MonoBehaviour
             PlayerController.Instance.DragEnd(power, angle);
         }
         stick.position = transform.position;
-
     }
 
 }
