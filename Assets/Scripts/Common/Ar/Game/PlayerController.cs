@@ -30,15 +30,18 @@ public class PlayerController : MonoSingleton<PlayerController>
     public void SellectPlayer(QuickSlot player)
     {
         sellectPlayer = player.Player;
+        CameraMove.Instance.MovetoTarget(sellectPlayer.transform.position);
     }
 
     public void Drag()
     {
+        if (sellectPlayer == null) return;
         sellectPlayer.Drag();
     }
 
     public void DragEnd(float power, Vector2 angle)
     {
+        if (sellectPlayer == null) return;
         sellectPlayer.DragEnd(power, angle);
     }
 }

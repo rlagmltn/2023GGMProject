@@ -10,15 +10,12 @@ public class JoyStick : MonoBehaviour
     [SerializeField] bool isMoveStick;
     private Transform stick;
     private Vector3 stickVec;
-    private Vector3 defaultPos;
     EventTrigger eventTrigger;
 
     private void Start()
     {
         stick = transform.GetChild(0);
         eventTrigger = stick.GetComponent<EventTrigger>();
-
-        defaultPos = stick.position;
 
         EventTrigger.Entry dragTrigger = new EventTrigger.Entry { eventID = EventTriggerType.Drag };
         EventTrigger.Entry endDragTrigger = new EventTrigger.Entry { eventID = EventTriggerType.EndDrag };
@@ -32,14 +29,14 @@ public class JoyStick : MonoBehaviour
     {
         Vector3 Pos = Util.Instance.mousePosition;
 
-        stickVec = (Pos - defaultPos).normalized;
+        stickVec = (Pos - transform.position).normalized;
 
-        float Dis = Vector3.Distance(Pos, defaultPos);
+        float Dis = Vector2.Distance(Pos, transform.position);
 
         if (Dis < radius)
-            stick.position = defaultPos + stickVec * Dis;
+            stick.position = transform.position + stickVec * Dis;
         else
-            stick.position = defaultPos + stickVec * radius;
+            stick.position = transform.position + stickVec * radius;
 
         if(isMoveStick)
         {
@@ -56,7 +53,7 @@ public class JoyStick : MonoBehaviour
             angle /= angle.magnitude;
             PlayerController.Instance.DragEnd(power, angle);
         }
-        stick.position = defaultPos;
+        stick.position = transform.position;
 
     }
 

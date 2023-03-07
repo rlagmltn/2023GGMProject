@@ -22,6 +22,5 @@ public class QuickSlot : MonoBehaviour
     public void SellectPlayer()
     {
         PlayerController.Instance.SellectPlayer(this);
-        CameraMove.Instance.MovetoTarget(PlayerController.Instance.sellectPlayer.transform.position);
     }
 }
