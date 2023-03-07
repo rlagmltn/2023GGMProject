@@ -851,6 +851,7 @@ GameObject:
   - component: {fileID: 552939685}
   - component: {fileID: 552939687}
   - component: {fileID: 552939686}
+  - component: {fileID: 552939688}
   m_Layer: 5
   m_Name: SkillStick
   m_TagString: Untagged
@@ -917,6 +918,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 552939684}
   m_CullTransparentMesh: 1
+--- !u!114 &552939688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552939684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed964fd7adb68d4582af069cdb67200, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0.8
+  isMoveStick: 0
 --- !u!1 &559429162
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,6 +943,7 @@ GameObject:
   - component: {fileID: 559429163}
   - component: {fileID: 559429165}
   - component: {fileID: 559429164}
+  - component: {fileID: 559429166}
   m_Layer: 5
   m_Name: JoyStick
   m_TagString: Untagged
@@ -994,6 +1010,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 559429162}
   m_CullTransparentMesh: 1
+--- !u!114 &559429166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559429162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed964fd7adb68d4582af069cdb67200, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 1.4
+  isMoveStick: 1
 --- !u!1 &569193851
 GameObject:
   m_ObjectHideFlags: 0
@@ -1537,6 +1567,7 @@ GameObject:
   - component: {fileID: 788729154}
   - component: {fileID: 788729156}
   - component: {fileID: 788729155}
+  - component: {fileID: 788729157}
   m_Layer: 5
   m_Name: Stick
   m_TagString: Untagged
@@ -1602,6 +1633,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788729153}
   m_CullTransparentMesh: 1
+--- !u!114 &788729157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788729153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1001 &936472333
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2757,6 +2801,7 @@ GameObject:
   - component: {fileID: 1324093859}
   - component: {fileID: 1324093861}
   - component: {fileID: 1324093860}
+  - component: {fileID: 1324093862}
   m_Layer: 5
   m_Name: Stick
   m_TagString: Untagged
@@ -2822,6 +2867,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1324093858}
   m_CullTransparentMesh: 1
+--- !u!114 &1324093862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324093858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1 &1377974391
 GameObject:
   m_ObjectHideFlags: 0
