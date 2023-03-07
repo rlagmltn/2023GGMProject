@@ -70,7 +70,7 @@ public class UIRootLoading : MonoBehaviour
 
     IEnumerator NextSceneState()
     {
-        loadLevelDone = SceneManager.LoadSceneAsync("MapScene");
+        loadLevelDone = SceneManager.LoadSceneAsync("MainScene");
 
         loadingLimitTime = MAX_LOADING_TIME;
         while (loadingState == eLoadingStatus.NextScene)
