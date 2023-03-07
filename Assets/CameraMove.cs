@@ -6,13 +6,14 @@ using DG.Tweening;
 public class CameraMove : MonoSingleton<CameraMove>
 {
     private Transform target;
-    bool isDoMove = false;
+    Coroutine co;
 
     public void MovetoTarget(Player target)
     {
+        if(co!=null) StopCoroutine(co);
         transform.DOMoveX(target.transform.position.x, 0.3f);
         transform.DOMoveY(target.transform.position.y, 0.3f);
-        StartCoroutine(SetTarget(target.transform));
+        co = StartCoroutine(SetTarget(target.transform));
         transform.position += new Vector3(0, 0, -10);
     }
 
@@ -23,7 +24,7 @@ public class CameraMove : MonoSingleton<CameraMove>
 
     public void ChaseTarget()
     {
-        if (target != null && isDoMove)
+        if (target != null)
         {
             transform.position = target.position;
             transform.position += new Vector3(0, 0, -10);
@@ -33,9 +34,7 @@ public class CameraMove : MonoSingleton<CameraMove>
     private IEnumerator SetTarget(Transform _target)
     {
         target = null;
-        isDoMove = true;
-        yield return new WaitForSeconds(0.25f);
-        isDoMove = false;
+        yield return new WaitForSeconds(0.3f);
         target = _target;
     }
 

@@ -37,6 +37,16 @@ public class PlayerController : MonoSingleton<PlayerController>
         CameraMove.Instance.MovetoTarget(sellectPlayer);
         moveStick.gameObject.SetActive(true);
         skillStick.gameObject.SetActive(true);
+        DisableQuickSlots();
+        player.ColorChange(true);
+    }
+
+    public void DisableQuickSlots()
+    {
+        foreach (QuickSlot slot in quickSlots)
+        {
+            slot.ColorChange(false);
+        }
     }
 
     public void Drag()

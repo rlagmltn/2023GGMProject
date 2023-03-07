@@ -27,6 +27,7 @@ public class BackGround : MonoBehaviour
     {
         CameraMove.Instance.ResetTarget();
         PlayerController.Instance.ResetSellect();
+        PlayerController.Instance.DisableQuickSlots();
         startPos.x = Util.Instance.mousePosition.x;
         startPos.y = Util.Instance.mousePosition.y;
     }
