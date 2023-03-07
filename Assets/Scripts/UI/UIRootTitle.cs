@@ -6,9 +6,14 @@ public class UIRootTitle : MonoBehaviour
 {
     public Button startButton;    //GameScene으로 씬을 옮겨주는 함수
 
-    private void Awake()
+    //private void Awake()
+    //{
+    //    InitFirst();
+    //}
+
+    private void Start()
     {
-        InitFirst();
+        MGScene.Instance.ChangeScene(eSceneName.Game);
     }
 
     void InitFirst()
