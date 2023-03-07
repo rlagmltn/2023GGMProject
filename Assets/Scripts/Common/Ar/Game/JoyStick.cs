@@ -40,13 +40,24 @@ public class JoyStick : MonoBehaviour
             stick.position = defaultPos + stickVec * Dis;
         else
             stick.position = defaultPos + stickVec * radius;
+
+        if(isMoveStick)
+        {
+            PlayerController.Instance.Drag();
+        }
     }
 
     public void OnDragEnd(BaseEventData data)
     {
+        if(isMoveStick)
+        {
+            var power = Vector2.Distance(transform.position, Util.Instance.mousePosition);
+            var angle = transform.position - Util.Instance.mousePosition;
+            angle /= angle.magnitude;
+            PlayerController.Instance.DragEnd(power, angle);
+        }
         stick.position = defaultPos;
-        //if(isMoveStick)
 
     }
-        
+
 }

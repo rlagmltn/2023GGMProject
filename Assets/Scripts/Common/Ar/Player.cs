@@ -7,6 +7,7 @@ public class Player : Ar
 {
     public int ar_id;
     public string ar_name;
+    public bool isSellected;
 
     public UnityEvent MouseUp;
 
@@ -14,7 +15,6 @@ public class Player : Ar
     private Vector2 dis;
 
     private float power;
-    private Vector2 angle;
 
     public Player()
     {
@@ -28,32 +28,37 @@ public class Player : Ar
         ar_name = itemObj.itemData.ar_name;
     }
 
-    protected override void StatReset()
+    protected override void Start()
     {
-        MaxHP = 100;
-        ATK = 10;
-        minDragPower = 1.25f;
-        maxDragPower = 6;
-        pushPower = 2;
-        base.StatReset();
+        base.Start();
+        StatReset();
     }
 
-    protected void OnMouseDrag()
+    protected override void StatReset()
     {
-        power = Mathf.Clamp(Vector2.Distance(transform.position, Util.Instance.mousePosition) * 4, minDragPower, maxDragPower);
+        base.StatReset();
+        MaxHP = 100;
+        ATK = 10;
+        minDragPower = 0.4f;
+        maxDragPower = 1.5f;
+        pushPower = 10;
+    }
+
+    public void Drag()
+    {
+        /*power = Mathf.Clamp(charge * 4, minDragPower, maxDragPower);
         if (power <= minDragPower)
         {
             line.transform.localScale = defaultScale;
             return;
         }
-        dis = Util.Instance.mousePosition - transform.position;
-        dragAngle = Mathf.Atan2(dis.y, dis.x) * Mathf.Rad2Deg;
         line.transform.localScale = new Vector2(power, 0.5f);
-        line.transform.rotation = Quaternion.Euler(0, 0, dragAngle);
+        line.transform.rotation = Quaternion.Euler(0, 0, dragAngle);*/
     }
 
-    protected void OnMouseUp()
+    public void DragEnd(float charge, Vector2 angle)
     {
+        power = Mathf.Clamp(charge, minDragPower, maxDragPower);
         line.transform.localScale = defaultScale;
         if (power <= minDragPower) return;
 
@@ -62,20 +67,18 @@ public class Player : Ar
         Debug.Log(TurnManager.Turn);
         */
 
-        angle = transform.position - Util.Instance.mousePosition;
-        angle /= angle.magnitude;
-
-        rigid.velocity = (angle * (power * pushPower));
+        Debug.Log(power);
+        rigid.velocity = (angle * power)*pushPower;
         MouseUp?.Invoke(); // 발사 직후 발동하는 트리거
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
-        if (collision.transform.CompareTag("Enemy"))
+        /*if (collision.transform.CompareTag("Enemy"))
         {
             BeforeCrash?.Invoke(); //충돌 직전 발동하는 트리거
             //BattleManager.Instance.CrashSet(this, collision.contacts[0].normal);
-        }
+        }*/
     }
 }
