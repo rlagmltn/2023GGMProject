@@ -2,20 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MGGame : MonoBehaviour
+public class MGGame : MonoSingleton<MGGame>
 {
     // public MGTeam gTeamManager;
     // public MGStage gStageManager;
-    public Object[] enemies;
-    public Object[] freindly;
+    public Ar[] enemies;
+    public Ar[] freindly;
+    private int enemyCount;
+    private int playerCount;
 
     void Awake()
     {
         GameSceneClass.gMGGame = this;
 
         InitCamera();
-        enemies = FindObjectsOfType(typeof(Enemy));
-        freindly = FindObjectsOfType(typeof(Player));
+        enemies = FindObjectsOfType<Enemy>();
+        freindly = FindObjectsOfType<Player>();
 
         // gTeamManager = new MGTeam();
         // gStageManager = new MGStage();
@@ -51,13 +53,28 @@ public class MGGame : MonoBehaviour
         }
     }
 
+    public void ArDead()
+    {
+        enemyCount = 0;
+        playerCount = 0;
+        foreach(Ar ar in enemies)
+        {
+            if (!ar.isDead) enemyCount++;
+        }
+        foreach (Ar ar in freindly)
+        {
+            if (!ar.isDead) playerCount++;
+        }
+        CheckGameDone();
+    }
+
     void CheckGameDone()
     {
-        if (enemies.Length == 0)
+        if (enemyCount == 0)
         {
             GameClear();
         }
-        if (freindly.Length == 0)
+        if (playerCount == 0)
         {
             GameOver();
         }

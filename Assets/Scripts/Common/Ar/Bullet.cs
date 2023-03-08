@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] BulletSO bulletSO;
 
     private CircleCollider2D collide;
-    private float damage;
+    public float damage { get; set; }
 
     private void OnEnable()
     {
@@ -20,6 +20,7 @@ public class Bullet : MonoBehaviour
         gameObject.name = bulletSO.name;
         damage = bulletSO.damage;
         collide.radius = bulletSO.radius;
+        Destroy(gameObject, bulletSO.lifeTime);
         // lifeTime만큼 기다렸다가 풀링
     }
 

@@ -10,6 +10,8 @@ public class Ar : MonoBehaviour
     public float ATK { get; set; }
     public Sprite arSprite { get; set; }
 
+    public bool isDead { get; set; }
+
     protected float minDragPower = 0.4f;
     protected float maxDragPower = 1.5f;
     protected float pushPower;
@@ -23,8 +25,6 @@ public class Ar : MonoBehaviour
 
     public UnityEvent BeforeCrash;
     public UnityEvent AfterCrash;
-    public UnityEvent BeforeBattle;
-    public UnityEvent AfterBattle;
     public UnityEvent BeforeAttack;
     public UnityEvent AfterAttack;
     public UnityEvent BeforeDefence;
@@ -45,6 +45,7 @@ public class Ar : MonoBehaviour
     protected virtual void StatReset() // 수치 초기화
     {
         HP = MaxHP;
+        isDead = false;
         //hpBar.localScale = new Vector3(Mathf.Clamp(HP / MaxHP, 0, 1), 1, 1);
     }
 
@@ -67,16 +68,16 @@ public class Ar : MonoBehaviour
         }
     }
 
-    public void BattleFinish()
-    {
-        Debug.Log(name + HP);
-        if (!DeadCheck())
-            AfterCrash?.Invoke(); //충돌 직후 발동하는 트리거
-    }
-
-    public void Hit(Vector2 velo)
+    public void Push(Vector2 velo)
     {
         rigid.velocity = velo;
+    }
+
+    public void Hit(float damage)
+    {
+        HP -= damage;
+        Debug.Log(name + HP);
+        DeadCheck();
     }
 
     protected bool DeadCheck()
@@ -85,11 +86,11 @@ public class Ar : MonoBehaviour
         if (HP <= 0)
         {
             OnBattleDie.Invoke();
-            if (HP <= 0)
-            {
-                //Pooling();
-                return true;
-            }
+            //Pooling();
+            isDead = true;
+            MGGame.Instance.ArDead();
+            gameObject.SetActive(false);
+            return true;
         }
         hpBar.localScale = new Vector3(Mathf.Clamp(HP / MaxHP, 0, 1), 1, 1);
         return false;
