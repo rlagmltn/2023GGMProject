@@ -57,7 +57,7 @@ public class MGGame : MonoSingleton<MGGame>
     {
         enemyCount = 0;
         playerCount = 0;
-        foreach(Ar ar in enemies)
+        foreach (Ar ar in enemies)
         {
             if (!ar.isDead) enemyCount++;
         }
@@ -70,13 +70,13 @@ public class MGGame : MonoSingleton<MGGame>
 
     void CheckGameDone()
     {
-        if (enemyCount == 0)
-        {
-            GameClear();
-        }
         if (playerCount == 0)
         {
             GameOver();
+        }
+        else if (enemyCount == 0)
+        {
+            GameClear();
         }
     }
 
