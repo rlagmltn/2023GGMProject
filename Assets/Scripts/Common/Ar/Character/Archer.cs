@@ -5,14 +5,21 @@ using System;
 
 public class Archer : Player
 {
-    public bool isSkillUse = false;
     void Start()
     {
         base.Start();
     }
 
-    public void DragEnd(float charge, Vector2 angle)
+    public void DragEnd(JoystickType joystickType, float charge, Vector2 angle)
     {
-        base.DragEnd(charge, angle);
+        base.DragEnd(joystickType, charge, angle);
+    }
+    public override void Attack(Vector2 angle)
+    {
+
+    }
+    public override void Skill(Vector2 angle)
+    {
+
     }
 }

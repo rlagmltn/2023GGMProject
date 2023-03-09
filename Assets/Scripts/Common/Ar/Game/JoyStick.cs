@@ -53,11 +53,7 @@ public class JoyStick : MonoBehaviour
             stick.position = transform.position + stickVec * Dis;
         else
             stick.position = transform.position + stickVec * radius;
-
-        if(joystickType==JoystickType.Move)
-        {
-            PlayerController.Instance.Drag();
-        }
+        PlayerController.Instance.Drag();
     }
 
     public void OnDragEnd(BaseEventData data)

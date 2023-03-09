@@ -55,12 +55,32 @@ public class Player : Ar
         line.transform.rotation = Quaternion.Euler(0, 0, dragAngle);*/
     }
 
-    public void DragEnd(float charge, Vector2 angle)
+    public void DragEnd(JoystickType joystickType, float charge, Vector2 angle)
     {
         power = Mathf.Clamp(charge, minDragPower, maxDragPower);
-
-        rigid.velocity = (angle * power)*pushPower;
+        switch (joystickType)
+        {
+            case JoystickType.Move:
+                rigid.velocity = ((angle * power) * pushPower);
+                break;
+            case JoystickType.Attack:
+                Attack();
+                break;
+            case JoystickType.Skill:
+                Skill();
+                break;
+            case JoystickType.None:
+                break;
+        };
         MouseUp?.Invoke(); // 발사 직후 발동하는 트리거
+    }
+    public virtual void Attack(Vector2 angle)
+    {
+
+    }
+    public virtual void Skill(Vector2 angle)
+    {
+
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)

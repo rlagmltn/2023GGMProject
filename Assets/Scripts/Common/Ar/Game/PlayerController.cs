@@ -55,11 +55,9 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         cancelButton.gameObject.SetActive(true);
     }
-
     public void Drag()
     {
-        if (sellectPlayer == null) return;
-        sellectPlayer.Drag();
+        sellectPlayer?.Drag();
     }
 
     public void DragEnd(float power, Vector2 angle)
@@ -70,9 +68,9 @@ public class PlayerController : MonoSingleton<PlayerController>
             cancelButton.gameObject.SetActive(false);
             return;
         }
-        else if (joystick.joystickType==JoystickType.Move && TurnManager.Instance.UseTurn())
+        else if (TurnManager.Instance.UseTurn())
         {
-            sellectPlayer.DragEnd(power, angle);
+            sellectPlayer.DragEnd(joystick.joystickType, power, angle);
             cancelButton.gameObject.SetActive(false);
             ResetSellect();
         }
