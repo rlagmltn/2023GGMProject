@@ -13,6 +13,8 @@ public class Player : Ar
 
     private float power;
 
+    private QuickSlot slot;
+
     public Player()
     {
         ar_id = -1;
@@ -33,12 +35,12 @@ public class Player : Ar
 
     protected override void StatReset()
     {
-        base.StatReset();
         MaxHP = 100;
         ATK = 10;
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
         pushPower = 15;
+        base.StatReset();
     }
 
     public void Drag()
@@ -69,5 +71,15 @@ public class Player : Ar
             BeforeCrash?.Invoke(); //충돌 직전 발동하는 트리거
             //BattleManager.Instance.CrashSet(this, collision.contacts[0].normal);
         }*/
+    }
+
+    private void OnMouseDown()
+    {
+        PlayerController.Instance.SellectPlayer(slot);
+    }
+
+    public void Connect(QuickSlot slot)
+    {
+        this.slot = slot;
     }
 }

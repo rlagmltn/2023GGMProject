@@ -19,6 +19,7 @@ public class QuickSlot : MonoBehaviour
     public void Connect(Player player)
     {
         Player = player;
+        Player.Connect(this);
     }
 
     public void SellectPlayer()

@@ -17,11 +17,11 @@ public class Warrior : Player
 
     protected override void StatReset()
     {
-        base.StatReset();
         MaxHP = 100;
         ATK = 10;
         pushPower = 15;
         isMove = false;
+        base.StatReset();
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
@@ -34,7 +34,7 @@ public class Warrior : Player
         if (rigid.velocity.magnitude <= 0.8f && isMove)
         {
             isMove = false;
-            AfterMove.Invoke();
+            AfterMove?.Invoke();
         }
     }
 

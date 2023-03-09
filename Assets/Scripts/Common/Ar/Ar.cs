@@ -8,6 +8,9 @@ public class Ar : MonoBehaviour
     public float MaxHP { get; set; }
     public float HP { get; set; }
     public float ATK { get; set; }
+    public float DEF { get; set; }
+    public float WEIGHT { get; set; }
+
     public Sprite arSprite { get; set; }
 
     public bool isDead { get; set; }
@@ -16,7 +19,6 @@ public class Ar : MonoBehaviour
     protected float maxDragPower = 1.5f;
     protected float pushPower;
 
-    protected GameObject line;
     protected Transform hpBar;
     protected SpriteRenderer hpImage;
 
@@ -36,7 +38,6 @@ public class Ar : MonoBehaviour
     protected virtual void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
-        line = transform.GetChild(0).gameObject;
         hpBar = transform.GetChild(1).GetChild(0);
         hpImage = hpBar.GetComponentInChildren<SpriteRenderer>();
         arSprite = transform.GetComponent<SpriteRenderer>().sprite;
@@ -46,6 +47,7 @@ public class Ar : MonoBehaviour
     {
         HP = MaxHP;
         isDead = false;
+        WEIGHT = 1;
         //hpBar.localScale = new Vector3(Mathf.Clamp(HP / MaxHP, 0, 1), 1, 1);
     }
 
@@ -63,8 +65,7 @@ public class Ar : MonoBehaviour
         }
         else if (collision.transform.CompareTag("Object"))
         {
-            rigid.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal);
-            AfterCrash?.Invoke();
+            rigid.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal) * 0.7f;
         }
     }
 

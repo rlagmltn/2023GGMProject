@@ -8,8 +8,9 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] QuickSlot pf_QuickSlot;
     [SerializeField] Transform slotHolder;
     [SerializeField] Transform[] spawnPoints;
-    [SerializeField] JoyStick moveStick;
-    [SerializeField] JoyStick skillStick;
+    [SerializeField] JoyStick joystick;
+    [SerializeField] StickCancel cancelButton;
+    [SerializeField] GameObject actSellect;
     public Player sellectPlayer = null;
     private List<QuickSlot> quickSlots = new List<QuickSlot>();
 
@@ -35,18 +36,24 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         sellectPlayer = player.Player;
         CameraMove.Instance.MovetoTarget(sellectPlayer);
-        moveStick.gameObject.SetActive(true);
-        skillStick.gameObject.SetActive(true);
         DisableQuickSlots();
+        actSellect.SetActive(true);
         player.ColorChange(true);
     }
 
     public void DisableQuickSlots()
     {
+        actSellect.SetActive(false);
+        joystick.gameObject.SetActive(false);
         foreach (QuickSlot slot in quickSlots)
         {
             slot.ColorChange(false);
         }
+    }
+
+    public void DragBegin()
+    {
+        cancelButton.gameObject.SetActive(true);
     }
 
     public void Drag()
@@ -57,9 +64,16 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     public void DragEnd(float power, Vector2 angle)
     {
-        if (sellectPlayer != null && TurnManager.Instance.UseTurn())
+        if(cancelButton.entering)
+        {
+            cancelButton.entering = false;
+            cancelButton.gameObject.SetActive(false);
+            return;
+        }
+        else if (joystick.joystickType==JoystickType.Move && TurnManager.Instance.UseTurn())
         {
             sellectPlayer.DragEnd(power, angle);
+            cancelButton.gameObject.SetActive(false);
             ResetSellect();
         }
     }
@@ -67,8 +81,13 @@ public class PlayerController : MonoSingleton<PlayerController>
     public void ResetSellect()
     {
         sellectPlayer = null;
-        moveStick.gameObject.SetActive(false);
-        skillStick.gameObject.SetActive(false);
         DisableQuickSlots();
+    }
+
+    public void ChooseStickType(int n)
+    {
+        actSellect.SetActive(false);
+        joystick.gameObject.SetActive(true);
+        joystick.joystickType = (JoystickType)n;
     }
 }

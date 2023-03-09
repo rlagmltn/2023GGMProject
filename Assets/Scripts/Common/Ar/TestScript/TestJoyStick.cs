@@ -1,21 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public enum JoystickType : int
+public class TestJoyStick : MonoBehaviour
 {
-    Move,
-    Attack,
-    Skill,
-    None
-}
-
-public class JoyStick : MonoBehaviour
-{
+    [SerializeField] Player player;
     [SerializeField] float radius;
-    public JoystickType joystickType;
+    [SerializeField] bool isMoveStick;
     private Transform stick;
     private Vector3 stickVec;
     EventTrigger eventTrigger;
@@ -25,20 +17,12 @@ public class JoyStick : MonoBehaviour
         stick = transform.GetChild(0);
         eventTrigger = stick.GetComponent<EventTrigger>();
 
-        EventTrigger.Entry beginDragTrigger = new EventTrigger.Entry { eventID = EventTriggerType.BeginDrag };
         EventTrigger.Entry dragTrigger = new EventTrigger.Entry { eventID = EventTriggerType.Drag };
         EventTrigger.Entry endDragTrigger = new EventTrigger.Entry { eventID = EventTriggerType.EndDrag };
-        beginDragTrigger.callback.AddListener(OnDragBegin);
         dragTrigger.callback.AddListener(OnDrag);
         endDragTrigger.callback.AddListener(OnDragEnd);
-        eventTrigger.triggers.Add(beginDragTrigger);
         eventTrigger.triggers.Add(dragTrigger);
         eventTrigger.triggers.Add(endDragTrigger);
-    }
-
-    public void OnDragBegin(BaseEventData data)
-    {
-        PlayerController.Instance.DragBegin();
     }
 
     public void OnDrag(BaseEventData data)
@@ -54,18 +38,23 @@ public class JoyStick : MonoBehaviour
         else
             stick.position = transform.position + stickVec * radius;
 
-        if(joystickType==JoystickType.Move)
+        if (isMoveStick)
         {
-            PlayerController.Instance.Drag();
+            player.Drag();
         }
     }
 
     public void OnDragEnd(BaseEventData data)
     {
-        var power = Vector2.Distance(transform.position, Util.Instance.mousePosition);
-        var angle = transform.position - Util.Instance.mousePosition;
-        angle /= angle.magnitude;
-        PlayerController.Instance.DragEnd(power, angle);
+        if (isMoveStick)
+        {
+            var power = Vector2.Distance(transform.position, Util.Instance.mousePosition);
+            var angle = transform.position - Util.Instance.mousePosition;
+            angle /= angle.magnitude;
+
+            player.DragEnd(power, angle);
+        }
         stick.position = transform.position;
     }
+
 }
