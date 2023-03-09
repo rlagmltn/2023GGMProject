@@ -64,10 +64,10 @@ public class Player : Ar
                 rigid.velocity = ((angle * power) * pushPower);
                 break;
             case JoystickType.Attack:
-                Attack();
+                Attack(angle);
                 break;
             case JoystickType.Skill:
-                Skill();
+                Skill(angle);
                 break;
             case JoystickType.None:
                 break;

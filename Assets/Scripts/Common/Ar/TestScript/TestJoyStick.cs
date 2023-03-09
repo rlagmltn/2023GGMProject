@@ -10,6 +10,7 @@ public class TestJoyStick : MonoBehaviour
     [SerializeField] bool isMoveStick;
     private Transform stick;
     private Vector3 stickVec;
+    public JoystickType joystickType;
     EventTrigger eventTrigger;
 
     private void Start()
@@ -52,7 +53,7 @@ public class TestJoyStick : MonoBehaviour
             var angle = transform.position - Util.Instance.mousePosition;
             angle /= angle.magnitude;
 
-            player.DragEnd(power, angle);
+            player.DragEnd(joystickType, power, angle);
         }
         stick.position = transform.position;
     }
