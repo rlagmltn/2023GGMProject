@@ -14,6 +14,9 @@ public class StageManager : MonoSingleton<StageManager>
     [SerializeField] private TextMeshProUGUI explanationText;
 
     [SerializeField] private Button closeButton;
+    [SerializeField] private Button closePanel;
+
+    [SerializeField] private int stageProgress;
 
     private void Start()
     {
@@ -26,7 +29,8 @@ public class StageManager : MonoSingleton<StageManager>
         {
             AddButtonEvent(btn, btn.GetComponent<StageHolder>().OnClick);
         }
-        AddButtonEvent(closeButton, CloseStageInfo);    
+        AddButtonEvent(closeButton, CloseStageInfo);
+        AddButtonEvent(closePanel, CloseStageInfo);
     }
 
     public void ShowStageInfo(StageSO stage)

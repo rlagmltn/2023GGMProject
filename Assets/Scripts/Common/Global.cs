@@ -48,7 +48,8 @@ public enum ePrefabs
     StageObj,
     EnemyObj1,
     EnemyObj2,
-    Button
+    Button,
+    Map,
 }
 
 public enum eSceneName

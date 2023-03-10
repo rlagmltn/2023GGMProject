@@ -7,6 +7,10 @@ public class StageSO : ScriptableObject
 {
     public string stageName;
 
+    public int stageNum;
+
+    public int stageProgress;
+
     [Multiline(5)]
     public string explanationText;
 
