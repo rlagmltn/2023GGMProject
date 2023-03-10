@@ -40,6 +40,7 @@ public enum ePrefabs
     UIRootLoading,
     UIRootTitle,
     UIRootGame,
+    UIRootSelect,
     UIRootMap,
 
     Object = 4000,
@@ -57,8 +58,9 @@ public enum eSceneName
     Game,
     Loading,
     Main,
-    Map,
+    Select,
     Title,
+    Map,
 }
 
 public class GameSceneClass
@@ -74,4 +76,12 @@ public enum eGameState
     None,
     Playing,
     Paused,
+}
+
+public enum eStageState
+{
+    None,
+    Event,
+    Shop,
+    Battle,
 }

@@ -13,6 +13,9 @@ public class InventorySorting : MonoSingleton<InventorySorting>
 
     public List<Transform> Buttons;
 
+    public List<Transform> HaveButton;
+    public List<Transform> nHaveButton;
+
     private void Awake()
     {
         ArList = GetComponent<ArSOListHolder>().ArList;
@@ -28,13 +31,11 @@ public class InventorySorting : MonoSingleton<InventorySorting>
             Buttons.Add(button.transform);
 
             ImageHolder img = button.GetComponent<ImageHolder>();
-            img.num = num;
+            //img.Ar = ArList.list[num]; //여기서 버그날거임
 
             AddButtonEvent(button, img.ClickArButton);
-            button.transform.gameObject.SetActive(false);
             num++;
         }
-
         //Buttons = content.GetComponentsInChildren<Button>();
 
         //for(int num = 0; num < Buttons.Length; num++)
@@ -44,44 +45,61 @@ public class InventorySorting : MonoSingleton<InventorySorting>
         //}
     }
 
+    void AllButtonActiveFalse()
+    {
+        foreach(Transform btn in Buttons)
+        {
+            btn.gameObject.SetActive(false);
+        }
+    }
+
 
     /// <summary>
     /// 인벤토리를 정렬 해주는 함수
     /// </summary>
-    void SortInventory()
+    public void SortInventory()
     {
-        int takeCount = 0;
-        int buttonCount = 0;
-        bool canClick = false;
-        Color color = Color.white;
-        Image image;
+        AllButtonActiveFalse();
 
-        foreach (ArSO ar in ArList.list)
+        ImageHolder img;
+        int num = 0;
+
+        for (num = 0; num < ArList.list.Count; num++)
         {
-            if (ar.isTake) takeCount++;
-
-            buttonCount++;
+            Buttons[num].gameObject.SetActive(true);
         }
 
-        // 버튼에 비활성화 하는 스크립트 따로 만들어서 붙이기
-
-        for (int i = 0; i < buttonCount; i++)
+        num = 0;
+        foreach(ArSO ar in ArList.list)
         {
-            Buttons[i].gameObject.SetActive(true);
-            color = new Color(0.7843f, 0.7843f, 0.7843f, 0.5f);
-            canClick = false;
-
-            if (i < takeCount) 
+            if(ar.isTake && !ar.isUse)
             {
-                canClick = true;
-                color = Color.white;
+                ActiveClick(Buttons[num], true);
+
+                img = Buttons[num].GetComponent<ImageHolder>();
+                img.Ar = ar;
+
+                img.image.sprite = img.Ar.Image;
+                img.image.color = Color.white;
+
+                num++;
             }
+        }
 
-            image = Buttons[i].GetComponent<ImageHolder>().image;
-            image.color = color;
-            image.sprite = ArList.list[i].Image;
+        foreach(ArSO ar in ArList.list)
+        {
+            if (!ar.isTake || ar.isUse)
+            {
+                ActiveClick(Buttons[num], false);
 
-            ActiveClick(Buttons[i].transform, canClick);
+                img = Buttons[num].GetComponent<ImageHolder>();
+                img.Ar = ar;
+
+                img.image.sprite = img.Ar.Image;
+                img.image.color = Color.gray;
+
+                num++;
+            }
         }
     }
 

@@ -27,6 +27,7 @@ public class ArSO : ScriptableObject
     public float currentWeight;
 
     public bool isTake = false;
+    public bool isUse = false;
 
     [Multiline(5)]
     public string Explanation;
