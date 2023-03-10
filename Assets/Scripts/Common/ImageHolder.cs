@@ -5,12 +5,18 @@ using UnityEngine.UI;
 
 public class ImageHolder : MonoBehaviour
 {
-    public Image image;
+    public ArSO Ar;
     public int num;
+    public Image image;
 
     public void ClickArButton()
     {
-        InventoryUI.Instance.Ar = InventorySorting.Instance.returnAr(num);
+        InventoryUI.Instance.Ar = Ar;
         InventoryUI.Instance.UpdateUI();
+    }
+
+    public void ClickButtonInGame()
+    {
+        InventorySelecter.Instance.unInputAr(num);
     }
 }
