@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class MGUI : MonoSingleton<MGUI>
 {
-    private Image escPanel;
+    public Image escPanel;
+    public GameObject win;
+    public GameObject lose;
     private void Start()
     {
         escPanel = GetComponentInChildren<Image>();
         escPanel.gameObject.SetActive(false);
+
+        win = GameObject.Find("Win");
+        lose = GameObject.Find("Lose");
+        win?.SetActive(false);
+        lose?.SetActive(false);
     }
 
     private void Update()
@@ -28,7 +36,7 @@ public class MGUI : MonoSingleton<MGUI>
 
     public void ToggleEscPanel()
     {
-        escPanel.gameObject.SetActive(!escPanel.gameObject.activeSelf);
+        escPanel.gameObject.SetActive(!escPanel.enabled);
     }
 
     public void MoveToTitleScene()
@@ -58,6 +66,13 @@ public class MGUI : MonoSingleton<MGUI>
 
     public void GameOver()
     {
+        Time.timeScale = 0f;
+        win?.SetActive(true);
+    }
 
+    public void GameClear()
+    {
+        Time.timeScale = 0f;
+        lose?.SetActive(true);
     }
 }

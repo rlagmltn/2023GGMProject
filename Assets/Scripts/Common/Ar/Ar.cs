@@ -8,14 +8,17 @@ public class Ar : MonoBehaviour
     public float MaxHP { get; set; }
     public float HP { get; set; }
     public float ATK { get; set; }
+    public float DEF { get; set; }
+    public float WEIGHT { get; set; }
+
     public Sprite arSprite { get; set; }
+
+    public bool isDead { get; set; }
 
     protected float minDragPower = 0.4f;
     protected float maxDragPower = 1.5f;
     protected float pushPower;
 
-    protected Vector2 defaultScale = new Vector2(0.5f, 0.5f);
-    protected GameObject line;
     protected Transform hpBar;
     protected SpriteRenderer hpImage;
 
@@ -24,19 +27,17 @@ public class Ar : MonoBehaviour
 
     public UnityEvent BeforeCrash;
     public UnityEvent AfterCrash;
-    public UnityEvent BeforeBattle;
-    public UnityEvent AfterBattle;
     public UnityEvent BeforeAttack;
     public UnityEvent AfterAttack;
     public UnityEvent BeforeDefence;
     public UnityEvent AfterDefence;
+    public UnityEvent AfterMove;
     public UnityEvent OnOutDie;
     public UnityEvent OnBattleDie;
 
     protected virtual void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
-        line = transform.GetChild(0).gameObject;
         hpBar = transform.GetChild(1).GetChild(0);
         hpImage = hpBar.GetComponentInChildren<SpriteRenderer>();
         arSprite = transform.GetComponent<SpriteRenderer>().sprite;
@@ -45,13 +46,10 @@ public class Ar : MonoBehaviour
     protected virtual void StatReset() // 수치 초기화
     {
         HP = MaxHP;
+        isDead = false;
+        WEIGHT = 1;
         //hpBar.localScale = new Vector3(Mathf.Clamp(HP / MaxHP, 0, 1), 1, 1);
     }
-
-    /*protected void OnMouseDown()
-    {
-        ArInfoManager.Instance.ShowBulletInfo(this);
-    }*/
 
     protected void FixedUpdate()
     {
@@ -67,21 +65,20 @@ public class Ar : MonoBehaviour
         }
         else if (collision.transform.CompareTag("Object"))
         {
-            rigid.velocity = Vector2.Reflect(lastVelocity.normalized, collision.contacts[0].normal) * pushPower;
-            AfterCrash?.Invoke();
+            rigid.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal) * 0.7f;
         }
     }
 
-    public void BattleFinish()
-    {
-        Debug.Log(name + HP);
-        if (!DeadCheck())
-            AfterCrash?.Invoke(); //충돌 직후 발동하는 트리거
-    }
-
-    public void Hit(Vector2 velo)
+    public void Push(Vector2 velo)
     {
         rigid.velocity = velo;
+    }
+
+    public void Hit(float damage)
+    {
+        HP -= damage;
+        Debug.Log(name + HP);
+        DeadCheck();
     }
 
     protected bool DeadCheck()
@@ -90,11 +87,11 @@ public class Ar : MonoBehaviour
         if (HP <= 0)
         {
             OnBattleDie.Invoke();
-            if (HP <= 0)
-            {
-                //Pooling();
-                return true;
-            }
+            //Pooling();
+            isDead = true;
+            MGGame.Instance.ArDead();
+            gameObject.SetActive(false);
+            return true;
         }
         hpBar.localScale = new Vector3(Mathf.Clamp(HP / MaxHP, 0, 1), 1, 1);
         return false;

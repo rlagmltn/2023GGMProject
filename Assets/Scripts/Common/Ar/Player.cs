@@ -11,10 +11,9 @@ public class Player : Ar
 
     public UnityEvent MouseUp;
 
-    private float dragAngle;
-    private Vector2 dis;
-
     private float power;
+
+    private QuickSlot slot;
 
     public Player()
     {
@@ -36,12 +35,12 @@ public class Player : Ar
 
     protected override void StatReset()
     {
-        base.StatReset();
         MaxHP = 100;
         ATK = 10;
-        minDragPower = 0.4f;
+        minDragPower = 0.2f;
         maxDragPower = 1.5f;
-        pushPower = 10;
+        pushPower = 15;
+        base.StatReset();
     }
 
     public void Drag()
@@ -56,20 +55,32 @@ public class Player : Ar
         line.transform.rotation = Quaternion.Euler(0, 0, dragAngle);*/
     }
 
-    public void DragEnd(float charge, Vector2 angle)
+    public void DragEnd(JoystickType joystickType, float charge, Vector2 angle)
     {
         power = Mathf.Clamp(charge, minDragPower, maxDragPower);
-        line.transform.localScale = defaultScale;
-        if (power <= minDragPower) return;
-
-        /*
-        TurnManager.Instance.AddTrun();
-        Debug.Log(TurnManager.Turn);
-        */
-
-        Debug.Log(power);
-        rigid.velocity = (angle * power)*pushPower;
+        switch (joystickType)
+        {
+            case JoystickType.Move:
+                rigid.velocity = ((angle * power) * pushPower);
+                break;
+            case JoystickType.Attack:
+                Attack(angle);
+                break;
+            case JoystickType.Skill:
+                Skill(angle);
+                break;
+            case JoystickType.None:
+                break;
+        };
         MouseUp?.Invoke(); // 발사 직후 발동하는 트리거
+    }
+    public virtual void Attack(Vector2 angle)
+    {
+
+    }
+    public virtual void Skill(Vector2 angle)
+    {
+
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
@@ -80,5 +91,15 @@ public class Player : Ar
             BeforeCrash?.Invoke(); //충돌 직전 발동하는 트리거
             //BattleManager.Instance.CrashSet(this, collision.contacts[0].normal);
         }*/
+    }
+
+    private void OnMouseDown()
+    {
+        PlayerController.Instance.SellectPlayer(slot);
+    }
+
+    public void Connect(QuickSlot slot)
+    {
+        this.slot = slot;
     }
 }

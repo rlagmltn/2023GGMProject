@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 5042380115964156597}
   m_Layer: 0
   m_Name: Player1
-  m_TagString: Ar
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,7 +161,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 6a7d2d60f5151b54e98bf9274b1aafe0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -246,6 +246,9 @@ MonoBehaviour:
   AfterDefence:
     m_PersistentCalls:
       m_Calls: []
+  AfterMove:
+    m_PersistentCalls:
+      m_Calls: []
   OnOutDie:
     m_PersistentCalls:
       m_Calls: []
@@ -254,6 +257,7 @@ MonoBehaviour:
       m_Calls: []
   ar_id: 0
   ar_name: 
+  isSellected: 0
   MouseUp:
     m_PersistentCalls:
       m_Calls: []
