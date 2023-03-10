@@ -22,7 +22,6 @@ public class StateIdle : State<ArFSM>
 
     public override void OnUpdate(float deltaTime)
     {
-        Debug.Log("Running");
         //자기턴이면
         if(turnFlag)
         {
@@ -32,7 +31,16 @@ public class StateIdle : State<ArFSM>
                 turnFlag = !turnFlag;
                 stateMachine.ChangeState<StateMove>();
             }
+
+
         }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            turnFlag = true;
+        }
+
+
     }
 
     public override void OnEnd()

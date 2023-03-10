@@ -17,10 +17,14 @@ public class StateMove : State<ArFSM>
 
     public override void OnStart()
     {
-        Debug.Log(ar);
-        Vector2 angle = stateMachineClass.SearchAr().position;
+        Vector2 angle = stateMachineClass.SearchAr().position - stateMachineClass.transform.position;
 
+        //power를 Enemy class에서 가지고 오기
         rigid.velocity = (angle * 1.5f) * 5f;
+
+        
+
+        
 
         stateMachine.ChangeState<StateIdle>();
     }
@@ -32,6 +36,7 @@ public class StateMove : State<ArFSM>
 
     public override void OnEnd()
     {
-
+        //TurnManager에게 turn종료알리기
+        
     }
 }

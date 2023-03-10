@@ -11,7 +11,9 @@ public class StateAtk : State<ArFSM>
 
     public override void OnStart()
     {
-        
+        Vector2 angle = stateMachineClass.SearchAr().position - stateMachineClass.transform.position;
+
+
     }
 
     public override void OnUpdate(float deltaTime)
