@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateIdle : State<ArFSM>
 {
-    private bool turnFlag = true;
+    private bool turnFlag = false;
 
     public override void OnAwake()
     {
@@ -14,10 +14,6 @@ public class StateIdle : State<ArFSM>
     public override void OnStart()
     {
         Transform target = stateMachineClass.SearchAr();
-        if (target)
-        {
-            Debug.Log("Find");
-        }
     }
 
     public override void OnUpdate(float deltaTime)

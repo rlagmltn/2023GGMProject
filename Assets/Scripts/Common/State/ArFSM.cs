@@ -58,8 +58,7 @@ public class ArFSM : MonoBehaviour
             {
                 //적 턴종료
                 TurnManager.Instance.UseTurn();
-
-                
+    
             }
         }
     }
@@ -67,7 +66,8 @@ public class ArFSM : MonoBehaviour
     public virtual bool CheckWall()
     {
         Vector3 dir = SearchAr().position - transform.position;
-        RaycastHit2D[] hits = Physics2D.RaycastAll(gameObject.transform.position, dir, 10f);
+        float distance = Vector2.Distance(transform.position, SearchAr().position);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(gameObject.transform.position, dir, distance);
         foreach(RaycastHit2D hit in hits)
         {
             if (hit.transform.gameObject.CompareTag("Object"))

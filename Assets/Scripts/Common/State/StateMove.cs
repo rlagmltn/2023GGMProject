@@ -18,14 +18,11 @@ public class StateMove : State<ArFSM>
     public override void OnStart()
     {
         Vector2 angle = stateMachineClass.SearchAr().position - stateMachineClass.transform.position;
-
+        if (!stateMachineClass.CheckWall())
+        {
+            rigid.velocity = (angle * 1.5f) * 5f;
+        }
         //power를 Enemy class에서 가지고 오기
-        rigid.velocity = (angle * 1.5f) * 5f;
-
-        
-
-        
-
         stateMachine.ChangeState<StateIdle>();
     }
 
