@@ -23,7 +23,7 @@ public class GameUI : MonoBehaviour
 
     void ChangeScene()
     {
-        MGScene.Instance.ChangeScene(eSceneName.Map);
+        MGScene.Instance.ChangeScene(eSceneName.Select);
     }
 
     void AddButtonEvent(Button button, UnityAction action)
