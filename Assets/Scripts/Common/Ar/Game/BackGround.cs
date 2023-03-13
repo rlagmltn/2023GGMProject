@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Cinemachine;
 
 public class BackGround : MonoBehaviour
 {
+    [SerializeField] Transform cameraMove;
     [SerializeField] float moveSpeed;
+    [SerializeField] GameObject roundCinemachine;
+    [SerializeField] GameObject hardCinemachine;
     private Vector3 startPos;
     EventTrigger eventTrigger;
 
@@ -18,6 +22,7 @@ public class BackGround : MonoBehaviour
         EventTrigger.Entry endDragTrigger = new EventTrigger.Entry { eventID = EventTriggerType.EndDrag };
         clickTrigger.callback.AddListener(BeginDrag);
         dragTrigger.callback.AddListener(Drag);
+        endDragTrigger.callback.AddListener(EndDrag);
         eventTrigger.triggers.Add(clickTrigger);
         eventTrigger.triggers.Add(dragTrigger);
         eventTrigger.triggers.Add(endDragTrigger);
@@ -30,11 +35,19 @@ public class BackGround : MonoBehaviour
         PlayerController.Instance.DisableQuickSlots();
         startPos.x = Util.Instance.mousePosition.x;
         startPos.y = Util.Instance.mousePosition.y;
+        roundCinemachine.SetActive(false);
+        hardCinemachine.SetActive(true);
     }
     private void Drag(BaseEventData data)
     {
         Vector3 angle = startPos - Util.Instance.mousePosition;
         angle.z = 0;
-        Util.Instance.mainCam.transform.position += angle;
+        cameraMove.position += angle;
+    }
+
+    private void EndDrag(BaseEventData data)
+    {
+        roundCinemachine.SetActive(true);
+        hardCinemachine.SetActive(false);
     }
 }
