@@ -16,6 +16,8 @@ public class StageManager : MonoSingleton<StageManager>
     [SerializeField] private Button closeButton;
     [SerializeField] private Button closePanel;
 
+    [SerializeField] private Button startButton;
+
     [SerializeField] private int stageProgress;
 
     private void Start()
@@ -31,6 +33,7 @@ public class StageManager : MonoSingleton<StageManager>
         }
         AddButtonEvent(closeButton, CloseStageInfo);
         AddButtonEvent(closePanel, CloseStageInfo);
+        AddButtonEvent(startButton, StageStart);
     }
 
     public void ShowStageInfo(StageSO stage)
@@ -38,11 +41,17 @@ public class StageManager : MonoSingleton<StageManager>
         stagePanel.gameObject.SetActive(true);
         stageNameText.text = stage.stageName;
         explanationText.text = stage.explanationText;
+        Global.Map = stage.map;
     }
 
     void CloseStageInfo()
     {
         stagePanel.gameObject.SetActive(false);
+    }
+
+    void StageStart()
+    {
+        MGScene.Instance.ChangeScene(eSceneName.InGame);
     }
 
     void AddButtonEvent(Button button, UnityAction action)

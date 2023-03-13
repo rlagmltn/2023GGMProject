@@ -4,5 +4,16 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    public Transform map;
+    private Transform map;
+
+    private void Start()
+    {
+        map = Global.Map;
+        InstantiateMap();
+    }
+
+    void InstantiateMap()
+    {
+        Instantiate(map);
+    }
 }
