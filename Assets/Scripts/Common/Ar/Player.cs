@@ -15,6 +15,11 @@ public class Player : Ar
 
     private QuickSlot slot;
 
+    private Transform rangeContainer;
+    private GameObject moveRange;
+    private GameObject attackRange;
+    private GameObject skillRange;
+
     public Player()
     {
         ar_id = -1;
@@ -30,6 +35,13 @@ public class Player : Ar
     protected override void Start()
     {
         base.Start();
+
+        rangeContainer = transform.GetChild(0);
+        moveRange = rangeContainer.GetChild(0).gameObject;
+        attackRange = rangeContainer.GetChild(1).gameObject;
+        skillRange = rangeContainer.GetChild(2).gameObject;
+        DisableRanges();
+
         StatReset();
     }
 
@@ -43,16 +55,27 @@ public class Player : Ar
         base.StatReset();
     }
 
-    public void Drag()
+    public void DragBegin(JoystickType joystickType)
     {
-        /*power = Mathf.Clamp(charge * 4, minDragPower, maxDragPower);
-        if (power <= minDragPower)
+        switch (joystickType)
         {
-            line.transform.localScale = defaultScale;
-            return;
-        }
-        line.transform.localScale = new Vector2(power, 0.5f);
-        line.transform.rotation = Quaternion.Euler(0, 0, dragAngle);*/
+            case JoystickType.Move:
+                moveRange.SetActive(true);
+                break;
+            case JoystickType.Attack:
+                attackRange.SetActive(true);
+                break;
+            case JoystickType.Skill:
+                skillRange.SetActive(true);
+                break;
+            case JoystickType.None:
+                break;
+        };
+    }
+
+    public void Drag(float angle)
+    {
+        rangeContainer.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     public void DragEnd(JoystickType joystickType, float charge, Vector2 angle)
@@ -81,6 +104,13 @@ public class Player : Ar
     public virtual void Skill(Vector2 angle)
     {
 
+    }
+
+    public void DisableRanges()
+    {
+        moveRange.SetActive(false);
+        attackRange.SetActive(false);
+        skillRange.SetActive(false);
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)

@@ -10,6 +10,8 @@ public class TestJoyStick : MonoBehaviour
     [SerializeField] bool isMoveStick;
     private Transform stick;
     private Vector3 stickVec;
+    private Vector2 angle;
+    private float zAngle;
     public JoystickType joystickType;
     EventTrigger eventTrigger;
 
@@ -39,9 +41,12 @@ public class TestJoyStick : MonoBehaviour
         else
             stick.position = transform.position + stickVec * radius;
 
+        angle = transform.position - Util.Instance.mousePosition;
+        angle /= angle.magnitude;
+
         if (isMoveStick)
         {
-            player.Drag();
+            player.Drag(zAngle);
         }
     }
 

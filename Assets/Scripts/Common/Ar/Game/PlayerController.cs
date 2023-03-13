@@ -51,18 +51,20 @@ public class PlayerController : MonoSingleton<PlayerController>
         }
     }
 
-    public void DragBegin()
+    public void DragBegin(JoystickType joystickType)
     {
         cancelButton.gameObject.SetActive(true);
+        sellectPlayer?.DragBegin(joystickType);
     }
-    public void Drag()
+    public void Drag(float angle)
     {
-        sellectPlayer?.Drag();
+        sellectPlayer?.Drag(angle);
     }
 
     public void DragEnd(float power, Vector2 angle)
     {
-        if(cancelButton.entering)
+        sellectPlayer.DisableRanges();
+        if (cancelButton.entering)
         {
             cancelButton.entering = false;
             cancelButton.gameObject.SetActive(false);

@@ -10,12 +10,15 @@ public class HitBox : MonoBehaviour
     [SerializeField] bool InfinityY;
 
     private GameObject hitbox;
+    public GameObject Hitbox { get; }
 
-    private void Start()
+    private void Awake()
     {
         hitbox = (GameObject)Resources.Load("Prefabs/Game/RedHitBox");
 
-        var box = Instantiate(hitbox, transform.position + new Vector3(0, (float)rangeY/2), Quaternion.identity);
+        var box = Instantiate(hitbox, transform.GetChild(0));
+        box.transform.position = transform.position + new Vector3((float)rangeX/2, 0);
+        box.transform.rotation = Quaternion.Euler(0, 0, 0);
         Vector2 size = new Vector2(rangeX, rangeY);
         box.transform.localScale = size;
     }
