@@ -18,7 +18,7 @@ public class Global
     // 메인카메라
     public static Transform gMainCamTrm;
     public static Camera mainCam;
-
+    public static Transform Map;
 }
 
 public enum ePrefabs
@@ -42,6 +42,7 @@ public enum ePrefabs
     UIRootGame,
     UIRootSelect,
     UIRootMap,
+    UIRootInGame,
 
     Object = 4000,
     EmptyObj,
@@ -62,6 +63,7 @@ public enum eSceneName
     Select,
     Title,
     Map,
+    InGame,
 }
 
 public class GameMapClass
