@@ -11,6 +11,8 @@ public class StageSO : ScriptableObject
 
     public int stageProgress;
 
+    public bool isEndStage;
+
     [Multiline(5)]
     public string explanationText;
 

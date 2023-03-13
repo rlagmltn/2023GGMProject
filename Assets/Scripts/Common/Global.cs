@@ -64,6 +64,11 @@ public enum eSceneName
     Map,
 }
 
+public class GameMapClass
+{
+    public static Transform gMap;
+}
+
 public class GameSceneClass
 {
     public static UIRoot gUiRoot;
