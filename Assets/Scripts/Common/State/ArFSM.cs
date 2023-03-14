@@ -9,9 +9,14 @@ public class ArFSM : MonoBehaviour
     private List<Ar> arList = new List<Ar>();
 
 
-    private void Start()
+    private void Awake()
     {
         fsmManager = new StateMachine<ArFSM>(this, new StateIdle());
+    }
+
+    private void Start()
+    {
+        
         fsmManager.AddStateList(new StateMove());
         fsmManager.AddStateList(new StateAtk());
     }
@@ -19,7 +24,7 @@ public class ArFSM : MonoBehaviour
     private void Update()
     {
         fsmManager.Update(Time.deltaTime);
-        Ray2D ray = new Ray2D(transform.position, Vector2.up);
+        
         
     }
     
@@ -28,7 +33,9 @@ public class ArFSM : MonoBehaviour
         Ar[] ars = FindObjectsOfType<Player>();
         float distance;
         float minDistance = float.MaxValue;
-        int minIndex = 0;
+        int minIndex = -1;
+    
+        Debug.Log(ars.Length);
     
         for (int i = 0; i < ars.Length; i++)
         {
@@ -40,7 +47,8 @@ public class ArFSM : MonoBehaviour
                 
             }
         }
-    
+
+        if (minIndex == -1) return null;
         return ars[minIndex].transform;
     }
     
@@ -79,6 +87,7 @@ public class ArFSM : MonoBehaviour
     
         //적 재탐색기능 추가 필요
         //모든적이 벽너머에 있으면 어떻게 해야되지
+    
     
     
         return false;
