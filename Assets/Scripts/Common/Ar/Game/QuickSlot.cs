@@ -17,7 +17,7 @@ public class QuickSlot : MonoBehaviour
         playerImage = transform.GetChild(1).GetComponent<Image>();
         outline = transform.GetChild(0).GetComponent<Image>();
 
-        playerImage.sprite = Player.arSprite;
+        playerImage.sprite = Player.ar_sprite;
     }
 
     public void Connect(Player player)

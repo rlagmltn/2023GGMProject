@@ -21,6 +21,7 @@ public class Warrior : Player
         ATK = 10;
         pushPower = 15;
         isMove = false;
+        isRangeCharacter = true;
         base.StatReset();
     }
 

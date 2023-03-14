@@ -12,11 +12,13 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] StickCancel cancelButton;
     [SerializeField] GameObject actSellect;
     public Player sellectPlayer = null;
-    private List<QuickSlot> quickSlots = new List<QuickSlot>();
 
+    private List<QuickSlot> quickSlots = new List<QuickSlot>();
+    private GameObject attackBtn;
     void Start()
     {
         SummonPlayers();
+        attackBtn = actSellect.transform.GetChild(1).gameObject;
     }
 
     private void SummonPlayers()
@@ -38,11 +40,14 @@ public class PlayerController : MonoSingleton<PlayerController>
         CameraMove.Instance.MovetoTarget(sellectPlayer);
         DisableQuickSlots();
         actSellect.SetActive(true);
+        if (sellectPlayer.isRangeCharacter)
+            attackBtn.SetActive(true);
         player.ColorChange(true);
     }
 
     public void DisableQuickSlots()
     {
+        attackBtn.SetActive(false);
         actSellect.SetActive(false);
         joystick.gameObject.SetActive(false);
         foreach (QuickSlot slot in quickSlots)
@@ -86,6 +91,7 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     public void ChooseStickType(int n)
     {
+        attackBtn.SetActive(false);
         actSellect.SetActive(false);
         joystick.gameObject.SetActive(true);
         joystick.joystickType = (JoystickType)n;

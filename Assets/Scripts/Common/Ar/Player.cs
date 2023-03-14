@@ -5,8 +5,11 @@ using UnityEngine.Events;
 
 public class Player : Ar
 {
+    public bool isRangeCharacter { get; protected set; }
+
     public int ar_id;
     public string ar_name;
+    public Sprite ar_sprite;
     public bool isSellected;
 
     public UnityEvent MouseUp;
