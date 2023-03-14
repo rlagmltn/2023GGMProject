@@ -61,7 +61,8 @@ public class Ar : MonoBehaviour
         if (collision.transform.CompareTag("Out"))
         {
             OnOutDie.Invoke();
-            //Pooling();
+            Debug.Log("¿∏æ”¡Í±›");
+            Out();
         }
         else if (collision.transform.CompareTag("Object"))
         {
@@ -74,11 +75,11 @@ public class Ar : MonoBehaviour
         rigid.velocity = velo;
     }
 
-    public void Hit(float damage)
+    public bool Hit(float damage)
     {
         HP -= damage;
         Debug.Log(name + HP);
-        DeadCheck();
+        return DeadCheck();
     }
 
     protected bool DeadCheck()
@@ -95,5 +96,10 @@ public class Ar : MonoBehaviour
         }
         hpBar.localScale = new Vector3(Mathf.Clamp(HP / MaxHP, 0, 1), 1, 1);
         return false;
+    }
+
+    protected void Out()
+    {
+        gameObject.SetActive(false);
     }
 }

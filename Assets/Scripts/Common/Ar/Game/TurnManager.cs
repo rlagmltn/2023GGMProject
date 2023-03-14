@@ -5,6 +5,7 @@ using UnityEngine;
 public class TurnManager : MonoSingleton<TurnManager>
 {
     [SerializeField] int playerTurn;
+    [SerializeField] int enemyTurn;
     [SerializeField] Turn pf_Turn;
     private List<Turn> turns = new List<Turn>();
     private int turnCount = 0;
@@ -21,19 +22,32 @@ public class TurnManager : MonoSingleton<TurnManager>
 
     public bool UseTurn()
     {
-        foreach (Turn turn in turns)
+        if (isPlayerTurn)
         {
-            if (turn.active)
+            foreach (Turn turn in turns)
             {
-                turn.DisableTurn();
-                turnCount++;
-                if(turnCount>=playerTurn)
+                if (turn.active)
                 {
-                    Debug.Log("플레이어 턴 종료");
-                    PassTurn();
+                    turn.DisableTurn();
+                    turnCount++;
+
+                    if (turnCount >= playerTurn)
+                    {
+                        Debug.Log("플레이어 턴 종료");
+                        PassTurn();
+                    }
+                    return true;
                 }
-                return true;
             }
+        }
+        else
+        {
+            if (turnCount >= enemyTurn)
+            {
+                Debug.Log("적 턴 종료");
+                PassTurn();
+            }
+            return true;
         }
         return false;
     }
@@ -58,8 +72,8 @@ public class TurnManager : MonoSingleton<TurnManager>
         else
         {
             Debug.Log("적 턴 시작");
-            Debug.Log("적 턴 끝");
-            PassTurn();
+            //여기에 적이 턴을 진행할 수 있도록 한다.
+
         }
     }
 }
