@@ -12,7 +12,6 @@ public class Archer : Player
     protected override void Start()
     {
         base.Start();
-        AfterMove.AddListener(ShootArrow);
         MouseUp.AddListener(() => { isMove = true; });
     }
 
@@ -39,11 +38,11 @@ public class Archer : Player
         }
     }
 
-    private void ShootArrow()
+    protected override void Attack(Vector2 angle)
     {
-        //var _slash = Instantiate(arrow, transform.position, Quaternion.Eul);
+
     }
-    private void Skill()
+    protected override void Skill(Vector2 angle)
     {
 
     }
