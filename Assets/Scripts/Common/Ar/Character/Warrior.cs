@@ -32,10 +32,10 @@ public class Warrior : Player
     protected override void Skill(Vector2 angle)
     {
         base.Skill(angle);
-        Skill(Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg);
+        Slash(Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg);
     }
 
-    private void Skill(float angle)
+    private void Slash(float angle)
     {
         Collider2D[] colliders = Physics2D.OverlapBoxAll(hitbox.Hitbox.transform.position, new Vector2(hitbox.rangeX, hitbox.rangeY), angle);
 
