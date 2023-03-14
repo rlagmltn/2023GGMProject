@@ -13,6 +13,7 @@ public class ArFSM : MonoBehaviour
     {
         fsmManager = new StateMachine<ArFSM>(this, new StateIdle());
         fsmManager.AddStateList(new StateMove());
+        fsmManager.AddStateList(new StateAtk());
     }
 
     private void Update()
@@ -62,7 +63,7 @@ public class ArFSM : MonoBehaviour
             }
         }
     }
-
+    
     public virtual bool CheckWall()
     {
         Vector3 dir = SearchAr().position - transform.position;
@@ -75,7 +76,11 @@ public class ArFSM : MonoBehaviour
                 return true;
             }
         }
-
+    
+        //적 재탐색기능 추가 필요
+        //모든적이 벽너머에 있으면 어떻게 해야되지
+    
+    
         return false;
     }
 }
