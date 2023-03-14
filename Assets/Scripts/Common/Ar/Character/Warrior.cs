@@ -6,12 +6,9 @@ public class Warrior : Player
 {
     private HitBox hitbox;
 
-    private bool isMove;
-
     protected override void Start()
     {
         base.Start();
-        MouseUp.AddListener(() => { isMove = true; });
         hitbox = GetComponent<HitBox>();
     }
 
@@ -20,8 +17,9 @@ public class Warrior : Player
         MaxHP = 100;
         ATK = 10;
         pushPower = 15;
-        isMove = false;
         isRangeCharacter = true;
+        skillCooltime = 7;
+        currentCooltime = 0;
         base.StatReset();
     }
 
@@ -30,17 +28,9 @@ public class Warrior : Player
         base.OnCollisionEnter2D(collision);
     }
 
-    private void Update()
+    protected override void Skill(Vector2 angle)
     {
-        if (rigid.velocity.magnitude <= 0.8f && isMove)
-        {
-            isMove = false;
-            AfterMove?.Invoke();
-        }
-    }
-
-    public override void Skill(Vector2 angle)
-    {
+        base.Skill(angle);
         Super_Hyper_Ultimate_Miracle_Ultimate_Warrior_Slash(Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg);
     }
 
