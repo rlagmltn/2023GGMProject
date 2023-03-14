@@ -58,15 +58,19 @@ public class Ar : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Out"))
+        if (collision.transform.CompareTag("Object"))
+        {
+            rigid.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal) * 0.7f;
+        }
+    }
+
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Out"))
         {
             OnOutDie.Invoke();
             Debug.Log("¿∏æ”¡Í±›");
             Out();
-        }
-        else if (collision.transform.CompareTag("Object"))
-        {
-            rigid.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal) * 0.7f;
         }
     }
 

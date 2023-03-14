@@ -29,4 +29,15 @@ public class Enemy : Ar
             BattleManager.Instance.SettingAr(this);
         }
     }
+
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        base.OnTriggerEnter2D(collision);
+        if (collision.CompareTag("Attack"))
+        {
+            if (collision.transform.IsChildOf(transform)) return;
+            var attacker = collision.transform.parent.GetComponent<Ar>();
+            BattleManager.Instance.SettingAr(this, attacker);
+        }
+    }
 }

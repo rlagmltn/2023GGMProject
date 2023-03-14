@@ -1263,6 +1263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 849c0061f99d7ce40b428a268c2b86d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
 --- !u!4 &315700884
 Transform:
   m_ObjectHideFlags: 0
@@ -2564,8 +2565,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4bc2e4075fcd4fae95ad42e1d61ca38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: []
-  freindly: []
 --- !u!1 &677200346
 GameObject:
   m_ObjectHideFlags: 0
