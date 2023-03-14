@@ -48,7 +48,7 @@ public class Player : Ar
     protected override void StatReset()
     {
         MaxHP = 100;
-        ATK = 10;
+        ATK = 30;
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
         pushPower = 15;
@@ -116,9 +116,8 @@ public class Player : Ar
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
-        if (collision.transform.CompareTag("Enemy"))
+        if (!collision.transform.CompareTag("Object"))
         {
-            BeforeCrash?.Invoke(); //충돌 직전 발동하는 트리거
             BattleManager.Instance.SettingAr(this);
         }
     }

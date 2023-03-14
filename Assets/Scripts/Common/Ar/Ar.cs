@@ -74,11 +74,11 @@ public class Ar : MonoBehaviour
         rigid.velocity = velo;
     }
 
-    public void Hit(float damage)
+    public bool Hit(float damage)
     {
         HP -= damage;
         Debug.Log(name + HP);
-        DeadCheck();
+        return DeadCheck();
     }
 
     protected bool DeadCheck()
