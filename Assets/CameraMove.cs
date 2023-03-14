@@ -5,12 +5,17 @@ using DG.Tweening;
 
 public class CameraMove : MonoSingleton<CameraMove>
 {
-    private Transform target;
+    [SerializeField] private Transform target;
 
     public void MovetoTarget(Player target)
     {
         this.target = target.transform;
         transform.position += new Vector3(0, 0, -10);
+    }
+
+    private void Start()
+    {
+        
     }
 
     private void Update()

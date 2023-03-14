@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2964456124361536144, guid: 76ecc618951ca3b439f246cf4ab3c8e4, type: 3}
       propertyPath: m_Name
-      value: Enemey
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 2964456124361536144, guid: 76ecc618951ca3b439f246cf4ab3c8e4, type: 3}
       propertyPath: m_IsActive
@@ -122,3 +122,18 @@ MonoBehaviour:
   OnBattleDie:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7230667762659068024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3616841280499926516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 955585d01286c46798e6083df75c277e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myKind: 4007
+  myTrm: {fileID: 0}
+  myVelocity: {x: 0, y: 0, z: 0}

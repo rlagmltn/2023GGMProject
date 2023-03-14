@@ -89,7 +89,7 @@ public class Ar : MonoBehaviour
             OnBattleDie.Invoke();
             //Pooling();
             isDead = true;
-            MGGame.Instance.ArDead();
+            GameManager.Instance.ArDead();
             gameObject.SetActive(false);
             return true;
         }

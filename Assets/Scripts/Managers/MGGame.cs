@@ -4,20 +4,11 @@ using UnityEngine;
 
 public class MGGame : MonoSingleton<MGGame>
 {
-    // public MGTeam gTeamManager;
-    // public MGStage gStageManager;
-    public Ar[] enemies;
-    public Ar[] freindly;
-    private int enemyCount;
-    private int playerCount;
-
     void Awake()
     {
         GameSceneClass.gMGGame = this;
 
         InitCamera();
-        enemies = FindObjectsOfType<Enemy>();
-        freindly = FindObjectsOfType<Player>();
 
         // gTeamManager = new MGTeam();
         // gStageManager = new MGStage();
@@ -36,6 +27,7 @@ public class MGGame : MonoSingleton<MGGame>
     void InitCamera()
     {
         Global.gMainCamTrm = FindObjectOfType<Camera>().transform;
+        Debug.Log(Global.gMainCamTrm.position);
 
         if (Global.gMainCamTrm == null)
         {
@@ -51,43 +43,5 @@ public class MGGame : MonoSingleton<MGGame>
                 return;
             }
         }
-    }
-
-    public void ArDead()
-    {
-        enemyCount = 0;
-        playerCount = 0;
-        foreach (Ar ar in enemies)
-        {
-            if (!ar.isDead) enemyCount++;
-        }
-        foreach (Ar ar in freindly)
-        {
-            if (!ar.isDead) playerCount++;
-        }
-        CheckGameDone();
-    }
-
-    void CheckGameDone()
-    {
-        if (playerCount == 0)
-        {
-            GameOver();
-        }
-        else if (enemyCount == 0)
-        {
-            GameClear();
-        }
-    }
-
-    private void GameOver()
-    {
-        MGUI.Instance.GameOver();
-
-    }
-
-    private void GameClear()
-    {
-        MGUI.Instance.GameClear();
     }
 }

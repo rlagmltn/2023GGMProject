@@ -51,6 +51,8 @@ public enum ePrefabs
     EnemyObj2,
     Button,
     Map,
+    Enemy,
+    RedHitBox,
 }
 
 public enum eSceneName
