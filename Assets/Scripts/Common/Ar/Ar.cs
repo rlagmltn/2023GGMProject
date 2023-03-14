@@ -5,15 +5,17 @@ using UnityEngine.Events;
 
 public class Ar : MonoBehaviour
 {
-    public float MaxHP { get; set; }
-    public float HP { get; set; }
-    public float ATK { get; set; }
-    public float DEF { get; set; }
-    public float WEIGHT { get; set; }
+    public float MaxHP { get; set; }//최대체력
+    public float HP { get; set; }//현재 체력
+    public float ATK { get; set; }//기본 공격력
+    public float SATK { get; set; } //스킬공격력
+    public float DEF { get; set; }//방어력
+    public float WEIGHT { get; set; }//무게
 
     public Sprite arSprite { get; set; }
 
     public bool isDead { get; set; }
+    public bool isUsingSkill { get; set; }
 
     protected float minDragPower = 0.4f;
     protected float maxDragPower = 1.5f;
@@ -82,7 +84,7 @@ public class Ar : MonoBehaviour
 
     public bool Hit(float damage)
     {
-        HP -= damage;
+        HP = Mathf.Clamp(HP - damage, 0, MaxHP);
         Debug.Log(name + HP);
         return DeadCheck();
     }

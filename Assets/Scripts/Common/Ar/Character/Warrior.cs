@@ -16,6 +16,7 @@ public class Warrior : Player
     {
         MaxHP = 100;
         ATK = 10;
+        SATK = 50;
         pushPower = 15;
         isRangeCharacter = true;
         skillCooltime = 7;

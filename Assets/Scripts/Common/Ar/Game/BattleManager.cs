@@ -92,15 +92,26 @@ public class BattleManager : MonoSingleton<BattleManager>
         (a, b) = D2c(arOne.lastVelocity, arTwo.lastVelocity, arOne.rigid.position, arTwo.rigid.position);
         arOne.Push(a);
         arTwo.Push(b);
+
+        if (arOne.isUsingSkill && arOne.SATK < 0)
+        {
+            arTwo.Hit(arOne.SATK);
+            arOne.isUsingSkill = false;
+        }
+        if(arTwo.isUsingSkill && arTwo.SATK < 0)
+        {
+            arOne.Hit(arTwo.SATK);
+            arTwo.isUsingSkill = false;
+        }
     }
 
-    //공격시 작동되는 배틀 시스템
+    //스킬 공격시 작동되는 배틀 시스템
     private bool AttackBattle()
     {
         arAtk.BeforeAttack?.Invoke();
         arOne.BeforeDefence?.Invoke();
 
-        var isdead = arOne.Hit(arAtk.ATK);
+        var isdead = arOne.Hit(arAtk.SATK);
 
         if (!isdead) arOne.AfterDefence?.Invoke();
         arAtk.AfterAttack?.Invoke();

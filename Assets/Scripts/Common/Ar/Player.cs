@@ -17,7 +17,7 @@ public class Player : Ar
 
     public UnityEvent MouseUp;
 
-    private float power;
+    protected float power;
 
     private QuickSlot slot;
 

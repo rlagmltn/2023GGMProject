@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class HitBox : MonoBehaviour
 {
-    public int rangeX;
-    public int rangeY;
-    [SerializeField] int startX;
-    [SerializeField] int startY;
+    public float rangeX;
+    public float rangeY;
+    [SerializeField] float startX;
+    [SerializeField] float startY;
 
     private GameObject hitbox;
     public GameObject Hitbox { get; set; }
