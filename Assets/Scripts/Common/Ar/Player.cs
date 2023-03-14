@@ -116,11 +116,11 @@ public class Player : Ar
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
-        /*if (collision.transform.CompareTag("Enemy"))
+        if (collision.transform.CompareTag("Enemy"))
         {
             BeforeCrash?.Invoke(); //충돌 직전 발동하는 트리거
-            //BattleManager.Instance.CrashSet(this, collision.contacts[0].normal);
-        }*/
+            BattleManager.Instance.SettingAr(this);
+        }
     }
 
     private void OnMouseDown()

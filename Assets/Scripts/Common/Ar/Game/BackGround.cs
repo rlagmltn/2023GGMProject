@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Cinemachine;
 
 public class BackGround : MonoBehaviour
 {
@@ -10,6 +9,8 @@ public class BackGround : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] GameObject roundCinemachine;
     [SerializeField] GameObject hardCinemachine;
+    [SerializeField] Vector2 minSize;
+    [SerializeField] Vector2 maxSize;
     private Vector3 startPos;
     EventTrigger eventTrigger;
 
@@ -43,6 +44,7 @@ public class BackGround : MonoBehaviour
         Vector3 angle = startPos - Util.Instance.mousePosition;
         angle.z = 0;
         cameraMove.position += angle;
+        cameraMove.position = new Vector2(Mathf.Clamp(cameraMove.position.x, minSize.x, maxSize.x), Mathf.Clamp(cameraMove.position.y, minSize.y, maxSize.y));
     }
 
     private void EndDrag(BaseEventData data)

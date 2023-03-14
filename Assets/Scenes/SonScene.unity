@@ -9548,9 +9548,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraMove: {fileID: 315700884}
-  moveSpeed: 10
+  moveSpeed: 8
   roundCinemachine: {fileID: 961345073}
   hardCinemachine: {fileID: 207753752}
+  minSize: {x: -16, y: -16}
+  maxSize: {x: 16, y: 16}
 --- !u!114 &1972251490
 MonoBehaviour:
   m_ObjectHideFlags: 0
