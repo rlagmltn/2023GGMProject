@@ -100,11 +100,11 @@ public class Player : Ar
         };
         MouseUp?.Invoke(); // 발사 직후 발동하는 트리거
     }
-    public virtual void Attack(Vector2 angle)
+    protected virtual void Attack(Vector2 angle)
     {
 
     }
-    public virtual void Skill(Vector2 angle)
+    protected virtual void Skill(Vector2 angle)
     {
 
     }

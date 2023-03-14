@@ -40,10 +40,15 @@ public class Archer : Player
 
     protected override void Attack(Vector2 angle)
     {
-
+        Shoot(angle);
     }
     protected override void Skill(Vector2 angle)
     {
-
+        Shoot(angle);
+        Shoot(angle);
+    }
+    void Shoot(Vector2 angle)
+    {
+        var bullet = Instantiate(arrow, transform.position, Quaternion.Euler(angle));
     }
 }
