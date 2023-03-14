@@ -122,6 +122,7 @@ public class Player : Ar
         if (!collision.transform.CompareTag("Object"))
         {
             BattleManager.Instance.SettingAr(this);
+            CameraMove.Instance.Shake();
         }
     }
 

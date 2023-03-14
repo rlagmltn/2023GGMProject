@@ -60,7 +60,8 @@ public class Ar : MonoBehaviour
     {
         if (collision.transform.CompareTag("Object"))
         {
-            rigid.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal) * 0.7f;
+            rigid.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal);
+            CameraMove.Instance.Shake();
         }
     }
 
