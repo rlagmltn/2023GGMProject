@@ -12,17 +12,28 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] JoyStick joystick;
     [SerializeField] StickCancel cancelButton;
     [SerializeField] GameObject actSellect;
+
+    public List<CONEntity> enemyList;
+
     public Player sellectPlayer = null;
 
     private List<QuickSlot> quickSlots = new List<QuickSlot>();
     private GameObject attackBtn;
     private TextMeshProUGUI skillBtnText;
-    void Start()
+    void Awake()
     {
         SummonPlayers();
         attackBtn = actSellect.transform.GetChild(1).gameObject;
         skillBtnText = actSellect.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
     }
+
+    //private void SetEnemyList()
+    //{
+    //    foreach(CONEntity con in MGPool.Instance.poolListDic[ePrefabs.Enemy])
+    //    {
+    //        enemyList.Add(con);
+    //    }
+    //}
 
     private void SummonPlayers()
     {

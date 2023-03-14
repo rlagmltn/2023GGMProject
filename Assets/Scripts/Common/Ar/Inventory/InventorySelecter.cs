@@ -93,7 +93,7 @@ public class InventorySelecter : MonoSingleton<InventorySelecter>
     void StartButtonClick()
     {
         if(CanStart())
-            MGScene.Instance.ChangeScene(eSceneName.Map);
+            MGScene.Instance.ChangeScene(eSceneName.Son);
         else
             warningPanel.gameObject.SetActive(true);
     }

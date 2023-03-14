@@ -43,6 +43,7 @@ public enum ePrefabs
     UIRootSelect,
     UIRootMap,
     UIRootInGame,
+    UIRootSon,
 
     Object = 4000,
     EmptyObj,
@@ -66,6 +67,7 @@ public enum eSceneName
     Title,
     Map,
     InGame,
+    Son,
 }
 
 public class GameMapClass

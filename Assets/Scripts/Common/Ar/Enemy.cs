@@ -11,6 +11,7 @@ public class Enemy : Ar
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
         pushPower = 15;
+        isDead = false;
         base.StatReset();
         Debug.Log(HP);
     }

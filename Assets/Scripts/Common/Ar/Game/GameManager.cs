@@ -5,21 +5,22 @@ using UnityEngine;
 public class GameManager : MonoSingleton<GameManager>
 {
     private Transform map;
-    public Ar[] enemies;
-    public Ar[] freindly;
+    public Enemy[] enemies;
+    public Player[] friendly;
+
     private int enemyCount;
     private int playerCount;
 
     private void Awake()
     {
-        map = Global.Map;
-        InstantiateMap();
+        //map = Global.Map;
+        //InstantiateMap();
     }
 
     private void Start()
     {
         enemies = FindObjectsOfType<Enemy>();
-        freindly = FindObjectsOfType<Player>();
+        friendly = FindObjectsOfType<Player>();
         Debug.Log(Global.gMainCamTrm.position);
         Global.gMainCamTrm.position = new Vector3(0, 0, -10);
     }
@@ -33,11 +34,11 @@ public class GameManager : MonoSingleton<GameManager>
     {
         enemyCount = 0;
         playerCount = 0;
-        foreach (Ar ar in enemies)
+        foreach (Enemy ar in enemies)
         {
             if (!ar.isDead) enemyCount++;
         }
-        foreach (Ar ar in freindly)
+        foreach (Ar ar in friendly)
         {
             if (!ar.isDead) playerCount++;
         }
