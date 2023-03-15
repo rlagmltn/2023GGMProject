@@ -541,9 +541,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3df48bf40d140498a645b2d47efe20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangeX: 60
-  rangeY: 3
-  startX: 30
+  rangeX: 2
+  rangeY: 4
+  startX: 1
   startY: 0
 --- !u!114 &1180937486853865539
 MonoBehaviour:
@@ -584,10 +584,14 @@ MonoBehaviour:
   OnBattleDie:
     m_PersistentCalls:
       m_Calls: []
-  ar_id: -1
+  ar_id: 1
   ar_name: 
   ar_sprite: {fileID: 21300000, guid: f5cecdc77987c4564ad8b7d175af4518, type: 3}
   isSellected: 0
   MouseUp:
     m_PersistentCalls:
       m_Calls: []
+  itemSlots:
+  - {fileID: 3777050627899223242, guid: a19e95e8dc9ae6a44b21bdcc3ae377d0, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}

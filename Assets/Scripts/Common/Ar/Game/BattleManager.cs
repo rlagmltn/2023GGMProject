@@ -51,19 +51,20 @@ public class BattleManager : MonoSingleton<BattleManager>
         {
             attacker = arOne;
             defender = arTwo;
-            Debug.Log("Attacker = " + arOne.name);
+            Debug.Log("Attacker = " + arOne.name + arOne.stat.ATK);
         }
         else
         {
             attacker = arTwo;
             defender = arOne;
-            Debug.Log("Attacker = " + arTwo.name);
+            Debug.Log("Attacker = " + arTwo.name + arTwo.stat.ATK);
         }
 
         attacker.BeforeAttack.Invoke();
         defender.BeforeDefence.Invoke();
 
-        var isdead = defender.Hit(attacker.ATK);
+        Debug.Log(attacker.stat.ATK);
+        var isdead = defender.Hit(attacker.stat.ATK);
 
         attacker.AfterAttack.Invoke();
         if(!isdead)
@@ -88,21 +89,23 @@ public class BattleManager : MonoSingleton<BattleManager>
     //같은 팀 끼리 충돌 시 작동되는 시스템
     private void Crush()
     {
+        if (arOne.isUsingSkill && arOne.stat.SATK < 0)
+        {
+            arTwo.Hit(arOne.stat.SATK);
+            arOne.isUsingSkill = false;
+        }
+        if (arTwo.isUsingSkill && arTwo.stat.SATK < 0)
+        {
+            arOne.Hit(arTwo.stat.SATK);
+            arTwo.isUsingSkill = false;
+        }
+
         Vector2 a, b;
         (a, b) = D2c(arOne.lastVelocity, arTwo.lastVelocity, arOne.rigid.position, arTwo.rigid.position);
         arOne.Push(a);
         arTwo.Push(b);
 
-        if (arOne.isUsingSkill && arOne.SATK < 0)
-        {
-            arTwo.Hit(arOne.SATK);
-            arOne.isUsingSkill = false;
-        }
-        if(arTwo.isUsingSkill && arTwo.SATK < 0)
-        {
-            arOne.Hit(arTwo.SATK);
-            arTwo.isUsingSkill = false;
-        }
+        ResetAll();
     }
 
     //스킬 공격시 작동되는 배틀 시스템
@@ -111,7 +114,7 @@ public class BattleManager : MonoSingleton<BattleManager>
         arAtk.BeforeAttack?.Invoke();
         arOne.BeforeDefence?.Invoke();
 
-        var isdead = arOne.Hit(arAtk.SATK);
+        var isdead = arOne.Hit(arAtk.stat.SATK);
 
         if (!isdead) arOne.AfterDefence?.Invoke();
         arAtk.AfterAttack?.Invoke();

@@ -33,12 +33,12 @@ public class Bullet : MonoBehaviour
 
         if (collision.CompareTag("Player") && bulletSO.teamType != TeamType.Player)
         {
-            collision.GetComponent<Player>().HP -= damage;
+            collision.GetComponent<Player>().stat.HP -= damage;
             //플레이어에게 이 불렛의 데미지만큼의 피해를 줌
         }
         else if (collision.CompareTag("Enemy") && bulletSO.teamType != TeamType.Enemy)
         {
-            collision.GetComponent<Enemy>().HP -= damage;
+            collision.GetComponent<Enemy>().stat.HP -= damage;
             //에너미에게 이 불렛의 데미지만큼의 피해를 줌
         }
     }

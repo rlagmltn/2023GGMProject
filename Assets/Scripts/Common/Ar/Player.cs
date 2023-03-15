@@ -5,19 +5,17 @@ using UnityEngine.Events;
 
 public class Player : Ar
 {
-    public bool isRangeCharacter { get; protected set; }
-
     public int ar_id;
     public string ar_name;
     public Sprite ar_sprite;
     public bool isSellected;
-
-    protected int skillCooltime;
     public int currentCooltime { get; set; }
+    public bool isRangeCharacter { get; protected set; }
 
     public UnityEvent MouseUp;
 
     protected float power;
+    protected int skillCooltime;
 
     private QuickSlot slot;
 
@@ -25,6 +23,8 @@ public class Player : Ar
     private GameObject moveRange;
     private GameObject attackRange;
     private GameObject skillRange;
+
+    [SerializeField] ItemInfo[] itemSlots = new ItemInfo[3];
 
     public Player()
     {
@@ -53,11 +53,15 @@ public class Player : Ar
 
     protected override void StatReset()
     {
-        MaxHP = 100;
-        ATK = 30;
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
         pushPower = 15;
+
+        foreach(ItemInfo item in itemSlots)
+        {
+            item?.Armed(this);
+        }
+
         base.StatReset();
     }
 

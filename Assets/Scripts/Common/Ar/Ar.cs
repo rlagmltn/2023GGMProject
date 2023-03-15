@@ -5,14 +5,7 @@ using UnityEngine.Events;
 
 public class Ar : MonoBehaviour
 {
-    public float MaxHP { get; set; }//최대체력
-    public float HP { get; set; }//현재 체력
-    public float ATK { get; set; }//기본 공격력
-    public float SATK { get; set; } //스킬공격력
-    public float DEF { get; set; }//방어력
-    public float WEIGHT { get; set; }//무게
-
-    public Sprite arSprite { get; set; }
+    public Stat stat { get; set; }
 
     public bool isDead { get; set; }
     public bool isUsingSkill { get; set; }
@@ -39,17 +32,17 @@ public class Ar : MonoBehaviour
 
     protected virtual void Start()
     {
+        stat = new Stat();
         rigid = GetComponent<Rigidbody2D>();
         hpBar = transform.GetChild(1).GetChild(0);
         hpImage = hpBar.GetComponentInChildren<SpriteRenderer>();
-        arSprite = transform.GetComponent<SpriteRenderer>().sprite;
     }
 
     protected virtual void StatReset() // 수치 초기화
     {
-        HP = MaxHP;
+        stat.HP = stat.MaxHP;
         isDead = false;
-        WEIGHT = 1;
+        stat.WEIGHT = 1;
         //hpBar.localScale = new Vector3(Mathf.Clamp(HP / MaxHP, 0, 1), 1, 1);
     }
 
@@ -84,15 +77,15 @@ public class Ar : MonoBehaviour
 
     public bool Hit(float damage)
     {
-        HP = Mathf.Clamp(HP - damage, 0, MaxHP);
-        Debug.Log(name + HP);
+        stat.HP = Mathf.Clamp(stat.HP - damage, 0, stat.MaxHP);
+        Debug.Log(name + stat.HP);
         return DeadCheck();
     }
 
     protected bool DeadCheck()
     {
         //ArInfoManager.Instance.ShowBulletInfo(this);
-        if (HP <= 0)
+        if (stat.HP <= 0)
         {
             OnBattleDie.Invoke();
             //Pooling();
@@ -101,7 +94,7 @@ public class Ar : MonoBehaviour
             gameObject.SetActive(false);
             return true;
         }
-        hpBar.localScale = new Vector3(Mathf.Clamp(HP / MaxHP, 0, 1), 1, 1);
+        hpBar.localScale = new Vector3(Mathf.Clamp(stat.HP / stat.MaxHP, 0, 1), 1, 1);
         return false;
     }
 
