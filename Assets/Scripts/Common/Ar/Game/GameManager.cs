@@ -12,6 +12,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Awake()
     {
+        InitCamera();
         map = Global.Map;
         InstantiateMap();
     }
@@ -65,5 +66,26 @@ public class GameManager : MonoSingleton<GameManager>
     private void GameClear()
     {
         MGUI.Instance.GameClear();
+    }
+
+    void InitCamera()
+    {
+        Global.gMainCamTrm = FindObjectOfType<Camera>().transform;
+        Debug.Log(Global.gMainCamTrm.position);
+
+        if (Global.gMainCamTrm == null)
+        {
+            Global.gMainCamTrm = ((GameObject.Instantiate(Global.prefabsDic[ePrefabs.MainCamera])) as GameObject).transform;
+        }
+
+        if (Global.gMainCamTrm != null) //카메라 2개면 오류생길듯?
+        {
+            Global.mainCam = Global.gMainCamTrm.GetComponent<Camera>();
+            if (Global.mainCam == null)
+            {
+                Debug.LogWarning("Global.mainCam in null");
+                return;
+            }
+        }
     }
 }
