@@ -20,6 +20,7 @@ public enum ItemPassiveType:int
 
 public class ItemInfo : MonoBehaviour
 {
+    public Sprite itemIcon;
     public ItemPassiveType itemType;
     public Stat stat;
     private Player armedPlayer;
