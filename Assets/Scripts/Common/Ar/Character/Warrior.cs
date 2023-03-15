@@ -14,11 +14,10 @@ public class Warrior : Player
 
     protected override void StatReset()
     {
-        MaxHP = 100;
-        ATK = 10;
-        SATK = 50;
-        pushPower = 15;
-        isRangeCharacter = true;
+        stat.MaxHP = 100;
+        stat.ATK = 10;
+        stat.SATK = 50;
+        isRangeCharacter = false;
         skillCooltime = 7;
         currentCooltime = 0;
         base.StatReset();
