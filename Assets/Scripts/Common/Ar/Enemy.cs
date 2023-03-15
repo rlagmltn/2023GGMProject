@@ -11,6 +11,7 @@ public class Enemy : Ar
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
         pushPower = 15;
+        isDead = false;
         base.StatReset();
         Debug.Log(HP);
     }
@@ -27,6 +28,17 @@ public class Enemy : Ar
         if (!collision.transform.CompareTag("Object"))
         {
             BattleManager.Instance.SettingAr(this);
+        }
+    }
+
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        base.OnTriggerEnter2D(collision);
+        if (collision.CompareTag("Attack"))
+        {
+            if (collision.transform.IsChildOf(transform)) return;
+            var attacker = collision.transform.parent.GetComponent<Ar>();
+            BattleManager.Instance.SettingAr(this, attacker);
         }
     }
 }

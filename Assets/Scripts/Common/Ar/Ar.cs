@@ -5,15 +5,17 @@ using UnityEngine.Events;
 
 public class Ar : MonoBehaviour
 {
-    public float MaxHP { get; set; }
-    public float HP { get; set; }
-    public float ATK { get; set; }
-    public float DEF { get; set; }
-    public float WEIGHT { get; set; }
+    public float MaxHP { get; set; }//최대체력
+    public float HP { get; set; }//현재 체력
+    public float ATK { get; set; }//기본 공격력
+    public float SATK { get; set; } //스킬공격력
+    public float DEF { get; set; }//방어력
+    public float WEIGHT { get; set; }//무게
 
     public Sprite arSprite { get; set; }
 
     public bool isDead { get; set; }
+    public bool isUsingSkill { get; set; }
 
     protected float minDragPower = 0.4f;
     protected float maxDragPower = 1.5f;
@@ -58,15 +60,20 @@ public class Ar : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Out"))
+        if (collision.transform.CompareTag("Object"))
+        {
+            rigid.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal);
+            CameraMove.Instance.Shake();
+        }
+    }
+
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Out"))
         {
             OnOutDie.Invoke();
             Debug.Log("으앙쥬금");
             Out();
-        }
-        else if (collision.transform.CompareTag("Object"))
-        {
-            rigid.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal) * 0.7f;
         }
     }
 
@@ -77,7 +84,7 @@ public class Ar : MonoBehaviour
 
     public bool Hit(float damage)
     {
-        HP -= damage;
+        HP = Mathf.Clamp(HP - damage, 0, MaxHP);
         Debug.Log(name + HP);
         return DeadCheck();
     }

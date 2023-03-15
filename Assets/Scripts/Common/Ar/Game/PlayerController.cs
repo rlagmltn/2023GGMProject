@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoSingleton<PlayerController>
 {
@@ -11,13 +12,28 @@ public class PlayerController : MonoSingleton<PlayerController>
     [SerializeField] JoyStick joystick;
     [SerializeField] StickCancel cancelButton;
     [SerializeField] GameObject actSellect;
-    public Player sellectPlayer = null;
-    private List<QuickSlot> quickSlots = new List<QuickSlot>();
 
-    void Start()
+    public List<CONEntity> enemyList;
+
+    public Player sellectPlayer = null;
+
+    private List<QuickSlot> quickSlots = new List<QuickSlot>();
+    private GameObject attackBtn;
+    private TextMeshProUGUI skillBtnText;
+    void Awake()
     {
         SummonPlayers();
+        attackBtn = actSellect.transform.GetChild(1).gameObject;
+        skillBtnText = actSellect.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
     }
+
+    //private void SetEnemyList()
+    //{
+    //    foreach(CONEntity con in MGPool.Instance.poolListDic[ePrefabs.Enemy])
+    //    {
+    //        enemyList.Add(con);
+    //    }
+    //}
 
     private void SummonPlayers()
     {
@@ -38,11 +54,15 @@ public class PlayerController : MonoSingleton<PlayerController>
         CameraMove.Instance.MovetoTarget(sellectPlayer);
         DisableQuickSlots();
         actSellect.SetActive(true);
+        if (sellectPlayer.isRangeCharacter)
+            attackBtn.SetActive(true);
+        SetSkillBtnText();
         player.ColorChange(true);
     }
 
     public void DisableQuickSlots()
     {
+        attackBtn.SetActive(false);
         actSellect.SetActive(false);
         joystick.gameObject.SetActive(false);
         foreach (QuickSlot slot in quickSlots)
@@ -75,6 +95,11 @@ public class PlayerController : MonoSingleton<PlayerController>
             sellectPlayer.DragEnd(joystick.joystickType, power, angle);
             cancelButton.gameObject.SetActive(false);
             ResetSellect();
+            
+            foreach(QuickSlot quickSlot in quickSlots)
+            {
+                quickSlot.Player.CountCooltime();
+            }
         }
     }
 
@@ -86,8 +111,19 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     public void ChooseStickType(int n)
     {
+        if ((JoystickType)n == JoystickType.Skill && sellectPlayer.currentCooltime > 0) return;
+
+        attackBtn.SetActive(false);
         actSellect.SetActive(false);
         joystick.gameObject.SetActive(true);
         joystick.joystickType = (JoystickType)n;
+    }
+
+    private void SetSkillBtnText()
+    {
+        if (sellectPlayer.currentCooltime > 0)
+            skillBtnText.SetText(sellectPlayer.currentCooltime.ToString());
+        else
+            skillBtnText.SetText("Skill");
     }
 }

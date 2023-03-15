@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class Warrior : Player
 {
-    [SerializeField] Bullet slash;
-
-    private bool isMove;
+    private HitBox hitbox;
 
     protected override void Start()
     {
         base.Start();
-        AfterMove.AddListener(Super_Hyper_Ultimate_Miracle_Ultimate_Warrior_Slash);
-        MouseUp.AddListener(() => { isMove = true; });
+        hitbox = GetComponent<HitBox>();
     }
 
     protected override void StatReset()
     {
         MaxHP = 100;
         ATK = 10;
+        SATK = 50;
         pushPower = 15;
-        isMove = false;
+        isRangeCharacter = true;
+        skillCooltime = 7;
+        currentCooltime = 0;
         base.StatReset();
     }
 
@@ -29,18 +29,19 @@ public class Warrior : Player
         base.OnCollisionEnter2D(collision);
     }
 
-    private void Update()
+    protected override void Skill(Vector2 angle)
     {
-        if (rigid.velocity.magnitude <= 0.8f && isMove)
-        {
-            isMove = false;
-            AfterMove?.Invoke();
-        }
+        base.Skill(angle);
+        Slash(Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg);
     }
 
-    private void Super_Hyper_Ultimate_Miracle_Ultimate_Warrior_Slash()
+    private void Slash(float angle)
     {
-        var _slash = Instantiate(slash, null);
-        _slash.transform.position = transform.position;
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(hitbox.Hitbox.transform.position, new Vector2(hitbox.rangeX, hitbox.rangeY), angle);
+
+        foreach (Collider2D collider in colliders)
+        {
+            BattleManager.Instance.SettingAr(collider.GetComponent<Enemy>(), this);
+        }
     }
 }

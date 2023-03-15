@@ -30,7 +30,7 @@ public class TurnManager : MonoSingleton<TurnManager>
                 {
                     turn.DisableTurn();
                     turnCount++;
-
+                    
                     if (turnCount >= playerTurn)
                     {
                         Debug.Log("플레이어 턴 종료");

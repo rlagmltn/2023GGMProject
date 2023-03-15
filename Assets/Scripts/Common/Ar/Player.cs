@@ -5,13 +5,19 @@ using UnityEngine.Events;
 
 public class Player : Ar
 {
+    public bool isRangeCharacter { get; protected set; }
+
     public int ar_id;
     public string ar_name;
+    public Sprite ar_sprite;
     public bool isSellected;
+
+    protected int skillCooltime;
+    public int currentCooltime { get; set; }
 
     public UnityEvent MouseUp;
 
-    private float power;
+    protected float power;
 
     private QuickSlot slot;
 
@@ -97,13 +103,14 @@ public class Player : Ar
         };
         MouseUp?.Invoke(); // 발사 직후 발동하는 트리거
     }
-    public virtual void Attack(Vector2 angle)
+    protected virtual void Attack(Vector2 angle)
     {
 
     }
-    public virtual void Skill(Vector2 angle)
+    protected virtual void Skill(Vector2 angle)
     {
-
+        currentCooltime = skillCooltime;
+        CameraMove.Instance.Shake();
     }
 
     public void DisableRanges()
@@ -119,6 +126,7 @@ public class Player : Ar
         if (!collision.transform.CompareTag("Object"))
         {
             BattleManager.Instance.SettingAr(this);
+            CameraMove.Instance.Shake();
         }
     }
 
@@ -130,5 +138,11 @@ public class Player : Ar
     public void Connect(QuickSlot slot)
     {
         this.slot = slot;
+    }
+
+    public void CountCooltime()
+    {
+        if (currentCooltime > 0)
+            currentCooltime--;
     }
 }

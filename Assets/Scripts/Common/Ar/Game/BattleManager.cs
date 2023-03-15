@@ -5,14 +5,13 @@ using UnityEngine;
 public class BattleManager : MonoSingleton<BattleManager>
 {
     private Ar arOne, arTwo;
-    private Bullet bullet;
+    private Ar arAtk;
 
     public void SettingAr(Ar ar)
     {
         if (arOne == null)
         {
             arOne = ar;
-            if (bullet != null) AttackBattle();
         }
         else if (arTwo == null)
         {
@@ -30,6 +29,14 @@ public class BattleManager : MonoSingleton<BattleManager>
 
             }
         }
+    }
+
+    public void SettingAr(Ar ar, Ar attacker)
+    {
+        arOne = ar;
+        arAtk = attacker;
+        if (arAtk != null && arOne != null) AttackBattle();
+        else ResetAll();
     }
 
     //충돌시 작동되는 배틀 시스템
@@ -85,12 +92,30 @@ public class BattleManager : MonoSingleton<BattleManager>
         (a, b) = D2c(arOne.lastVelocity, arTwo.lastVelocity, arOne.rigid.position, arTwo.rigid.position);
         arOne.Push(a);
         arTwo.Push(b);
+
+        if (arOne.isUsingSkill && arOne.SATK < 0)
+        {
+            arTwo.Hit(arOne.SATK);
+            arOne.isUsingSkill = false;
+        }
+        if(arTwo.isUsingSkill && arTwo.SATK < 0)
+        {
+            arOne.Hit(arTwo.SATK);
+            arTwo.isUsingSkill = false;
+        }
     }
 
-    //공격시 작동되는 배틀 시스템
+    //스킬 공격시 작동되는 배틀 시스템
     private bool AttackBattle()
     {
-        arOne.Hit(bullet.damage);
+        arAtk.BeforeAttack?.Invoke();
+        arOne.BeforeDefence?.Invoke();
+
+        var isdead = arOne.Hit(arAtk.SATK);
+
+        if (!isdead) arOne.AfterDefence?.Invoke();
+        arAtk.AfterAttack?.Invoke();
+
         ResetAll();
         return true;
     }
@@ -99,7 +124,7 @@ public class BattleManager : MonoSingleton<BattleManager>
     {
         arOne = null;
         arTwo = null;
-        bullet = null;
+        arAtk = null;
     }
 
     private (Vector2, Vector2) D2c(Vector2 v1, Vector2 v2, Vector2 c1, Vector2 c2, float e = 1)

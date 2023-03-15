@@ -7,13 +7,17 @@ public class QuickSlot : MonoBehaviour
 {
     private Button button;
     private Image outline;
+    private Image playerImage;
     public Player Player { get; set; }
 
     private void Start()
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(SellectPlayer);
+        playerImage = transform.GetChild(1).GetComponent<Image>();
         outline = transform.GetChild(0).GetComponent<Image>();
+
+        playerImage.sprite = Player.ar_sprite;
     }
 
     public void Connect(Player player)
