@@ -18,7 +18,7 @@ public class Archer : Player
     protected override void StatReset()
     {
         stat.MaxHP = 100;
-        stat.ATK = 10;
+        stat.ATK = 50;
         pushPower = 15;
         isMove = false;
         base.StatReset();
