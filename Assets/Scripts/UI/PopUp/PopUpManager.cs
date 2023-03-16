@@ -23,6 +23,7 @@ public class PopUpManager : MonoBehaviour
     [SerializeField] private List<ButtonAndPopUp> BAP;
     [SerializeField] private Transform backgroundPanel;
     [SerializeField] private Transform backgroundPanel2;
+    [SerializeField] private List<ButtonAndPopUp> BAP2;
 
     private void Start()
     {
@@ -34,16 +35,17 @@ public class PopUpManager : MonoBehaviour
     /// </summary>
     private void Init()
     {
-        ButtonInit();
+        ButtonInit(BAP);
+        ButtonInit(BAP2);
         BackGroundPanelActiveFalse();
     }
     
     /// <summary>
     /// 버튼 초기화
     /// </summary>
-    private void ButtonInit()
+    private void ButtonInit(List<ButtonAndPopUp> buttonAndPopUps)
     {
-        foreach(ButtonAndPopUp btn in BAP)
+        foreach(ButtonAndPopUp btn in buttonAndPopUps)
         {
             SetButtonPopUp(btn.button, btn.popUp);
 
