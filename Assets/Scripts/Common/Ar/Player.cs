@@ -24,7 +24,7 @@ public class Player : Ar
     private GameObject attackRange;
     private GameObject skillRange;
 
-    [SerializeField] ItemInfo[] itemSlots = new ItemInfo[3];
+    [SerializeField] ItemSO[] itemSlots = new ItemSO[3];
 
     public Player()
     {
@@ -57,9 +57,9 @@ public class Player : Ar
         maxDragPower = 1.5f;
         pushPower = 15;
 
-        foreach(ItemInfo item in itemSlots)
+        foreach(ItemSO item in itemSlots)
         {
-            item?.Armed(this);
+            item.Armed(this);
         }
 
         base.StatReset();

@@ -5,60 +5,52 @@ using UnityEngine;
 public class Shop : MonoBehaviour
 {
     [SerializeField] ItemDBSO itemDB;
-    [SerializeField] ShopBuySlot slot;
-    private int maxShopItemCount = 5;
-    public ItemInfo[] GetRandomItems(int count)
+
+    public ItemSO[] GetRandomItems(int count)
     {
         int[] result = GetUniqueRandomNumbers(count, 0, itemDB.items.Length); // 랜덤 값 배열에 저장
-        ItemInfo[] items = new ItemInfo[count];
+        ItemSO[] items = new ItemSO[count];
+
+        int number = 0;
 
         foreach(int num in result)
-        {
-            items[num] = itemDB.items[result[num]];
-        }
+            items[number++] = itemDB.items[num];
+
         return items;
     }
 
     private int[] GetUniqueRandomNumbers(int count, int min, int max)
     {
-        if (count > (max - min + 1) || max < min)
-        {
-            return null;
-        }
+        int currentIndex = 0;
+
+        if (count > (max - min + 1) || max < min) return null;
 
         int[] numbers = new int[count];
-        int currentIndex = 0;
+
+        ResetList(numbers);
+
         while (currentIndex < count)
         {
-            int number = Random.Range(min, max + 1);
+            int number = Random.Range(min, max);
             if (!ArrayContains(numbers, number))
-            {
-                numbers[currentIndex] = number;
-                currentIndex++;
-            }
+                numbers[currentIndex++] = number;
         }
 
         return numbers;
     }
 
+    void ResetList(int[] nums)
+    {
+        for (int i = 0; i < nums.Length; i++)
+        {
+            nums[i] = -1;
+        }
+    }
+
     bool ArrayContains(int[] array, int value)
     {
         for (int i = 0; i < array.Length; i++)
-        {
-            if (array[i] == value)
-            {
-                return true;
-            }
-        }
+            if (array[i] == value) return true;
         return false;
-    }
-    private void Start()
-    {
-        ItemInfo[] itemInfos = GetRandomItems(maxShopItemCount);
-        ShowItems(itemInfos);
-    }
-    void ShowItems(ItemInfo[] itemInfos)
-    {
-
     }
 }

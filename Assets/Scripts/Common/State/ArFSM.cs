@@ -7,7 +7,7 @@ public class ArFSM : MonoBehaviour
     protected StateMachine<ArFSM> fsmManager;
     public StateMachine<ArFSM> FsmManager => fsmManager;
     private List<Ar> arList = new List<Ar>();
-
+    [HideInInspector] public bool turnFlag = false;
 
     private void Awake()
     {
@@ -16,16 +16,13 @@ public class ArFSM : MonoBehaviour
 
     private void Start()
     {
-        
         fsmManager.AddStateList(new StateMove());
         fsmManager.AddStateList(new StateAtk());
     }
 
     private void Update()
     {
-        fsmManager.Update(Time.deltaTime);
-        
-        
+        fsmManager.Update(Time.deltaTime);   
     }
     
     public virtual Transform SearchAr()
@@ -58,25 +55,13 @@ public class ArFSM : MonoBehaviour
         transform.position += dir * 1f * Time.deltaTime;
     }
     
-    public virtual void ManageTurn()
-    {
-        for(int i = 0; i < arList.Count; i++)
-        {
-            //각각의 행동들이 끝나면
-            if(true)
-            {
-                //적 턴종료
-                TurnManager.Instance.UseTurn();
-    
-            }
-        }
-    }
-    
+   
     public virtual bool CheckWall()
     {
         Vector3 dir = SearchAr().position - transform.position;
         float distance = Vector2.Distance(transform.position, SearchAr().position);
         RaycastHit2D[] hits = Physics2D.RaycastAll(gameObject.transform.position, dir, distance);
+
         foreach(RaycastHit2D hit in hits)
         {
             if (hit.transform.gameObject.CompareTag("Object"))
@@ -84,12 +69,31 @@ public class ArFSM : MonoBehaviour
                 return true;
             }
         }
-    
+
         //적 재탐색기능 추가 필요
         //모든적이 벽너머에 있으면 어떻게 해야되지
     
-    
-    
         return false;
+    }
+
+    public void StartTurn()
+    {
+        Debug.Log("StartEnemy");
+        turnFlag = true;
+    }
+
+    private void PassiveSkill()
+    {
+        Vector3 dir = SearchAr().position - transform.position;
+        Collider2D[] cols = Physics2D.OverlapBoxAll(transform.position, new Vector2(10f, 10f), 0);
+        foreach (Collider2D col in cols)
+        {
+            Debug.Log(col.transform.position);
+            if (col.CompareTag("Player"))
+            {
+                col.GetComponent<Rigidbody2D>().AddForce(dir * 5f);
+                fsmManager.ChangeState<StateAtk>();
+            }
+        }
     }
 }

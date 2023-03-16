@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New ItemDB", menuName = "SO/Item/ItemDBs")]
 public class ItemDBSO : ScriptableObject
 {
-    public ItemInfo[] items;
+    public ItemSO[] items;
 }

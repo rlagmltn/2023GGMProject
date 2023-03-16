@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class StateIdle : State<ArFSM>
 {
-    private bool turnFlag = false;
 
     public override void OnAwake()
     {
@@ -13,30 +12,27 @@ public class StateIdle : State<ArFSM>
 
     public override void OnStart()
     {
-        Transform target = stateMachineClass.SearchAr();
+        
     }
-
-    public override void OnUpdate(float deltaTime)
-    {
-        //자기턴이면
-        if(turnFlag)
-        {
-            Transform target = stateMachineClass.SearchAr();
-            if(target)
-            {
-                turnFlag = !turnFlag;
+ 
+     public override void OnUpdate(float deltaTime)
+     {
+         //자기턴이면
+         if(!TurnManager.Instance.GetTurn() && stateMachineClass.turnFlag)
+         {
+             Debug.Log("적턴");
+             Transform target = stateMachineClass.SearchAr();
+             if(target)
+             {
+                stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
                 stateMachine.ChangeState<StateMove>();
-            }
-
-
-        }
-
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            turnFlag = true;
-        }
-
-
+             }
+         }
+  
+         if(Input.GetKeyDown(KeyCode.Space))
+         {
+             stateMachineClass.turnFlag = true;
+         }
     }
 
     public override void OnEnd()
