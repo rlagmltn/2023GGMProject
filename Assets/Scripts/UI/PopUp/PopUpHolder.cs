@@ -29,11 +29,17 @@ public class PopUpHolder : MonoBehaviour
     }
 
     /// <summary>
-    /// UI를 PopUp시키는 함수
+    /// UI를 PopUp시키는 함수 //item 관련하여 추가기능 넣음
     /// </summary>
     public void PopUpUI()
     {
         PopUpObj.gameObject.SetActive(true);
+
+        if (this.gameObject.GetComponent<MainItemButton>() != null)
+        {
+            var Item = this.gameObject.GetComponent<MainItemButton>();
+            MainShop.Instance.GetItemSO(Item.GetItemSO());
+        }
     }
 
     /// <summary>

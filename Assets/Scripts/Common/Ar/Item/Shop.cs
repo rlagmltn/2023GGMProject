@@ -6,10 +6,11 @@ public class Shop : MonoBehaviour
 {
     [SerializeField] ItemDBSO itemDB;
     private int maxShopItemCount = 5;
-    public ItemInfo[] GetRandomItems(int count)
+
+    public ItemSO[] GetRandomItems(int count)
     {
         int[] result = GetUniqueRandomNumbers(count, 0, itemDB.items.Length); // ·£´ý °ª ¹è¿­¿¡ ÀúÀå
-        ItemInfo[] items = new ItemInfo[count];
+        ItemSO[] items = new ItemSO[count];
 
         foreach(int num in result)
         {
@@ -26,14 +27,26 @@ public class Shop : MonoBehaviour
         }
 
         int[] numbers = new int[count];
+        for(int i=0; i<numbers.Length; i++)
+        {
+            numbers[i] = -1;
+        }
         int currentIndex = 0;
+        int loop = 0;
         while (currentIndex < count)
         {
-            int number = Random.Range(min, max + 1);
+            int number = Random.Range(min, max);
             if (!ArrayContains(numbers, number))
             {
                 numbers[currentIndex] = number;
                 currentIndex++;
+                Debug.Log(number);
+            }
+            loop++;
+            if (loop > 10000)
+            {
+                Debug.LogError("¹÷À¸");
+                break;
             }
         }
 
@@ -51,13 +64,13 @@ public class Shop : MonoBehaviour
         }
         return false;
     }
-    private void OnEnable()
+    /*private void OnEnable()
     {
-        ItemInfo[] itemInfos = GetRandomItems(maxShopItemCount);
+        ItemSO[] itemInfos = GetRandomItems(maxShopItemCount);
         ShowItems(itemInfos);
     }
-    void ShowItems(ItemInfo[] itemInfos)
+    void ShowItems(ItemSO[] itemInfos)
     {
 
-    }
+    }*/
 }
