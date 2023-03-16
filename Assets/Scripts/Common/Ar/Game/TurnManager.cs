@@ -8,6 +8,7 @@ public class TurnManager : MonoSingleton<TurnManager>
     [SerializeField] int enemyTurn;
     [SerializeField] Turn pf_Turn;
     private List<Turn> turns = new List<Turn>();
+    private List<ArFSM> enemys = new List<ArFSM>();
     private int turnCount = 0;
     private bool isPlayerTurn = true;
 
@@ -18,6 +19,8 @@ public class TurnManager : MonoSingleton<TurnManager>
             var turn = Instantiate(pf_Turn, transform);
             turns.Add(turn);
         }
+
+        enemys.CopyTo(FindObjectsOfType<ArFSM>());
     }
 
     public bool UseTurn()
@@ -72,8 +75,24 @@ public class TurnManager : MonoSingleton<TurnManager>
         else
         {
             Debug.Log("적 턴 시작");
+            ResetEnemyTurn();
             //여기에 적이 턴을 진행할 수 있도록 한다.
 
+        }
+    }
+
+    public bool GetTurn()
+    {
+        if (isPlayerTurn) return true;
+        else return false;
+    }
+
+    private void ResetEnemyTurn()
+    {
+        Debug.Log($"enemys: {enemys.Count}");
+        foreach (ArFSM arFSM in enemys)
+        {
+            arFSM.StartTurn();
         }
     }
 }
