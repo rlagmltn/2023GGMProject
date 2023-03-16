@@ -9,7 +9,7 @@ public class ItemDBObj : ScriptableObject
 
     private void OnValidate()
     {
-        for(int i =0; i<itemObjects.Length; ++i)
+        for(int i = 0; i < itemObjects.Length; ++i)
         {
             itemObjects[i].itemData.ar_id = i;
         }

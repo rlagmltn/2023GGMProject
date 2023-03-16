@@ -4,13 +4,9 @@ using UnityEngine;
 
 public enum ItemType : int
 {
-    Hair,
-    Head,
-    Body,
-    Pants,
-    LeftHand,
-    RightHand,
-    Default,
+    DEFAULT,
+    WEAPON,
+    ACCESSORY
 }
 
 [CreateAssetMenu(fileName ="New Item", menuName ="Inventory System/Items/New Item")]
@@ -21,6 +17,7 @@ public class ItemObj : ScriptableObject
     // 인벤토리에서 겹쳐지는지 여부
     public bool flagStackable;
 
+    public string itemName;
     public Sprite itemIcon;
     public GameObject objModelPrefab;
 
@@ -31,11 +28,13 @@ public class ItemObj : ScriptableObject
     [TextArea(15, 20)]
     public string itemSummery;
 
+    public int itemPrice;
+
     private void OnValidate()
     {
         boneNameLists.Clear();
 
-        if(objModelPrefab == null || objModelPrefab.GetComponentInChildren<SkinnedMeshRenderer>() == null )
+        if(objModelPrefab == null || objModelPrefab.GetComponentInChildren<SkinnedMeshRenderer>() == null)
         {
             return;
         }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Shop : MonoBehaviour
 {
     [SerializeField] ItemDBSO itemDB;
+    [SerializeField] ShopBuySlot slot;
     private int maxShopItemCount = 5;
     public ItemInfo[] GetRandomItems(int count)
     {
@@ -51,7 +52,7 @@ public class Shop : MonoBehaviour
         }
         return false;
     }
-    private void OnEnable()
+    private void Start()
     {
         ItemInfo[] itemInfos = GetRandomItems(maxShopItemCount);
         ShowItems(itemInfos);
