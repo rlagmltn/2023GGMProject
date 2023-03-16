@@ -44,6 +44,7 @@ public enum ePrefabs
     UIRootMap,
     UIRootInGame,
     UIRootSon,
+    ShopItemUI,
 
     Object = 4000,
     EmptyObj,

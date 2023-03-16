@@ -5,10 +5,10 @@ using UnityEngine;
 public class Shop : MonoBehaviour
 {
     [SerializeField] ItemDBSO itemDB;
-
+    private int maxShopItemCount = 5;
     public ItemInfo[] GetRandomItems(int count)
     {
-        int[] result = GenerateUniqueRandomNumbers(count, 0, itemDB.items.Length);
+        int[] result = GetUniqueRandomNumbers(count, 0, itemDB.items.Length); // 랜덤 값 배열에 저장
         ItemInfo[] items = new ItemInfo[count];
 
         foreach(int num in result)
@@ -18,7 +18,7 @@ public class Shop : MonoBehaviour
         return items;
     }
 
-    private int[] GenerateUniqueRandomNumbers(int count, int min, int max)
+    private int[] GetUniqueRandomNumbers(int count, int min, int max)
     {
         if (count > (max - min + 1) || max < min)
         {
@@ -50,5 +50,14 @@ public class Shop : MonoBehaviour
             }
         }
         return false;
+    }
+    private void OnEnable()
+    {
+        ItemInfo[] itemInfos = GetRandomItems(maxShopItemCount);
+        ShowItems(itemInfos);
+    }
+    void ShowItems(ItemInfo[] itemInfos)
+    {
+
     }
 }

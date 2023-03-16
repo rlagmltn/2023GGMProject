@@ -28,7 +28,7 @@ public class CameraMove : MonoSingleton<CameraMove>
 
     private void Start()
     {
-        shakeCamNoise = shakeCam.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
+        shakeCamNoise = shakeCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
     private void Update()
