@@ -17,6 +17,7 @@ public class MainItemButton : MonoBehaviour
         itemIcon = transform.Find("ItemImage").GetComponent<Image>();
         itemName = transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
         itemCost = transform.GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>();
+
         itemIcon.sprite = item.itemIcon;
         itemName.SetText(item.itemName);
         itemCost.SetText(item.itemPrice.ToString());

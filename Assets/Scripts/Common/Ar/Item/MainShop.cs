@@ -18,13 +18,12 @@ public class MainShop : MonoSingleton<MainShop>
 
     void Start()
     {
-        shopItems = shop.GetRandomItems(shopItemCount);
         int count = 0;
+
+        shopItems = shop.GetRandomItems(shopItemCount);
+
         foreach(ItemSO item in shopItems)
-        {
-            buttons[count].SettingInfo(item);
-            count++;
-        }
+            buttons[count++].SettingInfo(item);
     }
 
     public void GetItemSO(ItemSO item)
