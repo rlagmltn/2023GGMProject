@@ -18,8 +18,7 @@ public class Enemy : Ar
 
     public float GetPower()
     {
-        float dragPower = Random.Range(minDragPower, maxDragPower);
-        return dragPower * pushPower;
+        return maxDragPower * pushPower;
     }
 
     protected override void Start()
