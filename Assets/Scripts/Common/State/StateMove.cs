@@ -19,7 +19,7 @@ public class StateMove : State<ArFSM>
     
     public override void OnStart()
     {
-        Vector2 angle = stateMachineClass.SearchAr().position - stateMachineClass.transform.position;
+        Vector2 angle = Vector3.Normalize(stateMachineClass.SearchAr().position - stateMachineClass.transform.position);
         //벽체크 부분 해결해야함(임시로 그냥풀어둠)
         //if (!stateMachineClass.CheckWall())
         //{

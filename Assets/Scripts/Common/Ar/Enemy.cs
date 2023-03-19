@@ -10,7 +10,7 @@ public class Enemy : Ar
         stat.ATK = 10;
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
-        pushPower = 5;
+        pushPower = 15;
         isDead = false;
         base.StatReset();
         Debug.Log(stat.HP);
