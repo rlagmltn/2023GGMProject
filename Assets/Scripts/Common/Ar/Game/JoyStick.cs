@@ -66,7 +66,7 @@ public class JoyStick : MonoBehaviour
         var power = Vector2.Distance(transform.position, Util.Instance.mousePosition);
         angle = transform.position - Util.Instance.mousePosition;
         angle /= angle.magnitude;
-        PlayerController.Instance.DragEnd(power, angle);
+        StartCoroutine(PlayerController.Instance.DragEnd(power, angle));
         stick.position = transform.position;
     }
 }

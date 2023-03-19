@@ -12,6 +12,8 @@ public class Player : Ar
     public int currentCooltime { get; set; }
     public bool isRangeCharacter { get; protected set; }
 
+    public bool isEnd = true;
+
     public UnityEvent MouseUp;
 
     protected float power;
@@ -65,23 +67,50 @@ public class Player : Ar
         base.StatReset();
     }
 
+    //public void DragBegin(JoystickType joystickType)
+    //{
+    //    switch (joystickType)
+    //    {
+    //        case JoystickType.Move:
+    //            moveRange.SetActive(true);
+    //            break;
+    //        case JoystickType.Attack:
+    //            attackRange.SetActive(true);
+    //            break;
+    //        case JoystickType.Skill:
+    //            skillRange.SetActive(true);
+    //            break;
+    //        case JoystickType.None:
+    //            break;
+    //    };
+    //}
+
     public void DragBegin(JoystickType joystickType)
     {
-        switch (joystickType)
+        if (joystickType == JoystickType.None)
         {
-            case JoystickType.Move:
-                moveRange.SetActive(true);
-                break;
-            case JoystickType.Attack:
-                attackRange.SetActive(true);
-                break;
-            case JoystickType.Skill:
-                skillRange.SetActive(true);
-                break;
-            case JoystickType.None:
-                break;
+            Debug.LogWarning("조이스틱 타입이 NONE임");
+            return;
+        }
+
+        var Range = joystickType switch
+        {
+            JoystickType.Move => moveRange,
+            JoystickType.Attack => attackRange,
+            JoystickType.Skill => skillRange,
+            _ => moveRange,
         };
+
+        ActiveRangesAndChangeColor(Range);
     }
+
+    void ActiveRangesAndChangeColor(GameObject obj)
+    {
+        obj.SetActive(true);
+
+        ChangeColor_A(obj, 0.8f);
+    }
+
 
     public void Drag(float angle)
     {
@@ -90,23 +119,47 @@ public class Player : Ar
 
     public void DragEnd(JoystickType joystickType, float charge, Vector2 angle)
     {
-        power = Mathf.Clamp(charge, minDragPower, maxDragPower);
-        switch (joystickType)
+        //switch (joystickType)
+        //{
+        //    case JoystickType.Move:
+        //        Move(angle);
+        //        break;
+        //    case JoystickType.Attack:
+        //        Attack(angle);
+        //        break;
+        //    case JoystickType.Skill:
+        //        Skill(angle);
+        //        break;
+        //    case JoystickType.None:
+        //        break;
+        //};
+
+        if(joystickType == JoystickType.None)
         {
-            case JoystickType.Move:
-                rigid.velocity = ((angle * power) * pushPower);
-                break;
-            case JoystickType.Attack:
-                Attack(angle);
-                break;
-            case JoystickType.Skill:
-                Skill(angle);
-                break;
-            case JoystickType.None:
-                break;
+            Debug.LogWarning("조이스틱 타입이 NONE임");
+            return;
+        }
+
+        power = Mathf.Clamp(charge, minDragPower, maxDragPower);
+
+        UnityAction action = joystickType switch
+        {
+            JoystickType.Move => () => Move(angle),
+            JoystickType.Attack => () => Attack(angle),
+            JoystickType.Skill => () => Skill(angle),
+            _ => null,
         };
+
+        action();
+
         MouseUp?.Invoke(); // 발사 직후 발동하는 트리거
     }
+
+    private void Move(Vector2 angle)
+    {
+        rigid.velocity = ((angle * power) * pushPower);
+    }
+
     protected virtual void Attack(Vector2 angle)
     {
 
@@ -148,5 +201,33 @@ public class Player : Ar
     {
         if (currentCooltime > 0)
             currentCooltime--;
+    }
+
+    public IEnumerator DisableRanges_T()
+    {
+        isEnd = false;
+        GameObject[] Gobj = { moveRange, attackRange, skillRange };
+        GameObject S_obj = new GameObject();
+
+        foreach (GameObject obj in Gobj)
+            if (obj.activeSelf) S_obj = obj;
+
+        moveRange.SetActive(false);
+        attackRange.SetActive(false);
+
+        ChangeColor_A(S_obj, 1f);
+
+        yield return new WaitForSeconds(1f);
+
+        S_obj.SetActive(false);
+        isEnd = true;
+        StopCoroutine(DisableRanges_T());
+    }
+
+    void ChangeColor_A(GameObject obj, float num_A)
+    {
+        Color color = obj.GetComponent<SpriteRenderer>().color;
+        color = new Color(color.r, color.g, color.b, num_A);
+        obj.GetComponent<SpriteRenderer>().color = color;
     }
 }

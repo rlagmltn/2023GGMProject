@@ -81,26 +81,66 @@ public class PlayerController : MonoSingleton<PlayerController>
         sellectPlayer?.Drag(angle);
     }
 
-    public void DragEnd(float power, Vector2 angle)
-    {
-        sellectPlayer.DisableRanges();
-        if (cancelButton.entering)
-        {
-            cancelButton.entering = false;
-            cancelButton.gameObject.SetActive(false);
-            return;
-        }
-        else if (TurnManager.Instance.UseTurn())
-        {
-            sellectPlayer.DragEnd(joystick.joystickType, power, angle);
-            cancelButton.gameObject.SetActive(false);
-            ResetSellect();
+    //public void DragEnd(float power, Vector2 angle)
+    //{
+    //    StartCoroutine(sellectPlayer.DisableRanges_T());
+
+    //    while(!sellectPlayer.isEnd)
+    //    {
+    //        Debug.Log("기다리는중");
+    //    }
+
+    //    if (cancelButton.entering)
+    //    {
+    //        cancelButton.entering = false;
+    //        cancelButton.gameObject.SetActive(false);
+    //        return;
+    //    }
+    //    else if (TurnManager.Instance.UseTurn())
+    //    {
+    //        sellectPlayer.DragEnd(joystick.joystickType, power, angle);
+    //        cancelButton.gameObject.SetActive(false);
+    //        ResetSellect();
             
-            foreach(QuickSlot quickSlot in quickSlots)
+    //        foreach(QuickSlot quickSlot in quickSlots)
+    //        {
+    //            quickSlot.Player.CountCooltime();
+    //        }
+    //    }
+    //}
+
+    public IEnumerator DragEnd(float power,Vector2 angle)
+    {
+        StartCoroutine(sellectPlayer.DisableRanges_T());
+
+        while (true)
+        {
+            if(!sellectPlayer.isEnd)
             {
-                quickSlot.Player.CountCooltime();
+                yield return new WaitForSeconds(0.5f);
+                continue;
+            }
+
+            if (cancelButton.entering)
+            {
+                cancelButton.entering = false;
+                cancelButton.gameObject.SetActive(false);
+                break;
+            }
+            else if (TurnManager.Instance.UseTurn())
+            {
+                sellectPlayer.DragEnd(joystick.joystickType, power, angle);
+                cancelButton.gameObject.SetActive(false);
+                ResetSellect();
+
+                foreach (QuickSlot quickSlot in quickSlots)
+                {
+                    quickSlot.Player.CountCooltime();
+                }
+                break;
             }
         }
+        StopCoroutine(DragEnd(power, angle));
     }
 
     public void ResetSellect()
