@@ -10,10 +10,16 @@ public class Enemy : Ar
         stat.ATK = 10;
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
-        pushPower = 15;
+        pushPower = 5;
         isDead = false;
         base.StatReset();
         Debug.Log(stat.HP);
+    }
+
+    public float GetPower()
+    {
+        float dragPower = Random.Range(minDragPower, maxDragPower);
+        return dragPower * pushPower;
     }
 
     protected override void Start()

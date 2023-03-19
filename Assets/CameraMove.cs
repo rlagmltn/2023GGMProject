@@ -20,7 +20,7 @@ public class CameraMove : MonoSingleton<CameraMove>
         Util.Instance.mainCam.transform.position = setCamPos;
     }
 
-    public void MovetoTarget(Player target)
+    public void MovetoTarget(Ar target)
     {
         this.target = target.transform;
         transform.position += setCamPos;
