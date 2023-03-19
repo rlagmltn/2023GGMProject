@@ -5,23 +5,18 @@ using UnityEngine.UI;
 
 public class ShopBuySlot : MonoBehaviour
 {
-    Stat UpgradingStat;
-
+    public ItemObj item;
     [SerializeField] Sprite iconSprite;
     [SerializeField] Text nameText;
     [SerializeField] Text priceText;
     [SerializeField] Text infoText;
 
-    public Sprite icon;
-    public string Itemname;
-    [SerializeField] int itemPrice;
-    [SerializeField] string itemInfo;
-
     private void Start()
     {
-        UpgradingStat = new Stat();
-        iconSprite = icon;
-        priceText = GetComponentInChildren<Text>();
-        iconSprite = GetComponentInChildren<Sprite>();
+        iconSprite = item.itemIcon;
+        nameText.text = string.Format(item.itemName);
+        priceText.text = string.Format(item.itemPrice.ToString());
+        infoText.text = item.itemSummery;
     }
+
 }
