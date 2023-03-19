@@ -24,14 +24,8 @@ public class StateIdle : State<ArFSM>
              Transform target = stateMachineClass.SearchAr();
              if(target)
              {
-                stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
                 stateMachine.ChangeState<StateMove>();
              }
-         }
-  
-         if(Input.GetKeyDown(KeyCode.Space))
-         {
-             stateMachineClass.turnFlag = true;
          }
     }
 
