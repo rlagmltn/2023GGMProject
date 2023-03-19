@@ -20,7 +20,7 @@ public class ItemSO : ScriptableObject
     public void Armed(Player player)
     {
         player.stat += stat;
-        switch(itemPassiveType)
+        /*switch(itemPassiveType)
         {
             case ItemPassiveType.BeforeCrash:
                 player.BeforeCrash.AddListener(info.Passive);
@@ -55,7 +55,7 @@ public class ItemSO : ScriptableObject
             default:
                 Debug.LogError("아이템 타입이 정해지지 않았습니다!");
                 break;
-        }
+        }*/
         armedPlayer = player;
     }
 

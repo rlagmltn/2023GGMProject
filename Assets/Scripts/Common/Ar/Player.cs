@@ -61,7 +61,7 @@ public class Player : Ar
 
         foreach(ItemSO item in itemSlots)
         {
-            item.Armed(this);
+            item?.Armed(this);
         }
 
         base.StatReset();

@@ -21,6 +21,7 @@ public class Archer : Player
         stat.ATK = 50;
         pushPower = 15;
         isMove = false;
+        isRangeCharacter = true;
         base.StatReset();
     }
 
