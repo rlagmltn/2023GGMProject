@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public class ShopBuySlot : MonoBehaviour
 {
     public ItemObj item;
-    [SerializeField] Sprite iconSprite;
+    [SerializeField] Image itemImage;
     [SerializeField] Text nameText;
     [SerializeField] Text priceText;
     [SerializeField] Text infoText;
 
     private void Start()
     {
-        iconSprite = item.itemIcon;
+        itemImage.sprite = item.itemIcon;
         nameText.text = string.Format(item.itemName);
         priceText.text = string.Format(item.itemPrice.ToString());
         infoText.text = item.itemSummery;
