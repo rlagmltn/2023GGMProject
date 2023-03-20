@@ -32,6 +32,7 @@ public class BulletSO : ScriptableObject
     public BulletType bulletType;
     public float damage;
     public float radius;
+    public float speed;
 
     public float lifeTime;
 }

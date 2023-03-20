@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3460581898712811299}
   - component: {fileID: 3460581898712811296}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: ArcherBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,12 +75,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 3.4, y: 3.4}
+  m_Size: {x: 0.5, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -114,4 +114,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15685bd6c76c18e4389cdcf3e1a404c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSO: {fileID: 11400000, guid: 7d7bd6fc80fc6a147953f88b938c90ba, type: 2}
+  bulletSO: {fileID: 11400000, guid: ebd8865a1129f9741a6468b6ec63a869, type: 2}

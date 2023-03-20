@@ -12,6 +12,7 @@ public class TurnManager : MonoSingleton<TurnManager>
     private ArFSM[] enemys;
     private int turnCount = 0;
     private bool isPlayerTurn = true;
+    public bool IsPlayerTurn { get { return isPlayerTurn; } }
 
     private void Start()
     {
@@ -38,7 +39,7 @@ public class TurnManager : MonoSingleton<TurnManager>
                     if (turnCount >= playerTurn)
                     {
                         Debug.Log("플레이어 턴 종료");
-                        PassTurn();
+                        StartCoroutine(PassTurn());
                     }
                     return true;
                 }
@@ -56,7 +57,7 @@ public class TurnManager : MonoSingleton<TurnManager>
                     if (turnCount >= enemyTurn)
                     {
                         Debug.Log("적 턴 종료");
-                        PassTurn();
+                        StartCoroutine(PassTurn());
                     }
                     return true;
                 }
@@ -72,11 +73,13 @@ public class TurnManager : MonoSingleton<TurnManager>
         {
             turn.EnableTurn();
         }
+        PlayerController.Instance.SetQuickSlotsEnable(true);
         turnCount = 0;
     }
 
-    private void PassTurn()
+    private IEnumerator PassTurn()
     {
+        yield return new WaitForSeconds(1.5f);
         isPlayerTurn = !isPlayerTurn;
         if(isPlayerTurn)
         {
@@ -100,9 +103,10 @@ public class TurnManager : MonoSingleton<TurnManager>
 
     private IEnumerator ResetEnemyTurn()
     {
+        PlayerController.Instance.SetQuickSlotsEnable(false);
         turnCount = 0;
         //기다리는 시간 변수화!
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.1f);
         enemys = FindObjectsOfType<ArFSM>();
         enemyTurn = enemys.Length;
         Debug.Log($"enemys: {enemys.Length}");

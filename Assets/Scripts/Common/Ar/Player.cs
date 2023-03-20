@@ -121,6 +121,7 @@ public class Player : Ar
 
     public void DragEnd(JoystickType joystickType, float charge, Vector2 angle)
     {
+        
         //switch (joystickType)
         //{
         //    case JoystickType.Move:
@@ -191,6 +192,7 @@ public class Player : Ar
 
     private void OnMouseDown()
     {
+        if (!TurnManager.Instance.IsPlayerTurn) return;
         PlayerController.Instance.SellectPlayer(slot);
     }
 
@@ -208,7 +210,7 @@ public class Player : Ar
     public IEnumerator DisableRanges_T()
     {
         isEnd = false;
-        GameObject[] Gobj = { moveRange, attackRange, skillRange };
+        /*GameObject[] Gobj = { moveRange, attackRange, skillRange };
         GameObject S_obj = new GameObject();
 
         foreach (GameObject obj in Gobj)
@@ -217,11 +219,13 @@ public class Player : Ar
         moveRange.SetActive(false);
         attackRange.SetActive(false);
 
-        ChangeColor_A(S_obj, 1f);
+        ChangeColor_A(S_obj, 1f);*/
+
+        DisableRanges();
 
         yield return new WaitForSeconds(0.3f);
 
-        S_obj.SetActive(false);
+        //S_obj.SetActive(false);
         isEnd = true;
         StopCoroutine(DisableRanges_T());
     }

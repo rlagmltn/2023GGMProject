@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] BulletSO bulletSO;
 
+    private SpriteRenderer spriteSize;
     private CircleCollider2D collide;
     public float damage { get; set; }
 
@@ -17,28 +18,37 @@ public class Bullet : MonoBehaviour
     private void SetSO()
     {
         if (collide == null) collide = GetComponent<CircleCollider2D>();
+        if (spriteSize == null) spriteSize = GetComponent<SpriteRenderer>();
         gameObject.name = bulletSO.name;
         damage = bulletSO.damage;
         collide.radius = bulletSO.radius;
+        spriteSize.size = new Vector2(bulletSO.radius * 2, bulletSO.radius * 2);
         Destroy(gameObject, bulletSO.lifeTime);
         // lifeTime만큼 기다렸다가 풀링
+    }
+
+    private void Update()
+    {
+        transform.Translate(Vector2.right * bulletSO.speed * Time.deltaTime);   
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Object"))
         {
+            AfterCrush();
             // 풀링되는 코드
         }
-
         if (collision.CompareTag("Player") && bulletSO.teamType != TeamType.Player)
         {
-            collision.GetComponent<Player>().stat.HP -= damage;
+            BattleManager.Instance.SettingAr(collision.GetComponent<Ar>(), damage);
+            AfterCrush();
             //플레이어에게 이 불렛의 데미지만큼의 피해를 줌
         }
         else if (collision.CompareTag("Enemy") && bulletSO.teamType != TeamType.Enemy)
         {
-            collision.GetComponent<Enemy>().stat.HP -= damage;
+            BattleManager.Instance.SettingAr(collision.GetComponent<Ar>(), damage);
+            AfterCrush();
             //에너미에게 이 불렛의 데미지만큼의 피해를 줌
         }
     }
@@ -50,6 +60,7 @@ public class Bullet : MonoBehaviour
             switch (bulletSO.bulletType)
             {
                 case BulletType.Nomal:
+                    Destroy(gameObject);
                     // 풀링되는 코드
                     break;
                 case BulletType.Penetrate:
