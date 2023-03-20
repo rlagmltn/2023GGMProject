@@ -39,6 +39,7 @@ public class Archer : Player
     }
     void Shoot(Vector2 angle)
     {
+        Debug.Log("½µ");
         var bullet = Instantiate(arrow, transform.position, Quaternion.Euler(angle));
     }
 }

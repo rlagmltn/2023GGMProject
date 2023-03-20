@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e73e429114775cc4db40d8e91f1067b0, type: 3}
-  m_Name: TestBullet
+  m_Name: ArcherBullet
   m_EditorClassIdentifier: 
-  Name: TestBullet
+  Name: ArcherBullet
   teamType: 0
-  rangeType: 0
+  rangeType: 1
   bulletType: 0
   damage: 10
-  radius: 1.7
-  lifeTime: 0.3
+  radius: 0.5
+  lifeTime: 5
