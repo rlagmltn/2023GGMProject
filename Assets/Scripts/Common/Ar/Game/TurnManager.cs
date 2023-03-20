@@ -104,6 +104,7 @@ public class TurnManager : MonoSingleton<TurnManager>
         //기다리는 시간 변수화!
         yield return new WaitForSeconds(1.5f);
         enemys = FindObjectsOfType<ArFSM>();
+        enemyTurn = enemys.Length;
         Debug.Log($"enemys: {enemys.Length}");
         for(int i = 0; i < enemys.Length; i++)
         {
