@@ -117,7 +117,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         {
             if(!sellectPlayer.isEnd)
             {
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.1f);
                 continue;
             }
 

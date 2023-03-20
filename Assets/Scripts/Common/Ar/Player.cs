@@ -217,7 +217,7 @@ public class Player : Ar
 
         ChangeColor_A(S_obj, 1f);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.3f);
 
         S_obj.SetActive(false);
         isEnd = true;
