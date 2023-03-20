@@ -46,6 +46,10 @@ public class MGUI : MonoSingleton<MGUI>
 
     public void MoveToMapScene()
     {
+        SceneManager.LoadScene(eSceneName.Map.ToString() + "Scene");
+    }
+    public void MoveToSelectScene()
+    {
         SceneManager.LoadScene(eSceneName.Select.ToString() + "Scene");
     }
 

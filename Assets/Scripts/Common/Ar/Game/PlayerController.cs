@@ -5,7 +5,7 @@ using TMPro;
 
 public class PlayerController : MonoSingleton<PlayerController>
 {
-    [SerializeField] InventoryObj deck;
+    [SerializeField] ArInventoryObj deck;
     [SerializeField] QuickSlot pf_QuickSlot;
     [SerializeField] Transform slotHolder;
     [SerializeField] Transform[] spawnPoints;
@@ -117,7 +117,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         {
             if(!sellectPlayer.isEnd)
             {
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.1f);
                 continue;
             }
 

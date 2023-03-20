@@ -17,6 +17,6 @@ public class ImageHolder : MonoBehaviour
 
     public void ClickButtonInGame()
     {
-        InventorySelecter.Instance.unInputAr(num);
+        ArInventorySelecter.Instance.unInputAr(num);
     }
 }
