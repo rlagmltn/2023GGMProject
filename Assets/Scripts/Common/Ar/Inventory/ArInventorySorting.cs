@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.Events;
 
-public class InventorySorting : MonoSingleton<InventorySorting>
+public class ArInventorySorting : MonoSingleton<ArInventorySorting>
 {
     [SerializeField] Transform content;
 

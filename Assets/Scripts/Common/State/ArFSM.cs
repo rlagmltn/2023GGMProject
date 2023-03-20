@@ -11,18 +11,17 @@ public class ArFSM : MonoBehaviour
 
     private void Awake()
     {
-        fsmManager = new StateMachine<ArFSM>(this, new StateIdle());
+        fsmManager = new StateMachine<ArFSM>(this, new BanditWarrior_StateIdle());
     }
 
     private void Start()
     {
-        fsmManager.AddStateList(new StateMove());
-        fsmManager.AddStateList(new StateAtk());
+        fsmManager.AddStateList(new BanditWarrior_StateMove());
     }
 
     private void Update()
     {
-        fsmManager.Update(Time.deltaTime);   
+        fsmManager.Update(Time.deltaTime);
     }
     
     public virtual Transform SearchAr()
@@ -78,7 +77,6 @@ public class ArFSM : MonoBehaviour
 
     public void StartTurn()
     {
-        Debug.Log("StartEnemy");
         CameraMove.Instance.MovetoTarget(GetComponent<Enemy>());
         Invoke("ChangeTurnFlag", 2f);
     }

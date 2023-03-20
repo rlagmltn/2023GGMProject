@@ -5,7 +5,7 @@ using TMPro;
 
 public class PlayerController : MonoSingleton<PlayerController>
 {
-    [SerializeField] InventoryObj deck;
+    [SerializeField] ArInventoryObj deck;
     [SerializeField] QuickSlot pf_QuickSlot;
     [SerializeField] Transform slotHolder;
     [SerializeField] Transform[] spawnPoints;

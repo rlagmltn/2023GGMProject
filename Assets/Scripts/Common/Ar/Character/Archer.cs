@@ -7,12 +7,9 @@ public class Archer : Player
 {
     [SerializeField] Bullet arrow;
 
-    private bool isMove;
-
     protected override void Start()
     {
         base.Start();
-        MouseUp.AddListener(() => { isMove = true; });
     }
 
     protected override void StatReset()
@@ -21,21 +18,13 @@ public class Archer : Player
         stat.ATK = 50;
         pushPower = 15;
         isMove = false;
+        isRangeCharacter = true;
         base.StatReset();
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
-    }
-
-    private void Update()
-    {
-        if (rigid.velocity.magnitude <= 0.8f && isMove)
-        {
-            isMove = false;
-            AfterMove?.Invoke();
-        }
     }
 
     protected override void Attack(Vector2 angle)

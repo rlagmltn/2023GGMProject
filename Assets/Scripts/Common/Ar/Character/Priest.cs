@@ -7,7 +7,7 @@ public class Priest : Player
     protected override void Start()
     {
         base.Start();
-        StatReset();
+        AfterMove.AddListener(()=> { isUsingSkill = false; });
     }
 
     protected override void StatReset()

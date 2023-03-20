@@ -21,7 +21,7 @@ public class DynamicUIInventory : UIInventory
 
     public override void CreateUISlots()
     {
-        uiSlotLists = new Dictionary<GameObject, InventorySlot>();
+        uiSlotLists = new Dictionary<GameObject, ArInventorySlot>();
 
         for(int i =0; i < inventoryObj.inventorySlots.Length; ++i)
         {

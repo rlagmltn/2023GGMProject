@@ -9,26 +9,24 @@ public enum ItemType : int
     ACCESSORY
 }
 
-[CreateAssetMenu(fileName ="New Item", menuName ="Inventory System/Items/New Item")]
-public class ItemObj : ScriptableObject
+[CreateAssetMenu(fileName ="New Item", menuName ="Ars/New Ar")]
+public class ArObj : ScriptableObject
 {
     // 장비 타입
     public ItemType itemType;
     // 인벤토리에서 겹쳐지는지 여부
     public bool flagStackable;
 
-    public string itemName;
-    public Sprite itemIcon;
+    public string arName;
+    public Sprite arIcon;
     public GameObject objModelPrefab;
 
     public List<string> boneNameLists = new List<string>();
 
-    public Player itemData = new Player();
+    public Player arData = new Player();
 
     [TextArea(15, 20)]
-    public string itemSummery;
-
-    public int itemPrice;
+    public string arSummery;
 
     private void OnValidate()
     {

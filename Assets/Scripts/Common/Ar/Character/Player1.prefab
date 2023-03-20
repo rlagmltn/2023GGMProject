@@ -369,10 +369,15 @@ MonoBehaviour:
       m_Calls: []
   ar_id: 0
   ar_name: 
+  ar_sprite: {fileID: 0}
   isSellected: 0
   MouseUp:
     m_PersistentCalls:
       m_Calls: []
+  itemSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &3266473124807504997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,8 +392,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangeX: 2
   rangeY: 6
-  InfinityX: 0
-  InfinityY: 0
+  startX: 0
+  startY: 0
 --- !u!1 &4725181591716604985
 GameObject:
   m_ObjectHideFlags: 0

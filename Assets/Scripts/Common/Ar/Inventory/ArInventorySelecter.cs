@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
 
-public class InventorySelecter : MonoSingleton<InventorySelecter>
+public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
 {
     [SerializeField] private Button selectButton;
     [SerializeField] private List<Button> buttons;
@@ -61,7 +61,7 @@ public class InventorySelecter : MonoSingleton<InventorySelecter>
                 InventoryUI.Instance.Ar.isUse = true;
                 InventoryUI.Instance.Ar = emptyAr;
                 InventoryUI.Instance.UpdateUI();
-                InventorySorting.Instance.SortInventory();
+                ArInventorySorting.Instance.SortInventory();
                 UpdateUI();
                 return;
             }
@@ -87,7 +87,7 @@ public class InventorySelecter : MonoSingleton<InventorySelecter>
         Ars[num].isUse = false;
         Ars[num] = emptyAr;
         UpdateUI();
-        InventorySorting.Instance.SortInventory();
+        ArInventorySorting.Instance.SortInventory();
     }
 
     void StartButtonClick()

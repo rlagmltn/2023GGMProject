@@ -100,19 +100,17 @@ public class TurnManager : MonoSingleton<TurnManager>
 
     private IEnumerator ResetEnemyTurn()
     {
-        //for (int i = 0; i < playerTurn; i++)
-        //{
-        //    var turn = Instantiate(pf_Turn, transform);
-        //    turns.Add(turn);
-        //}
-        foreach (Turn turn in turns)
-        {
-            turn.EnableTurn();
-        }
         turnCount = 0;
+        //기다리는 시간 변수화!
+        yield return new WaitForSeconds(1.5f);
         enemys = FindObjectsOfType<ArFSM>();
-
+        enemyTurn = enemys.Length;
         Debug.Log($"enemys: {enemys.Length}");
+        for(int i = 0; i < enemys.Length; i++)
+        {
+            turns[turns.Count-i-1].EnableTurn();
+        }
+
         foreach (ArFSM arFSM in enemys)
         {
             arFSM.StartTurn();

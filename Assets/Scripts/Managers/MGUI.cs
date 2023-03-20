@@ -46,6 +46,10 @@ public class MGUI : MonoSingleton<MGUI>
 
     public void MoveToMapScene()
     {
+        SceneManager.LoadScene(eSceneName.Map.ToString() + "Scene");
+    }
+    public void MoveToSelectScene()
+    {
         SceneManager.LoadScene(eSceneName.Select.ToString() + "Scene");
     }
 
@@ -66,13 +70,13 @@ public class MGUI : MonoSingleton<MGUI>
 
     public void GameOver()
     {
+        lose?.SetActive(true);
         Time.timeScale = 0f;
-        win?.SetActive(true);
     }
 
     public void GameClear()
     {
+        win?.SetActive(true);
         Time.timeScale = 0f;
-        lose?.SetActive(true);
     }
 }

@@ -5,13 +5,13 @@ using System.Linq;
 using UnityEngine;
 
 [Serializable]
-public class Inventory
+public class ArInventory
 {
-    public InventorySlot[] inventorySlots = new InventorySlot[24];
+    public ArInventorySlot[] inventorySlots = new ArInventorySlot[24];
 
     public void Clear()
     {
-        foreach(InventorySlot invenSlot in inventorySlots )
+        foreach(ArInventorySlot invenSlot in inventorySlots )
         {
             invenSlot.DestoryItem();
         }
@@ -22,8 +22,8 @@ public class Inventory
         return inventorySlots.FirstOrDefault(i => i.item.ar_id == id) != null;
     }
 
-    public bool GetFlagHave(ItemObj itemObj)
+    public bool GetFlagHave(ArObj itemObj)
     {
-        return GetFlagHave(itemObj.itemData.ar_id);
+        return GetFlagHave(itemObj.arData.ar_id);
     }
 }

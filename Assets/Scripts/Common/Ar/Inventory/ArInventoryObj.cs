@@ -12,22 +12,22 @@ public enum InterfaceType
     Bag
 }
 
-[CreateAssetMenu(fileName ="New InventoryObject", menuName ="Inventory System/Inventory/InventoryObject")]
-public class InventoryObj : ScriptableObject
+[CreateAssetMenu(fileName ="New ArInventoryObject", menuName ="Ars/ArInventoryObject")]
+public class ArInventoryObj : ScriptableObject
 {
-    public ItemDBObj itemDBObj;
+    public ArDBObj arDBObj;
     public InterfaceType type;
 
     [SerializeField]
-    private Inventory inventory = new Inventory();
-    public InventorySlot[] inventorySlots => inventory.inventorySlots;
+    private ArInventory inventory = new ArInventory();
+    public ArInventorySlot[] inventorySlots => inventory.inventorySlots;
 
     public int GetEmptySlotCount
     {
         get
         {
             int cnt = 0;
-            foreach(InventorySlot slot in inventorySlots)
+            foreach(ArInventorySlot slot in inventorySlots)
             {
                 if (slot.item.ar_id <= -1)
                     cnt++;
@@ -38,8 +38,8 @@ public class InventoryObj : ScriptableObject
 
     public bool AddItem(Player item, int amount)
     {
-        InventorySlot invenSlot = SearchItemInInven(item);
-        if( !itemDBObj.itemObjects[item.ar_id].flagStackable || invenSlot == null)
+        ArInventorySlot invenSlot = SearchItemInInven(item);
+        if( !arDBObj.arObjects[item.ar_id].flagStackable || invenSlot == null)
         {
             if (GetEmptySlotCount <= 0)
                 return false;
@@ -53,36 +53,36 @@ public class InventoryObj : ScriptableObject
         return true;
     }
 
-    public InventorySlot SearchItemInInven(Player item)
+    public ArInventorySlot SearchItemInInven(Player item)
     {
         return inventorySlots.FirstOrDefault(i => i.item.ar_id == item.ar_id);
     }
 
-    public InventorySlot GetEmptySlot()
+    public ArInventorySlot GetEmptySlot()
     {
         return inventorySlots.FirstOrDefault(i => i.item.ar_id <= -1);
     }
 
-    public bool IsContainItem(ItemObj itemObj)
+    public bool IsContainItem(ArObj arObj)
     {
-        return inventorySlots.FirstOrDefault(i => i.item.ar_id == itemObj.itemData.ar_id) != null;
+        return inventorySlots.FirstOrDefault(i => i.item.ar_id == arObj.arData.ar_id) != null;
     }
 
-    public void SwapItems(InventorySlot itemA, InventorySlot itemB)
+    public void SwapItems(ArInventorySlot itemA, ArInventorySlot itemB)
     {
         if (itemA == itemB)
             return;
 
-        if(itemA.GetFlagEquipSlot(itemB.ItemObject) && itemB.GetFlagEquipSlot(itemA.ItemObject))
+        if(itemA.GetFlagEquipSlot(itemB.ArObject) && itemB.GetFlagEquipSlot(itemA.ArObject))
         {
-            InventorySlot temp = new InventorySlot(itemB.item, itemB.itemCnt);
+            ArInventorySlot temp = new ArInventorySlot(itemB.item, itemB.itemCnt);
             itemB.UploadSlot(itemA.item, itemA.itemCnt);
             itemA.UploadSlot(temp.item, temp.itemCnt);
         }
     }
 
     // 사용한 아이템 이벤트 발동
-    public Action<ItemObj> OnUseItemObject;
+    public Action<ArObj> OnUseItemObject;
 
     public void Clear()
     {

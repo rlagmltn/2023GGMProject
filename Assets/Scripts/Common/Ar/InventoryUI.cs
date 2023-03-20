@@ -20,7 +20,7 @@ public class InventoryUI : MonoSingleton<InventoryUI>
 
     public void UpdateUI()
     {
-        if(Ar == InventorySelecter.Instance.emptyAr)
+        if(Ar == ArInventorySelecter.Instance.emptyAr)
         {
             image.sprite = null;
             nameText.text = "";
