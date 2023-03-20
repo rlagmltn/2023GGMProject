@@ -4,16 +4,33 @@ using UnityEngine;
 
 public class BanditWarrior_StateIdle : StateIdle
 {
+    private bool canUsePassive = true;
+
+    private Enemy enemy;
+
+    public override void OnAwake()
+    {
+        enemy = stateMachineClass.GetComponent<Enemy>();
+    }
+
     public override void OnUpdate(float deltaTime)
     {
         //자기턴이면
         if (!TurnManager.Instance.GetTurn() && stateMachineClass.turnFlag)
         {
-            Debug.Log("적턴");
-            Transform target = stateMachineClass.SearchAr();
-            if (target)
+            
+            if(enemy.stat.HP <= 30 && canUsePassive)
             {
-                stateMachine.ChangeState<BanditWarrior_StateMove>();
+                canUsePassive = false;
+                stateMachine.ChangeState<BanditWarrior_StatePassive>();
+            }
+            else
+            {
+                Transform target = stateMachineClass.SearchAr();
+                if (target)
+                {
+                    stateMachine.ChangeState<BanditWarrior_StateMove>();
+                }
             }
         }
     }
