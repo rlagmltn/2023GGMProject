@@ -6,23 +6,8 @@ public class ArFSM : MonoBehaviour
 {
     protected StateMachine<ArFSM> fsmManager;
     public StateMachine<ArFSM> FsmManager => fsmManager;
-    private List<Ar> arList = new List<Ar>();
+    protected List<Ar> arList = new List<Ar>();
     [HideInInspector] public bool turnFlag = false;
-
-    private void Awake()
-    {
-        fsmManager = new StateMachine<ArFSM>(this, new BanditWarrior_StateIdle());
-    }
-
-    private void Start()
-    {
-        fsmManager.AddStateList(new BanditWarrior_StateMove());
-    }
-
-    private void Update()
-    {
-        fsmManager.Update(Time.deltaTime);
-    }
     
     public virtual Transform SearchAr()
     {
@@ -47,13 +32,6 @@ public class ArFSM : MonoBehaviour
         if (minIndex == -1) return null;
         return ars[minIndex].transform;
     }
-    
-    public virtual void MoveToTarget()
-    {
-        Vector3 dir = SearchAr().position - transform.position;
-        transform.position += dir * 1f * Time.deltaTime;
-    }
-    
    
     public virtual bool CheckWall()
     {
@@ -75,34 +53,19 @@ public class ArFSM : MonoBehaviour
         return false;
     }
 
-    public void StartTurn()
+    public virtual void StartTurn()
     {
         CameraMove.Instance.MovetoTarget(GetComponent<Enemy>());
         Invoke("ChangeTurnFlag", 2f);
     }
 
-    private void ChangeTurnFlag()
+    public virtual void ChangeTurnFlag()
     {
         turnFlag = true;
     }
 
-    public bool IsEnded()
+    public virtual bool IsEnded()
     {
         return turnFlag;
-    }
-
-    private void PassiveSkill()
-    {
-        Vector3 dir = SearchAr().position - transform.position;
-        Collider2D[] cols = Physics2D.OverlapBoxAll(transform.position, new Vector2(10f, 10f), 0);
-        foreach (Collider2D col in cols)
-        {
-            Debug.Log(col.transform.position);
-            if (col.CompareTag("Player"))
-            {
-                col.GetComponent<Rigidbody2D>().AddForce(dir * 5f);
-                fsmManager.ChangeState<StateAtk>();
-            }
-        }
     }
 }

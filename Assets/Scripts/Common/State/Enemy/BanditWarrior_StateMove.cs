@@ -20,12 +20,14 @@ public class BanditWarrior_StateMove : StateMove
     public override void OnStart()
     {
         Vector2 angle = Vector3.Normalize(stateMachineClass.SearchAr().position - stateMachineClass.transform.position);
+        
         //벽체크 부분 해결해야함(임시로 그냥풀어둠)
         //if (!stateMachineClass.CheckWall())
         //{
-        rigid.velocity = angle * enemy.GetPower();
         //}
-        //power를 Enemy class에서 가지고 오기
+        
+        rigid.velocity = angle * enemy.GetPower();
+        
         TurnManager.Instance.UseTurn();
         stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
 
