@@ -34,10 +34,10 @@ public class Player : Ar
         ar_name = "";
     }
 
-    public Player(ItemObj itemObj)
+    public Player(ArObj itemObj)
     {
-        ar_id = itemObj.itemData.ar_id;
-        ar_name = itemObj.itemData.ar_name;
+        ar_id = itemObj.arData.ar_id;
+        ar_name = itemObj.arData.ar_name;
     }
 
     protected override void Start()
@@ -49,6 +49,8 @@ public class Player : Ar
         attackRange = rangeContainer.GetChild(1).gameObject;
         skillRange = rangeContainer.GetChild(2).gameObject;
         DisableRanges();
+
+        MouseUp.AddListener(() => { isMove = true; });
 
         StatReset();
     }

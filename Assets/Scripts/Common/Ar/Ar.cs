@@ -9,6 +9,7 @@ public class Ar : MonoBehaviour
 
     public bool isDead { get; set; }
     public bool isUsingSkill { get; set; }
+    public bool isMove;
 
     protected float minDragPower = 0.4f;
     protected float maxDragPower = 1.5f;
@@ -49,6 +50,15 @@ public class Ar : MonoBehaviour
     protected void FixedUpdate()
     {
         lastVelocity = rigid.velocity;
+    }
+
+    protected void Update()
+    {
+        if (rigid.velocity.magnitude <= 0.5f && isMove)
+        {
+            isMove = false;
+            AfterMove?.Invoke();
+        }
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)

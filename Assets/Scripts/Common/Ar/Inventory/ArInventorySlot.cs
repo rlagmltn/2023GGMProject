@@ -4,36 +4,36 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class InventorySlot
+public class ArInventorySlot
 {
     // slot에 들어갈 아이템 타입
     public ItemType[] itemTypes = new ItemType[0];
 
     [NonSerialized]
-    public InventoryObj inventoryObj;
+    public ArInventoryObj arInventoryObj;
 
     [NonSerialized]
     public GameObject slotUI;
 
     [NonSerialized]
-    public Action<InventorySlot> OnPreUpload;
+    public Action<ArInventorySlot> OnPreUpload;
 
     [NonSerialized]
-    public Action<InventorySlot> OnPostUpload;
+    public Action<ArInventorySlot> OnPostUpload;
 
     public Player item;
     public int itemCnt;
 
-    public ItemObj ItemObject
+    public ArObj ArObject
     {
         get
         {
-            return item.ar_id >= 0 ? inventoryObj.itemDBObj.itemObjects[item.ar_id] : null;
+            return item.ar_id >= 0 ? arInventoryObj.arDBObj.arObjects[item.ar_id] : null;
         }
     }
 
-    public InventorySlot() => UploadSlot(new Player(), 0);
-    public InventorySlot(Player item, int cnt) => UploadSlot(item, cnt);
+    public ArInventorySlot() => UploadSlot(new Player(), 0);
+    public ArInventorySlot(Player item, int cnt) => UploadSlot(item, cnt);
     public void DestoryItem() => UploadSlot(new Player(), 0);
     public void AddCount(int value) => UploadSlot(item, itemCnt += value);
     public void AddItem(Player item, int cnt) => UploadSlot(item, cnt);
@@ -51,9 +51,9 @@ public class InventorySlot
         OnPostUpload?.Invoke(this);
     }
 
-    public bool GetFlagEquipSlot(ItemObj itemObj)
+    public bool GetFlagEquipSlot(ArObj itemObj)
     {
-        if( itemTypes.Length <= 0 || itemObj == null || itemObj.itemData.ar_id < 0 )
+        if( itemTypes.Length <= 0 || itemObj == null || itemObj.arData.ar_id < 0 )
         {
             return true;
         }

@@ -19,10 +19,10 @@ public static class MouseTransformData
 [RequireComponent(typeof(EventTrigger))]
 public abstract class UIInventory : MonoBehaviour
 {
-    public InventoryObj inventoryObj;
-    private InventoryObj beforeInventoryObj;
+    public ArInventoryObj inventoryObj;
+    private ArInventoryObj beforeInventoryObj;
 
-    public Dictionary<GameObject, InventorySlot> uiSlotLists = new Dictionary<GameObject, InventorySlot>();
+    public Dictionary<GameObject, ArInventorySlot> uiSlotLists = new Dictionary<GameObject, ArInventorySlot>();
 
     private void Awake()
     {
@@ -30,7 +30,7 @@ public abstract class UIInventory : MonoBehaviour
 
         for(int i = 0; i< inventoryObj.inventorySlots.Length; ++i)
         {
-            inventoryObj.inventorySlots[i].inventoryObj = inventoryObj;
+            inventoryObj.inventorySlots[i].arInventoryObj = inventoryObj;
             inventoryObj.inventorySlots[i].OnPostUpload += OnEquipUpdate;
         }
 
@@ -63,9 +63,9 @@ public abstract class UIInventory : MonoBehaviour
         eventTrigger.triggers.Add(eventTriggerEntry);
     }
 
-    public void OnEquipUpdate(InventorySlot inventorySlot)
+    public void OnEquipUpdate(ArInventorySlot inventorySlot)
     {
-        inventorySlot.slotUI.transform.GetChild(0).GetComponent<Image>().sprite = inventorySlot.item.ar_id < 0 ? null : inventorySlot.ItemObject.itemIcon;
+        inventorySlot.slotUI.transform.GetChild(0).GetComponent<Image>().sprite = inventorySlot.item.ar_id < 0 ? null : inventorySlot.ArObject.arIcon;
 
         inventorySlot.slotUI.transform.GetChild(0).GetComponent<Image>().color = inventorySlot.item.ar_id < 0 ? new Color(1, 1, 1, 0) : new Color(1, 1, 1, 1);
 
@@ -116,7 +116,7 @@ public abstract class UIInventory : MonoBehaviour
         }
         else if( MouseTransformData.mouseSlot )
         {
-            InventorySlot mouseHoverSlotData = MouseTransformData.mouseInventory.uiSlotLists[MouseTransformData.mouseSlot];
+            ArInventorySlot mouseHoverSlotData = MouseTransformData.mouseInventory.uiSlotLists[MouseTransformData.mouseSlot];
 
             inventoryObj.SwapItems(uiSlotLists[gameObj], mouseHoverSlotData);
         }
@@ -136,7 +136,7 @@ public abstract class UIInventory : MonoBehaviour
         imgDrags.transform.SetParent(transform.parent.parent.parent);
 
         Image image = imgDrags.AddComponent<Image>();
-        image.sprite = uiSlotLists[gameObj].ItemObject.itemIcon;
+        image.sprite = uiSlotLists[gameObj].ArObject.arIcon;
         image.raycastTarget = false;
 
         imgDrags.name = "Drag Image";
