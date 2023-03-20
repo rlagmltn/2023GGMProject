@@ -192,6 +192,7 @@ public class Player : Ar
 
     private void OnMouseDown()
     {
+        if (!TurnManager.Instance.IsPlayerTurn) return;
         PlayerController.Instance.SellectPlayer(slot);
     }
 

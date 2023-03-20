@@ -20,6 +20,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     private List<QuickSlot> quickSlots = new List<QuickSlot>();
     private GameObject attackBtn;
     private TextMeshProUGUI skillBtnText;
+
     void Awake()
     {
         SummonPlayers();
@@ -126,12 +127,15 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         StartCoroutine(sellectPlayer.DisableRanges_T());
 
-        while (true)
+        if(joystick.joystickType != JoystickType.Move)
         {
-            if (sellectPlayer.isEnd) break;
+            while (true)
+            {
+                if (sellectPlayer.isEnd) break;
 
-            yield return new WaitForSeconds(0.01f);
-            continue;
+                yield return new WaitForSeconds(0.01f);
+                continue;
+            }
         }
 
         if (TurnManager.Instance.UseTurn())
@@ -166,5 +170,13 @@ public class PlayerController : MonoSingleton<PlayerController>
             skillBtnText.SetText(sellectPlayer.currentCooltime.ToString());
         else
             skillBtnText.SetText("Skill");
+    }
+
+    public void SetQuickSlotsEnable(bool value)
+    {
+        foreach(QuickSlot slot in quickSlots)
+        {
+            slot.SetSlotActive(!value);
+        }
     }
 }

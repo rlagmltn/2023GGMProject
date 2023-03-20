@@ -39,7 +39,8 @@ public class Archer : Player
     }
     void Shoot(Vector2 angle)
     {
+        float zAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
         Debug.Log("½µ");
-        var bullet = Instantiate(arrow, transform.position, Quaternion.Euler(angle));
+        var bullet = Instantiate(arrow, transform.position, Quaternion.Euler(0, 0, zAngle-180));
     }
 }

@@ -6,6 +6,7 @@ public class BattleManager : MonoSingleton<BattleManager>
 {
     private Ar arOne, arTwo;
     private Ar arAtk;
+    private float damage;
 
     public void SettingAr(Ar ar)
     {
@@ -36,6 +37,14 @@ public class BattleManager : MonoSingleton<BattleManager>
         arOne = ar;
         arAtk = attacker;
         if (arAtk != null && arOne != null) AttackBattle();
+        else ResetAll();
+    }
+
+    public void SettingAr(Ar ar, float damage)
+    {
+        arOne = ar;
+        this.damage = damage;
+        if (arOne != null) BulletDamage();
         else ResetAll();
     }
 
@@ -123,11 +132,22 @@ public class BattleManager : MonoSingleton<BattleManager>
         return true;
     }
 
+    private bool BulletDamage()
+    {
+        var isdead = arOne.Hit(damage);
+
+        ResetAll();
+
+        if (isdead) return false;
+        else return true;
+    }
+
     private void ResetAll()
     {
         arOne = null;
         arTwo = null;
         arAtk = null;
+        damage = 0;
     }
 
     private (Vector2, Vector2) D2c(Vector2 v1, Vector2 v2, Vector2 c1, Vector2 c2, float e = 1)
