@@ -66,6 +66,7 @@ public class PopUpManager : MonoBehaviour
     void ReloadUIs()
     {
         HelpPannel.Instance.UpdateUI();
+        MainShop.Instance.Init();
     }
 
     /// <summary>

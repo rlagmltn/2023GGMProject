@@ -35,9 +35,9 @@ public class PopUpHolder : MonoBehaviour
     {
         PopUpObj.gameObject.SetActive(true);
 
-        if (this.gameObject.GetComponent<MainItemButton>() != null)
+        if (this.gameObject.GetComponent<MainShopButton>() != null)
         {
-            var Item = this.gameObject.GetComponent<MainItemButton>();
+            var Item = this.gameObject.GetComponent<MainShopButton>();
             MainShop.Instance.GetItemSO(Item.GetItemSO());
         }
     }
