@@ -109,38 +109,39 @@ public class PlayerController : MonoSingleton<PlayerController>
     //    }
     //}
 
-    public IEnumerator DragEnd(float power,Vector2 angle)
+    public void DragEnd(float power,Vector2 angle)
+    {
+        if (cancelButton.entering)
+        {
+            sellectPlayer.DisableRanges();
+            cancelButton.gameObject.SetActive(false);
+            cancelButton.entering = false;
+            return;
+        }
+
+        StartCoroutine(DragEnd_Couroutine(power, angle));
+    }
+
+    private IEnumerator DragEnd_Couroutine(float power, Vector2 angle)
     {
         StartCoroutine(sellectPlayer.DisableRanges_T());
 
         while (true)
         {
-            if(!sellectPlayer.isEnd)
-            {
-                yield return new WaitForSeconds(0.1f);
-                continue;
-            }
+            if (sellectPlayer.isEnd) break;
 
-            if (cancelButton.entering)
-            {
-                cancelButton.entering = false;
-                cancelButton.gameObject.SetActive(false);
-                break;
-            }
-            else if (TurnManager.Instance.UseTurn())
-            {
-                sellectPlayer.DragEnd(joystick.joystickType, power, angle);
-                cancelButton.gameObject.SetActive(false);
-                ResetSellect();
-
-                foreach (QuickSlot quickSlot in quickSlots)
-                {
-                    quickSlot.Player.CountCooltime();
-                }
-                break;
-            }
+            yield return new WaitForSeconds(0.01f);
+            continue;
         }
-        StopCoroutine(DragEnd(power, angle));
+
+        if (TurnManager.Instance.UseTurn())
+        {
+            sellectPlayer.DragEnd(joystick.joystickType, power, angle);
+            cancelButton.gameObject.SetActive(false);
+            ResetSellect();
+
+            foreach (QuickSlot quickSlot in quickSlots) quickSlot.Player.CountCooltime();
+        }
     }
 
     public void ResetSellect()
