@@ -52,7 +52,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     public void SellectPlayer(QuickSlot player)
     {
         sellectPlayer = player.Player;
-        CameraMove.Instance.MovetoTarget(sellectPlayer);
+        CameraMove.Instance.MovetoTarget(sellectPlayer.transform);
         DisableQuickSlots();
         actSellect.SetActive(true);
         if (sellectPlayer.isRangeCharacter)
