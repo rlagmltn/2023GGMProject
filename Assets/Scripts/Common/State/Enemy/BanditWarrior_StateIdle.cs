@@ -5,6 +5,9 @@ using UnityEngine;
 public class BanditWarrior_StateIdle : StateIdle
 {
     private bool canUsePassive = true;
+    private int passiveCool = 0;
+    private int skillCool = 0;
+
 
     private Enemy enemy;
 
@@ -18,19 +21,29 @@ public class BanditWarrior_StateIdle : StateIdle
         //자기턴이면
         if (!TurnManager.Instance.GetTurn() && stateMachineClass.turnFlag)
         {
-            
-            if(enemy.stat.HP <= 30 && canUsePassive)
+            Transform target = stateMachineClass.SearchAr();
+            if(!target)
+            {
+                Debug.LogWarning("None Target!");
+                return;
+            }
+
+            if(enemy.stat.HP <= 15 && canUsePassive)
             {
                 canUsePassive = false;
                 stateMachine.ChangeState<BanditWarrior_StatePassive>();
             }
+            else if(skillCool == 6)
+            {
+
+            }
+            else if(passiveCool == 5)
+            {
+
+            }
             else
             {
-                Transform target = stateMachineClass.SearchAr();
-                if (target)
-                {
-                    stateMachine.ChangeState<BanditWarrior_StateMove>();
-                }
+                stateMachine.ChangeState<BanditWarrior_StateMove>();
             }
         }
     }

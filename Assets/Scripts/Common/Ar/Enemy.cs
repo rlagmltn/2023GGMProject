@@ -6,11 +6,6 @@ public class Enemy : Ar
 {
     protected override void StatReset()
     {
-        stat.MaxHP = 100;
-        stat.ATK = 10;
-        minDragPower = 0.2f;
-        maxDragPower = 1.5f;
-        pushPower = 15;
         isDead = false;
         base.StatReset();
         Debug.Log(stat.HP);
