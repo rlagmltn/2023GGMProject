@@ -192,13 +192,15 @@ public class Player : Ar
 
     private void OnMouseDown()
     {
-        if (!TurnManager.Instance.IsPlayerTurn) return;
+        if (!TurnManager.Instance.IsPlayerTurn || isDead) return;
         PlayerController.Instance.SellectPlayer(slot);
     }
 
     public void Connect(QuickSlot slot)
     {
         this.slot = slot;
+        OnBattleDie.AddListener(()=>this.slot.SetSlotActive(false));
+        OnOutDie.AddListener(()=>this.slot.SetSlotActive(false));
     }
 
     public void CountCooltime()

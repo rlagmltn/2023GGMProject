@@ -557,6 +557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b1661581c950c47a19dde89f287829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMove: 0
   BeforeCrash:
     m_PersistentCalls:
       m_Calls: []
@@ -584,14 +585,15 @@ MonoBehaviour:
   OnBattleDie:
     m_PersistentCalls:
       m_Calls: []
-  ar_id: 1
+  ar_id: 0
   ar_name: 
   ar_sprite: {fileID: 21300000, guid: f5cecdc77987c4564ad8b7d175af4518, type: 3}
   isSellected: 0
+  isEnd: 1
   MouseUp:
     m_PersistentCalls:
       m_Calls: []
   itemSlots:
-  - {fileID: 11400000, guid: fc7abcbbd8167604b88c3b1dced33449, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

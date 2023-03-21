@@ -176,7 +176,8 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         foreach(QuickSlot slot in quickSlots)
         {
-            slot.SetSlotActive(!value);
+            if (slot.Player.isDead) return;
+                slot.SetSlotActive(value);
         }
     }
 }
