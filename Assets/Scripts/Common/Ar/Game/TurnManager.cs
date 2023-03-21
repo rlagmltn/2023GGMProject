@@ -92,7 +92,7 @@ public class TurnManager : MonoSingleton<TurnManager>
     private IEnumerator PassTurn()
     {
         isPlayerTurn = !isPlayerTurn;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(3f);
         ActiveAllTurn();
         if (isPlayerTurn)
         {
@@ -116,7 +116,7 @@ public class TurnManager : MonoSingleton<TurnManager>
 
     private IEnumerator ResetEnemyTurn()
     {
-        turnText.SetText("Enemy Trun");
+        turnText.SetText("Enemy Turn");
         PlayerController.Instance.SetQuickSlotsEnable(false);
         turnCount = 0;
 
