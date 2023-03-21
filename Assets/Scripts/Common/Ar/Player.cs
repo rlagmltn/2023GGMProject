@@ -187,6 +187,9 @@ public class Player : Ar
         {
             BattleManager.Instance.SettingAr(this);
             CameraMove.Instance.Shake();
+            var angle = collision.contacts[0].point - (Vector2)transform.position;
+            float zAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
+            EffectManager.Instance.InstantiateEffect(0, collision.contacts[0].point, zAngle - 90);
         }
     }
 
