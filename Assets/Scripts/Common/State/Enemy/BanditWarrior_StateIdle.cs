@@ -30,19 +30,26 @@ public class BanditWarrior_StateIdle : StateIdle
 
             if(enemy.stat.HP <= 15 && canUsePassive)
             {
+                passiveCool = Mathf.Min(5, passiveCool + 1);
+                skillCool = Mathf.Min(6, skillCool + 1);
                 canUsePassive = false;
                 stateMachine.ChangeState<BanditWarrior_StatePassive>();
             }
             else if(skillCool == 6)
             {
-
+                passiveCool = Mathf.Min(5, passiveCool + 1);
+                skillCool = 0;
+                stateMachine.ChangeState<BanditWarrior_StateSkill>();
             }
             else if(passiveCool == 5)
             {
-
+                passiveCool = 0;
+                skillCool = Mathf.Min(6, skillCool + 1);
             }
             else
             {
+                passiveCool = Mathf.Min(5, passiveCool + 1);
+                skillCool = Mathf.Min(6, skillCool + 1);
                 stateMachine.ChangeState<BanditWarrior_StateMove>();
             }
         }
