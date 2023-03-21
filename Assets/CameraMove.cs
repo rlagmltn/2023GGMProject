@@ -14,13 +14,14 @@ public class CameraMove : MonoSingleton<CameraMove>
 
     private CinemachineBasicMultiChannelPerlin shakeCamNoise;
     private Vector3 setCamPos = new Vector3(0, 0, -10);
+    private Vector3 moveDragPos;
 
     private void Awake()
     {
         Util.Instance.mainCam.transform.position = setCamPos;
     }
 
-    public void MovetoTarget(Ar target)
+    public void MovetoTarget(Transform target)
     {
         this.target = target.transform;
         transform.position += setCamPos;
@@ -40,7 +41,7 @@ public class CameraMove : MonoSingleton<CameraMove>
     {
         if (target != null)
         {
-            transform.position = target.position;
+            transform.position = target.position + moveDragPos;
             transform.position += setCamPos;
         }
     }
@@ -53,6 +54,11 @@ public class CameraMove : MonoSingleton<CameraMove>
     public void Shake()
     {
         StartCoroutine(ShakeCoroutine());
+    }
+
+    public void MoveDrag(Vector3 dragPos)
+    {
+        moveDragPos = dragPos;
     }
 
     private IEnumerator ShakeCoroutine()

@@ -55,7 +55,7 @@ public class ArFSM : MonoBehaviour
 
     public virtual void StartTurn()
     {
-        CameraMove.Instance.MovetoTarget(GetComponent<Enemy>());
+        CameraMove.Instance.MovetoTarget(transform);
         Invoke("ChangeTurnFlag", 2f);
     }
 
