@@ -59,7 +59,7 @@ public class Player : Ar
     {
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
-        pushPower = 15;
+        pushPower = 20;
 
         foreach(ItemSO item in itemSlots)
         {
@@ -187,6 +187,7 @@ public class Player : Ar
         {
             BattleManager.Instance.SettingAr(this);
             CameraMove.Instance.Shake();
+            EffectManager.Instance.InstantiateEffect(0, collision.contacts[0].point, transform.position, collision.contacts[0].point);
         }
     }
 

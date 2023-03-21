@@ -10,7 +10,7 @@ public class Turn : MonoBehaviour
 
     private void Start()
     {
-        EnableTurn();
+        DisableTurn();
     }
 
     public void EnableTurn()
@@ -27,10 +27,7 @@ public class Turn : MonoBehaviour
 
     public void SetActiveTurnObj(bool value)
     {
-        if (value)
-            EnableTurn();
-        else
-            DisableTurn();
+        DisableTurn();
         gameObject.SetActive(value);
     }
 }

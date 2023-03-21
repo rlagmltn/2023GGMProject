@@ -46,17 +46,15 @@ public class ArFSM : MonoBehaviour
                 return true;
             }
         }
-
-        //적 재탐색기능 추가 필요
-        //모든적이 벽너머에 있으면 어떻게 해야되지
     
         return false;
     }
 
     public virtual void StartTurn()
     {
-        CameraMove.Instance.MovetoTarget(GetComponent<Enemy>());
-        Invoke("ChangeTurnFlag", 2f);
+        CameraMove.Instance.MovetoTarget(transform);
+
+        Invoke("ChangeTurnFlag", 1.5f);
     }
 
     public virtual void ChangeTurnFlag()
@@ -67,5 +65,13 @@ public class ArFSM : MonoBehaviour
     public virtual bool IsEnded()
     {
         return turnFlag;
+    }
+
+    public virtual IEnumerator MoveAr(Vector2 vel)
+    {
+        yield return new WaitForSeconds(1.5f);
+        GetComponent<Rigidbody2D>().velocity = vel;
+        transform.GetChild(0).gameObject.SetActive(false);
+        StopCoroutine("MoveAr");
     }
 }

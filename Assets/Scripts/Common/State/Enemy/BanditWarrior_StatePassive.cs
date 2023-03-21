@@ -24,6 +24,7 @@ public class BanditWarrior_StatePassive : State<ArFSM>
                 Debug.Log("패시브 사용");
                 dir = Vector3.Normalize(col.transform.position - stateMachineClass.transform.position);
                 col.GetComponent<Rigidbody2D>().velocity = dir * 7f;
+
             }
         }
         stateMachineClass.StartCoroutine("Move");

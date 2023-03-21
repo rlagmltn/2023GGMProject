@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public enum ItemPassiveType:int
 {
@@ -16,11 +15,12 @@ public enum ItemPassiveType:int
     OnOutDie,
     OnBattleDie,
     MouseUp,
+    Alway
 }
 
-public interface ItemInfo
+public class ItemInfo : MonoBehaviour
 {
-    public void Passive();
+    public virtual void Passive() { }
 }
 
 [System.Serializable]

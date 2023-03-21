@@ -26,7 +26,11 @@ public class BanditWarrior_StateMove : StateMove
         //{
         //}
         
-        rigid.velocity = angle * enemy.GetPower();
+        stateMachineClass.transform.GetChild(0).gameObject.SetActive(true);
+        float rangeAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
+        stateMachineClass.transform.GetChild(0).rotation = Quaternion.Euler(new Vector3(0, 0, rangeAngle));
+        stateMachineClass.StartCoroutine("MoveAr", angle * enemy.GetPower());
+        //rigid.velocity = angle * enemy.GetPower();
         
         TurnManager.Instance.UseTurn();
         stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
@@ -41,7 +45,6 @@ public class BanditWarrior_StateMove : StateMove
 
     public override void OnEnd()
     {
-
 
     }
 }

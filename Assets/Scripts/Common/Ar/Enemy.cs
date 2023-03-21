@@ -6,11 +6,6 @@ public class Enemy : Ar
 {
     protected override void StatReset()
     {
-        stat.MaxHP = 100;
-        stat.ATK = 10;
-        minDragPower = 0.2f;
-        maxDragPower = 1.5f;
-        pushPower = 15;
         isDead = false;
         base.StatReset();
         Debug.Log(stat.HP);
@@ -33,6 +28,8 @@ public class Enemy : Ar
         if (!collision.transform.CompareTag("Object"))
         {
             BattleManager.Instance.SettingAr(this);
+            CameraMove.Instance.Shake();
+            EffectManager.Instance.InstantiateEffect(0, collision.contacts[0].point, transform.position, collision.contacts[0].point);
         }
     }
 

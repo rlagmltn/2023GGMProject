@@ -13,6 +13,7 @@ public class BanditWarrior_ArFSM : ArFSM
     {
         fsmManager.AddStateList(new BanditWarrior_StateMove());
         fsmManager.AddStateList(new BanditWarrior_StatePassive());
+        fsmManager.AddStateList(new BanditWarrior_StateSkill());
     }
 
     private void Update()
