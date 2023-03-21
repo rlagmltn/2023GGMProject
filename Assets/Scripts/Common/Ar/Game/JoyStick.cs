@@ -59,6 +59,7 @@ public class JoyStick : MonoBehaviour
         var v = stick.position - transform.position;
         zAngle = Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
         PlayerController.Instance.Drag(zAngle);
+        CameraMove.Instance.MoveDrag(-v * 3);
     }
 
     public void OnDragEnd(BaseEventData data)
@@ -68,5 +69,6 @@ public class JoyStick : MonoBehaviour
         angle /= angle.magnitude;
         PlayerController.Instance.DragEnd(power, angle);
         stick.position = transform.position;
+        CameraMove.Instance.MoveDrag(Vector3.zero);
     }
 }
