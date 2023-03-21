@@ -3,20 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using TMPro;
 
 public class MainShop : MonoSingleton<MainShop>
 {
     [SerializeField] private List<Button> buttons;
     //[SerializeField] MainItemButton[] buttons;
     [SerializeField] int shopItemCount;
-    private Shop shop;
-    private ItemSO[] shopItems;
-    public ItemSO selectItem;
-    public int pageNum;
-
     [SerializeField] private Button leftButton;
     [SerializeField] private Button rightButton;
     [SerializeField] private Image ItemFrameImage;
+    [SerializeField] private TextMeshProUGUI aboutText;
+
+    [SerializeField] private List<Image> underImages;
+    [SerializeField] private Sprite redSprite;
+    [SerializeField] private Sprite commonSprite;
+
+    private Shop shop;
+    private ItemSO[] shopItems;
+    private int pageNum = 1;
+
 
     private void Awake()
     {
@@ -36,6 +42,7 @@ public class MainShop : MonoSingleton<MainShop>
         ButtonInit();
         PreviewPage();
         ItemFrameImage.color = new Color(1, 1, 1, 0);
+        aboutText.text = "";
     }
 
     void PageUpdate()
@@ -44,11 +51,6 @@ public class MainShop : MonoSingleton<MainShop>
         {
             buttons[(num % 3)].GetComponent<MainShopButton>().SetItemSO(shopItems[num]);
         }
-    }
-
-    public void GetItemSO(ItemSO item)
-    {
-        selectItem = item;
     }
 
     private void ButtonInit()
@@ -72,6 +74,8 @@ public class MainShop : MonoSingleton<MainShop>
         pageNum = Mathf.Clamp(pageNum, 1, 2);
         PageUpdate();
 
+        SetUnderImages();
+
         foreach (Button btn in buttons) btn.GetComponent<MainShopButton>().UpdateUI();
     }
 
@@ -81,7 +85,17 @@ public class MainShop : MonoSingleton<MainShop>
         pageNum = Mathf.Clamp(pageNum, 1, 2);
         PageUpdate();
 
+        SetUnderImages();
+
         foreach (Button btn in buttons) btn.GetComponent<MainShopButton>().UpdateUI();
+    }
+
+    private void SetUnderImages()
+    {
+        for (int i = 0; i < underImages.Count; i++)
+            underImages[i].sprite = commonSprite;
+
+        underImages[(pageNum - 1)].sprite = redSprite;
     }
 
     private void RemoveButtonEvents(Button button)
