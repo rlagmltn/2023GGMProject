@@ -24,4 +24,13 @@ public class Turn : MonoBehaviour
         turnImage.color = Color.gray;
         active = false;
     }
+
+    public void SetActiveTurnObj(bool value)
+    {
+        if (value)
+            EnableTurn();
+        else
+            DisableTurn();
+        gameObject.SetActive(value);
+    }
 }

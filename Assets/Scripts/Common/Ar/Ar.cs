@@ -74,7 +74,6 @@ public class Ar : MonoBehaviour
     {
         if (collision.CompareTag("Out"))
         {
-            OnOutDie.Invoke();
             Debug.Log("¿∏æ”¡Í±›");
             Out();
         }
@@ -110,6 +109,9 @@ public class Ar : MonoBehaviour
 
     protected void Out()
     {
+        OnOutDie.Invoke();
+        isDead = true;
+        GameManager.Instance.ArDead();
         gameObject.SetActive(false);
     }
 }

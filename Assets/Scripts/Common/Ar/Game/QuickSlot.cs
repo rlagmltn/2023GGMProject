@@ -31,7 +31,7 @@ public class QuickSlot : MonoBehaviour
 
     public void SellectPlayer()
     {
-        if (!TurnManager.Instance.IsPlayerTurn) return;
+        if (!TurnManager.Instance.IsPlayerTurn || Player.isDead) return;
         PlayerController.Instance.SellectPlayer(this);
     }
 
@@ -47,6 +47,6 @@ public class QuickSlot : MonoBehaviour
 
     public void SetSlotActive(bool value)
     {
-        unableImage.gameObject.SetActive(value);
+        unableImage.gameObject.SetActive(!value);
     }
 }

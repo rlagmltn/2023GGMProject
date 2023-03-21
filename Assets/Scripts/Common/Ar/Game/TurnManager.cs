@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 
 public class TurnManager : MonoSingleton<TurnManager>
 {
     [SerializeField] int playerTurn;
     [SerializeField] int enemyTurn;
     [SerializeField] Turn pf_Turn;
+    [SerializeField] TextMeshProUGUI turnText;
+
     private List<Turn> turns = new List<Turn>();
     private ArFSM[] enemys;
     private int turnCount = 0;
@@ -79,15 +82,17 @@ public class TurnManager : MonoSingleton<TurnManager>
 
     private IEnumerator PassTurn()
     {
-        yield return new WaitForSeconds(1.5f);
         isPlayerTurn = !isPlayerTurn;
-        if(isPlayerTurn)
+        yield return new WaitForSeconds(1.5f);
+        if (isPlayerTurn)
         {
             Debug.Log("플레이어 턴 시작");
+            turnText.SetText("Player Turn");
             ResetTurn();
         }
         else
         {
+            turnText.SetText("Enemy Trun");
             Debug.Log("적 턴 시작");
             StartCoroutine(ResetEnemyTurn());
             //여기에 적이 턴을 진행할 수 있도록 한다.
