@@ -67,9 +67,7 @@ public class Ar : MonoBehaviour
         {
             rigid.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal);
             CameraMove.Instance.Shake();
-            var angle = collision.contacts[0].point - (Vector2)transform.position;
-            float zAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
-            EffectManager.Instance.InstantiateEffect(0, collision.contacts[0].point, zAngle - 90);
+            EffectManager.Instance.InstantiateEffect(0, collision.contacts[0].point, transform.position, collision.contacts[0].point);
         }
     }
 

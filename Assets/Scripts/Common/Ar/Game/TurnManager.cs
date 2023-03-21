@@ -138,7 +138,7 @@ public class TurnManager : MonoSingleton<TurnManager>
             if (arFSM.gameObject.activeSelf)
             {
                 arFSM.StartTurn();
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(5f);
             }
             else
             {
