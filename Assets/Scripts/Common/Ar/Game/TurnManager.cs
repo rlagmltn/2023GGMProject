@@ -135,8 +135,15 @@ public class TurnManager : MonoSingleton<TurnManager>
 
         foreach (ArFSM arFSM in enemys)
         {
-            arFSM.StartTurn();
-            yield return new WaitForSeconds(5f);
+            if (arFSM.gameObject.activeSelf)
+            {
+                arFSM.StartTurn();
+                yield return new WaitForSeconds(3f);
+            }
+            else
+            {
+                UseTurn();
+            }
 
             //yield return new WaitUntil(() => arFSM.GetComponent<Rigidbody2D>().velocity.x + arFSM.GetComponent<Rigidbody2D>().velocity.y <= 0.1f);
         }

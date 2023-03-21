@@ -59,7 +59,7 @@ public class Player : Ar
     {
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
-        pushPower = 25;
+        pushPower = 20;
 
         foreach(ItemSO item in itemSlots)
         {
