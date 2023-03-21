@@ -12,7 +12,8 @@ public class ButtonAndPopUp
     //떠오를 팝압창
     public Transform popUp;
     //닫는 버튼
-    public Button quitButton;
+    //public Button quitButton;
+    public List<Button> Quitbuttons;
 }
 
 /// <summary>
@@ -37,7 +38,7 @@ public class PopUpManager : MonoBehaviour
     {
         ButtonInit(BAP);
         ButtonInit(BAP2);
-        BackGroundPanelActiveFalse();
+        FirstBackGroundPanelActiveFalse();
     }
     
     /// <summary>
@@ -50,13 +51,21 @@ public class PopUpManager : MonoBehaviour
             SetButtonPopUp(btn.button, btn.popUp);
 
             RemoveButtonEvnets(btn.button);
-            RemoveButtonEvnets(btn.quitButton);
+            
+            for(int num = 0; num < btn.Quitbuttons.Count; num++)
+            {
+                RemoveButtonEvnets(btn.Quitbuttons[num]);
+                AddButtonEvent(btn.Quitbuttons[num], btn.button.GetComponent<PopUpHolder>().PopDownUI);
+                AddButtonEvent(btn.Quitbuttons[num], BackGroundPanelActiveFalse);
+            }
+
+            //RemoveButtonEvnets(btn.quitButton);
 
             AddButtonEvent(btn.button, btn.button.GetComponent<PopUpHolder>().PopUpUI);
-            AddButtonEvent(btn.quitButton, btn.button.GetComponent<PopUpHolder>().PopDownUI);
+            //AddButtonEvent(btn.quitButton, btn.button.GetComponent<PopUpHolder>().PopDownUI);
 
             AddButtonEvent(btn.button, BackGroundPanelActiveTrue);
-            AddButtonEvent(btn.quitButton, BackGroundPanelActiveFalse);
+            //AddButtonEvent(btn.quitButton, BackGroundPanelActiveFalse);
         }
     }
 
@@ -75,6 +84,7 @@ public class PopUpManager : MonoBehaviour
     void ResetUIs()
     {
         HelpPannel.Instance.ResetPannelNum();
+        MainShop.Instance.ResetMainShop();
     }
 
     /// <summary>
@@ -98,6 +108,17 @@ public class PopUpManager : MonoBehaviour
         ReloadUIs();
     }
 
+    void FirstBackGroundPanelActiveFalse()
+    {
+        if (backgroundPanel2.gameObject.activeSelf)
+        {
+            BackGroundPanelActiveFalse2();
+            return;
+        }
+
+        backgroundPanel.gameObject.SetActive(false);
+    }
+
     /// <summary>
     /// 백그라운드 패널을 꺼주는 역할
     /// </summary>
@@ -109,6 +130,7 @@ public class PopUpManager : MonoBehaviour
             return;
         }
 
+        MainShop.Instance.selectSO = null;
         backgroundPanel.gameObject.SetActive(false);
         ResetUIs();
     }

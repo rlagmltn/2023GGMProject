@@ -6,7 +6,7 @@ using TMPro;
 
 public class MainShopButton : MonoBehaviour
 {
-    private ItemSO Item;
+    private MainShopItem m_Item;
     [SerializeField] private Image itemIcon;
     [SerializeField] private TextMeshProUGUI NameText;
     [SerializeField] private TextMeshProUGUI PriceText;
@@ -15,26 +15,32 @@ public class MainShopButton : MonoBehaviour
 
     public void UpdateAboutUI()
     {
-        aboutText.text = Item.itemExplain;
-        ItemFrameImage.sprite = Item.itemIcon;
+        aboutText.text = m_Item.Item.itemExplain;
+        ItemFrameImage.sprite = m_Item.Item.itemIcon;
         ItemFrameImage.color = new Color(1, 1, 1, 1);
+
+        MainShop.Instance.SetSelcetSO(m_Item);
     }
 
     public void UpdateUI()
     {
-        itemIcon.sprite = Item.itemIcon;
-        NameText.SetText(Item.itemName);
-        PriceText.SetText(Item.itemPrice.ToString());
+        itemIcon.sprite = m_Item.Item.itemIcon;
+        NameText.SetText(m_Item.Item.itemName);
+        PriceText.SetText(m_Item.Item.itemPrice.ToString());
+
+        var btn = this.gameObject.GetComponent<Button>();
+        btn.interactable = true;
+        if (m_Item.isBuy) btn.interactable = false;
     }
 
-    public void SetItemSO(ItemSO item)
+    public void SetItemSO(MainShopItem item)
     {
-        Item = item;
+        m_Item = item;
     }
 
-    public ItemSO GetItemSO()
+    public MainShopItem GetItemSO()
     {
-        return Item;
+        return m_Item;
     }
 
 }

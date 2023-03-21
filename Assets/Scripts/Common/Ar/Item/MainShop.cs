@@ -5,6 +5,14 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
 
+[System.Serializable]
+public class MainShopItem
+{
+    //아이템
+    public ItemSO Item;
+    //구매여부
+    public bool isBuy;
+}
 public class MainShop : MonoSingleton<MainShop>
 {
     [SerializeField] private List<Button> buttons;
@@ -19,27 +27,48 @@ public class MainShop : MonoSingleton<MainShop>
     [SerializeField] private Sprite redSprite;
     [SerializeField] private Sprite commonSprite;
 
+    [SerializeField] private Button purchaseButton;
+    [SerializeField] private TextMeshProUGUI purchaseText;
+
+    [SerializeField] private Button PurchaseOKButton;
+
     private Shop shop;
     private ItemSO[] shopItems;
+    public List<MainShopItem> Items;
     private int pageNum = 1;
 
+    public MainShopItem selectSO;
 
     private void Awake()
     {
         shop = GetComponent<Shop>();
         shopItems = new ItemSO[shopItemCount];
         shopItems = shop.GetRandomItems(shopItemCount);
+
+        foreach (ItemSO Item in shopItems)
+        {
+            MainShopItem s_Item = new MainShopItem();
+            s_Item.Item = Item;
+            s_Item.isBuy = false;
+            Items.Add(s_Item);
+        }
     }
 
     void Start()
     {
-        Init();
+        ButtonInit();
+        //Init();
     }
 
     public void Init()
     {
-        PageUpdate();
-        ButtonInit();
+        PreviewPage();
+        SelectSONullCheck();
+        ResetMainShop();
+    }
+
+    public void ResetMainShop()
+    {
         PreviewPage();
         ItemFrameImage.color = new Color(1, 1, 1, 0);
         aboutText.text = "";
@@ -49,7 +78,9 @@ public class MainShop : MonoSingleton<MainShop>
     {
         for (int num = buttons.Count * (pageNum - 1); num < buttons.Count * pageNum; num++)
         {
-            buttons[(num % 3)].GetComponent<MainShopButton>().SetItemSO(shopItems[num]);
+            buttons[(num % 3)].GetComponent<MainShopButton>().SetItemSO(Items[num]);
+            buttons[(num % 3)].interactable = true;
+            if (Items[num].isBuy) buttons[(num % 3)].interactable = false;
         }
     }
 
@@ -66,6 +97,7 @@ public class MainShop : MonoSingleton<MainShop>
 
         AddButtonEvents(leftButton, PreviewPage);
         AddButtonEvents(rightButton, NextPage);
+        AddButtonEvents(PurchaseOKButton, BuyItem);
     }
 
     private void NextPage()
@@ -83,8 +115,8 @@ public class MainShop : MonoSingleton<MainShop>
     {
         pageNum--;
         pageNum = Mathf.Clamp(pageNum, 1, 2);
-        PageUpdate();
 
+        PageUpdate();
         SetUnderImages();
 
         foreach (Button btn in buttons) btn.GetComponent<MainShopButton>().UpdateUI();
@@ -96,6 +128,33 @@ public class MainShop : MonoSingleton<MainShop>
             underImages[i].sprite = commonSprite;
 
         underImages[(pageNum - 1)].sprite = redSprite;
+    }
+
+    public void SetSelcetSO(MainShopItem item)
+    {
+        selectSO = item;
+        PurchaseButtonClick();
+        SelectSONullCheck();
+    }
+
+    private void SelectSONullCheck()
+    {
+        purchaseButton.interactable = true;
+        if (selectSO == null) purchaseButton.interactable = false;
+    }
+
+    private void PurchaseButtonClick()
+    {
+        purchaseText.text = $"\"{selectSO.Item.name}\" 아이템을 구매하시겠습니까?";
+    }
+
+    private void BuyItem()
+    {
+        //골드가 있는지 조건 체크
+
+        selectSO.isBuy = true;
+        selectSO = null;
+        foreach (Button btn in buttons) btn.GetComponent<MainShopButton>().UpdateUI();
     }
 
     private void RemoveButtonEvents(Button button)
