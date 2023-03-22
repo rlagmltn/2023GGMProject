@@ -15,7 +15,7 @@ public class Warrior : Player
     protected override void StatReset()
     {
         stat.MaxHP = 20;
-        stat.MaxDEF = 4;
+        stat.MaxDP = 4;
         stat.ATK = 4;
         stat.SATK = 6;
         isRangeCharacter = false;

@@ -15,9 +15,9 @@ public class Archer : Player
     protected override void StatReset()
     {
         stat.MaxHP = 16;
-        stat.MaxDEF = 0;
-        stat.ATK = 7;
-        stat.SATK = 8;
+        stat.MaxDP = 0;
+        stat.ATK = 6;
+        stat.SATK = 7;
         isRangeCharacter = true;
         skillCooltime = 5;
         currentCooltime = 0;
@@ -47,7 +47,6 @@ public class Archer : Player
     void Shoot(Vector2 angle)
     {
         float zAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
-        Debug.Log("½µ");
         var bullet = Instantiate(arrow, transform.position, Quaternion.Euler(0, 0, zAngle-180));
         CameraMove.Instance.MovetoTarget(bullet.transform);
     }

@@ -6,7 +6,7 @@ public class CrushBooster : ItemInfo
 {
     public override void Passive()
     {
-        Debug.Log("Èå¿¡!");
-        player.Push(((player.rigid.velocity.normalized * player.Power) * player.PushPower));
+        if(player.isMove)
+            player.Push(((player.rigid.velocity.normalized * player.Power) * player.PushPower));
     }
 }

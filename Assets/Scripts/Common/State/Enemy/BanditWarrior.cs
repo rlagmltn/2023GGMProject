@@ -7,7 +7,7 @@ public class BanditWarrior : Enemy
     protected override void StatReset()
     {
         stat.MaxHP = 14;
-        stat.MaxDEF = 2;
+        stat.MaxDP = 2;
         stat.ATK = 4;
         minDragPower = 0.2f;
         maxDragPower = 1.5f;

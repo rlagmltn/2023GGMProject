@@ -8,7 +8,6 @@ public class Enemy : Ar
     {
         isDead = false;
         base.StatReset();
-        Debug.Log(stat.HP);
     }
 
     public float GetPower()

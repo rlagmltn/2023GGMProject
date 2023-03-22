@@ -18,6 +18,9 @@ public class Ar : MonoBehaviour
     protected Transform hpBar;
     protected SpriteRenderer hpImage;
 
+    protected Transform dpBar;
+    protected SpriteRenderer dpImage;
+
     public Rigidbody2D rigid { get; protected set; }
     public Vector2 lastVelocity { get; protected set; }
 
@@ -37,15 +40,17 @@ public class Ar : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         hpBar = transform.GetChild(1).GetChild(0);
         hpImage = hpBar.GetComponentInChildren<SpriteRenderer>();
+        dpBar = transform.GetChild(2).GetChild(0);
+        dpImage = dpBar.GetComponentInChildren<SpriteRenderer>();
     }
 
     protected virtual void StatReset() // ¼öÄ¡ ÃÊ±âÈ­
     {
         stat.HP = stat.MaxHP;
-        stat.DEF = stat.MaxDEF;
+        stat.DP = stat.MaxDP;
         isDead = false;
         stat.WEIGHT = 1;
-        //hpBar.localScale = new Vector3(Mathf.Clamp(HP / MaxHP, 0, 1), 1, 1);
+        DeadCheck();
     }
 
     protected void FixedUpdate()
@@ -81,7 +86,6 @@ public class Ar : MonoBehaviour
     {
         if (collision.CompareTag("Out"))
         {
-            Debug.Log("À¸¾ÓÁê±Ý");
             Out();
         }
     }
@@ -93,14 +97,15 @@ public class Ar : MonoBehaviour
 
     public bool Hit(int damage)
     {
-        if(damage>0)
+        if(damage>0 && stat.DP>0)
         {
-            stat.DEF -= damage;
-            if (stat.DEF < 0)
+            stat.DP -= damage;
+            if (stat.DP < 0)
             {
-                damage = -stat.DEF;
-                stat.DEF = 0;
+                damage = -stat.DP;
+                stat.DP = 0;
             }
+            else damage = 0;
         }
         stat.HP = Mathf.Clamp(stat.HP - damage, 0, stat.MaxHP);
         return DeadCheck();
@@ -119,6 +124,7 @@ public class Ar : MonoBehaviour
             gameObject.SetActive(false);
             return true;
         }
+        if (stat.MaxDP != 0) dpBar.localScale = new Vector3(Mathf.Clamp((float)stat.DP / stat.MaxDP, 0, 1), 1, 1); else dpBar.localScale = new Vector3(0, 1, 1);
         hpBar.localScale = new Vector3(Mathf.Clamp((float)stat.HP / stat.MaxHP, 0, 1), 1, 1);
         return false;
     }

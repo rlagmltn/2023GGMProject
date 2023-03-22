@@ -72,7 +72,6 @@ public class BattleManager : MonoSingleton<BattleManager>
         attacker.BeforeAttack.Invoke();
         defender.BeforeDefence.Invoke();
 
-        Debug.Log(attacker.stat.ATK);
         var isdead = defender.Hit(attacker.stat.ATK);
 
         attacker.AfterAttack.Invoke();
@@ -83,7 +82,6 @@ public class BattleManager : MonoSingleton<BattleManager>
             Vector2 a, b;
             (a, b) = D2c(attacker.lastVelocity, defender.lastVelocity, attacker.rigid.position, defender.rigid.position);
 
-            Debug.Log(a);
             attacker.Push(a);
             defender.Push(b);
 
