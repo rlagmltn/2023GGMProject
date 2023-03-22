@@ -34,12 +34,13 @@ public class ItemInfo : MonoBehaviour
 [System.Serializable]
 public class Stat
 {
-    public float MaxHP; // 최대체력
-    public float HP; // 현재 체력
-    public float ATK; // 기본 공격력
-    public float SATK; // 스킬공격력
-    public float DEF; // 방어력
-    public float WEIGHT; // 무게
+    public int MaxHP; // 최대체력
+    public int HP; // 현재 체력
+    public int MaxDEF; // 방어력
+    public int DEF; // 방어력
+    public int ATK; // 기본 공격력
+    public int SATK; // 스킬공격력
+    public int WEIGHT; // 무게
 
     public Stat()
     {

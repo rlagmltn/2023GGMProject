@@ -12,10 +12,10 @@ public class Priest : Player
 
     protected override void StatReset()
     {
-        stat.MaxHP = 100;
-        stat.ATK = 10;
-        stat.SATK = -20;
-        pushPower = 15;
+        stat.MaxHP = 18;
+        stat.MaxDEF = 0;
+        stat.ATK = 5;
+        stat.SATK = -6;
         isRangeCharacter = false;
         skillCooltime = 7;
         currentCooltime = 0;

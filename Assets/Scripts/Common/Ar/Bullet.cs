@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
 
     private SpriteRenderer spriteSize;
     private CircleCollider2D collide;
-    public float damage { get; set; }
+    public int damage { get; set; }
 
     private void OnEnable()
     {

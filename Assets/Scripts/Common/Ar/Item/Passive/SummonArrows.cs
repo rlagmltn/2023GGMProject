@@ -7,7 +7,6 @@ public class SummonArrows : ItemInfo
     [SerializeField] Bullet bullet;
     public override void Passive()
     {
-        Debug.Log("Èå¿¡¿¢!");
         for(int i=0; i<12; i++)
         {
             Shoot(i*30);

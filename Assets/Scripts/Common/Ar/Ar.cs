@@ -42,6 +42,7 @@ public class Ar : MonoBehaviour
     protected virtual void StatReset() // 수치 초기화
     {
         stat.HP = stat.MaxHP;
+        stat.DEF = stat.MaxDEF;
         isDead = false;
         stat.WEIGHT = 1;
         //hpBar.localScale = new Vector3(Mathf.Clamp(HP / MaxHP, 0, 1), 1, 1);
@@ -90,10 +91,18 @@ public class Ar : MonoBehaviour
         rigid.velocity = velo;
     }
 
-    public bool Hit(float damage)
+    public bool Hit(int damage)
     {
+        if(damage>0)
+        {
+            stat.DEF -= damage;
+            if (stat.DEF < 0)
+            {
+                damage = -stat.DEF;
+                stat.DEF = 0;
+            }
+        }
         stat.HP = Mathf.Clamp(stat.HP - damage, 0, stat.MaxHP);
-        Debug.Log(name + stat.HP);
         return DeadCheck();
     }
 
@@ -105,11 +114,12 @@ public class Ar : MonoBehaviour
             OnBattleDie.Invoke();
             //Pooling();
             isDead = true;
+            TurnManager.Instance.SomeoneIsMoving = false;
             GameManager.Instance.ArDead();
             gameObject.SetActive(false);
             return true;
         }
-        hpBar.localScale = new Vector3(Mathf.Clamp(stat.HP / stat.MaxHP, 0, 1), 1, 1);
+        hpBar.localScale = new Vector3(Mathf.Clamp((float)stat.HP / stat.MaxHP, 0, 1), 1, 1);
         return false;
     }
 
@@ -117,6 +127,7 @@ public class Ar : MonoBehaviour
     {
         OnOutDie.Invoke();
         isDead = true;
+        TurnManager.Instance.SomeoneIsMoving = false;
         GameManager.Instance.ArDead();
         gameObject.SetActive(false);
     }
