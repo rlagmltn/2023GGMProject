@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7868663312960282065}
-  - component: {fileID: 7015167528191210342}
+  - component: {fileID: 3660047272204240232}
   m_Layer: 0
-  m_Name: ItemSkill1
+  m_Name: CrushBooster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7015167528191210342
+--- !u!114 &3660047272204240232
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,6 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3719448114555635243}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b347b6a00943adc4aa8490019617bb4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 22ab5a43176500146a910c349c6e94c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}

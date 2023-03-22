@@ -20,7 +20,15 @@ public enum ItemPassiveType:int
 
 public class ItemInfo : MonoBehaviour
 {
+    [System.NonSerialized]
+    public Player player;
+
     public virtual void Passive() { }
+
+    public void GetPlayer(Player player = null)
+    {
+        this.player = player;
+    }
 }
 
 [System.Serializable]
