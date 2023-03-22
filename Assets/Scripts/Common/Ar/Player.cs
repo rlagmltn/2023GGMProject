@@ -157,12 +157,11 @@ public class Player : Ar
         };
 
         action();
-
-        MouseUp?.Invoke(); // 발사 직후 발동하는 트리거
     }
 
     private void Move(Vector2 angle)
     {
+        MouseUp?.Invoke();
         TurnManager.Instance.SomeoneIsMoving = true;
         rigid.velocity = ((angle.normalized * power) * pushPower);
     }
