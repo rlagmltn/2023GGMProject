@@ -51,7 +51,7 @@ public class GameAwake : MonoBehaviour
         LoadSpritesDic();
 
         // 씬매니져를 생성
-        MGScene.Instance.Generate();
+        //MGScene.Instance.Generate();
     }
 
     void LoadPrefabDic()

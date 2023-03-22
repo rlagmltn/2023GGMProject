@@ -45,6 +45,7 @@ public enum ePrefabs
     UIRootInGame,
     UIRootSon,
     ShopItemUI,
+    UIs,
 
     Object = 4000,
     EmptyObj,
@@ -55,6 +56,8 @@ public enum ePrefabs
     Map,
     Enemy,
     RedHitBox,
+    BanditWarrior,
+    ItemSlot,
 }
 
 public enum eSceneName

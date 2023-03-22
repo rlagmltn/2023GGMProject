@@ -91,7 +91,7 @@ public class UIRootLoading : MonoBehaviour
     IEnumerator DoneState()
     {
         // 모든 로딩이 완료 되었다면 LoadingDone을 호출해준다
-        MGScene.Instance.LoadingDone();
+        //MGScene.Instance.LoadingDone();
 
         while (loadingState == eLoadingStatus.Done)
         {

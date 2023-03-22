@@ -84,7 +84,6 @@ public class PopUpManager : MonoBehaviour
     void ResetUIs()
     {
         HelpPannel.Instance.ResetPannelNum();
-        MainShop.Instance.ResetMainShop();
     }
 
     /// <summary>

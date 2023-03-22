@@ -4,115 +4,71 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
 {
-    [SerializeField] private Button selectButton;
     [SerializeField] private List<Button> buttons;
-    [SerializeField] private List<TextMeshProUGUI> texts;
-    [SerializeField] private List<Image> images;
-    public ArSO emptyAr;
-    [SerializeField] private Button startButton;
-    [SerializeField] private Transform warningPanel;
-    [SerializeField] private Button quitButton;
+    [SerializeField] private ArSOList ArList;
+    [SerializeField] private ArSO emptyAr;
+    [SerializeField] private int CanSelectNum;
 
-    public ArSO[] Ars;
+    private List<ArSO> sortedArSO;
+    private ArSO[] selectedArs;
 
     private void Start()
     {
-        Ars = new ArSO[3];
         Init();
-        AddButtonEvent(selectButton, InputAr);
-        AddButtonEvent(startButton, StartButtonClick);
-        AddButtonEvent(quitButton, QuitButtonClick);
     }
 
-    /// <summary>
-    /// 시작할때 초기화
-    /// </summary>
     void Init()
     {
-        for (int i = 0; i < Ars.Length; i++)
-        {
-            Ars[i] = emptyAr;
-        }
-        UpdateUI();
+        ClassfyArSO();
+        ButtonInit();
+        SelectedSOInit();
+    }
 
-        ImageHolder img;
+    /// <summary>
+    /// 있는 알과 없는 알을 분류하는 작업
+    /// </summary>
+    void ClassfyArSO()
+    {
+        sortedArSO = new List<ArSO>();
 
-        for (int i = 0; i < buttons.Count; i++)
+        for (int num = 0; num < ArList.list.Count; num++)
+            if(ArList.list[num].isTake) sortedArSO.Add(ArList.list[num]);
+
+        for (int num = 0; num < ArList.list.Count; num++)
+            if (!ArList.list[num].isTake) sortedArSO.Add(ArList.list[num]);
+    }
+
+    /// <summary>
+    /// 버튼들을 처음 초기화 해주는 함수
+    /// </summary>
+    void ButtonInit()
+    {
+        for (int num = 0; num < buttons.Count; num++)
         {
-            img = buttons[i].gameObject.GetComponent<ImageHolder>();
-            img.num = i;
-            AddButtonEvent(buttons[i], img.ClickButtonInGame);
+            buttons[num].GetComponent<ArSOHolder>().SetArSO(sortedArSO[num]);
+            RemoveAllButtonEvents(buttons[num]);
+            AddButtonEvent(buttons[num], buttons[num].GetComponent<ArSOHolder>().SelectedButton);
         }
     }
 
     /// <summary>
-    /// select 버튼 눌렀을때 입력하기
+    /// 선택된 SO들을 초기화해주는 함수
     /// </summary>
-    public void InputAr()
+    void SelectedSOInit()
     {
-        for(int i = 0; i < Ars.Length; i++)
-        {
-            if(Ars[i] == emptyAr)
-            {
-                Ars[i] = InventoryUI.Instance.Ar;
-                InventoryUI.Instance.Ar.isUse = true;
-                InventoryUI.Instance.Ar = emptyAr;
-                InventoryUI.Instance.UpdateUI();
-                ArInventorySorting.Instance.SortInventory();
-                UpdateUI();
-                return;
-            }
-        }
+        selectedArs = new ArSO[CanSelectNum];
+
+        for (int num = 0; num < selectedArs.Length; num++)
+            selectedArs[num] = emptyAr;
     }
 
-    /// <summary>
-    /// UI의 상태를 업데이트 해줌
-    /// </summary>
-    public void UpdateUI()
+    void RemoveAllButtonEvents(Button button)
     {
-        for (int i = 0; i < Ars.Length; i++)
-        {
-            images[i].sprite = Ars[i].Image;
-            texts[i].text = Ars[i].Name;
-        }
-    }
-
-    public void unInputAr(int num)
-    {
-        images[num].sprite = null;
-        texts[num].text = "";
-        Ars[num].isUse = false;
-        Ars[num] = emptyAr;
-        UpdateUI();
-        ArInventorySorting.Instance.SortInventory();
-    }
-
-    void StartButtonClick()
-    {
-        if(CanStart())
-            MGScene.Instance.ChangeScene(eSceneName.Son);
-        else
-            warningPanel.gameObject.SetActive(true);
-    }
-
-    bool CanStart()
-    {
-        foreach(ArSO ar in Ars)
-        {
-            if (ar == emptyAr)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    void QuitButtonClick()
-    {
-        warningPanel.gameObject.SetActive(false);
+        button.onClick.RemoveAllListeners();
     }
 
     /// <summary>
@@ -122,5 +78,48 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
     {
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(action);
+    }
+
+    /// <summary>
+    /// 선택 할 수 있는 상태인지 리턴해주는 함수
+    /// </summary>
+    /// <returns></returns>
+    public bool IsCanSelect()
+    {
+        for(int num = 0; num < selectedArs.Length; num++)
+            if(selectedArs[num] == emptyAr) return true;
+        return false;
+    }
+
+    /// <summary>
+    /// EmptySO인 것에 Select시켜주는 함수
+    /// </summary>
+    /// <param name="ar"></param>
+    public void SelectArSO(ArSO ar)
+    {
+        for (int num = 0; num < selectedArs.Length; num++)
+        {
+            if (selectedArs[num] == emptyAr)
+            {
+                selectedArs[num] = ar;
+                break;
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Select된 SO를 EmptySO로 바꿔주는 함수
+    /// </summary>
+    /// <param name="ar"></param>
+    public void UnselectArSO(ArSO ar)
+    {
+        for (int num = 0; num < selectedArs.Length; num++)
+        {
+            if (selectedArs[num] == ar)
+            {
+                selectedArs[num] = emptyAr;
+                break;
+            }
+        }
     }
 }

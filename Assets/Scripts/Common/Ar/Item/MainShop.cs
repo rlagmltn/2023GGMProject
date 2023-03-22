@@ -63,8 +63,8 @@ public class MainShop : MonoSingleton<MainShop>
     public void Init()
     {
         PreviewPage();
-        SelectSONullCheck();
         ResetMainShop();
+        SelectSONullCheck();
     }
 
     public void ResetMainShop()
@@ -140,7 +140,11 @@ public class MainShop : MonoSingleton<MainShop>
     private void SelectSONullCheck()
     {
         purchaseButton.interactable = true;
-        if (selectSO == null) purchaseButton.interactable = false;
+        if (selectSO.Item == null)
+        {
+            purchaseButton.interactable = false;
+            Debug.Log("버튼 비활성화");
+        }
     }
 
     private void PurchaseButtonClick()

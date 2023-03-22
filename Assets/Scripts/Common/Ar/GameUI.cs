@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class GameUI : MonoBehaviour
 {
@@ -23,7 +24,9 @@ public class GameUI : MonoBehaviour
 
     void ChangeScene()
     {
-        MGScene.Instance.ChangeScene(eSceneName.Select);
+        //MGScene.Instance.ChangeScene(eSceneName.Select);
+        SceneManager.LoadScene("SelectScene");
+        Debug.Log("Change Scene to SelectScene");
     }
 
     void AddButtonEvent(Button button, UnityAction action)
