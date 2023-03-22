@@ -6,7 +6,7 @@ public class BattleManager : MonoSingleton<BattleManager>
 {
     private Ar arOne, arTwo;
     private Ar arAtk;
-    private float damage;
+    private int damage;
 
     public void SettingAr(Ar ar)
     {
@@ -40,7 +40,7 @@ public class BattleManager : MonoSingleton<BattleManager>
         else ResetAll();
     }
 
-    public void SettingAr(Ar ar, float damage)
+    public void SettingAr(Ar ar, int damage)
     {
         arOne = ar;
         this.damage = damage;

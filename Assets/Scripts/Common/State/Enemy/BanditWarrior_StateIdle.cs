@@ -45,6 +45,7 @@ public class BanditWarrior_StateIdle : StateIdle
             {
                 passiveCool = 0;
                 skillCool = Mathf.Min(6, skillCool + 1);
+                //¹æ±ï..
             }
             else
             {

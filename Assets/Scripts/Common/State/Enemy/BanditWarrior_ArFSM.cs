@@ -23,7 +23,9 @@ public class BanditWarrior_ArFSM : ArFSM
 
     private IEnumerator Move()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
+        transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
         fsmManager.ChangeState<BanditWarrior_StateMove>();
         StopCoroutine("Move");
     }

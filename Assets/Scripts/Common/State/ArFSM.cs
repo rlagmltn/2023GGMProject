@@ -69,9 +69,9 @@ public class ArFSM : MonoBehaviour
 
     public virtual IEnumerator MoveAr(Vector2 vel)
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         GetComponent<Rigidbody2D>().velocity = vel;
-        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
         StopCoroutine("MoveAr");
     }
 }

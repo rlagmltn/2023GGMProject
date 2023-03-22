@@ -14,11 +14,13 @@ public class Archer : Player
 
     protected override void StatReset()
     {
-        stat.MaxHP = 100;
-        stat.ATK = 50;
-        pushPower = 15;
-        isMove = false;
+        stat.MaxHP = 16;
+        stat.MaxDEF = 0;
+        stat.ATK = 7;
+        stat.SATK = 8;
         isRangeCharacter = true;
+        skillCooltime = 5;
+        currentCooltime = 0;
         base.StatReset();
     }
 
@@ -34,7 +36,12 @@ public class Archer : Player
     protected override void Skill(Vector2 angle)
     {
         base.Skill(angle);
+        StartCoroutine(ArcherSkill(angle));
+    }
+    IEnumerator ArcherSkill(Vector2 angle)
+    {
         Shoot(angle);
+        yield return new WaitForSeconds(0.2f);
         Shoot(angle);
     }
     void Shoot(Vector2 angle)
