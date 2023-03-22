@@ -16,6 +16,7 @@ public class TurnManager : MonoSingleton<TurnManager>
     private int turnCount = 0;
     private bool isPlayerTurn = true;
     public bool IsPlayerTurn { get { return isPlayerTurn; } }
+    public bool SomeoneIsMoving { get; set; }
 
     private void Start()
     {
@@ -135,6 +136,10 @@ public class TurnManager : MonoSingleton<TurnManager>
 
         foreach (ArFSM arFSM in enemys)
         {
+            while(SomeoneIsMoving)
+            {
+                yield return new WaitForSeconds(1f);
+            }
             if (arFSM.gameObject.activeSelf)
             {
                 arFSM.StartTurn();

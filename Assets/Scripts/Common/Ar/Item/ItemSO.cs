@@ -61,6 +61,7 @@ public class ItemSO : ScriptableObject
                 break;
         }
         armedPlayer = player;
+        info.GetPlayer(armedPlayer);
     }
 
     public void UnArmed()
@@ -107,5 +108,6 @@ public class ItemSO : ScriptableObject
                 break;
         }
         armedPlayer = null;
+        info.GetPlayer();
     }
 }

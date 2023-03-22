@@ -19,6 +19,9 @@ public class Player : Ar
     protected float power;
     protected int skillCooltime;
 
+    public float Power { get { return power; } }
+    public float PushPower { get { return pushPower; } }
+
     private QuickSlot slot;
 
     private Transform rangeContainer;
@@ -59,7 +62,7 @@ public class Player : Ar
     {
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
-        pushPower = 20;
+        pushPower = 22;
 
         foreach(ItemSO item in itemSlots)
         {
@@ -160,7 +163,8 @@ public class Player : Ar
 
     private void Move(Vector2 angle)
     {
-        rigid.velocity = ((angle * power) * pushPower);
+        TurnManager.Instance.SomeoneIsMoving = true;
+        rigid.velocity = ((angle.normalized * power) * pushPower);
     }
 
     protected virtual void Attack(Vector2 angle)
@@ -193,7 +197,7 @@ public class Player : Ar
 
     private void OnMouseDown()
     {
-        if (!TurnManager.Instance.IsPlayerTurn || isDead) return;
+        if (!TurnManager.Instance.IsPlayerTurn || isDead || TurnManager.Instance.SomeoneIsMoving) return;
         PlayerController.Instance.SellectPlayer(slot);
     }
 

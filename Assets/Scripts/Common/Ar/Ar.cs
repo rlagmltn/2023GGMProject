@@ -54,9 +54,10 @@ public class Ar : MonoBehaviour
 
     protected void Update()
     {
-        if (rigid.velocity.magnitude <= 0.5f && isMove)
+        if (rigid.velocity.magnitude <= 0.1f && isMove)
         {
             isMove = false;
+            TurnManager.Instance.SomeoneIsMoving = false;
             AfterMove?.Invoke();
         }
     }
@@ -65,9 +66,13 @@ public class Ar : MonoBehaviour
     {
         if (collision.transform.CompareTag("Object"))
         {
+            BeforeCrash?.Invoke();
+
             rigid.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal);
             CameraMove.Instance.Shake();
             EffectManager.Instance.InstantiateEffect(0, collision.contacts[0].point, transform.position, collision.contacts[0].point);
+
+            AfterCrash?.Invoke();
         }
     }
 
