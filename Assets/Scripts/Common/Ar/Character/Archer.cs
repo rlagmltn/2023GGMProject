@@ -34,7 +34,12 @@ public class Archer : Player
     protected override void Skill(Vector2 angle)
     {
         base.Skill(angle);
+        StartCoroutine(ArcherSkill(angle));
+    }
+    IEnumerator ArcherSkill(Vector2 angle)
+    {
         Shoot(angle);
+        yield return new WaitForSeconds(0.2f);
         Shoot(angle);
     }
     void Shoot(Vector2 angle)
