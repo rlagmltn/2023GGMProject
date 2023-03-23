@@ -79,7 +79,7 @@ public class BattleManager : MonoSingleton<BattleManager>
                 defender = arOne;
             }
         }
-        else
+        else if(!TurnManager.Instance.IsPlayerTurn)
         {
             if(arOne.CompareTag("Enemy"))
             {

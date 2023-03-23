@@ -92,8 +92,8 @@ public class TurnManager : MonoSingleton<TurnManager>
 
     private IEnumerator PassTurn()
     {
-        isPlayerTurn = !isPlayerTurn;
         yield return new WaitForSeconds(3f);
+        isPlayerTurn = !isPlayerTurn;
         ActiveAllTurn();
         if (isPlayerTurn)
         {
