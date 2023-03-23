@@ -40,8 +40,8 @@ public class MiniAr : MonoBehaviour
     public void ShowRange(GameObject obj)
     {
         range.gameObject.SetActive(true);
-        range.sizeDelta = obj.transform.localScale * 30;
-        range.transform.localPosition = obj.transform.localPosition * 30;
+        range.sizeDelta = obj.transform.localScale * 20;
+        range.transform.localPosition = obj.transform.localPosition * 20;
         activeRange = obj.transform;
     }
 

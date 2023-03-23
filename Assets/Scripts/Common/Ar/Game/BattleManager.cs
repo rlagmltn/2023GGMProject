@@ -56,17 +56,41 @@ public class BattleManager : MonoSingleton<BattleManager>
 
         Ar attacker = null;
         Ar defender = null;
-        if(arOne.lastVelocity.magnitude>arTwo.lastVelocity.magnitude)
+        if(arOne.isMove)
         {
             attacker = arOne;
             defender = arTwo;
-            Debug.Log("Attacker = " + arOne.name + arOne.stat.ATK);
         }
-        else
+        else if(arTwo.isMove)
         {
             attacker = arTwo;
             defender = arOne;
-            Debug.Log("Attacker = " + arTwo.name + arTwo.stat.ATK);
+        }
+        else if(TurnManager.Instance.IsPlayerTurn)
+        {
+            if(arOne.CompareTag("Player"))
+            {
+                attacker = arOne;
+                defender = arTwo;
+            }
+            else
+            {
+                attacker = arTwo;
+                defender = arOne;
+            }
+        }
+        else
+        {
+            if(arOne.CompareTag("Enemy"))
+            {
+                attacker = arOne;
+                defender = arTwo;
+            }
+            else
+            {
+                attacker = arTwo;
+                defender = arOne;
+            }
         }
 
         attacker.BeforeAttack.Invoke();
@@ -80,7 +104,7 @@ public class BattleManager : MonoSingleton<BattleManager>
             defender.AfterDefence.Invoke();
 
             Vector2 a, b;
-            (a, b) = D2c(attacker.lastVelocity, defender.lastVelocity, attacker.rigid.position, defender.rigid.position);
+            (a, b) = D2c(attacker.lastVelocity, defender.lastVelocity, attacker.rigid.position, defender.rigid.position, attacker.stat.WEIGHT, defender.stat.WEIGHT);
 
             attacker.Push(a);
             defender.Push(b);
@@ -108,7 +132,7 @@ public class BattleManager : MonoSingleton<BattleManager>
         }
 
         Vector2 a, b;
-        (a, b) = D2c(arOne.lastVelocity, arTwo.lastVelocity, arOne.rigid.position, arTwo.rigid.position);
+        (a, b) = D2c(arOne.lastVelocity, arTwo.lastVelocity, arOne.rigid.position, arTwo.rigid.position, arOne.stat.WEIGHT, arTwo.stat.WEIGHT);
         arOne.Push(a);
         arTwo.Push(b);
 
@@ -148,7 +172,7 @@ public class BattleManager : MonoSingleton<BattleManager>
         damage = 0;
     }
 
-    private (Vector2, Vector2) D2c(Vector2 v1, Vector2 v2, Vector2 c1, Vector2 c2, float e = 1)
+    private (Vector2, Vector2) D2c(Vector2 v1, Vector2 v2, Vector2 c1, Vector2 c2, float w1, float w2,float e = 1)
     {
         Vector2 basisX = (c2 - c1).normalized;
         Vector2 basisY = Vector2.Perpendicular(basisX);
@@ -194,8 +218,8 @@ public class BattleManager : MonoSingleton<BattleManager>
         }
 
         Vector2 u1, u2;
-        u1 = ((1-e)*v1.magnitude*cos1+(1+e)*v2.magnitude*cos2)/ 2 * basisX - v1.magnitude * sin1 * basisY;
-        u2 = ((1+e)*v1.magnitude*cos1+(1-e)*v2.magnitude*cos2)/ 2 * basisX - v2.magnitude * sin2 * basisY;
+        u1 = ((w1-e)*v1.magnitude*cos1+(1+e)*v2.magnitude*cos2)/ 2 * basisX - v1.magnitude * sin1 * basisY;
+        u2 = ((w2+e)*v1.magnitude*cos1+(1-e)*v2.magnitude*cos2)/ 2 * basisX - v2.magnitude * sin2 * basisY;
 
         return (u1, u2);
     }
