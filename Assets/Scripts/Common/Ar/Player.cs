@@ -28,6 +28,7 @@ public class Player : Ar
     private GameObject moveRange;
     private GameObject attackRange;
     private GameObject skillRange;
+    private GameObject skillActived;
 
     [SerializeField] ItemSO[] itemSlots = new ItemSO[3];
 
@@ -51,6 +52,7 @@ public class Player : Ar
         moveRange = rangeContainer.GetChild(0).gameObject;
         attackRange = rangeContainer.GetChild(1).gameObject;
         skillRange = rangeContainer.GetChild(2).gameObject;
+        skillActived = transform.GetChild(3).gameObject;
         DisableRanges();
 
         MouseUp.AddListener(() => { isMove = true; });
@@ -173,6 +175,7 @@ public class Player : Ar
     protected virtual void Skill(Vector2 angle)
     {
         currentCooltime = skillCooltime;
+        skillActived.SetActive(false);
         CameraMove.Instance.Shake();
     }
 
@@ -211,6 +214,8 @@ public class Player : Ar
     {
         if (currentCooltime > 0)
             currentCooltime--;
+        if (currentCooltime == 0)
+            skillActived.SetActive(true);
     }
 
     public IEnumerator DisableRanges_T()
