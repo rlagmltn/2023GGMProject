@@ -12,6 +12,7 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
     [SerializeField] private ArSOList ArList;
     [SerializeField] private ArSO emptyAr;
     [SerializeField] private int CanSelectNum;
+    [SerializeField] private Button StartButton;
 
     private List<ArSO> sortedArSO;
     private ArSO[] selectedArs;
@@ -53,6 +54,19 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
             RemoveAllButtonEvents(buttons[num]);
             AddButtonEvent(buttons[num], buttons[num].GetComponent<ArSOHolder>().SelectedButton);
         }
+        RemoveAllButtonEvents(StartButton);
+        AddButtonEvent(StartButton, CanStartCheck);
+    }
+
+    void CanStartCheck()
+    {
+        if(IsCanSelect())
+        {
+            Debug.Log("3개의 알을 선택해");
+            return;
+        }
+        Debug.Log("게임 스타트");
+        SceneManager.LoadScene("MapScene");
     }
 
     /// <summary>
@@ -66,6 +80,10 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
             selectedArs[num] = emptyAr;
     }
 
+    /// <summary>
+    /// 버튼의 모든 이벤트를 지워주는 함수
+    /// </summary>
+    /// <param name="button"></param>
     void RemoveAllButtonEvents(Button button)
     {
         button.onClick.RemoveAllListeners();
