@@ -77,6 +77,8 @@ public class Ar : MonoBehaviour
             CameraMove.Instance.Shake();
             EffectManager.Instance.InstantiateEffect(0, collision.contacts[0].point, transform.position, collision.contacts[0].point);
 
+            collision.gameObject.SetActive(false);
+
             AfterCrash?.Invoke();
         }
     }
