@@ -21,7 +21,6 @@ public class GameManager : MonoSingleton<GameManager>
     {
         enemies = FindObjectsOfType<Enemy>();
         friendly = FindObjectsOfType<Player>();
-        Debug.Log(Global.gMainCamTrm.position);
         Global.gMainCamTrm.position = new Vector3(0, 0, -10);
     }
 

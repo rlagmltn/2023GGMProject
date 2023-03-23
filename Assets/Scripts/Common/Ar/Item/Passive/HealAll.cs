@@ -16,7 +16,6 @@ public class HealAll : ItemInfo
             if(healTarget!=null)
             {
                 healTarget.Hit(-5);
-                Debug.Log("µýµý µû¶ó´Ü!");
             }
         }
     }

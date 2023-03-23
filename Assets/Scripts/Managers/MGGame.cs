@@ -27,7 +27,6 @@ public class MGGame : MonoSingleton<MGGame>
     void InitCamera()
     {
         Global.gMainCamTrm = FindObjectOfType<Camera>().transform;
-        Debug.Log(Global.gMainCamTrm.position);
 
         if (Global.gMainCamTrm == null)
         {

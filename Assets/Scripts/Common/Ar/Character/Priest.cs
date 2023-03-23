@@ -13,7 +13,7 @@ public class Priest : Player
     protected override void StatReset()
     {
         stat.MaxHP = 18;
-        stat.MaxDEF = 0;
+        stat.MaxDP = 0;
         stat.ATK = 5;
         stat.SATK = -6;
         isRangeCharacter = false;

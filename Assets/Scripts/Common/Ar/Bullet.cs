@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] BulletSO bulletSO;
 
     private SpriteRenderer spriteSize;
-    private CircleCollider2D collide;
+    private BoxCollider2D collide;
     public int damage { get; set; }
 
     private void OnEnable()
@@ -17,12 +17,12 @@ public class Bullet : MonoBehaviour
 
     private void SetSO()
     {
-        if (collide == null) collide = GetComponent<CircleCollider2D>();
+        if (collide == null) collide = GetComponent<BoxCollider2D>();
         if (spriteSize == null) spriteSize = GetComponent<SpriteRenderer>();
         gameObject.name = bulletSO.name;
         damage = bulletSO.damage;
-        collide.radius = bulletSO.radius;
-        spriteSize.size = new Vector2(bulletSO.radius * 2, bulletSO.radius * 2);
+        collide.size = new Vector2(bulletSO.width, bulletSO.height);
+        spriteSize.size = new Vector2(bulletSO.width, bulletSO.height);
         Destroy(gameObject, bulletSO.lifeTime);
         // lifeTime만큼 기다렸다가 풀링
     }
