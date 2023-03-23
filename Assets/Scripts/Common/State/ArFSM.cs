@@ -8,7 +8,13 @@ public class ArFSM : MonoBehaviour
     public StateMachine<ArFSM> FsmManager => fsmManager;
     protected List<Ar> arList = new List<Ar>();
     [HideInInspector] public bool turnFlag = false;
-    
+    private Enemy enemy;
+
+    private void Start()
+    {
+        enemy = GetComponent<Enemy>();
+    }
+
     public virtual Transform SearchAr()
     {
         Ar[] ars = FindObjectsOfType<Player>();
@@ -53,7 +59,7 @@ public class ArFSM : MonoBehaviour
     public virtual void StartTurn()
     {
         CameraMove.Instance.MovetoTarget(transform);
-
+        GetComponent<Enemy>().PassiveCoolDown();
         Invoke("ChangeTurnFlag", 1.5f);
     }
 

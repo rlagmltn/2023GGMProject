@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Enemy : Ar
 {
+    protected int currentPassiveCool;
+    protected int passiveCool;
+
     protected override void StatReset()
     {
         isDead = false;
@@ -41,5 +44,10 @@ public class Enemy : Ar
             var attacker = collision.transform.parent.GetComponent<Ar>();
             BattleManager.Instance.SettingAr(this, attacker);
         }
+    }
+
+    public void PassiveCoolDown()
+    {
+        currentPassiveCool = Mathf.Max(0, currentPassiveCool - 1);
     }
 }

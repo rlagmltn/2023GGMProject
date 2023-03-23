@@ -137,4 +137,9 @@ public class Ar : MonoBehaviour
         GameManager.Instance.ArDead();
         gameObject.SetActive(false);
     }
+
+    public void DecreaseDP(int val)
+    {
+        stat.DP = Mathf.Max(0, stat.DP - val);
+    }
 }
