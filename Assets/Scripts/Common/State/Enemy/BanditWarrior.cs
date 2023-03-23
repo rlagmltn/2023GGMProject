@@ -17,6 +17,10 @@ public class BanditWarrior : Enemy
         stat.MaxHP = 14;
         stat.MaxDP = 2;
         stat.ATK = 4;
+        stat.CriPer = 5;
+        stat.CriDmg = 1.5f;
+        stat.WEIGHT = 1;
+
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
         pushPower = 20;

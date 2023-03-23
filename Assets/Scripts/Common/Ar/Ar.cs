@@ -49,7 +49,6 @@ public class Ar : MonoBehaviour
         stat.HP = stat.MaxHP;
         stat.DP = stat.MaxDP;
         isDead = false;
-        stat.WEIGHT = 1;
         DeadCheck();
     }
 

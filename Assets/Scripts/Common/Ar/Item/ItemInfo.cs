@@ -40,6 +40,8 @@ public class Stat
     public int DP; // 현재 방어력
     public int ATK; // 기본 공격력
     public int SATK; // 스킬공격력
+    public int CriPer; // 치명타 확률
+    public float CriDmg; // 치명타 데미지
     public int WEIGHT; // 무게
 
     public Stat()
@@ -50,6 +52,8 @@ public class Stat
         DP = 0;
         ATK = 0;
         SATK = 0;
+        CriPer = 0;
+        CriDmg = 0;
         WEIGHT = 0;
     }
 
