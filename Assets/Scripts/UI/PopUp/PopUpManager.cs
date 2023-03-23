@@ -26,7 +26,7 @@ public class PopUpManager : MonoBehaviour
     [SerializeField] private Transform backgroundPanel2;
     [SerializeField] private List<ButtonAndPopUp> BAP2;
 
-    private void Start()
+    private void Awake()
     {
         Init();
     }

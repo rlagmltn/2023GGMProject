@@ -159,7 +159,7 @@ public class MainShop : MonoSingleton<MainShop>
     private void BuyItem()
     {
         //골드가 있는지 조건 체크
-
+        Debug.Log("구매");
         selectSO.isBuy = true;
         selectSO = null;
         foreach (Button btn in buttons) btn.GetComponent<MainShopButton>().UpdateUI();
