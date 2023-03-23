@@ -32,10 +32,10 @@ public class MainShop : MonoSingleton<MainShop>
 
     [SerializeField] private Button PurchaseOKButton;
 
-    private Shop shop;
-    private ItemSO[] shopItems;
+    public Shop shop;
+    public ItemSO[] shopItems;
     public List<MainShopItem> Items;
-    private int pageNum = 1;
+    public int pageNum = 1;
 
     public MainShopItem selectSO;
 
@@ -52,6 +52,8 @@ public class MainShop : MonoSingleton<MainShop>
             s_Item.isBuy = false;
             Items.Add(s_Item);
         }
+
+        selectSO = new MainShopItem();
     }
 
     void Start()
@@ -140,11 +142,13 @@ public class MainShop : MonoSingleton<MainShop>
     private void SelectSONullCheck()
     {
         purchaseButton.interactable = true;
-        if (selectSO.Item == null)
+        if(selectSO == null)
         {
             purchaseButton.interactable = false;
-            Debug.Log("버튼 비활성화");
+            return;
         }
+        else if (selectSO.Item == null)
+            purchaseButton.interactable = false;
     }
 
     private void PurchaseButtonClick()
