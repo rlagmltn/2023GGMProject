@@ -49,7 +49,6 @@ public class Ar : MonoBehaviour
         stat.HP = stat.MaxHP;
         stat.DP = stat.MaxDP;
         isDead = false;
-        stat.WEIGHT = 1;
         DeadCheck();
     }
 
@@ -77,6 +76,8 @@ public class Ar : MonoBehaviour
             rigid.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal);
             CameraMove.Instance.Shake();
             EffectManager.Instance.InstantiateEffect(0, collision.contacts[0].point, transform.position, collision.contacts[0].point);
+
+            collision.gameObject.SetActive(false);
 
             AfterCrash?.Invoke();
         }
@@ -136,5 +137,10 @@ public class Ar : MonoBehaviour
         TurnManager.Instance.SomeoneIsMoving = false;
         GameManager.Instance.ArDead();
         gameObject.SetActive(false);
+    }
+
+    public void DecreaseDP(int val)
+    {
+        stat.DP = Mathf.Max(0, stat.DP - val);
     }
 }

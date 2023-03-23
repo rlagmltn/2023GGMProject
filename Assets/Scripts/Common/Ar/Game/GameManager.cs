@@ -48,22 +48,27 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if (playerCount == 0)
         {
-            GameOver();
+            StartCoroutine(GameOver());
         }
         else if (enemyCount == 0)
         {
-            GameClear();
+            StartCoroutine(GameClear());
         }
     }
 
-    private void GameOver()
+    private IEnumerator GameOver()
     {
+        Time.timeScale = 0.3f;
+        yield return new WaitForSeconds(1.5f);
+        Time.timeScale = 1f;
         MGUI.Instance.GameOver();
-
     }
 
-    private void GameClear()
+    private IEnumerator GameClear()
     {
+        Time.timeScale = 0.3f;
+        yield return new WaitForSeconds(0.5f);
+        Time.timeScale = 1f;
         MGUI.Instance.GameClear();
     }
 }

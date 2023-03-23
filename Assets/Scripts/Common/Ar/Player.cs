@@ -30,6 +30,8 @@ public class Player : Ar
     private GameObject skillRange;
     private GameObject skillActived;
 
+    private MiniAr miniPlayer;
+
     [SerializeField] ItemSO[] itemSlots = new ItemSO[3];
 
     public Player()
@@ -115,6 +117,8 @@ public class Player : Ar
     {
         obj.SetActive(true);
 
+        miniPlayer.ShowRange(obj);
+
         ChangeColor_A(obj, 0.8f);
     }
 
@@ -144,7 +148,6 @@ public class Player : Ar
 
         if(joystickType == JoystickType.None)
         {
-            Debug.LogWarning("조이스틱 타입이 NONE임");
             return;
         }
 
@@ -165,7 +168,7 @@ public class Player : Ar
     {
         MouseUp?.Invoke();
         TurnManager.Instance.SomeoneIsMoving = true;
-        rigid.velocity = ((angle.normalized * power) * pushPower);
+        rigid.velocity = ((angle.normalized * power) * pushPower)/stat.WEIGHT;
     }
 
     protected virtual void Attack(Vector2 angle)
@@ -184,6 +187,15 @@ public class Player : Ar
         moveRange.SetActive(false);
         attackRange.SetActive(false);
         skillRange.SetActive(false);
+        miniPlayer.DisableRange();
+    }
+
+    public GameObject ActiveRange()
+    {
+        if (moveRange.activeSelf) return moveRange;
+        else if (attackRange.activeSelf) return attackRange;
+        else if (skillRange.activeSelf) return skillRange;
+        else return null;
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
@@ -246,5 +258,10 @@ public class Player : Ar
         Color color = obj.GetComponent<SpriteRenderer>().color;
         color = new Color(color.r, color.g, color.b, num_A);
         obj.GetComponent<SpriteRenderer>().color = color;
+    }
+
+    public void SetMini(MiniAr mini)
+    {
+        miniPlayer = mini;
     }
 }

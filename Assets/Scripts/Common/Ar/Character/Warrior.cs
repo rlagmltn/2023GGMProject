@@ -18,6 +18,9 @@ public class Warrior : Player
         stat.MaxDP = 4;
         stat.ATK = 4;
         stat.SATK = 6;
+        stat.CriPer = 5;
+        stat.CriDmg = 1.5f;
+        stat.WEIGHT = 1;
         isRangeCharacter = false;
         skillCooltime = 7;
         currentCooltime = 0;
