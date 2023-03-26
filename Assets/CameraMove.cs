@@ -11,15 +11,24 @@ public class CameraMove : MonoSingleton<CameraMove>
     [SerializeField] private float amplitude;
     [SerializeField] private float frequency;
     [SerializeField] private float duration;
-    [SerializeField] private float zoomMul;
+
+    [SerializeField] private float zoomAmount;
+    [SerializeField] private float zoomSpeed;
+    [SerializeField] private float minOrthographicSize = 10;
+    [SerializeField] private float maxOrthographicSize = 30;
 
     private CinemachineBasicMultiChannelPerlin shakeCamNoise;
     private Vector3 setCamPos = new Vector3(0, 0, -10);
     private Vector3 moveDragPos;
 
+    private float orthographicSize;
+    private float targetOrthographicSize;
+
     private void Awake()
     {
         Util.Instance.mainCam.transform.position = setCamPos;
+        orthographicSize = shakeCam.m_Lens.OrthographicSize;
+        targetOrthographicSize = orthographicSize;
     }
 
     public void MovetoTarget(Transform target)
@@ -37,6 +46,7 @@ public class CameraMove : MonoSingleton<CameraMove>
     {
         ChaseTarget();
         ZoomInAndOut();
+        HandleZoom();
     }
 
     public void ChaseTarget()
@@ -67,9 +77,19 @@ public class CameraMove : MonoSingleton<CameraMove>
             // 거리 차이 구함(거리가 이전보다 크면(마이너스가 나오면)손가락을 벌린 상태_줌인 상태)
             float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
 
-            shakeCam.m_Lens.OrthographicSize += deltaMagnitudeDiff * zoomMul;
+            shakeCam.m_Lens.OrthographicSize += deltaMagnitudeDiff * zoomAmount;
             shakeCam.m_Lens.OrthographicSize = Mathf.Max(shakeCam.m_Lens.OrthographicSize, 0.1f);
         }
+    }
+
+    private void HandleZoom()
+    {
+        targetOrthographicSize -= Input.mouseScrollDelta.y * zoomAmount;
+
+        targetOrthographicSize = Mathf.Clamp(targetOrthographicSize, minOrthographicSize, maxOrthographicSize);
+        orthographicSize = Mathf.Lerp(orthographicSize, targetOrthographicSize, Time.deltaTime * zoomSpeed);
+
+        shakeCam.m_Lens.OrthographicSize = orthographicSize;
     }
 
     public void ResetTarget()
