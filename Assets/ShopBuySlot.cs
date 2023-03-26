@@ -12,6 +12,7 @@ public class ShopBuySlot : MonoBehaviour
     [SerializeField] TextMeshProUGUI nameText;
     [SerializeField] TextMeshProUGUI priceText;
     [SerializeField] TextMeshProUGUI infoText;
+    public int price;
 
     internal void Init()
     {
@@ -19,5 +20,10 @@ public class ShopBuySlot : MonoBehaviour
         nameText.text = string.Format(item.itemName);
         priceText.text = string.Format(item.itemPrice.ToString());
         infoText.text = item.itemExplain;
+    }
+
+    internal void Buy()
+    {
+        Destroy(this.gameObject);
     }
 }

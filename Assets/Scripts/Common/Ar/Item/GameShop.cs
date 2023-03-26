@@ -6,7 +6,6 @@ public class GameShop : Shop
 {
     public ItemSO[] items;
     public GameObject itemSlotObj;
-    public Dictionary<int, ShopBuySlot> itemSlotObjs;
     [SerializeField] int itemCount = 5;
     private int itemIndex = 0;
 
@@ -34,7 +33,7 @@ public class GameShop : Shop
             itemSlotObj.GetComponent<ShopBuySlot>().item = items[i];
             itemSlotObj.GetComponent<ShopBuySlot>().Init();
             tempObj = Instantiate(tempObj, transform);
-            itemSlotObjs.Add(itemCount++, tempObj.GetComponent<ShopBuySlot>());
+            Debug.Log(itemIndex);
         }
     }
 }
