@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class BanditWarrior_ArFSM : ArFSM
 {
+    private Collider2D col;
+
     private void Awake()
     {
+        col = GetComponent<Collider2D>();
         fsmManager = new StateMachine<ArFSM>(this, new BanditWarrior_StateIdle());
     }
 
@@ -26,8 +29,13 @@ public class BanditWarrior_ArFSM : ArFSM
         yield return new WaitForSeconds(1f);
         transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
         yield return new WaitForSeconds(0.5f);
-        fsmManager.ChangeState<BanditWarrior_StateMove>();
-        StopCoroutine("Move");
+        fsmManager.ChangeState<BanditWarrior_StateSkill>();
+    }
+
+    private IEnumerator TriggerOff()
+    {
+        yield return new WaitForSeconds(2f);
+        col.isTrigger = false;
     }
 
 }

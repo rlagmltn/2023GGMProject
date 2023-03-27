@@ -29,7 +29,7 @@ public class BanditWarrior_StateIdle : StateIdle
         
             if(enemy.stat.HP <= 2 && canUsePassive)
             {
-                skillCool = Mathf.Min(6, skillCool + 1);
+                skillCool = 0;
                 canUsePassive = false;
                 stateMachine.ChangeState<BanditWarrior_StatePassive>();
             }
