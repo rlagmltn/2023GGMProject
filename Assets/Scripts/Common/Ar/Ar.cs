@@ -71,15 +71,15 @@ public class Ar : MonoBehaviour
     {
         if (collision.transform.CompareTag("Object"))
         {
-            BeforeCrash?.Invoke();
+            //BeforeCrash?.Invoke();
 
-            rigid.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal);
-            CameraMove.Instance.Shake();
-            EffectManager.Instance.InstantiateEffect(0, collision.contacts[0].point, transform.position, collision.contacts[0].point);
+            //rigid.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal);
+            //CameraMove.Instance.Shake();
+            //EffectManager.Instance.InstantiateEffect(0, collision.contacts[0].point, transform.position, collision.contacts[0].point);
 
             collision.gameObject.SetActive(false);
 
-            AfterCrash?.Invoke();
+            //AfterCrash?.Invoke();
         }
     }
 

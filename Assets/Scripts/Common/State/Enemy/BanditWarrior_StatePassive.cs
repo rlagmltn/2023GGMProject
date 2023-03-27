@@ -16,7 +16,7 @@ public class BanditWarrior_StatePassive : State<ArFSM>
     public override void OnStart()
     {
         Vector3 dir;
-        Collider2D[] cols = Physics2D.OverlapCircleAll(stateMachineClass.transform.position, 1.5f);
+        Collider2D[] cols = Physics2D.OverlapCircleAll(stateMachineClass.transform.position, 3f);
         Debug.Log("패시브 사용");
         stateMachineClass.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
         foreach (Collider2D col in cols)
@@ -24,7 +24,7 @@ public class BanditWarrior_StatePassive : State<ArFSM>
             if (col.CompareTag("Player"))
             {
                 dir = Vector3.Normalize(col.transform.position - stateMachineClass.transform.position);
-                col.GetComponent<Rigidbody2D>().velocity = dir * 7f;
+                col.GetComponent<Rigidbody2D>().velocity = dir * 10f;
 
             }
         }
