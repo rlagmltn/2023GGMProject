@@ -7,6 +7,6 @@ public class CrushBooster : ItemInfo
     public override void Passive()
     {
         if(player.isMove)
-            player.Push(((player.rigid.velocity.normalized * player.Power) * player.PushPower)/player.stat.WEIGHT);
+            player.Push(((player.rigid.velocity.normalized * player.Power) * player.PushPower)/(1+player.stat.WEIGHT*0.1f));
     }
 }

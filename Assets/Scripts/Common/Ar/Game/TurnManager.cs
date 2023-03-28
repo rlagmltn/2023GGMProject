@@ -80,7 +80,6 @@ public class TurnManager : MonoSingleton<TurnManager>
             turns[turns.Count - i - 1].EnableTurn();
         }
 
-        PlayerController.Instance.SetQuickSlotsEnable(true);
         turnCount = 0;
     }
 
@@ -92,6 +91,7 @@ public class TurnManager : MonoSingleton<TurnManager>
 
     private IEnumerator PassTurn()
     {
+        PlayerController.Instance.SetQuickSlotsEnable(!isPlayerTurn);
         yield return new WaitForSeconds(3f);
         isPlayerTurn = !isPlayerTurn;
         ActiveAllTurn();
@@ -118,7 +118,6 @@ public class TurnManager : MonoSingleton<TurnManager>
     private IEnumerator ResetEnemyTurn()
     {
         turnText.SetText("Enemy Turn");
-        PlayerController.Instance.SetQuickSlotsEnable(false);
         turnCount = 0;
 
         enemys = FindObjectsOfType<ArFSM>();

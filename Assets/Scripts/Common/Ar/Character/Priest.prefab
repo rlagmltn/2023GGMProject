@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1198730170117680703}
   - component: {fileID: 556526565237605690}
   - component: {fileID: 3093398957151007069}
+  - component: {fileID: 190870191}
   m_Layer: 0
   m_Name: Priest
   m_TagString: Player
@@ -81,12 +82,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: b9a6f839005ff4a5ab63a78a6abc90a0, type: 3}
+  m_Sprite: {fileID: -188233160, guid: be800ac115209604abd56a8b2625e4fb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_DrawMode: 1
+  m_Size: {x: 2.7, y: 2.7}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -187,7 +188,7 @@ MonoBehaviour:
       m_Calls: []
   ar_id: 1
   ar_name: 
-  ar_sprite: {fileID: 21300000, guid: b9a6f839005ff4a5ab63a78a6abc90a0, type: 3}
+  ar_sprite: {fileID: 21300000, guid: 29437a4557fe1e344b783afeeceee8a7, type: 3}
   isSellected: 0
   isEnd: 1
   MouseUp:
@@ -197,6 +198,26 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eed6633ded688124183c9663d7410dc8, type: 2}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!95 &190870191
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274201525851538383}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0f96aacd9c715914689f84514c4f64f4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &624619942958693182
 GameObject:
   m_ObjectHideFlags: 0

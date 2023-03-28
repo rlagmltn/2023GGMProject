@@ -168,15 +168,16 @@ public class Player : Ar
     {
         MouseUp?.Invoke();
         TurnManager.Instance.SomeoneIsMoving = true;
-        rigid.velocity = ((angle.normalized * power) * pushPower)/stat.WEIGHT;
+        rigid.velocity = ((angle.normalized * power) * pushPower)/(1+stat.WEIGHT*0.1f);
     }
 
     protected virtual void Attack(Vector2 angle)
     {
-
+        AnimAttackStart();
     }
     protected virtual void Skill(Vector2 angle)
     {
+        AnimAttackStart();
         currentCooltime = skillCooltime;
         skillActived.SetActive(false);
         CameraMove.Instance.Shake();

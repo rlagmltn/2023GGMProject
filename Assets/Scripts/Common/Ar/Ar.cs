@@ -34,6 +34,9 @@ public class Ar : MonoBehaviour
     public UnityEvent OnOutDie;
     public UnityEvent OnBattleDie;
 
+    private SpriteRenderer sprite;
+    private Animator animator;
+
     protected virtual void Start()
     {
         stat = new Stat();
@@ -42,6 +45,8 @@ public class Ar : MonoBehaviour
         hpImage = hpBar.GetComponentInChildren<SpriteRenderer>();
         dpBar = transform.GetChild(2).GetChild(0);
         dpImage = dpBar.GetComponentInChildren<SpriteRenderer>();
+        sprite = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     protected virtual void StatReset() // 수치 초기화
@@ -65,6 +70,8 @@ public class Ar : MonoBehaviour
             TurnManager.Instance.SomeoneIsMoving = false;
             AfterMove?.Invoke();
         }
+        if (rigid.velocity.x < 0) sprite.flipX = true;
+        else sprite.flipX = false;
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
@@ -142,5 +149,15 @@ public class Ar : MonoBehaviour
     public void DecreaseDP(int val)
     {
         stat.DP = Mathf.Max(0, stat.DP - val);
+    }
+
+    public void AnimAttackStart()
+    {
+        animator.SetBool("isAttack", true);
+    }
+
+    public void AnimAttackFinish()
+    {
+        animator.SetBool("isAttack", false);
     }
 }

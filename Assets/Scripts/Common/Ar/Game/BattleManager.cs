@@ -96,6 +96,8 @@ public class BattleManager : MonoSingleton<BattleManager>
         attacker.BeforeAttack.Invoke();
         defender.BeforeDefence.Invoke();
 
+        attacker.AnimAttackStart();
+
         var criChance = Random.Range(1, 101);
         Debug.Log(criChance);
         bool isDead;
