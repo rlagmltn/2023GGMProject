@@ -164,7 +164,7 @@ public class BattleManager : MonoSingleton<BattleManager>
     private bool BulletDamage()
     {
         var isdead = arOne.Hit(damage);
-
+        arOne.AfterDefence?.Invoke();
         ResetAll();
 
         if (isdead) return false;
