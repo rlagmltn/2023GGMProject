@@ -34,6 +34,7 @@ public class Archer : Player
 
     protected override void Attack(Vector2 angle)
     {
+        base.Attack(angle);
         Shoot(angle);
     }
     protected override void Skill(Vector2 angle)
