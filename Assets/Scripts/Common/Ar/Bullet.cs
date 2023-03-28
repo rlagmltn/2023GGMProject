@@ -34,7 +34,11 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Object"))
+        if(collision.CompareTag("Out"))
+        {
+            Destroy(gameObject);
+        }
+        else if (collision.CompareTag("Object"))
         {
             EffectManager.Instance.InstantiateEffect(0, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
             AfterCrush();
