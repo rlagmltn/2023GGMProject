@@ -31,7 +31,7 @@ public class QuickSlot : MonoBehaviour
 
     public void SellectPlayer()
     {
-        if (!TurnManager.Instance.IsPlayerTurn || Player.isDead || TurnManager.Instance.SomeoneIsMoving) return;
+        if (!TurnManager.Instance.IsPlayerTurn || Player.isDead || TurnManager.Instance.SomeoneIsMoving || TurnManager.Instance.IsWaitingTurn) return;
         PlayerController.Instance.SellectPlayer(this);
     }
 

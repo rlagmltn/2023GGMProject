@@ -99,7 +99,6 @@ public class BattleManager : MonoSingleton<BattleManager>
         attacker.AnimAttackStart();
 
         var criChance = Random.Range(1, 101);
-        Debug.Log(criChance);
         bool isDead;
         if(criChance<attacker.stat.CriPer)
             isDead = defender.Hit(attacker.stat.ATK * attacker.stat.CriPer);
