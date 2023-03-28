@@ -92,8 +92,8 @@ public class TurnManager : MonoSingleton<TurnManager>
     private IEnumerator PassTurn()
     {
         PlayerController.Instance.SetQuickSlotsEnable(!isPlayerTurn);
-        yield return new WaitForSeconds(3f);
         isPlayerTurn = !isPlayerTurn;
+        yield return new WaitForSeconds(3f);
         ActiveAllTurn();
         if (isPlayerTurn)
         {
