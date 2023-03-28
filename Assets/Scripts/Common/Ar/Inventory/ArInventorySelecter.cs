@@ -8,14 +8,18 @@ using UnityEngine.SceneManagement;
 
 public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
 {
-    [SerializeField] private List<Button> buttons;
+    [SerializeField] private List<Button> PresetButtons;
     [SerializeField] private ArSOList ArList;
     [SerializeField] private ArSO emptyAr;
-    [SerializeField] private int CanSelectNum;
-    [SerializeField] private Button StartButton;
+    [SerializeField] private List<Button> Buttons;
+    [SerializeField] private List<Image> ArImages;
 
     private List<ArSO> sortedArSO;
-    private ArSO[] selectedArs;
+    public ArSO[] FirstPreset;
+    public ArSO[] SecondPreset;
+    public ArSO[] ThirdPreset;
+
+    private int SelectPresetNum;
 
     private void Start()
     {
@@ -24,120 +28,244 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
 
     void Init()
     {
+        FirstPreset = new ArSO[3];
+        SecondPreset = new ArSO[3];
+        ThirdPreset = new ArSO[3];
+        SelectPresetNum = 0;
+
+        SetEmptySO();
         ClassfyArSO();
         ButtonInit();
-        SelectedSOInit();
+        UpdateUI();
     }
-
+    
     /// <summary>
-    /// 있는 알과 없는 알을 분류하는 작업
+    /// 알들을 정렬 하는 함수
     /// </summary>
-    void ClassfyArSO()
+    private void ClassfyArSO()
     {
         sortedArSO = new List<ArSO>();
 
         for (int num = 0; num < ArList.list.Count; num++)
-            if(ArList.list[num].isTake) sortedArSO.Add(ArList.list[num]);
+            if (ArList.list[num].isTake) sortedArSO.Add(ArList.list[num]);
 
         for (int num = 0; num < ArList.list.Count; num++)
             if (!ArList.list[num].isTake) sortedArSO.Add(ArList.list[num]);
+
+        AddButtonArSO();
+    }
+
+    void AddButtonArSO()
+    {
+        int num = 0;
+        foreach (Button btn in Buttons)
+        {
+            if(sortedArSO.Count <= num)
+            {
+                btn.GetComponent<ArSOHolder>().SetArSO(null);
+                num++;
+                continue;
+            }
+            btn.GetComponent<ArSOHolder>().SetArSO(sortedArSO[num]);
+            num++;
+        }
+    }
+
+    void SetEmptySO()
+    {
+        for(int i = 0; i < FirstPreset.Length; i++)
+        {
+            FirstPreset[i] = emptyAr;
+            SecondPreset[i] = emptyAr;
+            ThirdPreset[i] = emptyAr;
+        }
+    }
+
+    void UpdateUI()
+    {
+        ArSO[] arList = SelectPresetNum switch
+        {
+            0 => FirstPreset,
+            1 => SecondPreset,
+            2 => ThirdPreset,
+            _ => FirstPreset,
+        };
+
+        int num = 0;
+
+        foreach(ArSO ar in arList)
+        {
+            ArImages[num].sprite = ar.Image;
+            ++num;
+        }
     }
 
     /// <summary>
-    /// 버튼들을 처음 초기화 해주는 함수
+    /// ArSO에 알을 선택 할 수 잇는지 리턴해주는 함수
     /// </summary>
+    /// <returns></returns>
+    public bool CanSelect()
+    {
+        ArSO[] arList = ReturnPresetList();
+
+        foreach (ArSO ar in arList)
+        {
+            if(ar == emptyAr)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// ArSO에 알을 선택해주는 함수
+    /// </summary>
+    /// <param name="ar"></param>
+    public void SelectArSO(ArSO ar)
+    {
+        ArSO[] arList = ReturnPresetList();
+
+        for (int i = 0; i < arList.Length; i++)
+        {
+            if(arList[i] == emptyAr)
+            {
+                arList[i] = ar;
+                break;
+            }
+        }
+
+        UpdateUI();
+    }
+
+    ArSO[] ReturnPresetList()
+    {
+        ArSO[] arList = SelectPresetNum switch
+        {
+            0 => FirstPreset,
+            1 => SecondPreset,
+            2 => ThirdPreset,
+            _ => FirstPreset,
+        };
+
+        return arList;
+    }
+
     void ButtonInit()
     {
-        for (int num = 0; num < buttons.Count; num++)
+        RemoveAllButtonEvents(PresetButtons[0]);
+        RemoveAllButtonEvents(PresetButtons[1]);
+        RemoveAllButtonEvents(PresetButtons[2]);
+        AddButtonEvent(PresetButtons[0], FirstPresetButtonClick);
+        AddButtonEvent(PresetButtons[1], SecondPresetButtonClick);
+        AddButtonEvent(PresetButtons[2], ThirdPresetButtonClick);
+
+        foreach(Button btn in Buttons)
         {
-            buttons[num].GetComponent<ArSOHolder>().SetArSO(sortedArSO[num]);
-            RemoveAllButtonEvents(buttons[num]);
-            AddButtonEvent(buttons[num], buttons[num].GetComponent<ArSOHolder>().SelectedButton);
+            RemoveAllButtonEvents(btn);
+            AddButtonEvent(btn, btn.GetComponent<ArSOHolder>().SelectedButton);
         }
-        RemoveAllButtonEvents(StartButton);
-        AddButtonEvent(StartButton, CanStartCheck);
+
+        RemoveAllButtonEvents(ArImages[0].GetComponent<Button>());
+        RemoveAllButtonEvents(ArImages[1].GetComponent<Button>());
+        RemoveAllButtonEvents(ArImages[2].GetComponent<Button>());
+
+        AddButtonEvent(ArImages[0].GetComponent<Button>(), FirstImageClick);
+        AddButtonEvent(ArImages[1].GetComponent<Button>(), SecondImageClick);
+        AddButtonEvent(ArImages[2].GetComponent<Button>(), ThirdImageClick);
     }
 
-    void CanStartCheck()
+    void FirstPresetButtonClick()
     {
-        if(IsCanSelect())
+        SelectPresetNum = 0;
+        ChangePreset();
+        AllUIUpdate();
+    }
+
+    void SecondPresetButtonClick()
+    {
+        SelectPresetNum = 1;
+        ChangePreset();
+        AllUIUpdate();
+    }
+    void ThirdPresetButtonClick()
+    {
+        SelectPresetNum = 2;
+        ChangePreset();
+        AllUIUpdate();
+    }
+
+    void ChangePreset()
+    {
+        for (int i = 0; i < FirstPreset.Length; i++)
         {
-            Debug.Log("3개의 알을 선택해");
-            return;
+            FirstPreset[i].isUse = false;
+            SecondPreset[i].isUse = false;
+            ThirdPreset[i].isUse = false;
         }
-        Debug.Log("게임 스타트");
-        SceneManager.LoadScene("MapScene");
+
+        ArSO[] arList = ReturnPresetList();
+
+        for (int i = 0; i < arList.Length; i++)
+        {
+            arList[i].isUse = true;
+        }
     }
 
-    /// <summary>
-    /// 선택된 SO들을 초기화해주는 함수
-    /// </summary>
-    void SelectedSOInit()
+    void FirstImageClick()
     {
-        selectedArs = new ArSO[CanSelectNum];
+        ArSO[] arList = ReturnPresetList();
 
-        for (int num = 0; num < selectedArs.Length; num++)
-            selectedArs[num] = emptyAr;
+        arList[0].isUse = false;
+        arList[0] = emptyAr;
+        AllUIUpdate();
     }
 
-    /// <summary>
-    /// 버튼의 모든 이벤트를 지워주는 함수
-    /// </summary>
-    /// <param name="button"></param>
+    void SecondImageClick()
+    {
+        ArSO[] arList = ReturnPresetList();
+
+        arList[1].isUse = false;
+        arList[1] = emptyAr;
+        AllUIUpdate();
+    }
+
+    void ThirdImageClick()
+    {
+        ArSO[] arList = ReturnPresetList();
+
+        arList[2].isUse = false;
+        arList[2] = emptyAr;
+        AllUIUpdate();
+    }
+
+    void AllUIUpdate()
+    {
+        foreach (Button btn in Buttons)
+        {
+            ArSOHolder holder =  btn.GetComponent<ArSOHolder>();
+            holder.SetArSO(holder.GetArSO());
+        }
+        UpdateUI();
+    }
+
+    public void ArTOGlobal()
+    {
+        for(int i = 0; i < FirstPreset.Length; i++)
+        {
+            Global.FirstPreset[i] = FirstPreset[i];
+            Global.SecondPreset[i] = SecondPreset[i];
+            Global.ThirdPreset[i] = ThirdPreset[i];
+        }
+    }
+
     void RemoveAllButtonEvents(Button button)
     {
         button.onClick.RemoveAllListeners();
     }
 
-    /// <summary>
-    /// 버튼에 이벤트를 추가해주는 함수
-    /// </summary>
     void AddButtonEvent(Button button, UnityAction action)
     {
-        button.onClick.RemoveAllListeners();
         button.onClick.AddListener(action);
-    }
-
-    /// <summary>
-    /// 선택 할 수 있는 상태인지 리턴해주는 함수
-    /// </summary>
-    /// <returns></returns>
-    public bool IsCanSelect()
-    {
-        for(int num = 0; num < selectedArs.Length; num++)
-            if(selectedArs[num] == emptyAr) return true;
-        return false;
-    }
-
-    /// <summary>
-    /// EmptySO인 것에 Select시켜주는 함수
-    /// </summary>
-    /// <param name="ar"></param>
-    public void SelectArSO(ArSO ar)
-    {
-        for (int num = 0; num < selectedArs.Length; num++)
-        {
-            if (selectedArs[num] == emptyAr)
-            {
-                selectedArs[num] = ar;
-                break;
-            }
-        }
-    }
-    
-    /// <summary>
-    /// Select된 SO를 EmptySO로 바꿔주는 함수
-    /// </summary>
-    /// <param name="ar"></param>
-    public void UnselectArSO(ArSO ar)
-    {
-        for (int num = 0; num < selectedArs.Length; num++)
-        {
-            if (selectedArs[num] == ar)
-            {
-                selectedArs[num] = emptyAr;
-                break;
-            }
-        }
     }
 }

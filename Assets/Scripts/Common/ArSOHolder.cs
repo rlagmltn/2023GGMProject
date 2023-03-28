@@ -7,14 +7,12 @@ public class ArSOHolder : MonoBehaviour
 {
     private ArSO Ar;
     private Image ArImage;
-    private Image SelectedImage;
 
     Color color = new Color(1, 1, 1);
 
     private void UpdateButtonUI()
     {
         ArImage = transform.GetChild(0).GetComponent<Image>();
-        SelectedImage = transform.GetChild(1).GetComponent<Image>();
         ArImage.sprite = Ar.Image;
     }
 
@@ -26,7 +24,7 @@ public class ArSOHolder : MonoBehaviour
             return;
         }
 
-        if(Ar.isTake == false)
+        if(Ar.isTake == false || Ar.isUse == true)
         {
             gameObject.GetComponent<Button>().interactable = false;
             color = gameObject.GetComponent<Button>().colors.disabledColor;
@@ -40,6 +38,11 @@ public class ArSOHolder : MonoBehaviour
 
     public void SetArSO(ArSO ar)
     {
+        if(ar == null)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
         Ar = ar;
         UpdateButtonUI();
         Button_ActiveSelf();
@@ -50,20 +53,13 @@ public class ArSOHolder : MonoBehaviour
         return Ar;
     }
 
-    public void SelectedButton() //컬러 체인지 작업해야함
+    public void SelectedButton()
     {
-        if(Ar.isUse)
+        if (ArInventorySelecter.Instance.CanSelect())
         {
-            Ar.isUse = false;
-            SelectedImage.gameObject.SetActive(false);
-            ArInventorySelecter.Instance.UnselectArSO(Ar);
-            return;
+            ArInventorySelecter.Instance.SelectArSO(Ar);
+            Ar.isUse= true;
+            Button_ActiveSelf();
         }
-
-        if(!ArInventorySelecter.Instance.IsCanSelect()) return;
-
-        Ar.isUse = true;
-        SelectedImage.gameObject.SetActive(true);
-        ArInventorySelecter.Instance.SelectArSO(Ar);
     }
 }

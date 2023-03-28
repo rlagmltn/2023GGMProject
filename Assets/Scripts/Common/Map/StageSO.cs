@@ -1,15 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "StageSO", menuName = "SO/StageSO")]
 public class StageSO : ScriptableObject
 {
     public string stageName;
 
-    public int stageNum;
-
-    public int stageProgress;
+    public Sprite stageImage;
 
     public bool isEndStage;
 

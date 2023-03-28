@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class StageHolder : MonoBehaviour
 {
-    public StageSO stage;
+    public StageSO Stage;
 
     public void OnClick()
     {
-        if (stage == null)
-        {
-            Debug.LogWarning("StageHolder의 stage비어있음");
-            return;
-        }
+        
+    }
 
-        StageManager.Instance.ShowStageInfo(stage);
+    public void SetStageSO(StageSO stage)
+    {
+        Stage = stage;
+    }
+
+    public void GetStageSO()
+    {
+        //stageManager에 무언가를 보내서 실행시켜야할듯?
+        StageManager.Instance.ShowStageInfo(Stage);
     }
 }

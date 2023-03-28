@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class StartPannel : MonoBehaviour
 {
@@ -34,16 +35,25 @@ public class StartPannel : MonoBehaviour
     private void EasyModeStart()
     {
         Debug.Log("쉬움모드 선택");
+        ChangeSceneToMap();
     }
 
     private void NormalModeStart()
     {
         Debug.Log("보통모드 선택");
+        ChangeSceneToMap();
     }
 
     private void HardModeStart()
     {
         Debug.Log("어려움모드 선택");
+        ChangeSceneToMap();
+    }
+
+    private void ChangeSceneToMap()
+    {
+        ArInventorySelecter.Instance.ArTOGlobal();
+        SceneManager.LoadScene("MapScene");
     }
 
     private void RemoveAllEvents(Button button)

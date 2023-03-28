@@ -19,6 +19,10 @@ public class Global
     public static Transform gMainCamTrm;
     public static Camera mainCam;
     public static Transform Map;
+
+    public static ArSO[] FirstPreset = new ArSO[3];
+    public static ArSO[] SecondPreset = new ArSO[3];
+    public static ArSO[] ThirdPreset = new ArSO[3];
 }
 
 public enum ePrefabs
