@@ -3750,6 +3750,7 @@ GameObject:
   m_Component:
   - component: {fileID: 798485901}
   - component: {fileID: 798485902}
+  - component: {fileID: 798485903}
   m_Layer: 0
   m_Name: DeadLine
   m_TagString: Out
@@ -3798,6 +3799,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 32, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &798485903
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798485900}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &823773676
 GameObject:
   m_ObjectHideFlags: 0
@@ -5059,6 +5081,7 @@ GameObject:
   m_Component:
   - component: {fileID: 988085458}
   - component: {fileID: 988085459}
+  - component: {fileID: 988085460}
   m_Layer: 0
   m_Name: DeadLine (3)
   m_TagString: Out
@@ -5107,6 +5130,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 32}
   m_EdgeRadius: 0
+--- !u!50 &988085460
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988085457}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1007070009
 GameObject:
   m_ObjectHideFlags: 0
@@ -5829,6 +5873,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1107953910}
   - component: {fileID: 1107953911}
+  - component: {fileID: 1107953912}
   m_Layer: 0
   m_Name: DeadLine (1)
   m_TagString: Out
@@ -5877,6 +5922,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 32, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &1107953912
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1107953909}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1109695641
 GameObject:
   m_ObjectHideFlags: 0
@@ -8192,6 +8258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1395766673}
   - component: {fileID: 1395766674}
+  - component: {fileID: 1395766675}
   m_Layer: 0
   m_Name: DeadLine (2)
   m_TagString: Out
@@ -8240,6 +8307,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 32}
   m_EdgeRadius: 0
+--- !u!50 &1395766675
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395766672}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1399230397
 GameObject:
   m_ObjectHideFlags: 0
