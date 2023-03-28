@@ -153,11 +153,11 @@ public class Ar : MonoBehaviour
 
     public void AnimAttackStart()
     {
-        animator.SetBool("isAttack", true);
+        animator?.SetBool("isAttack", true);
     }
 
     public void AnimAttackFinish()
     {
-        animator.SetBool("isAttack", false);
+        animator?.SetBool("isAttack", false);
     }
 }
