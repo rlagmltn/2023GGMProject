@@ -20,7 +20,7 @@ public class Warrior : Player
         stat.SATK = 6;
         stat.CriPer = 5;
         stat.CriDmg = 1.5f;
-        stat.WEIGHT = 1;
+        stat.WEIGHT = 4;
         isRangeCharacter = false;
         skillCooltime = 7;
         currentCooltime = 0;

@@ -5,11 +5,13 @@ using UnityEngine;
 public class BanditWarrior : Enemy
 {
     private Ar lastAr = null;
+    private bool canUsePassive = true;
 
     protected override void Start()
     {
         base.Start();
         BeforeAttack.AddListener(PassiveDP);
+        AfterDefence.AddListener(PassivePush);
     }
 
     protected override void StatReset()
@@ -17,6 +19,7 @@ public class BanditWarrior : Enemy
         stat.MaxHP = 14;
         stat.MaxDP = 2;
         stat.ATK = 4;
+        stat.SATK = 4;
         stat.CriPer = 5;
         stat.CriDmg = 1.5f;
         stat.WEIGHT = 1;
@@ -38,6 +41,25 @@ public class BanditWarrior : Enemy
         }
     }
 
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        base.OnTriggerEnter2D(collision);
+        if(collision.transform.CompareTag("Player"))
+        {
+            Ar target = collision.gameObject.GetComponent<Ar>();
+            StartCoroutine(SkillCameraMove(collision.transform, target));
+        }
+    }
+
+    private IEnumerator SkillCameraMove(Transform targetTransform, Ar targetAr)
+    {
+        yield return new WaitForSeconds(1f);
+        CameraMove.Instance.MovetoTarget(targetTransform);
+        yield return new WaitForSeconds(0.5f);
+        BattleManager.Instance.SettingAr(targetAr, this);
+        CameraMove.Instance.Shake();
+    }
+
     private void PassiveDP()
     {
         if(lastAr != null && currentPassiveCool == 0)
@@ -47,5 +69,35 @@ public class BanditWarrior : Enemy
             lastAr.DecreaseDP(1);
             lastAr = null;
         }
+    }
+
+    private void PassivePush()
+    {
+        if(stat.HP <= 3 && canUsePassive)
+        {
+            canUsePassive = false;
+            StartCoroutine("PassivePushCo");
+        }
+    }
+
+    private IEnumerator PassivePushCo()
+    {
+        yield return new WaitForSeconds(0.3f);
+        CameraMove.Instance.MovetoTarget(this.transform);
+        yield return new WaitForSeconds(0.5f);
+        Vector3 dir;
+        Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, 3f);
+        Debug.Log("패시브 사용");
+        transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+        foreach (Collider2D col in cols)
+        {
+            if (col.CompareTag("Player"))
+            {
+                dir = Vector3.Normalize(col.transform.position - transform.position);
+                col.GetComponent<Rigidbody2D>().velocity = dir * 10f;
+            }
+        }
+        yield return new WaitForSeconds(0.5f);
+        transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
     }
 }

@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ShopBuySlot : MonoBehaviour
 {
     public ItemSO item;
     [SerializeField] Image itemImage;
     [SerializeField] Sprite iconSprite;
-    [SerializeField] Text nameText;
-    [SerializeField] Text priceText;
-    [SerializeField] Text infoText;
+    [SerializeField] TextMeshProUGUI nameText;
+    [SerializeField] TextMeshProUGUI priceText;
+    [SerializeField] TextMeshProUGUI infoText;
+    public int price;
 
-    private void Start()
+    internal void Init()
     {
         itemImage.sprite = item.itemIcon;
         nameText.text = string.Format(item.itemName);
@@ -20,4 +22,8 @@ public class ShopBuySlot : MonoBehaviour
         infoText.text = item.itemExplain;
     }
 
+    internal void Buy()
+    {
+        Destroy(this.gameObject);
+    }
 }

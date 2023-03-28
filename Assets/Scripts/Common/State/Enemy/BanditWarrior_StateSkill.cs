@@ -5,10 +5,12 @@ using UnityEngine;
 public class BanditWarrior_StateSkill : StateAtk
 {
     private Enemy enemy;
+    private Collider2D col;
 
     public override void OnAwake()
     {
         enemy = stateMachineClass.GetComponent<Enemy>();
+        col = stateMachineClass.GetComponent<Collider2D>();
     }
 
     public override void OnStart()
@@ -19,14 +21,12 @@ public class BanditWarrior_StateSkill : StateAtk
         float rangeAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
         stateMachineClass.transform.GetChild(0).rotation = Quaternion.Euler(new Vector3(0, 0, rangeAngle));
         stateMachineClass.StartCoroutine("MoveAr", angle * enemy.GetPower());
+        //col.isTrigger = true;
+        stateMachineClass.StartCoroutine("TriggerOff");
 
         TurnManager.Instance.UseTurn();
         stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
-
-
-
         stateMachine.ChangeState<BanditWarrior_StateIdle>();
-
     }
 
     public override void OnUpdate(float deltaTime)

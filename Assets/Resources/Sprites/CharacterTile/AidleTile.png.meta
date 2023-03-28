@@ -1,0 +1,1467 @@
+fileFormatVersion: 2
+guid: ce55498fed48ceb4fa7dd118de21a49a
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 128
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: AidleTile_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2457
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ce5c648ec10ac347ac680d3b2e6778e
+      internalID: -1979853313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_1
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 2457
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 654c01e3105d0a448b2554a5073172f2
+      internalID: 451114527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_2
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 2457
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac2389b701fa27f4294f4beb1c3b8395
+      internalID: -2030840935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_3
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 2457
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2df9c202b18cd443bbce7f37ec88542
+      internalID: -807503450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_4
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 2457
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9968adee587011944872f2532997e401
+      internalID: 1357425382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_5
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 2457
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9defab245d5faad488613d2ca789cb5a
+      internalID: 1258439874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_6
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 2457
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd45b5b3c03bdd746a1bcd0960fcd9e9
+      internalID: -2084877240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_7
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 2457
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84242b8054339a64fb37fcb5148be78b
+      internalID: -42023425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2106
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0341edfdf5818740abda145b06d35cf
+      internalID: 669226684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_9
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 2106
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 101e852ef69161b4bb27a85158517467
+      internalID: -537124920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_10
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 2106
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46b97f7ada671e345b6f7820fcb29277
+      internalID: 1363342303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_11
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 2106
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: befb8bed4fe82fc4999ee885982c32c9
+      internalID: -1645722233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_12
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 2106
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6209e09b555cc742895740551a50253
+      internalID: -996050053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_13
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 2106
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a88728f6369db244cafc8580af0e6f4f
+      internalID: 938369463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_14
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 2106
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e8ae94c775c7fa488c4b835948a6273
+      internalID: 91080630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_15
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 2106
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5688fa7d9acedf7418d66cfc116688e3
+      internalID: 1008707652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1755
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8480b47ea1d0ec846b7526049cfe7f3e
+      internalID: 1930006341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_17
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 1755
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fb53300184771046a450256b6a38806
+      internalID: 1709401801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_18
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 1755
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17ba7c637860599419cb608cb991634e
+      internalID: -461853284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_19
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 1755
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 294eb974b299e084abfaf43bc7b27d19
+      internalID: -1950520329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_20
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 1755
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a97fc839e0ce734fa369be3960c4b38
+      internalID: 1164730171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_21
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 1755
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 148706507bb5ce346ba318828209788b
+      internalID: -1192069476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_22
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 1755
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8c8f3f05fafe394c9f318a65b4dfca9
+      internalID: -1094512699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_23
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 1755
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36e5625ab1219fc4da7f65d21087fba4
+      internalID: 686085580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1404
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fecc6a68649d2c498a7226eb0cb16aa
+      internalID: -1381476064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_25
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 1404
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63259f0b02832474f81ba282923f78a0
+      internalID: -16638884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_26
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 1404
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ad2f457f07e47e4ebad70bfb8df9bf4
+      internalID: -1612318426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_27
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 1404
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4112d35a84534b243b1235f71eeaf878
+      internalID: 1245218242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_28
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 1404
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9ebef513808982448054019b8f85ad1
+      internalID: -415365878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_29
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 1404
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9115b28ddafe824db86d434e8ce8a86
+      internalID: -1877100184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_30
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 1404
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad4b8dd3330aaf34a943587bf5705691
+      internalID: -150176876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_31
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 1404
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81af2396c196ad047b8880358630d66f
+      internalID: 480537071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1053
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7a3fb99581f6dd47999b5b32df47d4f
+      internalID: 2102126974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_33
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 1053
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f24ac65d3b608dc43bb9e56837f448ea
+      internalID: -967703884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_34
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 1053
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3059039e9b7d98c4883ff6effb2bab6e
+      internalID: -1119099383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_35
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 1053
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 745619d64363e3c4b837134078f777b4
+      internalID: -1949919025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_36
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 1053
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d02abc9ca902b1346b2b7090455e576d
+      internalID: 1029447033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_37
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 1053
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fa7c7c94720950439e02db02adc00c2
+      internalID: -1094776044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_38
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 1053
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e9f03f3eadaf6b4fbc57e66b15fb30e
+      internalID: 1469140594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_39
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 1053
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 960c919b9563dba48af2c5aba41f7912
+      internalID: 1620856942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 702
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09c34cf0a8b898a4796f2da586c9d324
+      internalID: -404660695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_41
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 702
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fd469a6d9db59745816b5895cfbdf11
+      internalID: -108880358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_42
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 702
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01d361e5ff2624545808a822d98520d8
+      internalID: -1027257933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_43
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 702
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edb282cd9efee24438a40106fbf8db53
+      internalID: 1090739167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_44
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 702
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f65da64f922c3944b073ff0dcc102c5
+      internalID: -240428088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_45
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 702
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 539cad41b8becb44e900222051d1fa73
+      internalID: 2072036585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_46
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 702
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7e1fd0feafc5a8488854aae2e1b7d93
+      internalID: -966084696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_47
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 702
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 721ad608ef016c8439072b47caa816c2
+      internalID: -1348344314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_48
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 351
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e09610965142bdb4da0510a8360a2d51
+      internalID: -1664811519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_49
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 351
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d37ee6c51f9d1443b92d78aab4a993b
+      internalID: -1015439893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_50
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 351
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 241c6b20db060614e8b95b3760ad5acf
+      internalID: -1369981769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_51
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 351
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3a9571d2dd732a48acf05c014077959
+      internalID: -1768380585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_52
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 351
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea5a9043ae98e7649bbdb5f80170ea65
+      internalID: 448624801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_53
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 351
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0128d1529a9c1714aafb24f8576b9180
+      internalID: -1238618570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_54
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 351
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a05c29fbf00ee834d8a54dfa83e663a2
+      internalID: -1937266196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_55
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 351
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24caa5b96ec88ab448d450d644528115
+      internalID: -1341057748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_56
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b395bee23a79fa4c88aee244604191f
+      internalID: 2010726513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_57
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5474f04acc209bb4aa2252dbda35c49d
+      internalID: 861654346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_58
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14ccf193cf853cf47b971f9b8be4a944
+      internalID: 1954081402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AidleTile_59
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 400
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 190bb098711700a479dbae2a334e7535
+      internalID: -1066824350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      AidleTile_58: 1954081402
+      AidleTile_24: -1381476064
+      AidleTile_19: -1950520329
+      AidleTile_7: -42023425
+      AidleTile_37: -1094776044
+      AidleTile_0: -1979853313
+      AidleTile_35: -1949919025
+      AidleTile_38: 1469140594
+      AidleTile_48: -1664811519
+      AidleTile_33: -967703884
+      AidleTile_31: 480537071
+      AidleTile_20: 1164730171
+      AidleTile_30: -150176876
+      AidleTile_36: 1029447033
+      AidleTile_49: -1015439893
+      AidleTile_22: -1094512699
+      AidleTile_52: 448624801
+      AidleTile_53: -1238618570
+      AidleTile_59: -1066824350
+      AidleTile_47: -1348344314
+      AidleTile_34: -1119099383
+      AidleTile_13: 938369463
+      AidleTile_43: 1090739167
+      AidleTile_16: 1930006341
+      AidleTile_2: -2030840935
+      AidleTile_17: 1709401801
+      AidleTile_56: 2010726513
+      AidleTile_25: -16638884
+      AidleTile_44: -240428088
+      AidleTile_5: 1258439874
+      AidleTile_11: -1645722233
+      AidleTile_45: 2072036585
+      AidleTile_41: -108880358
+      AidleTile_46: -966084696
+      AidleTile_40: -404660695
+      AidleTile_3: -807503450
+      AidleTile_4: 1357425382
+      AidleTile_14: 91080630
+      AidleTile_54: -1937266196
+      AidleTile_51: -1768380585
+      AidleTile_29: -1877100184
+      AidleTile_26: -1612318426
+      AidleTile_42: -1027257933
+      AidleTile_27: 1245218242
+      AidleTile_28: -415365878
+      AidleTile_21: -1192069476
+      AidleTile_57: 861654346
+      AidleTile_18: -461853284
+      AidleTile_8: 669226684
+      AidleTile_6: -2084877240
+      AidleTile_32: 2102126974
+      AidleTile_10: 1363342303
+      AidleTile_15: 1008707652
+      AidleTile_39: 1620856942
+      AidleTile_23: 686085580
+      AidleTile_50: -1369981769
+      AidleTile_12: -996050053
+      AidleTile_55: -1341057748
+      AidleTile_1: 451114527
+      AidleTile_9: -537124920
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

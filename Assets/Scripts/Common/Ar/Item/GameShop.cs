@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class GameShop : Shop
 {
-    ItemSO[] items;
-    GameObject[] itemSlotObjs;
-    [SerializeField] int itemCount;
+    public ItemSO[] items;
+    public GameObject itemSlotObj;
+    [SerializeField] int itemCount = 5;
+    private int itemIndex = 0;
 
     void Start()
     {
-        items = GetRandomItems(itemCount);
         Init();
+        items = GetRandomItems(itemCount);
         ShowItemContent();
     }
 
@@ -28,10 +29,11 @@ public class GameShop : Shop
     {
         for (int i = 0; i < itemCount; i++)
         {
-            ShopBuySlot itemSlot = new ShopBuySlot();
-            itemSlot.item = items[i];
-            itemSlotObjs[i] = Instantiate(itemSlot.gameObject);
-            itemSlotObjs[i].transform.SetParent(this.transform);
+            var tempObj = itemSlotObj;
+            itemSlotObj.GetComponent<ShopBuySlot>().item = items[i];
+            itemSlotObj.GetComponent<ShopBuySlot>().Init();
+            tempObj = Instantiate(tempObj, transform);
+            Debug.Log(itemIndex);
         }
     }
 }

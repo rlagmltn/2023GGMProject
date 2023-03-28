@@ -2,20 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Cinemachine;
 
 public class BackGround : MonoBehaviour
 {
     [SerializeField] Transform cameraMove;
     [SerializeField] float moveSpeed;
-    [SerializeField] GameObject roundCinemachine;
-    [SerializeField] GameObject hardCinemachine;
+    [SerializeField] CinemachineVirtualCamera cinemachine;
     [SerializeField] Vector2 minSize;
     [SerializeField] Vector2 maxSize;
     private Vector3 startPos;
     EventTrigger eventTrigger;
+    private CinemachineTransposer transposer;
 
     private void Start()
     {
+        transposer = cinemachine.GetCinemachineComponent<CinemachineTransposer>();
         eventTrigger = GetComponent<EventTrigger>();
 
         EventTrigger.Entry clickTrigger = new EventTrigger.Entry { eventID = EventTriggerType.BeginDrag };
@@ -36,8 +38,9 @@ public class BackGround : MonoBehaviour
         PlayerController.Instance.DisableQuickSlots();
         startPos.x = Util.Instance.mousePosition.x;
         startPos.y = Util.Instance.mousePosition.y;
-        roundCinemachine.SetActive(false);
-        hardCinemachine.SetActive(true);
+        transposer.m_XDamping = 0;
+        transposer.m_YDamping = 0;
+        transposer.m_ZDamping = 0;
     }
     private void Drag(BaseEventData data)
     {
@@ -49,7 +52,8 @@ public class BackGround : MonoBehaviour
 
     private void EndDrag(BaseEventData data)
     {
-        roundCinemachine.SetActive(true);
-        hardCinemachine.SetActive(false);
+        transposer.m_XDamping = 1;
+        transposer.m_YDamping = 1;
+        transposer.m_ZDamping = 1;
     }
 }

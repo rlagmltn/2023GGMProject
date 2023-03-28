@@ -22,8 +22,6 @@ public class ArFSM : MonoBehaviour
         float minDistance = float.MaxValue;
         int minIndex = -1;
     
-        Debug.Log(ars.Length);
-    
         for (int i = 0; i < ars.Length; i++)
         {
             distance = Vector2.Distance(transform.position, ars[i].transform.position);

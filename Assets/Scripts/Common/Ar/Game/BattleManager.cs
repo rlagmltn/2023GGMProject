@@ -96,8 +96,9 @@ public class BattleManager : MonoSingleton<BattleManager>
         attacker.BeforeAttack.Invoke();
         defender.BeforeDefence.Invoke();
 
+        attacker.AnimAttackStart();
+
         var criChance = Random.Range(1, 101);
-        Debug.Log(criChance);
         bool isDead;
         if(criChance<attacker.stat.CriPer)
             isDead = defender.Hit(attacker.stat.ATK * attacker.stat.CriPer);
@@ -110,7 +111,7 @@ public class BattleManager : MonoSingleton<BattleManager>
             defender.AfterDefence.Invoke();
 
             Vector2 a, b;
-            (a, b) = D2c(attacker.lastVelocity, defender.lastVelocity, attacker.rigid.position, defender.rigid.position, attacker.stat.WEIGHT, defender.stat.WEIGHT);
+            (a, b) = D2c(attacker.lastVelocity, defender.lastVelocity, attacker.rigid.position, defender.rigid.position, 1+attacker.stat.WEIGHT*0.1f, 1+defender.stat.WEIGHT*0.1f);
 
             attacker.Push(a);
             defender.Push(b);
@@ -138,7 +139,7 @@ public class BattleManager : MonoSingleton<BattleManager>
         }
 
         Vector2 a, b;
-        (a, b) = D2c(arOne.lastVelocity, arTwo.lastVelocity, arOne.rigid.position, arTwo.rigid.position, arOne.stat.WEIGHT, arTwo.stat.WEIGHT);
+        (a, b) = D2c(arOne.lastVelocity, arTwo.lastVelocity, arOne.rigid.position, arTwo.rigid.position, 1+arOne.stat.WEIGHT*0.1f, 1+arTwo.stat.WEIGHT*0.1f);
         arOne.Push(a);
         arTwo.Push(b);
 
@@ -163,7 +164,7 @@ public class BattleManager : MonoSingleton<BattleManager>
     private bool BulletDamage()
     {
         var isdead = arOne.Hit(damage);
-
+        arOne.AfterDefence?.Invoke();
         ResetAll();
 
         if (isdead) return false;

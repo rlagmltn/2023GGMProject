@@ -14,7 +14,9 @@ public class Shop : MonoBehaviour
         int number = 0;
 
         foreach(int num in result)
+        {
             items[number++] = itemDB.items[num];
+        }
 
         return items;
     }
@@ -33,9 +35,10 @@ public class Shop : MonoBehaviour
         {
             int number = Random.Range(min, max);
             if (!ArrayContains(numbers, number))
+            {
                 numbers[currentIndex++] = number;
+            }
         }
-
         return numbers;
     }
 
