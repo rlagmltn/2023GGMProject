@@ -71,7 +71,7 @@ public class Ar : MonoBehaviour
             AfterMove?.Invoke();
         }
         if (rigid.velocity.x < 0) sprite.flipX = true;
-        else sprite.flipX = false;
+        else if (rigid.velocity.x > 0) sprite.flipX = false;
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
