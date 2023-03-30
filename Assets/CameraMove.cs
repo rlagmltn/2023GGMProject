@@ -115,4 +115,16 @@ public class CameraMove : MonoSingleton<CameraMove>
         shakeCamNoise.m_AmplitudeGain = 0;
         shakeCamNoise.m_FrequencyGain = 0;
     }
+
+    public void TimeFreeze(float amount)
+    {
+        Time.timeScale = amount;
+        Debug.Log(Time.timeScale);
+        //StartCoroutine(TimeFreezeCoru(amount, duration));
+    }
+    
+    public void EffectZoom(float amount)
+    {
+        shakeCam.m_Lens.OrthographicSize = orthographicSize - (1 - amount)*2;
+    }
 }

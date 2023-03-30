@@ -100,6 +100,7 @@ public class BattleManager : MonoSingleton<BattleManager>
 
         var criChance = Random.Range(1, 101);
         bool isDead;
+
         if(criChance<attacker.stat.CriPer)
             isDead = defender.Hit(attacker.stat.ATK * attacker.stat.CriPer);
         else
@@ -142,6 +143,9 @@ public class BattleManager : MonoSingleton<BattleManager>
         (a, b) = D2c(arOne.lastVelocity, arTwo.lastVelocity, arOne.rigid.position, arTwo.rigid.position, 1+arOne.stat.WEIGHT*0.1f, 1+arTwo.stat.WEIGHT*0.1f);
         arOne.Push(a);
         arTwo.Push(b);
+
+        arOne.AfterCrash?.Invoke();
+        arTwo.AfterCrash?.Invoke();
 
         ResetAll();
     }
