@@ -14,16 +14,7 @@ public class Archer : Player
 
     protected override void StatReset()
     {
-        stat.MaxHP = 16;
-        stat.MaxDP = 0;
-        stat.ATK = 6;
-        stat.SATK = 7;
-        stat.CriPer = 99;
-        stat.CriDmg = 1.5f;
-        stat.WEIGHT = 1;
         isRangeCharacter = true;
-        skillCooltime = 5;
-        currentCooltime = 0;
         base.StatReset();
     }
 

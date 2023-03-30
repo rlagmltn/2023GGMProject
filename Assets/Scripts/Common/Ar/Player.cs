@@ -5,9 +5,8 @@ using UnityEngine.Events;
 
 public class Player : Ar
 {
-    public int ar_id;
-    public string ar_name;
-    public Sprite ar_sprite;
+    public ArSO so;
+
     public bool isSellected;
     public int currentCooltime { get; set; }
     public bool isRangeCharacter { get; protected set; }
@@ -36,14 +35,13 @@ public class Player : Ar
 
     public Player()
     {
-        ar_id = -1;
-        ar_name = "";
+
     }
 
-    public Player(ArObj itemObj)
+    public Player(ArSO arSO)
     {
-        ar_id = itemObj.arData.ar_id;
-        ar_name = itemObj.arData.ar_name;
+        gameObject.name = arSO.characterInfo.Name;
+        sprite.sprite = arSO.characterInfo.Image;
     }
 
     protected override void Start()
@@ -64,6 +62,15 @@ public class Player : Ar
 
     protected override void StatReset()
     {
+        stat.MaxHP = (int)so.surviveStats.MaxHP;
+        stat.HP = (int)so.surviveStats.currentHP;
+        stat.MaxSP = (int)so.surviveStats.MaxShield;
+        stat.SP = (int)so.surviveStats.currentShield;
+        stat.ATK = (int)so.attackStats.currentAtk;
+        stat.SATK = (int)so.attackStats.currentSkillAtk;
+        stat.CriPer = (int)so.criticalStats.currentCritalPer;
+        stat.CriDmg = (int)so.criticalStats.currentCriticalDamage;
+        stat.WEIGHT = (int)so.surviveStats.currentWeight;
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
         pushPower = 22;

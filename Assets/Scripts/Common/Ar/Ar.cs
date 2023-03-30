@@ -34,7 +34,7 @@ public class Ar : MonoBehaviour
     public UnityEvent OnOutDie;
     public UnityEvent OnBattleDie;
 
-    private SpriteRenderer sprite;
+    protected SpriteRenderer sprite;
     private Animator animator;
 
     [SerializeField] private Transform battleTarget;
@@ -62,7 +62,7 @@ public class Ar : MonoBehaviour
     protected virtual void StatReset() // 수치 초기화
     {
         stat.HP = stat.MaxHP;
-        stat.DP = stat.MaxDP;
+        stat.SP = stat.MaxSP;
         isDead = false;
         DeadCheck();
     }
@@ -155,13 +155,13 @@ public class Ar : MonoBehaviour
 
     public bool Hit(int damage)
     {
-        if(damage>0 && stat.DP>0)
+        if(damage>0 && stat.SP>0)
         {
-            stat.DP -= damage;
-            if (stat.DP < 0)
+            stat.SP -= damage;
+            if (stat.SP < 0)
             {
-                damage = -stat.DP;
-                stat.DP = 0;
+                damage = -stat.SP;
+                stat.SP = 0;
             }
             else damage = 0;
         }
@@ -182,7 +182,7 @@ public class Ar : MonoBehaviour
             gameObject.SetActive(false);
             return true;
         }
-        if (stat.MaxDP != 0) dpBar.localScale = new Vector3(Mathf.Clamp((float)stat.DP / stat.MaxDP, 0, 1), 1, 1); else dpBar.localScale = new Vector3(0, 1, 1);
+        if (stat.MaxSP != 0) dpBar.localScale = new Vector3(Mathf.Clamp((float)stat.SP / stat.MaxSP, 0, 1), 1, 1); else dpBar.localScale = new Vector3(0, 1, 1);
         hpBar.localScale = new Vector3(Mathf.Clamp((float)stat.HP / stat.MaxHP, 0, 1), 1, 1);
         return false;
     }
@@ -198,7 +198,7 @@ public class Ar : MonoBehaviour
 
     public void DecreaseDP(int val)
     {
-        stat.DP = Mathf.Max(0, stat.DP - val);
+        stat.SP = Mathf.Max(0, stat.SP - val);
     }
 
     public void AnimAttackStart()

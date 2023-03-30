@@ -5,7 +5,6 @@ using TMPro;
 
 public class PlayerController : MonoSingleton<PlayerController>
 {
-    [SerializeField] ArInventoryObj deck;
     [SerializeField] QuickSlot pf_QuickSlot;
     [SerializeField] Transform slotHolder;
     [SerializeField] Transform[] spawnPoints;
@@ -38,9 +37,9 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     private void SummonPlayers()
     {
-        for(int i=0; i<deck.inventorySlots.Length; i++)
+        for(int i=0; i<Global.Selected_Ar_Preset.Length; i++)
         {
-            var player = Instantiate(deck.inventorySlots[i].item, null);
+            var player = Instantiate(Global.Selected_Ar_Preset[i].ArData, null);
             player.transform.position = spawnPoints[i].position;
             var quickSlot = Instantiate(pf_QuickSlot, slotHolder);
             quickSlots.Add(quickSlot);
