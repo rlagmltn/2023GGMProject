@@ -12,4 +12,9 @@ public class StageSOHolder : MonoBehaviour
     {
         return Stage;
     }
+
+    public void EnterStage()
+    {
+        TestStageManager.Instance.StageEnter(Stage);
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class TestStageManager : MonoBehaviour
+public class TestStageManager : MonoSingleton<TestStageManager>
 {
     [SerializeField] private Transform startStage; //그냥 아무것도 아닌 시작하는 스테이지 아마도 emptyStage가 아닐까?
     [SerializeField] private List<Transform> AllButtons;
@@ -25,13 +25,29 @@ public class TestStageManager : MonoBehaviour
         currentStage = startStage;
         FindNextStage();
         StageDisable();
+        ButtonInit();
+    }
+
+    void ButtonInit()
+    {
+        for(int num = 0; num < AllButtons.Count; num++)
+        {
+            Button btn = AllButtons[num].GetComponent<Button>();
+            RemoveAllButtonListeners(btn);
+            AddButtonListener(btn, AllButtons[num].GetComponent<StageSOHolder>().EnterStage);
+        }
+    }
+
+    void InfoPannelActive(bool active)
+    {
+        StageInfoPannel.gameObject.SetActive(active);
     }
 
     /// <summary>
     /// 게임에 들어갈 때 실행할 함수
     /// </summary>
     /// <param name="stageSO"></param>
-    void StageEnter(StageSO stageSO)
+    public void StageEnter(StageSO stageSO)
     {
         Global.EnterStage = stageSO;
         //맵 로딩 해줘야함
