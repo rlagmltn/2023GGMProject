@@ -71,7 +71,11 @@ public class Ar : MonoBehaviour
     {
         if (rigid.velocity.normalized != lastVelocity.normalized && rigid.velocity.magnitude != 0)
         {
-            RaycastHit2D[] hit = Physics2D.BoxCastAll(gameObject.transform.position, Vector2.one/2, Mathf.Atan2(rigid.velocity.y, rigid.velocity.x) * Mathf.Rad2Deg ,rigid.velocity.normalized, rigid.velocity.magnitude / 2 / (1 + stat.WEIGHT));
+            RaycastHit2D[] hit = Physics2D.BoxCastAll(gameObject.transform.position, 
+                Vector2.one/2, 
+                Mathf.Atan2(rigid.velocity.y, rigid.velocity.x) * Mathf.Rad2Deg, 
+                rigid.velocity.normalized, 
+                rigid.velocity.magnitude / 2 / (1 + stat.WEIGHT));
 
             if (hit.Length <= 1) return;
 

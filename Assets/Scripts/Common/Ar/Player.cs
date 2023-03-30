@@ -29,6 +29,7 @@ public class Player : Ar
     private GameObject attackRange;
     private GameObject skillRange;
     private GameObject skillActived;
+    private Transform MoveEffectPos;
 
     private MiniAr miniPlayer;
 
@@ -55,6 +56,7 @@ public class Player : Ar
         attackRange = rangeContainer.GetChild(1).gameObject;
         skillRange = rangeContainer.GetChild(2).gameObject;
         skillActived = transform.GetChild(3).gameObject;
+        MoveEffectPos = transform.GetChild(4).transform;
         DisableRanges();
 
         MouseUp.AddListener(() => { isMove = true; });
@@ -167,6 +169,7 @@ public class Player : Ar
     private void Move(Vector2 angle)
     {
         MouseUp?.Invoke();
+        EffectManager.Instance.InstantiateEffect((int)EffectManager.Effect.MOVE, transform.position, angle);
         TurnManager.Instance.SomeoneIsMoving = true;
         rigid.velocity = ((angle.normalized * power) * pushPower)/(1+stat.WEIGHT*0.1f);
     }
