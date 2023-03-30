@@ -17,6 +17,7 @@ public class StageManager : MonoSingleton<StageManager>
 
     [SerializeField] private Button closeButton;
     [SerializeField] private Button startButton;
+    [SerializeField] private ArSOList ArList;
 
     private void Start()
     {
@@ -67,5 +68,13 @@ public class StageManager : MonoSingleton<StageManager>
     void AddButtonEvent(Button button, UnityAction action)
     {
         button.onClick.AddListener(action);
+    }
+
+    private void OnApplicationQuit()
+    {
+        foreach (ArSO ar in ArList.list)
+        {
+            ar.isUse = false;
+        }
     }
 }
