@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc33080b8fafa27479602cce7b7008dd, type: 3}
+  m_Name: Archer
+  m_EditorClassIdentifier: 
+  characterInfo:
+    image: {fileID: 21300000, guid: 476502d761fdcfa47967595d9eab3df6, type: 3}
+    nameString: "\uC5D0\uC774\uD504\uB9B4"
+    Rarity: 0
+    arClass: 1
+    Level: 1
+  attackStats:
+    baseAtk: 4
+    currentAtk: 4
+    baseSkillAtk: 4
+    currentSkillAtk: 8
+  criticalStats:
+    baseCriticalPer: 10
+    currentCritalPer: 10
+    baseCriticalDamage: 50
+    currentCriticalDamage: 50
+  surviveStats:
+    baseHP: 10
+    MaxHP: 10
+    currentHP: 10
+    baseShield: 4
+    MaxShield: 4
+    currentShield: 4
+    baseWeight: 3
+    currentWeight: 3
+  skillCoolDown:
+    skillCoolTime: 3
+    MaxSkillCoolTime: 3
+    currentSkillCoolTime: 0
+  isTake: 1
+  isUse: 0
+  ArData: {fileID: 8771273036672505357, guid: 594c5cfc6fc31074b905e55d9a9c7fcb, type: 3}
+  Summary: "\uAC15\uB824\uD06C\uD55C \uD654\uC0B4\uC744 \uBC1C\uC0AC\uD558\uB294
+    \uC139\uC2DC\uD55C \uAD81\uC218\uC784"

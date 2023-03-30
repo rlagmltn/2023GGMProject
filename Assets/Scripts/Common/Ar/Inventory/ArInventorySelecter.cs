@@ -13,11 +13,22 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
     [SerializeField] private ArSO emptyAr;
     [SerializeField] private List<Button> Buttons;
     [SerializeField] private List<Image> ArImages;
+    [SerializeField] private Button StartButton;
+    [SerializeField] private Transform InfoPannel;
+    [SerializeField] private Image InfoImage;
+    [SerializeField] private TextMeshProUGUI Ar_NameText;
+    [SerializeField] private List<TextMeshProUGUI> InfoTexts;
+    [SerializeField] private Transform InfoStatPannel;
+    [SerializeField] private Transform InfoSkillPannel;
+    [SerializeField] private Button InfoStatButton;
+    [SerializeField] private Button InfoSkillButton;
 
+    private bool isSkillPannel = false;
+    private ArSO SelectedAR;
     private List<ArSO> sortedArSO;
-    public ArSO[] FirstPreset;
-    public ArSO[] SecondPreset;
-    public ArSO[] ThirdPreset;
+    private ArSO[] FirstPreset;
+    private ArSO[] SecondPreset;
+    private ArSO[] ThirdPreset;
 
     private int SelectPresetNum;
 
@@ -32,6 +43,7 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
         SecondPreset = new ArSO[3];
         ThirdPreset = new ArSO[3];
         SelectPresetNum = 0;
+        SelectedAR = emptyAr;
 
         SetEmptySO();
         ClassfyArSO();
@@ -95,9 +107,37 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
 
         foreach(ArSO ar in arList)
         {
-            ArImages[num].sprite = ar.Image;
+            ArImages[num].sprite = ar.characterInfo.Image;
             ++num;
         }
+
+
+        InfoSkillPannel.gameObject.SetActive(isSkillPannel);
+        InfoStatPannel.gameObject.SetActive(!isSkillPannel);
+
+        if(SelectedAR == emptyAr)
+        {
+            InfoPannel.gameObject.SetActive(false);
+            return;
+        }
+
+        InfoPannel.gameObject.SetActive(true);
+
+        if(isSkillPannel)
+        {
+            InfoImage.sprite = SelectedAR.skill.SkillImage;
+            Ar_NameText.text = SelectedAR.skill.SkillName;
+            InfoTexts[6].text = SelectedAR.skill.SkillSummary;
+            return;
+        }
+        InfoImage.sprite = SelectedAR.characterInfo.Image;
+        Ar_NameText.text = SelectedAR.characterInfo.Name;
+        InfoTexts[0].text = $" : {SelectedAR.surviveStats.BaseHP}";
+        InfoTexts[1].text = $" : {SelectedAR.surviveStats.BaseShield}";
+        InfoTexts[2].text = $" : {SelectedAR.attackStats.BaseAtk}";
+        InfoTexts[3].text = $" : {SelectedAR.attackStats.BaseSkillAtk}";
+        InfoTexts[4].text = $" : {SelectedAR.criticalStats.BaseCritalPer}";
+        InfoTexts[5].text = $" : {SelectedAR.surviveStats.BaseWeight}";
     }
 
     /// <summary>
@@ -135,6 +175,8 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
             }
         }
 
+        isSkillPannel = false;
+        SelectedAR = ar;
         UpdateUI();
     }
 
@@ -169,15 +211,34 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
         RemoveAllButtonEvents(ArImages[0].GetComponent<Button>());
         RemoveAllButtonEvents(ArImages[1].GetComponent<Button>());
         RemoveAllButtonEvents(ArImages[2].GetComponent<Button>());
+        RemoveAllButtonEvents(StartButton);
+        RemoveAllButtonEvents(InfoStatButton);
+        RemoveAllButtonEvents(InfoSkillButton);
 
+        AddButtonEvent(StartButton, StartButtonClick);
         AddButtonEvent(ArImages[0].GetComponent<Button>(), FirstImageClick);
         AddButtonEvent(ArImages[1].GetComponent<Button>(), SecondImageClick);
         AddButtonEvent(ArImages[2].GetComponent<Button>(), ThirdImageClick);
+        AddButtonEvent(InfoStatButton, StatInfoClick);
+        AddButtonEvent(InfoSkillButton, SkillInfoClick);
     }
+
+    void StatInfoClick()
+    {
+        isSkillPannel = false;
+        AllUIUpdate();
+    }
+    void SkillInfoClick()
+    {
+        isSkillPannel = true;
+        AllUIUpdate();
+    }
+
 
     void FirstPresetButtonClick()
     {
         SelectPresetNum = 0;
+        SelectedAR = emptyAr;
         ChangePreset();
         AllUIUpdate();
     }
@@ -185,12 +246,14 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
     void SecondPresetButtonClick()
     {
         SelectPresetNum = 1;
+        SelectedAR = emptyAr;
         ChangePreset();
         AllUIUpdate();
     }
     void ThirdPresetButtonClick()
     {
         SelectPresetNum = 2;
+        SelectedAR = emptyAr;
         ChangePreset();
         AllUIUpdate();
     }
@@ -214,6 +277,7 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
 
     void FirstImageClick()
     {
+        SelectedAR = emptyAr;
         ArSO[] arList = ReturnPresetList();
 
         arList[0].isUse = false;
@@ -223,6 +287,7 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
 
     void SecondImageClick()
     {
+        SelectedAR = emptyAr;
         ArSO[] arList = ReturnPresetList();
 
         arList[1].isUse = false;
@@ -232,6 +297,7 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
 
     void ThirdImageClick()
     {
+        SelectedAR = emptyAr;
         ArSO[] arList = ReturnPresetList();
 
         arList[2].isUse = false;
@@ -249,14 +315,28 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
         UpdateUI();
     }
 
+    void StartButtonClick()
+    {
+        if(CanSelect())
+        {
+            Debug.Log("3개의 알을 전부 선택해야함");
+            return;
+        }
+
+        ArTOGlobal();
+        SceneManager.LoadScene("MapScene");
+    }
+
     public void ArTOGlobal()
     {
-        for(int i = 0; i < FirstPreset.Length; i++)
+        ArSO[] arList = ReturnPresetList();
+
+        for(int i = 0; i < arList.Length; i++)
         {
-            Global.FirstPreset[i] = FirstPreset[i];
-            Global.SecondPreset[i] = SecondPreset[i];
-            Global.ThirdPreset[i] = ThirdPreset[i];
+            Global.Selected_Ar_Preset[i] = arList[i];
+            Debug.Log(Global.Selected_Ar_Preset[i].characterInfo.Name);
         }
+
     }
 
     void RemoveAllButtonEvents(Button button)

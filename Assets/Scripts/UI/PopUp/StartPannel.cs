@@ -13,7 +13,7 @@ public class StartPannel : MonoBehaviour
 
     private void Awake()
     {
-        Init();
+        //Init();
     }
 
     private void Init()
@@ -52,7 +52,6 @@ public class StartPannel : MonoBehaviour
 
     private void ChangeSceneToMap()
     {
-        ArInventorySelecter.Instance.ArTOGlobal();
         SceneManager.LoadScene("MapScene");
     }
 

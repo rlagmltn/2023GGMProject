@@ -20,9 +20,7 @@ public class Global
     public static Camera mainCam;
     public static Transform Map;
 
-    public static ArSO[] FirstPreset = new ArSO[3];
-    public static ArSO[] SecondPreset = new ArSO[3];
-    public static ArSO[] ThirdPreset = new ArSO[3];
+    public static ArSO[] Selected_Ar_Preset = new ArSO[3];
 }
 
 public enum ePrefabs
@@ -104,4 +102,31 @@ public enum eStageState
     Event,
     Shop,
     Battle,
+}
+
+public enum ArRarity
+{
+    NORMAL,
+    RARE,
+    UNIQUE,
+    LEGENDARY,
+}
+
+public enum ItemRarity
+{
+    NORMAL,
+    RARE,
+    UNIQUE,
+    LEGENDARY,
+    BOSSCURSE,
+}
+
+public enum ArClasses
+{
+    NONE,
+    ARCHER,     //아처
+    LOG,        //로그
+    WARRIOR,    //전사
+    PRIEST,     //프리스트
+    WIZARD,     //마법사
 }

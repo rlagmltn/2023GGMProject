@@ -12,14 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc33080b8fafa27479602cce7b7008dd, type: 3}
   m_Name: 18
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: d6c28b1f93e3bdd43bc8a0160ce5f8cc, type: 3}
-  nameString: "18\uBC88\uC54C"
-  baseAtk: 18
-  currentAtk: 18
-  baseHP: 18
-  currentHP: 18
-  baseWeight: 18
-  currentWeight: 18
+  characterInfo:
+    image: {fileID: 21300000, guid: 5f03392d09cd94240a3c17119b60781f, type: 3}
+    nameString: 
+    Rarity: 0
+    arClass: 0
+    Level: 0
+  attackStats:
+    baseAtk: 0
+    currentAtk: 0
+    baseSkillAtk: 0
+    currentSkillAtk: 0
+  criticalStats:
+    baseCriticalPer: 0
+    currentCritalPer: 0
+    baseCriticalDamage: 0
+    currentCriticalDamage: 0
+  surviveStats:
+    baseHP: 0
+    MaxHP: 0
+    currentHP: 0
+    baseShield: 0
+    MaxShield: 0
+    currentShield: 0
+    baseWeight: 0
+    currentWeight: 0
+  skillCoolDown:
+    skillCoolTime: 0
+    MaxSkillCoolTime: 0
+    currentSkillCoolTime: 0
   isTake: 1
   isUse: 0
-  Explanation: "13\uBC88\uC54C \uC774\uB2E4"
+  ArData: {fileID: 0}
+  Summary: 

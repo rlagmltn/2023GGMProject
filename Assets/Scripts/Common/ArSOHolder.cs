@@ -13,7 +13,7 @@ public class ArSOHolder : MonoBehaviour
     private void UpdateButtonUI()
     {
         ArImage = transform.GetChild(0).GetComponent<Image>();
-        ArImage.sprite = Ar.Image;
+        ArImage.sprite = Ar.characterInfo.Image;
     }
 
     private void Button_ActiveSelf()
