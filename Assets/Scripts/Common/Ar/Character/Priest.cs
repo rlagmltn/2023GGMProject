@@ -12,16 +12,7 @@ public class Priest : Player
 
     protected override void StatReset()
     {
-        stat.MaxHP = 18;
-        stat.MaxDP = 0;
-        stat.ATK = 5;
-        stat.SATK = -6;
-        stat.CriPer = 5;
-        stat.CriDmg = 1.5f;
-        stat.WEIGHT = 2;
         isRangeCharacter = false;
-        skillCooltime = 7;
-        currentCooltime = 0;
         base.StatReset();
     }
 

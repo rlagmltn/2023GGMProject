@@ -14,16 +14,7 @@ public class Warrior : Player
 
     protected override void StatReset()
     {
-        stat.MaxHP = 20;
-        stat.MaxDP = 4;
-        stat.ATK = 4;
-        stat.SATK = 6;
-        stat.CriPer = 5;
-        stat.CriDmg = 1.5f;
-        stat.WEIGHT = 4;
         isRangeCharacter = false;
-        skillCooltime = 7;
-        currentCooltime = 0;
         base.StatReset();
     }
 

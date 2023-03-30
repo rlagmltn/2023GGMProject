@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BattleManager : MonoSingleton<BattleManager>
 {
-    private Ar arOne, arTwo;
+    [SerializeField] private Ar arOne, arTwo;
     private Ar arAtk;
     private int damage;
 
@@ -27,7 +27,6 @@ public class BattleManager : MonoSingleton<BattleManager>
                 {
                     CrushBattle();
                 }
-
             }
         }
     }

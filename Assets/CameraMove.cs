@@ -119,7 +119,6 @@ public class CameraMove : MonoSingleton<CameraMove>
     public void TimeFreeze(float amount)
     {
         Time.timeScale = amount;
-        Debug.Log(Time.timeScale);
         //StartCoroutine(TimeFreezeCoru(amount, duration));
     }
     

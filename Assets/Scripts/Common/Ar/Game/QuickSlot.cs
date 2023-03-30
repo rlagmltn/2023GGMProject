@@ -20,7 +20,7 @@ public class QuickSlot : MonoBehaviour
         unableImage = transform.GetChild(2).GetComponent<Image>();
 
         unableImage.gameObject.SetActive(false);
-        playerImage.sprite = Player.ar_sprite;
+        playerImage.sprite = Player.so.characterInfo.Image;
     }
 
     public void Connect(Player player)

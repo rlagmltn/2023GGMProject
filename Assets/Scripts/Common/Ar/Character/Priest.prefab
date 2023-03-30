@@ -187,16 +187,15 @@ MonoBehaviour:
   OnBattleDie:
     m_PersistentCalls:
       m_Calls: []
-  ar_id: 1
-  ar_name: 
-  ar_sprite: {fileID: 21300000, guid: 29437a4557fe1e344b783afeeceee8a7, type: 3}
+  battleTarget: {fileID: 0}
+  so: {fileID: 11400000, guid: 4a913f1654848b14cbe922d5e298ad32, type: 2}
   isSellected: 0
   isEnd: 1
   MouseUp:
     m_PersistentCalls:
       m_Calls: []
   itemSlots:
-  - {fileID: 11400000, guid: eed6633ded688124183c9663d7410dc8, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
 --- !u!95 &190870191
