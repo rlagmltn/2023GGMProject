@@ -61,8 +61,6 @@ public class Ar : MonoBehaviour
 
     protected virtual void StatReset() // 수치 초기화
     {
-        stat.HP = stat.MaxHP;
-        stat.SP = stat.MaxSP;
         isDead = false;
         DeadCheck();
     }
