@@ -71,6 +71,7 @@ public class Player : Ar
         stat.CriPer = (int)so.criticalStats.currentCritalPer;
         stat.CriDmg = (int)so.criticalStats.currentCriticalDamage;
         stat.WEIGHT = (int)so.surviveStats.currentWeight;
+        skillCooltime = so.skill.MaxSkillCoolTime;
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
         pushPower = 22;

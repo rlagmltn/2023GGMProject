@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    [SerializeField] private ArSOList ArList;
     private Transform map;
     public Enemy[] enemies;
     public Player[] friendly;
@@ -70,5 +71,13 @@ public class GameManager : MonoSingleton<GameManager>
         yield return new WaitForSeconds(0.5f);
         Time.timeScale = 1f;
         MGUI.Instance.GameClear();
+    }
+
+    private void OnApplicationQuit()
+    {
+        foreach (ArSO ar in ArList.list)
+        {
+            ar.isUse = false;
+        }
     }
 }
