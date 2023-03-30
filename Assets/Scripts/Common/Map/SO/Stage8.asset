@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c27043b600b654bae2dcfe517491c0, type: 3}
   m_Name: Stage8
   m_EditorClassIdentifier: 
-  stageName: 1 - 8
-  stageImage: {fileID: 21300000, guid: 0b72b5aff9b28064eb538a3c610ecf7d, type: 3}
-  isEndStage: 0
-  explanationText: "8\uBC88 \uC2A4\uD14C\uC774\uC9C0"
+  stageInfo:
+    stageName: 
+    stageImage: {fileID: 0}
+    explanationText: 
   stageKind: 3
+  IsCleared: 0
+  IsCanEnter: 0
   map: {fileID: 4222675004877185896, guid: 2e5d623063e071a49af1be42da9b6ea2, type: 3}

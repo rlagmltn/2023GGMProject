@@ -41,9 +41,9 @@ public class StageManager : MonoSingleton<StageManager>
     public void ShowStageInfo(StageSO stage)
     {
         stagePanel.gameObject.SetActive(true);
-        stageNameText.text = stage.stageName;
-        explanationText.text = stage.explanationText;
-        MapImage.sprite = stage.stageImage;
+        stageNameText.text = stage.stageInfo.stageName;
+        explanationText.text = stage.stageInfo.explanationText;
+        MapImage.sprite = stage.stageInfo.stageImage;
         Global.Map = stage.map;
     }
 
@@ -55,7 +55,7 @@ public class StageManager : MonoSingleton<StageManager>
     void StageStart()
     {
         //MGScene.Instance.ChangeScene(eSceneName.InGame);
-        SceneManager.LoadScene("InGameScene");
+        SceneManager.LoadScene("TestScene");
         Debug.Log("Change Scene to InGameScene");
     }
 

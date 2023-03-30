@@ -6,16 +6,24 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "StageSO", menuName = "SO/StageSO")]
 public class StageSO : ScriptableObject
 {
+    public StageInfo stageInfo;
+
+    public eStageState stageKind;
+
+    public bool IsCleared;
+
+    public bool IsCanEnter;
+
+    public Transform map;
+}
+
+[System.Serializable]
+public class StageInfo
+{
     public string stageName;
 
     public Sprite stageImage;
 
-    public bool isEndStage;
-
     [Multiline(5)]
     public string explanationText;
-
-    public eStageState stageKind;
-
-    public Transform map;
 }
