@@ -37,6 +37,9 @@ public class Ar : MonoBehaviour
     private SpriteRenderer sprite;
     private Animator animator;
 
+    [SerializeField] private Transform battleTarget;
+    private float slowMagnitude = 5f;
+
     protected virtual void Start()
     {
         stat = new Stat();
@@ -47,6 +50,13 @@ public class Ar : MonoBehaviour
         dpImage = dpBar.GetComponentInChildren<SpriteRenderer>();
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+
+        AfterCrash.AddListener(() =>
+        {
+            battleTarget = null;
+            CameraMove.Instance.TimeFreeze(1);
+            CameraMove.Instance.EffectZoom(0);
+        });
     }
 
     protected virtual void StatReset() // 수치 초기화
@@ -59,6 +69,24 @@ public class Ar : MonoBehaviour
 
     protected void FixedUpdate()
     {
+        if (rigid.velocity.normalized != lastVelocity.normalized && rigid.velocity.magnitude != 0)
+        {
+            RaycastHit2D[] hit = Physics2D.BoxCastAll(gameObject.transform.position, Vector2.one/2, Mathf.Atan2(rigid.velocity.y, rigid.velocity.x) * Mathf.Rad2Deg ,rigid.velocity.normalized, rigid.velocity.magnitude / 2 / (1 + stat.WEIGHT));
+
+            if (hit.Length <= 1) return;
+
+            if(hit[1].collider.GetComponent<Ar>())
+            {
+                battleTarget = hit[1].collider.transform;
+            }
+            else
+            {
+                battleTarget = null;
+                CameraMove.Instance.TimeFreeze(1);
+                CameraMove.Instance.EffectZoom(0);
+            }
+        }
+
         lastVelocity = rigid.velocity;
     }
 
@@ -72,6 +100,18 @@ public class Ar : MonoBehaviour
         }
         if (rigid.velocity.x < 0) sprite.flipX = true;
         else if (rigid.velocity.x > 0) sprite.flipX = false;
+
+        if(battleTarget!=null)
+        {
+            var distance = transform.position - battleTarget.position;
+            if(distance.magnitude<slowMagnitude)
+            {
+                var amount = distance.magnitude / slowMagnitude == float.NaN ? 1 : distance.magnitude / slowMagnitude;
+                CameraMove.Instance.EffectZoom(amount);
+                if (amount < 0.25f) amount *= amount;
+                CameraMove.Instance.TimeFreeze(amount);
+            }
+        }
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
@@ -95,6 +135,16 @@ public class Ar : MonoBehaviour
         if (collision.CompareTag("Out"))
         {
             Out();
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.transform == battleTarget)
+        {
+            battleTarget = null;
+            CameraMove.Instance.TimeFreeze(1);
+            CameraMove.Instance.EffectZoom(0);
         }
     }
 
