@@ -66,7 +66,7 @@ public class BanditWarrior : Enemy
         {
             Debug.Log("¹æ±ï»ç¿ë");
             currentPassiveCool = passiveCool;
-            lastAr.DecreaseDP(1);
+            lastAr.DecreaseSP(1);
             lastAr = null;
         }
     }
