@@ -27,9 +27,6 @@ public class Player : Ar
     private GameObject moveRange;
     private GameObject attackRange;
     private GameObject skillRange;
-    private GameObject skillActived;
-
-    private MiniAr miniPlayer;
 
     [SerializeField] ItemSO[] itemSlots = new ItemSO[3];
 
@@ -52,7 +49,6 @@ public class Player : Ar
         moveRange = rangeContainer.GetChild(0).gameObject;
         attackRange = rangeContainer.GetChild(1).gameObject;
         skillRange = rangeContainer.GetChild(2).gameObject;
-        skillActived = transform.GetChild(3).gameObject;
         DisableRanges();
 
         MouseUp.AddListener(() => { isMove = true; });
@@ -124,9 +120,6 @@ public class Player : Ar
     void ActiveRangesAndChangeColor(GameObject obj)
     {
         obj.SetActive(true);
-
-        miniPlayer.ShowRange(obj);
-
         ChangeColor_A(obj, 0.8f);
     }
 
@@ -177,6 +170,7 @@ public class Player : Ar
         MouseUp?.Invoke();
         TurnManager.Instance.SomeoneIsMoving = true;
         rigid.velocity = ((angle.normalized * power) * pushPower)/(1+stat.WEIGHT*0.1f);
+        EffectManager.Instance.InstantiateEffect(2, transform.position, angle);
     }
 
     protected virtual void Attack(Vector2 angle)
@@ -187,7 +181,6 @@ public class Player : Ar
     {
         AnimAttackStart();
         currentCooltime = skillCooltime;
-        skillActived.SetActive(false);
         CameraMove.Instance.Shake();
     }
 
@@ -196,7 +189,6 @@ public class Player : Ar
         moveRange.SetActive(false);
         attackRange.SetActive(false);
         skillRange.SetActive(false);
-        miniPlayer.DisableRange();
     }
 
     public GameObject ActiveRange()
@@ -241,7 +233,6 @@ public class Player : Ar
         }
         if (currentCooltime == 0)
         {
-            skillActived.SetActive(true);
             slot.SkillReady(true);
         }
     }
@@ -274,11 +265,6 @@ public class Player : Ar
         Color color = obj.GetComponent<SpriteRenderer>().color;
         color = new Color(color.r, color.g, color.b, num_A);
         obj.GetComponent<SpriteRenderer>().color = color;
-    }
-
-    public void SetMini(MiniAr mini)
-    {
-        miniPlayer = mini;
     }
 
     protected override bool DeadCheck()

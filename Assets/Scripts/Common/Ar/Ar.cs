@@ -153,15 +153,24 @@ public class Ar : MonoBehaviour
 
     public virtual bool Hit(int damage)
     {
-        if(damage>0 && stat.SP>0)
+
+        if(damage>=0)
         {
-            stat.SP -= damage;
-            if (stat.SP < 0)
+            EffectManager.Instance.InstantiateFloatDamage(transform.position).DamageText(damage);
+            if (stat.SP>0)
             {
-                damage = -stat.SP;
-                stat.SP = 0;
+                stat.SP -= damage;
+                if (stat.SP < 0)
+                {
+                    damage = -stat.SP;
+                    stat.SP = 0;
+                }
+                else damage = 0;
             }
-            else damage = 0;
+            if (damage >= 0)
+                StartCoroutine(HitColorChange(Color.red));
+            else
+                StartCoroutine(HitColorChange(Color.green));
         }
         stat.HP = Mathf.Clamp(stat.HP - damage, 0, stat.MaxHP);
         return DeadCheck();
@@ -194,7 +203,14 @@ public class Ar : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void DecreaseDP(int val)
+    private IEnumerator HitColorChange(Color color)
+    {
+        sprite.color = color;
+        yield return new WaitForSeconds(0.25f);
+        sprite.color = Color.white;
+    }
+
+    public void DecreaseSP(int val)
     {
         stat.SP = Mathf.Max(0, stat.SP - val);
     }
