@@ -50,7 +50,7 @@ public class QuickSlot : MonoBehaviour
             background.color = Color.yellow;
         }
         else
-            background.color = Color.white;
+            background.color = Color.black;
     }
 
     public void SkillReady(bool isReady)
