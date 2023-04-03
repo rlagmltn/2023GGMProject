@@ -17,6 +17,7 @@ public class StageManager : MonoSingleton<StageManager>
 
     [SerializeField] private Button closeButton;
     [SerializeField] private Button startButton;
+    [SerializeField] private ArSOList ArList;
 
     private void Start()
     {
@@ -41,9 +42,9 @@ public class StageManager : MonoSingleton<StageManager>
     public void ShowStageInfo(StageSO stage)
     {
         stagePanel.gameObject.SetActive(true);
-        stageNameText.text = stage.stageName;
-        explanationText.text = stage.explanationText;
-        MapImage.sprite = stage.stageImage;
+        stageNameText.text = stage.stageInfo.stageName;
+        explanationText.text = stage.stageInfo.explanationText;
+        MapImage.sprite = stage.stageInfo.stageImage;
         Global.Map = stage.map;
     }
 
@@ -55,7 +56,7 @@ public class StageManager : MonoSingleton<StageManager>
     void StageStart()
     {
         //MGScene.Instance.ChangeScene(eSceneName.InGame);
-        SceneManager.LoadScene("InGameScene");
+        SceneManager.LoadScene("TestScene");
         Debug.Log("Change Scene to InGameScene");
     }
 
@@ -67,5 +68,13 @@ public class StageManager : MonoSingleton<StageManager>
     void AddButtonEvent(Button button, UnityAction action)
     {
         button.onClick.AddListener(action);
+    }
+
+    private void OnApplicationQuit()
+    {
+        foreach (ArSO ar in ArList.list)
+        {
+            ar.isUse = false;
+        }
     }
 }

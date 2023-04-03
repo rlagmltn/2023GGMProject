@@ -348,4 +348,12 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
     {
         button.onClick.AddListener(action);
     }
+
+    private void OnApplicationQuit()
+    {
+        foreach(ArSO ar in ArList.list)
+        {
+            ar.isUse = false;
+        }
+    }
 }

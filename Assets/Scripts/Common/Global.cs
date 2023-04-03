@@ -21,6 +21,8 @@ public class Global
     public static Transform Map;
 
     public static ArSO[] Selected_Ar_Preset = new ArSO[3];
+
+    public static StageSO EnterStage = new StageSO();
 }
 
 public enum ePrefabs
@@ -60,6 +62,7 @@ public enum ePrefabs
     RedHitBox,
     BanditWarrior,
     ItemSlot,
+    Map1
 }
 
 public enum eSceneName

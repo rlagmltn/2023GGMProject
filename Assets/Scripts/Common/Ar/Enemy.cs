@@ -10,6 +10,8 @@ public class Enemy : Ar
     protected override void StatReset()
     {
         isDead = false;
+        stat.HP = stat.MaxHP;
+        stat.SP = stat.MaxSP;
         base.StatReset();
     }
 
@@ -20,6 +22,7 @@ public class Enemy : Ar
 
     protected override void Start()
     {
+        stat = new Stat();
         base.Start();
         StatReset();
     }

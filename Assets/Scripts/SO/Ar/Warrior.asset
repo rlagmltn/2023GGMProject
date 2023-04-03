@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterInfo:
     image: {fileID: 21300000, guid: 5bce922180f0b01449cb24514b293cae, type: 3}
-    nameString: "\uC6CC\uB9AC\uC5B4"
+    nameString: "\uBE14\uB808\uBBF8\uC0E4\uC778"
     Rarity: 0
     arClass: 3
     Level: 1
@@ -37,11 +37,15 @@ MonoBehaviour:
     currentShield: 4
     baseWeight: 5
     currentWeight: 5
-  skillCoolDown:
+  skill:
+    skillImage: {fileID: 21300000, guid: 3494dc956dfd7174abc07060940a2848, type: 3}
+    skillName: "\uAC15\uD0C0"
     skillCoolTime: 4
     MaxSkillCoolTime: 4
     currentSkillCoolTime: 0
+    SkillSummary: "\uAD11\uBC94\uC704\uD55C \uBC94\uC704\uC5D0 \uAC15\uB825\uD06C\uD55C
+      \uB370\uBBF8\uC9C0\uB97C \uC900\uB2E4"
   isTake: 1
-  isUse: 0
+  isUse: 1
   ArData: {fileID: 1180937486853865539, guid: 2063a13c16dbd7c458d7f8a28bfd9da2, type: 3}
   Summary: "\uAC15\uB824\uD06C\uD55C \uC804\uC0AC\uC774\uB2E4."

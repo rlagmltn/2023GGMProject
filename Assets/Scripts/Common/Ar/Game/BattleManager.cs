@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BattleManager : MonoSingleton<BattleManager>
 {
-    private Ar arOne, arTwo;
+    [SerializeField] private Ar arOne, arTwo;
     private Ar arAtk;
     private int damage;
 
@@ -27,7 +27,6 @@ public class BattleManager : MonoSingleton<BattleManager>
                 {
                     CrushBattle();
                 }
-
             }
         }
     }
@@ -97,12 +96,13 @@ public class BattleManager : MonoSingleton<BattleManager>
         defender.BeforeDefence.Invoke();
 
         attacker.AnimAttackStart();
+        EffectManager.Instance.InstantiateEffect(1, (attacker.transform.position+defender.transform.position)/2, attacker.transform.position, defender.transform.position);
 
         var criChance = Random.Range(1, 101);
         bool isDead;
 
         if(criChance<attacker.stat.CriPer)
-            isDead = defender.Hit(attacker.stat.ATK * attacker.stat.CriPer);
+            isDead = defender.Hit(attacker.stat.ATK + (attacker.stat.ATK/100) * attacker.stat.CriPer);
         else
             isDead = defender.Hit(attacker.stat.ATK);
 

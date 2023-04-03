@@ -71,12 +71,10 @@ public class MGUI : MonoSingleton<MGUI>
     public void GameOver()
     {
         lose?.SetActive(true);
-        Time.timeScale = 0f;
     }
 
     public void GameClear()
     {
         win?.SetActive(true);
-        Time.timeScale = 0f;
     }
 }

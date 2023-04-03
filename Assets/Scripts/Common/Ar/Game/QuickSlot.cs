@@ -7,25 +7,33 @@ public class QuickSlot : MonoBehaviour
 {
     private Button button;
     private Image outline;
+    private Image background;
     private Image playerImage;
     private Image unableImage;
+    private Image hpImage;
+    private Image spImage;
+
     public Player Player { get; set; }
 
     private void Start()
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(SellectPlayer);
-        playerImage = transform.GetChild(1).GetComponent<Image>();
         outline = transform.GetChild(0).GetComponent<Image>();
-        unableImage = transform.GetChild(2).GetComponent<Image>();
+        background = transform.GetChild(1).GetComponent<Image>();
+        playerImage = transform.GetChild(2).GetComponent<Image>();
+        unableImage = transform.GetChild(3).GetComponent<Image>();
+        hpImage = transform.GetChild(4).GetComponent<Image>();
+        spImage = transform.GetChild(5).GetComponent<Image>();
 
         unableImage.gameObject.SetActive(false);
-        playerImage.sprite = Player.ar_sprite;
+        playerImage.sprite = Player.so.characterInfo.Image;
     }
 
     public void Connect(Player player)
     {
         Player = player;
+        Start();
         Player.Connect(this);
     }
 
@@ -39,8 +47,16 @@ public class QuickSlot : MonoBehaviour
     {
         if (change)
         {
-            outline.color = Color.red;
+            background.color = Color.yellow;
         }
+        else
+            background.color = Color.black;
+    }
+
+    public void SkillReady(bool isReady)
+    {
+        if (isReady)
+            outline.color = Color.yellow;
         else
             outline.color = Color.black;
     }
@@ -48,5 +64,14 @@ public class QuickSlot : MonoBehaviour
     public void SetSlotActive(bool value)
     {
         unableImage.gameObject.SetActive(!value);
+    }
+
+    public void SetHPBar(float value)
+    {
+        hpImage.fillAmount = value;
+    }
+    public void SetSPBar(float value)
+    {
+        spImage.fillAmount = value;
     }
 }

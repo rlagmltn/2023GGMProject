@@ -5,9 +5,8 @@ using UnityEngine.Events;
 
 public class Player : Ar
 {
-    public int ar_id;
-    public string ar_name;
-    public Sprite ar_sprite;
+    public ArSO so;
+
     public bool isSellected;
     public int currentCooltime { get; set; }
     public bool isRangeCharacter { get; protected set; }
@@ -28,23 +27,18 @@ public class Player : Ar
     private GameObject moveRange;
     private GameObject attackRange;
     private GameObject skillRange;
-    private GameObject skillActived;
-    private Transform MoveEffectPos;
-
-    private MiniAr miniPlayer;
 
     [SerializeField] ItemSO[] itemSlots = new ItemSO[3];
 
     public Player()
     {
-        ar_id = -1;
-        ar_name = "";
+
     }
 
-    public Player(ArObj itemObj)
+    public Player(ArSO arSO)
     {
-        ar_id = itemObj.arData.ar_id;
-        ar_name = itemObj.arData.ar_name;
+        gameObject.name = arSO.characterInfo.Name;
+        sprite.sprite = arSO.characterInfo.Image;
     }
 
     protected override void Start()
@@ -55,8 +49,6 @@ public class Player : Ar
         moveRange = rangeContainer.GetChild(0).gameObject;
         attackRange = rangeContainer.GetChild(1).gameObject;
         skillRange = rangeContainer.GetChild(2).gameObject;
-        skillActived = transform.GetChild(3).gameObject;
-        MoveEffectPos = transform.GetChild(4).transform;
         DisableRanges();
 
         MouseUp.AddListener(() => { isMove = true; });
@@ -66,6 +58,16 @@ public class Player : Ar
 
     protected override void StatReset()
     {
+        stat.MaxHP = (int)so.surviveStats.MaxHP;
+        stat.HP = (int)so.surviveStats.currentHP;
+        stat.MaxSP = (int)so.surviveStats.MaxShield;
+        stat.SP = (int)so.surviveStats.currentShield;
+        stat.ATK = (int)so.attackStats.currentAtk;
+        stat.SATK = (int)so.attackStats.currentSkillAtk;
+        stat.CriPer = (int)so.criticalStats.currentCritalPer;
+        stat.CriDmg = (int)so.criticalStats.currentCriticalDamage;
+        stat.WEIGHT = (int)so.surviveStats.currentWeight;
+        skillCooltime = so.skill.MaxSkillCoolTime;
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
         pushPower = 22;
@@ -118,9 +120,6 @@ public class Player : Ar
     void ActiveRangesAndChangeColor(GameObject obj)
     {
         obj.SetActive(true);
-
-        miniPlayer.ShowRange(obj);
-
         ChangeColor_A(obj, 0.8f);
     }
 
@@ -169,9 +168,9 @@ public class Player : Ar
     private void Move(Vector2 angle)
     {
         MouseUp?.Invoke();
-        EffectManager.Instance.InstantiateEffect((int)EffectManager.Effect.MOVE, transform.position, angle);
         TurnManager.Instance.SomeoneIsMoving = true;
         rigid.velocity = ((angle.normalized * power) * pushPower)/(1+stat.WEIGHT*0.1f);
+        EffectManager.Instance.InstantiateEffect(2, transform.position, angle);
     }
 
     protected virtual void Attack(Vector2 angle)
@@ -182,7 +181,6 @@ public class Player : Ar
     {
         AnimAttackStart();
         currentCooltime = skillCooltime;
-        skillActived.SetActive(false);
         CameraMove.Instance.Shake();
     }
 
@@ -191,7 +189,6 @@ public class Player : Ar
         moveRange.SetActive(false);
         attackRange.SetActive(false);
         skillRange.SetActive(false);
-        miniPlayer.DisableRange();
     }
 
     public GameObject ActiveRange()
@@ -224,14 +221,20 @@ public class Player : Ar
         this.slot = slot;
         OnBattleDie.AddListener(()=>this.slot.SetSlotActive(false));
         OnOutDie.AddListener(()=>this.slot.SetSlotActive(false));
+        slot.SkillReady(true);
     }
 
     public void CountCooltime()
     {
         if (currentCooltime > 0)
+        {
             currentCooltime--;
+            slot.SkillReady(false);
+        }
         if (currentCooltime == 0)
-            skillActived.SetActive(true);
+        {
+            slot.SkillReady(true);
+        }
     }
 
     public IEnumerator DisableRanges_T()
@@ -264,8 +267,10 @@ public class Player : Ar
         obj.GetComponent<SpriteRenderer>().color = color;
     }
 
-    public void SetMini(MiniAr mini)
+    protected override bool DeadCheck()
     {
-        miniPlayer = mini;
+        slot.SetHPBar((float)stat.HP / stat.MaxHP);
+        slot.SetSPBar((float)stat.SP / stat.MaxSP);
+        return base.DeadCheck();
     }
 }

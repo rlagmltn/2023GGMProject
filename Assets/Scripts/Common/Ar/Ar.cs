@@ -34,7 +34,7 @@ public class Ar : MonoBehaviour
     public UnityEvent OnOutDie;
     public UnityEvent OnBattleDie;
 
-    private SpriteRenderer sprite;
+    protected SpriteRenderer sprite;
     private Animator animator;
 
     [SerializeField] private Transform battleTarget;
@@ -61,8 +61,6 @@ public class Ar : MonoBehaviour
 
     protected virtual void StatReset() // 수치 초기화
     {
-        stat.HP = stat.MaxHP;
-        stat.DP = stat.MaxDP;
         isDead = false;
         DeadCheck();
     }
@@ -157,23 +155,32 @@ public class Ar : MonoBehaviour
         rigid.velocity = velo;
     }
 
-    public bool Hit(int damage)
+    public virtual bool Hit(int damage)
     {
-        if(damage>0 && stat.DP>0)
+
+        if(damage>=0)
         {
-            stat.DP -= damage;
-            if (stat.DP < 0)
+            EffectManager.Instance.InstantiateFloatDamage(transform.position).DamageText(damage);
+            if (stat.SP>0)
             {
-                damage = -stat.DP;
-                stat.DP = 0;
+                stat.SP -= damage;
+                if (stat.SP < 0)
+                {
+                    damage = -stat.SP;
+                    stat.SP = 0;
+                }
+                else damage = 0;
             }
-            else damage = 0;
+            if (damage >= 0)
+                StartCoroutine(HitColorChange(Color.red));
+            else
+                StartCoroutine(HitColorChange(Color.green));
         }
         stat.HP = Mathf.Clamp(stat.HP - damage, 0, stat.MaxHP);
         return DeadCheck();
     }
 
-    protected bool DeadCheck()
+    protected virtual bool DeadCheck()
     {
         //ArInfoManager.Instance.ShowBulletInfo(this);
         if (stat.HP <= 0)
@@ -186,7 +193,7 @@ public class Ar : MonoBehaviour
             gameObject.SetActive(false);
             return true;
         }
-        if (stat.MaxDP != 0) dpBar.localScale = new Vector3(Mathf.Clamp((float)stat.DP / stat.MaxDP, 0, 1), 1, 1); else dpBar.localScale = new Vector3(0, 1, 1);
+        if (stat.MaxSP != 0) dpBar.localScale = new Vector3(Mathf.Clamp((float)stat.SP / stat.MaxSP, 0, 1), 1, 1); else dpBar.localScale = new Vector3(0, 1, 1);
         hpBar.localScale = new Vector3(Mathf.Clamp((float)stat.HP / stat.MaxHP, 0, 1), 1, 1);
         return false;
     }
@@ -200,9 +207,16 @@ public class Ar : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void DecreaseDP(int val)
+    private IEnumerator HitColorChange(Color color)
     {
-        stat.DP = Mathf.Max(0, stat.DP - val);
+        sprite.color = color;
+        yield return new WaitForSeconds(0.25f);
+        sprite.color = Color.white;
+    }
+
+    public void DecreaseSP(int val)
+    {
+        stat.SP = Mathf.Max(0, stat.SP - val);
     }
 
     public void AnimAttackStart()
