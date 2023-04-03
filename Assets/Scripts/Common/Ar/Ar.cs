@@ -151,7 +151,7 @@ public class Ar : MonoBehaviour
         rigid.velocity = velo;
     }
 
-    public bool Hit(int damage)
+    public virtual bool Hit(int damage)
     {
         if(damage>0 && stat.SP>0)
         {
@@ -167,7 +167,7 @@ public class Ar : MonoBehaviour
         return DeadCheck();
     }
 
-    protected bool DeadCheck()
+    protected virtual bool DeadCheck()
     {
         //ArInfoManager.Instance.ShowBulletInfo(this);
         if (stat.HP <= 0)

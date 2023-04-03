@@ -229,14 +229,21 @@ public class Player : Ar
         this.slot = slot;
         OnBattleDie.AddListener(()=>this.slot.SetSlotActive(false));
         OnOutDie.AddListener(()=>this.slot.SetSlotActive(false));
+        slot.SkillReady(true);
     }
 
     public void CountCooltime()
     {
         if (currentCooltime > 0)
+        {
             currentCooltime--;
+            slot.SkillReady(false);
+        }
         if (currentCooltime == 0)
+        {
             skillActived.SetActive(true);
+            slot.SkillReady(true);
+        }
     }
 
     public IEnumerator DisableRanges_T()
@@ -272,5 +279,12 @@ public class Player : Ar
     public void SetMini(MiniAr mini)
     {
         miniPlayer = mini;
+    }
+
+    protected override bool DeadCheck()
+    {
+        slot.SetHPBar((float)stat.HP / stat.MaxHP);
+        slot.SetSPBar((float)stat.SP / stat.MaxSP);
+        return base.DeadCheck();
     }
 }
