@@ -7,7 +7,7 @@ public class Enemy : Ar
     protected int currentPassiveCool;
     protected int passiveCool;
 
-    protected override void StatReset()
+    public override void StatReset()
     {
         isDead = false;
         stat.HP = stat.MaxHP;

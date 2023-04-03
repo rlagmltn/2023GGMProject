@@ -59,7 +59,7 @@ public class Ar : MonoBehaviour
         });
     }
 
-    protected virtual void StatReset() // 수치 초기화
+    public virtual void StatReset() // 수치 초기화
     {
         isDead = false;
         DeadCheck();
