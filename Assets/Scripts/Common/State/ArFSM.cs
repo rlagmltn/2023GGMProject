@@ -15,6 +15,11 @@ public class ArFSM : MonoBehaviour
         enemy = GetComponent<Enemy>();
     }
 
+    public virtual void Update()
+    {
+        fsmManager.Update(Time.deltaTime);
+    }
+
     public virtual Transform SearchAr()
     {
         Ar[] ars = FindObjectsOfType<Player>();

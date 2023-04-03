@@ -32,7 +32,7 @@ public class BanditWarrior_StateIdle : StateIdle
                 skillCool = 6;
                 canUsePassive = false;
             }
-
+        
             if(skillCool == 6)
             {
                 skillCool = 0;

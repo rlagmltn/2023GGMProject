@@ -40,7 +40,7 @@ public class BanditWarrior : Enemy
             lastAr = collision.gameObject.GetComponent<Ar>();
         }
     }
-
+    
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
@@ -50,7 +50,7 @@ public class BanditWarrior : Enemy
             StartCoroutine(SkillCameraMove(collision.transform, target));
         }
     }
-
+    
     private IEnumerator SkillCameraMove(Transform targetTransform, Ar targetAr)
     {
         yield return new WaitForSeconds(1f);
@@ -59,7 +59,7 @@ public class BanditWarrior : Enemy
         BattleManager.Instance.SettingAr(targetAr, this);
         CameraMove.Instance.Shake();
     }
-
+    
     private void PassiveDP()
     {
         if(lastAr != null && currentPassiveCool == 0)
@@ -70,7 +70,7 @@ public class BanditWarrior : Enemy
             lastAr = null;
         }
     }
-
+    
     private void PassivePush()
     {
         if(stat.HP <= 3 && canUsePassive)
@@ -79,7 +79,7 @@ public class BanditWarrior : Enemy
             StartCoroutine("PassivePushCo");
         }
     }
-
+    
     private IEnumerator PassivePushCo()
     {
         yield return new WaitForSeconds(0.3f);

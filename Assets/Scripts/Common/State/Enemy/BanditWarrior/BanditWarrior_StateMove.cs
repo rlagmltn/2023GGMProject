@@ -31,14 +31,4 @@ public class BanditWarrior_StateMove : StateMove
     
         stateMachine.ChangeState<BanditWarrior_StateIdle>();
     }
-
-    public override void OnUpdate(float deltaTime)
-    {
-
-    }
-
-    public override void OnEnd()
-    {
-
-    }
 }

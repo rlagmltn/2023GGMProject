@@ -19,9 +19,9 @@ public class BanditWarrior_ArFSM : ArFSM
         fsmManager.AddStateList(new BanditWarrior_StateSkill());
     }
 
-    private void Update()
+    public override void Update()
     {
-        fsmManager.Update(Time.deltaTime);
+        base.Update();
     }
 
     private IEnumerator Move()
