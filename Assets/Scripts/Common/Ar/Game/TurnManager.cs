@@ -136,6 +136,8 @@ public class TurnManager : MonoSingleton<TurnManager>
             turns[turns.Count - i - 1].EnableTurn();
         }
 
+        CameraMove.Instance.SetDefaultZoom();
+
         foreach (ArFSM arFSM in enemys)
         {
             while(SomeoneIsMoving)

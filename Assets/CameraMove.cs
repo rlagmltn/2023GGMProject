@@ -21,6 +21,7 @@ public class CameraMove : MonoSingleton<CameraMove>
     private Vector3 setCamPos = new Vector3(0, 0, -10);
     private Vector3 moveDragPos;
 
+    private float defaultOrthographicSize = 4.5f;
     private float orthographicSize;
     private float targetOrthographicSize;
 
@@ -45,6 +46,7 @@ public class CameraMove : MonoSingleton<CameraMove>
     private void Update()
     {
         ChaseTarget();
+        if (!TurnManager.Instance.IsPlayerTurn) return;
         ZoomInAndOut();
         HandleZoom();
     }
@@ -124,6 +126,11 @@ public class CameraMove : MonoSingleton<CameraMove>
     
     public void EffectZoom(float amount)
     {
-        shakeCam.m_Lens.OrthographicSize = orthographicSize - (1 - amount)*2;
+        orthographicSize -= (1 - amount)*2;
+    }
+
+    public void SetDefaultZoom()
+    {
+        shakeCam.m_Lens.OrthographicSize = defaultOrthographicSize;
     }
 }
