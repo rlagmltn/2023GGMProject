@@ -76,19 +76,20 @@ public class Ar : MonoBehaviour
                 Vector2.one / 2,
                 Mathf.Atan2(rigid.velocity.y, rigid.velocity.x) * Mathf.Rad2Deg,
                 rigid.velocity.normalized,
-                rigid.velocity.magnitude / 2 / (1 + stat.WEIGHT));
+                rigid.velocity.magnitude / (2 + stat.WEIGHT*0.5f));
 
             if (hit.Length <= 1) return;
 
             if(hit[1].collider.GetComponent<Ar>())
             {
                 battleTarget = hit[1].collider.transform;
+                CameraMove.Instance.MovetoTarget(battleTarget);
             }
             else
             {
                 battleTarget = null;
                 CameraMove.Instance.TimeFreeze(1);
-                CameraMove.Instance.EffectZoom(0);
+                CameraMove.Instance.EffectZoom(1);
             }
         }
         else lastVelocity = rigid.velocity;
@@ -99,6 +100,9 @@ public class Ar : MonoBehaviour
         if (rigid.velocity.magnitude <= 0.1f && isMove)
         {
             isMove = false;
+            battleTarget = null;
+            CameraMove.Instance.TimeFreeze(1);
+            CameraMove.Instance.EffectZoom(1);
             TurnManager.Instance.SomeoneIsMoving = false;
             AfterMove?.Invoke();
         }
@@ -112,7 +116,6 @@ public class Ar : MonoBehaviour
             {
                 var amount = distance.magnitude / slowMagnitude == float.NaN ? 1 : distance.magnitude / slowMagnitude;
                 CameraMove.Instance.EffectZoom(amount);
-                if (amount < 0.25f) amount *= amount;
                 CameraMove.Instance.TimeFreeze(amount);
             }
         }
