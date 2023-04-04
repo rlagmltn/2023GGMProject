@@ -17,7 +17,6 @@ public class TestStageManager : MonoSingleton<TestStageManager>
 {
     [SerializeField] private Transform startStage; //그냥 아무것도 아닌 시작하는 스테이지 아마도 emptyStage가 아닐까?
     [SerializeField] private List<Transform> AllButtons;
-    [SerializeField] private List<Transform> AllRoads;
     [SerializeField] private List<Road> AllRoads_Info;
     [SerializeField] private StageSOList stageList;
 
