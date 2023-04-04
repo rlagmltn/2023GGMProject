@@ -16,6 +16,7 @@ public class Reward : Shop
             var rand = Random.Range(0, arHolder.list.Count);
             if (arHolder.list[rand] == null) continue;
 
+            Debug.Log(arHolder.list[rand].name);
             arInven.list.Add(arHolder.list[rand]);
             arHolder.list.RemoveAt(rand);
             newAr = true;

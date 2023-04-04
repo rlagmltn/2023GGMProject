@@ -18,6 +18,7 @@ public class Shop : MonoBehaviour
             items[number++] = itemDB.items[num];
         }
 
+        Debug.Log(items[0].name);
         return items;
     }
 
