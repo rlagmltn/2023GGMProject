@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
 {
@@ -136,7 +135,7 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
         InfoTexts[1].text = $" : {SelectedAR.surviveStats.BaseShield}";
         InfoTexts[2].text = $" : {SelectedAR.attackStats.BaseAtk}";
         InfoTexts[3].text = $" : {SelectedAR.attackStats.BaseSkillAtk}";
-        InfoTexts[4].text = $" : {SelectedAR.criticalStats.BaseCritalPer}";
+        InfoTexts[4].text = $" : {SelectedAR.criticalStats.BaseCriticalPer}";
         InfoTexts[5].text = $" : {SelectedAR.surviveStats.BaseWeight}";
     }
 
@@ -324,7 +323,7 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
         }
 
         ArTOGlobal();
-        SceneManager.LoadScene("MapScene");
+        SceneMgr.Instance.LoadScene("MapScene");
     }
 
     public void ArTOGlobal()

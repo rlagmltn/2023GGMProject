@@ -33,15 +33,6 @@ public enum Sound
 
 }
 
-public enum SceneState
-{
-    TITLE,
-    MAIN,
-    BATTLE,
-    EVENT,
-    SHOP,
-}
-
 public enum ePrefabs
 {
     None = -1,

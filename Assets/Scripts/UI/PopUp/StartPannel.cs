@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 public class StartPannel : MonoBehaviour
 {
@@ -52,7 +51,7 @@ public class StartPannel : MonoBehaviour
 
     private void ChangeSceneToMap()
     {
-        SceneManager.LoadScene("MapScene");
+        SceneMgr.Instance.LoadScene("MapScene");
     }
 
     private void RemoveAllEvents(Button button)

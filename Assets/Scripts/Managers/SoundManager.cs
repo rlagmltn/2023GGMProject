@@ -21,6 +21,5 @@ public class SoundManager : MonoSingleton<SoundManager>
         }
 
         audioSources[(int)Sound.BGM].loop = true;
-        
     }
 }

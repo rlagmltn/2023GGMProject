@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
-using UnityEngine.SceneManagement;
 public class StageManager : MonoSingleton<StageManager>
 {
     [SerializeField] private List<Button> stageButtons;
@@ -56,7 +55,7 @@ public class StageManager : MonoSingleton<StageManager>
     void StageStart()
     {
         //MGScene.Instance.ChangeScene(eSceneName.InGame);
-        SceneManager.LoadScene("TestScene");
+        SceneMgr.Instance.LoadScene("TestScene");
         Debug.Log("Change Scene to InGameScene");
     }
 

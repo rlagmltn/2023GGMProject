@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System;
 
 public class MGUI : MonoSingleton<MGUI>
@@ -41,26 +40,26 @@ public class MGUI : MonoSingleton<MGUI>
 
     public void MoveToTitleScene()
     {
-        SceneManager.LoadScene(eSceneName.Title.ToString() + "Scene");
+        SceneMgr.Instance.LoadScene(eSceneName.Title);
     }
 
     public void MoveToMapScene()
     {
-        SceneManager.LoadScene(eSceneName.Map.ToString() + "Scene");
+        SceneMgr.Instance.LoadScene(eSceneName.Map);
     }
     public void MoveToSelectScene()
     {
-        SceneManager.LoadScene(eSceneName.Select.ToString() + "Scene");
+        SceneMgr.Instance.LoadScene(eSceneName.Select);
     }
 
     public void MoveToMainScene()
     {
-        SceneManager.LoadScene(eSceneName.Main.ToString() + "Scene");
+        SceneMgr.Instance.LoadScene(eSceneName.Main);
     }
 
     public void MoveToLoadingScene()
     {
-        SceneManager.LoadScene(eSceneName.Loading.ToString() + "Scene");
+        SceneMgr.Instance.LoadScene(eSceneName.Loading);
     }
 
     public void ExitGame()

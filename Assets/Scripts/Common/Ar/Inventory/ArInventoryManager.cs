@@ -24,7 +24,6 @@ public class ArInventoryManager : MonoSingleton<ArInventoryManager>
 
     public void HolderToInven(int num)
     {
-        Debug.Log(holder.list[num].name);
         inven.list.Add(holder.list[num]);
         holder.list.RemoveAt(num);
     }
@@ -33,5 +32,6 @@ public class ArInventoryManager : MonoSingleton<ArInventoryManager>
     {
         inven.list.Add(ar);
         holder.list.Remove(ar);
+        //ar.ResetAll();
     }
 }
