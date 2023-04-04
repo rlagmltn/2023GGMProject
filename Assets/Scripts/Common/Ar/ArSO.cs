@@ -23,6 +23,16 @@ public class ArSO : ScriptableObject
 
     [Multiline(5)]
     public string Summary;
+
+    public void ResetAll()
+    {
+        characterInfo.Reset();
+        attackStats.Reset();
+        criticalStats.Reset();
+        surviveStats.Reset();
+        skill.Reset();
+        ArData.StatReset();
+    }
 }
 
 [System.Serializable]
@@ -41,6 +51,11 @@ public class CharacterInfo
     public ArClasses ArClass => arClass;
      
     public int Level;
+
+    public void Reset()
+    {
+        Level = 1;
+    }
 }
 
 [System.Serializable]
@@ -55,6 +70,12 @@ public class AttackStat
     public float BaseSkillAtk => baseSkillAtk;
 
     public float currentSkillAtk;
+
+    public void Reset()
+    {
+        currentAtk = baseAtk;
+        currentSkillAtk = baseSkillAtk;
+    }
 }
 
 [System.Serializable]
@@ -69,6 +90,12 @@ public class CriticalStat
     public float BaseCriticalDamage => baseCriticalDamage;
 
     public float currentCriticalDamage;
+
+    public void Reset()
+    {
+        currentCritalPer = baseCriticalPer;
+        currentCriticalDamage = baseCriticalDamage;
+    }
 }
 
 [System.Serializable]
@@ -92,6 +119,14 @@ public class SurviveStat
     public float BaseWeight => baseWeight;
 
     public float currentWeight;
+
+    public void Reset()
+    {
+        MaxHP = baseHP;
+        currentHP = baseHP;
+        MaxShield = baseShield;
+        currentShield = baseShield;
+    }
 }
 
 [System.Serializable]
@@ -111,4 +146,10 @@ public class Skill
     public int currentSkillCoolTime;
 
     public string SkillSummary;
+
+    public void Reset()
+    {
+        MaxSkillCoolTime = skillCoolTime;
+        currentSkillCoolTime = skillCoolTime;
+    }
 }

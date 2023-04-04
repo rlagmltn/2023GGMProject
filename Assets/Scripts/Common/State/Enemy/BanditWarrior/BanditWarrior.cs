@@ -14,7 +14,7 @@ public class BanditWarrior : Enemy
         AfterDefence.AddListener(PassivePush);
     }
 
-    protected override void StatReset()
+    public override void StatReset()
     {
         stat.MaxHP = 14;
         stat.MaxSP = 2;

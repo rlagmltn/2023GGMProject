@@ -11,7 +11,7 @@ public class BanditArcher : Enemy
         base.Start();
     }
 
-    protected override void StatReset()
+    public override void StatReset()
     {
         stat.MaxHP = 14;
         stat.MaxSP = 2;

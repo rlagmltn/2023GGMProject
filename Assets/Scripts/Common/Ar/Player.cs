@@ -56,7 +56,7 @@ public class Player : Ar
         StatReset();
     }
 
-    protected override void StatReset()
+    public override void StatReset()
     {
         stat.MaxHP = (int)so.surviveStats.MaxHP;
         stat.HP = (int)so.surviveStats.currentHP;
