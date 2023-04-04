@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum eLoadingStatus
@@ -70,7 +69,7 @@ public class UIRootLoading : MonoBehaviour
 
     IEnumerator NextSceneState()
     {
-        loadLevelDone = SceneMgr.LoadSceneAsync("MainScene");
+        loadLevelDone = SceneMgr.Instance.LoadSceneAsync("MainScene");
 
         loadingLimitTime = MAX_LOADING_TIME;
         while (loadingState == eLoadingStatus.NextScene)

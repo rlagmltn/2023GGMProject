@@ -13,4 +13,8 @@ public class SceneMgr : MonoSingleton<SceneMgr>
     {
         SceneManager.LoadScene(name);
     }
+    public AsyncOperation LoadSceneAsync(string name)
+    {
+        return SceneManager.LoadSceneAsync(name);
+    }
 }
