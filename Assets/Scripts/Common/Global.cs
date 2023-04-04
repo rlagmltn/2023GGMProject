@@ -113,6 +113,7 @@ public enum eStageState
     Event,
     Shop,
     Battle,
+    Boss,
 }
 
 public enum ArRarity

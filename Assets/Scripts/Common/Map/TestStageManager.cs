@@ -44,6 +44,7 @@ public class TestStageManager : MonoSingleton<TestStageManager>
         FindNextStage();
         StageDisable();
         ButtonInit();
+        SetStageState();
         //DebugSetName(); //디버그용
     }
 
@@ -212,6 +213,37 @@ public class TestStageManager : MonoSingleton<TestStageManager>
                 btn.colors = color;
             }
 
+        }
+    }
+
+    void SetStageState()
+    {
+        int eventNum = stageList.stageList.Count / 4;
+        int shopNum = stageList.stageList.Count / 9;
+
+        for (int num = 0; num < stageList.stageList.Count - 1; num++)
+            stageList.stageList[num].stageKind = eStageState.Battle;
+
+        for (int num = 0; num < eventNum;)
+        {
+            int temp = Random.Range(0, stageList.stageList.Count - 1);
+
+            if (stageList.stageList[temp].stageKind == eStageState.Battle)
+            {
+                stageList.stageList[temp].stageKind = eStageState.Event;
+                num++;
+            }
+        }
+
+        for (int num = 0; num < shopNum;)
+        {
+            int temp = Random.Range(0, stageList.stageList.Count - 1);
+
+            if (stageList.stageList[temp].stageKind == eStageState.Battle)
+            {
+                stageList.stageList[temp].stageKind = eStageState.Shop;
+                num++;
+            }
         }
     }
 
