@@ -15,7 +15,7 @@ public class UIRootTitle : MonoBehaviour
     private void Start()
     {
         //MGScene.Instance.ChangeScene(eSceneName.Game);
-        SceneManager.LoadScene("MainScene");
+        SceneMgr.LoadScene("MainScene");
         Debug.Log("Change Scene to MainScene");
     }
 
