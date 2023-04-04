@@ -85,6 +85,7 @@ public enum eSceneName
     Map,
     InGame,
     Son,
+    MaxCount,
 }
 
 public class GameMapClass
