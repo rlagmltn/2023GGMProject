@@ -11,7 +11,7 @@ public class Ar : MonoBehaviour
 
     public bool isDead { get; set; }
     public bool isUsingSkill { get; set; }
-    public bool isMove;
+    public bool isMove { get; set; }
 
     protected float minDragPower = 0.4f;
     protected float maxDragPower = 1.5f;
@@ -26,15 +26,15 @@ public class Ar : MonoBehaviour
     public Rigidbody2D rigid { get; protected set; }
     public Vector2 lastVelocity { get; protected set; }
 
-    public UnityEvent BeforeCrash;
-    public UnityEvent AfterCrash;
-    public UnityEvent BeforeAttack;
-    public UnityEvent AfterAttack;
-    public UnityEvent BeforeDefence;
-    public UnityEvent AfterDefence;
-    public UnityEvent AfterMove;
-    public UnityEvent OnOutDie;
-    public UnityEvent OnBattleDie;
+    [HideInInspector] public UnityEvent BeforeCrash;
+    [HideInInspector] public UnityEvent AfterCrash;
+    [HideInInspector] public UnityEvent BeforeAttack;
+    [HideInInspector] public UnityEvent AfterAttack;
+    [HideInInspector] public UnityEvent BeforeDefence;
+    [HideInInspector] public UnityEvent AfterDefence;
+    [HideInInspector] public UnityEvent AfterMove;
+    [HideInInspector] public UnityEvent OnOutDie;
+    [HideInInspector] public UnityEvent OnBattleDie;
 
     protected SpriteRenderer sprite;
     private Animator animator;
