@@ -52,12 +52,13 @@ public class Player : Ar
         DisableRanges();
 
         MouseUp.AddListener(() => { isMove = true; });
-
+    
         StatReset();
     }
 
     public override void StatReset()
     {
+        so.ResetAll();
         stat.MaxHP = (int)so.surviveStats.MaxHP;
         stat.HP = (int)so.surviveStats.currentHP;
         stat.MaxSP = (int)so.surviveStats.MaxShield;
@@ -269,8 +270,19 @@ public class Player : Ar
 
     protected override bool DeadCheck()
     {
-        slot.SetHPBar((float)stat.HP / stat.MaxHP);
-        slot.SetSPBar((float)stat.SP / stat.MaxSP);
+        slot?.SetHPBar((float)stat.HP / stat.MaxHP);
+        slot?.SetSPBar((float)stat.SP / stat.MaxSP);
         return base.DeadCheck();
+    }
+
+    public void TakeAllStat()
+    {
+        so.surviveStats.currentHP = stat.HP;
+        so.surviveStats.currentShield = stat.SP;
+        so.attackStats.currentAtk = stat.ATK;
+        so.attackStats.currentSkillAtk = stat.SATK;
+        so.criticalStats.currentCritalPer = stat.CriPer;
+        so.criticalStats.currentCriticalDamage = stat.CriDmg;
+        so.surviveStats.currentWeight = stat.WEIGHT;
     }
 }

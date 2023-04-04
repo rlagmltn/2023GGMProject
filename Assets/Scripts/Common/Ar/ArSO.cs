@@ -31,7 +31,6 @@ public class ArSO : ScriptableObject
         criticalStats.Reset();
         surviveStats.Reset();
         skill.Reset();
-        ArData.StatReset();
     }
 }
 
@@ -82,7 +81,7 @@ public class AttackStat
 public class CriticalStat
 {
     [SerializeField] private float baseCriticalPer;
-    public float BaseCritalPer => baseCriticalPer;
+    public float BaseCriticalPer => baseCriticalPer;
 
     public float currentCritalPer;
 
@@ -126,6 +125,7 @@ public class SurviveStat
         currentHP = baseHP;
         MaxShield = baseShield;
         currentShield = baseShield;
+        currentWeight = baseWeight;
     }
 }
 
