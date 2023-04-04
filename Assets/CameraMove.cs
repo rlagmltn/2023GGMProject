@@ -22,6 +22,7 @@ public class CameraMove : MonoSingleton<CameraMove>
     private Vector3 moveDragPos;
 
     private float defaultOrthographicSize = 4.5f;
+    private float zoom = 1;
     private float orthographicSize;
     private float targetOrthographicSize;
 
@@ -46,7 +47,6 @@ public class CameraMove : MonoSingleton<CameraMove>
     private void Update()
     {
         ChaseTarget();
-        if (!TurnManager.Instance.IsPlayerTurn) return;
         ZoomInAndOut();
         HandleZoom();
     }
@@ -62,6 +62,7 @@ public class CameraMove : MonoSingleton<CameraMove>
 
     private void ZoomInAndOut()
     {
+        if (!TurnManager.Instance.IsPlayerTurn) return;
         if (Input.touchCount == 2) //손가락 2개가 눌렸을 때
         {
             Touch touchZero = Input.GetTouch(0); //첫번째 손가락 터치를 저장
@@ -86,12 +87,14 @@ public class CameraMove : MonoSingleton<CameraMove>
 
     private void HandleZoom()
     {
-        targetOrthographicSize -= Input.mouseScrollDelta.y * zoomAmount;
+        if (TurnManager.Instance.IsPlayerTurn)
+        {
+            targetOrthographicSize -= Input.mouseScrollDelta.y * zoomAmount;
 
-        targetOrthographicSize = Mathf.Clamp(targetOrthographicSize, minOrthographicSize, maxOrthographicSize);
-        orthographicSize = Mathf.Lerp(orthographicSize, targetOrthographicSize, Time.deltaTime * zoomSpeed);
-
-        shakeCam.m_Lens.OrthographicSize = orthographicSize;
+            targetOrthographicSize = Mathf.Clamp(targetOrthographicSize, minOrthographicSize, maxOrthographicSize);
+            orthographicSize = Mathf.Lerp(orthographicSize, targetOrthographicSize, Time.deltaTime * zoomSpeed);
+        }
+        shakeCam.m_Lens.OrthographicSize = Mathf.Clamp(orthographicSize*zoom, orthographicSize/2, 10);
     }
 
     public void ResetTarget()
@@ -120,13 +123,13 @@ public class CameraMove : MonoSingleton<CameraMove>
 
     public void TimeFreeze(float amount)
     {
-        Time.timeScale = amount;
+        Time.timeScale = Mathf.Clamp(amount, 0.1f, 1f);
         //StartCoroutine(TimeFreezeCoru(amount, duration));
     }
     
     public void EffectZoom(float amount)
     {
-        orthographicSize -= (1 - amount)*2;
+        zoom = Mathf.Clamp((amount)*2, 0.3f, 1);
     }
 
     public void SetDefaultZoom()

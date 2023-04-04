@@ -54,8 +54,8 @@ public class BackGround : MonoBehaviour
 
     private void EndDrag(BaseEventData data)
     {
-        transposer.m_XDamping = 1;
-        transposer.m_YDamping = 1;
-        transposer.m_ZDamping = 1;
+        transposer.m_XDamping = 0.75f;
+        transposer.m_YDamping = 0.5f;
+        transposer.m_ZDamping = 0.75f;
     }
 }

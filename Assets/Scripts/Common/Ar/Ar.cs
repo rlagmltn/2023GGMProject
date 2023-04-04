@@ -57,7 +57,7 @@ public class Ar : MonoBehaviour
         {
             battleTarget = null;
             CameraMove.Instance.TimeFreeze(1);
-            CameraMove.Instance.EffectZoom(0);
+            CameraMove.Instance.EffectZoom(1);
         });
     }
 
@@ -69,13 +69,13 @@ public class Ar : MonoBehaviour
 
     protected void FixedUpdate()
     {
-        lastVelocity = rigid.velocity;
         if (rigid.velocity.normalized != lastVelocity.normalized && rigid.velocity.magnitude != 0)
         {
-            RaycastHit2D[] hit = Physics2D.BoxCastAll(gameObject.transform.position, 
-                Vector2.one, 
-                Mathf.Atan2(rigid.velocity.y, rigid.velocity.x) * Mathf.Rad2Deg, 
-                rigid.velocity.normalized, 
+            lastVelocity = rigid.velocity;
+            RaycastHit2D[] hit = Physics2D.BoxCastAll(gameObject.transform.position,
+                Vector2.one / 2,
+                Mathf.Atan2(rigid.velocity.y, rigid.velocity.x) * Mathf.Rad2Deg,
+                rigid.velocity.normalized,
                 rigid.velocity.magnitude / 2 / (1 + stat.WEIGHT));
 
             if (hit.Length <= 1) return;
@@ -91,6 +91,7 @@ public class Ar : MonoBehaviour
                 CameraMove.Instance.EffectZoom(0);
             }
         }
+        else lastVelocity = rigid.velocity;
     }
 
     protected void Update()

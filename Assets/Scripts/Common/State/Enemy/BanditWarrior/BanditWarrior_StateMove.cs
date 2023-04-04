@@ -26,7 +26,6 @@ public class BanditWarrior_StateMove : StateMove
         stateMachineClass.transform.GetChild(0).rotation = Quaternion.Euler(new Vector3(0, 0, rangeAngle));
         stateMachineClass.StartCoroutine("MoveAr", angle * enemy.GetPower());
         
-        TurnManager.Instance.UseTurn();
         stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
     
         stateMachine.ChangeState<BanditWarrior_StateIdle>();

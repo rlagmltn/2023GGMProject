@@ -31,6 +31,7 @@ public class TurnManager : MonoSingleton<TurnManager>
 
     public bool UseTurn()
     {
+        StopBlink();
         if (isPlayerTurn)
         {
             foreach (Turn turn in turns)
@@ -146,6 +147,7 @@ public class TurnManager : MonoSingleton<TurnManager>
             }
             if (arFSM.gameObject.activeSelf)
             {
+                BlinkNextTurn();
                 arFSM.StartTurn();
                 yield return new WaitForSeconds(6f);
             }
