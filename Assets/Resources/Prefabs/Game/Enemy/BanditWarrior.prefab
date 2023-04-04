@@ -740,6 +740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1508433b2d7934b48b591ec6c625934d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: "\uC0B0\uC801 \uC804\uC0AC"
   isMove: 0
   BeforeCrash:
     m_PersistentCalls:
@@ -768,6 +769,7 @@ MonoBehaviour:
   OnBattleDie:
     m_PersistentCalls:
       m_Calls: []
+  battleTarget: {fileID: 0}
 --- !u!1 &9112568377438190268
 GameObject:
   m_ObjectHideFlags: 0

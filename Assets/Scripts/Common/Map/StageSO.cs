@@ -10,6 +10,8 @@ public class StageSO : ScriptableObject
 
     public eStageState stageKind;
 
+    public List<Enemy> stageEnmey;
+
     public bool IsCleared;
 
     public bool IsCanEnter;

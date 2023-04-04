@@ -13,8 +13,13 @@ public class StageSOHolder : MonoBehaviour
         return Stage;
     }
 
-    public void EnterStage()
+    public void StageSelect()
     {
-        TestStageManager.Instance.StageEnter(Stage);
+        TestStageManager.Instance.InfoPannelActiveTrue(Stage);
     }
+
+    //public void EnterStage()
+    //{
+    //    TestStageManager.Instance.StageEnter(Stage);
+    //}
 }

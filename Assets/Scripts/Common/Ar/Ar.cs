@@ -7,6 +7,8 @@ public class Ar : MonoBehaviour
 {
     public Stat stat { get; set; }
 
+    public string Name;
+
     public bool isDead { get; set; }
     public bool isUsingSkill { get; set; }
     public bool isMove;

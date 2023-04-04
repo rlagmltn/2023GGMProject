@@ -3,16 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using TMPro;
+
+[System.Serializable]
+public class Road
+{
+    public Transform BeforeButton;
+    public Transform NextButton;
+    public Transform road;
+}
 
 public class TestStageManager : MonoSingleton<TestStageManager>
 {
     [SerializeField] private Transform startStage; //그냥 아무것도 아닌 시작하는 스테이지 아마도 emptyStage가 아닐까?
     [SerializeField] private List<Transform> AllButtons;
+    [SerializeField] private List<Transform> AllRoads;
+    [SerializeField] private List<Road> AllRoads_Info;
     [SerializeField] private StageSOList stageList;
 
     [SerializeField] private Transform StageInfoPannel;
+    [SerializeField] private Button BackPannel;
+    [SerializeField] private Button StartButton;
 
+    [SerializeField] private List<Image> EnemyImages;
+    [SerializeField] private List<TextMeshProUGUI> EnemyTexts;
+    
+    public List<Transform> ClearedStages;
     private Transform currentStage;
+    private StageSO SelectedStage;
 
     void Start()
     {
@@ -26,6 +44,7 @@ public class TestStageManager : MonoSingleton<TestStageManager>
         FindNextStage();
         StageDisable();
         ButtonInit();
+        //DebugSetName(); //디버그용
     }
 
     void ButtonInit()
@@ -34,24 +53,58 @@ public class TestStageManager : MonoSingleton<TestStageManager>
         {
             Button btn = AllButtons[num].GetComponent<Button>();
             RemoveAllButtonListeners(btn);
-            AddButtonListener(btn, AllButtons[num].GetComponent<StageSOHolder>().EnterStage);
+            AddButtonListener(btn, btn.GetComponent<StageSOHolder>().StageSelect);
+        }
+
+        RemoveAllButtonListeners(BackPannel);
+        AddButtonListener(BackPannel, InfoPannelActiveFalse);
+        RemoveAllButtonListeners(StartButton);
+        AddButtonListener(StartButton, StageEnter);
+    }
+
+    void DebugSetName()
+    { 
+        for(int i = 0; i <stageList.stageList.Count; i++)
+        {
+            var stage = stageList.stageList[i].stageInfo;
+            stage.stageName = new string($"스테이지{i + 1}");
+            stage.explanationText = new string($"스테이지{i + 1} 이다.");
         }
     }
 
-    void InfoPannelActive(bool active)
+    public void InfoPannelActiveTrue(StageSO stage)
     {
-        StageInfoPannel.gameObject.SetActive(active);
+        StageInfoPannel.gameObject.SetActive(true);
+        BackPannel.gameObject.SetActive(true);
+        SelectedStage = stage;
+        StageInfoPannelUpdate();
+    }
+
+    void InfoPannelActiveFalse()
+    {
+        StageInfoPannel.gameObject.SetActive(false);
+        BackPannel.gameObject.SetActive(false);
+    }
+
+    void StageInfoPannelUpdate()
+    {
+        for(int num = 0; num < EnemyTexts.Count; num++)
+        {
+            EnemyTexts[num].text = SelectedStage.stageEnmey[num].Name;
+        }
+        //스테이지의 정보로 ui업데이트
     }
 
     /// <summary>
     /// 게임에 들어갈 때 실행할 함수
     /// </summary>
     /// <param name="stageSO"></param>
-    public void StageEnter(StageSO stageSO)
+    public void StageEnter()
     {
-        Global.EnterStage = stageSO;
+        InfoPannelActiveFalse();
+        Global.EnterStage = SelectedStage;
         //맵 로딩 해줘야함
-
+        Global.Map = SelectedStage.map;
         //지금은 임시로 스테이지 클리어임
         StageClear();
     }
@@ -68,7 +121,7 @@ public class TestStageManager : MonoSingleton<TestStageManager>
             if(trans.GetComponent<StageSOHolder>().GetStage() == Global.EnterStage)
             {
                 currentStage = trans;
-                Debug.Log("현재 스테이지 체인지");
+                ClearedStages.Add(currentStage);
                 break;
             }
         }
@@ -91,6 +144,41 @@ public class TestStageManager : MonoSingleton<TestStageManager>
         //입장 가능한 스테이지 설정
         for (int num = 0; num < CurrentStage.NextStageList.Count; num++)
             CurrentStage.NextStageList[num].GetComponent<StageSOHolder>().GetStage().IsCanEnter = true;
+
+        if (ClearedStages.Count <= 0)
+        {
+            for (int num = 0; num < AllRoads_Info.Count; num++)
+                RoadchangeColor(AllRoads_Info[num].road, new Color(0.78f, 0.78f, 0.78f, 0.78f));
+            return;
+        }
+
+        for (int num = 0; num < AllRoads_Info.Count; num++)
+        {
+            //들어갈 수 있는길 활성화 해주기
+            if (AllRoads_Info[num].BeforeButton == ClearedStages[ClearedStages.Count - 1])
+            {
+                RoadchangeColor(AllRoads_Info[num].road, new Color(1, 1, 1));
+                continue;
+            }
+
+            //길 비활성화
+            RoadchangeColor(AllRoads_Info[num].road, new Color(0.78f, 0.78f, 0.78f, 0.78f));
+        }
+
+
+        //클리어했던 길 활성화 해주기
+        if (ClearedStages.Count < 2) return;
+
+        for (int num = 0; num < AllRoads_Info.Count; num++)
+        {
+            for (int i = 0; i < ClearedStages.Count - 1; i++)
+            {
+                if (ClearedStages[i] != AllRoads_Info[num].BeforeButton) continue;
+                if (ClearedStages[i + 1] != AllRoads_Info[num].NextButton) continue;
+
+                RoadchangeColor(AllRoads_Info[num].road, new Color(1, 1, 1));
+            }
+        }
     }
 
     /// <summary>
@@ -98,15 +186,38 @@ public class TestStageManager : MonoSingleton<TestStageManager>
     /// </summary>
     void StageDisable()
     {
-        for(int num = 0; num < AllButtons.Count; num++)
+        ColorBlock color = new();
+        color = AllButtons[1].GetComponent<Button>().colors;
+
+        for (int num = 0; num < AllButtons.Count; num++)
         {
             Button btn = AllButtons[num].GetComponent<Button>();
             StageSO stage = AllButtons[num].GetComponent<StageSOHolder>().GetStage();
-            btn.interactable = false;
 
-            if(stage.IsCleared || stage.IsCanEnter)
+            btn.interactable = false;
+            color.disabledColor = new Color(0.78f, 0.78f, 0.78f, 0.5f);
+            btn.colors = color;
+
+            if (stage.IsCleared)
+            {
+                color.disabledColor = new Color(1f,1f, 1f, 1f);
+                btn.colors = color;
+                continue;
+            }
+
+            if(stage.IsCanEnter)
+            {
                 btn.interactable = true;
+                color.disabledColor = new Color(1f, 1f, 1f, 1f);
+                btn.colors = color;
+            }
+
         }
+    }
+
+    void RoadchangeColor(Transform obj, Color color)
+    {
+        obj.GetComponent<Image>().color = color;
     }
 
     void RemoveAllButtonListeners(Button button)
