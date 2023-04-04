@@ -24,7 +24,6 @@ public class BanditWarrior_StateSkill : StateAtk
         //col.isTrigger = true;
         stateMachineClass.StartCoroutine("TriggerOff");
 
-        TurnManager.Instance.UseTurn();
         stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
         stateMachine.ChangeState<BanditWarrior_StateIdle>();
     }

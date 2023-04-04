@@ -7,6 +7,12 @@ public class SoundManager : MonoSingleton<SoundManager>
     public AudioSource[] audioSources = new AudioSource[(int)Sound.MAXCOUNT];
     Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
 
+    private void Awake()
+    {
+        //Init();
+        DontDestroyOnLoad(gameObject);
+    }
+
     public void Init()
     {
         GameObject root = GameObject.Find("SoundManager");
@@ -21,5 +27,20 @@ public class SoundManager : MonoSingleton<SoundManager>
         }
 
         audioSources[(int)Sound.BGM].loop = true;
+    }
+
+    public void Clear()
+    {
+        foreach (var audio in audioSources)
+        {
+            audio.clip = null;
+            audio.Stop();
+        }
+        audioClips.Clear();
+    }
+
+    public void LoadScene(eSceneName name)
+    {
+        Clear();
     }
 }

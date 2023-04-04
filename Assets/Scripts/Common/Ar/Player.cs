@@ -7,13 +7,13 @@ public class Player : Ar
 {
     public ArSO so;
 
-    public bool isSellected;
+    public bool isSellected { get; set; }
     public int currentCooltime { get; set; }
     public bool isRangeCharacter { get; protected set; }
 
     public bool isEnd = true;
 
-    public UnityEvent MouseUp;
+    [HideInInspector] public UnityEvent MouseUp;
 
     protected float power;
     protected int skillCooltime;

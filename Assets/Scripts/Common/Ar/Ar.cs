@@ -11,7 +11,7 @@ public class Ar : MonoBehaviour
 
     public bool isDead { get; set; }
     public bool isUsingSkill { get; set; }
-    public bool isMove;
+    public bool isMove { get; set; }
 
     protected float minDragPower = 0.4f;
     protected float maxDragPower = 1.5f;
@@ -26,15 +26,15 @@ public class Ar : MonoBehaviour
     public Rigidbody2D rigid { get; protected set; }
     public Vector2 lastVelocity { get; protected set; }
 
-    public UnityEvent BeforeCrash;
-    public UnityEvent AfterCrash;
-    public UnityEvent BeforeAttack;
-    public UnityEvent AfterAttack;
-    public UnityEvent BeforeDefence;
-    public UnityEvent AfterDefence;
-    public UnityEvent AfterMove;
-    public UnityEvent OnOutDie;
-    public UnityEvent OnBattleDie;
+    [HideInInspector] public UnityEvent BeforeCrash;
+    [HideInInspector] public UnityEvent AfterCrash;
+    [HideInInspector] public UnityEvent BeforeAttack;
+    [HideInInspector] public UnityEvent AfterAttack;
+    [HideInInspector] public UnityEvent BeforeDefence;
+    [HideInInspector] public UnityEvent AfterDefence;
+    [HideInInspector] public UnityEvent AfterMove;
+    [HideInInspector] public UnityEvent OnOutDie;
+    [HideInInspector] public UnityEvent OnBattleDie;
 
     protected SpriteRenderer sprite;
     private Animator animator;
@@ -57,7 +57,7 @@ public class Ar : MonoBehaviour
         {
             battleTarget = null;
             CameraMove.Instance.TimeFreeze(1);
-            CameraMove.Instance.EffectZoom(0);
+            CameraMove.Instance.EffectZoom(1);
         });
     }
 
@@ -69,28 +69,30 @@ public class Ar : MonoBehaviour
 
     protected void FixedUpdate()
     {
-        lastVelocity = rigid.velocity;
         if (rigid.velocity.normalized != lastVelocity.normalized && rigid.velocity.magnitude != 0)
         {
-            RaycastHit2D[] hit = Physics2D.BoxCastAll(gameObject.transform.position, 
-                Vector2.one, 
-                Mathf.Atan2(rigid.velocity.y, rigid.velocity.x) * Mathf.Rad2Deg, 
-                rigid.velocity.normalized, 
-                rigid.velocity.magnitude / 2 / (1 + stat.WEIGHT));
+            lastVelocity = rigid.velocity;
+            RaycastHit2D[] hit = Physics2D.BoxCastAll(gameObject.transform.position,
+                Vector2.one / 2,
+                Mathf.Atan2(rigid.velocity.y, rigid.velocity.x) * Mathf.Rad2Deg,
+                rigid.velocity.normalized,
+                rigid.velocity.magnitude / (2 + stat.WEIGHT*0.5f));
 
             if (hit.Length <= 1) return;
 
             if(hit[1].collider.GetComponent<Ar>())
             {
                 battleTarget = hit[1].collider.transform;
+                CameraMove.Instance.MovetoTarget(battleTarget);
             }
             else
             {
                 battleTarget = null;
                 CameraMove.Instance.TimeFreeze(1);
-                CameraMove.Instance.EffectZoom(0);
+                CameraMove.Instance.EffectZoom(1);
             }
         }
+        else lastVelocity = rigid.velocity;
     }
 
     protected void Update()
@@ -98,6 +100,9 @@ public class Ar : MonoBehaviour
         if (rigid.velocity.magnitude <= 0.1f && isMove)
         {
             isMove = false;
+            battleTarget = null;
+            CameraMove.Instance.TimeFreeze(1);
+            CameraMove.Instance.EffectZoom(1);
             TurnManager.Instance.SomeoneIsMoving = false;
             AfterMove?.Invoke();
         }
@@ -111,7 +116,6 @@ public class Ar : MonoBehaviour
             {
                 var amount = distance.magnitude / slowMagnitude == float.NaN ? 1 : distance.magnitude / slowMagnitude;
                 CameraMove.Instance.EffectZoom(amount);
-                if (amount < 0.25f) amount *= amount;
                 CameraMove.Instance.TimeFreeze(amount);
             }
         }

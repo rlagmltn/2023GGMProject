@@ -33,6 +33,7 @@ public class BackGround : MonoBehaviour
 
     private void BeginDrag(BaseEventData data)
     {
+        if (!TurnManager.Instance.IsPlayerTurn) return;
         CameraMove.Instance.ResetTarget();
         PlayerController.Instance.ResetSellect();
         PlayerController.Instance.DisableQuickSlots();
@@ -44,6 +45,7 @@ public class BackGround : MonoBehaviour
     }
     private void Drag(BaseEventData data)
     {
+        if (!TurnManager.Instance.IsPlayerTurn) return;
         Vector3 angle = startPos - Util.Instance.mousePosition;
         angle.z = 0;
         cameraMove.position += angle;
@@ -52,8 +54,8 @@ public class BackGround : MonoBehaviour
 
     private void EndDrag(BaseEventData data)
     {
-        transposer.m_XDamping = 1;
-        transposer.m_YDamping = 1;
-        transposer.m_ZDamping = 1;
+        transposer.m_XDamping = 0.75f;
+        transposer.m_YDamping = 0.5f;
+        transposer.m_ZDamping = 0.75f;
     }
 }

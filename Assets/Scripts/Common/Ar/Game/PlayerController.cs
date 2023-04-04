@@ -75,6 +75,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         cancelButton.gameObject.SetActive(true);
         sellectPlayer?.DragBegin(joystickType);
+        TurnManager.Instance.BlinkNextTurn();
     }
     public void Drag(float angle)
     {
@@ -111,6 +112,7 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     public void DragEnd(float power,Vector2 angle)
     {
+        TurnManager.Instance.StopBlink();
         if (cancelButton.entering)
         {
             sellectPlayer.DisableRanges();

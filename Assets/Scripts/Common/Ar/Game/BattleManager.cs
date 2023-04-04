@@ -27,6 +27,7 @@ public class BattleManager : MonoSingleton<BattleManager>
                 {
                     CrushBattle();
                 }
+                CameraMove.Instance.ResetTarget();
             }
         }
     }
