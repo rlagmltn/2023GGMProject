@@ -334,6 +334,7 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
         for(int i = 0; i < arList.Length; i++)
         {
             Global.Selected_Ar_Preset[i] = arList[i];
+            ArInventoryManager.Instance.HolderToInven(arList[i]);
             Debug.Log(Global.Selected_Ar_Preset[i].characterInfo.Name);
         }
 

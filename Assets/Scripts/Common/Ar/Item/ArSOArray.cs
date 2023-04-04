@@ -10,7 +10,8 @@ public class ArSOArray : ScriptableObject
 
     public void LoadArlist()
     {
-        list = dataBase.list;
+        list.Clear();
+        list.AddRange(dataBase.list);
     }
 
     public void ResetArlist()

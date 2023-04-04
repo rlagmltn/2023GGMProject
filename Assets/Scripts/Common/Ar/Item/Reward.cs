@@ -4,23 +4,11 @@ using UnityEngine;
 
 public class Reward : Shop
 {
-    [SerializeField] private ArSOArray arInven;
-    [SerializeField] private ArSOArray arHolder;
     [SerializeField] private ItemDBSO itemInven;
 
     public void TakeAr()
     {
-        var newAr = false;
-        while(!newAr)
-        {
-            var rand = Random.Range(0, arHolder.list.Count);
-            if (arHolder.list[rand] == null) continue;
-
-            Debug.Log(arHolder.list[rand].name);
-            arInven.list.Add(arHolder.list[rand]);
-            arHolder.list.RemoveAt(rand);
-            newAr = true;
-        }
+        ArInventoryManager.Instance.HolderToInven(Random.Range(0, ArInventoryManager.Instance.HolderList.Count));
     }
 
     public void TakeItem()
@@ -30,7 +18,7 @@ public class Reward : Shop
 
     public void TakeHeal()
     {
-        foreach(ArSO ar in arInven.list)
+        foreach(ArSO ar in ArInventoryManager.Instance.InvenList)
         {
             ar.ArData.so.surviveStats.currentHP = Mathf.Clamp(ar.ArData.so.surviveStats.currentHP + 
                 (ar.ArData.so.surviveStats.MaxHP / 10 * 3), 0, ar.ArData.so.surviveStats.MaxHP);

@@ -3979,9 +3979,9 @@ RectTransform:
   m_Father: {fileID: 1080818344}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 50, y: 50}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 50, y: 0}
   m_SizeDelta: {x: 0, y: 1641}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &904628977
@@ -4001,7 +4001,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 3
   m_Spacing: 20
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
@@ -8551,8 +8551,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDB: {fileID: 11400000, guid: 6931aa12e23d47c428cd4b1a26f04d43, type: 2}
-  arInven: {fileID: 11400000, guid: 6dc7aefb3acb1d5499a2cc3c16e87d2b, type: 2}
-  arHolder: {fileID: 11400000, guid: c0349a2e67d6a8b4bb7b0f45355720ad, type: 2}
   itemInven: {fileID: 11400000, guid: ee95ca39174dbe24b806fbbabc35b6fe, type: 2}
 --- !u!1 &1550971117
 GameObject:
