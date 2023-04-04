@@ -67,6 +67,7 @@ public class Ar : MonoBehaviour
 
     protected void FixedUpdate()
     {
+        lastVelocity = rigid.velocity;
         if (rigid.velocity.normalized != lastVelocity.normalized && rigid.velocity.magnitude != 0)
         {
             RaycastHit2D[] hit = Physics2D.BoxCastAll(gameObject.transform.position, 
@@ -88,8 +89,6 @@ public class Ar : MonoBehaviour
                 CameraMove.Instance.EffectZoom(0);
             }
         }
-
-        lastVelocity = rigid.velocity;
     }
 
     protected void Update()

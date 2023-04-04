@@ -231,7 +231,8 @@ public class BattleManager : MonoSingleton<BattleManager>
         Vector2 u1, u2;
         u1 = ((w1 - e * w2) / (w1 + w2) * v1.magnitude * cos1 + (w2 + e * w2) / (w1 + w2) * v2.magnitude * cos2) / 2 * basisX - v1.magnitude * sin1 * basisY;
         u2 = ((w1 + e * w1) / (w1 + w2) * v1.magnitude * cos1 + (w2 - e * w1) / (w1 + w2) * v2.magnitude * cos2) / 2 * basisX - v2.magnitude * sin2 * basisY;
-
+        u1 += u1.normalized;
+        u2 += u2.normalized;
         return (u1, u2);
     }
 }
