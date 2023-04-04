@@ -52,7 +52,7 @@ public class StartPannel : MonoBehaviour
 
     private void ChangeSceneToMap()
     {
-        SceneManager.LoadScene("MapScene");
+        SceneMgr.LoadScene("MapScene");
     }
 
     private void RemoveAllEvents(Button button)
