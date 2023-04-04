@@ -61,7 +61,7 @@ public class Ar : MonoBehaviour
         });
     }
 
-    protected virtual void StatReset() // 수치 초기화
+    public virtual void StatReset() // 수치 초기화
     {
         isDead = false;
         DeadCheck();
@@ -69,9 +69,14 @@ public class Ar : MonoBehaviour
 
     protected void FixedUpdate()
     {
+        lastVelocity = rigid.velocity;
         if (rigid.velocity.normalized != lastVelocity.normalized && rigid.velocity.magnitude != 0)
         {
-            RaycastHit2D[] hit = Physics2D.BoxCastAll(gameObject.transform.position, Vector2.one/2, Mathf.Atan2(rigid.velocity.y, rigid.velocity.x) * Mathf.Rad2Deg ,rigid.velocity.normalized, rigid.velocity.magnitude / 2 / (1 + stat.WEIGHT));
+            RaycastHit2D[] hit = Physics2D.BoxCastAll(gameObject.transform.position, 
+                Vector2.one/2, 
+                Mathf.Atan2(rigid.velocity.y, rigid.velocity.x) * Mathf.Rad2Deg, 
+                rigid.velocity.normalized, 
+                rigid.velocity.magnitude / 2 / (1 + stat.WEIGHT));
 
             if (hit.Length <= 1) return;
 
@@ -86,8 +91,6 @@ public class Ar : MonoBehaviour
                 CameraMove.Instance.EffectZoom(0);
             }
         }
-
-        lastVelocity = rigid.velocity;
     }
 
     protected void Update()
@@ -153,23 +156,32 @@ public class Ar : MonoBehaviour
         rigid.velocity = velo;
     }
 
-    public bool Hit(int damage)
+    public virtual bool Hit(int damage)
     {
-        if(damage>0 && stat.SP>0)
+
+        if(damage>=0)
         {
-            stat.SP -= damage;
-            if (stat.SP < 0)
+            EffectManager.Instance.InstantiateFloatDamage(transform.position).DamageText(damage);
+            if (stat.SP>0)
             {
-                damage = -stat.SP;
-                stat.SP = 0;
+                stat.SP -= damage;
+                if (stat.SP < 0)
+                {
+                    damage = -stat.SP;
+                    stat.SP = 0;
+                }
+                else damage = 0;
             }
-            else damage = 0;
+            if (damage >= 0)
+                StartCoroutine(HitColorChange(Color.red));
+            else
+                StartCoroutine(HitColorChange(Color.green));
         }
         stat.HP = Mathf.Clamp(stat.HP - damage, 0, stat.MaxHP);
         return DeadCheck();
     }
 
-    protected bool DeadCheck()
+    protected virtual bool DeadCheck()
     {
         //ArInfoManager.Instance.ShowBulletInfo(this);
         if (stat.HP <= 0)
@@ -196,7 +208,14 @@ public class Ar : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void DecreaseDP(int val)
+    private IEnumerator HitColorChange(Color color)
+    {
+        sprite.color = color;
+        yield return new WaitForSeconds(0.25f);
+        sprite.color = Color.white;
+    }
+
+    public void DecreaseSP(int val)
     {
         stat.SP = Mathf.Max(0, stat.SP - val);
     }

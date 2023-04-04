@@ -37,9 +37,9 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     private void SummonPlayers()
     {
-        for(int i=0; i<Global.Selected_Ar_Preset.Length; i++)
+        for(int i=0; i<ArInventoryManager.Instance.InvenList.Count; i++)
         {
-            var player = Instantiate(Global.Selected_Ar_Preset[i].ArData, null);
+            var player = Instantiate(ArInventoryManager.Instance.InvenList[i].ArData, null);
             player.transform.position = spawnPoints[i].position;
             var quickSlot = Instantiate(pf_QuickSlot, slotHolder);
             quickSlots.Add(quickSlot);

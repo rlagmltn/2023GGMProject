@@ -27,9 +27,6 @@ public class Player : Ar
     private GameObject moveRange;
     private GameObject attackRange;
     private GameObject skillRange;
-    private GameObject skillActived;
-
-    private MiniAr miniPlayer;
 
     [SerializeField] ItemSO[] itemSlots = new ItemSO[3];
 
@@ -52,7 +49,6 @@ public class Player : Ar
         moveRange = rangeContainer.GetChild(0).gameObject;
         attackRange = rangeContainer.GetChild(1).gameObject;
         skillRange = rangeContainer.GetChild(2).gameObject;
-        skillActived = transform.GetChild(3).gameObject;
         DisableRanges();
 
         MouseUp.AddListener(() => { isMove = true; });
@@ -60,7 +56,7 @@ public class Player : Ar
         StatReset();
     }
 
-    protected override void StatReset()
+    public override void StatReset()
     {
         stat.MaxHP = (int)so.surviveStats.MaxHP;
         stat.HP = (int)so.surviveStats.currentHP;
@@ -124,9 +120,6 @@ public class Player : Ar
     void ActiveRangesAndChangeColor(GameObject obj)
     {
         obj.SetActive(true);
-
-        miniPlayer.ShowRange(obj);
-
         ChangeColor_A(obj, 0.8f);
     }
 
@@ -177,6 +170,7 @@ public class Player : Ar
         MouseUp?.Invoke();
         TurnManager.Instance.SomeoneIsMoving = true;
         rigid.velocity = ((angle.normalized * power) * pushPower)/(1+stat.WEIGHT*0.1f);
+        EffectManager.Instance.InstantiateEffect(2, transform.position, angle);
     }
 
     protected virtual void Attack(Vector2 angle)
@@ -187,7 +181,6 @@ public class Player : Ar
     {
         AnimAttackStart();
         currentCooltime = skillCooltime;
-        skillActived.SetActive(false);
         CameraMove.Instance.Shake();
     }
 
@@ -196,7 +189,6 @@ public class Player : Ar
         moveRange.SetActive(false);
         attackRange.SetActive(false);
         skillRange.SetActive(false);
-        miniPlayer.DisableRange();
     }
 
     public GameObject ActiveRange()
@@ -229,14 +221,20 @@ public class Player : Ar
         this.slot = slot;
         OnBattleDie.AddListener(()=>this.slot.SetSlotActive(false));
         OnOutDie.AddListener(()=>this.slot.SetSlotActive(false));
+        slot.SkillReady(true);
     }
 
     public void CountCooltime()
     {
         if (currentCooltime > 0)
+        {
             currentCooltime--;
+            slot.SkillReady(false);
+        }
         if (currentCooltime == 0)
-            skillActived.SetActive(true);
+        {
+            slot.SkillReady(true);
+        }
     }
 
     public IEnumerator DisableRanges_T()
@@ -269,8 +267,10 @@ public class Player : Ar
         obj.GetComponent<SpriteRenderer>().color = color;
     }
 
-    public void SetMini(MiniAr mini)
+    protected override bool DeadCheck()
     {
-        miniPlayer = mini;
+        slot.SetHPBar((float)stat.HP / stat.MaxHP);
+        slot.SetSPBar((float)stat.SP / stat.MaxSP);
+        return base.DeadCheck();
     }
 }

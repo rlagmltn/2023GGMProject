@@ -12,7 +12,7 @@ public class Archer : Player
         base.Start();
     }
 
-    protected override void StatReset()
+    public override void StatReset()
     {
         isRangeCharacter = true;
         base.StatReset();

@@ -25,6 +25,23 @@ public class Global
     public static StageSO EnterStage = new StageSO();
 }
 
+public enum Sound
+{
+    BGM,
+    EFFECT,
+    MAXCOUNT,
+
+}
+
+public enum SceneState
+{
+    TITLE,
+    MAIN,
+    BATTLE,
+    EVENT,
+    SHOP,
+}
+
 public enum ePrefabs
 {
     None = -1,

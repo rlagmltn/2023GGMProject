@@ -10,7 +10,7 @@ public class Priest : Player
         AfterMove.AddListener(()=> { isUsingSkill = false; });
     }
 
-    protected override void StatReset()
+    public override void StatReset()
     {
         isRangeCharacter = false;
         base.StatReset();
