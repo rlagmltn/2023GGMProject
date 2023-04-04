@@ -133,7 +133,7 @@ public class TurnManager : MonoSingleton<TurnManager>
 
         for(int i = 0; i< enemyTurn; i++)
         {
-            turns[turns.Count - i - 1].EnableTurn();
+            turns[turns.Count - i - 1].EnableEnemyTurn();
         }
 
         CameraMove.Instance.SetDefaultZoom();
@@ -173,6 +173,30 @@ public class TurnManager : MonoSingleton<TurnManager>
         for (int i = 0; i < turns.Count - count; i++)
         {
             turns[i].SetActiveTurnObj(false);
+        }
+    }
+
+    public void BlinkNextTurn()
+    {
+        foreach (Turn turn in turns)
+        {
+            if (turn.active)
+            {
+                turn.Blink();
+                break;
+            }
+        }
+    }
+
+    public void StopBlink()
+    {
+        foreach (Turn turn in turns)
+        {
+            if (turn.active)
+            {
+                turn.StopBlink();
+                break;
+            }
         }
     }
 }
