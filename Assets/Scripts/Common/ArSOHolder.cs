@@ -24,7 +24,7 @@ public class ArSOHolder : MonoBehaviour
             return;
         }
 
-        if(Ar.isTake == false || Ar.isUse == true)
+        if (Ar.isTake == false || Ar.isUse == true)
         {
             gameObject.GetComponent<Button>().interactable = false;
             color = gameObject.GetComponent<Button>().colors.disabledColor;
@@ -38,7 +38,7 @@ public class ArSOHolder : MonoBehaviour
 
     public void SetArSO(ArSO ar)
     {
-        if(ar == null)
+        if (ar == null)
         {
             gameObject.SetActive(false);
             return;
@@ -58,7 +58,7 @@ public class ArSOHolder : MonoBehaviour
         if (ArInventorySelecter.Instance.CanSelect())
         {
             ArInventorySelecter.Instance.SelectArSO(Ar);
-            Ar.isUse= true;
+            Ar.isUse = true;
             Button_ActiveSelf();
         }
     }
