@@ -207,5 +207,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         }
         batchZone.SetActive(false);
         batchUI.SetActive(false);
+
+        GameManager.Instance.Finding();
     }
 }
