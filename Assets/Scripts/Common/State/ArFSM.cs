@@ -10,7 +10,7 @@ public class ArFSM : MonoBehaviour
     [HideInInspector] public bool turnFlag = false;
     private Enemy enemy;
 
-    private void Start()
+    protected virtual void Start()
     {
         enemy = GetComponent<Enemy>();
     }
@@ -82,6 +82,7 @@ public class ArFSM : MonoBehaviour
         TurnManager.Instance.UseTurn();
         GetComponent<Rigidbody2D>().velocity = vel;
         transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        enemy.isMove = true;
         StopCoroutine("MoveAr");
     }
 }

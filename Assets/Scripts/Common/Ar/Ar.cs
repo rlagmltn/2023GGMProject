@@ -61,7 +61,12 @@ public class Ar : MonoBehaviour
         });
     }
 
-    void InitTImeScale() => Time.timeScale = 1f;
+    void InitTImeScale()
+    {
+        battleTarget = null;
+        CameraMove.Instance.TimeFreeze(1);
+        CameraMove.Instance.EffectZoom(1);
+    }
 
     public virtual void StatReset() // 수치 초기화
     {
@@ -75,11 +80,7 @@ public class Ar : MonoBehaviour
         if (rigid.velocity.normalized != lastVelocity.normalized && rigid.velocity.magnitude != 0)
         {
             lastVelocity = rigid.velocity;
-            RaycastHit2D[] hit = Physics2D.BoxCastAll(gameObject.transform.position,
-                Vector2.one / 2,
-                Mathf.Atan2(rigid.velocity.y, rigid.velocity.x) * Mathf.Rad2Deg,
-                rigid.velocity.normalized,
-                rigid.velocity.magnitude / (2 + stat.WEIGHT*0.5f));
+            RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position, rigid.velocity.normalized, rigid.velocity.magnitude);
 
             if (hit.Length <= 1) return;
 
