@@ -5,9 +5,12 @@ using TMPro;
 
 public class PlayerController : MonoSingleton<PlayerController>
 {
+    [SerializeField] int playerCount;
     [SerializeField] QuickSlot pf_QuickSlot;
     [SerializeField] Transform slotHolder;
-    [SerializeField] Transform[] spawnPoints;
+    [SerializeField] Transform batchHolderTrs;
+    [SerializeField] GameObject batchUI;
+    [SerializeField] GameObject batchZone;
     [SerializeField] JoyStick joystick;
     [SerializeField] StickCancel cancelButton;
     [SerializeField] GameObject actSellect;
@@ -16,12 +19,17 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     public Player sellectPlayer = null;
 
+    public bool IsBatchMode { get; set; }
+    public int BatchCount { get; set; }
+
     private List<QuickSlot> quickSlots = new List<QuickSlot>();
+    public List<QuickSlot> quickSlotHolder = new List<QuickSlot>();
     private GameObject attackBtn;
     private TextMeshProUGUI skillBtnText;
 
     void Awake()
     {
+        IsBatchMode = true;
         SummonPlayers();
         attackBtn = actSellect.transform.GetChild(1).gameObject;
         skillBtnText = actSellect.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
@@ -37,19 +45,19 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     private void SummonPlayers()
     {
-        for(int i=0; i<ArInventoryManager.Instance.InvenList.Count; i++)
+        for (int i = 0; i < ArInventoryManager.Instance.InvenList.Count; i++)
         {
             var player = Instantiate(ArInventoryManager.Instance.InvenList[i].ArData, null);
-            player.transform.position = spawnPoints[i].position;
-            var quickSlot = Instantiate(pf_QuickSlot, slotHolder);
-            quickSlots.Add(quickSlot);
+            var quickSlot = Instantiate(pf_QuickSlot, batchHolderTrs);
 
+            player.gameObject.SetActive(false);
             quickSlot.Connect(player);
         }
     }
 
     public void SellectPlayer(QuickSlot player)
     {
+        if (IsBatchMode) return;
         sellectPlayer = player.Player;
         CameraMove.Instance.MovetoTarget(sellectPlayer.transform);
         DisableQuickSlots();
@@ -62,6 +70,7 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     public void DisableQuickSlots()
     {
+        if (IsBatchMode) return;
         attackBtn.SetActive(false);
         actSellect.SetActive(false);
         joystick.gameObject.SetActive(false);
@@ -73,12 +82,14 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     public void DragBegin(JoystickType joystickType)
     {
+        if (IsBatchMode) return;
         cancelButton.gameObject.SetActive(true);
         sellectPlayer?.DragBegin(joystickType);
         TurnManager.Instance.BlinkNextTurn();
     }
     public void Drag(float angle)
     {
+        if (IsBatchMode) return;
         sellectPlayer?.Drag(angle);
     }
 
@@ -102,7 +113,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     //        sellectPlayer.DragEnd(joystick.joystickType, power, angle);
     //        cancelButton.gameObject.SetActive(false);
     //        ResetSellect();
-            
+
     //        foreach(QuickSlot quickSlot in quickSlots)
     //        {
     //            quickSlot.Player.CountCooltime();
@@ -110,8 +121,9 @@ public class PlayerController : MonoSingleton<PlayerController>
     //    }
     //}
 
-    public void DragEnd(float power,Vector2 angle)
+    public void DragEnd(float power, Vector2 angle)
     {
+        if (IsBatchMode) return;
         TurnManager.Instance.StopBlink();
         if (cancelButton.entering)
         {
@@ -128,7 +140,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         StartCoroutine(sellectPlayer.DisableRanges_T());
 
-        if(joystick.joystickType != JoystickType.Move)
+        if (joystick.joystickType != JoystickType.Move)
         {
             while (true)
             {
@@ -175,11 +187,25 @@ public class PlayerController : MonoSingleton<PlayerController>
 
     public void SetQuickSlotsEnable(bool value)
     {
-        foreach(QuickSlot slot in quickSlots)
+        foreach (QuickSlot slot in quickSlots)
         {
             if (slot.Player.isDead) continue;
-            
+
             slot.SetSlotActive(value);
         }
+    }
+
+    public void BattleStart()
+    {
+        if (BatchCount != playerCount) return;
+        IsBatchMode = false;
+
+        foreach(QuickSlot slot in quickSlotHolder)
+        {
+            quickSlots.Add(slot);
+            slot.transform.SetParent(slotHolder);
+        }
+        batchZone.SetActive(false);
+        batchUI.SetActive(false);
     }
 }
