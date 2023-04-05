@@ -9,11 +9,13 @@ public class Reward : Shop
     public void TakeAr()
     {
         ArInventoryManager.Instance.HolderToInven(Random.Range(0, ArInventoryManager.Instance.HolderList.Count));
+        SceneMgr.Instance.LoadScene(eSceneName.Map);
     }
 
     public void TakeItem()
     {
         itemInven.AddItemsInItems(GetRandomItems(1));
+        SceneMgr.Instance.LoadScene(eSceneName.Map);
     }
 
     public void TakeHeal()
@@ -23,5 +25,6 @@ public class Reward : Shop
             ar.ArData.so.surviveStats.currentHP = Mathf.Clamp(ar.ArData.so.surviveStats.currentHP + 
                 (ar.ArData.so.surviveStats.MaxHP / 10 * 3), 0, ar.ArData.so.surviveStats.MaxHP);
         }
+        SceneMgr.Instance.LoadScene(eSceneName.Map);
     }
 }

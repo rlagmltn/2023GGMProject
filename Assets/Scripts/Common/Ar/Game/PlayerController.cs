@@ -134,7 +134,7 @@ public class PlayerController : MonoSingleton<PlayerController>
             {
                 if (sellectPlayer.isEnd) break;
 
-                yield return new WaitForSeconds(0.01f);
+                yield return null;
                 continue;
             }
         }
