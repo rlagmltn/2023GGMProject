@@ -28,7 +28,7 @@ public class MapInventory : MonoSingleton<MapInventory>
 
     private void Start()
     {
-        Init();
+        //Init();
     }
 
     void Init()
