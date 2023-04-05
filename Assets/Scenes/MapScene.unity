@@ -8188,9 +8188,16 @@ MonoBehaviour:
   StageInfoPannel: {fileID: 846469658}
   BackPannel: {fileID: 1501798321}
   StartButton: {fileID: 451289158}
-  EnemyImages: []
-  EnemyTexts: []
+  EnemyImages:
+  - {fileID: 66927410}
+  - {fileID: 1371287849}
+  - {fileID: 1875335452}
+  EnemyTexts:
+  - {fileID: 1445439337}
+  - {fileID: 1149804712}
+  - {fileID: 2128554089}
   ClearedStages: []
+  currentStage: {fileID: 0}
 --- !u!4 &1116575914
 Transform:
   m_ObjectHideFlags: 0

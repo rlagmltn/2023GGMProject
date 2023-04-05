@@ -27,6 +27,8 @@ public class TestStageManager : MonoSingleton<TestStageManager>
 
     [SerializeField] private List<Image> EnemyImages;
     [SerializeField] private List<TextMeshProUGUI> EnemyTexts;
+
+    [SerializeField] private Image MapImage;
     
     public List<Transform> ClearedStages;
     private Transform currentStage;
@@ -39,12 +41,31 @@ public class TestStageManager : MonoSingleton<TestStageManager>
 
     void Init()
     {
-        startStage.GetComponent<StageSOHolder>().GetStage().IsCleared = true;
-        currentStage = startStage;
+        if(GlobalIsEmpty())
+        {
+            startStage.GetComponent<StageSOHolder>().GetStage().IsCleared = true;
+            currentStage = startStage;
+            SetStageState();
+            Debug.Log("빔");
+        }
+        else
+        {
+            foreach (Transform trans in AllButtons)
+            {
+                if (trans.GetComponent<StageSOHolder>().GetStage() == Global.EnterStage)
+                {
+                    currentStage = trans;
+                    break;
+                }
+            }
+        }
+
         FindNextStage();
         StageDisable();
         ButtonInit();
-        SetStageState();
+
+        //if (GlobalIsEmpty()) SetStageState(); 
+
         //DebugSetName(); //디버그용
     }
 
@@ -78,6 +99,7 @@ public class TestStageManager : MonoSingleton<TestStageManager>
         StageInfoPannel.gameObject.SetActive(true);
         BackPannel.gameObject.SetActive(true);
         SelectedStage = stage;
+        MapImage.sprite = stage.stageInfo.stageImage;
         StageInfoPannelUpdate();
     }
 
@@ -109,7 +131,7 @@ public class TestStageManager : MonoSingleton<TestStageManager>
         //지금은 임시로 스테이지 클리어임
         StageClear();
 
-        SceneManager.LoadScene("TestScene");
+        //SceneManager.LoadScene("TestScene");
     }
 
     /// <summary>
@@ -117,7 +139,7 @@ public class TestStageManager : MonoSingleton<TestStageManager>
     /// </summary>
     public void StageClear()
     {
-        Global.EnterStage.IsCleared = true;
+        Global.EnterStage.IsCleared = true; //이거를 다른 거에서 해줘야할듯? 이거만 하면 됨 ㄹㅇ
 
         foreach(Transform trans in AllButtons)
         {
@@ -247,6 +269,16 @@ public class TestStageManager : MonoSingleton<TestStageManager>
                 num++;
             }
         }
+    }
+
+    bool GlobalIsEmpty()
+    {
+        foreach(Transform trans in AllButtons)
+        {
+            if (Global.EnterStage == trans.GetComponent<StageSOHolder>().GetStage())
+                return false;
+        }
+        return true;
     }
 
     void RoadchangeColor(Transform obj, Color color)
