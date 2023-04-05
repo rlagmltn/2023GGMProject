@@ -129,9 +129,9 @@ public class TestStageManager : MonoSingleton<TestStageManager>
         //맵 로딩 해줘야함
         Global.Map = SelectedStage.map;
         //지금은 임시로 스테이지 클리어임
-        StageClear();
+        //StageClear();
 
-        //SceneManager.LoadScene("TestScene");
+        SceneManager.LoadScene("TestScene");
     }
 
     /// <summary>
