@@ -98,7 +98,7 @@ public class QuickSlot : MonoBehaviour
     {
         if (!PlayerController.Instance.IsBatchMode) return;
         RaycastHit2D ray = Physics2D.Raycast(Player.transform.position, new Vector3(0, -1, 0), 0.01f, LayerMask.GetMask("Batch"));
-        if (!ray.collider.CompareTag("UI") && ray.collider!=null)
+        if (ray.collider != null && !ray.collider.CompareTag("UI"))
         {
             if (!isBatched)
             {
