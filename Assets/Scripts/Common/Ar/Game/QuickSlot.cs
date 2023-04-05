@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class QuickSlot : MonoBehaviour
@@ -13,9 +14,11 @@ public class QuickSlot : MonoBehaviour
     private Image hpImage;
     private Image spImage;
 
+    private bool isBatched;
+
     public Player Player { get; set; }
 
-    private void Start()
+    private void Init()
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(SellectPlayer);
@@ -28,12 +31,13 @@ public class QuickSlot : MonoBehaviour
 
         unableImage.gameObject.SetActive(false);
         playerImage.sprite = Player.so.characterInfo.Image;
+        isBatched = false;
     }
 
     public void Connect(Player player)
     {
         Player = player;
-        Start();
+        Init();
         Player.Connect(this);
     }
 
@@ -73,5 +77,49 @@ public class QuickSlot : MonoBehaviour
     public void SetSPBar(float value)
     {
         spImage.fillAmount = value;
+    }
+
+    public void Click()
+    {
+        if (!PlayerController.Instance.IsBatchMode) return;
+        Player.gameObject.SetActive(true);
+        Player.Collide.enabled = false;
+        Player.transform.position = transform.position;
+        background.color = Color.yellow;
+    }
+
+    public void Drag()
+    {
+        if (!PlayerController.Instance.IsBatchMode) return;
+        Player.transform.position = Util.Instance.mousePosition;
+    }
+
+    public void Up()
+    {
+        if (!PlayerController.Instance.IsBatchMode) return;
+        RaycastHit2D ray = Physics2D.Raycast(Player.transform.position, new Vector3(0, -1, 0), 0.01f, LayerMask.GetMask("Batch"));
+        if (!ray.collider.CompareTag("UI") && ray.collider!=null)
+        {
+            if (!isBatched)
+            {
+                PlayerController.Instance.BatchCount++;
+                PlayerController.Instance.quickSlotHolder.Add(this);
+            }
+
+            isBatched = true;
+            Player.Collide.enabled = true;
+        }
+        else
+        {
+            if (isBatched)
+            {
+                PlayerController.Instance.BatchCount--;
+                PlayerController.Instance.quickSlotHolder.Remove(this);
+            }
+
+            isBatched = false;
+            Player.gameObject.SetActive(false);
+        }
+        background.color = Color.black;
     }
 }

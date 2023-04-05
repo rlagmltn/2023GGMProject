@@ -21,6 +21,8 @@ public class Player : Ar
     public float Power { get { return power; } }
     public float PushPower { get { return pushPower; } }
 
+    public CircleCollider2D Collide { get; set; }
+
     private QuickSlot slot;
 
     private Transform rangeContainer;
@@ -223,6 +225,7 @@ public class Player : Ar
         OnBattleDie.AddListener(()=>this.slot.SetSlotActive(false));
         OnOutDie.AddListener(()=>this.slot.SetSlotActive(false));
         slot.SkillReady(true);
+        Collide = GetComponent<CircleCollider2D>();
     }
 
     public void CountCooltime()
