@@ -37,8 +37,8 @@ public class MapInventory : MonoSingleton<MapInventory>
         SelectedAR = emptyAr;
 
         ClassfyArSO();
-        ButtonInit();
-        UpdateUI();
+        //ButtonInit();
+        //UpdateUI();
     }
 
     /// <summary>
@@ -121,16 +121,16 @@ public class MapInventory : MonoSingleton<MapInventory>
         SelectedAR = Ar;
     }
 
-    void StatInfoClick()
-    {
-        isSkillPannel = false;
-        AllUIUpdate();
-    }
-    void SkillInfoClick()
-    {
-        isSkillPannel = true;
-        AllUIUpdate();
-    }
+    //void StatInfoClick()
+    //{
+    //    isSkillPannel = false;
+    //    AllUIUpdate();
+    //}
+    //void SkillInfoClick()
+    //{
+    //    isSkillPannel = true;
+    //    AllUIUpdate();
+    //}
 
    
     //void AllUIUpdate()

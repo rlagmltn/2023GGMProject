@@ -59,7 +59,11 @@ public class Ar : MonoBehaviour
             CameraMove.Instance.TimeFreeze(1);
             CameraMove.Instance.EffectZoom(1);
         });
+
+        AfterMove.AddListener(InitTImeScale);
     }
+
+    void InitTImeScale() => Time.timeScale = 1f;
 
     public virtual void StatReset() // 수치 초기화
     {

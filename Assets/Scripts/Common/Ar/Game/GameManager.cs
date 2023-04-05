@@ -20,9 +20,14 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Start()
     {
+        Finding();   
+        Global.gMainCamTrm.position = new Vector3(0, 0, -10);
+    }
+
+    public void Finding()
+    {
         enemies = FindObjectsOfType<Enemy>();
         friendly = FindObjectsOfType<Player>();
-        Global.gMainCamTrm.position = new Vector3(0, 0, -10);
     }
 
     void InstantiateMap()
