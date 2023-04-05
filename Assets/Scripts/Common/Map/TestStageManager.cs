@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Road
@@ -107,6 +108,8 @@ public class TestStageManager : MonoSingleton<TestStageManager>
         Global.Map = SelectedStage.map;
         //지금은 임시로 스테이지 클리어임
         StageClear();
+
+        SceneManager.LoadScene("TestScene");
     }
 
     /// <summary>
