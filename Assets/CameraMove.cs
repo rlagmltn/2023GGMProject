@@ -87,13 +87,13 @@ public class CameraMove : MonoSingleton<CameraMove>
 
     private void HandleZoom()
     {
-        if (TurnManager.Instance.IsPlayerTurn)
+        /*if (TurnManager.Instance.IsPlayerTurn)
         {
             targetOrthographicSize -= Input.mouseScrollDelta.y * zoomAmount;
 
             targetOrthographicSize = Mathf.Clamp(targetOrthographicSize, minOrthographicSize, maxOrthographicSize);
             orthographicSize = Mathf.Lerp(orthographicSize, targetOrthographicSize, Time.deltaTime * zoomSpeed);
-        }
+        }*/
         shakeCam.m_Lens.OrthographicSize = Mathf.Clamp(orthographicSize*zoom, orthographicSize/2, 10);
     }
 
