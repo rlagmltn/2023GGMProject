@@ -80,8 +80,8 @@ public class CameraMove : MonoSingleton<CameraMove>
             // 거리 차이 구함(거리가 이전보다 크면(마이너스가 나오면)손가락을 벌린 상태_줌인 상태)
             float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
 
-            shakeCam.m_Lens.OrthographicSize += deltaMagnitudeDiff * zoomAmount;
-            shakeCam.m_Lens.OrthographicSize = Mathf.Max(shakeCam.m_Lens.OrthographicSize, 0.1f);
+            orthographicSize += deltaMagnitudeDiff * zoomAmount;
+            orthographicSize = Mathf.Max(shakeCam.m_Lens.OrthographicSize, 0.1f);
         }
     }
 
