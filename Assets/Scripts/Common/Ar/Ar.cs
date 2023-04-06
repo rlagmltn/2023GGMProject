@@ -80,7 +80,7 @@ public class Ar : MonoBehaviour
         if (rigid.velocity.normalized != lastVelocity.normalized && rigid.velocity.magnitude != 0)
         {
             lastVelocity = rigid.velocity;
-            RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position, rigid.velocity.normalized, rigid.velocity.magnitude);
+            RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position, lastVelocity / stat.WEIGHT);
 
             if (hit.Length <= 1) return;
 
@@ -121,6 +121,12 @@ public class Ar : MonoBehaviour
                 var amount = distance.magnitude / slowMagnitude == float.NaN ? 1 : distance.magnitude / slowMagnitude;
                 CameraMove.Instance.EffectZoom(amount);
                 CameraMove.Instance.TimeFreeze(amount);
+            }
+            if(rigid.velocity.magnitude<=0.1f)
+            {
+                battleTarget = null;
+            CameraMove.Instance.TimeFreeze(1);
+            CameraMove.Instance.EffectZoom(1);
             }
         }
     }

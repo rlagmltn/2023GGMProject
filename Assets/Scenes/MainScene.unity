@@ -932,7 +932,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 1550}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &71908299
 MonoBehaviour:
@@ -6057,7 +6057,8 @@ PrefabInstance:
       propertyPath: m_BackGroundColor.r
       value: 0.5849056
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 345327110621291364, guid: d728e997d30c74e189926f9a17074546, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d728e997d30c74e189926f9a17074546, type: 3}
 --- !u!1001 &1022007947
 PrefabInstance:
@@ -30500,7 +30501,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &7221774096774222227
 CanvasRenderer:
   m_ObjectHideFlags: 0
