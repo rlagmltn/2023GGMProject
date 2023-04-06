@@ -57,6 +57,9 @@ public class MapInventory : MonoSingleton<MapInventory>
         AddButtonInstance();
     }
 
+    /// <summary>
+    /// 버튼에 정보를 전해주는 함수
+    /// </summary>
     void AddButtonInstance()
     {
         int num = 0;
@@ -75,8 +78,8 @@ public class MapInventory : MonoSingleton<MapInventory>
 
     void UpdateUI()
     {
-        //InfoSkillPannel.gameObject.SetActive(isSkillPannel);
-        //InfoStatPannel.gameObject.SetActive(!isSkillPannel);
+        InfoSkillPannel.gameObject.SetActive(isSkillPannel);
+        InfoStatPannel.gameObject.SetActive(!isSkillPannel);
 
         if (SelectedAR == emptyAr)
         {
@@ -111,37 +114,27 @@ public class MapInventory : MonoSingleton<MapInventory>
             AddButtonEvent(btn, btn.GetComponent<ArSOHolder_Map>().SelectedButton);
         }
 
-        //AddButtonEvent(InfoStatButton, StatInfoClick);
-        //AddButtonEvent(InfoSkillButton, SkillInfoClick);
+        AddButtonEvent(InfoStatButton, StatInfoClick);
+        AddButtonEvent(InfoSkillButton, SkillInfoClick);
     }
 
     public void SelectArSO(ArSO Ar)
     {
         SelectedAR = Ar;
+        isSkillPannel = false;
         UpdateUI();
     }
 
-    //void StatInfoClick()
-    //{
-    //    isSkillPannel = false;
-    //    AllUIUpdate();
-    //}
-    //void SkillInfoClick()
-    //{
-    //    isSkillPannel = true;
-    //    AllUIUpdate();
-    //}
-
-   
-    //void AllUIUpdate()
-    //{
-    //    foreach (Button btn in Buttons)
-    //    {
-    //        ArSOHolder holder = btn.GetComponent<ArSOHolder>();
-    //        holder.SetArSO(holder.GetArSO());
-    //    }
-    //    UpdateUI();
-    //}
+    void StatInfoClick()
+    {
+        isSkillPannel = false;
+        UpdateUI();
+    }
+    void SkillInfoClick()
+    {
+        isSkillPannel = true;
+        UpdateUI();
+    }
 
     void RemoveAllButtonEvents(Button button)
     {
