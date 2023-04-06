@@ -52,11 +52,12 @@ public class TestStageManager : MonoSingleton<TestStageManager>
         {
             foreach (Transform trans in AllButtons)
             {
+                if(trans != startStage)
+                    if(trans.GetComponent<StageSOHolder>().GetStage().IsCleared)
+                        ClearedStages.Add(trans);
+
                 if (trans.GetComponent<StageSOHolder>().GetStage() == Global.EnterStage)
-                {
                     currentStage = trans;
-                    break;
-                }
             }
         }
 
