@@ -28,7 +28,7 @@ public class MapInventory : MonoSingleton<MapInventory>
 
     private void Start()
     {
-        //Init();
+        Init();
     }
 
     void Init()
@@ -37,8 +37,8 @@ public class MapInventory : MonoSingleton<MapInventory>
         SelectedAR = emptyAr;
 
         ClassfyArSO();
-        //ButtonInit();
-        //UpdateUI();
+        ButtonInit();
+        UpdateUI();
     }
 
     /// <summary>
@@ -54,71 +54,71 @@ public class MapInventory : MonoSingleton<MapInventory>
         for (int num = 0; num < ArList.list.Count; num++)
             if (!ArList.list[num].isTake) sortedArSO.Add(ArList.list[num]);
 
-        AddButtonArSO();
+        AddButtonInstance();
     }
 
-    void AddButtonArSO()
+    void AddButtonInstance()
     {
         int num = 0;
         foreach (Button btn in Buttons)
         {
             if (sortedArSO.Count <= num)
             {
-                btn.GetComponent<ArSOHolder>().SetArSO(null);
+                btn.GetComponent<ArSOHolder_Map>().SetArSO(null);
                 num++;
                 continue;
             }
-            btn.GetComponent<ArSOHolder>().SetArSO(sortedArSO[num]);
+            btn.GetComponent<ArSOHolder_Map>().SetArSO(sortedArSO[num]);
             num++;
         }
     }
 
-    //void UpdateUI()
-    //{
+    void UpdateUI()
+    {
+        //InfoSkillPannel.gameObject.SetActive(isSkillPannel);
+        //InfoStatPannel.gameObject.SetActive(!isSkillPannel);
 
-    //    InfoSkillPannel.gameObject.SetActive(isSkillPannel);
-    //    InfoStatPannel.gameObject.SetActive(!isSkillPannel);
+        if (SelectedAR == emptyAr)
+        {
+            InfoPannel.gameObject.SetActive(false);
+            return;
+        }
 
-    //    if (SelectedAR == emptyAr)
-    //    {
-    //        InfoPannel.gameObject.SetActive(false);
-    //        return;
-    //    }
+        InfoPannel.gameObject.SetActive(true);
 
-    //    InfoPannel.gameObject.SetActive(true);
+        if (isSkillPannel)
+        {
+            InfoImage.sprite = SelectedAR.skill.SkillImage;
+            Ar_NameText.text = SelectedAR.skill.SkillName;
+            InfoTexts[6].text = SelectedAR.skill.SkillSummary;
+            return;
+        }
+        InfoImage.sprite = SelectedAR.characterInfo.Image;
+        Ar_NameText.text = SelectedAR.characterInfo.Name;
+        InfoTexts[0].text = $" : {SelectedAR.surviveStats.BaseHP}";
+        InfoTexts[1].text = $" : {SelectedAR.surviveStats.BaseShield}";
+        InfoTexts[2].text = $" : {SelectedAR.attackStats.BaseAtk}";
+        InfoTexts[3].text = $" : {SelectedAR.attackStats.BaseSkillAtk}";
+        InfoTexts[4].text = $" : {SelectedAR.criticalStats.BaseCriticalPer}";
+        InfoTexts[5].text = $" : {SelectedAR.surviveStats.BaseWeight}";
+    }
 
-    //    if (isSkillPannel)
-    //    {
-    //        InfoImage.sprite = SelectedAR.skill.SkillImage;
-    //        Ar_NameText.text = SelectedAR.skill.SkillName;
-    //        InfoTexts[6].text = SelectedAR.skill.SkillSummary;
-    //        return;
-    //    }
-    //    InfoImage.sprite = SelectedAR.characterInfo.Image;
-    //    Ar_NameText.text = SelectedAR.characterInfo.Name;
-    //    InfoTexts[0].text = $" : {SelectedAR.surviveStats.BaseHP}";
-    //    InfoTexts[1].text = $" : {SelectedAR.surviveStats.BaseShield}";
-    //    InfoTexts[2].text = $" : {SelectedAR.attackStats.BaseAtk}";
-    //    InfoTexts[3].text = $" : {SelectedAR.attackStats.BaseSkillAtk}";
-    //    InfoTexts[4].text = $" : {SelectedAR.criticalStats.BaseCriticalPer}";
-    //    InfoTexts[5].text = $" : {SelectedAR.surviveStats.BaseWeight}";
-    //}
+    void ButtonInit()
+    {
+        foreach (Button btn in Buttons)
+        {
+            RemoveAllButtonEvents(btn);
+            AddButtonEvent(btn, btn.GetComponent<ArSOHolder_Map>().SelectedButton);
+        }
 
-    //void ButtonInit()
-    //{
-    //    foreach (Button btn in Buttons)
-    //    {
-    //        RemoveAllButtonEvents(btn);
-    //        AddButtonEvent(btn, btn.GetComponent<ArSOHolder>().SelectedButton);
-    //    }
-
-    //    AddButtonEvent(InfoStatButton, StatInfoClick);
-    //    AddButtonEvent(InfoSkillButton, SkillInfoClick);
-    //}
+        //AddButtonEvent(InfoStatButton, StatInfoClick);
+        //AddButtonEvent(InfoSkillButton, SkillInfoClick);
+    }
 
     public void SelectArSO(ArSO Ar)
     {
         SelectedAR = Ar;
+        UpdateUI();
     }
 
     //void StatInfoClick()
