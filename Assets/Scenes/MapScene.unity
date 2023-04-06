@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3708985, g: 0.3783704, b: 0.35722548, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5550,7 +5550,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 2560, y: 1440}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -20864,6 +20864,23 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 345327110621291364, guid: d728e997d30c74e189926f9a17074546, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d728e997d30c74e189926f9a17074546, type: 3}
+--- !u!1 &1724961323 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3033442290656158764, guid: d728e997d30c74e189926f9a17074546, type: 3}
+  m_PrefabInstance: {fileID: 1724961322}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1724961324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724961323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6893c102ffb33294685be744d88e9e65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1729201339
 GameObject:
   m_ObjectHideFlags: 0
