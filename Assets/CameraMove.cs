@@ -24,13 +24,12 @@ public class CameraMove : MonoSingleton<CameraMove>
     private float defaultOrthographicSize = 4.5f;
     private float zoom = 1;
     private float orthographicSize;
-    private float targetOrthographicSize;
+    public bool isZoommode { get; set; }
 
     private void Awake()
     {
         Util.Instance.mainCam.transform.position = setCamPos;
         orthographicSize = shakeCam.m_Lens.OrthographicSize;
-        targetOrthographicSize = orthographicSize;
     }
 
     public void MovetoTarget(Transform target)
@@ -65,6 +64,7 @@ public class CameraMove : MonoSingleton<CameraMove>
         if (!TurnManager.Instance.IsPlayerTurn) return;
         if (Input.touchCount == 2) //손가락 2개가 눌렸을 때
         {
+            isZoommode = true;
             Touch touchZero = Input.GetTouch(0); //첫번째 손가락 터치를 저장
             Touch touchOne = Input.GetTouch(1); //두번째 손가락 터치를 저장
 
@@ -80,9 +80,9 @@ public class CameraMove : MonoSingleton<CameraMove>
             // 거리 차이 구함(거리가 이전보다 크면(마이너스가 나오면)손가락을 벌린 상태_줌인 상태)
             float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
 
-            orthographicSize += deltaMagnitudeDiff * zoomAmount;
-            orthographicSize = Mathf.Max(shakeCam.m_Lens.OrthographicSize, 0.1f);
+            orthographicSize = Mathf.Clamp(orthographicSize + deltaMagnitudeDiff * zoomAmount, minOrthographicSize, maxOrthographicSize);
         }
+        else isZoommode = false;
     }
 
     private void HandleZoom()
@@ -94,7 +94,12 @@ public class CameraMove : MonoSingleton<CameraMove>
             targetOrthographicSize = Mathf.Clamp(targetOrthographicSize, minOrthographicSize, maxOrthographicSize);
             orthographicSize = Mathf.Lerp(orthographicSize, targetOrthographicSize, Time.deltaTime * zoomSpeed);
         }*/
-        shakeCam.m_Lens.OrthographicSize = Mathf.Clamp(orthographicSize*zoom, orthographicSize/2, 10);
+        if(TurnManager.Instance.IsPlayerTurn)
+        {
+            shakeCam.m_Lens.OrthographicSize = Mathf.Clamp(orthographicSize * zoom, minOrthographicSize/2, maxOrthographicSize);
+        }
+        else
+            shakeCam.m_Lens.OrthographicSize = Mathf.Clamp(orthographicSize*zoom, orthographicSize/2, maxOrthographicSize);
     }
 
     public void ResetTarget()
