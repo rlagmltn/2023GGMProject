@@ -12,11 +12,12 @@ public class BanditWarrior_ArFSM : ArFSM
         fsmManager = new StateMachine<ArFSM>(this, new BanditWarrior_StateIdle());
     }
 
-    private void Start()
+    protected override void Start()
     {
         fsmManager.AddStateList(new BanditWarrior_StateMove());
         fsmManager.AddStateList(new BanditWarrior_StatePassive());
         fsmManager.AddStateList(new BanditWarrior_StateSkill());
+        base.Start();
     }
 
     public override void Update()

@@ -134,6 +134,7 @@ public class CameraMove : MonoSingleton<CameraMove>
 
     public void SetDefaultZoom()
     {
-        shakeCam.m_Lens.OrthographicSize = defaultOrthographicSize;
+        orthographicSize = defaultOrthographicSize;
+        zoom = 1;
     }
 }
