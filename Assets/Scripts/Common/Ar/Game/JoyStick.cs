@@ -17,6 +17,7 @@ public class JoyStick : MonoBehaviour
     [SerializeField] float radius;
     public JoystickType joystickType;
     private Transform stick;
+    private CameraMove cameraMove;
     private Vector3 stickVec;
     private Vector2 angle;
     private float zAngle;
@@ -26,6 +27,7 @@ public class JoyStick : MonoBehaviour
     {
         stick = transform.GetChild(0);
         eventTrigger = stick.GetComponent<EventTrigger>();
+        cameraMove = FindObjectOfType<CameraMove>();
 
         EventTrigger.Entry beginDragTrigger = new EventTrigger.Entry { eventID = EventTriggerType.BeginDrag };
         EventTrigger.Entry dragTrigger = new EventTrigger.Entry { eventID = EventTriggerType.Drag };
@@ -61,7 +63,7 @@ public class JoyStick : MonoBehaviour
         PlayerController.Instance.Drag(zAngle);
 
         if(joystickType == JoystickType.Move)
-            CameraMove.Instance.MoveDrag(-v * 3);
+            cameraMove.MoveDrag(-v * 3);
     }
 
     public void OnDragEnd(BaseEventData data)
@@ -71,6 +73,6 @@ public class JoyStick : MonoBehaviour
         angle /= angle.magnitude;
         PlayerController.Instance.DragEnd(power, angle);
         stick.position = transform.position;
-        CameraMove.Instance.MoveDrag(Vector3.zero);
+        cameraMove.MoveDrag(Vector3.zero);
     }
 }

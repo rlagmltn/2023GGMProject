@@ -9,10 +9,12 @@ public class ArFSM : MonoBehaviour
     protected List<Ar> arList = new List<Ar>();
     [HideInInspector] public bool turnFlag = false;
     private Enemy enemy;
+    private CameraMove cameraMove;
 
     protected virtual void Start()
     {
         enemy = GetComponent<Enemy>();
+        cameraMove = FindObjectOfType<CameraMove>();
     }
 
     public virtual void Update()
@@ -61,7 +63,7 @@ public class ArFSM : MonoBehaviour
 
     public virtual void StartTurn()
     {
-        CameraMove.Instance.MovetoTarget(transform);
+        cameraMove.MovetoTarget(transform);
         GetComponent<Enemy>().PassiveCoolDown();
         Invoke("ChangeTurnFlag", 1.5f);
     }

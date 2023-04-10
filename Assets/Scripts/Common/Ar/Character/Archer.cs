@@ -43,6 +43,6 @@ public class Archer : Player
     {
         float zAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
         var bullet = Instantiate(arrow, transform.position, Quaternion.Euler(0, 0, zAngle-180));
-        CameraMove.Instance.MovetoTarget(bullet.transform);
+        cameraMove.MovetoTarget(bullet.transform);
     }
 }

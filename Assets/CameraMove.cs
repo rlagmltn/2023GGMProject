@@ -2,104 +2,73 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.EventSystems;
 
-public class CameraMove : MonoSingleton<CameraMove>
+public class CameraMove : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    [SerializeField] private CinemachineVirtualCamera cinemachineCam;
 
-    [SerializeField] private CinemachineVirtualCamera shakeCam;
+    private Touch touchZero;
+    private Touch touchOne;
+
+    #region 카메라 무브
+    [SerializeField] private Transform target;
+    [SerializeField] private Vector2 minSize;
+    [SerializeField] private Vector2 maxSize;
+
+    private Vector3 moveDragPos;
+    private Vector3 setCamPos = new Vector3(0, 0, -10);
+    #endregion
+
+    #region 카메라 셰이크
     [SerializeField] private float amplitude;
     [SerializeField] private float frequency;
     [SerializeField] private float duration;
+    #endregion
 
-    [SerializeField] private float zoomAmount;
-    [SerializeField] private float zoomSpeed;
+    #region 카메라 줌인
     [SerializeField] private float minOrthographicSize = 10;
     [SerializeField] private float maxOrthographicSize = 30;
 
-    private CinemachineBasicMultiChannelPerlin shakeCamNoise;
-    private Vector3 setCamPos = new Vector3(0, 0, -10);
-    private Vector3 moveDragPos;
-
     private float defaultOrthographicSize = 4.5f;
-    private float zoom = 1;
     private float orthographicSize;
     public bool isZoommode { get; set; }
+    public bool isDragmode { get; set; }
+    public bool isBatchmode { get; set; }
+    #endregion
 
-    private void Awake()
-    {
-        Util.Instance.mainCam.transform.position = setCamPos;
-        orthographicSize = shakeCam.m_Lens.OrthographicSize;
-    }
+    private CinemachineBasicMultiChannelPerlin camNoise;
+    private CinemachineTransposer camTransposer;
 
-    public void MovetoTarget(Transform target)
-    {
-        this.target = target.transform;
-        transform.position += setCamPos;
-    }
+    [SerializeField] private float moveSensitivity;
+    [SerializeField] private float zoomSensitivity;
 
     private void Start()
     {
-        shakeCamNoise = shakeCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        orthographicSize = cinemachineCam.m_Lens.OrthographicSize;
+        camNoise = cinemachineCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        camTransposer = cinemachineCam.GetCinemachineComponent<CinemachineTransposer>();
     }
 
     private void Update()
     {
+        DragMove();
         ChaseTarget();
         ZoomInAndOut();
-        HandleZoom();
     }
 
     public void ChaseTarget()
     {
         if (target != null)
         {
-            transform.position = target.position + moveDragPos;
-            transform.position += setCamPos;
+            transform.position = target.position + moveDragPos + setCamPos;
         }
     }
 
-    private void ZoomInAndOut()
+    public void MovetoTarget(Transform target)
     {
-        if (!TurnManager.Instance.IsPlayerTurn) return;
-        if (Input.touchCount == 2) //손가락 2개가 눌렸을 때
-        {
-            isZoommode = true;
-            Touch touchZero = Input.GetTouch(0); //첫번째 손가락 터치를 저장
-            Touch touchOne = Input.GetTouch(1); //두번째 손가락 터치를 저장
-
-            //터치에 대한 이전 위치값을 각각 저장함
-            //처음 터치한 위치(touchZero.position)에서 이전 프레임에서의 터치 위치와 이번 프로임에서 터치 위치의 차이를 뺌
-            Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition; //deltaPosition는 이동방향 추적할 때 사용
-            Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
-
-            // 각 프레임에서 터치 사이의 벡터 거리 구함
-            float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude; //magnitude는 두 점간의 거리 비교(벡터)
-            float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
-
-            // 거리 차이 구함(거리가 이전보다 크면(마이너스가 나오면)손가락을 벌린 상태_줌인 상태)
-            float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
-
-            orthographicSize = Mathf.Clamp(orthographicSize + deltaMagnitudeDiff * zoomAmount, minOrthographicSize, maxOrthographicSize);
-        }
-        else isZoommode = false;
-    }
-
-    private void HandleZoom()
-    {
-        /*if (TurnManager.Instance.IsPlayerTurn)
-        {
-            targetOrthographicSize -= Input.mouseScrollDelta.y * zoomAmount;
-
-            targetOrthographicSize = Mathf.Clamp(targetOrthographicSize, minOrthographicSize, maxOrthographicSize);
-            orthographicSize = Mathf.Lerp(orthographicSize, targetOrthographicSize, Time.deltaTime * zoomSpeed);
-        }*/
-        if(TurnManager.Instance.IsPlayerTurn)
-        {
-            shakeCam.m_Lens.OrthographicSize = Mathf.Clamp(orthographicSize * zoom, minOrthographicSize/2, maxOrthographicSize);
-        }
-        else
-            shakeCam.m_Lens.OrthographicSize = Mathf.Clamp(orthographicSize*zoom, orthographicSize/2, maxOrthographicSize);
+        this.target = target.transform;
+        EndDrag();
     }
 
     public void ResetTarget()
@@ -107,9 +76,36 @@ public class CameraMove : MonoSingleton<CameraMove>
         target = null;
     }
 
-    public void Shake()
+    private void ZoomInAndOut()
     {
-        StartCoroutine(ShakeCoroutine());
+        if (!TurnManager.Instance.IsPlayerTurn) return;
+        if (Input.touchCount == 2) //손가락 2개가 눌렸을 때
+        {
+            if (isBatchmode) return;
+            isZoommode = true;
+            touchZero = Input.GetTouch(0);
+            touchOne = Input.GetTouch(1);
+
+            Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
+            Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+
+
+            float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+            float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
+
+
+            float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
+
+            orthographicSize = Mathf.Clamp(orthographicSize + deltaMagnitudeDiff * zoomSensitivity, minOrthographicSize, maxOrthographicSize);
+            ApplyCameraSize();
+        }
+        else isZoommode = false;
+    }
+
+    public void ApplyCameraSize(float zoomScale = 1)
+    {
+        zoomScale = Mathf.Clamp(zoomScale * 2, 0.3f, 1);
+        cinemachineCam.m_Lens.OrthographicSize = Mathf.Clamp(orthographicSize * zoomScale, minOrthographicSize / 2, maxOrthographicSize);
     }
 
     public void MoveDrag(Vector3 dragPos)
@@ -117,29 +113,73 @@ public class CameraMove : MonoSingleton<CameraMove>
         moveDragPos = dragPos;
     }
 
-    private IEnumerator ShakeCoroutine()
+    public void Shake()
     {
-        shakeCamNoise.m_AmplitudeGain = amplitude;
-        shakeCamNoise.m_FrequencyGain = frequency;
-        yield return new WaitForSeconds(duration);
-        shakeCamNoise.m_AmplitudeGain = 0;
-        shakeCamNoise.m_FrequencyGain = 0;
+        StartCoroutine(ShakeCoroutine());
     }
 
-    public void TimeFreeze(float amount)
+    private IEnumerator ShakeCoroutine()
     {
-        Time.timeScale = Mathf.Clamp(amount, 0.1f, 1f);
-        //StartCoroutine(TimeFreezeCoru(amount, duration));
+        camNoise.m_AmplitudeGain = amplitude;
+        camNoise.m_FrequencyGain = frequency;
+        yield return new WaitForSeconds(duration);
+        camNoise.m_AmplitudeGain = 0;
+        camNoise.m_FrequencyGain = 0;
     }
-    
-    public void EffectZoom(float amount)
+
+    private void DragMove()
     {
-        zoom = Mathf.Clamp((amount)*2, 0.3f, 1);
+        if (!TurnManager.Instance.IsPlayerTurn || isZoommode) return;
+        if (Input.touchCount == 1)
+        {
+            touchZero = Input.GetTouch(0);
+            if (!isDragmode && !isBatchmode) BeginDrag();
+            else Drag();
+        }
+        else if (Input.touchCount == 0) EndDrag();
+    }
+
+    private void BeginDrag()
+    {
+        if (touchZero.deltaPosition.magnitude < 5) return;
+        if (EventSystem.current.IsPointerOverGameObject(touchZero.fingerId))
+            isBatchmode = true;
+        else
+        {
+            isDragmode = true;
+            ResetTarget();
+            PlayerController.Instance.ResetSellect();
+            PlayerController.Instance.DisableQuickSlots();
+            camTransposer.m_XDamping = 0;
+            camTransposer.m_YDamping = 0;
+            camTransposer.m_ZDamping = 0;
+        }
+    }
+    private void Drag()
+    {
+        if (!isDragmode) return;
+        Vector3 pos = touchZero.deltaPosition * moveSensitivity;
+        transform.position -= pos;
+        transform.position = new Vector2(Mathf.Clamp(transform.position.x, minSize.x, maxSize.x), Mathf.Clamp(transform.position.y, minSize.y, maxSize.y));
+    }
+
+    private void EndDrag()
+    {
+        camTransposer.m_XDamping = 1;
+        camTransposer.m_YDamping = 1;
+        camTransposer.m_ZDamping = 1;
+        isDragmode = false;
+        isBatchmode = false;
+    }
+
+    public void TimeFreeze(float amount = 1)
+    {
+        Time.timeScale = Mathf.Clamp(amount, 0.15f, 1f);
     }
 
     public void SetDefaultZoom()
     {
         orthographicSize = defaultOrthographicSize;
-        zoom = 1;
+        ApplyCameraSize();
     }
 }

@@ -184,7 +184,7 @@ public class Player : Ar
     {
         AnimAttackStart();
         currentCooltime = skillCooltime;
-        CameraMove.Instance.Shake();
+        cameraMove.Shake();
     }
 
     public void DisableRanges()
@@ -208,7 +208,7 @@ public class Player : Ar
         if (!collision.transform.CompareTag("Object"))
         {
             BattleManager.Instance.SettingAr(this);
-            CameraMove.Instance.Shake();
+            cameraMove.Shake();
             EffectManager.Instance.InstantiateEffect(0, collision.contacts[0].point, transform.position, collision.contacts[0].point);
         }
     }

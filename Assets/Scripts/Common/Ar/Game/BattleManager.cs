@@ -7,6 +7,12 @@ public class BattleManager : MonoSingleton<BattleManager>
     [SerializeField] private Ar arOne, arTwo;
     private Ar arAtk;
     private int damage;
+    private CameraMove cameraMove;
+
+    private void Awake()
+    {
+        cameraMove = FindObjectOfType<CameraMove>();
+    }
 
     public void SettingAr(Ar ar)
     {
@@ -27,7 +33,7 @@ public class BattleManager : MonoSingleton<BattleManager>
                 {
                     CrushBattle();
                 }
-                CameraMove.Instance.ResetTarget();
+                cameraMove.ResetTarget();
             }
         }
     }

@@ -54,10 +54,10 @@ public class BanditWarrior : Enemy
     private IEnumerator SkillCameraMove(Transform targetTransform, Ar targetAr)
     {
         yield return new WaitForSeconds(1f);
-        CameraMove.Instance.MovetoTarget(targetTransform);
+        cameraMove.MovetoTarget(targetTransform);
         yield return new WaitForSeconds(0.5f);
         BattleManager.Instance.SettingAr(targetAr, this);
-        CameraMove.Instance.Shake();
+        cameraMove.Shake();
     }
     
     private void PassiveDP()
@@ -83,7 +83,7 @@ public class BanditWarrior : Enemy
     private IEnumerator PassivePushCo()
     {
         yield return new WaitForSeconds(0.3f);
-        CameraMove.Instance.MovetoTarget(this.transform);
+        cameraMove.MovetoTarget(transform);
         yield return new WaitForSeconds(0.5f);
         Vector3 dir;
         Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, 3f);

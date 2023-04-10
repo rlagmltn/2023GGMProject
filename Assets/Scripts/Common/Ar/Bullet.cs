@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
 
     private SpriteRenderer spriteSize;
     private BoxCollider2D collide;
+    private CameraMove cameraMove;
     public int damage { get; set; }
 
     private void OnEnable()
@@ -19,6 +20,7 @@ public class Bullet : MonoBehaviour
     {
         if (collide == null) collide = GetComponent<BoxCollider2D>();
         if (spriteSize == null) spriteSize = GetComponent<SpriteRenderer>();
+        if (cameraMove == null) cameraMove = FindObjectOfType<CameraMove>();
         gameObject.name = bulletSO.name;
         damage = bulletSO.damage;
         collide.size = new Vector2(bulletSO.width, bulletSO.height);
@@ -64,7 +66,7 @@ public class Bullet : MonoBehaviour
 
     private void AfterCrush()
     {
-        CameraMove.Instance.Shake();
+        cameraMove.Shake();
         if (bulletSO.rangeType == RangeType.Range)
         {
             switch (bulletSO.bulletType)

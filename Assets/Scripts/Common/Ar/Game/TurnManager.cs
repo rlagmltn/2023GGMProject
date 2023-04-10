@@ -15,12 +15,14 @@ public class TurnManager : MonoSingleton<TurnManager>
     private ArFSM[] enemys;
     private int turnCount = 0;
     private bool isPlayerTurn = true;
+    private CameraMove cameraMove;
     public bool IsPlayerTurn { get { return isPlayerTurn; } }
     public bool IsWaitingTurn { get; private set; }
     public bool SomeoneIsMoving { get; set; }
 
     private void Start()
     {
+        cameraMove = FindObjectOfType<CameraMove>();
         for(int i=0; i<10; i++)
         {
             var turn = Instantiate(pf_Turn, transform);
@@ -137,7 +139,7 @@ public class TurnManager : MonoSingleton<TurnManager>
             turns[turns.Count - i - 1].EnableEnemyTurn();
         }
 
-        CameraMove.Instance.SetDefaultZoom();
+        cameraMove.SetDefaultZoom();
 
         foreach (ArFSM arFSM in enemys)
         {

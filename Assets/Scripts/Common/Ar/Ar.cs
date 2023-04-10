@@ -38,6 +38,7 @@ public class Ar : MonoBehaviour
 
     protected SpriteRenderer sprite;
     private Animator animator;
+    protected CameraMove cameraMove;
 
     [SerializeField] private Transform battleTarget;
     private float slowMagnitude = 5f;
@@ -52,20 +53,16 @@ public class Ar : MonoBehaviour
         dpImage = dpBar.GetComponentInChildren<SpriteRenderer>();
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        cameraMove = FindObjectOfType<CameraMove>();
 
-        AfterCrash.AddListener(() =>
-        {
-            battleTarget = null;
-            CameraMove.Instance.TimeFreeze(1);
-            CameraMove.Instance.EffectZoom(1);
-        });
+        AfterCrash.AddListener(InitTImeScale);
     }
 
     void InitTImeScale()
     {
         battleTarget = null;
-        CameraMove.Instance.TimeFreeze(1);
-        CameraMove.Instance.EffectZoom(1);
+        cameraMove.TimeFreeze();
+        cameraMove.ApplyCameraSize();
     }
 
     public virtual void StatReset() // 수치 초기화
@@ -87,13 +84,11 @@ public class Ar : MonoBehaviour
             if(hit[1].collider.GetComponent<Ar>())
             {
                 battleTarget = hit[1].collider.transform;
-                CameraMove.Instance.MovetoTarget(battleTarget);
+                cameraMove.MovetoTarget(battleTarget);
             }
             else
             {
-                battleTarget = null;
-                CameraMove.Instance.TimeFreeze(1);
-                CameraMove.Instance.EffectZoom(1);
+                InitTImeScale();
             }
         }
         else lastVelocity = rigid.velocity;
@@ -101,34 +96,45 @@ public class Ar : MonoBehaviour
 
     protected void Update()
     {
-        if (rigid.velocity.magnitude <= 0.1f && isMove)
+        Flip();
+        StopMove();
+        BattleEffect();
+    }
+
+    private void BattleEffect()
+    {
+        if (battleTarget != null)
         {
+            var distance = transform.position - battleTarget.position;
+            if (distance.magnitude < slowMagnitude)
+            {
+                var amount = distance.magnitude / slowMagnitude == float.NaN ? 1 : distance.magnitude / slowMagnitude;
+                cameraMove.TimeFreeze(amount);
+                cameraMove.ApplyCameraSize(amount);
+            }
+            if (rigid.velocity.magnitude <= 0.1f)
+            {
+                InitTImeScale();
+            }
+        }
+    }
+
+    private void StopMove()
+    {
+        if (rigid.velocity.magnitude <= 0.2f && isMove)
+        {
+            rigid.velocity = Vector2.zero;
             isMove = false;
-            battleTarget = null;
-            CameraMove.Instance.TimeFreeze(1);
-            CameraMove.Instance.EffectZoom(1);
+            InitTImeScale();
             TurnManager.Instance.SomeoneIsMoving = false;
             AfterMove?.Invoke();
         }
+    }
+
+    private void Flip()
+    {
         if (rigid.velocity.x < 0) sprite.flipX = true;
         else if (rigid.velocity.x > 0) sprite.flipX = false;
-
-        if(battleTarget!=null)
-        {
-            var distance = transform.position - battleTarget.position;
-            if(distance.magnitude<slowMagnitude)
-            {
-                var amount = distance.magnitude / slowMagnitude == float.NaN ? 1 : distance.magnitude / slowMagnitude;
-                CameraMove.Instance.EffectZoom(amount);
-                CameraMove.Instance.TimeFreeze(amount);
-            }
-            if(rigid.velocity.magnitude<=0.1f)
-            {
-                battleTarget = null;
-            CameraMove.Instance.TimeFreeze(1);
-            CameraMove.Instance.EffectZoom(1);
-            }
-        }
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
@@ -137,11 +143,9 @@ public class Ar : MonoBehaviour
         {
             //BeforeCrash?.Invoke();
 
-            //rigid.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal);
-            //CameraMove.Instance.Shake();
-            //EffectManager.Instance.InstantiateEffect(0, collision.contacts[0].point, transform.position, collision.contacts[0].point);
-
-            collision.gameObject.SetActive(false);
+            rigid.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal);
+            cameraMove.Shake();
+            EffectManager.Instance.InstantiateEffect(0, collision.contacts[0].point, transform.position, collision.contacts[0].point);
 
             //AfterCrash?.Invoke();
         }
@@ -152,16 +156,6 @@ public class Ar : MonoBehaviour
         if (collision.CompareTag("Out"))
         {
             Out();
-        }
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.transform == battleTarget)
-        {
-            battleTarget = null;
-            CameraMove.Instance.TimeFreeze(1);
-            CameraMove.Instance.EffectZoom(0);
         }
     }
 

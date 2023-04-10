@@ -33,7 +33,7 @@ public class Enemy : Ar
         if (!collision.transform.CompareTag("Object"))
         {
             BattleManager.Instance.SettingAr(this);
-            CameraMove.Instance.Shake();
+            cameraMove.Shake();
             EffectManager.Instance.InstantiateEffect(0, collision.contacts[0].point, transform.position, collision.contacts[0].point);
         }
     }

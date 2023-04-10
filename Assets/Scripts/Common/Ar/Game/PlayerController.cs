@@ -26,6 +26,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     public List<QuickSlot> quickSlotHolder = new List<QuickSlot>();
     private GameObject attackBtn;
     private TextMeshProUGUI skillBtnText;
+    private CameraMove cameraMove;
 
     void Awake()
     {
@@ -33,6 +34,7 @@ public class PlayerController : MonoSingleton<PlayerController>
         SummonPlayers();
         attackBtn = actSellect.transform.GetChild(1).gameObject;
         skillBtnText = actSellect.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
+        cameraMove = FindObjectOfType<CameraMove>();
     }
 
     //private void SetEnemyList()
@@ -59,7 +61,7 @@ public class PlayerController : MonoSingleton<PlayerController>
     {
         if (IsBatchMode) return;
         sellectPlayer = player.Player;
-        CameraMove.Instance.MovetoTarget(sellectPlayer.transform);
+        cameraMove.MovetoTarget(sellectPlayer.transform);
         DisableQuickSlots();
         actSellect.SetActive(true);
         if (sellectPlayer.isRangeCharacter)
