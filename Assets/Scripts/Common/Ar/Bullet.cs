@@ -40,7 +40,7 @@ public class Bullet : MonoBehaviour
         }
         else if (collision.CompareTag("Object"))
         {
-            EffectManager.Instance.InstantiateEffect(0, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
+            EffectManager.Instance.InstantiateEffect(Effect.HIT, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
             AfterCrush();
             // 풀링되는 코드
         }
@@ -48,7 +48,7 @@ public class Bullet : MonoBehaviour
         {
             BattleManager.Instance.SettingAr(collision.GetComponent<Ar>(), damage);
             EffectManager.Instance.InstantiateEffect(0, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
-            EffectManager.Instance.InstantiateEffect(Random.Range(1, 3), collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
+            EffectManager.Instance.InstantiateEffect((Effect)Random.Range(1, 3), collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
             AfterCrush();
             //플레이어에게 이 불렛의 데미지만큼의 피해를 줌
         }
@@ -56,7 +56,7 @@ public class Bullet : MonoBehaviour
         {
             BattleManager.Instance.SettingAr(collision.GetComponent<Ar>(), damage);
             EffectManager.Instance.InstantiateEffect(0, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
-            EffectManager.Instance.InstantiateEffect(Random.Range(1, 3), collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
+            EffectManager.Instance.InstantiateEffect((Effect)Random.Range(1, 3), collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
             AfterCrush();
             //에너미에게 이 불렛의 데미지만큼의 피해를 줌
         }

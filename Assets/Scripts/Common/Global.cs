@@ -32,7 +32,14 @@ public enum Sound
     MAXCOUNT,
 
 }
-
+public enum Effect
+{
+    HIT = 0,
+    CRASH,
+    DASH,
+    SMASH,
+    WALLCRUSH
+}
 public enum ePrefabs
 {
     None = -1,

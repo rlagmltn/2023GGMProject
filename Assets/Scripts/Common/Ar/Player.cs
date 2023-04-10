@@ -173,7 +173,7 @@ public class Player : Ar
         MouseUp?.Invoke();
         TurnManager.Instance.SomeoneIsMoving = true;
         rigid.velocity = ((angle.normalized * power) * pushPower)/(1+stat.WEIGHT*0.1f);
-        EffectManager.Instance.InstantiateEffect(2, transform.position, angle);
+        EffectManager.Instance.InstantiateEffect(Effect.DASH, transform.position, angle);
     }
 
     protected virtual void Attack(Vector2 angle)
