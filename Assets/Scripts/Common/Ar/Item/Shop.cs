@@ -8,17 +8,12 @@ public class Shop : MonoBehaviour
 
     public ItemSO[] GetRandomItems(int count)
     {
+        int number = 0;
         int[] result = GetUniqueRandomNumbers(count, 0, itemDB.items.Length); // 랜덤 값 배열에 저장
         ItemSO[] items = new ItemSO[count];
 
-        int number = 0;
+        foreach(int num in result) items[number++] = itemDB.items[num];
 
-        foreach(int num in result)
-        {
-            items[number++] = itemDB.items[num];
-        }
-
-        Debug.Log(items[0].name);
         return items;
     }
 
@@ -26,29 +21,24 @@ public class Shop : MonoBehaviour
     {
         int currentIndex = 0;
 
-        if (count > (max - min + 1) || max < min) return null;
+        if (count - 1 > max - min || max < min) return null;
 
+        int number = 0;
         int[] numbers = new int[count];
 
         ResetList(numbers);
 
         while (currentIndex < count)
         {
-            int number = Random.Range(min, max);
-            if (!ArrayContains(numbers, number))
-            {
-                numbers[currentIndex++] = number;
-            }
+            number = Random.Range(min, max);
+            if (!ArrayContains(numbers, number)) numbers[currentIndex++] = number;
         }
         return numbers;
     }
 
     void ResetList(int[] nums)
     {
-        for (int i = 0; i < nums.Length; i++)
-        {
-            nums[i] = -1;
-        }
+        for (int i = 0; i < nums.Length; i++) nums[i] = -1;
     }
 
     bool ArrayContains(int[] array, int value)

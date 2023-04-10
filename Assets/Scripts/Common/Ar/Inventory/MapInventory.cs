@@ -24,8 +24,6 @@ public class MapInventory : MonoSingleton<MapInventory>
     private ArSO SelectedAR;
     private List<ArSO> sortedArSO;
 
-    private int SelectPresetNum;
-
     private void Start()
     {
         Init();
@@ -33,7 +31,6 @@ public class MapInventory : MonoSingleton<MapInventory>
 
     void Init()
     {
-        SelectPresetNum = 0;
         SelectedAR = emptyAr;
 
         ClassfyArSO();
@@ -63,15 +60,13 @@ public class MapInventory : MonoSingleton<MapInventory>
     void AddButtonInstance()
     {
         int num = 0;
+        ArSO _Ar = null;
         foreach (Button btn in Buttons)
         {
-            if (sortedArSO.Count <= num)
-            {
-                btn.GetComponent<ArSOHolder_Map>().SetArSO(null);
-                num++;
-                continue;
-            }
-            btn.GetComponent<ArSOHolder_Map>().SetArSO(sortedArSO[num]);
+            _Ar = null;
+            if (sortedArSO.Count > num) _Ar = sortedArSO[num];
+
+            btn.GetComponent<ArSOHolder_Map>().SetArSO(_Ar);
             num++;
         }
     }

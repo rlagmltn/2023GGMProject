@@ -69,15 +69,13 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
     void AddButtonArSO()
     {
         int num = 0;
+        ArSO _Ar = null;
         foreach (Button btn in Buttons)
         {
-            if(sortedArSO.Count <= num)
-            {
-                btn.GetComponent<ArSOHolder>().SetArSO(null);
-                num++;
-                continue;
-            }
-            btn.GetComponent<ArSOHolder>().SetArSO(sortedArSO[num]);
+            _Ar = null;
+            if(sortedArSO.Count > num) _Ar = sortedArSO[num];
+
+            btn.GetComponent<ArSOHolder>().SetArSO(_Ar);
             num++;
         }
     }
@@ -94,22 +92,10 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
 
     void UpdateUI()
     {
-        ArSO[] arList = SelectPresetNum switch
-        {
-            0 => FirstPreset,
-            1 => SecondPreset,
-            2 => ThirdPreset,
-            _ => FirstPreset,
-        };
+        ArSO[] arList = ReturnPresetList();
 
         int num = 0;
-
-        foreach(ArSO ar in arList)
-        {
-            ArImages[num].sprite = ar.characterInfo.Image;
-            ++num;
-        }
-
+        foreach(ArSO ar in arList) ArImages[num++].sprite = ar.characterInfo.Image;
 
         InfoSkillPannel.gameObject.SetActive(isSkillPannel);
         InfoStatPannel.gameObject.SetActive(!isSkillPannel);
@@ -129,6 +115,7 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
             InfoTexts[6].text = SelectedAR.skill.SkillSummary;
             return;
         }
+
         InfoImage.sprite = SelectedAR.characterInfo.Image;
         Ar_NameText.text = SelectedAR.characterInfo.Name;
         InfoTexts[0].text = $" : {SelectedAR.surviveStats.BaseHP}";

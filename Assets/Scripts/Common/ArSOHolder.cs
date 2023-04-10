@@ -18,12 +18,6 @@ public class ArSOHolder : MonoBehaviour
 
     private void Button_ActiveSelf()
     {
-        if (Ar == null)
-        {
-            gameObject.SetActive(false);
-            return;
-        }
-
         if (Ar.isTake == false || Ar.isUse == true)
         {
             gameObject.GetComponent<Button>().interactable = false;
@@ -43,6 +37,7 @@ public class ArSOHolder : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
+
         Ar = ar;
         UpdateButtonUI();
         Button_ActiveSelf();

@@ -129,7 +129,7 @@ public class PopUpManager : MonoBehaviour
             return;
         }
 
-        MainShop.Instance.selectSO = null;
+        MainShop.Instance.SetSelectedItem(null);
         backgroundPanel.gameObject.SetActive(false);
         ResetUIs();
     }

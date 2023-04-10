@@ -30,7 +30,7 @@ public class TestStageManager : MonoSingleton<TestStageManager>
 
     [SerializeField] private Image MapImage;
     
-    public List<Transform> ClearedStages;
+    private List<Transform> ClearedStages;
     private Transform currentStage;
     private StageSO SelectedStage;
 
@@ -41,6 +41,8 @@ public class TestStageManager : MonoSingleton<TestStageManager>
 
     void Init()
     {
+        ClearedStages = new List<Transform>();
+
         if(GlobalIsEmpty())
         {
             startStage.GetComponent<StageSOHolder>().GetStage().IsCleared = true;
@@ -132,7 +134,14 @@ public class TestStageManager : MonoSingleton<TestStageManager>
         //지금은 임시로 스테이지 클리어임
         //StageClear();
 
-        SceneManager.LoadScene("TestScene");
+        UnityAction Action = SelectedStage.stageKind switch
+        {
+            eStageState.Battle => () => SceneManager.LoadScene("TestScene"),
+            eStageState.Shop => () => SceneManager.LoadScene("ShopScene"),
+            _ => () => SceneManager.LoadScene("TestScene"),
+        };
+
+        Action();
     }
 
     /// <summary>
@@ -161,6 +170,7 @@ public class TestStageManager : MonoSingleton<TestStageManager>
     /// </summary>
     void FindNextStage()
     {
+        Color color = new Color(1, 1, 1);
         StageSOHolder CurrentStage = currentStage.GetComponent<StageSOHolder>();
 
         //현재의 입장 가능한 스테이지 전부 초기화
@@ -181,14 +191,12 @@ public class TestStageManager : MonoSingleton<TestStageManager>
         for (int num = 0; num < AllRoads_Info.Count; num++)
         {
             //들어갈 수 있는길 활성화 해주기
+            color = new Color(0.78f, 0.78f, 0.78f, 0.78f);
             if (AllRoads_Info[num].BeforeButton == ClearedStages[ClearedStages.Count - 1])
-            {
-                RoadchangeColor(AllRoads_Info[num].road, new Color(1, 1, 1));
-                continue;
-            }
+                color = new Color(1f, 1f, 1f, 1f);
 
-            //길 비활성화
-            RoadchangeColor(AllRoads_Info[num].road, new Color(0.78f, 0.78f, 0.78f, 0.78f));
+            //길 활성화/비활성화
+            RoadchangeColor(AllRoads_Info[num].road, color);
         }
 
 
@@ -222,25 +230,18 @@ public class TestStageManager : MonoSingleton<TestStageManager>
 
             btn.interactable = false;
             color.disabledColor = new Color(0.78f, 0.78f, 0.78f, 0.5f);
+
+            if (stage.IsCleared) color.disabledColor = new Color(1f,1f, 1f, 1f);
+
+            if(stage.IsCanEnter) btn.interactable = true;
+
             btn.colors = color;
-
-            if (stage.IsCleared)
-            {
-                color.disabledColor = new Color(1f,1f, 1f, 1f);
-                btn.colors = color;
-                continue;
-            }
-
-            if(stage.IsCanEnter)
-            {
-                btn.interactable = true;
-                color.disabledColor = new Color(1f, 1f, 1f, 1f);
-                btn.colors = color;
-            }
-
         }
     }
 
+    /// <summary>
+    /// 스테이지의 종류를 정해주는 함수
+    /// </summary>
     void SetStageState()
     {
         int eventNum = stageList.stageList.Count / 4;

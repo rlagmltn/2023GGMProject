@@ -26815,15 +26815,8 @@ MonoBehaviour:
   redSprite: {fileID: 21300000, guid: 1edaa05f7907bfd419611590e647443c, type: 3}
   commonSprite: {fileID: 21300000, guid: edb16c18e48cd7146b9ad24350ff7113, type: 3}
   purchaseButton: {fileID: 975761079392591451}
-  purchaseText: {fileID: 3888369413395174255}
   PurchaseOKButton: {fileID: 3888369413738206393}
-  shop: {fileID: 0}
-  shopItems: []
-  Items: []
-  pageNum: 1
-  selectSO:
-    Item: {fileID: 0}
-    isBuy: 0
+  purchaseText: {fileID: 3888369413395174255}
 --- !u!114 &6828795703739430090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26837,21 +26830,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDB: {fileID: 11400000, guid: 6931aa12e23d47c428cd4b1a26f04d43, type: 2}
---- !u!114 &6828795703739430091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7221774096715608063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4081ebdc59380c74abac9870738148bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EasyButton: {fileID: 0}
-  NormalButton: {fileID: 0}
-  HardButton: {fileID: 0}
 --- !u!114 &7048982081951210614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28338,7 +28316,6 @@ GameObject:
   - component: {fileID: 8905862846470130498}
   - component: {fileID: 6828795703739430090}
   - component: {fileID: 6828795703739429941}
-  - component: {fileID: 6828795703739430091}
   - component: {fileID: 7048982081951210614}
   m_Layer: 5
   m_Name: PopUpPannels

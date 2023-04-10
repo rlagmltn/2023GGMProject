@@ -28,19 +28,20 @@ public class MainShop : MonoSingleton<MainShop>
     [SerializeField] private Sprite commonSprite;
 
     [SerializeField] private Button purchaseButton;
+    [SerializeField] private Button PurchaseOKButton;
     [SerializeField] private TextMeshProUGUI purchaseText;
 
-    [SerializeField] private Button PurchaseOKButton;
 
-    public Shop shop;
-    public ItemSO[] shopItems;
-    public List<MainShopItem> Items;
-    public int pageNum = 1;
+    private ItemSO[] shopItems;
 
-    public MainShopItem selectSO;
+    private List<MainShopItem> Items;
+    private Shop shop;
+    private int pageNum = 1;
+    private MainShopItem selectSO;
 
     private void Awake()
     {
+        Items = new List<MainShopItem>();
         shop = GetComponent<Shop>();
         shopItems = new ItemSO[shopItemCount];
         shopItems = shop.GetRandomItems(shopItemCount);
@@ -163,6 +164,16 @@ public class MainShop : MonoSingleton<MainShop>
         selectSO.isBuy = true;
         selectSO = null;
         foreach (Button btn in buttons) btn.GetComponent<MainShopButton>().UpdateUI();
+    }
+
+    public MainShopItem GetSelectedItem()
+    {
+        return selectSO;
+    }
+
+    public void SetSelectedItem(MainShopItem Item)
+    {
+        selectSO = Item;
     }
 
     private void RemoveButtonEvents(Button button)
