@@ -273,11 +273,23 @@ public class Player : Ar
         obj.GetComponent<SpriteRenderer>().color = color;
     }
 
+    protected override void Out()
+    {
+        DeadSave();
+        base.Out();
+    }
+
     protected override bool DeadCheck()
+    {
+        DeadSave();
+        return base.DeadCheck();
+    }
+
+    private void DeadSave()
     {
         slot?.SetHPBar((float)stat.HP / stat.MaxHP);
         slot?.SetSPBar((float)stat.SP / stat.MaxSP);
-        return base.DeadCheck();
+        if (stat.HP <= 0) TakeAllStat();
     }
 
     public void TakeAllStat()
