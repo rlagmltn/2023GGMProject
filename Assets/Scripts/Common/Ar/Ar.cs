@@ -56,6 +56,7 @@ public class Ar : MonoBehaviour
         cameraMove = FindObjectOfType<CameraMove>();
 
         AfterCrash.AddListener(InitTImeScale);
+        AfterMove.AddListener(InitTImeScale);
     }
 
     void InitTImeScale()
@@ -67,7 +68,6 @@ public class Ar : MonoBehaviour
 
     public virtual void StatReset() // 수치 초기화
     {
-        AfterMove.AddListener(InitTImeScale);
         isDead = false;
         DeadCheck();
     }
@@ -87,12 +87,9 @@ public class Ar : MonoBehaviour
                 battleTarget = hit[1].collider.transform;
                 cameraMove.MovetoTarget(battleTarget);
             }
-            else
-            {
-                InitTImeScale();
-            }
         }
-        else lastVelocity = rigid.velocity;
+        
+        lastVelocity = rigid.velocity;
     }
 
     protected void Update()
@@ -113,10 +110,6 @@ public class Ar : MonoBehaviour
                 cameraMove.TimeFreeze(amount);
                 cameraMove.ApplyCameraSize(amount);
             }
-            if (rigid.velocity.magnitude <= 0.1f)
-            {
-                InitTImeScale();
-            }
         }
     }
 
@@ -126,7 +119,6 @@ public class Ar : MonoBehaviour
         {
             rigid.velocity = Vector2.zero;
             isMove = false;
-            InitTImeScale();
             TurnManager.Instance.SomeoneIsMoving = false;
             AfterMove?.Invoke();
         }
@@ -156,6 +148,7 @@ public class Ar : MonoBehaviour
     {
         if (collision.CompareTag("Out"))
         {
+            OnOutDie?.Invoke();
             Out();
         }
     }
