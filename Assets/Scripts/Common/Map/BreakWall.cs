@@ -6,7 +6,8 @@ public class BreakWall : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        GameObject particle = EffectManager.Instance.InstantiateEffect(Effect.WALLCRUSH, transform.position, Vector2.zero);
+        particle.transform.position = collision.collider.ClosestPoint(transform.position);
         Destroy(gameObject);
-        EffectManager.Instance.InstantiateEffect(Effect.WALLCRUSH, collision.collider.ClosestPoint(transform.position), Vector2.zero);
     }
 }

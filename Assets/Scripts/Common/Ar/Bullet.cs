@@ -9,6 +9,8 @@ public class Bullet : MonoBehaviour
     private SpriteRenderer spriteSize;
     private BoxCollider2D collide;
     private CameraMove cameraMove;
+
+    public Ar summoner { get; set; }
     public int damage { get; set; }
 
     private void OnEnable()
@@ -16,7 +18,7 @@ public class Bullet : MonoBehaviour
         SetSO();
     }
 
-    private void SetSO()
+    protected virtual void SetSO()
     {
         if (collide == null) collide = GetComponent<BoxCollider2D>();
         if (spriteSize == null) spriteSize = GetComponent<SpriteRenderer>();
@@ -64,7 +66,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private void AfterCrush()
+    protected virtual void AfterCrush()
     {
         cameraMove.Shake();
         if (bulletSO.rangeType == RangeType.Range)

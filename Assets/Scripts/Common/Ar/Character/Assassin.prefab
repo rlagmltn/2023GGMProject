@@ -581,13 +581,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: 
+  BeforeCrash:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterCrash:
+    m_PersistentCalls:
+      m_Calls: []
+  BeforeAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  BeforeDefence:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterDefence:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterMove:
+    m_PersistentCalls:
+      m_Calls: []
+  OnOutDie:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBattleDie:
+    m_PersistentCalls:
+      m_Calls: []
   battleTarget: {fileID: 0}
   so: {fileID: 11400000, guid: ccebee1322355b941850cd5dd83cf694, type: 2}
   isEnd: 1
+  MouseUp:
+    m_PersistentCalls:
+      m_Calls: []
   itemSlots:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  kunai: {fileID: 7247462277862405748, guid: a9df22e1b14dea04d98579a63d32e895, type: 3}
 --- !u!1 &7683837737996170686
 GameObject:
   m_ObjectHideFlags: 0

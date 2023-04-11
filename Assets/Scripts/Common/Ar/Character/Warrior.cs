@@ -26,16 +26,32 @@ public class Warrior : Player
     protected override void Skill(Vector2 angle)
     {
         base.Skill(angle);
-        Slash(Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg);
+        StartCoroutine(Slash(angle));
     }
 
-    private void Slash(float angle)
+    protected override void Passive()
     {
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(hitbox.Hitbox.transform.position, new Vector2(hitbox.rangeX, hitbox.rangeY), angle);
+        stat.SP = (int)so.surviveStats.MaxShield;
+        DeadCheck();
+    }
+
+    private IEnumerator Slash(Vector2 angle)
+    {
+        var attackSuccess = false;
+
+        rigid.velocity = -((angle.normalized * 1.5f) * pushPower) / (1 + stat.WEIGHT * 0.1f);
+
+        yield return new WaitForSeconds(1f);
+
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(hitbox.Hitbox.transform.position, new Vector2(hitbox.rangeX, hitbox.rangeY), Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg);
 
         foreach (Collider2D collider in colliders)
         {
-            BattleManager.Instance.SettingAr(collider.GetComponent<Enemy>(), this);
+            var enemy = collider.GetComponent<Enemy>();
+            BattleManager.Instance.SettingAr(enemy, this);
+            if (enemy != null) attackSuccess = true;
         }
+
+        if (attackSuccess) Passive();
     }
 }

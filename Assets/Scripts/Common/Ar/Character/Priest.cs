@@ -31,5 +31,12 @@ public class Priest : Player
         base.Skill(angle);
         rigid.velocity = (angle * power) * pushPower;
         isUsingSkill = true;
+        Passive();
+    }
+
+    protected override void Passive()
+    {
+        stat.HP += stat.ATK;
+        HpMaxCheck();
     }
 }
