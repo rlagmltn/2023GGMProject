@@ -148,7 +148,8 @@ public class Ar : MonoBehaviour
     {
         if (collision.CompareTag("Out"))
         {
-            OnOutDie?.Invoke();
+            stat.HP = 0;
+            stat.SP = 0;
             Out();
         }
     }
@@ -201,9 +202,9 @@ public class Ar : MonoBehaviour
         return false;
     }
 
-    protected void Out()
+    protected virtual void Out()
     {
-        OnOutDie.Invoke();
+        OnOutDie?.Invoke();
         isDead = true;
         TurnManager.Instance.SomeoneIsMoving = false;
         GameManager.Instance.ArDead();
