@@ -24,8 +24,8 @@ MonoBehaviour:
     baseSkillAtk: 6
     currentSkillAtk: 6
   criticalStats:
-    baseCriticalPer: 10
-    currentCritalPer: 10
+    baseCriticalPer: 5
+    currentCritalPer: 5
     baseCriticalDamage: 50
     currentCriticalDamage: 50
   surviveStats:
@@ -40,9 +40,9 @@ MonoBehaviour:
   skill:
     skillImage: {fileID: 21300000, guid: 626b9cddb29049e4cac50cd87b419945, type: 3}
     skillName: "\uC0AC\uACA9"
-    skillCoolTime: 3
-    MaxSkillCoolTime: 3
-    currentSkillCoolTime: 3
+    skillCoolTime: 6
+    MaxSkillCoolTime: 6
+    currentSkillCoolTime: 6
     SkillSummary: "\uAC15\uB824\uD06C\uD55C \uD654\uC0B4\uC744 \uBC1C\uC0AC\uD574
       \uC801\uC744 \uACF5\uACA9\uD55C\uB2E4"
   E_Item:
@@ -51,7 +51,7 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
   isTake: 1
-  isUse: 1
+  isUse: 0
   isInGameTake: 1
   ArData: {fileID: 8771273036672505357, guid: 594c5cfc6fc31074b905e55d9a9c7fcb, type: 3}
   Summary: "\uBE60\uB974\uAC8C \uD654\uC0B4\uC744 2\uBC1C \uBC1C\uC0AC\uD55C\uB2E4"

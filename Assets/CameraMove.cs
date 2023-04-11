@@ -30,7 +30,7 @@ public class CameraMove : MonoBehaviour
     [SerializeField] private float minOrthographicSize = 10;
     [SerializeField] private float maxOrthographicSize = 30;
 
-    private float defaultOrthographicSize = 4.5f;
+    private float defaultOrthographicSize = 5f;
     private float orthographicSize;
     public bool isZoommode { get; set; }
     public bool isDragmode { get; set; }
