@@ -8,8 +8,8 @@ public class ArFSM : MonoBehaviour
     public StateMachine<ArFSM> FsmManager => fsmManager;
     protected List<Ar> arList = new List<Ar>();
     [HideInInspector] public bool turnFlag = false;
-    private Enemy enemy;
-    private CameraMove cameraMove;
+    protected Enemy enemy;
+    protected CameraMove cameraMove;
 
     protected virtual void Start()
     {

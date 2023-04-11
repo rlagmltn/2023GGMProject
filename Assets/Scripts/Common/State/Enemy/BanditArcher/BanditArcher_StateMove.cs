@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class BanditArcher_StateMove : StateMove
 {
-    public override void OnUpdate(float deltaTime)
+
+    public override void OnStart()
     {
-        
+        base.OnStart();
+        stateMachine.ChangeState<BanditWarrior_StateIdle>();
     }
 }

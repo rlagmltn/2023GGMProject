@@ -9,10 +9,12 @@ public class BanditArcher_ArFSM : ArFSM
         fsmManager = new StateMachine<ArFSM>(this, new BanditArcher_StateIdle());
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         fsmManager.AddStateList(new BanditArcher_StateMove());
         fsmManager.AddStateList(new BanditArcher_StatePassive());
+        fsmManager.AddStateList(new BanditArcher_StateAtk());
         fsmManager.AddStateList(new BanditArcher_StateSkill());
     }
 

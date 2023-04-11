@@ -16,13 +16,13 @@ public class BanditWarrior : Enemy
 
     public override void StatReset()
     {
-        stat.MaxHP = 14;
-        stat.MaxSP = 2;
+        stat.MaxHP = 8;
+        stat.MaxSP = 8;
         stat.ATK = 4;
         stat.SATK = 4;
         stat.CriPer = 5;
         stat.CriDmg = 1.5f;
-        stat.WEIGHT = 1;
+        stat.WEIGHT = 5;
 
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
@@ -89,6 +89,8 @@ public class BanditWarrior : Enemy
         Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, 3f);
         Debug.Log("패시브 사용");
         transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+        
+    
         foreach (Collider2D col in cols)
         {
             if (col.CompareTag("Player"))
