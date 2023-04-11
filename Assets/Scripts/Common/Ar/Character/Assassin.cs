@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Assassin : Player
 {
+    [SerializeField] Bullet kunai;
     private HitBox hitbox;
 
     protected override void Start()
@@ -16,6 +17,7 @@ public class Assassin : Player
     {
         isRangeCharacter = false;
         base.StatReset();
+        Passive();
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
@@ -26,16 +28,18 @@ public class Assassin : Player
     protected override void Skill(Vector2 angle)
     {
         base.Skill(angle);
-        Slash(Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg);
+        Shoot(angle);
     }
 
-    private void Slash(float angle)
+    protected override void Passive()
     {
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(hitbox.Hitbox.transform.position, new Vector2(hitbox.rangeX, hitbox.rangeY), angle);
+        stat.CriDmg *= 2.5f;
+    }
 
-        foreach (Collider2D collider in colliders)
-        {
-            BattleManager.Instance.SettingAr(collider.GetComponent<Enemy>(), this);
-        }
+    void Shoot(Vector2 angle)
+    {
+        float zAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
+        var bullet = Instantiate(kunai, transform.position, Quaternion.Euler(0, 0, zAngle - 180));
+        cameraMove.MovetoTarget(bullet.transform);
     }
 }

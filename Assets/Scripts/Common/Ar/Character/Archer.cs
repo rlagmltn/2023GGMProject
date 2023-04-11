@@ -28,21 +28,25 @@ public class Archer : Player
         base.Attack(angle);
         Shoot(angle);
     }
+
     protected override void Skill(Vector2 angle)
     {
         base.Skill(angle);
         StartCoroutine(ArcherSkill(angle));
     }
+
     IEnumerator ArcherSkill(Vector2 angle)
     {
         Shoot(angle);
         yield return new WaitForSeconds(0.2f);
         Shoot(angle);
     }
+
     void Shoot(Vector2 angle)
     {
         float zAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
         var bullet = Instantiate(arrow, transform.position, Quaternion.Euler(0, 0, zAngle-180));
+        rigid.velocity = ((angle.normalized * 0.5f) * pushPower) / (1 + stat.WEIGHT * 0.1f);
         cameraMove.MovetoTarget(bullet.transform);
     }
 }

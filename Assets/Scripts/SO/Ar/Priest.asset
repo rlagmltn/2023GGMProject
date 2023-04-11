@@ -19,13 +19,13 @@ MonoBehaviour:
     arClass: 4
     Level: 1
   attackStats:
-    baseAtk: 4
-    currentAtk: 4
-    baseSkillAtk: -6
-    currentSkillAtk: -6
+    baseAtk: 2
+    currentAtk: 2
+    baseSkillAtk: -3
+    currentSkillAtk: -3
   criticalStats:
-    baseCriticalPer: 5
-    currentCritalPer: 5
+    baseCriticalPer: 10
+    currentCritalPer: 10
     baseCriticalDamage: 50
     currentCriticalDamage: 50
   surviveStats:
@@ -40,9 +40,9 @@ MonoBehaviour:
   skill:
     skillImage: {fileID: 21300000, guid: 02800fb9cff14da47a04572790384d8b, type: 3}
     skillName: "\uC138\uD06C\uB9AC\uD30C\uC2A4"
-    skillCoolTime: 4
-    MaxSkillCoolTime: 4
-    currentSkillCoolTime: 4
+    skillCoolTime: 10
+    MaxSkillCoolTime: 10
+    currentSkillCoolTime: 10
     SkillSummary: "\uC544\uAD70\uC744 \uD0C0\uACA9\uD558\uBA74 \uAC15\uB824\uD06C\uD55C
       \uD790\uC744 \uC900\uB2E4"
   E_Item:
@@ -51,7 +51,7 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
   isTake: 1
-  isUse: 1
+  isUse: 0
   isInGameTake: 1
   ArData: {fileID: 3093398957151007069, guid: 1393d6ae2cda1254c823767e18625624, type: 3}
   Summary: "\uC544\uAD70\uC5D0\uAC8C \uBD80\uB52A\uD600 \uC544\uAD70\uC744 \uCE58\uC720\uD560

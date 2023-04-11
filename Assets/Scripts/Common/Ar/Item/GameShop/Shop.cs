@@ -9,7 +9,7 @@ public class Shop : MonoBehaviour
     public ItemSO[] GetRandomItems(int count)
     {
         int number = 0;
-        int[] result = GetUniqueRandomNumbers(count, 0, itemDB.items.Length); // 랜덤 값 배열에 저장
+        int[] result = GetUniqueRandomNumbers(count, 0, itemDB.items.Count); // 랜덤 값 배열에 저장
         ItemSO[] items = new ItemSO[count];
 
         foreach(int num in result) items[number++] = itemDB.items[num];

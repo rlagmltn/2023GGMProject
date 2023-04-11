@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameShop : Shop
 {
@@ -29,10 +30,11 @@ public class GameShop : Shop
     {
         for (int i = 0; i < itemCount; i++)
         {
-            var tempObj = itemSlotObj;
-            itemSlotObj.GetComponent<ShopBuySlot>().SetItem(items[i]);
-            tempObj = Instantiate(tempObj, ContentTransform);
-            Debug.Log(itemIndex);
+            var tempObj = Instantiate(itemSlotObj, ContentTransform);
+            tempObj.GetComponent<ShopBuySlot>().Generate();
+            tempObj.GetComponent<ShopBuySlot>().SetItem(items[i]);
+            tempObj.GetComponent<Button>().onClick.RemoveAllListeners();
+            tempObj.GetComponent<Button>().onClick.AddListener(tempObj.GetComponent<ShopBuySlot>().Buy);
         }
     }
 }

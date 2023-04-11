@@ -9,6 +9,7 @@ public class TurnManager : MonoSingleton<TurnManager>
     [SerializeField] int playerTurn;
     [SerializeField] int enemyTurn;
     [SerializeField] Turn pf_Turn;
+    [SerializeField] GameObject turnObj;
     [SerializeField] TextMeshProUGUI turnText;
 
     private List<Turn> turns = new List<Turn>();
@@ -29,6 +30,7 @@ public class TurnManager : MonoSingleton<TurnManager>
             turns.Add(turn);
         }
         StartCoroutine(ResetTurn_C());
+        turnObj.SetActive(false);
     }
 
     public bool UseTurn()
@@ -45,7 +47,7 @@ public class TurnManager : MonoSingleton<TurnManager>
                     
                     if (turnCount >= playerTurn)
                     {
-                        Debug.Log("플레이어 턴 종료");
+                        //플레이어 턴 종료
                         StartCoroutine(PassTurn());
                     }
                     return true;
@@ -63,7 +65,7 @@ public class TurnManager : MonoSingleton<TurnManager>
 
                     if (turnCount >= enemyTurn)
                     {
-                        Debug.Log("적 턴 종료");
+                        //적 턴 종료
                         StartCoroutine(PassTurn());
                     }
                     return true;
@@ -76,7 +78,7 @@ public class TurnManager : MonoSingleton<TurnManager>
 
     public void ResetTurn()
     {
-        turnText.SetText("Player Turn");
+        turnText.SetText("Enemy Turn");
         UnActiveNotUseTurn(playerTurn);
 
         for (int i = 0; i < playerTurn; i++)
@@ -97,21 +99,20 @@ public class TurnManager : MonoSingleton<TurnManager>
     {
         PlayerController.Instance.SetQuickSlotsEnable(!isPlayerTurn);
         IsWaitingTurn = true;
+        StartCoroutine(ActiveTurnPanel());
         yield return new WaitForSeconds(3f);
         IsWaitingTurn = false;
         isPlayerTurn = !isPlayerTurn;
         ActiveAllTurn();
         if (isPlayerTurn)
         {
-            Debug.Log("플레이어 턴 시작");
+            //플레이어 턴 시작
             ResetTurn();
         }
         else
         {
-            Debug.Log("적 턴 시작");
+            //적 턴 시작
             StartCoroutine(ResetEnemyTurn());
-            //여기에 적이 턴을 진행할 수 있도록 한다.
-
         }
     }
 
@@ -123,7 +124,7 @@ public class TurnManager : MonoSingleton<TurnManager>
 
     private IEnumerator ResetEnemyTurn()
     {
-        turnText.SetText("Enemy Turn");
+        turnText.SetText("Player Turn");
         turnCount = 0;
 
         enemys = FindObjectsOfType<ArFSM>();
@@ -202,5 +203,16 @@ public class TurnManager : MonoSingleton<TurnManager>
                 break;
             }
         }
+    }
+
+    private IEnumerator ActiveTurnPanel()
+    {
+        yield return new WaitForSeconds(1f);
+        turnObj.SetActive(true);
+        turnObj.transform.DORotate(Vector3.zero, 0.5f);
+        yield return new WaitForSeconds(1.5f);
+        turnObj.transform.DORotate(new Vector3(0, 90, 0), 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        turnObj.SetActive(false);
     }
 }

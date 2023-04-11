@@ -187,6 +187,7 @@ public class Player : Ar
         currentCooltime = skillCooltime;
         cameraMove.Shake();
     }
+    protected virtual void Passive() { }
 
     public void DisableRanges()
     {

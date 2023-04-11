@@ -82,7 +82,7 @@ public class Ar : MonoBehaviour
 
             if (hit.Length <= 1) return;
 
-            if(hit[1].collider.GetComponent<Ar>())
+            if(hit[1].collider.GetComponent<Ar>()&&hit[1].collider.gameObject!=gameObject)
             {
                 battleTarget = hit[1].collider.transform;
                 cameraMove.MovetoTarget(battleTarget);
@@ -160,27 +160,27 @@ public class Ar : MonoBehaviour
 
     public virtual bool Hit(int damage)
     {
-
-        if(damage>=0)
+        EffectManager.Instance.InstantiateFloatDamage(transform.position).DamageText(damage);
+        if (stat.SP > 0)
         {
-            EffectManager.Instance.InstantiateFloatDamage(transform.position).DamageText(damage);
-            if (stat.SP>0)
+            stat.SP -= damage;
+            if (stat.SP < 0)
             {
-                stat.SP -= damage;
-                if (stat.SP < 0)
-                {
-                    damage = -stat.SP;
-                    stat.SP = 0;
-                }
-                else damage = 0;
+                damage = -stat.SP;
+                stat.SP = 0;
             }
-            if (damage >= 0)
-                StartCoroutine(HitColorChange(Color.red));
-            else
-                StartCoroutine(HitColorChange(Color.green));
+            else damage = 0;
         }
-        stat.HP = Mathf.Clamp(stat.HP - damage, 0, stat.MaxHP);
+
+        StartCoroutine(HitColorChange(Color.red));
+        stat.HP -= damage;
+        HpMaxCheck();
         return DeadCheck();
+    }
+
+    public void HpMaxCheck()
+    {
+        stat.HP = Mathf.Clamp(stat.HP, 0, stat.MaxHP);
     }
 
     protected virtual bool DeadCheck()

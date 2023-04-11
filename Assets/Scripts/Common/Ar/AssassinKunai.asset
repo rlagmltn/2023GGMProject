@@ -9,10 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2ee2d8f5bdee16429fd7b4786a80b93, type: 3}
-  m_Name: ItemInventory
+  m_Script: {fileID: 11500000, guid: e73e429114775cc4db40d8e91f1067b0, type: 3}
+  m_Name: AssassinKunai
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  Name: AssassinKunai
+  teamType: 0
+  rangeType: 1
+  bulletType: 0
+  damage: 2
+  width: 1
+  height: 0.4
+  speed: 40
+  lifeTime: 1
