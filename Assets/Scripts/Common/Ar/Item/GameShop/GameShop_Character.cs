@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameShop_Character : MonoBehaviour
+public class GameShop_Character : MonoSingleton<GameShop_Character>
 {
     [SerializeField] private ArSOList ArSOList;
     [SerializeField] private Transform CharacterSlot;
     [SerializeField] private Transform CharacterContent;
 
     private List<ArSO> TakeArList;
+    private List<Transform> Pannels;
 
     private void Awake()
     {
@@ -18,6 +19,8 @@ public class GameShop_Character : MonoBehaviour
     void Init()
     {
         TakeArList = new List<ArSO>();
+        Pannels = new List<Transform>();
+
         TrashPreviewSlot();
         TakeArToList();
         InstantiateCharacterSlot();
@@ -51,6 +54,15 @@ public class GameShop_Character : MonoBehaviour
         {
             Transform tempObj = Instantiate(CharacterSlot, CharacterContent);
             tempObj.GetComponent<ShopCharacterSlot>().SetArSO(TakeArList[num]);
+            Pannels.Add(tempObj);
+        }
+    }
+
+    internal void AllArUpdateUI()
+    {
+        for (int num = 0; num < Pannels.Count; num++)
+        {
+            Pannels[num].GetComponent<ShopCharacterSlot>().UpdateUI();
         }
     }
 }

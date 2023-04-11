@@ -10,7 +10,6 @@ public class GameShop : Shop
 
     [SerializeField] private Transform ContentTransform;
     [SerializeField] int itemCount = 5;
-    private int itemIndex = 0;
 
     void Start()
     {

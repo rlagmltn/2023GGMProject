@@ -30,7 +30,7 @@ public class GameShop_Inventory : MonoSingleton<GameShop_Inventory>
 
     internal void SetItem(ItemSO Item)
     {
-        for(int num = 0; num < InventorySO.items.Length; num++)
+        for(int num = 0; num < InventorySO.items.Count; num++)
         {
             if(InventorySO.items[num] == EmptySO)
             {
@@ -43,14 +43,14 @@ public class GameShop_Inventory : MonoSingleton<GameShop_Inventory>
 
     internal bool CanAddItem()
     {
-        for (int num = 0; num < InventorySO.items.Length; num++)
+        for (int num = 0; num < InventorySO.items.Count; num++)
             if (InventorySO.items[num] == EmptySO) return true;
         return false;
     }
 
     private void OnApplicationQuit() //없애야함
     {
-        for (int num = 0; num < InventorySO.items.Length; num++)
+        for (int num = 0; num < InventorySO.items.Count; num++)
                 InventorySO.items[num] = EmptySO;
     }
 }
