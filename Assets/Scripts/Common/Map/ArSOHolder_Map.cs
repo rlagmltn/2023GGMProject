@@ -18,7 +18,7 @@ public class ArSOHolder_Map : MonoBehaviour
 
     private void Button_ActiveSelf()
     {
-        if (Ar.isTake == false)
+        if (Ar.isInGameTake == false)
         {
             gameObject.GetComponent<Button>().interactable = false;
             color = gameObject.GetComponent<Button>().colors.disabledColor;

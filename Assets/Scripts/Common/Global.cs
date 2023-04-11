@@ -30,7 +30,6 @@ public enum Sound
     BGM,
     EFFECT,
     MAXCOUNT,
-
 }
 public enum Effect
 {

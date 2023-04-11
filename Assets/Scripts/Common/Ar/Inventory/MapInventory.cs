@@ -46,10 +46,10 @@ public class MapInventory : MonoSingleton<MapInventory>
         sortedArSO = new List<ArSO>();
 
         for (int num = 0; num < ArList.list.Count; num++)
-            if (ArList.list[num].isTake) sortedArSO.Add(ArList.list[num]);
+            if (ArList.list[num].isInGameTake) sortedArSO.Add(ArList.list[num]);
 
         for (int num = 0; num < ArList.list.Count; num++)
-            if (!ArList.list[num].isTake) sortedArSO.Add(ArList.list[num]);
+            if (!ArList.list[num].isInGameTake) sortedArSO.Add(ArList.list[num]);
 
         AddButtonInstance();
     }
@@ -146,6 +146,7 @@ public class MapInventory : MonoSingleton<MapInventory>
         foreach (ArSO ar in ArList.list)
         {
             ar.isUse = false;
+            ar.isInGameTake = false;
         }
     }
 }

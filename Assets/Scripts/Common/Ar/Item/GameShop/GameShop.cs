@@ -6,6 +6,8 @@ public class GameShop : Shop
 {
     public ItemSO[] items;
     public GameObject itemSlotObj;
+
+    [SerializeField] private Transform ContentTransform;
     [SerializeField] int itemCount = 5;
     private int itemIndex = 0;
 
@@ -18,11 +20,9 @@ public class GameShop : Shop
 
     void Init()
     {
-        var trash = FindObjectsOfType<ShopBuySlot>();
-        foreach (var t in trash)
-        {
-            Destroy(t.gameObject);
-        }
+        ShopBuySlot[] trash = FindObjectsOfType<ShopBuySlot>();
+
+        for(int num = 0; num < trash.Length; num++) Destroy(trash[num]);
     }
 
     void ShowItemContent()
@@ -30,9 +30,8 @@ public class GameShop : Shop
         for (int i = 0; i < itemCount; i++)
         {
             var tempObj = itemSlotObj;
-            itemSlotObj.GetComponent<ShopBuySlot>().item = items[i];
-            itemSlotObj.GetComponent<ShopBuySlot>().Init();
-            tempObj = Instantiate(tempObj, transform);
+            itemSlotObj.GetComponent<ShopBuySlot>().SetItem(items[i]);
+            tempObj = Instantiate(tempObj, ContentTransform);
             Debug.Log(itemIndex);
         }
     }

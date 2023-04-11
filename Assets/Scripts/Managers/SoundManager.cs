@@ -21,9 +21,9 @@ public class SoundManager : MonoSingleton<SoundManager>
         string[] soundNames = System.Enum.GetNames(typeof(Sound));
         for (int i = 0; i < soundNames.Length; i++)
         {
-            GameObject go = new GameObject { name = soundNames[i] };
-            audioSources[i] = go.AddComponent<AudioSource>();
-            go.transform.parent = root.transform;
+            GameObject obj = new GameObject { name = soundNames[i] };
+            audioSources[i] = obj.AddComponent<AudioSource>();
+            obj.transform.parent = root.transform;
         }
 
         audioSources[(int)Sound.BGM].loop = true;

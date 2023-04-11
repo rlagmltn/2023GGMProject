@@ -319,6 +319,7 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
 
         for(int i = 0; i < arList.Length; i++)
         {
+            arList[i].isInGameTake = true;
             Global.Selected_Ar_Preset[i] = arList[i];
             ArInventoryManager.Instance.HolderToInven(arList[i]);
             Debug.Log(Global.Selected_Ar_Preset[i].characterInfo.Name);
@@ -341,6 +342,7 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
         foreach(ArSO ar in ArList.list)
         {
             ar.isUse = false;
+            ar.isInGameTake = false;
         }
     }
 }

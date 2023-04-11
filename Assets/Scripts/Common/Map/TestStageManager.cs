@@ -252,7 +252,7 @@ public class TestStageManager : MonoSingleton<TestStageManager>
 
         for (int num = 0; num < eventNum;)
         {
-            int temp = Random.Range(0, stageList.stageList.Count - 1);
+            int temp = Random.Range(1, stageList.stageList.Count - 1);
 
             if (stageList.stageList[temp].stageKind == eStageState.Battle)
             {
@@ -263,7 +263,7 @@ public class TestStageManager : MonoSingleton<TestStageManager>
 
         for (int num = 0; num < shopNum;)
         {
-            int temp = Random.Range(0, stageList.stageList.Count - 1);
+            int temp = Random.Range(1, stageList.stageList.Count - 1);
 
             if (stageList.stageList[temp].stageKind == eStageState.Battle)
             {

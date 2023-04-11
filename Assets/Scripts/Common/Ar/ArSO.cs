@@ -16,8 +16,12 @@ public class ArSO : ScriptableObject
 
     public Skill skill;
 
+    public EquipItem E_Item;
+
     public bool isTake = false;
     public bool isUse = false;
+
+    public bool isInGameTake = false;
 
     public Player ArData;
 
@@ -152,4 +156,10 @@ public class Skill
         MaxSkillCoolTime = skillCoolTime;
         currentSkillCoolTime = skillCoolTime;
     }
+}
+
+[System.Serializable]
+public class EquipItem
+{
+    public ItemSO[] itmeSO = new ItemSO[3];
 }
