@@ -13,6 +13,7 @@ public class Kunai : Bullet
     protected override void AfterCrush()
     {
         summoner.transform.position = transform.position;
+        summoner.Push(Vector2.one);
         base.AfterCrush();
     }
 }
