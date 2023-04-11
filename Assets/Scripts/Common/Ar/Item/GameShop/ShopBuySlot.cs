@@ -15,12 +15,19 @@ public class ShopBuySlot : MonoBehaviour
     private int price;
     private ItemSO item;
 
+    internal void Generate()
+    {
+        item = new ItemSO();
+    }
+
     private void Init()
     {
         itemImage.sprite = item.itemIcon;
         nameText.text = string.Format(item.itemName);
         priceText.text = string.Format(item.itemPrice.ToString());
         infoText.text = item.itemExplain;
+
+        price = item.itemPrice;
     }
 
     internal void SetItem(ItemSO _Item)
@@ -34,8 +41,12 @@ public class ShopBuySlot : MonoBehaviour
         return price;
     }
 
-    internal void Buy() //?
+    internal void Buy() 
     {
+        //돈 있는지 확인 //돈없으면 리턴 //상현이가 해주겠지?
+        if (!GameShop_Inventory.Instance.CanAddItem()) return;
+        GameShop_Inventory.Instance.SetItem(item as ItemSO);
+        Debug.Log("구매");
         Destroy(this.gameObject);
     }
 }
