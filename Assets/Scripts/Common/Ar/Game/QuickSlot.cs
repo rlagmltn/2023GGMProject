@@ -15,6 +15,7 @@ public class QuickSlot : MonoBehaviour
     private Image spImage;
 
     private bool isBatched;
+    private JoyStick joyStick;
 
     public Player Player { get; set; }
 
@@ -31,6 +32,7 @@ public class QuickSlot : MonoBehaviour
 
         unableImage.gameObject.SetActive(false);
         playerImage.sprite = Player.so.characterInfo.Image;
+        joyStick = FindObjectOfType<JoyStick>();
         isBatched = false;
     }
 
@@ -43,7 +45,9 @@ public class QuickSlot : MonoBehaviour
 
     public void SellectPlayer()
     {
-        if (!TurnManager.Instance.IsPlayerTurn || Player.isDead || TurnManager.Instance.SomeoneIsMoving || TurnManager.Instance.IsWaitingTurn) return;
+        if (!TurnManager.Instance.IsPlayerTurn || Player.isDead || TurnManager.Instance.SomeoneIsMoving 
+            || TurnManager.Instance.IsWaitingTurn || joyStick.isDraging) return;
+
         PlayerController.Instance.SellectPlayer(this);
     }
 

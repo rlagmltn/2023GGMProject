@@ -51,10 +51,10 @@ public class PlayerController : MonoSingleton<PlayerController>
         {
             var player = Instantiate(ArInventoryManager.Instance.InvenList[i].ArData, null);
             var quickSlot = Instantiate(pf_QuickSlot, batchHolderTrs);
-
-            player.gameObject.SetActive(false);
             quickSlot.Connect(player);
         }
+        joystick.gameObject.SetActive(false);
+        cancelButton.gameObject.SetActive(false);
     }
 
     public void SellectPlayer(QuickSlot player)
@@ -94,34 +94,6 @@ public class PlayerController : MonoSingleton<PlayerController>
         if (IsBatchMode) return;
         sellectPlayer?.Drag(angle);
     }
-
-    //public void DragEnd(float power, Vector2 angle)
-    //{
-    //    StartCoroutine(sellectPlayer.DisableRanges_T());
-
-    //    while(!sellectPlayer.isEnd)
-    //    {
-    //        Debug.Log("기다리는중");
-    //    }
-
-    //    if (cancelButton.entering)
-    //    {
-    //        cancelButton.entering = false;
-    //        cancelButton.gameObject.SetActive(false);
-    //        return;
-    //    }
-    //    else if (TurnManager.Instance.UseTurn())
-    //    {
-    //        sellectPlayer.DragEnd(joystick.joystickType, power, angle);
-    //        cancelButton.gameObject.SetActive(false);
-    //        ResetSellect();
-
-    //        foreach(QuickSlot quickSlot in quickSlots)
-    //        {
-    //            quickSlot.Player.CountCooltime();
-    //        }
-    //    }
-    //}
 
     public void DragEnd(float power, Vector2 angle)
     {

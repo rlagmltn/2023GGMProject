@@ -25,12 +25,14 @@ public class ArInventoryManager : MonoSingleton<ArInventoryManager>
     public void HolderToInven(int num)
     {
         inven.list.Add(holder.list[num]);
+        holder.list[num].ResetAll();
         holder.list.RemoveAt(num);
     }
 
     public void HolderToInven(ArSO ar)
     {
         inven.list.Add(ar);
+        ar.ResetAll();
         holder.list.Remove(ar);
         //ar.ResetAll();
     }
