@@ -56,11 +56,12 @@ public class Player : Ar
         MouseUp.AddListener(() => { isMove = true; });
     
         StatReset();
+
+        gameObject.SetActive(false);
     }
 
     public override void StatReset()
     {
-        so.ResetAll();
         stat.MaxHP = (int)so.surviveStats.MaxHP;
         stat.HP = (int)so.surviveStats.currentHP;
         stat.MaxSP = (int)so.surviveStats.MaxShield;

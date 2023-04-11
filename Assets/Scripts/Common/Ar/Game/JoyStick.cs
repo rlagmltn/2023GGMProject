@@ -23,6 +23,8 @@ public class JoyStick : MonoBehaviour
     private float zAngle;
     EventTrigger eventTrigger;
 
+    public bool isDraging { get; private set; }
+
     private void Start()
     {
         stick = transform.GetChild(0);
@@ -42,6 +44,7 @@ public class JoyStick : MonoBehaviour
 
     public void OnDragBegin(BaseEventData data)
     {
+        isDraging = true;
         PlayerController.Instance.DragBegin(joystickType);
     }
 
@@ -68,6 +71,7 @@ public class JoyStick : MonoBehaviour
 
     public void OnDragEnd(BaseEventData data)
     {
+        isDraging = false;
         var power = Vector2.Distance(transform.position, Util.Instance.mousePosition);
         angle = transform.position - Util.Instance.mousePosition;
         angle /= angle.magnitude;
