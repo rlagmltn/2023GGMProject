@@ -77,7 +77,8 @@ public class Ar : MonoBehaviour
         if (rigid.velocity.normalized != lastVelocity.normalized && rigid.velocity.magnitude != 0)
         {
             lastVelocity = rigid.velocity;
-            RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position, lastVelocity / stat.WEIGHT);
+            RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position, lastVelocity.normalized, lastVelocity.magnitude / 4);
+            Debug.DrawRay(transform.position, lastVelocity / 4, Color.red, 3f);
 
             if (hit.Length <= 1) return;
 
