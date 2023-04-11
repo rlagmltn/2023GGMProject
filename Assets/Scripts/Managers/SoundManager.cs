@@ -29,6 +29,46 @@ public class SoundManager : MonoSingleton<SoundManager>
         audioSources[(int)Sound.BGM].loop = true;
     }
 
+    public void Play(AudioClip clip, Sound sound, float pitch = 1.0f)
+    {
+        AudioSource audioSource = audioSources[(int)sound];
+        audioSource.pitch = pitch;
+        if (sound == Sound.BGM)
+        {
+            if (audioSource.isPlaying) audioSource.Stop();
+            audioSource.clip = clip;
+            audioSource.Play();
+        }
+        else
+        {
+            audioSource.PlayOneShot(clip);  
+        }
+    }
+    public AudioClip GetOrAddAudioClips(string path, Sound sound = Sound.EFFECT)
+    {
+        if (path.Contains("Sounds/") == false)
+            path = $"Sounds/{path}"; 
+
+        AudioClip audioClip = null;
+
+        if (sound == Sound.BGM) 
+        {
+            audioClip = Resources.Load<AudioClip>(path);
+        }
+        else
+        {
+            if (audioClips.TryGetValue(path, out audioClip) == false)
+            {
+                audioClip = Resources.Load<AudioClip>(path);
+                audioClips.Add(path, audioClip);
+            }
+        }
+
+        if (audioClip == null)
+            Debug.Log($"AudioClip Missing ! {path}");
+
+        return audioClip;
+    }
     public void Clear()
     {
         foreach (var audio in audioSources)
