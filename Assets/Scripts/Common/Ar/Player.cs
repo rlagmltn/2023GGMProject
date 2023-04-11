@@ -30,6 +30,8 @@ public class Player : Ar
     private GameObject attackRange;
     private GameObject skillRange;
 
+    private PlayerController playerController;
+
     [SerializeField] ItemSO[] itemSlots = new ItemSO[3];
 
     public Player()
@@ -51,6 +53,7 @@ public class Player : Ar
         moveRange = rangeContainer.GetChild(0).gameObject;
         attackRange = rangeContainer.GetChild(1).gameObject;
         skillRange = rangeContainer.GetChild(2).gameObject;
+        playerController = FindObjectOfType<PlayerController>();
         DisableRanges();
 
         MouseUp.AddListener(() => { isMove = true; });
@@ -83,24 +86,6 @@ public class Player : Ar
 
         base.StatReset();
     }
-
-    //public void DragBegin(JoystickType joystickType)
-    //{
-    //    switch (joystickType)
-    //    {
-    //        case JoystickType.Move:
-    //            moveRange.SetActive(true);
-    //            break;
-    //        case JoystickType.Attack:
-    //            attackRange.SetActive(true);
-    //            break;
-    //        case JoystickType.Skill:
-    //            skillRange.SetActive(true);
-    //            break;
-    //        case JoystickType.None:
-    //            break;
-    //    };
-    //}
 
     public void DragBegin(JoystickType joystickType)
     {
@@ -135,22 +120,6 @@ public class Player : Ar
 
     public void DragEnd(JoystickType joystickType, float charge, Vector2 angle)
     {
-        
-        //switch (joystickType)
-        //{
-        //    case JoystickType.Move:
-        //        Move(angle);
-        //        break;
-        //    case JoystickType.Attack:
-        //        Attack(angle);
-        //        break;
-        //    case JoystickType.Skill:
-        //        Skill(angle);
-        //        break;
-        //    case JoystickType.None:
-        //        break;
-        //};
-
         if(joystickType == JoystickType.None)
         {
             return;
@@ -218,7 +187,7 @@ public class Player : Ar
     private void OnMouseDown()
     {
         if (!TurnManager.Instance.IsPlayerTurn || isDead || TurnManager.Instance.SomeoneIsMoving) return;
-        PlayerController.Instance.SellectPlayer(slot);
+        playerController.SellectPlayer(slot);
     }
 
     public void Connect(QuickSlot slot)
@@ -279,7 +248,7 @@ public class Player : Ar
         base.Out();
     }
 
-    protected override bool DeadCheck()
+    public override bool DeadCheck()
     {
         DeadSave();
         return base.DeadCheck();

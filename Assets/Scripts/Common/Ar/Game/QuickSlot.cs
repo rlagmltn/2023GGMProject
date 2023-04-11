@@ -16,6 +16,7 @@ public class QuickSlot : MonoBehaviour
 
     private bool isBatched;
     private JoyStick joyStick;
+    private PlayerController playerController;
 
     public Player Player { get; set; }
 
@@ -33,6 +34,7 @@ public class QuickSlot : MonoBehaviour
         unableImage.gameObject.SetActive(false);
         playerImage.sprite = Player.so.characterInfo.Image;
         joyStick = FindObjectOfType<JoyStick>();
+        playerController = FindObjectOfType<PlayerController>();
         isBatched = false;
     }
 
@@ -48,7 +50,7 @@ public class QuickSlot : MonoBehaviour
         if (!TurnManager.Instance.IsPlayerTurn || Player.isDead || TurnManager.Instance.SomeoneIsMoving 
             || TurnManager.Instance.IsWaitingTurn || joyStick.isDraging) return;
 
-        PlayerController.Instance.SellectPlayer(this);
+        playerController.SellectPlayer(this);
     }
 
     public void ColorChange(bool change)
@@ -85,7 +87,8 @@ public class QuickSlot : MonoBehaviour
 
     public void Click()
     {
-        if (!PlayerController.Instance.IsBatchMode || Player.isDead) return;
+        if (!playerController.IsBatchMode || Player.isDead) return;
+        if (!isBatched && playerController.BatchCount > 3) return;
         Player.gameObject.SetActive(true);
         Player.Collide.enabled = false;
         Player.transform.position = transform.position;
@@ -94,20 +97,20 @@ public class QuickSlot : MonoBehaviour
 
     public void Drag()
     {
-        if (!PlayerController.Instance.IsBatchMode) return;
+        if (!playerController.IsBatchMode) return;
         Player.transform.position = Util.Instance.mousePosition;
     }
 
     public void Up()
     {
-        if (!PlayerController.Instance.IsBatchMode) return;
+        if (!playerController.IsBatchMode) return;
         RaycastHit2D ray = Physics2D.Raycast(Player.transform.position, new Vector3(0, -1, 0), 0.01f, LayerMask.GetMask("Batch"));
         if (ray.collider != null && !ray.collider.CompareTag("UI"))
         {
             if (!isBatched)
             {
-                PlayerController.Instance.BatchCount++;
-                PlayerController.Instance.quickSlotHolder.Add(this);
+                playerController.BatchCount++;
+                playerController.quickSlotHolder.Add(this);
             }
 
             isBatched = true;
@@ -117,8 +120,8 @@ public class QuickSlot : MonoBehaviour
         {
             if (isBatched)
             {
-                PlayerController.Instance.BatchCount--;
-                PlayerController.Instance.quickSlotHolder.Remove(this);
+                playerController.BatchCount--;
+                playerController.quickSlotHolder.Remove(this);
             }
 
             isBatched = false;

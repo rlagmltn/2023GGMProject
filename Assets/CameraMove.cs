@@ -43,11 +43,14 @@ public class CameraMove : MonoBehaviour
     [SerializeField] private float moveSensitivity;
     [SerializeField] private float zoomSensitivity;
 
+    private PlayerController playerController;
+
     private void Start()
     {
         orthographicSize = cinemachineCam.m_Lens.OrthographicSize;
         camNoise = cinemachineCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         camTransposer = cinemachineCam.GetCinemachineComponent<CinemachineTransposer>();
+        playerController = FindObjectOfType<PlayerController>();
     }
 
     private void Update()
@@ -148,8 +151,8 @@ public class CameraMove : MonoBehaviour
         {
             isDragmode = true;
             ResetTarget();
-            PlayerController.Instance.ResetSellect();
-            PlayerController.Instance.DisableQuickSlots();
+            playerController.ResetSellect();
+            playerController.DisableQuickSlots();
             camTransposer.m_XDamping = 0;
             camTransposer.m_YDamping = 0;
             camTransposer.m_ZDamping = 0;
