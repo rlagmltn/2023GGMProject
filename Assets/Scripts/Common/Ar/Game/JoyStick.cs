@@ -22,6 +22,7 @@ public class JoyStick : MonoBehaviour
     private Vector2 angle;
     private float zAngle;
     EventTrigger eventTrigger;
+    private PlayerController playerController;
 
     public bool isDraging { get; private set; }
 
@@ -30,6 +31,7 @@ public class JoyStick : MonoBehaviour
         stick = transform.GetChild(0);
         eventTrigger = stick.GetComponent<EventTrigger>();
         cameraMove = FindObjectOfType<CameraMove>();
+        playerController = FindObjectOfType<PlayerController>();
 
         EventTrigger.Entry beginDragTrigger = new EventTrigger.Entry { eventID = EventTriggerType.BeginDrag };
         EventTrigger.Entry dragTrigger = new EventTrigger.Entry { eventID = EventTriggerType.Drag };
@@ -45,7 +47,7 @@ public class JoyStick : MonoBehaviour
     public void OnDragBegin(BaseEventData data)
     {
         isDraging = true;
-        PlayerController.Instance.DragBegin(joystickType);
+        playerController.DragBegin(joystickType);
     }
 
     public void OnDrag(BaseEventData data)
@@ -63,7 +65,7 @@ public class JoyStick : MonoBehaviour
 
         var v = stick.position - transform.position;
         zAngle = Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
-        PlayerController.Instance.Drag(zAngle);
+        playerController.Drag(zAngle);
 
         if(joystickType == JoystickType.Move)
             cameraMove.MoveDrag(-v * 3);
@@ -75,7 +77,7 @@ public class JoyStick : MonoBehaviour
         var power = Vector2.Distance(transform.position, Util.Instance.mousePosition);
         angle = transform.position - Util.Instance.mousePosition;
         angle /= angle.magnitude;
-        PlayerController.Instance.DragEnd(power, angle);
+        playerController.DragEnd(power, angle);
         stick.position = transform.position;
         cameraMove.MoveDrag(Vector3.zero);
     }

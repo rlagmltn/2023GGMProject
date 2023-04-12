@@ -17,6 +17,7 @@ public class TurnManager : MonoSingleton<TurnManager>
     private int turnCount = 0;
     private bool isPlayerTurn = true;
     private CameraMove cameraMove;
+    private PlayerController playerController;
     public bool IsPlayerTurn { get { return isPlayerTurn; } }
     public bool IsWaitingTurn { get; private set; }
     public bool SomeoneIsMoving { get; set; }
@@ -24,6 +25,8 @@ public class TurnManager : MonoSingleton<TurnManager>
     private void Start()
     {
         cameraMove = FindObjectOfType<CameraMove>();
+        playerController = FindObjectOfType<PlayerController>();
+
         for(int i=0; i<10; i++)
         {
             var turn = Instantiate(pf_Turn, transform);
@@ -97,7 +100,7 @@ public class TurnManager : MonoSingleton<TurnManager>
 
     private IEnumerator PassTurn()
     {
-        PlayerController.Instance.SetQuickSlotsEnable(!isPlayerTurn);
+        playerController.SetQuickSlotsEnable(!isPlayerTurn);
         IsWaitingTurn = true;
         StartCoroutine(ActiveTurnPanel());
         yield return new WaitForSeconds(3f);

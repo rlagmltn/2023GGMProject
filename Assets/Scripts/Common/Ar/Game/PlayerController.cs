@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PlayerController : MonoSingleton<PlayerController>
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] int playerCount;
     [SerializeField] QuickSlot pf_QuickSlot;

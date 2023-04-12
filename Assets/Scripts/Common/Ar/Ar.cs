@@ -184,7 +184,7 @@ public class Ar : MonoBehaviour
         stat.HP = Mathf.Clamp(stat.HP, 0, stat.MaxHP);
     }
 
-    protected virtual bool DeadCheck()
+    public virtual bool DeadCheck()
     {
         //ArInfoManager.Instance.ShowBulletInfo(this);
         if (stat.HP <= 0)
