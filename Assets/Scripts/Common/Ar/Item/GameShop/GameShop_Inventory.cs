@@ -25,7 +25,7 @@ public class GameShop_Inventory : MonoSingleton<GameShop_Inventory>
     void UpdateImage()
     {
         for(int num = 0; num < InventoryButtons.Count; num++)
-            InventoryButtons[num].GetComponent<InventoryButton>().SetItem(InventorySO.items[num]);
+            InventoryButtons[num].GetComponent<InventoryButton>().SetItem(InventorySO.items[num], num);
     }
 
     internal void SetItem(ItemSO Item)
@@ -38,6 +38,18 @@ public class GameShop_Inventory : MonoSingleton<GameShop_Inventory>
                 break;
             }
         }
+        UpdateImage();
+    }
+
+    internal void ItemChange(ItemSO Item, int num)
+    {
+        InventorySO.items[num] = Item;
+        UpdateImage();
+    }
+
+    internal void InventoryClear(int num)
+    {
+        InventorySO.items[num] = EmptySO;
         UpdateImage();
     }
 

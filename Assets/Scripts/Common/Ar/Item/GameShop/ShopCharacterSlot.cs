@@ -10,6 +10,20 @@ public class ShopCharacterSlot : MonoBehaviour
 
     private ArSO AR;
 
+    private void Start()
+    {
+        Init();
+    }
+
+    private void Init()
+    {
+        for (int num = 0; num < AR.E_Item.itmeSO.Length; num++)
+        {
+            ItemButtons[num].onClick.RemoveAllListeners();
+            ItemButtons[num].onClick.AddListener(ItemButtons[num].GetComponent<CanDrop>().ItemUnEquip);
+        }
+    }
+
     internal void UpdateUI()
     {
         ArImage.sprite = AR.characterInfo.Image;
@@ -17,11 +31,17 @@ public class ShopCharacterSlot : MonoBehaviour
         for(int num = 0; num < AR.E_Item.itmeSO.Length; num++)
         {
             if (AR.E_Item.itmeSO[num] == null)
+            {
                 ItemButtons[num].interactable = false;
+                ItemButtons[num].GetComponent<CanDrop>().ImageActiveSelf(false);
+            }
             else
+            {
                 ItemButtons[num].interactable = true;
+                ItemButtons[num].GetComponent<CanDrop>().ImageActiveSelf(true);
+                ItemButtons[num].GetComponent<CanDrop>().UpdateUI();
+            }
         }
-
     }
 
     internal void SetArSO(ArSO Ar)
