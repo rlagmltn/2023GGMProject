@@ -10,11 +10,13 @@ public class GameShop_Drag : MonoBehaviour
     public ItemSO Item;
     [SerializeField] private Image GhostImage;
     [SerializeField] private ItemSO EmptySO;
+    [SerializeField] private ItemUIInfo ItemUI;
 
     private bool Isfind = false;
     private bool isClickDown = false;
     private bool isClickUp = false;
     private Transform TempObj;
+    private int T_num;
 
     private void Start()
     {
@@ -70,6 +72,7 @@ public class GameShop_Drag : MonoBehaviour
             if (Obj.GetComponent<InventoryButton>() != null)
             {
                 Item = Obj.GetComponent<InventoryButton>().GetItem();
+                T_num = Obj.GetComponent<InventoryButton>().GetNum();
                 TempObj = Obj.transform;
                 Isfind = true;
                 break;
@@ -77,7 +80,8 @@ public class GameShop_Drag : MonoBehaviour
         }
 
         if (!Isfind) return;
-        if(Item == EmptySO) return;
+        if(ItemUI != null) ItemUI.UpdateUI(Item);
+        if (Item == EmptySO) return;
 
         //고스트 이미지에 아이템의 이미지 넣어주고 활성화
         GhostImage.sprite = Item.itemIcon;
@@ -121,6 +125,13 @@ public class GameShop_Drag : MonoBehaviour
                 Isfind = true;
                 break;
             }
+
+            if(Obj.GetComponent<InventoryButton>() != null)
+            {
+                int TempNum = Obj.GetComponent<InventoryButton>().GetNum();
+                GameShop_Inventory.Instance.ChangeEachOther(T_num, TempNum);
+                break;
+            }
         }
 
         if (!Isfind) return;
@@ -133,7 +144,10 @@ public class GameShop_Drag : MonoBehaviour
     void GhostImageMove()
     {
         if (!Isfind) return;
-        GhostImage.transform.position = GetMousePos();
+
+        Vector3 vec = GetMousePos();
+        vec.z = 1f;
+        GhostImage.transform.position = vec;
     }
 
     Vector2 GetMousePos()

@@ -40,7 +40,6 @@ public class CanDrop : MonoBehaviour
         GameShop_Inventory.Instance.SetItem(Ar.E_Item.itmeSO[Num]);
         this.Ar.E_Item.itmeSO[Num] = null;
         GameShop_Character.Instance.AllArUpdateUI();
-        Ar.ArData.StatReset();
     }
 
     internal void CharacterStatReset()
