@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
         if (cameraMove == null) cameraMove = FindObjectOfType<CameraMove>();
         gameObject.name = bulletSO.name;
         damage = bulletSO.damage;
-        collide.size = new Vector2(bulletSO.width, bulletSO.height);
+        collide.size = new Vector2(bulletSO.width, bulletSO.height);    
         spriteSize.size = new Vector2(bulletSO.width, bulletSO.height);
         Destroy(gameObject, bulletSO.lifeTime);
         // lifeTime만큼 기다렸다가 풀링
@@ -33,37 +33,40 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(Vector2.right * bulletSO.speed * Time.deltaTime);   
+        transform.Translate(Vector2.right * bulletSO.speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Out"))
+        if (collision.CompareTag("Out"))
         {
             Destroy(gameObject);
+            return;
         }
         else if (collision.CompareTag("Object"))
         {
             EffectManager.Instance.InstantiateEffect(Effect.HIT, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
-            AfterCrush();
             // 풀링되는 코드
         }
         if (collision.CompareTag("Player") && bulletSO.teamType != TeamType.Player)
         {
-            BattleManager.Instance.SettingAr(collision.GetComponent<Ar>(), damage);
-            EffectManager.Instance.InstantiateEffect(0, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
-            EffectManager.Instance.InstantiateEffect((Effect)Random.Range(1, 3), collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
-            AfterCrush();
+            DamageToAr(collision);
             //플레이어에게 이 불렛의 데미지만큼의 피해를 줌
         }
         else if (collision.CompareTag("Enemy") && bulletSO.teamType != TeamType.Enemy)
         {
-            BattleManager.Instance.SettingAr(collision.GetComponent<Ar>(), damage);
-            EffectManager.Instance.InstantiateEffect(0, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
-            EffectManager.Instance.InstantiateEffect((Effect)Random.Range(1, 3), collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
-            AfterCrush();
+            DamageToAr(collision);
             //에너미에게 이 불렛의 데미지만큼의 피해를 줌
         }
+        AfterCrush();
+    }
+
+    public void DamageToAr(Collider2D collision)
+    {
+        BattleManager.Instance.SettingAr(collision.GetComponent<Ar>(), damage);
+        EffectManager.Instance.InstantiateEffect(Effect.HIT, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
+        EffectManager.Instance.InstantiateEffect(Effect.CRASH, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
+        EffectManager.Instance.InstantiateEffect(Effect.Flash, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
     }
 
     protected virtual void AfterCrush()
