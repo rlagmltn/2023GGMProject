@@ -60,9 +60,17 @@ public class GameShop_Inventory : MonoSingleton<GameShop_Inventory>
         return false;
     }
 
-    private void OnApplicationQuit() //绝局具窃
+    internal void ChangeEachOther(int Item1, int Item2)
     {
-        for (int num = 0; num < InventorySO.items.Count; num++)
-                InventorySO.items[num] = EmptySO;
+        ItemSO Temp = InventorySO.items[Item1];
+        InventorySO.items[Item1] = InventorySO.items[Item2];
+        InventorySO.items[Item2] = Temp;
+        UpdateImage();
     }
+
+    //private void OnApplicationQuit() //绝局具窃
+    //{
+    //    for (int num = 0; num < InventorySO.items.Count; num++)
+    //            InventorySO.items[num] = EmptySO;
+    //}
 }

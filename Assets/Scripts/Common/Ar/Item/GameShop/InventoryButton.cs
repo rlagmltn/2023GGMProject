@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class InventoryButton : MonoBehaviour
 {
     [SerializeField] private Image ItemImage;
-    private ItemSO Item;
-    private int ButtonNum;
+    public ItemSO Item;
+    public int ButtonNum;
 
     internal void UpdateImage()
     {

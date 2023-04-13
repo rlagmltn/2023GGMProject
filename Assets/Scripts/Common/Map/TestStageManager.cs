@@ -29,6 +29,10 @@ public class TestStageManager : MonoSingleton<TestStageManager>
     [SerializeField] private List<TextMeshProUGUI> EnemyTexts;
 
     [SerializeField] private Image MapImage;
+
+    [SerializeField] Button InventoryBtn;
+    [SerializeField] Transform InventoryPopUpPannel;
+    [SerializeField] Button InvnetoryQuitBtn;
     
     private List<Transform> ClearedStages;
     private Transform currentStage;
@@ -85,6 +89,10 @@ public class TestStageManager : MonoSingleton<TestStageManager>
         AddButtonListener(BackPannel, InfoPannelActiveFalse);
         RemoveAllButtonListeners(StartButton);
         AddButtonListener(StartButton, StageEnter);
+        RemoveAllButtonListeners(InventoryBtn);
+        AddButtonListener(InventoryBtn, PopUpInventoryUI);
+        RemoveAllButtonListeners(InvnetoryQuitBtn);
+        AddButtonListener(InvnetoryQuitBtn, InfoPannelActiveFalse);
     }
 
     void DebugSetName()
@@ -109,6 +117,7 @@ public class TestStageManager : MonoSingleton<TestStageManager>
     void InfoPannelActiveFalse()
     {
         StageInfoPannel.gameObject.SetActive(false);
+        InventoryPopUpPannel.gameObject.SetActive(false);
         BackPannel.gameObject.SetActive(false);
     }
 
@@ -288,6 +297,12 @@ public class TestStageManager : MonoSingleton<TestStageManager>
         obj.GetComponent<Image>().color = color;
     }
 
+    void PopUpInventoryUI()
+    {
+        InventoryPopUpPannel.gameObject.SetActive(true);
+        BackPannel.gameObject.SetActive(true);
+    }
+
     void RemoveAllButtonListeners(Button button)
     {
         button.onClick.RemoveAllListeners();
@@ -303,7 +318,7 @@ public class TestStageManager : MonoSingleton<TestStageManager>
     /// </summary>
     private void OnApplicationQuit()
     {
-        foreach(StageSO stage in stageList.stageList)
+        foreach (StageSO stage in stageList.stageList)
         {
             stage.IsCanEnter = false;
             stage.IsCleared = false;
