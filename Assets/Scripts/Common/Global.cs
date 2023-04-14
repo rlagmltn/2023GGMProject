@@ -35,7 +35,7 @@ public enum Effect
 {
     HIT = 0,
     CRASH,
-    SMASH,
+    Flash,
     DASH,
     WALLCRUSH
 }
