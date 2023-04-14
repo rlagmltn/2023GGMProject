@@ -204,11 +204,11 @@ public class Player : Ar
         if (currentCooltime > 0)
         {
             currentCooltime--;
-            slot.SkillReady(false);
+            slot?.SkillReady(false);
         }
         if (currentCooltime == 0)
         {
-            slot.SkillReady(true);
+            slot?.SkillReady(true);
         }
     }
 

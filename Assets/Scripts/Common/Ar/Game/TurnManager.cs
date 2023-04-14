@@ -33,7 +33,7 @@ public class TurnManager : MonoSingleton<TurnManager>
             turns.Add(turn);
         }
         StartCoroutine(ResetTurn_C());
-        turnObj.SetActive(false);
+        turnObj?.SetActive(false);
     }
 
     public bool UseTurn()
@@ -81,7 +81,7 @@ public class TurnManager : MonoSingleton<TurnManager>
 
     public void ResetTurn()
     {
-        turnText.SetText("Enemy Turn");
+        turnText?.SetText("Enemy Turn");
         UnActiveNotUseTurn(playerTurn);
 
         for (int i = 0; i < playerTurn; i++)
@@ -102,7 +102,7 @@ public class TurnManager : MonoSingleton<TurnManager>
     {
         playerController.SetQuickSlotsEnable(!isPlayerTurn);
         IsWaitingTurn = true;
-        StartCoroutine(ActiveTurnPanel());
+        if(turnObj!=null) StartCoroutine(ActiveTurnPanel());
         yield return new WaitForSeconds(3f);
         IsWaitingTurn = false;
         isPlayerTurn = !isPlayerTurn;
@@ -127,7 +127,7 @@ public class TurnManager : MonoSingleton<TurnManager>
 
     private IEnumerator ResetEnemyTurn()
     {
-        turnText.SetText("Player Turn");
+        turnText?.SetText("Player Turn");
         turnCount = 0;
 
         enemys = FindObjectsOfType<ArFSM>();
