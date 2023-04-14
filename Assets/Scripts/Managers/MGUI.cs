@@ -35,7 +35,7 @@ public class MGUI : MonoSingleton<MGUI>
 
     public void ToggleEscPanel()
     {
-        escPanel.gameObject.SetActive(!escPanel.enabled);
+        escPanel.gameObject.SetActive(!escPanel.gameObject.activeSelf);
     }
 
     public void MoveToTitleScene()
