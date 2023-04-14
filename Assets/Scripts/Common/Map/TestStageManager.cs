@@ -147,6 +147,7 @@ public class TestStageManager : MonoSingleton<TestStageManager>
         {
             eStageState.Battle => () => SceneManager.LoadScene("TestScene"),
             eStageState.Shop => () => SceneManager.LoadScene("ShopScene"),
+            eStageState.Event => () => SceneManager.LoadScene("EventScene"),
             _ => () => SceneManager.LoadScene("TestScene"),
         };
 
