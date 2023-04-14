@@ -47,18 +47,20 @@ public class Bullet : MonoBehaviour
         {
             EffectManager.Instance.InstantiateEffect(Effect.HIT, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
             // 풀링되는 코드
+            AfterCrush();
         }
         if (collision.CompareTag("Player") && bulletSO.teamType != TeamType.Player)
         {
             DamageToAr(collision);
             //플레이어에게 이 불렛의 데미지만큼의 피해를 줌
+            AfterCrush();
         }
         else if (collision.CompareTag("Enemy") && bulletSO.teamType != TeamType.Enemy)
         {
             DamageToAr(collision);
             //에너미에게 이 불렛의 데미지만큼의 피해를 줌
+            AfterCrush();
         }
-        AfterCrush();
     }
 
     public void DamageToAr(Collider2D collision)

@@ -10,7 +10,7 @@ public class ArInventoryManager : MonoSingleton<ArInventoryManager>
     public List<ArSO> InvenList { get { return inven.list; } }
     public List<ArSO> HolderList { get { return holder.list; } }
 
-    private void Start()
+    private void Awake()
     {
         Init();
         DontDestroyOnLoad(gameObject);

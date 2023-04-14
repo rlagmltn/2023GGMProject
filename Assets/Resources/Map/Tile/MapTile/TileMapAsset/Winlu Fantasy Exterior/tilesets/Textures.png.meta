@@ -113,6 +113,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -41282,9 +41294,8 @@ TextureImporter:
       Textures_626: -444411376
       Textures_765: -506073547
       Textures_1605: 213919517
-      Textures_1010: -244064865
       Textures_1944: -729869196
-      Textures_1255: -1597024799
+      Textures_1010: -244064865
       Textures_708: -142744681
       Textures_1126: 1731875533
       Textures_1832: -964016606
@@ -41294,6 +41305,7 @@ TextureImporter:
       Textures_1673: -66561921
       Textures_1067: 1095771059
       Textures_268: -1624557202
+      Textures_1255: -1597024799
       Textures_195: 440663219
       Textures_1511: 437498622
       Textures_1774: 790181432
@@ -41302,25 +41314,25 @@ TextureImporter:
       Textures_1337: -280660098
       Textures_201: -63223500
       Textures_1217: -1369895244
-      Textures_1426: 1802984037
       Textures_1678: 13103809
-      Textures_1453: -2058186673
+      Textures_1426: 1802984037
       Textures_1222: 258564642
-      Textures_1576: 2058763848
+      Textures_1453: -2058186673
       Textures_440: 1887060904
+      Textures_1576: 2058763848
       Textures_1825: 1917624093
       Textures_756: -1119176637
-      Textures_215: 969726311
       Textures_1163: 990779647
+      Textures_215: 969726311
       Textures_381: 16541662
       Textures_898: -1776601025
       Textures_313: 585103859
       Textures_911: 2047592336
-      Textures_1081: 960499471
       Textures_1586: 2103230959
       Textures_1030: -1962089679
       Textures_1885: 1057267540
       Textures_703: 53640825
+      Textures_1081: 960499471
       Textures_1596: -362680919
       Textures_203: 2081602500
       Textures_469: -1213373921
@@ -41412,27 +41424,27 @@ TextureImporter:
       Textures_614: -526124199
       Textures_797: 1663634758
       Textures_265: 1279664710
-      Textures_154: -1916666700
-      Textures_938: -1953924947
       Textures_1372: 303808914
-      Textures_940: -1012075484
+      Textures_154: -1916666700
       Textures_1760: 995927964
+      Textures_940: -1012075484
       Textures_962: 1628852792
       Textures_350: -1629751920
       Textures_691: -2088184581
       Textures_1419: -614521294
-      Textures_618: 622840211
+      Textures_938: -1953924947
       Textures_1597: 2047720368
       Textures_1170: -684035768
       Textures_291: 1520962122
-      Textures_1622: -327567458
+      Textures_618: 622840211
       Textures_743: -351952488
       Textures_287: -1848164931
       Textures_1545: -798412054
       Textures_726: -260990844
       Textures_1108: 2006329581
-      Textures_1765: -1775348456
+      Textures_1622: -327567458
       Textures_788: -2145670393
+      Textures_1765: -1775348456
       Textures_1460: 1254547960
       Textures_34: 1728389875
       Textures_564: 1562379602
@@ -41465,26 +41477,26 @@ TextureImporter:
       Textures_397: -2012486660
       Textures_569: -1789403163
       Textures_985: 1660554279
-      Textures_1420: 1424464495
+      Textures_1458: 46210332
       Textures_651: 1845427147
       Textures_1601: -233656734
       Textures_1004: 707654622
       Textures_107: -993258515
       Textures_943: 511899587
-      Textures_1458: 46210332
+      Textures_1492: -371264736
       Textures_220: 157823274
+      Textures_1805: 1366105681
       Textures_886: -1257275341
-      Textures_1113: -1363833245
       Textures_987: 1120781113
       Textures_1738: 1003053364
-      Textures_1492: -371264736
-      Textures_1087: 485944262
+      Textures_1420: 1424464495
       Textures_1047: -2041524743
       Textures_1754: 1388472099
+      Textures_1113: -1363833245
       Textures_1704: -767583817
       Textures_1713: -712811280
+      Textures_1087: 485944262
       Textures_1653: 569134836
-      Textures_1805: 1366105681
       Textures_325: -204978417
       Textures_1348: 638858917
       Textures_1657: 1431216002
@@ -41500,9 +41512,9 @@ TextureImporter:
       Textures_278: -123330161
       Textures_358: -1218405080
       Textures_747: -1578595297
-      Textures_414: -1415365531
       Textures_689: -1530127561
       Textures_1054: 477452111
+      Textures_414: -1415365531
       Textures_927: -1216629551
       Textures_805: -952997019
       Textures_605: 1705260875
@@ -41661,10 +41673,10 @@ TextureImporter:
       Textures_1196: 1276607247
       Textures_919: -1243653185
       Textures_269: -2032476261
-      Textures_519: -1862941667
       Textures_1548: 773906817
       Textures_1726: 49566347
       Textures_1946: 577197016
+      Textures_519: -1862941667
       Textures_1874: 809380244
       Textures_819: -212926007
       Textures_849: 700797233
@@ -41689,12 +41701,12 @@ TextureImporter:
       Textures_59: -1442212016
       Textures_885: 773495668
       Textures_1172: -234575439
-      Textures_4: 574737851
+      Textures_1624: 1521490455
       Textures_1449: 1924928842
       Textures_108: 1193600209
       Textures_1195: 1682721882
+      Textures_4: 574737851
       Textures_1565: 362414904
-      Textures_1624: 1521490455
       Textures_508: 1473161296
       Textures_103: 1730299767
       Textures_683: -329126985
@@ -41732,16 +41744,15 @@ TextureImporter:
       Textures_573: -26064991
       Textures_955: -1794836208
       Textures_343: -1227210239
-      Textures_449: 760521401
-      Textures_1128: 114261326
       Textures_1753: -1173955706
+      Textures_1128: 114261326
+      Textures_449: 760521401
       Textures_456: -778143396
-      Textures_1227: 177099434
       Textures_147: -552340737
       Textures_636: -1493224422
       Textures_277: 1993533342
       Textures_436: 470403490
-      Textures_1620: 2056103674
+      Textures_1227: 177099434
       Textures_1719: 1889059972
       Textures_722: -560655640
       Textures_245: -1348394009
@@ -41750,27 +41761,28 @@ TextureImporter:
       Textures_1854: 649503541
       Textures_1799: 2065914107
       Textures_288: 813791427
-      Textures_363: 1933223012
+      Textures_1620: 2056103674
       Textures_632: -84978824
       Textures_1914: -660788067
       Textures_9: 528069079
+      Textures_363: 1933223012
       Textures_320: 800252073
       Textures_1456: -1021525712
       Textures_848: 1269218613
       Textures_791: -455944371
       Textures_1176: -722533194
-      Textures_1470: -688901880
+      Textures_1736: -2067201889
       Textures_115: 86367514
       Textures_681: 1173188716
-      Textures_1231: 1571944537
+      Textures_1470: -688901880
       Textures_961: 804274633
-      Textures_1443: 1487764955
-      Textures_1736: -2067201889
+      Textures_1231: 1571944537
       Textures_473: 442143591
       Textures_100: 939316146
       Textures_1357: -1015345309
       Textures_1623: 458027784
       Textures_68: 1088565034
+      Textures_1443: 1487764955
       Textures_1527: -1615156052
       Textures_769: 968614
       Textures_365: -35395723
@@ -41793,17 +41805,17 @@ TextureImporter:
       Textures_1604: 37754909
       Textures_232: 762186684
       Textures_239: -861258854
-      Textures_611: 1618492985
-      Textures_464: -133102515
-      Textures_472: -1629127190
-      Textures_196: 208941439
       Textures_1201: -680574516
+      Textures_472: -1629127190
+      Textures_611: 1618492985
+      Textures_196: 208941439
+      Textures_464: -133102515
+      Textures_1926: -1687619007
       Textures_141: 1901855645
       Textures_1136: -91666254
       Textures_1533: 1301469508
       Textures_426: -1073487515
       Textures_811: -1009066553
-      Textures_1926: -1687619007
       Textures_933: -1468061149
       Textures_906: 1595855457
       Textures_1712: -475980163
@@ -41824,10 +41836,10 @@ TextureImporter:
       Textures_1851: 738026675
       Textures_65: 571281149
       Textures_122: -1214286755
-      Textures_345: 515183915
       Textures_855: -1276021005
       Textures_309: 1328401892
       Textures_925: 1538822587
+      Textures_345: 515183915
       Textures_199: 1150475075
       Textures_865: -2136309746
       Textures_1027: 509945879
@@ -42161,16 +42173,16 @@ TextureImporter:
       Textures_1265: 319142301
       Textures_1822: -642322913
       Textures_236: 174976885
-      Textures_246: -1771373639
       Textures_1134: -820004804
-      Textures_567: -1904952195
+      Textures_246: -1771373639
       Textures_706: -703723638
       Textures_1145: 971064133
       Textures_1775: 1077259250
       Textures_1062: -730629583
-      Textures_705: 1257258161
-      Textures_572: -1453147645
+      Textures_567: -1904952195
       Textures_1809: 1413321733
+      Textures_572: -1453147645
+      Textures_705: 1257258161
       Textures_179: 1139465960
       Textures_1658: 925351818
       Textures_810: -1626467773
@@ -42180,21 +42192,21 @@ TextureImporter:
       Textures_1275: 1681956229
       Textures_845: 961582709
       Textures_46: -1230241222
-      Textures_58: 661221155
+      Textures_1334: -920905644
       Textures_1109: -1555984691
-      Textures_1399: -730121106
+      Textures_58: 661221155
       Textures_853: 680638812
       Textures_782: 73232014
-      Textures_1334: -920905644
+      Textures_1399: -730121106
       Textures_1532: 425021876
       Textures_1187: 1896717513
       Textures_1541: -1765692600
       Textures_1695: 328781579
       Textures_234: 121434271
-      Textures_903: -1862796488
-      Textures_766: -1931900355
-      Textures_1338: -1789959114
       Textures_1116: 1880928766
+      Textures_766: -1931900355
+      Textures_903: -1862796488
+      Textures_1338: -1789959114
       Textures_917: -810012699
       Textures_1561: -1509673424
       Textures_792: 1549788313
@@ -42215,8 +42227,8 @@ TextureImporter:
       Textures_966: 924165395
       Textures_1937: -1848107191
       Textures_306: -2001064562
-      Textures_251: 1419163079
       Textures_1025: -311331246
+      Textures_251: 1419163079
       Textures_1938: -834377836
       Textures_1144: 838970557
       Textures_386: 2018000891
@@ -42238,8 +42250,8 @@ TextureImporter:
       Textures_1643: 274243817
       Textures_1725: 1861177434
       Textures_249: 114463060
-      Textures_1146: -431925457
       Textures_1826: -1400118440
+      Textures_1146: -431925457
       Textures_385: -1699188791
       Textures_418: -1637571923
       Textures_1006: 1951666819
@@ -42261,8 +42273,8 @@ TextureImporter:
       Textures_787: -1524713948
       Textures_226: -1672328054
       Textures_1327: 1229410781
-      Textures_1390: -1504006879
       Textures_1543: -2081767628
+      Textures_1390: -1504006879
       Textures_542: 1556779302
       Textures_1743: 1469681451
       Textures_480: 701656753
@@ -42290,15 +42302,15 @@ TextureImporter:
       Textures_1554: -1652036860
       Textures_1299: -1914487200
       Textures_13: 997820060
-      Textures_461: -940811329
+      Textures_1489: -742044698
       Textures_847: -1131193604
       Textures_289: 1067511696
       Textures_547: 1305700809
       Textures_592: 1839214641
-      Textures_979: -2124297159
-      Textures_1489: -742044698
       Textures_1575: -2021901302
+      Textures_979: -2124297159
       Textures_1940: -114676412
+      Textures_461: -940811329
       Textures_831: -1998208002
       Textures_1445: 586049627
       Textures_1428: -2055853998
@@ -42320,13 +42332,13 @@ TextureImporter:
       Textures_581: -1254895394
       Textures_1819: -1081390675
       Textures_61: -556189346
-      Textures_91: -678036854
       Textures_536: -2008525654
-      Textures_1177: 589538436
       Textures_559: 1101612554
+      Textures_1177: 589538436
       Textures_505: -874663188
       Textures_821: -2046246541
       Textures_719: 1570526188
+      Textures_91: -678036854
       Textures_1329: 1264722360
       Textures_1349: -1939719129
       Textures_72: -1500275361
@@ -42456,11 +42468,11 @@ TextureImporter:
       Textures_1830: 1678583392
       Textures_894: 1406157883
       Textures_556: -1086542546
-      Textures_216: -1762016617
-      Textures_302: 2036052354
       Textures_1250: 701975356
-      Textures_731: 19661721
+      Textures_302: 2036052354
       Textures_1641: -1583035383
+      Textures_731: 19661721
+      Textures_216: -1762016617
       Textures_1635: 771445370
       Textures_828: 1314925902
       Textures_1574: 503042825
