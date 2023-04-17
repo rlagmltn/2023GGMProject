@@ -9,21 +9,58 @@ public class EventManger : MonoBehaviour
     [SerializeField] private Transform BackGroudnPannel;
     [SerializeField] private Transform ClearPannel;
 
+    [SerializeField] private List<_Event> EventList;
+    public Events S_event;
+
+    private int RandomNum;
+
     private void Start()
     {
-        ButtonInit();
+        Init();
     }
 
-    internal void EventClear() //이벤트가 클리어왰을때 띄워줄 창
+    void Init()
     {
-        BackGroudnPannel.gameObject.SetActive(true);
-        ClearPannel.gameObject.SetActive(true);
+        ButtonInit();
+        EventPlay();
     }
 
     void ButtonInit()
     {
         ClearButton.onClick.RemoveAllListeners();
         ClearButton.onClick.AddListener(StageClear);
+    }
+
+    void EventPlay()
+    {
+        EventSelect();
+        
+        switch(S_event)
+        {
+            case Events.HealAll: { EventList[(int)Events.HealAll].EventStart(); EventList[(int)Events.HealAll].Reward(); } break;
+            default: { EventList[(int)S_event].EventStart(); EventList[(int)S_event].Reward(); } break;
+        }
+    }
+
+    void EventSelect()
+    {
+        RandomNum = Random.Range(0, EventList.Count);
+
+        foreach(Events num in Events.GetValues(typeof(Events)))
+        {
+            if(RandomNum == (int)num)
+            {
+                string EventName = Events.GetName(typeof(Events), RandomNum);
+                S_event = (Events)Events.Parse(typeof(Events), EventName);
+                break;
+            }
+        }
+    }
+
+    internal void EventClear() //이벤트가 클리어왰을때 띄워줄 창
+    {
+        BackGroudnPannel.gameObject.SetActive(true);
+        ClearPannel.gameObject.SetActive(true);
     }
 
     void StageClear()

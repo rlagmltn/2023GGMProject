@@ -149,3 +149,8 @@ public enum ArClasses
     PRIEST,     //프리스트
     WIZARD,     //마법사
 }
+
+public enum Events
+{
+    HealAll = 0,
+};
