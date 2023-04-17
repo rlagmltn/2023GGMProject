@@ -153,7 +153,7 @@ public class Player : Ar
     }
     protected virtual void Skill(Vector2 angle)
     {
-        AnimAttackStart();
+        AnimSkillStart();
         currentCooltime = skillCooltime;
         cameraMove.Shake();
     }

@@ -233,4 +233,14 @@ public class Ar : MonoBehaviour
     {
         animator?.SetBool("isAttack", false);
     }
+
+    public void AnimSkillStart()
+    {
+        animator?.SetBool("isSkill", true);
+    }
+
+    public void AnimSkillFinish()
+    {
+        animator?.SetBool("isSkill", false);
+    }
 }
