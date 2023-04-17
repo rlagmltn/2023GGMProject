@@ -20,6 +20,14 @@ public class ArInventoryManager : MonoSingleton<ArInventoryManager>
     {
         inven.ResetArlist();
         holder.LoadArlist();
+        foreach (ArSO so in inven.list)
+        {
+            so.ResetAll();
+        }
+        foreach (ArSO so in holder.list)
+        {
+            so.ResetAll();
+        }
     }
 
     public void HolderToInven(int num)
