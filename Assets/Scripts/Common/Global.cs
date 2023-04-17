@@ -35,7 +35,7 @@ public enum Effect
 {
     HIT = 0,
     CRASH,
-    Flash,
+    FLASH,
     WALLCRUSH,
     DASH,
 }
@@ -75,6 +75,7 @@ public enum ePrefabs
     Enemy,
     RedHitBox,
     BanditWarrior,
+    BanditArcher,
     ItemSlot,
     Map1
 }

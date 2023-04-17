@@ -69,7 +69,7 @@ public class Bullet : MonoBehaviour
         BattleManager.Instance.SettingAr(collision.GetComponent<Ar>(), damage);
         EffectManager.Instance.InstantiateEffect(Effect.HIT, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
         EffectManager.Instance.InstantiateEffect(Effect.CRASH, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
-        EffectManager.Instance.InstantiateEffect(Effect.Flash, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
+        EffectManager.Instance.InstantiateEffect(Effect.FLASH, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
         AfterCrush();
     }
 
