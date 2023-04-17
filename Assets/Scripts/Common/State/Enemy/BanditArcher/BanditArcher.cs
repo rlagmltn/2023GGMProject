@@ -41,5 +41,17 @@ public class BanditArcher : Enemy
         cameraMove.Shake();
     }
 
+    public void ShootArrow(Vector2 angle, bool isLast, bool isSkill = false)
+    {
+        if(arrowGameObject == null)
+        {
+            Debug.LogWarning("arrowGameObject is Null");
+            return;
+        }
+        float rangeAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
+        var bullet = Instantiate(arrowGameObject, transform.position, Quaternion.Euler(new Vector3(0, 0, rangeAngle)));
+        cameraMove.MovetoTarget(bullet.transform);
+        //bullet.GetComponent<>();
 
+    }
 }

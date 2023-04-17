@@ -89,7 +89,7 @@ public class BanditWarrior : Enemy
         Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, 3f);
         Debug.Log("패시브 사용");
         transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
-        
+
     
         foreach (Collider2D col in cols)
         {
@@ -97,6 +97,7 @@ public class BanditWarrior : Enemy
             {
                 dir = Vector3.Normalize(col.transform.position - transform.position);
                 col.GetComponent<Rigidbody2D>().velocity = dir * 10f;
+    
             }
         }
         yield return new WaitForSeconds(0.5f);
