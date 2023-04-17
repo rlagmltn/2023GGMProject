@@ -31,6 +31,7 @@ public class Priest : Player
         base.Skill(angle);
         rigid.velocity = -(angle * power) * pushPower;
         isUsingSkill = true;
+        cameraMove.Shake();
         Passive();
     }
 

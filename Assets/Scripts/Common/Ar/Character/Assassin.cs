@@ -6,6 +6,7 @@ public class Assassin : Player
 {
     [SerializeField] Bullet kunai;
     private HitBox hitbox;
+    private Vector2 angle;
 
     protected override void Start()
     {
@@ -28,6 +29,12 @@ public class Assassin : Player
     protected override void Skill(Vector2 angle)
     {
         base.Skill(angle);
+        this.angle = angle;
+        AnimSkillStart();
+    }
+
+    public override void AnimTimingSkill()
+    {
         Shoot(angle);
     }
 
@@ -41,5 +48,6 @@ public class Assassin : Player
         float zAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
         var bullet = Instantiate(kunai, transform.position, Quaternion.Euler(0, 0, zAngle - 180));
         cameraMove.MovetoTarget(bullet.transform);
+        cameraMove.Shake();
     }
 }

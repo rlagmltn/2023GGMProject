@@ -6,6 +6,8 @@ public class Warrior : Player
 {
     private HitBox hitbox;
 
+    private Vector2 angle;
+
     protected override void Start()
     {
         base.Start();
@@ -27,6 +29,8 @@ public class Warrior : Player
     {
         base.Skill(angle);
         StartCoroutine(Slash(angle));
+        cameraMove.Shake();
+        this.angle = angle;
     }
 
     protected override void Passive()
@@ -37,11 +41,15 @@ public class Warrior : Player
 
     private IEnumerator Slash(Vector2 angle)
     {
-        var attackSuccess = false;
-
         rigid.velocity = -((angle.normalized * 1.5f) * pushPower) / (1 + stat.WEIGHT * 0.1f);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
+        AnimSkillStart();
+    }
+
+    public override void AnimTimingSkill()
+    {
+        var attackSuccess = false;
 
         Collider2D[] colliders = Physics2D.OverlapBoxAll(hitbox.Hitbox.transform.position, new Vector2(hitbox.rangeX, hitbox.rangeY), Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg);
 
@@ -49,7 +57,11 @@ public class Warrior : Player
         {
             var enemy = collider.GetComponent<Enemy>();
             BattleManager.Instance.SettingAr(enemy, this);
-            if (enemy != null) attackSuccess = true;
+            if (enemy != null)
+            {
+                attackSuccess = true;
+                cameraMove.Shake();
+            }
         }
 
         if (attackSuccess) Passive();

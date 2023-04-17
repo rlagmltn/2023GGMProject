@@ -7,6 +7,8 @@ public class Archer : Player
 {
     [SerializeField] Bullet arrow;
 
+    private Vector2 angle;
+
     protected override void Start()
     {
         base.Start();
@@ -32,13 +34,12 @@ public class Archer : Player
     protected override void Skill(Vector2 angle)
     {
         base.Skill(angle);
-        StartCoroutine(ArcherSkill(angle));
+        AnimSkillStart();
+        this.angle = angle;
     }
 
-    IEnumerator ArcherSkill(Vector2 angle)
+    public override void AnimTimingSkill()
     {
-        Shoot(angle);
-        yield return new WaitForSeconds(0.2f);
         Shoot(angle);
     }
 
@@ -48,5 +49,6 @@ public class Archer : Player
         var bullet = Instantiate(arrow, transform.position, Quaternion.Euler(0, 0, zAngle-180));
         rigid.velocity = ((angle.normalized * 0.5f) * pushPower) / (1 + stat.WEIGHT * 0.1f);
         cameraMove.MovetoTarget(bullet.transform);
+        cameraMove.Shake();
     }
 }

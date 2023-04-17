@@ -153,11 +153,11 @@ public class Player : Ar
     }
     protected virtual void Skill(Vector2 angle)
     {
-        AnimSkillStart();
         currentCooltime = skillCooltime;
-        cameraMove.Shake();
     }
     protected virtual void Passive() { }
+
+    public virtual void AnimTimingSkill() { }
 
     public void DisableRanges()
     {
