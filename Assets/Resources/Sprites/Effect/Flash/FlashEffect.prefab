@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7223855423719059200}
   - component: {fileID: 7223855423719059201}
   - component: {fileID: 7223855423719059214}
+  - component: {fileID: 1326203778}
   m_Layer: 0
   m_Name: FlashEffect
   m_TagString: Untagged
@@ -53,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 230a2e6fe0a736a4cb0bed6a121aaccf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -71,15 +72,15 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 826327109
+  m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2046083640, guid: 96a6de08d655a76458daa4a0fddbab3b, type: 3}
+  m_Sprite: {fileID: -1133871887, guid: 96a6de08d655a76458daa4a0fddbab3b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 6, y: 6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -105,3 +106,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1326203778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7223855423719059215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b8ef50e492a8db48ad616f5e825b59b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

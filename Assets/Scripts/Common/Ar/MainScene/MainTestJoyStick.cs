@@ -54,11 +54,11 @@ public class MainTestJoyStick : MonoBehaviour
             stick.position = transform.position + stickVec * radius;
 
         var v = stick.position - transform.position;
+        var vDis = Vector2.Distance(stick.position, transform.position);
         zAngle = Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
-        MainTestModeManager.Instance.Drag(zAngle);
+        MainTestModeManager.Instance.Drag(zAngle, vDis);
 
-        if (joystickType == JoystickType.Move)
-            cameraMove.MoveDrag(-v * 3);
+        cameraMove.MoveDrag(-v * 3);
     }
 
     public void OnDragEnd(BaseEventData data)

@@ -89,10 +89,10 @@ public class PlayerController : MonoBehaviour
         sellectPlayer?.DragBegin(joystickType);
         TurnManager.Instance.BlinkNextTurn();
     }
-    public void Drag(float angle)
+    public void Drag(float angle, float dis)
     {
         if (IsBatchMode) return;
-        sellectPlayer?.Drag(angle);
+        sellectPlayer?.Drag(angle, dis);
     }
 
     public void DragEnd(float power, Vector2 angle)

@@ -74,9 +74,9 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         testPlayer?.DragBegin(joystick.joystickType);
     }
 
-    public void Drag(float angle)
+    public void Drag(float angle, float dis)
     {
-        testPlayer?.Drag(angle);
+        testPlayer?.Drag(angle, dis);
     }
 
     public void DragEnd(float power, Vector2 angle)

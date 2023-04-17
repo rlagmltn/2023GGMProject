@@ -29,7 +29,7 @@ public class Priest : Player
     protected override void Skill(Vector2 angle)
     {
         base.Skill(angle);
-        rigid.velocity = (angle * power) * pushPower;
+        rigid.velocity = -(angle * power) * pushPower;
         isUsingSkill = true;
         Passive();
     }
