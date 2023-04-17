@@ -21,7 +21,7 @@ public class BanditWarrior_StateIdle : StateIdle
         if (!TurnManager.Instance.GetTurn() && stateMachineClass.turnFlag)
         {
             Transform target = stateMachineClass.SearchAr();
-            if(!target)
+            if(target == null)
             {
                 Debug.LogWarning("None Target!");
                 return;

@@ -46,19 +46,22 @@ public class Bullet : MonoBehaviour
         else if (collision.CompareTag("Object"))
         {
             EffectManager.Instance.InstantiateEffect(Effect.HIT, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
+            AfterCrush();
             // 풀링되는 코드
+            AfterCrush();
         }
         if (collision.CompareTag("Player") && bulletSO.teamType != TeamType.Player)
         {
             DamageToAr(collision);
             //플레이어에게 이 불렛의 데미지만큼의 피해를 줌
+            AfterCrush();
         }
         else if (collision.CompareTag("Enemy") && bulletSO.teamType != TeamType.Enemy)
         {
             DamageToAr(collision);
             //에너미에게 이 불렛의 데미지만큼의 피해를 줌
+            AfterCrush();
         }
-        AfterCrush();
     }
 
     public void DamageToAr(Collider2D collision)
@@ -67,10 +70,12 @@ public class Bullet : MonoBehaviour
         EffectManager.Instance.InstantiateEffect(Effect.HIT, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
         EffectManager.Instance.InstantiateEffect(Effect.CRASH, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
         EffectManager.Instance.InstantiateEffect(Effect.Flash, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
+        AfterCrush();
     }
 
     protected virtual void AfterCrush()
     {
+        Debug.Log("화살부딪");
         cameraMove.Shake();
         if (bulletSO.rangeType == RangeType.Range)
         {
