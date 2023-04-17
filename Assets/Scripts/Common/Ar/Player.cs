@@ -26,7 +26,7 @@ public class Player : Ar
     private QuickSlot slot;
 
     private Transform rangeContainer;
-    private GameObject moveRange;
+    private SpriteRenderer moveRange;
     private GameObject attackRange;
     private GameObject skillRange;
 
@@ -50,7 +50,7 @@ public class Player : Ar
         base.Start();
 
         rangeContainer = transform.GetChild(0);
-        moveRange = rangeContainer.GetChild(0).gameObject;
+        moveRange = rangeContainer.GetChild(0).GetComponent<SpriteRenderer>();
         attackRange = rangeContainer.GetChild(1).gameObject;
         skillRange = rangeContainer.GetChild(2).gameObject;
         playerController = FindObjectOfType<PlayerController>();
@@ -97,10 +97,10 @@ public class Player : Ar
 
         var Range = joystickType switch
         {
-            JoystickType.Move => moveRange,
+            JoystickType.Move => moveRange.gameObject,
             JoystickType.Attack => attackRange,
             JoystickType.Skill => skillRange,
-            _ => moveRange,
+            _ => moveRange.gameObject,
         };
 
         ActiveRangesAndChangeColor(Range);
@@ -113,9 +113,10 @@ public class Player : Ar
     }
 
 
-    public void Drag(float angle)
+    public void Drag(float angle, float dis)
     {
-        rangeContainer.rotation = Quaternion.Euler(0, 0, angle);
+        rangeContainer.rotation = Quaternion.Euler(0, 0, angle+180);
+        moveRange.size = new Vector2((dis * 2), 1);
     }
 
     public void DragEnd(JoystickType joystickType, float charge, Vector2 angle)
@@ -130,8 +131,8 @@ public class Player : Ar
         UnityAction action = joystickType switch
         {
             JoystickType.Move => () => Move(angle),
-            JoystickType.Attack => () => Attack(angle),
-            JoystickType.Skill => () => Skill(angle),
+            JoystickType.Attack => () => Attack(-angle),
+            JoystickType.Skill => () => Skill(-angle),
             _ => null,
         };
 
@@ -160,14 +161,14 @@ public class Player : Ar
 
     public void DisableRanges()
     {
-        moveRange.SetActive(false);
+        moveRange.gameObject.SetActive(false);
         attackRange.SetActive(false);
         skillRange.SetActive(false);
     }
 
     public GameObject ActiveRange()
     {
-        if (moveRange.activeSelf) return moveRange;
+        if (moveRange.gameObject.activeSelf) return moveRange.gameObject;
         else if (attackRange.activeSelf) return attackRange;
         else if (skillRange.activeSelf) return skillRange;
         else return null;
