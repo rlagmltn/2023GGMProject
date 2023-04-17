@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 821838897775782624}
   m_Layer: 0
-  m_Name: 4_Flash
+  m_Name: 2_Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,38 +83,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7223855423719059201, guid: 659224fa488b4064eb36f9c44e0f36c5, type: 3}
-      propertyPath: m_Size.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7223855423719059201, guid: 659224fa488b4064eb36f9c44e0f36c5, type: 3}
-      propertyPath: m_Size.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7223855423719059201, guid: 659224fa488b4064eb36f9c44e0f36c5, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -1133871887, guid: 96a6de08d655a76458daa4a0fddbab3b, type: 3}
-    - target: {fileID: 7223855423719059201, guid: 659224fa488b4064eb36f9c44e0f36c5, type: 3}
-      propertyPath: m_SortingLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7223855423719059201, guid: 659224fa488b4064eb36f9c44e0f36c5, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7223855423719059201, guid: 659224fa488b4064eb36f9c44e0f36c5, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 826327109
-      objectReference: {fileID: 0}
-    - target: {fileID: 7223855423719059201, guid: 659224fa488b4064eb36f9c44e0f36c5, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7223855423719059201, guid: 659224fa488b4064eb36f9c44e0f36c5, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 230a2e6fe0a736a4cb0bed6a121aaccf, type: 2}
     - target: {fileID: 7223855423719059215, guid: 659224fa488b4064eb36f9c44e0f36c5, type: 3}
       propertyPath: m_Name
       value: FlashEffect
@@ -126,20 +94,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7223855423719059200, guid: 659224fa488b4064eb36f9c44e0f36c5, type: 3}
   m_PrefabInstance: {fileID: 821838898856985376}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8009520151499484207 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7223855423719059215, guid: 659224fa488b4064eb36f9c44e0f36c5, type: 3}
-  m_PrefabInstance: {fileID: 821838898856985376}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1326203778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8009520151499484207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b8ef50e492a8db48ad616f5e825b59b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

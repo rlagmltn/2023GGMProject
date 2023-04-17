@@ -36,8 +36,8 @@ public enum Effect
     HIT = 0,
     CRASH,
     Flash,
+    WALLCRUSH,
     DASH,
-    WALLCRUSH
 }
 public enum ePrefabs
 {
