@@ -12,6 +12,10 @@ public class ArSOArray : ScriptableObject
     {
         list.Clear();
         list.AddRange(dataBase.list);
+        foreach(ArSO ar in list)
+        {
+            ar.isInGameTake = false;
+        }
     }
 
     public void ResetArlist()

@@ -77,7 +77,6 @@ public class Player : Ar
         skillCooltime = so.skill.MaxSkillCoolTime;
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
-        pushPower = 22;
 
         foreach(ItemSO item in itemSlots)
         {
