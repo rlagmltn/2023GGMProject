@@ -103,7 +103,7 @@ public class TurnManager : MonoSingleton<TurnManager>
         playerController.SetQuickSlotsEnable(!isPlayerTurn);
         IsWaitingTurn = true;
         if(turnObj!=null) StartCoroutine(ActiveTurnPanel());
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
         IsWaitingTurn = false;
         isPlayerTurn = !isPlayerTurn;
         ActiveAllTurn();
@@ -136,7 +136,7 @@ public class TurnManager : MonoSingleton<TurnManager>
 
         UnActiveNotUseTurn(enemyTurn);
         //기다리는 시간 변수화!
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
 
         for(int i = 0; i< enemyTurn; i++)
         {
@@ -210,7 +210,7 @@ public class TurnManager : MonoSingleton<TurnManager>
 
     private IEnumerator ActiveTurnPanel()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         turnObj.SetActive(true);
         turnObj.transform.DORotate(Vector3.zero, 0.5f);
         yield return new WaitForSeconds(1.5f);
