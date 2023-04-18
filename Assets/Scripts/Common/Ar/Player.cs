@@ -71,7 +71,7 @@ public class Player : Ar
         stat.SP = (int)so.surviveStats.currentShield;
         stat.ATK = (int)so.attackStats.currentAtk;
         stat.SATK = (int)so.attackStats.currentSkillAtk;
-        stat.CriPer = (int)so.criticalStats.currentCritalPer;
+        stat.CriPer = (int)so.criticalStats.currentCriticalPer;
         stat.CriDmg = (int)so.criticalStats.currentCriticalDamage;
         stat.WEIGHT = (int)so.surviveStats.currentWeight;
         skillCooltime = so.skill.MaxSkillCoolTime;
@@ -269,7 +269,7 @@ public class Player : Ar
         so.surviveStats.currentShield = stat.SP;
         so.attackStats.currentAtk = stat.ATK;
         so.attackStats.currentSkillAtk = stat.SATK;
-        so.criticalStats.currentCritalPer = stat.CriPer;
+        so.criticalStats.currentCriticalPer = stat.CriPer;
         so.criticalStats.currentCriticalDamage = stat.CriDmg;
         so.surviveStats.currentWeight = stat.WEIGHT;
     }

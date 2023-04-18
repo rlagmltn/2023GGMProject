@@ -7,6 +7,7 @@ public class ShopCharacterSlot : MonoBehaviour
 {
     [SerializeField] private Image ArImage;
     [SerializeField] private List<Button> ItemButtons;
+    [SerializeField] private Button ImageButton;
 
     private ArSO AR;
 
@@ -22,6 +23,8 @@ public class ShopCharacterSlot : MonoBehaviour
             ItemButtons[num].onClick.RemoveAllListeners();
             ItemButtons[num].onClick.AddListener(ItemButtons[num].GetComponent<CanDrop>().ItemUnEquip);
         }
+        ImageButton.onClick.RemoveAllListeners();
+        ImageButton.onClick.AddListener(() => ItemUIInfo.Instance.UpdateUI_AR(AR));
     }
 
     internal void UpdateUI()

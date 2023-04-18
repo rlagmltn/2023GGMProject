@@ -87,7 +87,7 @@ public class CriticalStat
     [SerializeField] private float baseCriticalPer;
     public float BaseCriticalPer => baseCriticalPer;
 
-    public float currentCritalPer;
+    public float currentCriticalPer;
 
     [SerializeField] private float baseCriticalDamage;
     public float BaseCriticalDamage => baseCriticalDamage;
@@ -96,7 +96,7 @@ public class CriticalStat
 
     public void Reset()
     {
-        currentCritalPer = baseCriticalPer;
+        currentCriticalPer = baseCriticalPer;
         currentCriticalDamage = baseCriticalDamage;
     }
 }
