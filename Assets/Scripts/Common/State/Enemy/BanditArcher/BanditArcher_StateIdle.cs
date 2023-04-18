@@ -42,14 +42,4 @@ public class BanditArcher_StateIdle : StateIdle
 
         }
     }
-
-    public override void OnUpdate(float deltaTime)
-    {
-        
-    }
-
-    public override void OnEnd()
-    {
-        
-    }
 }

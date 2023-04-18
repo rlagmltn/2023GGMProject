@@ -8,7 +8,6 @@ public class BanditArcher : Enemy
     public float AtkRange => atkRange;
 
     [SerializeField] private GameObject arrowGameObject;
-    public GameObject ArrowGameObject => arrowGameObject;
     
     protected override void Start()
     {
@@ -31,15 +30,6 @@ public class BanditArcher : Enemy
         atkRange = 6f;
         base.StatReset();
     }
-    
-    private IEnumerator SkillCameraMove(Transform targetTransform, Ar targetAr)
-    {
-        yield return new WaitForSeconds(1f);
-        cameraMove.MovetoTarget(targetTransform);
-        yield return new WaitForSeconds(0.5f);
-        BattleManager.Instance.SettingAr(targetAr, this);
-        cameraMove.Shake();
-    }
 
     public void ShootArrow(Vector2 angle, bool isLast, bool isSkill = false)
     {
@@ -50,8 +40,15 @@ public class BanditArcher : Enemy
         }
         float rangeAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
         var bullet = Instantiate(arrowGameObject, transform.position, Quaternion.Euler(new Vector3(0, 0, rangeAngle)));
+        if(isSkill)
+        {
+            bullet.GetComponent<Bullet>().damage = stat.ATK - 2;
+            //need deburf
+        }
+        if(isLast)
+        {
+            bullet.GetComponent<Bullet>().damage = stat.ATK * 2;
+        }
         cameraMove.MovetoTarget(bullet.transform);
-        //bullet.GetComponent<>();
-
     }
 }
