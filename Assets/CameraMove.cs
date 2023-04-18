@@ -18,6 +18,9 @@ public class CameraMove : MonoBehaviour
 
     private Vector3 moveDragPos;
     private Vector3 setCamPos = new Vector3(0, 0, -10);
+
+    bool moveMove = false;
+    float moveSpeed = 10f;
     #endregion
 
     #region 카메라 셰이크
@@ -58,6 +61,7 @@ public class CameraMove : MonoBehaviour
         DragMove();
         ChaseTarget();
         ZoomInAndOut();
+        KeyboardMove();
     }
 
     public void ChaseTarget()
@@ -140,6 +144,30 @@ public class CameraMove : MonoBehaviour
             else Drag();
         }
         else if (Input.touchCount == 0) EndDrag();
+    }
+
+    private void KeyboardMove()
+    {
+        Vector3 dir = Vector3.zero;
+        dir.x = Input.GetAxisRaw("Horizontal");
+        dir.y = Input.GetAxisRaw("Vertical");
+
+        if(dir!=Vector3.zero && !moveMove)
+        {
+            moveMove = true;
+            ResetTarget();
+            camTransposer.m_XDamping = 0;
+            camTransposer.m_YDamping = 0;
+            camTransposer.m_ZDamping = 0;
+        }
+        else if(moveMove)
+        {
+            moveMove = false;
+            camTransposer.m_XDamping = 1;
+            camTransposer.m_YDamping = 1;
+            camTransposer.m_ZDamping = 1;
+        }
+        transform.position += dir * moveSpeed * Time.deltaTime;
     }
 
     private void BeginDrag()

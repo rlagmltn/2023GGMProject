@@ -27,8 +27,8 @@ public class Player : Ar
 
     private Transform rangeContainer;
     private SpriteRenderer moveRange;
-    private GameObject attackRange;
-    private GameObject skillRange;
+    private SpriteRenderer attackRange;
+    private SpriteRenderer skillRange;
 
     private PlayerController playerController;
 
@@ -51,8 +51,8 @@ public class Player : Ar
 
         rangeContainer = transform.GetChild(0);
         moveRange = rangeContainer.GetChild(0).GetComponent<SpriteRenderer>();
-        attackRange = rangeContainer.GetChild(1).gameObject;
-        skillRange = rangeContainer.GetChild(2).gameObject;
+        attackRange = rangeContainer.GetChild(1).GetComponent<SpriteRenderer>();
+        skillRange = rangeContainer.GetChild(2).GetComponent<SpriteRenderer>();
         playerController = FindObjectOfType<PlayerController>();
         DisableRanges();
 
@@ -98,8 +98,8 @@ public class Player : Ar
         var Range = joystickType switch
         {
             JoystickType.Move => moveRange.gameObject,
-            JoystickType.Attack => attackRange,
-            JoystickType.Skill => skillRange,
+            JoystickType.Attack => attackRange.gameObject,
+            JoystickType.Skill => skillRange.gameObject,
             _ => moveRange.gameObject,
         };
 
@@ -117,6 +117,7 @@ public class Player : Ar
     {
         rangeContainer.rotation = Quaternion.Euler(0, 0, angle+180);
         moveRange.size = new Vector2((dis * 2), 1);
+        attackRange.size = new Vector2((dis * 2), 1);
     }
 
     public void DragEnd(JoystickType joystickType, float charge, Vector2 angle)
@@ -144,7 +145,7 @@ public class Player : Ar
         MouseUp?.Invoke();
         TurnManager.Instance.SomeoneIsMoving = true;
         rigid.velocity = ((angle.normalized * power) * pushPower)/(1+stat.WEIGHT*0.1f);
-        EffectManager.Instance.InstantiateEffect(Effect.DASH, transform.position, angle);
+        EffectManager.Instance.InstantiateEffect_P(Effect.DASH, transform.position, new Vector2(-angle.x, angle.y));
     }
 
     protected virtual void Attack(Vector2 angle)
@@ -162,15 +163,15 @@ public class Player : Ar
     public void DisableRanges()
     {
         moveRange.gameObject.SetActive(false);
-        attackRange.SetActive(false);
-        skillRange.SetActive(false);
+        attackRange.gameObject.SetActive(false);
+        skillRange.gameObject.SetActive(false);
     }
 
     public GameObject ActiveRange()
     {
         if (moveRange.gameObject.activeSelf) return moveRange.gameObject;
-        else if (attackRange.activeSelf) return attackRange;
-        else if (skillRange.activeSelf) return skillRange;
+        else if (attackRange.gameObject.activeSelf) return attackRange.gameObject;
+        else if (skillRange.gameObject.activeSelf) return skillRange.gameObject;
         else return null;
     }
 

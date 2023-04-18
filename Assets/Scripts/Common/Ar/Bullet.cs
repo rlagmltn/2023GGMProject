@@ -48,7 +48,6 @@ public class Bullet : MonoBehaviour
             EffectManager.Instance.InstantiateEffect(Effect.HIT, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
             AfterCrush();
             // 풀링되는 코드
-            AfterCrush();
         }
         if (collision.CompareTag("Player") && bulletSO.teamType != TeamType.Player)
         {
