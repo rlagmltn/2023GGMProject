@@ -26,7 +26,6 @@ public class BanditArcher : Enemy
     
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
-        pushPower = 20;
         atkRange = 6f;
         base.StatReset();
     }

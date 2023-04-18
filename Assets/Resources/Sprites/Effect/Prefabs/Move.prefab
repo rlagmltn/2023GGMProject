@@ -89,7 +89,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7422769134988805060, guid: db4ccf7358d440f4ba11f712fcacd51f, type: 3}
       propertyPath: InitialModule.startRotation.scalar
-      value: 0
+      value: -2.2617753
       objectReference: {fileID: 0}
     - target: {fileID: 7422769134988805060, guid: db4ccf7358d440f4ba11f712fcacd51f, type: 3}
       propertyPath: InitialModule.randomizeRotationDirection
@@ -106,3 +106,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7422769134988805059, guid: db4ccf7358d440f4ba11f712fcacd51f, type: 3}
   m_PrefabInstance: {fileID: 6142207886026147297}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3620745343870486055 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7422769134988805062, guid: db4ccf7358d440f4ba11f712fcacd51f, type: 3}
+  m_PrefabInstance: {fileID: 6142207886026147297}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2700627734152577041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620745343870486055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed58c4627cd180a4db5ed4a397d1ce1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  breakTime: 0.4

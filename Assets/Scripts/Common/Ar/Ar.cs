@@ -68,6 +68,7 @@ public class Ar : MonoBehaviour
 
     public virtual void StatReset() // 수치 초기화
     {
+        pushPower = 40;
         isDead = false;
         DeadCheck();
     }

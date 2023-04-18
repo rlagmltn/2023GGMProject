@@ -77,7 +77,6 @@ public class Player : Ar
         skillCooltime = so.skill.MaxSkillCoolTime;
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
-        pushPower = 22;
 
         foreach(ItemSO item in itemSlots)
         {
@@ -189,7 +188,7 @@ public class Player : Ar
     private void OnMouseDown()
     {
         if (!TurnManager.Instance.IsPlayerTurn || isDead || TurnManager.Instance.SomeoneIsMoving) return;
-        playerController.SellectPlayer(slot);
+        playerController?.SellectPlayer(slot);
     }
 
     public void Connect(QuickSlot slot)

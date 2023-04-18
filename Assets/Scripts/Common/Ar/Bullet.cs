@@ -53,13 +53,11 @@ public class Bullet : MonoBehaviour
         {
             DamageToAr(collision);
             //플레이어에게 이 불렛의 데미지만큼의 피해를 줌
-            AfterCrush();
         }
         else if (collision.CompareTag("Enemy") && bulletSO.teamType != TeamType.Enemy)
         {
             DamageToAr(collision);
             //에너미에게 이 불렛의 데미지만큼의 피해를 줌
-            AfterCrush();
         }
     }
 
@@ -75,6 +73,7 @@ public class Bullet : MonoBehaviour
     {
         Debug.Log("화살부딪");
         cameraMove.Shake();
+        cameraMove.ResetTarget();
         if (bulletSO.rangeType == RangeType.Range)
         {
             switch (bulletSO.bulletType)

@@ -35,7 +35,6 @@ public class Enemy : Ar
             BattleManager.Instance.SettingAr(this);
             cameraMove.Shake();
             EffectManager.Instance.InstantiateEffect(Effect.HIT, collision.contacts[0].point, transform.position, collision.contacts[0].point);
-            EffectManager.Instance.InstantiateEffect(Effect.FLASH, collision.contacts[0].point, transform.position, collision.contacts[0].point);
         }
     }
 
