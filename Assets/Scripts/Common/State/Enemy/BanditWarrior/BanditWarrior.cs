@@ -26,7 +26,6 @@ public class BanditWarrior : Enemy
 
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
-        pushPower = 20;
         passiveCool = 5;
         currentPassiveCool = 0;
         base.StatReset();
@@ -97,7 +96,6 @@ public class BanditWarrior : Enemy
             {
                 dir = Vector3.Normalize(col.transform.position - transform.position);
                 col.GetComponent<Rigidbody2D>().velocity = dir * 10f;
-    
             }
         }
         yield return new WaitForSeconds(0.5f);

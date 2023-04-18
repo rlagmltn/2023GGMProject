@@ -64,7 +64,7 @@ public class CameraMove : MonoBehaviour
         KeyboardMove();
     }
 
-    public void ChaseTarget()
+    private void ChaseTarget()
     {
         if (target != null)
         {
@@ -167,7 +167,7 @@ public class CameraMove : MonoBehaviour
             camTransposer.m_YDamping = 1;
             camTransposer.m_ZDamping = 1;
         }
-        transform.position += dir * moveSpeed * Time.deltaTime;
+        transform.Translate(dir * moveSpeed * Time.deltaTime);
     }
 
     private void BeginDrag()
@@ -205,7 +205,7 @@ public class CameraMove : MonoBehaviour
 
     public void TimeFreeze(float amount = 1)
     {
-        Time.timeScale = Mathf.Clamp(amount, 0.15f, 1f);
+        Time.timeScale = Mathf.Clamp(amount, 0.1f, 1f);
     }
 
     public void SetDefaultZoom()

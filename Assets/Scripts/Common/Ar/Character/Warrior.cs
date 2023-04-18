@@ -63,7 +63,6 @@ public class Warrior : Player
                 cameraMove.Shake();
             }
         }
-
         if (attackSuccess) Passive();
     }
 }

@@ -34,6 +34,7 @@ public class ArInventoryManager : MonoSingleton<ArInventoryManager>
     {
         inven.list.Add(holder.list[num]);
         holder.list[num].ResetAll();
+        holder.list[num].isInGameTake = true;
         holder.list.RemoveAt(num);
     }
 
@@ -41,6 +42,7 @@ public class ArInventoryManager : MonoSingleton<ArInventoryManager>
     {
         inven.list.Add(ar);
         ar.ResetAll();
+        ar.isInGameTake = true;
         holder.list.Remove(ar);
         //ar.ResetAll();
     }

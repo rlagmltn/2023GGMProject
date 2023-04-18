@@ -38,6 +38,7 @@ public enum Effect
     FLASH,
     WALLCRUSH,
     DASH,
+    WARRIOR,
 }
 public enum ePrefabs
 {
@@ -75,6 +76,7 @@ public enum ePrefabs
     Enemy,
     RedHitBox,
     BanditWarrior,
+    BanditDummy,
     BanditArcher,
     ItemSlot,
     Map1
