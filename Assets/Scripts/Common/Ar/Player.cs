@@ -265,11 +265,11 @@ public class Player : Ar
     public void TakeAllStat()
     {
         so.surviveStats.currentHP = stat.HP;
-        so.surviveStats.currentShield = stat.SP;
         so.attackStats.currentAtk = stat.ATK;
         so.attackStats.currentSkillAtk = stat.SATK;
         so.criticalStats.currentCritalPer = stat.CriPer;
         so.criticalStats.currentCriticalDamage = stat.CriDmg;
         so.surviveStats.currentWeight = stat.WEIGHT;
+        if(!isDead) so.surviveStats.currentShield = so.surviveStats.MaxShield;
     }
 }

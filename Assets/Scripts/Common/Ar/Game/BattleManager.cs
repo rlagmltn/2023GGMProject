@@ -33,7 +33,6 @@ public class BattleManager : MonoSingleton<BattleManager>
                 {
                     CrushBattle();
                 }
-                cameraMove.ResetTarget();
             }
         }
     }
@@ -127,7 +126,7 @@ public class BattleManager : MonoSingleton<BattleManager>
             defender.AfterCrash.Invoke();
         }
         attacker.AfterCrash.Invoke();
-
+        cameraMove.MovetoTarget(attacker.transform);
         ResetAll();
         return true;
     }

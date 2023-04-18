@@ -88,7 +88,7 @@ public class QuickSlot : MonoBehaviour
     public void Click()
     {
         if (!playerController.IsBatchMode || Player.isDead) return;
-        if (!isBatched && playerController.BatchCount > 3) return;
+        if (!isBatched && playerController.BatchCount >= 3) return;
         Player.gameObject.SetActive(true);
         Player.Collide.enabled = false;
         Player.transform.position = transform.position;
