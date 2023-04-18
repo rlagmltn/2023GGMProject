@@ -199,7 +199,12 @@ public class Ar : MonoBehaviour
             return true;
         }
 
-        if (stat.MaxSP != 0) dpBar.localScale = new Vector3(Mathf.Clamp((float)stat.SP / stat.MaxSP, 0, 1), 1, 1); else dpBar.localScale = new Vector3(0, 1, 1);
+        if (stat.SP > 0)
+        {
+            dpBar.parent.gameObject.SetActive(true);
+            dpBar.localScale = new Vector3(Mathf.Clamp((float)stat.SP / stat.MaxSP, 0, 1), 1, 1);
+        }
+        else dpBar.parent.gameObject.SetActive(false);
         hpBar.localScale = new Vector3(Mathf.Clamp((float)stat.HP / stat.MaxHP, 0, 1), 1, 1);
         return false;
     }
