@@ -5,7 +5,7 @@ using UnityEngine;
 public class MainTestModeManager : MonoSingleton<MainTestModeManager>
 {
     [SerializeField] private CameraMove cameraMove;
-    [SerializeField] private Enemy dummy;
+    [SerializeField] private Enemy pfDummy;
     [SerializeField] private ArSOArray arHolder;
     [SerializeField] private MainTestSlot pfMainTestSlot;
     [SerializeField] private Transform testBtnSlot;
@@ -17,6 +17,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
     private GameObject attackAct;
     private Transform testBtnSlotParent;
     private Player testPlayer;
+    private Enemy dummy;
 
     /* 
      * 여기에 해야할 것들
@@ -35,6 +36,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         cancelButton.gameObject.SetActive(false);
         attackAct = actSellect.transform.GetChild(1).gameObject;
         actSellect.SetActive(false);
+        dummy = Instantiate(pfDummy, new Vector3(5, 0), Quaternion.identity);
     }
 
     private void MakeArTestSlot()
@@ -65,6 +67,9 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
             actSellect.SetActive(true);
             attackAct.SetActive(testPlayer.isRangeCharacter);
             cameraMove.MovetoTarget(testPlayer.transform);
+            dummy.StatReset();
+            dummy.gameObject.SetActive(true);
+            dummy.transform.position = new Vector3(5, 0);
         }
     }
 

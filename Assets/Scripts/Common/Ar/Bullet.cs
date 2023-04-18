@@ -40,7 +40,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.CompareTag("Out"))
         {
-            AfterCrush();
+            Destroy(gameObject);
             return;
         }
         else if (collision.CompareTag("Object"))

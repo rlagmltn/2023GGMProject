@@ -97,7 +97,6 @@ public class BanditWarrior : Enemy
             {
                 dir = Vector3.Normalize(col.transform.position - transform.position);
                 col.GetComponent<Rigidbody2D>().velocity = dir * 10f;
-    
             }
         }
         yield return new WaitForSeconds(0.5f);

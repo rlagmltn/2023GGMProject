@@ -562,9 +562,7 @@ GameObject:
   - component: {fileID: 1807758250263130485}
   - component: {fileID: 8454270740256362986}
   - component: {fileID: 7367620824462638103}
-  - component: {fileID: 3731530152947601912}
-  - component: {fileID: 4402106315308626771}
-  - component: {fileID: 4190432432035387756}
+  - component: {fileID: 8199106677453408659}
   m_Layer: 0
   m_Name: BanditDummy
   m_TagString: Enemy
@@ -700,7 +698,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &3731530152947601912
+--- !u!114 &8199106677453408659
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -709,39 +707,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8454270740256362983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 955585d01286c46798e6083df75c277e, type: 3}
+  m_Script: {fileID: 11500000, guid: dc80b71946238e74bad50a0102c0d938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myKind: 4009
-  myTrm: {fileID: 0}
-  myVelocity: {x: 0, y: 0, z: 0}
---- !u!114 &4402106315308626771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8454270740256362983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2390ddd961230a84f9ffbb073009345d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnFlag: 0
---- !u!114 &4190432432035387756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8454270740256362983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1508433b2d7934b48b591ec6c625934d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: "\uC0B0\uC801 \uC804\uC0AC"
-  isMove: 0
+  Name: "\uB354\uBBF8"
   BeforeCrash:
     m_PersistentCalls:
       m_Calls: []
