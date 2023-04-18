@@ -148,7 +148,7 @@ public class CameraMove : MonoBehaviour
 
     private void KeyboardMove()
     {
-        Vector3 dir = Vector3.zero;
+        var dir = Vector3.zero;
         dir.x = Input.GetAxisRaw("Horizontal");
         dir.y = Input.GetAxisRaw("Vertical");
 
@@ -168,6 +168,17 @@ public class CameraMove : MonoBehaviour
             camTransposer.m_ZDamping = 1;
         }
         transform.Translate(dir * moveSpeed * Time.deltaTime);
+
+        if (Input.GetKeyDown(KeyCode.Equals))
+        {
+            orthographicSize = Mathf.Clamp(orthographicSize+1, minOrthographicSize, maxOrthographicSize);
+            ApplyCameraSize();
+        }
+        else if (Input.GetKeyDown(KeyCode.Minus))
+        {
+            orthographicSize = Mathf.Clamp(orthographicSize - 1, minOrthographicSize, maxOrthographicSize);
+            ApplyCameraSize();
+        }
     }
 
     private void BeginDrag()
