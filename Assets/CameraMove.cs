@@ -205,7 +205,7 @@ public class CameraMove : MonoBehaviour
 
     public void TimeFreeze(float amount = 1)
     {
-        Time.timeScale = Mathf.Clamp(amount, 0.15f, 1f);
+        Time.timeScale = Mathf.Clamp(amount, 0.1f, 1f);
     }
 
     public void SetDefaultZoom()

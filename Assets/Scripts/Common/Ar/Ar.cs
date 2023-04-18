@@ -104,11 +104,11 @@ public class Ar : MonoBehaviour
     {
         if (battleTarget != null)
         {
-            var distance = transform.position - battleTarget.position;
-            if (distance.magnitude < slowMagnitude)
+            var distance = Vector2.Distance(transform.position, battleTarget.position);
+            if (distance < slowMagnitude)
             {
-                var amount = distance.magnitude / slowMagnitude == float.NaN ? 1 : distance.magnitude / slowMagnitude;
-                cameraMove.TimeFreeze(amount);
+                var amount = distance / slowMagnitude == float.NaN ? 1 : distance / slowMagnitude;
+                cameraMove.TimeFreeze(amount - lastVelocity.magnitude/(pushPower*3));
                 cameraMove.ApplyCameraSize(amount);
             }
         }
