@@ -127,6 +127,7 @@ public class Player : Ar
         }
 
         power = Mathf.Clamp(charge, minDragPower, maxDragPower);
+        cameraMove.MovetoTarget(gameObject.transform);
 
         UnityAction action = joystickType switch
         {
@@ -144,19 +145,23 @@ public class Player : Ar
         MouseUp?.Invoke();
         TurnManager.Instance.SomeoneIsMoving = true;
         rigid.velocity = ((angle.normalized * power) * pushPower)/(1+stat.WEIGHT*0.1f);
+        Debug.Log(rigid.velocity.magnitude);
         EffectManager.Instance.InstantiateEffect_P(Effect.DASH, transform.position, new Vector2(-angle.x, angle.y));
     }
 
-    protected virtual void Attack(Vector2 angle)
+    protected virtual void Passive() { }
+
+    protected virtual void Attack(Vector2 angle) 
     {
         AnimAttackStart();
     }
+    public virtual void AnimTimingAttack() { }
+
     protected virtual void Skill(Vector2 angle)
     {
         currentCooltime = skillCooltime;
+        AnimSkillStart();
     }
-    protected virtual void Passive() { }
-
     public virtual void AnimTimingSkill() { }
 
     public void DisableRanges()

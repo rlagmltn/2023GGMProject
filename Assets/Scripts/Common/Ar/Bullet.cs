@@ -6,8 +6,6 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] BulletSO bulletSO;
 
-    private SpriteRenderer spriteSize;
-    private BoxCollider2D collide;
     private CameraMove cameraMove;
 
     public Ar summoner { get; set; }
@@ -20,13 +18,9 @@ public class Bullet : MonoBehaviour
 
     protected virtual void SetSO()
     {
-        if (collide == null) collide = GetComponent<BoxCollider2D>();
-        if (spriteSize == null) spriteSize = GetComponent<SpriteRenderer>();
         if (cameraMove == null) cameraMove = FindObjectOfType<CameraMove>();
         gameObject.name = bulletSO.name;
         damage = bulletSO.damage;
-        collide.size = new Vector2(bulletSO.width, bulletSO.height);    
-        spriteSize.size = new Vector2(bulletSO.width, bulletSO.height);
         Destroy(gameObject, bulletSO.lifeTime);
         // lifeTime만큼 기다렸다가 풀링
     }

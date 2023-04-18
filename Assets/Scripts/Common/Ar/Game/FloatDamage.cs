@@ -13,7 +13,7 @@ public class FloatDamage : MonoBehaviour
         Destroy(gameObject, 0.8f);
         if (tmp == null) tmp = GetComponent<TextMeshPro>();
         tmp.SetText(damage.ToString());
-        tmp.fontSize = 6 + damage/5;
+        tmp.fontSize = 7 + damage/4;
         transform.DOMoveY(transform.position.y + 2f, 0.8f);
     }
 }

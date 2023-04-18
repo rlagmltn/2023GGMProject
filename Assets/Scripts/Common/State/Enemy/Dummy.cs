@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Dummy : Enemy
 {
-    private Ar lastAr = null;
-    private bool canUsePassive = true;
-
     protected override void Start()
     {
         base.Start();
