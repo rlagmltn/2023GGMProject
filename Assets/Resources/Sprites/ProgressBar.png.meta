@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -67,7 +67,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 512
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -113,89 +113,101 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HPBar
+      name: hpBar
       rect:
         serializedVersion: 2
-        x: 8
+        x: 0
         y: 0
         width: 64
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 6, y: 0, z: 6, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2cbd83733c0b4ca4ba7662922f4c2c0f
-      internalID: -1943502748
+      spriteID: 25153ed8ead899d47872dc7674ff5146
+      internalID: 105478736
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HPAmount
+      name: hpAmount
       rect:
         serializedVersion: 2
-        x: 88
+        x: 64
         y: 0
         width: 64
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 6, y: 0, z: 6, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25bbe1568fbaa71478b48f0d5cf4371e
-      internalID: 218935564
+      spriteID: b3cb9845bdc8b454e8db0abd9db5814c
+      internalID: 240007627
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPBar
+      name: spBar
       rect:
         serializedVersion: 2
-        x: 168
+        x: 128
         y: 0
         width: 64
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 8, y: 0, z: 8, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2503e44bc48ac6a46963a6999f8bc338
-      internalID: 1805801633
+      spriteID: 740ea34dbf920cb48bb162229cf47dac
+      internalID: -1538344911
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPAmount
+      name: spAmount
       rect:
         serializedVersion: 2
-        x: 248
+        x: 192
         y: 0
         width: 64
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 8, y: 0, z: 8, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bcd9a159c5724174db1d317e48f8c841
-      internalID: -1085456570
+      spriteID: 8d97d0ba838054b4b8e9ed63c4979c1d
+      internalID: 2002553603
       vertices: []
       indices: 
       edges: []
@@ -211,10 +223,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HPBar: -1943502748
-      SPAmount: -1085456570
-      HPAmount: 218935564
-      SPBar: 1805801633
+      spAmount: 2002553603
+      spBar: -1538344911
+      hpAmount: -1538344911
+      hpBar: 240007627
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
