@@ -188,7 +188,7 @@ public class Player : Ar
     private void OnMouseDown()
     {
         if (!TurnManager.Instance.IsPlayerTurn || isDead || TurnManager.Instance.SomeoneIsMoving) return;
-        playerController.SellectPlayer(slot);
+        playerController?.SellectPlayer(slot);
     }
 
     public void Connect(QuickSlot slot)
