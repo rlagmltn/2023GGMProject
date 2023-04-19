@@ -17411,9 +17411,6 @@ MonoBehaviour:
   target: {fileID: 0}
   minSize: {x: -18, y: -16}
   maxSize: {x: 18, y: 16}
-  amplitude: 16
-  frequency: 1
-  duration: 0.4
   minOrthographicSize: 5
   maxOrthographicSize: 15
   moveSensitivity: 0.02
@@ -22464,7 +22461,7 @@ MonoBehaviour:
   m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
   m_PivotOffset: {x: 0, y: 0, z: 0}
   m_AmplitudeGain: 0
-  m_FrequencyGain: 0
+  m_FrequencyGain: 1
   mNoiseOffsets: {x: -246.20569, y: 428.80988, z: -724.7107}
 --- !u!114 &1550971121
 MonoBehaviour:

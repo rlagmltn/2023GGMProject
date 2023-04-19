@@ -23,6 +23,11 @@ public class CameraMove : MonoBehaviour
     float moveSpeed = 10f;
     #endregion
 
+    #region 카메라 셰이크
+    private float shakeTime;
+    private bool timeIsGoing = false;
+    #endregion
+
     #region 카메라 줌인
     [SerializeField] private float minOrthographicSize = 10;
     [SerializeField] private float maxOrthographicSize = 30;
@@ -56,6 +61,11 @@ public class CameraMove : MonoBehaviour
         ChaseTarget();
         ZoomInAndOut();
         KeyboardMove();
+    }
+
+    private void FixedUpdate()
+    {
+        TimeIsGoing();
     }
 
     private void ChaseTarget()
@@ -116,21 +126,29 @@ public class CameraMove : MonoBehaviour
 
     public void Shake(float amplitude = 12, float duration = 0.3f)
     {
-        StartCoroutine(ShakeCoroutine(amplitude, duration));
+        timeIsGoing = true;
+
+        if(duration>shakeTime)
+            shakeTime = duration;
+
+        if(amplitude> camNoise.m_AmplitudeGain)
+            camNoise.m_AmplitudeGain = amplitude;
+    }
+
+    private void TimeIsGoing()
+    {
+        if (!timeIsGoing) return;
+        shakeTime -= Time.deltaTime;
+        if(shakeTime < 0)
+        {
+            camNoise.m_AmplitudeGain = 0;
+            timeIsGoing = false;
+        }
     }
 
     public void StopShake()
     {
-        StopAllCoroutines();
-    }
-
-    private IEnumerator ShakeCoroutine(float amplitude, float duration)
-    {
-        camNoise.m_AmplitudeGain = amplitude;
-        camNoise.m_FrequencyGain = 1;
-        yield return new WaitForSeconds(duration);
-        camNoise.m_AmplitudeGain = 0;
-        camNoise.m_FrequencyGain = 0;
+        shakeTime = 0;
     }
 
     private void DragMove()
