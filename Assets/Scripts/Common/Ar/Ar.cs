@@ -249,4 +249,14 @@ public class Ar : MonoBehaviour
     {
         animator?.SetBool("isSkill", false);
     }
+
+    public void AnimMoveStart()
+    {
+        animator?.SetBool("isMove", true);
+    }
+
+    public void AnimMoveFinish()
+    {
+        animator?.SetBool("isMove", false);
+    }
 }

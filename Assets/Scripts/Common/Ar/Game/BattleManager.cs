@@ -101,7 +101,7 @@ public class BattleManager : MonoSingleton<BattleManager>
         attacker.BeforeAttack.Invoke();
         defender.BeforeDefence.Invoke();
 
-        attacker.AnimAttackStart();
+        attacker.AnimMoveStart();
         EffectManager.Instance.InstantiateEffect(Effect.CRASH, (attacker.transform.position+defender.transform.position)/2, attacker.transform.position, defender.transform.position);
 
         var criChance = Random.Range(1, 101);
