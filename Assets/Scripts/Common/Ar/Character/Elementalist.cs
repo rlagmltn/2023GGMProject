@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Assassin : Player
+public class Elementalist : Player
 {
-    [SerializeField] Bullet kunai;
     private Vector2 angle;
 
     protected override void Start()
@@ -16,7 +15,6 @@ public class Assassin : Player
     {
         isRangeCharacter = false;
         base.StatReset();
-        Passive();
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
@@ -27,25 +25,26 @@ public class Assassin : Player
     protected override void Skill(Vector2 angle)
     {
         base.Skill(angle);
+        StartCoroutine(Slash(angle));
         this.angle = angle;
+    }
+
+    protected override void Passive()
+    {
+        stat.SP = (int)so.surviveStats.MaxShield;
+        DeadCheck();
+    }
+
+    private IEnumerator Slash(Vector2 angle)
+    {
+        rigid.velocity = -((angle.normalized * 1.5f) * pushPower) / (1 + stat.WEIGHT * 0.1f);
+
+        yield return new WaitForSeconds(0.5f);
         AnimSkillStart();
     }
 
     public override void AnimTimingSkill()
     {
-        Shoot(angle);
-    }
 
-    protected override void Passive()
-    {
-        stat.CriDmg *= 2.5f;
-    }
-
-    void Shoot(Vector2 angle)
-    {
-        float zAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
-        var bullet = Instantiate(kunai, transform.position, Quaternion.Euler(0, 0, zAngle - 180));
-        cameraMove.MovetoTarget(bullet.transform);
-        cameraMove.Shake();
     }
 }

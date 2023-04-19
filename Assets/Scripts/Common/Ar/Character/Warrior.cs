@@ -4,20 +4,31 @@ using UnityEngine;
 
 public class Warrior : Player
 {
-    private HitBox hitbox;
-
     private Vector2 angle;
+    private Transform boxPoint;
+    private bool dashing = false;
 
     protected override void Start()
     {
         base.Start();
-        hitbox = GetComponent<HitBox>();
+        boxPoint = rangeContainer.GetChild(3);
     }
 
     public override void StatReset()
     {
         isRangeCharacter = false;
         base.StatReset();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        if (dashing && battleTarget != null) InitTImeScale();
+    }
+
+    public override void Push(Vector2 velo)
+    {
+        rigid.velocity = lastVelocity;
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
@@ -28,6 +39,7 @@ public class Warrior : Player
     protected override void Skill(Vector2 angle)
     {
         base.Skill(angle);
+        dashing = true;
         StartCoroutine(Slash(angle));
         this.angle = angle;
     }
@@ -40,28 +52,32 @@ public class Warrior : Player
 
     private IEnumerator Slash(Vector2 angle)
     {
-        rigid.velocity = -((angle.normalized * 1.5f) * pushPower) / (1 + stat.WEIGHT * 0.1f);
+        rigid.velocity = -((angle.normalized * 1f) * pushPower) / (1 + stat.WEIGHT * 0.1f);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.3f);
         AnimSkillStart();
     }
 
     public override void AnimTimingSkill()
     {
         var attackSuccess = false;
-
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(hitbox.Hitbox.transform.position, new Vector2(hitbox.rangeX, hitbox.rangeY), Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(boxPoint.position, new Vector2(4.2f, 2.2f), rangeContainer.rotation.z);
 
         foreach (Collider2D collider in colliders)
         {
             var enemy = collider.GetComponent<Enemy>();
-            BattleManager.Instance.SettingAr(enemy, this);
             if (enemy != null)
             {
+                enemy.Push(-angle.normalized * 5);
+                BattleManager.Instance.SettingAr(enemy, this);
                 attackSuccess = true;
-                cameraMove.Shake();
             }
         }
-        if (attackSuccess) Passive();
+        if (attackSuccess)
+        {
+            Passive();
+            cameraMove.Shake();
+        }
+        dashing = false;
     }
 }
