@@ -153,10 +153,17 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 0.7
+    functionName: AnimTimingAttack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.93333334
     functionName: AnimAttackFinish
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 3460581898712811297, guid: cad45bbbeb62b0f4992b25d550070cdf, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

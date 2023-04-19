@@ -29,7 +29,6 @@ public class Warrior : Player
     {
         base.Skill(angle);
         StartCoroutine(Slash(angle));
-        cameraMove.Shake();
         this.angle = angle;
     }
 
