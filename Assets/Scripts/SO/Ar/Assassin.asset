@@ -25,13 +25,13 @@ MonoBehaviour:
     currentSkillAtk: 10
   criticalStats:
     baseCriticalPer: 15
-    currentCritalPer: 15
+    currentCriticalPer: 0
     baseCriticalDamage: 50
     currentCriticalDamage: 50
   surviveStats:
     baseHP: 11
     MaxHP: 11
-    currentHP: 1
+    currentHP: 11
     baseShield: 4
     MaxShield: 4
     currentShield: 4
@@ -52,6 +52,6 @@ MonoBehaviour:
     - {fileID: 0}
   isTake: 1
   isUse: 0
-  isInGameTake: 0
+  isInGameTake: 1
   ArData: {fileID: 5805691218845003586, guid: 3e4107562d1d04c40b2ebd51c043cb44, type: 3}
   Summary: 

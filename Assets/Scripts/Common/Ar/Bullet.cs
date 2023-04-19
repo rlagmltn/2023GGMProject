@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour
         // lifeTime만큼 기다렸다가 풀링
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         transform.Translate(Vector2.right * bulletSO.speed * Time.deltaTime);
     }
@@ -94,5 +94,10 @@ public class Bullet : MonoBehaviour
         {
 
         }
+    }
+
+    protected BulletSO GetBullet()
+    {
+        return bulletSO;
     }
 }

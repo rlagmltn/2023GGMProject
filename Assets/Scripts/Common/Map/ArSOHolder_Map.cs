@@ -52,4 +52,9 @@ public class ArSOHolder_Map : MonoBehaviour
     {
         MapInventory.Instance.SelectArSO(Ar);
     }
+
+    public void SelectButton_Heal()
+    {
+        Heal_Inventory.Instance.gameObject.GetComponent<AllHealEvent>().HealFull(Ar);
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EventManger : MonoBehaviour
+public class EventManger : MonoSingleton<EventManger>
 {
     [SerializeField] private Button ClearButton;
     [SerializeField] private Transform BackGroudnPannel;
@@ -37,8 +37,8 @@ public class EventManger : MonoBehaviour
         
         switch(S_event)
         {
-            case Events.HealAll: { EventList[(int)Events.HealAll].EventStart(); EventList[(int)Events.HealAll].Reward(); } break;
-            default: { EventList[(int)S_event].EventStart(); EventList[(int)S_event].Reward(); } break;
+            case Events.HealAll: { EventList[(int)Events.HealAll].EventStart();} break;
+            default: { EventList[(int)S_event].EventStart();} break;
         }
     }
 
