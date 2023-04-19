@@ -23,12 +23,6 @@ public class CameraMove : MonoBehaviour
     float moveSpeed = 10f;
     #endregion
 
-    #region 카메라 셰이크
-    [SerializeField] private float amplitude;
-    [SerializeField] private float frequency;
-    [SerializeField] private float duration;
-    #endregion
-
     #region 카메라 줌인
     [SerializeField] private float minOrthographicSize = 10;
     [SerializeField] private float maxOrthographicSize = 30;
@@ -120,15 +114,20 @@ public class CameraMove : MonoBehaviour
         moveDragPos = dragPos;
     }
 
-    public void Shake()
+    public void Shake(float amplitude = 12, float duration = 0.3f)
     {
-        StartCoroutine(ShakeCoroutine());
+        StartCoroutine(ShakeCoroutine(amplitude, duration));
     }
 
-    private IEnumerator ShakeCoroutine()
+    public void StopShake()
+    {
+        StopAllCoroutines();
+    }
+
+    private IEnumerator ShakeCoroutine(float amplitude, float duration)
     {
         camNoise.m_AmplitudeGain = amplitude;
-        camNoise.m_FrequencyGain = frequency;
+        camNoise.m_FrequencyGain = 1;
         yield return new WaitForSeconds(duration);
         camNoise.m_AmplitudeGain = 0;
         camNoise.m_FrequencyGain = 0;
@@ -216,6 +215,7 @@ public class CameraMove : MonoBehaviour
 
     public void TimeFreeze(float amount = 1)
     {
+        if (amount < 0.3f) StopShake();
         Time.timeScale = Mathf.Clamp(amount, 0.1f, 1f);
     }
 
