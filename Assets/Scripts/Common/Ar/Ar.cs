@@ -77,6 +77,7 @@ public class Ar : MonoBehaviour
     {
         if (rigid.velocity.normalized != lastVelocity.normalized && rigid.velocity.magnitude != 0)
         {
+            Flip();
             lastVelocity = rigid.velocity;
             RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position, lastVelocity.normalized, lastVelocity.magnitude / 4);
             Debug.DrawRay(transform.position, lastVelocity / 4, Color.red, 3f);
@@ -95,7 +96,6 @@ public class Ar : MonoBehaviour
 
     protected void Update()
     {
-        Flip();
         StopMove();
         BattleEffect();
     }
@@ -199,8 +199,13 @@ public class Ar : MonoBehaviour
             return true;
         }
 
-        if (stat.MaxSP != 0) dpBar.localScale = new Vector3(Mathf.Clamp((float)stat.SP / stat.MaxSP, 0, 1), 1, 1); else dpBar.localScale = new Vector3(0, 1, 1);
-        hpBar.localScale = new Vector3(Mathf.Clamp((float)stat.HP / stat.MaxHP, 0, 1), 1, 1);
+        if (stat.SP > 0)
+        {
+            dpBar.parent.gameObject.SetActive(true);
+            dpImage.size = new Vector2((float)stat.SP / stat.MaxSP * 2, 2);
+        }
+        else dpBar.parent.gameObject.SetActive(false);
+        hpImage.size = new Vector2((float)stat.HP / stat.MaxHP * 2, 2);
         return false;
     }
 
@@ -243,5 +248,15 @@ public class Ar : MonoBehaviour
     public void AnimSkillFinish()
     {
         animator?.SetBool("isSkill", false);
+    }
+
+    public void AnimMoveStart()
+    {
+        animator?.SetBool("isMove", true);
+    }
+
+    public void AnimMoveFinish()
+    {
+        animator?.SetBool("isMove", false);
     }
 }

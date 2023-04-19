@@ -24,9 +24,8 @@ public class CameraMove : MonoBehaviour
     #endregion
 
     #region 카메라 셰이크
-    [SerializeField] private float amplitude;
-    [SerializeField] private float frequency;
-    [SerializeField] private float duration;
+    private float shakeTime;
+    private bool timeIsGoing = false;
     #endregion
 
     #region 카메라 줌인
@@ -62,6 +61,11 @@ public class CameraMove : MonoBehaviour
         ChaseTarget();
         ZoomInAndOut();
         KeyboardMove();
+    }
+
+    private void FixedUpdate()
+    {
+        TimeIsGoing();
     }
 
     private void ChaseTarget()
@@ -120,18 +124,31 @@ public class CameraMove : MonoBehaviour
         moveDragPos = dragPos;
     }
 
-    public void Shake()
+    public void Shake(float amplitude = 12, float duration = 0.3f)
     {
-        StartCoroutine(ShakeCoroutine());
+        timeIsGoing = true;
+
+        if(duration>shakeTime)
+            shakeTime = duration;
+
+        if(amplitude> camNoise.m_AmplitudeGain)
+            camNoise.m_AmplitudeGain = amplitude;
     }
 
-    private IEnumerator ShakeCoroutine()
+    private void TimeIsGoing()
     {
-        camNoise.m_AmplitudeGain = amplitude;
-        camNoise.m_FrequencyGain = frequency;
-        yield return new WaitForSeconds(duration);
-        camNoise.m_AmplitudeGain = 0;
-        camNoise.m_FrequencyGain = 0;
+        if (!timeIsGoing) return;
+        shakeTime -= Time.deltaTime;
+        if(shakeTime < 0)
+        {
+            camNoise.m_AmplitudeGain = 0;
+            timeIsGoing = false;
+        }
+    }
+
+    public void StopShake()
+    {
+        shakeTime = 0;
     }
 
     private void DragMove()
@@ -216,6 +233,7 @@ public class CameraMove : MonoBehaviour
 
     public void TimeFreeze(float amount = 1)
     {
+        if (amount < 0.3f) StopShake();
         Time.timeScale = Mathf.Clamp(amount, 0.1f, 1f);
     }
 

@@ -65,6 +65,7 @@ public class AStarGrid : MonoBehaviour
                 // walkable Tilemap에 타일이 있으면 이동 가능한 노드, 타일이 없으면 이동 불가능한 노드이다.
                 if (walkableMap.HasTile(new Vector3Int(x, y, 0)))
                 {
+                    IsWalkAble(walkableMap.GetTile(new Vector3Int(x, y, 10)));
                     node.isWalkable = true;
                     grid[i, j] = node;
                 }
@@ -145,7 +146,7 @@ public class AStarGrid : MonoBehaviour
             }
         }
     }
-
+    
     public void TestPathfind(bool diagonal)
     {
         List<AStarNode> path = pathfinder.CreatePath(startNode, endNode, diagonal);
@@ -156,15 +157,23 @@ public class AStarGrid : MonoBehaviour
                 Vector3Int startCellPos = walkableMap.WorldToCell(new Vector3(path[i].xPos, path[i].yPos));
                 Vector3 startCenterPos = walkableMap.GetCellCenterWorld(startCellPos);
                 startCenterPos -= walkableMap.cellGap / 2;
-
+    
                 Vector3Int endCellPos = walkableMap.WorldToCell(new Vector3(path[i + 1].xPos, path[i + 1].yPos));
                 Vector3 endCenterPos = walkableMap.GetCellCenterWorld(endCellPos);
                 endCenterPos -= walkableMap.cellGap / 2;
-
+    
                 Debug.DrawLine(new Vector3(path[i].xPos, path[i].yPos), new Vector3(path[i + 1].xPos, path[i + 1].yPos), Color.black, 2f);
                 Debug.DrawLine(startCenterPos, endCenterPos, Color.white, 2f);
             }
             Debug.Log("path");
         }
+    }
+    
+    private bool IsWalkAble(TileBase tile)
+    {
+        //tile.GetTileData(new Vector3Int(), , new TileData());
+    
+    
+        return false;
     }
 }

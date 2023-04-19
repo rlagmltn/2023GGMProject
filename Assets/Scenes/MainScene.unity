@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3708985, g: 0.3783704, b: 0.35722548, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8518,9 +8518,6 @@ MonoBehaviour:
   target: {fileID: 0}
   minSize: {x: -15, y: -15}
   maxSize: {x: 15, y: 15}
-  amplitude: 16
-  frequency: 1
-  duration: 0.4
   minOrthographicSize: 5
   maxOrthographicSize: 15
   moveSensitivity: 0.02
@@ -9791,7 +9788,7 @@ MonoBehaviour:
   m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
   m_PivotOffset: {x: 0, y: 0, z: 0}
   m_AmplitudeGain: 0
-  m_FrequencyGain: 0
+  m_FrequencyGain: 1
   mNoiseOffsets: {x: -246.20569, y: 428.80988, z: -724.7107}
 --- !u!114 &1370746225
 MonoBehaviour:
