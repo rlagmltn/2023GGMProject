@@ -45,16 +45,12 @@ public enum ePrefabs
     None = -1,
     MainCamera,
 
-    HEROS = 1000,
-    HeroMan,
-    HeroGirl,
-
-    MANAGERS = 2000,
+    MANAGERS = 1000,
     GameManager,
     PoolManager,
     SpawnManager,
 
-    UI = 3000,
+    UI = 2000,
     UIRoot,
     UIRootLoading,
     UIRootTitle,
@@ -65,15 +61,13 @@ public enum ePrefabs
     UIRootSon,
     ShopItemUI,
     UIs,
+    ActSellect,
 
-    Object = 4000,
+    Object = 3000,
     EmptyObj,
     StageObj,
-    EnemyObj1,
-    EnemyObj2,
     Button,
     Map,
-    Enemy,
     RedHitBox,
     BanditWarrior,
     BanditDummy,
@@ -85,15 +79,13 @@ public enum ePrefabs
 public enum eSceneName
 {
     None = -1,
-    Boss,
-    Game,
-    Loading,
-    Main,
-    Select,
     Title,
+    Main,
+    Loading,
+    Select,
     Map,
     InGame,
-    Son,
+    Boss,
     MaxCount,
 }
 
