@@ -40,7 +40,7 @@ public class Ar : MonoBehaviour
     private Animator animator;
     protected CameraMove cameraMove;
 
-    [SerializeField] private Transform battleTarget;
+    [SerializeField] protected Transform battleTarget;
     private float slowMagnitude = 5f;
 
     protected virtual void Start()
@@ -59,7 +59,7 @@ public class Ar : MonoBehaviour
         AfterMove.AddListener(InitTImeScale);
     }
 
-    void InitTImeScale()
+    protected void InitTImeScale()
     {
         battleTarget = null;
         cameraMove.TimeFreeze();
@@ -73,7 +73,7 @@ public class Ar : MonoBehaviour
         DeadCheck();
     }
 
-    protected void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (rigid.velocity.normalized != lastVelocity.normalized && rigid.velocity.magnitude != 0)
         {
@@ -94,7 +94,7 @@ public class Ar : MonoBehaviour
         lastVelocity = rigid.velocity;
     }
 
-    protected void Update()
+    protected virtual void Update()
     {
         StopMove();
         BattleEffect();
@@ -155,7 +155,7 @@ public class Ar : MonoBehaviour
         }
     }
 
-    public void Push(Vector2 velo)
+    public virtual void Push(Vector2 velo)
     {
         rigid.velocity = velo;
     }

@@ -25,10 +25,11 @@ public class Player : Ar
 
     private QuickSlot slot;
 
-    private Transform rangeContainer;
+    protected Transform rangeContainer;
     private SpriteRenderer moveRange;
     private SpriteRenderer attackRange;
     private SpriteRenderer skillRange;
+    protected Collider2D skillCollider;
 
     private PlayerController playerController;
 
@@ -53,6 +54,7 @@ public class Player : Ar
         moveRange = rangeContainer.GetChild(0).GetComponent<SpriteRenderer>();
         attackRange = rangeContainer.GetChild(1).GetComponent<SpriteRenderer>();
         skillRange = rangeContainer.GetChild(2).GetComponent<SpriteRenderer>();
+        skillCollider = skillRange.GetComponent<Collider2D>();
         playerController = FindObjectOfType<PlayerController>();
         DisableRanges();
 
@@ -84,6 +86,12 @@ public class Player : Ar
         }
 
         base.StatReset();
+    }
+
+    protected override void FixedUpdate()
+    {
+        if (!TurnManager.Instance.IsPlayerTurn) return;
+        base.FixedUpdate();
     }
 
     public void DragBegin(JoystickType joystickType)
@@ -160,7 +168,6 @@ public class Player : Ar
     protected virtual void Skill(Vector2 angle)
     {
         currentCooltime = skillCooltime;
-        AnimSkillStart();
     }
     public virtual void AnimTimingSkill() { }
 
