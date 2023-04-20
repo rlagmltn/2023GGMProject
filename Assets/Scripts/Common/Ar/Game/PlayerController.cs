@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] JoyStick joystick;
     [SerializeField] StickCancel cancelButton;
     [SerializeField] GameObject actSellect;
+    [SerializeField] TextMeshProUGUI batchUnitText;
 
     public List<CONEntity> enemyList;
 
@@ -57,6 +58,7 @@ public class PlayerController : MonoBehaviour
         }
         joystick.gameObject.SetActive(false);
         cancelButton.gameObject.SetActive(false);
+        ChangeBatchCount();
     }
 
     public void SellectPlayer(QuickSlot player)
@@ -179,7 +181,7 @@ public class PlayerController : MonoBehaviour
 
     public void BattleStart()
     {
-        if (BatchCount != playerCount) return;
+        if (BatchCount > playerCount || BatchCount <= 0) return;
         IsBatchMode = false;
 
         foreach(QuickSlot slot in quickSlotHolder)
@@ -191,5 +193,23 @@ public class PlayerController : MonoBehaviour
         batchUI.SetActive(false);
 
         GameManager.Instance.Finding();
+    }
+
+    public void ChangeBatchCount()
+    {
+        batchUnitText.SetText($"{BatchCount} / {playerCount}");
+
+        if(BatchCount<=0)
+        {
+            batchUnitText.color = Color.red;
+        }
+        else if (BatchCount <= playerCount)
+        {
+            batchUnitText.color = Color.green;
+        }
+        else
+        {
+            batchUnitText.color = Color.red;
+        }
     }
 }

@@ -110,6 +110,7 @@ public class QuickSlot : MonoBehaviour
             if (!isBatched)
             {
                 playerController.BatchCount++;
+                playerController.ChangeBatchCount();
                 playerController.quickSlotHolder.Add(this);
             }
 
@@ -121,6 +122,7 @@ public class QuickSlot : MonoBehaviour
             if (isBatched)
             {
                 playerController.BatchCount--;
+                playerController.ChangeBatchCount();
                 playerController.quickSlotHolder.Remove(this);
             }
 
