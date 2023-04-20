@@ -28,7 +28,10 @@ public class Warrior : Player
 
     public override void Push(Vector2 velo)
     {
-        rigid.velocity = lastVelocity;
+        if (dashing)
+            rigid.velocity = lastVelocity;
+        else
+            base.Push(velo);    
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
@@ -54,7 +57,7 @@ public class Warrior : Player
     {
         rigid.velocity = -((angle.normalized * 1f) * pushPower) / (1 + stat.WEIGHT * 0.1f);
 
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(0.6f);
         AnimSkillStart();
     }
 
