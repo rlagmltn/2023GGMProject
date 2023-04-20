@@ -218,4 +218,9 @@ public class TurnManager : MonoSingleton<TurnManager>
         yield return new WaitForSeconds(0.5f);
         turnObj.SetActive(false);
     }
+
+    public bool IsUsedAllTurn()
+    {
+        return turnCount >= playerTurn;
+    }
 }

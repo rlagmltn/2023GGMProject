@@ -199,7 +199,7 @@ public class Player : Ar
 
     private void OnMouseDown()
     {
-        if (!TurnManager.Instance.IsPlayerTurn || isDead || TurnManager.Instance.SomeoneIsMoving) return;
+        if (!TurnManager.Instance.IsPlayerTurn || isDead || TurnManager.Instance.SomeoneIsMoving || TurnManager.Instance.IsUsedAllTurn()) return;
         playerController?.SellectPlayer(slot);
     }
 
