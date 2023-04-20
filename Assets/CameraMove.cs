@@ -113,15 +113,16 @@ public class CameraMove : MonoBehaviour
         else isZoommode = false;
     }
 
-    public void ApplyCameraSize(float zoomScale = 1)
+    public void ApplyCameraSize(float zoomScale = 1, float zoomAdd = 0)
     {
         zoomScale = Mathf.Clamp(zoomScale * 2, 0.3f, 1);
-        cinemachineCam.m_Lens.OrthographicSize = Mathf.Clamp(orthographicSize * zoomScale, minOrthographicSize / 2, maxOrthographicSize);
+        zoomAdd *= (orthographicSize / 6);
+        cinemachineCam.m_Lens.OrthographicSize = Mathf.Clamp(orthographicSize * zoomScale + zoomAdd, minOrthographicSize / 2, maxOrthographicSize * 1.5f);
     }
 
     public void MoveDrag(Vector3 dragPos)
     {
-        moveDragPos = dragPos;
+        moveDragPos = dragPos * orthographicSize;
     }
 
     public void Shake(float amplitude = 12, float duration = 0.3f)
