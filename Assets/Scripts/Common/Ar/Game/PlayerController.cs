@@ -25,7 +25,8 @@ public class PlayerController : MonoBehaviour
     private List<QuickSlot> quickSlots = new List<QuickSlot>();
     public List<QuickSlot> quickSlotHolder = new List<QuickSlot>();
     private GameObject attackBtn;
-    private TextMeshProUGUI skillBtnText;
+    private GameObject skilCoolImage;
+    private TextMeshProUGUI skillCoolText;
     private CameraMove cameraMove;
 
     void Awake()
@@ -33,7 +34,8 @@ public class PlayerController : MonoBehaviour
         IsBatchMode = true;
         SummonPlayers();
         attackBtn = actSellect.transform.GetChild(1).gameObject;
-        skillBtnText = actSellect.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
+        skilCoolImage = actSellect.transform.GetChild(2).GetChild(1).gameObject;
+        skillCoolText = skilCoolImage.GetComponentInChildren<TextMeshProUGUI>();
         cameraMove = FindObjectOfType<CameraMove>();
     }
 
@@ -154,9 +156,15 @@ public class PlayerController : MonoBehaviour
     private void SetSkillBtnText()
     {
         if (sellectPlayer.currentCooltime > 0)
-            skillBtnText.SetText(sellectPlayer.currentCooltime.ToString());
+        {
+            skilCoolImage.SetActive(true);
+            skillCoolText.SetText(sellectPlayer.currentCooltime.ToString());
+        }
         else
-            skillBtnText.SetText("Skill");
+        {
+            skilCoolImage.SetActive(false);
+            skillCoolText.SetText("");
+        }
     }
 
     public void SetQuickSlotsEnable(bool value)
