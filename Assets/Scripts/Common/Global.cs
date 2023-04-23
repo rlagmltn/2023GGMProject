@@ -55,6 +55,7 @@ public enum ePrefabs
     UIRootLoading,
     UIRootTitle,
     UIRootGame,
+    UIRootMain,
     UIRootSelect,
     UIRootMap,
     UIRootInGame,
@@ -67,13 +68,12 @@ public enum ePrefabs
     EmptyObj,
     StageObj,
     Button,
-    Map,
     RedHitBox,
     BanditWarrior,
     BanditDummy,
     BanditArcher,
     ItemSlot,
-    Map1
+    Stage_1
 }
 
 public enum eSceneName

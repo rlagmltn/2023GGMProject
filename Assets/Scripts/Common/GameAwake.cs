@@ -47,7 +47,6 @@ public class GameAwake : MonoBehaviour
     void InitOnce()
     {
         LoadPrefabDic();
-
         LoadSpritesDic();
 
         // 씬매니져를 생성
@@ -60,7 +59,7 @@ public class GameAwake : MonoBehaviour
 
         object[] files;
 
-        _sb.Remove(0, _sb.Length);
+        _sb.Clear();
         _sb.Append("Prefabs/");
 
         files = Resources.LoadAll(_sb.ToString());
@@ -74,7 +73,6 @@ public class GameAwake : MonoBehaviour
             GameObject outObj;
 
             tempStr = GetFileName(files[i].ToString());
-
             if (!Global.prefabsDic.TryGetValue((ePrefabs)Enum.Parse(typeof(ePrefabs), tempStr), out outObj))
                 Global.prefabsDic.Add((ePrefabs)Enum.Parse(typeof(ePrefabs), tempStr), (GameObject)files[i]);
         }
@@ -86,7 +84,7 @@ public class GameAwake : MonoBehaviour
 
         Sprite[] files;
 
-        _sb.Remove(0, _sb.Length);
+        _sb.Clear();
         _sb.Append("Sprites/");
 
         files = Resources.LoadAll<Sprite>(_sb.ToString());
