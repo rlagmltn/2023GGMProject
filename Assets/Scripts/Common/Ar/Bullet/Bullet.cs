@@ -80,6 +80,12 @@ public class Bullet : MonoBehaviour
                     // 벽에 닿을 때 까지 계속 날아가는 코드
                     break;
                 case BulletType.Explosion:
+                    var hits = Physics2D.OverlapCircleAll(transform.position, bulletSO.range);
+                    foreach(Collider2D hit in hits)
+                    {
+                        BattleManager.Instance.SettingAr(hit.GetComponent<Ar>(), damage);
+                    }
+                    Destroy(gameObject);
                     // 주변 적들도 피해를 주고 풀링되는 코드
                     break;
             }

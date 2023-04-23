@@ -14,36 +14,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterInfo:
     image: {fileID: 0}
-    nameString: 
-    Rarity: 0
-    arClass: 0
-    Level: 0
+    nameString: "\uC815\uB839\uC0AC"
+    Rarity: 1
+    arClass: 5
+    Level: 1
   attackStats:
-    baseAtk: 0
-    currentAtk: 0
-    baseSkillAtk: 0
-    currentSkillAtk: 0
+    baseAtk: 3
+    currentAtk: 3
+    baseSkillAtk: 5
+    currentSkillAtk: 5
   criticalStats:
-    baseCriticalPer: 0
-    currentCriticalPer: 0
-    baseCriticalDamage: 0
-    currentCriticalDamage: 0
+    baseCriticalPer: 10
+    currentCriticalPer: 10
+    baseCriticalDamage: 50
+    currentCriticalDamage: 50
   surviveStats:
-    baseHP: 0
-    MaxHP: 0
-    currentHP: 0
-    baseShield: 0
-    MaxShield: 0
-    currentShield: 0
-    baseWeight: 0
-    currentWeight: 0
+    baseHP: 8
+    MaxHP: 8
+    currentHP: 8
+    baseShield: 6
+    MaxShield: 6
+    currentShield: 6
+    baseWeight: 3
+    currentWeight: 3
   skill:
     skillImage: {fileID: 0}
-    skillName: 
-    skillCoolTime: 0
-    MaxSkillCoolTime: 0
+    skillName: "\uC2A4\uD53C\uB9BF \uBC84\uC2A4\uD2B8"
+    skillCoolTime: 9
+    MaxSkillCoolTime: 9
     currentSkillCoolTime: 0
-    SkillSummary: 
+    SkillSummary: "\uC804\uBC29\uC73C\uB85C \uC815\uB839\uC744 \uBCF4\uB0B4 \uD3ED\uBC1C
+      \uC2DC\uCF1C \uBC94\uC704\uB0B4\uC758 \uC801\uB4E4\uC5D0\uAC8C \uB370\uBBF8\uC9C0\uB97C
+      \uC900\uB2E4 "
   E_Item:
     itmeSO:
     - {fileID: 0}
