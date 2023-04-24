@@ -8,13 +8,13 @@ public class QuickSlot : MonoBehaviour
 {
     private Button button;
     private Image outline;
-    private Image background;
+    public Image background;
     private Image playerImage;
     private Image unableImage;
     private Image hpImage;
     private Image spImage;
 
-    private bool isBatched;
+    public bool isBatched;
     private JoyStick joyStick;
     private PlayerController playerController;
 
@@ -116,6 +116,7 @@ public class QuickSlot : MonoBehaviour
 
             isBatched = true;
             Player.Collide.enabled = true;
+            background.color = Color.gray;
         }
         else
         {
@@ -128,7 +129,7 @@ public class QuickSlot : MonoBehaviour
 
             isBatched = false;
             Player.gameObject.SetActive(false);
+            background.color = Color.black;
         }
-        background.color = Color.black;
     }
 }
