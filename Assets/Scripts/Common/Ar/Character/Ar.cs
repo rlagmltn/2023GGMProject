@@ -144,7 +144,7 @@ public class Ar : MonoBehaviour
             rigid.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal);
             cameraMove.Shake();
             EffectManager.Instance.InstantiateEffect(0, collision.contacts[0].point, transform.position, collision.contacts[0].point);
-
+            InitTImeScale();
             //AfterCrash?.Invoke();
         }
     }
@@ -217,8 +217,16 @@ public class Ar : MonoBehaviour
     {
         OnOutDie?.Invoke();
         isDead = true;
+        rigid.velocity = lastVelocity/5;
+        isMove = false;
         TurnManager.Instance.SomeoneIsMoving = false;
         GameManager.Instance.ArDead();
+        EffectManager.Instance.InstantiateEffect_P(Effect.SUNK, transform.position, Vector2.zero);
+        animator?.SetTrigger("isDead");
+    }
+
+    public void OutDie()
+    {
         gameObject.SetActive(false);
     }
 
