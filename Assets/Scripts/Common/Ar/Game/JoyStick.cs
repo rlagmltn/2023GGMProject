@@ -68,8 +68,8 @@ public class JoyStick : MonoBehaviour
         zAngle = Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
         playerController.Drag(zAngle, vDis);
 
-        cameraMove.MoveDrag(-v/2);
-        cameraMove.ApplyCameraSize(1, vDis/2);
+        cameraMove.MoveDrag(new Vector2(-v.x * 0.9f, -v.y * 0.6f));
+        cameraMove.ApplyCameraSize(1, vDis * 0.8f);
     }
 
     public void OnDragEnd(BaseEventData data)
