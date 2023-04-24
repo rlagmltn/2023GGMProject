@@ -130,11 +130,12 @@ public enum ArRarity
 
 public enum ItemRarity
 {
-    NORMAL,
-    RARE,
-    UNIQUE,
-    LEGENDARY,
-    BOSSCURSE,
+    Legacy,
+    Basic,
+    Common,
+    Rare,
+    Epic,
+    Legendary,
 }
 
 public enum ArClasses
