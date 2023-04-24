@@ -52,13 +52,6 @@ namespace Assets.HeroEditor4D.Common.Scripts.CharacterScripts
         public List<Sprite> Earrings { set { Parts.ForEach(i => i.Earrings = value.ToList()); } }
         public WeaponType WeaponType { get => Character.WeaponType; set { Parts.ForEach(i => i.WeaponType = value); } }
 
-        public void OnValidate()
-        {
-            Parts = new List<Character> { Character };
-            Parts.ForEach(i => i.BodyRenderers.ForEach(j => j.color = BodyColor));
-            Parts.ForEach(i => i.EarsRenderers.ForEach(j => j.color = BodyColor));
-        }
-
         public void Start()
         {
             var stateHandler = Animator.GetBehaviours<StateHandler>().SingleOrDefault(i => i.Name == "Death");

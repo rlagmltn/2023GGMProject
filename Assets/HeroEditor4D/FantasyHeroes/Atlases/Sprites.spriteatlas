@@ -40,6 +40,7 @@ SpriteAtlas:
       allowAlphaSplitting: 0
       enableRotation: 1
       enableTightPacking: 1
+      enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
@@ -708,8 +709,8 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 6e5c5a837a0977c41b72e15873a17542, type: 3}
   - {fileID: 21300000, guid: 9489da8347b755b42822a6d208d94d08, type: 3}
   - {fileID: 21300000, guid: ec099f8390d1e414b8e41bbdfc175024, type: 3}
-  - {fileID: 21300010, guid: ec099f8390d1e414b8e41bbdfc175024, type: 3}
   - {fileID: 21300002, guid: ec099f8390d1e414b8e41bbdfc175024, type: 3}
+  - {fileID: 21300010, guid: ec099f8390d1e414b8e41bbdfc175024, type: 3}
   - {fileID: 21300008, guid: ec099f8390d1e414b8e41bbdfc175024, type: 3}
   - {fileID: 21300004, guid: ec099f8390d1e414b8e41bbdfc175024, type: 3}
   - {fileID: 21300006, guid: ec099f8390d1e414b8e41bbdfc175024, type: 3}
@@ -1175,7 +1176,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c6c24045c5af0ea41833e46446205829, type: 3}
   - {fileID: 21300000, guid: 7ffa3445fd3a4484fb28da45830a85e4, type: 3}
   - {fileID: 21300000, guid: a2400f4575528e546b98c006de69f20e, type: 3}
-  - {fileID: 21300000, guid: c61bf65547eb1484887b4f332bdc5cd5, type: 3}
   - {fileID: 21300020, guid: d9b2be55118a1ed428f1334abe7b519e, type: 3}
   - {fileID: 21300074, guid: d9b2be55118a1ed428f1334abe7b519e, type: 3}
   - {fileID: 21300036, guid: d9b2be55118a1ed428f1334abe7b519e, type: 3}
@@ -1819,7 +1819,6 @@ SpriteAtlas:
   - {fileID: 21300070, guid: 8bfa4ab77418afe46a022b4fbee27657, type: 3}
   - {fileID: 21300000, guid: 46188eb72528b87419fd70608a19a7e4, type: 3}
   - {fileID: 21300000, guid: 60bc8fb71dc95ac4ea6c57d9f7c043ed, type: 3}
-  - {fileID: 21300000, guid: fb59b3c7fe64e604f871f9fc9809c0bd, type: 3}
   - {fileID: 21300000, guid: 55cf78c79ec120347a8c747e39e5c25d, type: 3}
   - {fileID: -9212286445950041963, guid: 74769dc77c4418a43a9f8c7647f41267, type: 3}
   - {fileID: -3905612625394228665, guid: 74769dc77c4418a43a9f8c7647f41267, type: 3}
@@ -2752,8 +2751,8 @@ SpriteAtlas:
   - {fileID: 21300048, guid: 3d91e9bb2fe824c429f5714007eae2b9, type: 3}
   - {fileID: 21300070, guid: 3d91e9bb2fe824c429f5714007eae2b9, type: 3}
   - {fileID: 21300000, guid: b4f5bcbb5ea871749a8371bd1a3a8e45, type: 3}
-  - {fileID: 21300010, guid: b4f5bcbb5ea871749a8371bd1a3a8e45, type: 3}
   - {fileID: 21300002, guid: b4f5bcbb5ea871749a8371bd1a3a8e45, type: 3}
+  - {fileID: 21300010, guid: b4f5bcbb5ea871749a8371bd1a3a8e45, type: 3}
   - {fileID: 21300008, guid: b4f5bcbb5ea871749a8371bd1a3a8e45, type: 3}
   - {fileID: 21300004, guid: b4f5bcbb5ea871749a8371bd1a3a8e45, type: 3}
   - {fileID: 21300006, guid: b4f5bcbb5ea871749a8371bd1a3a8e45, type: 3}
@@ -4286,9 +4285,9 @@ SpriteAtlas:
   - Spices
   - SilverDagger
   - BoarSkin
-  - SideLoaded
+  - Gun
+  - GunEmpty
   - Quiver
-  - SideEmpty
   - FrontEmpty
   - Bolt
   - FrontLoaded
@@ -4754,7 +4753,6 @@ SpriteAtlas:
   - Doner
   - SilverKey
   - Coal
-  - RedApple
   - BackFingersR
   - BackFingersL
   - BackHead
@@ -5398,7 +5396,6 @@ SpriteAtlas:
   - FrontSleeveR
   - HoleyLightSword
   - Brass
-  - Coin
   - Schnapps
   - Gun
   - Shell
@@ -6330,9 +6327,9 @@ SpriteAtlas:
   - FrontSleeveL
   - BackLegR
   - FrontSleeveR
-  - SideLoaded
+  - Gun
+  - GunEmpty
   - Quiver
-  - SideEmpty
   - FrontEmpty
   - Bolt
   - FrontLoaded

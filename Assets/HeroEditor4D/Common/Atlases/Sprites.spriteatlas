@@ -40,6 +40,7 @@ SpriteAtlas:
       allowAlphaSplitting: 0
       enableRotation: 1
       enableTightPacking: 1
+      enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
@@ -542,6 +543,7 @@ SpriteAtlas:
   - {fileID: 21300070, guid: 5d5fbc45b8d18c343b5c93de38111374, type: 3}
   - {fileID: 21300024, guid: 5d5fbc45b8d18c343b5c93de38111374, type: 3}
   - {fileID: 21300076, guid: 5d5fbc45b8d18c343b5c93de38111374, type: 3}
+  - {fileID: 21300000, guid: c61bf65547eb1484887b4f332bdc5cd5, type: 3}
   - {fileID: 21300006, guid: 27f45495b87c83243942519aaf528745, type: 3}
   - {fileID: 21300002, guid: 27f45495b87c83243942519aaf528745, type: 3}
   - {fileID: 21300000, guid: 27f45495b87c83243942519aaf528745, type: 3}
@@ -846,6 +848,7 @@ SpriteAtlas:
   - {fileID: 8968894577945027273, guid: 6a3c18a77a874214782e1b53a2f3e884, type: 3}
   - {fileID: -8137581963233685907, guid: 6a3c18a77a874214782e1b53a2f3e884, type: 3}
   - {fileID: 6591478365344907407, guid: 6a3c18a77a874214782e1b53a2f3e884, type: 3}
+  - {fileID: 21300000, guid: fb59b3c7fe64e604f871f9fc9809c0bd, type: 3}
   - {fileID: 8968894577945027273, guid: 95e0f8c7b185257448b184ac18e73d03, type: 3}
   - {fileID: -8137581963233685907, guid: 95e0f8c7b185257448b184ac18e73d03, type: 3}
   - {fileID: 6591478365344907407, guid: 95e0f8c7b185257448b184ac18e73d03, type: 3}
@@ -2157,6 +2160,7 @@ SpriteAtlas:
   - FrontSleeveL
   - BackLegR
   - FrontSleeveR
+  - RedApple
   - Left
   - Back
   - Front
@@ -2461,6 +2465,7 @@ SpriteAtlas:
   - Left
   - Back
   - Front
+  - Coin
   - Left
   - Back
   - Front

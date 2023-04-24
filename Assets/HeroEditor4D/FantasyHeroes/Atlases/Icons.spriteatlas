@@ -40,6 +40,7 @@ SpriteAtlas:
       allowAlphaSplitting: 0
       enableRotation: 1
       enableTightPacking: 1
+      enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
@@ -436,7 +437,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: dfbaa6a56b8694545a1ec84d90726a1c, type: 3}
   - {fileID: 21300000, guid: 949339a5285ee9b41b51e0bbe2972ed3, type: 3}
   - {fileID: 21300000, guid: 22ebaaa55195db54ca4a7b1c4688ae0f, type: 3}
-  - {fileID: 21300000, guid: eeb600b527962b247b9305aa09914320, type: 3}
   - {fileID: 21300000, guid: 3c710ab5a64634046bd300db1b814dc0, type: 3}
   - {fileID: 21300000, guid: eb926db5da1fe0f4d84b5db923f07a8a, type: 3}
   - {fileID: 21300000, guid: 6f1e9fb5db61bc94f8bbe8b8ae3bfb38, type: 3}
@@ -515,7 +515,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 28a40dc6509c86c438de8f6deaf99029, type: 3}
   - {fileID: 21300000, guid: fbed2dc62ec300648b9edde728886e9d, type: 3}
   - {fileID: 21300000, guid: 145853d629f22b449822abcf2c63d852, type: 3}
-  - {fileID: 21300000, guid: 0ca683d694afea64b85a7bb9d0e07a96, type: 3}
   - {fileID: 21300000, guid: 3a4688d6842e67e4a8c2b0667ea7bf4b, type: 3}
   - {fileID: 21300000, guid: 6b51f9d6983dab04c86ba55bab2098e5, type: 3}
   - {fileID: 21300000, guid: 0e2bead621bc33446b211b288cc8365a, type: 3}
@@ -1551,7 +1550,6 @@ SpriteAtlas:
   - SteelBow
   - WallKeeperArmor
   - Type3
-  - Coin
   - RubyBomb
   - OakBow
   - GoblinCaptain [ShowEars]
@@ -1630,7 +1628,6 @@ SpriteAtlas:
   - ManticoreBow
   - SpikedBomb
   - WoodenLongSword
-  - RedApple
   - GraveyardClothes
   - ChainmailLightArmor
   - PiperOutfit [ShowEars]
