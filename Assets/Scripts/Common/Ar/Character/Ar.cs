@@ -56,7 +56,11 @@ public class Ar : MonoBehaviour
         cameraMove = FindObjectOfType<CameraMove>();
 
         AfterCrash.AddListener(InitTImeScale);
-        AfterMove.AddListener(InitTImeScale);
+        AfterMove.AddListener(()=>
+        {
+            battleTarget = null;
+            cameraMove.TimeFreeze();
+        });
     }
 
     protected void InitTImeScale()

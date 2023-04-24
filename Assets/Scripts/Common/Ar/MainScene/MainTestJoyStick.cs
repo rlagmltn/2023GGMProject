@@ -58,8 +58,8 @@ public class MainTestJoyStick : MonoBehaviour
         zAngle = Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
         MainTestModeManager.Instance.Drag(zAngle, vDis);
 
-        cameraMove.MoveDrag(-v);
-        cameraMove.ApplyCameraSize(1, vDis);
+        cameraMove.MoveDrag(new Vector2(-v.x * 0.9f, -v.y * 0.6f));
+        cameraMove.ApplyCameraSize(1, vDis * 0.8f);
     }
 
     public void OnDragEnd(BaseEventData data)
