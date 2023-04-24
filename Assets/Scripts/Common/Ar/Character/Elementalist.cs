@@ -5,22 +5,13 @@ using UnityEngine;
 public class Elementalist : Player
 {
     [SerializeField] Bullet elemental;
+    private int turnCount;
     private Vector2 angle;
-
-    protected override void Start()
-    {
-        base.Start();
-    }
 
     public override void StatReset()
     {
         isRangeCharacter = false;
         base.StatReset();
-    }
-
-    protected override void OnCollisionEnter2D(Collision2D collision)
-    {
-        base.OnCollisionEnter2D(collision);
     }
 
     protected override void Skill(Vector2 angle)
@@ -29,8 +20,21 @@ public class Elementalist : Player
         AnimSkillStart();
     }
 
+    protected override void Update()
+    {
+        if (TurnManager.Instance.PassedTurn != turnCount)
+            Passive();
+        base.Update();
+    }
+
     protected override void Passive()
     {
+        turnCount = TurnManager.Instance.PassedTurn;
+        if (turnCount % 3 == 0)
+        {
+            turnCount = 0;
+            stat.CriPer += 2;
+        }
         //세 턴이 지날 때 마다 치명타 확률이 2%씩 증가한다.
     }
 

@@ -31,7 +31,7 @@ public class Player : Ar
     private SpriteRenderer skillRange;
     protected Collider2D skillCollider;
 
-    private PlayerController playerController;
+    protected PlayerController playerController;
 
     [SerializeField] ItemSO[] itemSlots = new ItemSO[3];
 
@@ -309,10 +309,6 @@ public class Player : Ar
     public void TakeAllStat()
     {
         so.surviveStats.currentHP = stat.HP;
-        so.attackStats.currentAtk = stat.ATK;
-        so.attackStats.currentSkillAtk = stat.SATK;
-        so.criticalStats.currentCriticalPer = stat.CriPer;
-        so.criticalStats.currentCriticalDamage = stat.CriDmg;
         so.surviveStats.currentWeight = stat.WEIGHT;
         if(!isDead) so.surviveStats.currentShield = so.surviveStats.MaxShield;
     }

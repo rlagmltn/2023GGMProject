@@ -56,11 +56,8 @@ public class Ar : MonoBehaviour
         cameraMove = FindObjectOfType<CameraMove>();
 
         AfterCrash.AddListener(InitTImeScale);
-        AfterMove.AddListener(()=>
-        {
-            battleTarget = null;
-            cameraMove.TimeFreeze();
-        });
+        AfterMove.AddListener(InitTImeScale);
+        AfterMove.AddListener(TurnOver);
     }
 
     protected void InitTImeScale()
@@ -124,7 +121,6 @@ public class Ar : MonoBehaviour
         {
             rigid.velocity = Vector2.zero;
             isMove = false;
-            TurnManager.Instance.SomeoneIsMoving = false;
             AfterMove?.Invoke();
         }
     }
@@ -240,6 +236,11 @@ public class Ar : MonoBehaviour
     public void DecreaseSP(int val)
     {
         stat.SP = Mathf.Max(0, stat.SP - val);
+    }
+
+    protected virtual void TurnOver()
+    {
+        TurnManager.Instance.SomeoneIsMoving = false;
     }
 
     public void AnimAttackStart()

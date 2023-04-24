@@ -36,12 +36,14 @@ public class MainTestJoyStick : MonoBehaviour
 
     public void OnDragBegin(BaseEventData data)
     {
+        if (TurnManager.Instance.SomeoneIsMoving) return;
         isDraging = true;
         MainTestModeManager.Instance.DragBegin();
     }
 
     public void OnDrag(BaseEventData data)
     {
+        if (TurnManager.Instance.SomeoneIsMoving) return;
         Vector3 Pos = Util.Instance.mousePosition;
 
         stickVec = (Pos - transform.position).normalized;
@@ -64,6 +66,7 @@ public class MainTestJoyStick : MonoBehaviour
 
     public void OnDragEnd(BaseEventData data)
     {
+        if (TurnManager.Instance.SomeoneIsMoving) return;
         isDraging = false;
         var power = Vector2.Distance(transform.position, Util.Instance.mousePosition);
         angle = transform.position - Util.Instance.mousePosition;

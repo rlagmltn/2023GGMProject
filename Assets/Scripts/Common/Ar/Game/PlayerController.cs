@@ -192,6 +192,7 @@ public class PlayerController : MonoBehaviour
         batchZone.SetActive(false);
         batchUI.SetActive(false);
 
+        DisableQuickSlots();
         GameManager.Instance.Finding();
     }
 

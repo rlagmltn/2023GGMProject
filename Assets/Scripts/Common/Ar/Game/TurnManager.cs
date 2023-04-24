@@ -22,6 +22,8 @@ public class TurnManager : MonoSingleton<TurnManager>
     public bool IsWaitingTurn { get; private set; }
     public bool SomeoneIsMoving { get; set; }
 
+    public int PassedTurn { get; private set; }
+
     private void Start()
     {
         cameraMove = FindObjectOfType<CameraMove>();
@@ -76,6 +78,7 @@ public class TurnManager : MonoSingleton<TurnManager>
             }
             
         }
+        PassedTurn++;
         return false;
     }
 
@@ -102,11 +105,14 @@ public class TurnManager : MonoSingleton<TurnManager>
     {
         playerController.SetQuickSlotsEnable(!isPlayerTurn);
         IsWaitingTurn = true;
+        while (SomeoneIsMoving) yield return null;
+
         if(turnObj!=null) StartCoroutine(ActiveTurnPanel());
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(4f);
         IsWaitingTurn = false;
         isPlayerTurn = !isPlayerTurn;
         ActiveAllTurn();
+
         if (isPlayerTurn)
         {
             //플레이어 턴 시작
@@ -136,7 +142,7 @@ public class TurnManager : MonoSingleton<TurnManager>
 
         UnActiveNotUseTurn(enemyTurn);
         //기다리는 시간 변수화!
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
 
         for(int i = 0; i< enemyTurn; i++)
         {
@@ -155,7 +161,11 @@ public class TurnManager : MonoSingleton<TurnManager>
             {
                 BlinkNextTurn();
                 arFSM.StartTurn();
-                yield return new WaitForSeconds(6f);
+                SomeoneIsMoving = true;
+                while (SomeoneIsMoving)
+                {
+                    yield return new WaitForSeconds(1f);
+                }
             }
             else
             {
@@ -210,7 +220,7 @@ public class TurnManager : MonoSingleton<TurnManager>
 
     private IEnumerator ActiveTurnPanel()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         turnObj.SetActive(true);
         turnObj.transform.DORotate(Vector3.zero, 0.5f);
         yield return new WaitForSeconds(1.5f);
