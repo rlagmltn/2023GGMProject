@@ -148,22 +148,33 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
     /// ArSO에 알을 선택해주는 함수
     /// </summary>
     /// <param name="ar"></param>
-    public void SelectArSO(ArSO ar)
+    public void SelectArSO(ArSO ar, int num)
     {
         ArSO[] arList = ReturnPresetList();
 
-        for (int i = 0; i < arList.Length; i++)
+        if(!CanSelect(num)) return;
+
+        arList[num] = ar;
+
+        for(int i = 0; i < arList.Length; i++)
         {
-            if(arList[i] == emptyAr)
-            {
-                arList[i] = ar;
-                break;
-            }
+            if (i == num) continue;
+            if (arList[i] == ar) arList[i] = emptyAr;
         }
 
         isSkillPannel = false;
         SelectedAR = ar;
         UpdateUI();
+
+    }
+
+    public bool CanSelect(int num)
+    {
+        ArSO[] arList = ReturnPresetList();
+
+        if (arList[num] != emptyAr) return false;
+
+        return true;
     }
 
     public void OnlySelectArSO(ArSO ar)
