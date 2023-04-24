@@ -50,11 +50,13 @@ public class ArSOHolder : MonoBehaviour
 
     public void SelectedButton()
     {
-        if (ArInventorySelecter.Instance.CanSelect())
-        {
-            ArInventorySelecter.Instance.SelectArSO(Ar);
-            Ar.isUse = true;
-            Button_ActiveSelf();
-        }
+        //if (ArInventorySelecter.Instance.CanSelect())
+        //{
+        //    ArInventorySelecter.Instance.SelectArSO(Ar);
+        //    Ar.isUse = true;
+        //    Button_ActiveSelf();
+        //}
+
+        ArInventorySelecter.Instance.OnlySelectArSO(Ar);
     }
 }

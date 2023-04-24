@@ -73,7 +73,8 @@ public enum ePrefabs
     BanditDummy,
     BanditArcher,
     ItemSlot,
-    Stage_1
+    Stage_1,
+    Main,
 }
 
 public enum eSceneName

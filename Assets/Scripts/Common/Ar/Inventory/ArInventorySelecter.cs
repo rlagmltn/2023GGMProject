@@ -166,6 +166,13 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
         UpdateUI();
     }
 
+    public void OnlySelectArSO(ArSO ar)
+    {
+        isSkillPannel = false;
+        SelectedAR = ar;
+        UpdateUI();
+    }
+
     ArSO[] ReturnPresetList()
     {
         ArSO[] arList = SelectPresetNum switch
