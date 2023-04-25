@@ -13,7 +13,6 @@ public class AStarGrid : MonoBehaviour
     
     private AStarPathfind pathfinder;
     
-    // for TEST
     private AStarNode startNode;
     private AStarNode endNode;
     
@@ -85,7 +84,13 @@ public class AStarGrid : MonoBehaviour
             node.Reset();
         }
     }
-    
+
+    public void SetNode(Vector2 start, Vector2 end)
+    {
+        startNode = GetNodeFromWorld(start);
+        endNode = GetNodeFromWorld(end);
+    }
+
     public AStarNode GetNodeFromWorld(Vector3 worldPosition)
     { 
         // 월드 좌표로 해당 좌표의 AStarNode 인스턴스를 얻는다.
@@ -168,29 +173,6 @@ public class AStarGrid : MonoBehaviour
             Debug.Log("path");
         }
     }
+
     
-    private bool IsWalkAble(TileBase tile)
-    {
-        //tile.GetTileData(new Vector3Int(), , new TileData());
-    
-        Vector3Int cellPos = walkableMap.WorldToCell(transform.position);
-        int y = cellPos.y + Mathf.Abs(walkableMap.cellBounds.yMin);
-        int x = cellPos.x + Mathf.Abs(walkableMap.cellBounds.xMin);
-        
-        AStarNode node = grid[y, x];
-    
-        if(node.isWalkable)
-        {
-            //Check isWalked
-            
-    
-        }
-        else
-        {
-            
-    
-        }
-    
-        return false;
-    }
 }
