@@ -47,10 +47,10 @@ public class Ar : MonoBehaviour
     {
         stat = new Stat();
         rigid = GetComponent<Rigidbody2D>();
-        hpBar = transform.GetChild(1).GetChild(0);
-        hpImage = hpBar.GetComponentInChildren<SpriteRenderer>();
-        dpBar = transform.GetChild(2).GetChild(0);
-        dpImage = dpBar.GetComponentInChildren<SpriteRenderer>();
+        hpBar = transform.GetChild(1);
+        hpImage = hpBar.GetChild(0).GetComponent<SpriteRenderer>();
+        dpBar = transform.GetChild(2);
+        dpImage = dpBar.GetChild(0).GetComponent<SpriteRenderer>();
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         cameraMove = FindObjectOfType<CameraMove>();
@@ -201,10 +201,10 @@ public class Ar : MonoBehaviour
 
         if (stat.SP > 0)
         {
-            dpBar.parent.gameObject.SetActive(true);
+            dpBar.gameObject.SetActive(true);
             dpImage.size = new Vector2((float)stat.SP / stat.MaxSP * 2, 2);
         }
-        else dpBar.parent.gameObject.SetActive(false);
+        else dpBar.gameObject.SetActive(false);
         hpImage.size = new Vector2((float)stat.HP / stat.MaxHP * 2, 2);
         return false;
     }

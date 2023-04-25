@@ -33,11 +33,11 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         IsBatchMode = true;
+        cameraMove = FindObjectOfType<CameraMove>();
         SummonPlayers();
         attackBtn = actSellect.transform.GetChild(1).gameObject;
         skilCoolImage = actSellect.transform.GetChild(2).GetChild(1).gameObject;
         skillCoolText = skilCoolImage.GetComponentInChildren<TextMeshProUGUI>();
-        cameraMove = FindObjectOfType<CameraMove>();
     }
 
     //private void SetEnemyList()
@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < ArInventoryManager.Instance.InvenList.Count; i++)
         {
             var player = Instantiate(ArInventoryManager.Instance.InvenList[i].ArData, null);
+            //charactorDirection.Init(player);
             var quickSlot = Instantiate(pf_QuickSlot, batchHolderTrs);
             quickSlot.Connect(player);
         }

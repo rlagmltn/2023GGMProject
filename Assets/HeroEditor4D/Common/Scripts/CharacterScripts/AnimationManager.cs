@@ -11,7 +11,7 @@ namespace Assets.HeroEditor4D.Common.Scripts.CharacterScripts
 	/// </summary>
 	public class AnimationManager : MonoBehaviour
 	{
-		public Character4D Character;
+		public Character Character;
 		public Animator Animator;
 
         public bool IsAction
@@ -20,10 +20,15 @@ namespace Assets.HeroEditor4D.Common.Scripts.CharacterScripts
             set => Animator.SetBool("Action", value);
         }
 
-		/// <summary>
-		/// Set animation parameter State that controls transition.
-		/// </summary>
-		public void SetState(CharacterState state)
+        private void Awake()
+        {
+			Character = transform.Find("Character").GetComponent<Character>();
+        }
+
+        /// <summary>
+        /// Set animation parameter State that controls transition.
+        /// </summary>
+        public void SetState(CharacterState state)
 		{
 			Animator.SetInteger("State", (int) state);
 		}
@@ -168,15 +173,12 @@ namespace Assets.HeroEditor4D.Common.Scripts.CharacterScripts
             Animator.SetTrigger("Fire");
             IsAction = true;
 
-            if (Character.Parts[0].PrimaryWeapon != null)
+            if (Character.PrimaryWeapon != null)
             {
-                var loaded = Character.Character.CompositeWeapon.Single(i => i.name == "Gun");
-                var empty = Character.Character.CompositeWeapon.Single(i => i.name == "GunEmpty");
+                var loaded = Character.CompositeWeapon.Single(i => i.name == "Gun");
+                var empty = Character.CompositeWeapon.Single(i => i.name == "GunEmpty");
 
-                foreach (var part in Character.Parts)
-                {
-                    part.PrimaryWeaponRenderer.sprite = part.PrimaryWeaponRenderer.sprite == loaded ? empty : loaded;
-                }
+                Character.PrimaryWeaponRenderer.sprite = Character.PrimaryWeaponRenderer.sprite == loaded ? empty : loaded;
             }
 		}
 
