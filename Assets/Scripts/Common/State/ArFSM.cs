@@ -6,10 +6,13 @@ public class ArFSM : MonoBehaviour
 {
     protected StateMachine<ArFSM> fsmManager;
     public StateMachine<ArFSM> FsmManager => fsmManager;
+    
     protected List<Ar> arList = new List<Ar>();
     [HideInInspector] public bool turnFlag = false;
     protected Enemy enemy;
     protected CameraMove cameraMove;
+
+    protected bool turnSkip = false;
 
     protected virtual void Start()
     {
@@ -65,7 +68,15 @@ public class ArFSM : MonoBehaviour
     {
         cameraMove.MovetoTarget(transform);
         GetComponent<Enemy>().PassiveCoolDown();
-        Invoke("ChangeTurnFlag", 1.5f);
+        if(turnSkip)
+        {
+            turnSkip = false;
+            TurnManager.Instance.UseTurn();
+        }
+        else
+        {
+            Invoke("ChangeTurnFlag", 1.5f);
+        }
     }
 
     public virtual void ChangeTurnFlag()
@@ -85,6 +96,11 @@ public class ArFSM : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = vel;
         transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
         enemy.isMove = true;
-        StopCoroutine("MoveAr");
+        
+    }
+
+    public void SetTurnSkip()
+    {
+        turnSkip = true;
     }
 }
