@@ -47,6 +47,8 @@ public class CameraMove : MonoBehaviour
 
     private PlayerController playerController;
 
+    public float OrthographicSize { get { return cinemachineCam.m_Lens.OrthographicSize; } }
+
     private void Start()
     {
         orthographicSize = cinemachineCam.m_Lens.OrthographicSize;
