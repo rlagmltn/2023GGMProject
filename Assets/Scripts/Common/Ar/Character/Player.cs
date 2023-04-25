@@ -31,6 +31,8 @@ public class Player : Ar
     private SpriteRenderer skillRange;
     protected Collider2D skillCollider;
 
+    public List<ItemInfo> ItemInfos;
+
     protected PlayerController playerController;
 
     [SerializeField] ItemSO[] itemSlots = new ItemSO[3];
@@ -58,6 +60,14 @@ public class Player : Ar
         playerController = FindObjectOfType<PlayerController>();
         DisableRanges();
 
+        for (int num = 0; num < itemSlots.Length; num++)
+        {
+            if (so.E_Item.itmeSO[num] == null) continue;
+            itemSlots[num] = so.E_Item.itmeSO[num];
+            ItemInfo tempInfo = Instantiate(so.E_Item.itmeSO[num].info, this.transform);
+            ItemInfos.Add(tempInfo);
+        }
+
         MouseUp.AddListener(() => { isMove = true; });
     
         StatReset();
@@ -80,12 +90,62 @@ public class Player : Ar
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
 
-        foreach(ItemSO item in itemSlots)
-        {
-            item?.Armed(this);
-        }
-
+        Armed();
         base.StatReset();
+    }
+
+    void Armed()
+    {
+        int infoNum = 0;
+        for (int num = 0; num < ItemInfos.Count; num++)
+        {
+            if (itemSlots[num] == null) continue;
+
+            stat += itemSlots[num].stat;
+            skillCooltime -= itemSlots[num].SkillCoolDown; //이거 언암드에도 해줘야함
+            switch (itemSlots[num].itemPassiveType)
+            {
+                case ItemPassiveType.BeforeCrash:
+                    BeforeCrash.AddListener(ItemInfos[infoNum].Passive);
+                    break;
+                case ItemPassiveType.AfterCrash:
+                    AfterCrash.AddListener(ItemInfos[infoNum].Passive);
+                    break;
+                case ItemPassiveType.BeforeAttack:
+                    BeforeAttack.AddListener(ItemInfos[infoNum].Passive);
+                    break;
+                case ItemPassiveType.AfterAttack:
+                    AfterAttack.AddListener(ItemInfos[infoNum].Passive);
+                    break;
+                case ItemPassiveType.BeforeDefence:
+                    BeforeDefence.AddListener(ItemInfos[infoNum].Passive);
+                    break;
+                case ItemPassiveType.AfterDefence:
+                    AfterDefence.AddListener(ItemInfos[infoNum].Passive);
+                    break;
+                case ItemPassiveType.AfterMove:
+                    AfterMove.AddListener(ItemInfos[infoNum].Passive);
+                    break;
+                case ItemPassiveType.OnOutDie:
+                    OnOutDie.AddListener(ItemInfos[infoNum].Passive);
+                    break;
+                case ItemPassiveType.OnBattleDie:
+                    OnBattleDie.AddListener(ItemInfos[infoNum].Passive);
+                    break;
+                case ItemPassiveType.MouseUp:
+                    MouseUp.AddListener(ItemInfos[infoNum].Passive);
+                    break;
+                case ItemPassiveType.Alway:
+
+
+                    break;
+                default:
+                    Debug.LogError("아이템 타입이 정해지지 않았습니다!");
+                    break;
+            }
+            ItemInfos[infoNum].GetPlayer(this);
+            infoNum++;
+        }
     }
 
     protected override void FixedUpdate()

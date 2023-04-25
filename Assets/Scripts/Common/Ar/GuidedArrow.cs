@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class GuidedArrow : Arrow
 {
+    [SerializeField] private int CanDistance = 6;
+
     private Player ThisCharacter;
     private float CharacterDistance;
 
+    private Vector2 StartPos;
+
     private void Start()
     {
+        StartPos = transform.position;
         CharacterDistance = 100f;
         GetNearCharacter();
     }
 
     protected override void Update()
     {
+        if(Vector2.Distance(StartPos, transform.position) > CanDistance * 6) Destroy(gameObject);
         transform.Translate(Vector2.right * GetBullet().speed * Time.deltaTime);
     }
 

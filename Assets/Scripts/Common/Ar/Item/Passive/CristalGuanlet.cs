@@ -2,37 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MiracleBranch : ItemInfo
+public class CristalGuanlet : ItemInfo
 {
-    [SerializeField] GuidedArrow arrow;
-
+    [SerializeField] private int triggerPercent;
     private Transform nearEnemy;
-    private float Distance;
-    private float deg;
-    Vector3 targetPos;
 
-    public override void Passive()
+    public override void Passive() //애프터 크러쉬에 넣을것
     {
-        StartCoroutine(Shoot_Croutine());
+        
     }
 
-    private IEnumerator Shoot_Croutine()
+    void StopEnemy_Random()
     {
         GetNearEnemy();
-        Shoot();
-        yield return new WaitForSeconds(0.1f);
-        GetNearEnemy();
-        Shoot();
-    }
-
-    void Shoot()
-    {
-        var _bullet = Instantiate(arrow, player.transform.position, Quaternion.Euler(new Vector3(0,0,deg)));
+        int Rnum = Random.Range(0, 101);
+        if (Rnum > triggerPercent) return;
+        nearEnemy.GetComponent<ArFSM>();
     }
 
     void GetNearEnemy()
     {
-        Distance = 100000;
+        float Distance = 100000;
         Collider2D[] hit = Physics2D.OverlapCircleAll(player.transform.position, 10000);
 
         if (hit.Length <= 0) return;
@@ -46,8 +36,5 @@ public class MiracleBranch : ItemInfo
             Distance = Vector2.Distance(transform.position, hit[num].transform.position);
             nearEnemy = hit[num].transform;
         }
-
-        targetPos = (nearEnemy.position - transform.position).normalized;
-        deg = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
     }
 }

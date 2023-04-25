@@ -16520,6 +16520,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stage_1
       objectReference: {fileID: 0}
+    - target: {fileID: 6942653577303563084, guid: 3d5fb0b21bd40d049b4f8647d06d40fe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942653577428032713, guid: 3d5fb0b21bd40d049b4f8647d06d40fe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942653578379091562, guid: 3d5fb0b21bd40d049b4f8647d06d40fe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942653579112241412, guid: 3d5fb0b21bd40d049b4f8647d06d40fe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2097033240732429196, guid: 3d5fb0b21bd40d049b4f8647d06d40fe, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3d5fb0b21bd40d049b4f8647d06d40fe, type: 3}
@@ -21984,9 +22000,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BindingMode: 1
   m_FollowOffset: {x: 0, y: 0, z: -10}
-  m_XDamping: 0.5
-  m_YDamping: 0.5
-  m_ZDamping: 0.5
+  m_XDamping: 1
+  m_YDamping: 1
+  m_ZDamping: 1
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
