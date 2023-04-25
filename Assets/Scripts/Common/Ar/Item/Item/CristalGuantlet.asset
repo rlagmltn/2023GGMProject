@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd6096bb90998d0469d40c07acdda1e3, type: 3}
-  m_Name: MiracleBranch
+  m_Name: CristalGuantlet
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: 6f464aca7259d0f4f8209e1f5c296612, type: 3}
-  itemName: "\uB9C8\uBC95\uC758 \uB098\uBB47\uAC00\uC9C0"
+  itemIcon: {fileID: 21300000, guid: c8d966739c7e65947964aa4035df3cc2, type: 3}
+  itemName: "\uD06C\uB9AC\uC2A4\uD0C8 \uAC74\uD2C0\uB9BF"
   itemPrice: 0
   stat:
     MaxHP: 0
     HP: 0
     MaxSP: 0
-    SP: 0
+    SP: 1
     ATK: 0
     SATK: 0
-    CriPer: 2
+    CriPer: 0
     CriDmg: 0
     WEIGHT: 0
   SkillCoolDown: 0
-  itemPassiveType: 10
-  itemExplain: "\uC5D8\uD504\uC758 \uC232\uC5D0\uC11C \uC8FC\uC6B4 \uBE5B\uC774\uB098\uB294
-    \uC2E0\uBE44\uB85C\uC6B4 \uB098\uBB47\uAC00\uC9C0\uC774\uB2E4."
-  info: {fileID: 3692405128401988840, guid: bf80e2f45c06fec4aa81473abae3a25b, type: 3}
+  itemPassiveType: 2
+  itemExplain: "\uD558\uB298\uC0C9\uC758 \uC544\uB984\uB2E4\uC6B4 \uD06C\uB9AC\uC2A4\uD0C8\uB85C
+    \uB4A4\uB36E\uC5EC \uC788\uB294 \uAC74\uD2C0\uB9BF\uC774\uB2E4."
+  info: {fileID: -4248153018553944703, guid: b78f8a872ff5e3e4ab6763621c30a280, type: 3}
   armedPlayer: {fileID: 0}
