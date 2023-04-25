@@ -9,7 +9,7 @@ public class CristalGuanlet : ItemInfo
 
     public override void Passive() //애프터 크러쉬에 넣을것
     {
-        
+        StopEnemy_Random();
     }
 
     void StopEnemy_Random()
@@ -17,7 +17,7 @@ public class CristalGuanlet : ItemInfo
         GetNearEnemy();
         int Rnum = Random.Range(0, 101);
         if (Rnum > triggerPercent) return;
-        nearEnemy.GetComponent<ArFSM>();
+        nearEnemy.GetComponent<ArFSM>().SetTurnSkip();
     }
 
     void GetNearEnemy()
