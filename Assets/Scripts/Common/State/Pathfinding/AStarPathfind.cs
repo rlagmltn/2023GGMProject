@@ -15,26 +15,26 @@ public class AStarPathfind
         // 맨해튼 거리
         var dx = Mathf.Abs(a.xPos - b.xPos);
         var dy = Mathf.Abs(a.yPos - b.yPos);
-
+    
         if (!diagonal) return 1 * (dx + dy);
         // 체비쇼프 거리
         return Mathf.Max(Mathf.Abs(a.xPos - b.xPos), Mathf.Abs(a.yPos - b.yPos));
     }
-
+    
     public List<AStarNode> CreatePath(AStarNode start, AStarNode end, bool diagonal = false)
     {
         if (start == null || end == null) return null;
         grid.ResetNode();
-
+    
         List<AStarNode> openSet = new List<AStarNode>();
         List<AStarNode> closedSet = new List<AStarNode>();
-
+    
         AStarNode startNode = start;
         AStarNode endNode = end;
         startNode.gCost = 0;
         startNode.hCost = Heuristic(start, end);
         openSet.Add(startNode);
-
+    
         while (openSet.Count > 0)
         {
             // Open Set 내의 노드 중 가장 거리가 짧은 노드를 찾는다.
@@ -47,7 +47,7 @@ public class AStarPathfind
                 }
             }
             AStarNode currentNode = openSet[shortest];
-
+    
             // 목적지 도착
             if (currentNode == endNode)
             {
@@ -62,13 +62,17 @@ public class AStarPathfind
                     tempNode = tempNode.parent;
                 }
                 path.Reverse();
+                foreach (Vector2 vec in CreateDir(path))
+                {
+                    Debug.Log(vec);
+                }
                 return path;
             }
-
+    
             // 리스트를 업데이트한다.
             openSet.Remove(currentNode);
             closedSet.Add(currentNode);
-
+    
             // 다음 노드를 방문한다.
             var neighbors = grid.GetNeighborNodes(currentNode, diagonal);
             for (int i = 0; i < neighbors.Count; i++)
@@ -87,13 +91,29 @@ public class AStarPathfind
         }
         return null;
     }
-
+    
     public List<AStarNode> CreatePath(Vector3Int start, Vector3Int end, bool diagonal)
     {
         AStarNode startNode = grid.GetNodeFromWorld(start);
         AStarNode endNode = grid.GetNodeFromWorld(end);
-
+    
         var ret = CreatePath(startNode, endNode, diagonal);
         return ret;
     }
+
+    private List<Vector2> CreateDir(List<AStarNode> path)
+    {
+        List<Vector2> dir = new List<Vector2>();
+
+        for (int i = 0; i<path.Count - 1; i++)
+        {
+            float xDif = path[i+1].xPos - path[i].xPos;
+            float yDif = path[i+1].yPos - path[i].yPos;
+
+            dir.Add(new Vector2(xDif, yDif));
+        }
+
+        return dir;
+    }
+
 }

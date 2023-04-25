@@ -13,12 +13,24 @@ public class StateMove : State<ArFSM>
     
     public override void OnStart()
     {
-        Vector2 angle = Vector3.Normalize(stateMachineClass.SearchAr().position - stateMachineClass.transform.position);
+        Vector2 myPos = stateMachineClass.transform.position;
+        Vector2 targetPos = stateMachineClass.SearchAr().position;
+        RaycastHit2D hit = Physics2D.Raycast(myPos, targetPos - myPos, Vector2.Distance(myPos, targetPos) - 1f);
 
-        stateMachineClass.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
-        float rangeAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
-        stateMachineClass.transform.GetChild(0).rotation = Quaternion.Euler(new Vector3(0, 0, rangeAngle));
-        stateMachineClass.StartCoroutine("MoveAr", angle * enemy.GetPower());
+        if(hit.collider == null)
+        {
+            Vector2 angle = Vector3.Normalize(targetPos - myPos);
+
+            stateMachineClass.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+            float rangeAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
+            stateMachineClass.transform.GetChild(0).rotation = Quaternion.Euler(new Vector3(0, 0, rangeAngle));
+            stateMachineClass.StartCoroutine("MoveAr", angle * enemy.GetPower());
+        }
+        else
+        {
+            //A*
+        }
+        
 
         stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
     }
