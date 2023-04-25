@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 114391165987986440}
   - component: {fileID: 95412966663271060}
   - component: {fileID: 210585855654267702}
-  - component: {fileID: 1169356337669318558}
+  - component: {fileID: 12}
   m_Layer: 0
-  m_Name: test
+  m_Name: Knight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1063387080856860}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -56,10 +56,7 @@ MonoBehaviour:
   Parts:
   - {fileID: 1262752340133911472}
   Shadows:
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 8918425206650489872}
-  - {fileID: 0}
   Animator: {fileID: 95412966663271060}
   AnimationManager: {fileID: 114299399650273240}
   LayerManager: {fileID: 114391165987986440}
@@ -76,7 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a803be54150222e44893e7f7e2c14849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Character: {fileID: 114216053546988558}
+  Character: {fileID: 1262752340133911472}
   Animator: {fileID: 95412966663271060}
 --- !u!114 &114421965729107498
 MonoBehaviour:
@@ -177,7 +174,7 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 200
---- !u!58 &1169356337669318558
+--- !u!58 &12
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,7 +189,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 1}
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 0.8
 --- !u!1 &1481269329147902
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,7 +465,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 45
-  m_Sprite: {fileID: 21300000, guid: 74c1e0e96bf63bc4c88b8eb728477ef9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 62ea53872a31d5a4693da469e613b675, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -864,7 +861,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 465
-  m_Sprite: {fileID: 21300002, guid: 98f733767f5bff5488383801dbe428bd, type: 3}
+  m_Sprite: {fileID: 21300002, guid: a8c97b5de1d6f43488f9360e97e148e3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1169,7 +1166,7 @@ SpriteRenderer:
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.28, y: 2.56}
+  m_Size: {x: 0.64, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -1367,7 +1364,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 130
-  m_Sprite: {fileID: 21300052, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
+  m_Sprite: {fileID: 21300086, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1733,7 +1730,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 450
-  m_Sprite: {fileID: 21300082, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
+  m_Sprite: {fileID: 21300098, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1932,7 +1929,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 265
-  m_Sprite: {fileID: 21300038, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
+  m_Sprite: {fileID: 21300082, guid: 1418ebf56f53b374ea541e95d7437f4a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2031,7 +2028,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300050, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
+  m_Sprite: {fileID: 21300084, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2394,7 +2391,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 105
-  m_Sprite: {fileID: 21300054, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
+  m_Sprite: {fileID: 21300088, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2644,7 +2641,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4612158018447569776}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.75, z: 0}
+  m_LocalPosition: {x: 0, y: 0.7687921, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2734,7 +2731,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 490
-  m_Sprite: {fileID: 21300002, guid: 98f733767f5bff5488383801dbe428bd, type: 3}
+  m_Sprite: {fileID: 21300002, guid: a8c97b5de1d6f43488f9360e97e148e3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 1
   m_FlipY: 0
@@ -3536,7 +3533,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 55
-  m_Sprite: {fileID: 21300084, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
+  m_Sprite: {fileID: 21300100, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3636,7 +3633,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 230
   m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5882353, g: 0.19607843, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3734,7 +3731,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 30
-  m_Sprite: {fileID: 21300016, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
+  m_Sprite: {fileID: 21300096, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3833,7 +3830,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 435
-  m_Sprite: {fileID: 21300010, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
+  m_Sprite: {fileID: 21300094, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3994,7 +3991,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 405
-  m_Sprite: {fileID: 21300058, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
+  m_Sprite: {fileID: 21300092, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4072,7 +4069,7 @@ MonoBehaviour:
   - {fileID: 21300002, guid: 17d8c1b68153975408b54cbd158b6ce3, type: 3}
   - {fileID: 21300000, guid: 17d8c1b68153975408b54cbd158b6ce3, type: 3}
   - {fileID: 21300004, guid: 17d8c1b68153975408b54cbd158b6ce3, type: 3}
-  Hair: {fileID: 21300006, guid: 72aa7dbf531a6314080711e386cb4984, type: 3}
+  Hair: {fileID: 21300006, guid: 181898c4efb402c47945341aab44277f, type: 3}
   HairCropped: {fileID: 21300006, guid: 72aa7dbf531a6314080711e386cb4984, type: 3}
   Beard: {fileID: 0}
   Body:
@@ -4129,50 +4126,49 @@ MonoBehaviour:
     Eyes: {fileID: 21300004, guid: 9a749df01cafb4b4bb058b787309f261, type: 3}
     EyesColor: {r: 0, g: 0.78431374, b: 1, a: 1}
     Mouth: {fileID: 21300004, guid: 5c190d61cd55f964ea24dbd0def87104, type: 3}
-  Helmet: {fileID: 21300038, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  PrimaryWeapon: {fileID: 21300000, guid: 74c1e0e96bf63bc4c88b8eb728477ef9, type: 3}
+  Helmet: {fileID: 21300082, guid: 1418ebf56f53b374ea541e95d7437f4a, type: 3}
+  PrimaryWeapon: {fileID: 21300000, guid: 62ea53872a31d5a4693da469e613b675, type: 3}
   SecondaryWeapon: {fileID: 0}
   Cape: {fileID: 0}
   Backpack: {fileID: 0}
   Shield:
-  - {fileID: 21300000, guid: 98f733767f5bff5488383801dbe428bd, type: 3}
-  - {fileID: 21300002, guid: 98f733767f5bff5488383801dbe428bd, type: 3}
+  - {fileID: 21300000, guid: a8c97b5de1d6f43488f9360e97e148e3, type: 3}
+  - {fileID: 21300002, guid: a8c97b5de1d6f43488f9360e97e148e3, type: 3}
   Armor:
-  - {fileID: 21300040, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300044, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300042, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300074, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300020, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300072, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300008, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300036, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300046, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300048, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300030, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300026, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300028, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300006, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300068, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300024, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300060, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300032, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300018, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300070, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300058, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300050, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300052, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300084, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300010, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300016, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300038, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300056, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300054, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
-  - {fileID: 21300082, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
+  - {fileID: 21300040, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300044, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300042, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300074, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300020, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300072, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300008, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300036, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300046, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300048, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300030, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300026, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300028, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300006, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300068, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300024, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300060, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300032, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300018, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300070, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300092, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300084, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300086, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300100, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300094, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300096, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300082, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300090, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300088, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
+  - {fileID: 21300098, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
   CompositeWeapon: []
   Makeup: {fileID: 0}
   Mask: {fileID: 0}
-  Earrings:
-  - {fileID: 0}
+  Earrings: []
   BodyRenderers:
   - {fileID: 8737215627638841346}
   - {fileID: 4426712858992861818}
@@ -4472,7 +4468,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b67e1036325c49a4a378ba14ec243c30, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4494,7 +4490,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 245
   m_Sprite: {fileID: 21300006, guid: 72aa7dbf531a6314080711e386cb4984, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5882353, g: 0.19607843, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4691,7 +4687,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 70
-  m_Sprite: {fileID: 21300056, guid: 932eb8d5023602e45bd0f3d4e1206516, type: 3}
+  m_Sprite: {fileID: 21300090, guid: 1badcd1373e54d246a620aad7342d023, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4923,7 +4919,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8937235036692091762}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
