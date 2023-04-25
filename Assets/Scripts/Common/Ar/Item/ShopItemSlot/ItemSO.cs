@@ -9,60 +9,14 @@ public class ItemSO : ScriptableObject
     public string itemName;
     public int itemPrice;
     public Stat stat;
+    public int SkillCoolDown;
+
     public ItemPassiveType itemPassiveType;
     [TextArea(15, 20)]
     public string itemExplain;
 
     public ItemInfo info;
-    private Player armedPlayer;
-
-
-    public void Armed(Player player)
-    {
-        player.stat += stat;
-        switch(itemPassiveType)
-        {
-            case ItemPassiveType.BeforeCrash:
-                player.BeforeCrash.AddListener(info.Passive);
-                break;
-            case ItemPassiveType.AfterCrash:
-                player.AfterCrash.AddListener(info.Passive);
-                break;
-            case ItemPassiveType.BeforeAttack:
-                player.BeforeAttack.AddListener(info.Passive);
-                break;
-            case ItemPassiveType.AfterAttack:
-                player.AfterAttack.AddListener(info.Passive);
-                break;
-            case ItemPassiveType.BeforeDefence:
-                player.BeforeDefence.AddListener(info.Passive);
-                break;
-            case ItemPassiveType.AfterDefence:
-                player.AfterDefence.AddListener(info.Passive);
-                break;
-            case ItemPassiveType.AfterMove:
-                player.AfterMove.AddListener(info.Passive);
-                break;
-            case ItemPassiveType.OnOutDie:
-                player.OnOutDie.AddListener(info.Passive);
-                break;
-            case ItemPassiveType.OnBattleDie:
-                player.OnBattleDie.AddListener(info.Passive);
-                break;
-            case ItemPassiveType.MouseUp:
-                player.MouseUp.AddListener(info.Passive);
-                break;
-            case ItemPassiveType.Alway:
-                
-
-                break;
-            default:
-                Debug.LogError("아이템 타입이 정해지지 않았습니다!");
-                break;
-        }
-        armedPlayer = player;
-        info.GetPlayer(armedPlayer);
-    }
+    public Player armedPlayer;
 
     public void UnArmed()
     {
