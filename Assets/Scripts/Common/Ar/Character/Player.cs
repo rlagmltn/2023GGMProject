@@ -31,7 +31,11 @@ public class Player : Ar
     private SpriteRenderer skillRange;
     protected Collider2D skillCollider;
 
-    public List<ItemInfo> ItemInfos;
+    public List<ItemInfo> ItemInfos; //지워야함
+
+    public List<TypeAndInfo> TAI;
+
+    public Dictionary<ItemPassiveType, ItemInfo> ItemInfoDic = new Dictionary<ItemPassiveType, ItemInfo>(); //테스트용
 
     protected PlayerController playerController;
 
@@ -64,8 +68,14 @@ public class Player : Ar
         {
             if (so.E_Item.itmeSO[num] == null) continue;
             itemSlots[num] = so.E_Item.itmeSO[num];
-            ItemInfo tempInfo = Instantiate(so.E_Item.itmeSO[num].info, this.transform);
-            ItemInfos.Add(tempInfo);
+
+            for (int j = 0; j < so.E_Item.itmeSO[num].TAI.Count; j++)
+            {
+                TypeAndInfo _TAI = new TypeAndInfo();
+                _TAI.itemPassiveType = so.E_Item.itmeSO[num].TAI[j].itemPassiveType;
+                _TAI.Info = Instantiate(so.E_Item.itmeSO[num].TAI[j].Info, this.transform);
+                TAI.Add(_TAI);
+            }
         }
 
         MouseUp.AddListener(() => { isMove = true; });
@@ -96,44 +106,47 @@ public class Player : Ar
 
     void Armed()
     {
-        int infoNum = 0;
-        for (int num = 0; num < ItemInfos.Count; num++)
+
+        for (int num = 0; num < itemSlots.Length; num++)
         {
             if (itemSlots[num] == null) continue;
-
             stat += itemSlots[num].stat;
             skillCooltime -= itemSlots[num].SkillCoolDown; //이거 언암드에도 해줘야함
-            switch (itemSlots[num].itemPassiveType)
+        }
+
+        for(int num = 0; num < TAI.Count; num++)
+        {
+            switch(TAI[num].itemPassiveType)
             {
                 case ItemPassiveType.BeforeCrash:
-                    BeforeCrash.AddListener(ItemInfos[infoNum].Passive);
+                    BeforeCrash.AddListener(TAI[num].Info.Passive);
                     break;
                 case ItemPassiveType.AfterCrash:
-                    AfterCrash.AddListener(ItemInfos[infoNum].Passive);
+                    AfterCrash.AddListener(TAI[num].Info.Passive);
                     break;
                 case ItemPassiveType.BeforeAttack:
-                    BeforeAttack.AddListener(ItemInfos[infoNum].Passive);
+                    BeforeAttack.AddListener(TAI[num].Info.Passive);
                     break;
                 case ItemPassiveType.AfterAttack:
-                    AfterAttack.AddListener(ItemInfos[infoNum].Passive);
+                    AfterAttack.AddListener(TAI[num].Info.Passive);
                     break;
                 case ItemPassiveType.BeforeDefence:
-                    BeforeDefence.AddListener(ItemInfos[infoNum].Passive);
+                    BeforeDefence.AddListener(TAI[num].Info.Passive);
                     break;
                 case ItemPassiveType.AfterDefence:
-                    AfterDefence.AddListener(ItemInfos[infoNum].Passive);
+                    AfterDefence.AddListener(TAI[num].Info.Passive);
                     break;
                 case ItemPassiveType.AfterMove:
-                    AfterMove.AddListener(ItemInfos[infoNum].Passive);
+                    AfterMove.AddListener(TAI[num].Info.Passive);
                     break;
                 case ItemPassiveType.OnOutDie:
-                    OnOutDie.AddListener(ItemInfos[infoNum].Passive);
+                    OnOutDie.AddListener(TAI[num].Info.Passive);
                     break;
                 case ItemPassiveType.OnBattleDie:
-                    OnBattleDie.AddListener(ItemInfos[infoNum].Passive);
+                    OnBattleDie.AddListener(TAI[num].Info.Passive);
                     break;
                 case ItemPassiveType.MouseUp:
-                    MouseUp.AddListener(ItemInfos[infoNum].Passive);
+                    MouseUp.AddListener(TAI[num].Info.Passive);
                     break;
                 case ItemPassiveType.Alway:
 
@@ -143,8 +156,7 @@ public class Player : Ar
                     Debug.LogError("아이템 타입이 정해지지 않았습니다!");
                     break;
             }
-            ItemInfos[infoNum].GetPlayer(this);
-            infoNum++;
+            TAI[num].Info.GetPlayer(this);
         }
     }
 
