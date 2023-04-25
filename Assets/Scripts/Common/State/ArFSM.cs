@@ -70,8 +70,7 @@ public class ArFSM : MonoBehaviour
         GetComponent<Enemy>().PassiveCoolDown();
         if(turnSkip)
         {
-            turnSkip = false;
-            TurnManager.Instance.UseTurn();
+            Invoke("TurnSkip", 1.5f);
         }
         else
         {
@@ -102,5 +101,12 @@ public class ArFSM : MonoBehaviour
     public void SetTurnSkip()
     {
         turnSkip = true;
+    }
+
+    private void TurnSkip()
+    {
+        turnSkip = false;
+        enemy.isMove = true;
+        TurnManager.Instance.UseTurn();
     }
 }
