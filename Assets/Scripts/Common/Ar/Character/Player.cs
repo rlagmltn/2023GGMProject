@@ -203,6 +203,8 @@ public class Player : Ar
         {
             Collide.enabled = false;
             slot.background.color = Color.yellow;
+            cameraMove.isBatchmode = true;
+            cameraMove.isDragmode = false;
         }
         else if(!TurnManager.Instance.IsPlayerTurn || isDead || TurnManager.Instance.SomeoneIsMoving || TurnManager.Instance.IsUsedAllTurn()) return;
         playerController?.SellectPlayer(slot);

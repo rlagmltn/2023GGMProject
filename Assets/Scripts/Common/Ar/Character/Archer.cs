@@ -28,7 +28,7 @@ public class Archer : Player
     protected override void Attack(Vector2 angle)
     {
         base.Attack(angle);
-        StartCoroutine(WaitSec(1f));
+        StartCoroutine(WaitSec(2f));
         this.angle = angle;
     }
 
@@ -41,7 +41,7 @@ public class Archer : Player
     {
         base.Skill(angle);
         AnimSkillStart();
-        StartCoroutine(WaitSec(2.5f));
+        StartCoroutine(WaitSec(3.5f));
         this.angle = angle;
     }
 
