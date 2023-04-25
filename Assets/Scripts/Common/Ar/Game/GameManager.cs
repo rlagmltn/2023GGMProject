@@ -65,7 +65,7 @@ public class GameManager : MonoSingleton<GameManager>
     private IEnumerator GameOver()
     {
         Time.timeScale = 0.3f;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
         Time.timeScale = 1f;
         MGUI.Instance.GameOver();
     }

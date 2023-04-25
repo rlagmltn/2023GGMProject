@@ -28,11 +28,12 @@ public class Assassin : Player
     {
         base.Skill(angle);
         this.angle = angle;
-        AnimSkillStart();
+        animationManager.Throw();
     }
 
-    public override void AnimTimingSkill()
+    public override IEnumerator AnimTimingSkill()
     {
+        while (isSkill) yield return null;
         Shoot(angle);
     }
 

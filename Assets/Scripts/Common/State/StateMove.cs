@@ -16,6 +16,7 @@ public class StateMove : State<ArFSM>
         Vector2 myPos = stateMachineClass.transform.position;
         Vector2 targetPos = stateMachineClass.SearchAr().position;
         RaycastHit2D hit = Physics2D.Raycast(myPos, targetPos - myPos, Vector2.Distance(myPos, targetPos) - 1f);
+        
 
         if(hit.collider == null)
         {
@@ -29,6 +30,8 @@ public class StateMove : State<ArFSM>
         else
         {
             //A*
+            stateMachineClass.StartCoroutine("MoveAr", Vector2.zero);
+            
         }
         
 

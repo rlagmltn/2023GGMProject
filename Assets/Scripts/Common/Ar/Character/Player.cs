@@ -38,6 +38,8 @@ public class Player : Ar
     public Dictionary<ItemPassiveType, ItemInfo> ItemInfoDic = new Dictionary<ItemPassiveType, ItemInfo>(); //테스트용
 
     protected PlayerController playerController;
+    protected bool isAttack = false;
+    protected bool isSkill = false;
 
     [SerializeField] ItemSO[] itemSlots = new ItemSO[3];
 
@@ -49,7 +51,6 @@ public class Player : Ar
     public Player(ArSO arSO)
     {
         gameObject.name = arSO.characterInfo.Name;
-        sprite.sprite = arSO.characterInfo.Image;
     }
 
     protected override void Start()
@@ -233,15 +234,24 @@ public class Player : Ar
 
     protected virtual void Attack(Vector2 angle) 
     {
-        AnimAttackStart();
+        isAttack = true;
+        animationManager.Attack();
     }
-    public virtual void AnimTimingAttack() { }
+    public virtual IEnumerator AnimTimingAttack() { yield return null; }
 
     protected virtual void Skill(Vector2 angle)
     {
+        isSkill = true;
         currentCooltime = skillCooltime;
+        StartCoroutine(AnimTimingSkill());
     }
-    public virtual void AnimTimingSkill() { }
+    public virtual IEnumerator AnimTimingSkill() { yield return null; }
+
+    public void AnimFinish()
+    {
+        isAttack = false;
+        isSkill = false;
+    }
 
     public void DisableRanges()
     {
