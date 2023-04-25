@@ -41,8 +41,10 @@ namespace Assets.HeroEditor4D.Common.Scripts.CharacterScripts
 			switch (Character.WeaponType)
 			{
 				case WeaponType.Melee1H:
-				case WeaponType.Melee2H:
 					Slash1H();
+					break;
+				case WeaponType.Melee2H:
+					Slash2H();
 					break;
 				case WeaponType.Bow:
 					ShotBow();
@@ -160,6 +162,12 @@ namespace Assets.HeroEditor4D.Common.Scripts.CharacterScripts
         {
             Animator.SetTrigger("Fire");
             IsAction = true;
+        }
+
+		public void Throw()
+        {
+			Animator.SetTrigger("Throw");
+			IsAction = true;
         }
 
 		public void SecondaryShot()

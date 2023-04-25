@@ -1,3 +1,4 @@
+using Assets.HeroEditor4D.Common.Scripts.CharacterScripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,8 +37,8 @@ public class Ar : MonoBehaviour
     [HideInInspector] public UnityEvent OnOutDie;
     [HideInInspector] public UnityEvent OnBattleDie;
 
-    protected SpriteRenderer sprite;
-    private Animator animator;
+    protected Transform character;
+    protected AnimationManager animationManager;
     protected CameraMove cameraMove;
 
     [SerializeField] protected Transform battleTarget;
@@ -51,8 +52,8 @@ public class Ar : MonoBehaviour
         hpImage = hpBar.GetChild(0).GetComponent<SpriteRenderer>();
         dpBar = transform.GetChild(2);
         dpImage = dpBar.GetChild(0).GetComponent<SpriteRenderer>();
-        sprite = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
+        character = transform.GetChild(3);
+        animationManager = GetComponent<AnimationManager>();
         cameraMove = FindObjectOfType<CameraMove>();
 
         AfterCrash.AddListener(InitTImeScale);
@@ -127,8 +128,8 @@ public class Ar : MonoBehaviour
 
     private void Flip()
     {
-        if (rigid.velocity.x < 0) sprite.flipX = true;
-        else if (rigid.velocity.x > 0) sprite.flipX = false;
+        if (rigid.velocity.x < 0) character.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        else if (rigid.velocity.x > 0) character.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
@@ -173,8 +174,6 @@ public class Ar : MonoBehaviour
             }
             else damage = 0;
         }
-
-        StartCoroutine(HitColorChange(Color.red));
         stat.HP -= damage;
         HpMaxCheck();
         return DeadCheck();
@@ -218,19 +217,12 @@ public class Ar : MonoBehaviour
         TurnManager.Instance.SomeoneIsMoving = false;
         GameManager.Instance.ArDead();
         EffectManager.Instance.InstantiateEffect_P(Effect.SUNK, transform.position, Vector2.zero);
-        animator?.SetTrigger("isDead");
+        animationManager.Die();
     }
 
     public void OutDie()
     {
         gameObject.SetActive(false);
-    }
-
-    private IEnumerator HitColorChange(Color color)
-    {
-        sprite.color = color;
-        yield return new WaitForSeconds(0.25f);
-        sprite.color = Color.white;
     }
 
     public void DecreaseSP(int val)
@@ -243,33 +235,8 @@ public class Ar : MonoBehaviour
         TurnManager.Instance.SomeoneIsMoving = false;
     }
 
-    public void AnimAttackStart()
-    {
-        animator?.SetBool("isAttack", true);
-    }
-
-    public void AnimAttackFinish()
-    {
-        animator?.SetBool("isAttack", false);
-    }
-
-    public void AnimSkillStart()
-    {
-        animator?.SetBool("isSkill", true);
-    }
-
-    public void AnimSkillFinish()
-    {
-        animator?.SetBool("isSkill", false);
-    }
-
     public void AnimMoveStart()
     {
-        animator?.SetBool("isMove", true);
-    }
-
-    public void AnimMoveFinish()
-    {
-        animator?.SetBool("isMove", false);
+        animationManager.Attack();
     }
 }

@@ -17,7 +17,7 @@ public class Elementalist : Player
     protected override void Skill(Vector2 angle)
     {
         this.angle = angle;
-        AnimSkillStart();
+        animationManager.Throw();
     }
 
     protected override void Update()
@@ -38,8 +38,9 @@ public class Elementalist : Player
         //세 턴이 지날 때 마다 치명타 확률이 2%씩 증가한다.
     }
 
-    public override void AnimTimingSkill()
+    public override IEnumerator AnimTimingSkill()
     {
+        while (isSkill) yield return null;
         Shoot(angle);
     }
 
