@@ -81,16 +81,20 @@ public class Ar : MonoBehaviour
         {
             Flip();
             lastVelocity = rigid.velocity;
-            RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position, lastVelocity.normalized, lastVelocity.magnitude / 4);
+            Collider2D[] hit = Physics2D.OverlapBoxAll((Vector2)transform.position + lastVelocity/8, new Vector2(1, lastVelocity.magnitude/4), Mathf.Atan2(lastVelocity.y, lastVelocity.x) * Mathf.Rad2Deg);
+                //Physics2D.RaycastAll(transform.position, lastVelocity.normalized, lastVelocity.magnitude / 4);
             Debug.DrawRay(transform.position, lastVelocity / 4, Color.red, 3f);
 
-            if (hit.Length <= 1) return;
-
-            if(hit[1].collider.GetComponent<Ar>()&&hit[1].collider.gameObject!=gameObject)
+            foreach(Collider2D col in hit)
             {
-                battleTarget = hit[1].collider.transform;
-                cameraMove.MovetoTarget(battleTarget);
+                if (col.GetComponent<Ar>() && col.gameObject != gameObject)
+                {
+                    battleTarget = col.transform;
+                    cameraMove.MovetoTarget(battleTarget);
+                    break;
+                }
             }
+
         }
         
         lastVelocity = rigid.velocity;
@@ -110,8 +114,8 @@ public class Ar : MonoBehaviour
             if (distance < slowMagnitude)
             {
                 var amount = distance / slowMagnitude == float.NaN ? 1 : distance / slowMagnitude;
-                cameraMove.TimeFreeze(amount - lastVelocity.magnitude/(pushPower*3));
-                cameraMove.ApplyCameraSize(amount);
+                cameraMove.TimeFreeze(amount - lastVelocity.magnitude/(pushPower*2));
+                cameraMove.ApplyCameraSize(amount * 0.7f);
             }
         }
     }
