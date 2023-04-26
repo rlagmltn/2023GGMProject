@@ -77,7 +77,7 @@ public class Ar : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if (rigid.velocity.normalized != lastVelocity.normalized && rigid.velocity.magnitude != 0)
+        if (rigid.velocity.normalized != lastVelocity.normalized && rigid.velocity.magnitude != 0 && isMove)
         {
             Flip();
             lastVelocity = rigid.velocity;
