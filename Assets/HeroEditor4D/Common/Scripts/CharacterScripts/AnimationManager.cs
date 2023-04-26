@@ -89,10 +89,16 @@ namespace Assets.HeroEditor4D.Common.Scripts.CharacterScripts
             IsAction = true;
 		}
 
-        /// <summary>
-        /// Play Slash1H animation.
-        /// </summary>
-        public void HeavySlash1H()
+		public void Cast()
+		{
+			Animator.SetTrigger("Cast");
+			IsAction = true;
+		}
+
+		/// <summary>
+		/// Play Slash1H animation.
+		/// </summary>
+		public void HeavySlash1H()
         {
             Animator.SetTrigger("HeavySlash1H");
             IsAction = true;
