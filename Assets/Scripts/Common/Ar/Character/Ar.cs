@@ -201,10 +201,10 @@ public class Ar : MonoBehaviour
         if (stat.SP > 0)
         {
             dpBar.gameObject.SetActive(true);
-            dpImage.size = new Vector2((float)stat.SP / stat.MaxSP * 2, 2);
+            dpImage.size = new Vector2((float)stat.SP / stat.MaxSP, 1);
         }
         else dpBar.gameObject.SetActive(false);
-        hpImage.size = new Vector2((float)stat.HP / stat.MaxHP * 2, 2);
+        hpImage.size = new Vector2((float)stat.HP / stat.MaxHP, 1);
         return false;
     }
 

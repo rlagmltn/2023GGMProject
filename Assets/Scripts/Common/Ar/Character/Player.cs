@@ -88,6 +88,7 @@ public class Player : Ar
 
     public override void StatReset()
     {
+        Armed();
         stat.MaxHP = (int)so.surviveStats.MaxHP;
         stat.HP = (int)so.surviveStats.currentHP;
         stat.MaxSP = (int)so.surviveStats.MaxShield;
@@ -100,8 +101,6 @@ public class Player : Ar
         skillCooltime = so.skill.MaxSkillCoolTime;
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
-
-        Armed();
         base.StatReset();
     }
 

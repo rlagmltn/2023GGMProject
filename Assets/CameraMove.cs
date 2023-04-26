@@ -190,12 +190,12 @@ public class CameraMove : MonoBehaviour
         }
         transform.Translate(dir * moveSpeed * Time.deltaTime);
 
-        if (Input.GetKeyDown(KeyCode.Equals))
+        if (Input.GetKeyDown(KeyCode.Minus))
         {
             orthographicSize = Mathf.Clamp(orthographicSize+1, minOrthographicSize, maxOrthographicSize);
             ApplyCameraSize();
         }
-        else if (Input.GetKeyDown(KeyCode.Minus))
+        else if (Input.GetKeyDown(KeyCode.Equals))
         {
             orthographicSize = Mathf.Clamp(orthographicSize - 1, minOrthographicSize, maxOrthographicSize);
             ApplyCameraSize();
