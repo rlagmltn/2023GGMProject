@@ -32,7 +32,7 @@ public class Archer : Player
         {
             TurnManager.Instance.SomeoneIsMoving = false;
             timeGoing = false;
-            currentCooltime = 0;
+            currentTime = 0;
         }
     }
 
