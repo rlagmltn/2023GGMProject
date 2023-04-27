@@ -21,6 +21,8 @@ public class Player : Ar
     public float Power { get { return power; } }
     public float PushPower { get { return pushPower; } }
 
+    public bool isPaperBirdPlay = false;
+
     public CircleCollider2D Collide { get; set; }
 
     private QuickSlot slot;

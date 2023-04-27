@@ -41,7 +41,7 @@ public class ArInventory_Drag : MonoBehaviour
         isFind = false;
 
         Vector2 MousePosition = GetMousePos();
-        Collider2D[] hit = Physics2D.OverlapBoxAll(MousePosition, new Vector2(1, 1), 0);
+        Collider2D[] hit = Physics2D.OverlapBoxAll(MousePosition, new Vector2(1.75f, 1.75f), 0);
 
         if (hit.Length <= 0) return;
 

@@ -56,7 +56,6 @@ public class ArSOHolder : MonoBehaviour
         //    Ar.isUse = true;
         //    Button_ActiveSelf();
         //}
-
         ArInventorySelecter.Instance.OnlySelectArSO(Ar);
     }
 }
