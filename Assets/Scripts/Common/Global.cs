@@ -39,7 +39,8 @@ public enum Effect
     WALLCRUSH,
     DASH,
     WARRIOR,
-    SUNK
+    SUNK,
+    ElementExplode
 }
 public enum ePrefabs
 {

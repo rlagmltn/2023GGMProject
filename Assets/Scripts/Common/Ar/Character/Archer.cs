@@ -10,6 +10,7 @@ public class Archer : Player
     float maxTime = 1;
     float currentTime = 0;
     bool timeGoing = false;
+    private float range;
 
     private Vector2 angle;
 
@@ -22,6 +23,7 @@ public class Archer : Player
     {
         isRangeCharacter = true;
         base.StatReset();
+        range = arrow.bulletSO.speed * arrow.bulletSO.lifeTime;
     }
 
     protected override void Update()
@@ -33,6 +35,24 @@ public class Archer : Player
             TurnManager.Instance.SomeoneIsMoving = false;
             timeGoing = false;
             currentTime = 0;
+        }
+    }
+
+    public override void Drag(float angle, float dis)
+    {
+        base.Drag(angle, dis);
+
+        var target = Physics2D.RaycastAll(transform.position, attackRange.transform.position - transform.position, range);
+
+        if(target.Length>1 && target[1].collider.CompareTag("Enemy"))
+        {
+            attackRange.size = new Vector2(Vector2.Distance(transform.position, target[1].collider.transform.position)/2, 1);
+            skillRange.size = new Vector2(Vector2.Distance(transform.position, target[1].collider.transform.position)/2, 1);
+        }
+        else
+        {
+            attackRange.size = new Vector2(range / 2, 1);
+            skillRange.size = new Vector2(range / 2, 1);
         }
     }
 
@@ -77,8 +97,8 @@ public class Archer : Player
         var bullet = Instantiate(arrow, transform.position, Quaternion.Euler(0, 0, zAngle-180));
         rigid.velocity = ((angle.normalized * 0.5f) * 25) / (1 + stat.WEIGHT * 0.1f);
         cameraMove.MovetoTarget(bullet.transform);
-        if (angle.x < 0) character.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        else if (angle.x > 0) character.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
+        if (angle.x < 0) character.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
+        else if (angle.x > 0) character.localScale = new Vector3(0.5f, 0.5f, 0.5f);
     }
 
     void WaitSec(float sec)

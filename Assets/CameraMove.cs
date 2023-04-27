@@ -184,9 +184,9 @@ public class CameraMove : MonoBehaviour
         else if(moveMove)
         {
             moveMove = false;
-            camTransposer.m_XDamping = 1;
-            camTransposer.m_YDamping = 1;
-            camTransposer.m_ZDamping = 1;
+            camTransposer.m_XDamping = 0.5f;
+            camTransposer.m_YDamping = 0.5f;
+            camTransposer.m_ZDamping = 0.5f;
         }
         transform.Translate(dir * moveSpeed * Time.deltaTime);
 
@@ -228,9 +228,9 @@ public class CameraMove : MonoBehaviour
 
     private void EndDrag()
     {
-        camTransposer.m_XDamping = 1;
-        camTransposer.m_YDamping = 1;
-        camTransposer.m_ZDamping = 1;
+        camTransposer.m_XDamping = 0.5f;
+        camTransposer.m_YDamping = 0.5f;
+        camTransposer.m_ZDamping = 0.5f;
         isDragmode = false;
         isBatchmode = false;
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] BulletSO bulletSO;
+    public BulletSO bulletSO;
 
     private CameraMove cameraMove;
 
@@ -83,7 +83,7 @@ public class Bullet : MonoBehaviour
                     var hits = Physics2D.OverlapCircleAll(transform.position, bulletSO.range);
                     foreach(Collider2D hit in hits)
                     {
-                        BattleManager.Instance.SettingAr(hit.GetComponent<Ar>(), damage);
+                        BattleManager.Instance.SettingAr(hit.GetComponent<Enemy>(), damage);
                     }
                     Destroy(gameObject);
                     // 주변 적들도 피해를 주고 풀링되는 코드

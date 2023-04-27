@@ -5,35 +5,62 @@ using UnityEngine;
 public class StateMove : State<ArFSM>
 {
     protected Enemy enemy;
+    private AStarGrid grid;
 
     public override void OnAwake()
     {
         enemy = stateMachineClass.GetComponent<Enemy>();
+        grid = stateMachineClass.GetComponent<AStarGrid>();
     }
     
     public override void OnStart()
     {
         Vector2 myPos = stateMachineClass.transform.position;
         Vector2 targetPos = stateMachineClass.SearchAr().position;
-        RaycastHit2D hit = Physics2D.Raycast(myPos, targetPos - myPos, Vector2.Distance(myPos, targetPos) - 1f);
-        
+        Vector2 angle;
 
-        if(hit.collider == null)
-        {
-            Vector2 angle = Vector3.Normalize(targetPos - myPos);
+        //if(hit.collider == null)
+        //{
+        //    angle = Vector3.Normalize(targetPos - myPos);
+        //}
+        //else
+        //{
+        //    grid.SetNode(myPos, targetPos);
+        //    List<Vector2> path = grid.GetPath();
+        //    angle = path[0];
+        //}
 
-            stateMachineClass.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
-            float rangeAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
-            stateMachineClass.transform.GetChild(0).rotation = Quaternion.Euler(new Vector3(0, 0, rangeAngle));
-            stateMachineClass.StartCoroutine("MoveAr", angle * enemy.GetPower());
-        }
-        else
+        grid.SetNode(myPos, targetPos);
+        List<Vector2> path = grid.GetPath();
+        Vector2 curVec = Vector2.zero;
+        Vector2 sumVec = Vector2.zero;
+        int changeCnt = -1;
+        foreach(Vector2 vec in path)
         {
-            //A*
-            stateMachineClass.StartCoroutine("MoveAr", Vector2.zero);
-            
+            if(curVec != vec)
+            {
+                changeCnt++;
+                curVec = vec;
+                if (changeCnt == 2) break;
+            }
+            sumVec += vec;
         }
+
+        angle = sumVec.normalized;
         
+        foreach(RaycastHit2D ray in Physics2D.RaycastAll(myPos, angle, 30f))
+        {
+            if(ray.collider.CompareTag("Out") || ray.collider.CompareTag("Object"))
+            {
+                angle = path[0];
+                break;
+            }
+        }
+
+        stateMachineClass.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+        float rangeAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
+        stateMachineClass.transform.GetChild(0).rotation = Quaternion.Euler(new Vector3(0, 0, rangeAngle));
+        stateMachineClass.StartCoroutine("MoveAr", angle * 30f);
 
         stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
     }
