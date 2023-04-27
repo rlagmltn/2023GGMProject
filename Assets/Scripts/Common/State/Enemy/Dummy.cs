@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Dummy : Enemy
 {
-    protected override void Start()
-    {
-        base.Start();
-    }
-
     public override void StatReset()
     {
         stat.MaxHP = 99999;
