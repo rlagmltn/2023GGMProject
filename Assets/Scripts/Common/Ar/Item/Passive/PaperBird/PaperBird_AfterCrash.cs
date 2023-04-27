@@ -17,6 +17,7 @@ public class PaperBird_AfterCrash : ItemInfo
         player.isPaperBirdPlay = true;
         yield return new WaitForSeconds(0.5f);
         nearEnemy.GetComponent<Ar>().Hit(2);
+        EffectManager.Instance.InstantiateEffect(Effect.HIT, nearEnemy.gameObject.transform.position, new Vector3(0, 0, 0)); //³ªÁß¿¡ ¹Ù²ãÁà¾ßÇÔ
     }
 
     void GetNearEnemy()
