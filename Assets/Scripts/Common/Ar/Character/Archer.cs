@@ -77,8 +77,8 @@ public class Archer : Player
         var bullet = Instantiate(arrow, transform.position, Quaternion.Euler(0, 0, zAngle-180));
         rigid.velocity = ((angle.normalized * 0.5f) * 25) / (1 + stat.WEIGHT * 0.1f);
         cameraMove.MovetoTarget(bullet.transform);
-        if (angle.x < 0) character.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        else if (angle.x > 0) character.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
+        if (angle.x < 0) character.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
+        else if (angle.x > 0) character.localScale = new Vector3(0.5f, 0.5f, 0.5f);
     }
 
     void WaitSec(float sec)

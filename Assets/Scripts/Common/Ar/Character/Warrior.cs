@@ -57,13 +57,16 @@ public class Warrior : Player
     {
         rigid.velocity = -((angle.normalized * 1f) * pushPower) / (1 + stat.WEIGHT * 0.1f);
 
-        yield return new WaitForSeconds(0.6f);
-        animationManager.HeavySlash1H();
+        yield return new WaitForSeconds(0.8f);
+        
+        if(isSkill)
+            animationManager.Attack();
     }
 
     public override IEnumerator AnimTimingSkill()
     {
         while (isSkill) yield return null;
+        rigid.velocity = Vector2.zero;
         var attackSuccess = false;
         Collider2D[] colliders = Physics2D.OverlapBoxAll(boxPoint.position, new Vector2(4.2f, 2.2f), rangeContainer.rotation.z);
 
