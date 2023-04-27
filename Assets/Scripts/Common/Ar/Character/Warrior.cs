@@ -6,12 +6,16 @@ public class Warrior : Player
 {
     private Vector2 angle;
     private Transform boxPoint;
+    private Transform skillBox;
     private bool dashing = false;
+    private float range;
 
     protected override void Start()
     {
         base.Start();
         boxPoint = rangeContainer.GetChild(3);
+        skillBox = skillRange.transform.GetChild(0);
+        range = 7f;
     }
 
     public override void StatReset()
@@ -24,6 +28,25 @@ public class Warrior : Player
     {
         base.Update();
         if (dashing && battleTarget != null) InitTImeScale();
+    }
+
+    public override void Drag(float angle, float dis)
+    {
+        base.Drag(angle, dis);
+
+        var target = Physics2D.RaycastAll(transform.position, attackRange.transform.position - transform.position, range);
+
+        if (target.Length > 1 && target[1].collider.CompareTag("Enemy"))
+        {
+            var a = Vector2.Distance(transform.position, target[1].collider.transform.position);
+            skillRange.size = new Vector2(a / 2, 1);
+            skillBox.localPosition = new Vector2(a + 1, 0);
+        }
+        else
+        {
+            skillRange.size = new Vector2(range/2, 1);
+            skillBox.localPosition = new Vector2(range/2 + 1, 0);
+        }
     }
 
     public override void Push(Vector2 velo)

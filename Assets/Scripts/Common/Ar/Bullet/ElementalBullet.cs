@@ -8,6 +8,7 @@ public class ElementalBullet : Bullet
     {
         summoner = FindObjectOfType<Elementalist>();
         base.SetSO();
+        Invoke("AfterCrush", bulletSO.lifeTime-0.01f);
     }
 
     protected override void AfterCrush()

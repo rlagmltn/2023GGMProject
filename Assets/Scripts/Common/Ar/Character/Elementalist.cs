@@ -7,6 +7,8 @@ public class Elementalist : Player
     [SerializeField] Bullet elemental;
     private int turnCount;
     private Vector2 angle;
+    private Transform skillCircle;
+    private float range;
 
     float maxTime = 1;
     float currentTime = 0;
@@ -17,6 +19,8 @@ public class Elementalist : Player
     {
         isRangeCharacter = false;
         base.StatReset();
+        skillCircle = skillRange.transform.GetChild(0);
+        range = elemental.bulletSO.speed * elemental.bulletSO.lifeTime;
     }
 
     protected override void Skill(Vector2 angle)
@@ -39,6 +43,25 @@ public class Elementalist : Player
             TurnManager.Instance.SomeoneIsMoving = false;
             timeGoing = false;
             currentTime = 0;
+        }
+    }
+
+    public override void Drag(float angle, float dis)
+    {
+        base.Drag(angle, dis);
+
+        var target = Physics2D.RaycastAll(transform.position, attackRange.transform.position - transform.position, range);
+
+        if (target.Length > 1 && target[1].collider.CompareTag("Enemy"))
+        {
+            var a = Vector2.Distance(transform.position, target[1].collider.transform.position);
+            skillRange.size = new Vector2(a / 2, 1);
+            skillCircle.localPosition = new Vector2(a / 2 - 0.5f, 0);
+        }
+        else
+        {
+            skillRange.size = new Vector2(range / 2, 1);
+            skillCircle.localPosition = new Vector2(range / 2 - 0.5f, 0);
         }
     }
 
