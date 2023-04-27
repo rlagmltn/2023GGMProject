@@ -6,6 +6,7 @@ public class Assassin : Player
 {
     [SerializeField] Bullet kunai;
     private Vector2 angle;
+    private float range;
 
     protected override void Start()
     {
@@ -17,11 +18,28 @@ public class Assassin : Player
         isRangeCharacter = false;
         base.StatReset();
         Passive();
+        range = kunai.bulletSO.speed * kunai.bulletSO.lifeTime;
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
+    }
+
+    public override void Drag(float angle, float dis)
+    {
+        base.Drag(angle, dis);
+
+        var target = Physics2D.RaycastAll(transform.position, attackRange.transform.position - transform.position, range);
+
+        if (target.Length > 1 && target[1].collider.CompareTag("Enemy"))
+        {
+            skillRange.size = new Vector2(Vector2.Distance(transform.position, target[1].collider.transform.position) / 2, 1);
+        }
+        else
+        {
+            skillRange.size = new Vector2(range / 2, 1);
+        }
     }
 
     protected override void Skill(Vector2 angle)

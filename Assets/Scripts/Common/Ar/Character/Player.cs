@@ -29,9 +29,9 @@ public class Player : Ar
     public QuickSlot slot { get; private set; }
 
     protected Transform rangeContainer;
-    private SpriteRenderer moveRange;
-    private SpriteRenderer attackRange;
-    private SpriteRenderer skillRange;
+    protected SpriteRenderer moveRange;
+    protected SpriteRenderer attackRange;
+    protected SpriteRenderer skillRange;
     protected Collider2D skillCollider;
 
     public List<ItemInfo> ItemInfos; //지워야함
@@ -202,7 +202,7 @@ public class Player : Ar
     }
 
 
-    public void Drag(float angle, float dis)
+    public virtual void Drag(float angle, float dis)
     {
         rangeContainer.rotation = Quaternion.Euler(0, 0, angle+180);
         moveRange.size = new Vector2((dis * 2), 1);

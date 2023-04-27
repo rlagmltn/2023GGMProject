@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] BulletSO bulletSO;
+    public BulletSO bulletSO;
 
     private CameraMove cameraMove;
 

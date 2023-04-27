@@ -103,7 +103,8 @@ public class TurnManager : MonoSingleton<TurnManager>
 
     private IEnumerator PassTurn()
     {
-        if(IsPlayerTurn)
+        yield return new WaitForSeconds(0.5f);
+        if (IsPlayerTurn)
         {
             foreach (Player p in GameManager.Instance.friendly)
             {
