@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 7312674456348278807}
   - component: {fileID: 7844694564665887568}
   - component: {fileID: 5209284912838123193}
+  - component: {fileID: 8373120025901472727}
   m_Layer: 0
   m_Name: BanditWarrior
   m_TagString: Enemy
@@ -262,6 +263,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: "\uC0B0\uC801 \uC804\uC0AC"
+  StartTurn:
+    m_PersistentCalls:
+      m_Calls: []
   BeforeCrash:
     m_PersistentCalls:
       m_Calls: []
@@ -289,7 +293,25 @@ MonoBehaviour:
   OnBattleDie:
     m_PersistentCalls:
       m_Calls: []
+  EndTurn:
+    m_PersistentCalls:
+      m_Calls: []
   battleTarget: {fileID: 0}
+--- !u!114 &8373120025901472727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063387080856860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a9152ed4fbf664fa5e638270ea2830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkableMap: {fileID: 0}
+  ShowTestGrid: 0
+  Diagonal: 1
 --- !u!1 &1481269329147902
 GameObject:
   m_ObjectHideFlags: 0

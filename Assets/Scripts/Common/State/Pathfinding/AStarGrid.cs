@@ -18,6 +18,11 @@ public class AStarGrid : MonoBehaviour
     
     private void Start()
     {
+        if(walkableMap == null)
+        {
+            walkableMap = GameObject.Find("EnemyTile").GetComponent<Tilemap>();
+
+        }
         // 초기화
         CreateGrid();
         pathfinder = new AStarPathfind(this);
@@ -29,20 +34,20 @@ public class AStarGrid : MonoBehaviour
         //TEST
         //if (Input.GetMouseButtonDown(0))
         //{
-        //    Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //    startNode = GetNodeFromWorld(worldPos);
+            //Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //startNode = GetNodeFromWorld(worldPos);
         //}
         //if (Input.GetMouseButtonDown(1))
         //{
-        //    Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //    endNode = GetNodeFromWorld(worldPos);
+            //Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //endNode = GetNodeFromWorld(worldPos);
         //}
-        //
+
         //if (Input.GetKeyUp(KeyCode.Space))
         //{
-        //    TestPathfind(Diagonal);
+            //TestPathfind(Diagonal);
         //}
-    
+
     }
     
     private void CreateGrid()
@@ -143,9 +148,11 @@ public class AStarGrid : MonoBehaviour
     
     public List<Vector2> GetPath()
     {
+        Debug.Log("GetPath");
+        TestPathfind(Diagonal);
         return pathfinder.CreateDir(startNode, endNode, Diagonal);
     }
-
+    
     private void OnDrawGizmos()
     {
         // 그리드가 잘 생성되었는지 확인해보기 위해서 에디터에 그려본다.

@@ -918,10 +918,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -7990106611284356861, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
-      propertyPath: walkableMap
-      value: 
-      objectReference: {fileID: 1746043041}
     - target: {fileID: 8454270740256362983, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
       propertyPath: m_Name
       value: BanditWarrior (2)
@@ -22753,10 +22749,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -7990106611284356861, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
-      propertyPath: walkableMap
-      value: 
-      objectReference: {fileID: 1746043041}
     - target: {fileID: 8454270740256362983, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
       propertyPath: m_Name
       value: BanditWarrior
@@ -22884,11 +22876,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 2960, y: 1660}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1839735485 &1746043041 stripped
-Tilemap:
-  m_CorrespondingSourceObject: {fileID: 6942653579112241410, guid: 3d5fb0b21bd40d049b4f8647d06d40fe, type: 3}
-  m_PrefabInstance: {fileID: 507838576}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1789713456
 GameObject:
   m_ObjectHideFlags: 0
@@ -23403,10 +23390,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -7990106611284356861, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
-      propertyPath: walkableMap
-      value: 
-      objectReference: {fileID: 1746043041}
     - target: {fileID: 8454270740256362983, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
       propertyPath: m_Name
       value: BanditWarrior (1)
@@ -24728,53 +24711,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -7990106611284356861, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
-      propertyPath: walkableMap
-      value: 
-      objectReference: {fileID: 1746043041}
-    - target: {fileID: 135110020438172417, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2394303930108376434, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3328627234247788885, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3991284417140415870, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4719053677004461874, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5036273340772891382, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5630134832838115199, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6944072972419662988, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7202501303934346514, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 8454270740256362983, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
       propertyPath: m_Name
       value: BanditWarrior (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8454270740256362983, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8454270740256362985, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
       propertyPath: m_RootOrder
@@ -24819,10 +24758,6 @@ PrefabInstance:
     - target: {fileID: 8454270740256362985, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9112568377438190268, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}

@@ -36,7 +36,7 @@ public class BanditWarrior_StateIdle : StateIdle
             if(skillCool == 6)
             {
                 skillCool = 0;
-                stateMachine.ChangeState<BanditWarrior_StateSkill>();
+                stateMachine.ChangeState<BanditWarrior_StateMove>();
             }
             else
             {
