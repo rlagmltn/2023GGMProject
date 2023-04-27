@@ -62,10 +62,6 @@ public class AStarPathfind
                     tempNode = tempNode.parent;
                 }
                 path.Reverse();
-                foreach (Vector2 vec in CreateDir(path))
-                {
-                    Debug.Log(vec);
-                }
                 return path;
             }
     
@@ -101,14 +97,16 @@ public class AStarPathfind
         return ret;
     }
 
-    private List<Vector2> CreateDir(List<AStarNode> path)
+    public List<Vector2> CreateDir(AStarNode start, AStarNode end, bool diagonal)
     {
         List<Vector2> dir = new List<Vector2>();
+        List<AStarNode> path = CreatePath(start, end, diagonal);
 
         for (int i = 0; i<path.Count - 1; i++)
         {
             float xDif = path[i+1].xPos - path[i].xPos;
             float yDif = path[i+1].yPos - path[i].yPos;
+            
 
             dir.Add(new Vector2(xDif, yDif));
         }
