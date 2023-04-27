@@ -5,6 +5,8 @@ using UnityEngine;
 public enum ItemPassiveType:int
 {
     None,
+    StartTurn,
+    EndTurn,
     BeforeCrash,
     AfterCrash,
     BeforeAttack,

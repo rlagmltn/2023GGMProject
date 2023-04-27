@@ -15,9 +15,9 @@ public class Ar : MonoBehaviour
     public bool isUsingSkill { get; set; }
     public bool isMove { get; set; }
 
+    protected const float pushPower = 40f;
     protected float minDragPower = 0.4f;
     protected float maxDragPower = 1.5f;
-    protected float pushPower;
 
     protected Transform hpBar;
     protected SpriteRenderer hpImage;
@@ -28,6 +28,7 @@ public class Ar : MonoBehaviour
     public Rigidbody2D rigid { get; protected set; }
     public Vector2 lastVelocity { get; protected set; }
 
+    [HideInInspector] public UnityEvent StartTurn;
     [HideInInspector] public UnityEvent BeforeCrash;
     [HideInInspector] public UnityEvent AfterCrash;
     [HideInInspector] public UnityEvent BeforeAttack;
@@ -37,6 +38,7 @@ public class Ar : MonoBehaviour
     [HideInInspector] public UnityEvent AfterMove;
     [HideInInspector] public UnityEvent OnOutDie;
     [HideInInspector] public UnityEvent OnBattleDie;
+    [HideInInspector] public UnityEvent EndTurn;
 
     protected Transform character;
     protected AnimationManager animationManager;
@@ -71,7 +73,6 @@ public class Ar : MonoBehaviour
 
     public virtual void StatReset() // 수치 초기화
     {
-        pushPower = 40;
         isDead = false;
         DeadCheck();
     }

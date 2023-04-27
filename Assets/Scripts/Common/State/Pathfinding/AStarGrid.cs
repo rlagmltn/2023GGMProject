@@ -27,26 +27,32 @@ public class AStarGrid : MonoBehaviour
     private void Update()
     {
         //TEST
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            startNode = GetNodeFromWorld(worldPos);
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            endNode = GetNodeFromWorld(worldPos);
-        }
-    
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            TestPathfind(Diagonal);
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //    startNode = GetNodeFromWorld(worldPos);
+        //}
+        //if (Input.GetMouseButtonDown(1))
+        //{
+        //    Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //    endNode = GetNodeFromWorld(worldPos);
+        //}
+        //
+        //if (Input.GetKeyUp(KeyCode.Space))
+        //{
+        //    TestPathfind(Diagonal);
+        //}
     
     }
     
     private void CreateGrid()
     {
+        if(walkableMap == null)
+        {
+            Debug.LogError("None Tilemap in AstarGrid");
+            return;
+        }
+
         walkableMap.CompressBounds();
         BoundsInt bounds = walkableMap.cellBounds;
         grid = new AStarNode[bounds.size.y, bounds.size.x];
@@ -135,6 +141,11 @@ public class AStarGrid : MonoBehaviour
           return neighbors;
     }
     
+    public List<Vector2> GetPath()
+    {
+        return pathfinder.CreateDir(startNode, endNode, Diagonal);
+    }
+
     private void OnDrawGizmos()
     {
         // 그리드가 잘 생성되었는지 확인해보기 위해서 에디터에 그려본다.
@@ -173,6 +184,7 @@ public class AStarGrid : MonoBehaviour
             Debug.Log("path");
         }
     }
+
 
     
 }

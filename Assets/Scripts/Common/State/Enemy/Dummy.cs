@@ -16,7 +16,6 @@ public class Dummy : Enemy
 
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
-        pushPower = 20;
         passiveCool = 5;
         currentPassiveCool = 0;
         base.StatReset();

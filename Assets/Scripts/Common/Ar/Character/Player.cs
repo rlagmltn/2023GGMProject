@@ -26,7 +26,7 @@ public class Player : Ar
 
     public CircleCollider2D Collide { get; set; }
 
-    private QuickSlot slot;
+    public QuickSlot slot { get; private set; }
 
     protected Transform rangeContainer;
     private SpriteRenderer moveRange;
@@ -121,6 +121,12 @@ public class Player : Ar
         {
             switch(TAI[num].itemPassiveType)
             {
+                case ItemPassiveType.StartTurn:
+                    StartTurn.AddListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.EndTurn:
+                    EndTurn.AddListener(TAI[num].Info.Passive);
+                    break;
                 case ItemPassiveType.BeforeCrash:
                     BeforeCrash.AddListener(TAI[num].Info.Passive);
                     break;
