@@ -148,7 +148,6 @@ public class AStarGrid : MonoBehaviour
     
     public List<Vector2> GetPath()
     {
-        Debug.Log("GetPath");
         TestPathfind(Diagonal);
         return pathfinder.CreateDir(startNode, endNode, Diagonal);
     }
