@@ -209,7 +209,6 @@ public class Player : Ar
         }
 
         power = Mathf.Clamp(charge, minDragPower, maxDragPower);
-        animationManager.SetState(CharacterState.Run);
         cameraMove.MovetoTarget(gameObject.transform);
 
         UnityAction action = joystickType switch
@@ -226,6 +225,7 @@ public class Player : Ar
     private void Move(Vector2 angle)
     {
         MouseUp?.Invoke();
+        animationManager.SetState(CharacterState.Run);
         TurnManager.Instance.SomeoneIsMoving = true;
         rigid.velocity = ((angle.normalized * power) * pushPower)/(1+stat.WEIGHT*0.1f);
         EffectManager.Instance.InstantiateEffect_P(Effect.DASH, transform.position, new Vector2(-angle.x, angle.y));
