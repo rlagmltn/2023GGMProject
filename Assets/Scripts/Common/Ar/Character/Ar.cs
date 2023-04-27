@@ -1,4 +1,5 @@
 using Assets.HeroEditor4D.Common.Scripts.CharacterScripts;
+using Assets.HeroEditor4D.Common.Scripts.Enums;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -77,20 +78,22 @@ public class Ar : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if (rigid.velocity.normalized != lastVelocity.normalized && rigid.velocity.magnitude != 0)
+        if (rigid.velocity.normalized != lastVelocity.normalized && rigid.velocity.magnitude != 0 && isMove)
         {
             Flip();
             lastVelocity = rigid.velocity;
-            RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position, lastVelocity.normalized, lastVelocity.magnitude / 4);
-            Debug.DrawRay(transform.position, lastVelocity / 4, Color.red, 3f);
+            Collider2D[] hit = Physics2D.OverlapBoxAll((Vector2)transform.position + lastVelocity/8, new Vector2(0.6f, lastVelocity.magnitude/4), Mathf.Atan2(lastVelocity.y, lastVelocity.x) * Mathf.Rad2Deg + 90);
 
-            if (hit.Length <= 1) return;
-
-            if(hit[1].collider.GetComponent<Ar>()&&hit[1].collider.gameObject!=gameObject)
+            foreach(Collider2D col in hit)
             {
-                battleTarget = hit[1].collider.transform;
-                cameraMove.MovetoTarget(battleTarget);
+                if (col.GetComponent<Ar>() && col.gameObject != gameObject)
+                {
+                    battleTarget = col.transform;
+                    cameraMove.MovetoTarget(battleTarget);
+                    break;
+                }
             }
+
         }
         
         lastVelocity = rigid.velocity;
@@ -110,19 +113,20 @@ public class Ar : MonoBehaviour
             if (distance < slowMagnitude)
             {
                 var amount = distance / slowMagnitude == float.NaN ? 1 : distance / slowMagnitude;
-                cameraMove.TimeFreeze(amount - lastVelocity.magnitude/(pushPower*3));
-                cameraMove.ApplyCameraSize(amount);
+                cameraMove.TimeFreeze(amount - lastVelocity.magnitude/(pushPower*2));
+                cameraMove.ApplyCameraSize(amount * 0.7f);
             }
         }
     }
 
     private void StopMove()
     {
-        if (rigid.velocity.magnitude <= 0.2f && isMove)
+        if (rigid.velocity.magnitude <= 1.5f && isMove)
         {
             rigid.velocity = Vector2.zero;
             isMove = false;
             AfterMove?.Invoke();
+            animationManager.SetState(CharacterState.Idle);
         }
     }
 
@@ -201,10 +205,10 @@ public class Ar : MonoBehaviour
         if (stat.SP > 0)
         {
             dpBar.gameObject.SetActive(true);
-            dpImage.size = new Vector2((float)stat.SP / stat.MaxSP * 2, 2);
+            dpImage.size = new Vector2((float)stat.SP / stat.MaxSP, 1);
         }
         else dpBar.gameObject.SetActive(false);
-        hpImage.size = new Vector2((float)stat.HP / stat.MaxHP * 2, 2);
+        hpImage.size = new Vector2((float)stat.HP / stat.MaxHP, 1);
         return false;
     }
 

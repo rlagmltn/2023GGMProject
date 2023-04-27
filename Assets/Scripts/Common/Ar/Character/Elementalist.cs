@@ -8,6 +8,11 @@ public class Elementalist : Player
     private int turnCount;
     private Vector2 angle;
 
+    float maxTime = 1;
+    float currentTime = 0;
+    bool timeGoing = false;
+
+
     public override void StatReset()
     {
         isRangeCharacter = false;
@@ -16,8 +21,10 @@ public class Elementalist : Player
 
     protected override void Skill(Vector2 angle)
     {
+        base.Skill(angle);
+        animationManager.Cast();
         this.angle = angle;
-        animationManager.Throw();
+        WaitSec(2f);
     }
 
     protected override void Update()
@@ -25,6 +32,14 @@ public class Elementalist : Player
         if (TurnManager.Instance.PassedTurn != turnCount)
             Passive();
         base.Update();
+
+        if (timeGoing) currentTime += Time.deltaTime;
+        if (maxTime <= currentTime)
+        {
+            TurnManager.Instance.SomeoneIsMoving = false;
+            timeGoing = false;
+            currentTime = 0;
+        }
     }
 
     protected override void Passive()
@@ -50,6 +65,13 @@ public class Elementalist : Player
         float zAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
         var bullet = Instantiate(elemental, transform.position, Quaternion.Euler(0, 0, zAngle - 180));
         cameraMove.MovetoTarget(bullet.transform);
-        cameraMove.Shake();
+    }
+
+    void WaitSec(float sec)
+    {
+        TurnManager.Instance.SomeoneIsMoving = true;
+        timeGoing = true;
+        maxTime = sec;
+        currentTime = 0;
     }
 }

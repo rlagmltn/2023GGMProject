@@ -32,7 +32,7 @@ public class CameraMove : MonoBehaviour
     [SerializeField] private float minOrthographicSize = 10;
     [SerializeField] private float maxOrthographicSize = 30;
 
-    private float defaultOrthographicSize = 5f;
+    private float defaultOrthographicSize = 10f;
     private float orthographicSize;
     public bool isZoommode { get; set; }
     public bool isDragmode { get; set; }
@@ -55,6 +55,7 @@ public class CameraMove : MonoBehaviour
         camNoise = cinemachineCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         camTransposer = cinemachineCam.GetCinemachineComponent<CinemachineTransposer>();
         playerController = FindObjectOfType<PlayerController>();
+        SetDefaultZoom();
     }
 
     private void Update()
@@ -189,12 +190,12 @@ public class CameraMove : MonoBehaviour
         }
         transform.Translate(dir * moveSpeed * Time.deltaTime);
 
-        if (Input.GetKeyDown(KeyCode.Equals))
+        if (Input.GetKeyDown(KeyCode.Minus))
         {
             orthographicSize = Mathf.Clamp(orthographicSize+1, minOrthographicSize, maxOrthographicSize);
             ApplyCameraSize();
         }
-        else if (Input.GetKeyDown(KeyCode.Minus))
+        else if (Input.GetKeyDown(KeyCode.Equals))
         {
             orthographicSize = Mathf.Clamp(orthographicSize - 1, minOrthographicSize, maxOrthographicSize);
             ApplyCameraSize();

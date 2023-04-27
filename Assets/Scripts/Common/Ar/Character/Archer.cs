@@ -7,7 +7,7 @@ public class Archer : Player
 {
     [SerializeField] Bullet arrow;
 
-    float maxTime = 0;
+    float maxTime = 1;
     float currentTime = 0;
     bool timeGoing = false;
 
@@ -32,6 +32,7 @@ public class Archer : Player
         {
             TurnManager.Instance.SomeoneIsMoving = false;
             timeGoing = false;
+            currentTime = 0;
         }
     }
 
