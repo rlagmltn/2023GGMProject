@@ -15,9 +15,9 @@ public class Ar : MonoBehaviour
     public bool isUsingSkill { get; set; }
     public bool isMove { get; set; }
 
+    protected const float pushPower = 40f;
     protected float minDragPower = 0.4f;
     protected float maxDragPower = 1.5f;
-    protected float pushPower;
 
     protected Transform hpBar;
     protected SpriteRenderer hpImage;
@@ -73,7 +73,6 @@ public class Ar : MonoBehaviour
 
     public virtual void StatReset() // 수치 초기화
     {
-        pushPower = 40;
         isDead = false;
         DeadCheck();
     }
