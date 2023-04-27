@@ -1,4 +1,5 @@
 using Assets.HeroEditor4D.Common.Scripts.CharacterScripts;
+using Assets.HeroEditor4D.Common.Scripts.Enums;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -81,9 +82,7 @@ public class Ar : MonoBehaviour
         {
             Flip();
             lastVelocity = rigid.velocity;
-            Collider2D[] hit = Physics2D.OverlapBoxAll((Vector2)transform.position + lastVelocity/8, new Vector2(1, lastVelocity.magnitude/4), Mathf.Atan2(lastVelocity.y, lastVelocity.x) * Mathf.Rad2Deg);
-                //Physics2D.RaycastAll(transform.position, lastVelocity.normalized, lastVelocity.magnitude / 4);
-            Debug.DrawRay(transform.position, lastVelocity / 4, Color.red, 3f);
+            Collider2D[] hit = Physics2D.OverlapBoxAll((Vector2)transform.position + lastVelocity/8, new Vector2(0.6f, lastVelocity.magnitude/4), Mathf.Atan2(lastVelocity.y, lastVelocity.x) * Mathf.Rad2Deg + 90);
 
             foreach(Collider2D col in hit)
             {
@@ -122,11 +121,12 @@ public class Ar : MonoBehaviour
 
     private void StopMove()
     {
-        if (rigid.velocity.magnitude <= 0.2f && isMove)
+        if (rigid.velocity.magnitude <= 1.5f && isMove)
         {
             rigid.velocity = Vector2.zero;
             isMove = false;
             AfterMove?.Invoke();
+            animationManager.SetState(CharacterState.Idle);
         }
     }
 

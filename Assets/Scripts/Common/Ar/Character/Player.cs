@@ -1,3 +1,4 @@
+using Assets.HeroEditor4D.Common.Scripts.Enums;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,9 +22,11 @@ public class Player : Ar
     public float Power { get { return power; } }
     public float PushPower { get { return pushPower; } }
 
+    public bool isPaperBirdPlay = false;
+
     public CircleCollider2D Collide { get; set; }
 
-    private QuickSlot slot;
+    public QuickSlot slot { get; private set; }
 
     protected Transform rangeContainer;
     private SpriteRenderer moveRange;
@@ -182,6 +185,7 @@ public class Player : Ar
             _ => moveRange.gameObject,
         };
 
+        animationManager.SetState(CharacterState.Ready);
         ActiveRangesAndChangeColor(Range);
     }
 
@@ -223,9 +227,9 @@ public class Player : Ar
     private void Move(Vector2 angle)
     {
         MouseUp?.Invoke();
+        animationManager.SetState(CharacterState.Run);
         TurnManager.Instance.SomeoneIsMoving = true;
         rigid.velocity = ((angle.normalized * power) * pushPower)/(1+stat.WEIGHT*0.1f);
-        Debug.Log(rigid.velocity.magnitude);
         EffectManager.Instance.InstantiateEffect_P(Effect.DASH, transform.position, new Vector2(-angle.x, angle.y));
     }
 
