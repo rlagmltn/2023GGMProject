@@ -154,6 +154,7 @@ public class PlayerController : MonoBehaviour
         actSellect.SetActive(false);
         joystick.gameObject.SetActive(true);
         joystick.joystickType = (JoystickType)n;
+        sellectPlayer.slot.ActiveIcon(joystick.joystickType);
     }
 
     private void SetSkillBtnText()

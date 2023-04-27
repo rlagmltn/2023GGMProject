@@ -14,6 +14,10 @@ public class QuickSlot : MonoBehaviour
     private Image hpImage;
     private Image spImage;
 
+    private GameObject MoveIcon;
+    private GameObject AttackIcon;
+    private GameObject SkillIcon;
+
     public bool isBatched;
     private JoyStick joyStick;
     private PlayerController playerController;
@@ -30,12 +34,16 @@ public class QuickSlot : MonoBehaviour
         unableImage = transform.GetChild(3).GetComponent<Image>();
         hpImage = transform.GetChild(4).GetComponent<Image>();
         spImage = transform.GetChild(5).GetComponent<Image>();
+        MoveIcon = transform.GetChild(6).gameObject;
+        AttackIcon = transform.GetChild(7).gameObject;
+        SkillIcon = transform.GetChild(8).gameObject;
 
         unableImage.gameObject.SetActive(false);
         playerImage.sprite = Player.so.characterInfo.Image;
         joyStick = FindObjectOfType<JoyStick>();
         playerController = FindObjectOfType<PlayerController>();
         isBatched = false;
+        UnActiveIcons();
     }
 
     public void Connect(Player player)
@@ -57,18 +65,21 @@ public class QuickSlot : MonoBehaviour
     {
         if (change)
         {
-            background.color = Color.yellow;
+            outline.color = Color.white;
         }
         else
-            background.color = Color.black;
+        {
+            outline.color = Color.black;
+            UnActiveIcons();
+        }
     }
 
     public void SkillReady(bool isReady)
     {
         if (isReady)
-            outline.color = Color.yellow;
+            background.color = Color.yellow;
         else
-            outline.color = Color.black;
+            background.color = Color.black;
     }
 
     public void SetSlotActive(bool value)
@@ -92,7 +103,7 @@ public class QuickSlot : MonoBehaviour
         Player.gameObject.SetActive(true);
         Player.Collide.enabled = false;
         Player.transform.position = transform.position;
-        background.color = Color.yellow;
+        outline.color = Color.white;
     }
 
     public void Drag()
@@ -116,7 +127,7 @@ public class QuickSlot : MonoBehaviour
 
             isBatched = true;
             Player.Collide.enabled = true;
-            background.color = Color.gray;
+            outline.color = Color.black;
         }
         else
         {
@@ -129,7 +140,27 @@ public class QuickSlot : MonoBehaviour
 
             isBatched = false;
             Player.gameObject.SetActive(false);
-            background.color = Color.black;
+            outline.color = Color.black;
         }
+    }
+
+    public void ActiveIcon(JoystickType joystickType)
+    {
+        UnActiveIcons();
+        GameObject icon = joystickType switch
+        {
+            JoystickType.Move => MoveIcon,
+            JoystickType.Attack => AttackIcon,
+            JoystickType.Skill => SkillIcon,
+            _ => null,
+        };
+        icon.SetActive(true);
+    }
+
+    private void UnActiveIcons()
+    {
+        MoveIcon.SetActive(false);
+        AttackIcon.SetActive(false);
+        SkillIcon.SetActive(false);
     }
 }

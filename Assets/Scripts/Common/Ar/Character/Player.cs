@@ -26,7 +26,7 @@ public class Player : Ar
 
     public CircleCollider2D Collide { get; set; }
 
-    private QuickSlot slot;
+    public QuickSlot slot { get; private set; }
 
     protected Transform rangeContainer;
     private SpriteRenderer moveRange;
