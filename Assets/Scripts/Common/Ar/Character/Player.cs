@@ -22,7 +22,6 @@ public class Player : Ar
     public float Power { get { return power; } }
     public float PushPower { get { return pushPower; } }
 
-    public bool isPaperBirdPlay = false;
 
     public CircleCollider2D Collide { get; set; }
 
@@ -34,7 +33,11 @@ public class Player : Ar
     private SpriteRenderer skillRange;
     protected Collider2D skillCollider;
 
-    public List<ItemInfo> ItemInfos; //지워야함
+    public bool isPaperBirdPlay = false;
+    public List<Transform> StickySlimeList;
+    public List<float> StickySlime_PoaerList;
+
+    public Dictionary<Transform, int> OminousTalismanDic = new Dictionary<Transform, int>();
 
     public List<TypeAndInfo> TAI;
 
@@ -119,7 +122,8 @@ public class Player : Ar
 
         for(int num = 0; num < TAI.Count; num++)
         {
-            switch(TAI[num].itemPassiveType)
+            TAI[num].Info.GetPlayer(this);
+            switch (TAI[num].itemPassiveType)
             {
                 case ItemPassiveType.StartTurn:
                     StartTurn.AddListener(TAI[num].Info.Passive);
@@ -161,11 +165,13 @@ public class Player : Ar
 
 
                     break;
+                case ItemPassiveType.Once:
+                    TAI[num].Info.Passive();
+                    break;
                 default:
                     Debug.LogError("아이템 타입이 정해지지 않았습니다!");
                     break;
             }
-            TAI[num].Info.GetPlayer(this);
         }
     }
 

@@ -17,7 +17,8 @@ public enum ItemPassiveType:int
     OnOutDie,
     OnBattleDie,
     MouseUp,
-    Alway
+    Alway,
+    Once,
 }
 
 public class ItemInfo : MonoBehaviour

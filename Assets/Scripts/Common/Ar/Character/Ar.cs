@@ -15,7 +15,7 @@ public class Ar : MonoBehaviour
     public bool isUsingSkill { get; set; }
     public bool isMove { get; set; }
 
-    protected const float pushPower = 40f;
+    public float pushPower = 40f;
     protected float minDragPower = 0.4f;
     protected float maxDragPower = 1.5f;
 
@@ -183,6 +183,7 @@ public class Ar : MonoBehaviour
         HpMaxCheck();
         return DeadCheck();
     }
+
 
     public void HpMaxCheck()
     {
