@@ -28,6 +28,7 @@ public class Ar : MonoBehaviour
     public Rigidbody2D rigid { get; protected set; }
     public Vector2 lastVelocity { get; protected set; }
 
+    [HideInInspector] public UnityEvent StartTurn;
     [HideInInspector] public UnityEvent BeforeCrash;
     [HideInInspector] public UnityEvent AfterCrash;
     [HideInInspector] public UnityEvent BeforeAttack;
@@ -37,6 +38,7 @@ public class Ar : MonoBehaviour
     [HideInInspector] public UnityEvent AfterMove;
     [HideInInspector] public UnityEvent OnOutDie;
     [HideInInspector] public UnityEvent OnBattleDie;
+    [HideInInspector] public UnityEvent EndTurn;
 
     protected Transform character;
     protected AnimationManager animationManager;

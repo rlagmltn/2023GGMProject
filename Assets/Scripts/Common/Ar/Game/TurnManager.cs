@@ -103,6 +103,21 @@ public class TurnManager : MonoSingleton<TurnManager>
 
     private IEnumerator PassTurn()
     {
+        if(IsPlayerTurn)
+        {
+            foreach (Player p in GameManager.Instance.friendly)
+            {
+                p.EndTurn?.Invoke();
+            }
+        }
+        else
+        {
+            foreach (Enemy p in GameManager.Instance.enemies)
+            {
+                p.EndTurn?.Invoke();
+            }
+        }
+
         playerController.SetQuickSlotsEnable(!isPlayerTurn);
         IsWaitingTurn = true;
         while (SomeoneIsMoving) yield return null;
@@ -115,11 +130,19 @@ public class TurnManager : MonoSingleton<TurnManager>
 
         if (isPlayerTurn)
         {
+            foreach (Player p in GameManager.Instance.friendly)
+            {
+                p.StartTurn?.Invoke();
+            }
             //플레이어 턴 시작
             ResetTurn();
         }
         else
         {
+            foreach (Enemy p in GameManager.Instance.enemies)
+            {
+                p.StartTurn?.Invoke();
+            }
             //적 턴 시작
             StartCoroutine(ResetEnemyTurn());
         }
