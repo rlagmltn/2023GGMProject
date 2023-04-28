@@ -19,22 +19,20 @@ public class StateMove : State<ArFSM>
         Vector2 targetPos = stateMachineClass.SearchAr().position;
         Vector2 angle;
 
-        //if(hit.collider == null)
-        //{
-        //    angle = Vector3.Normalize(targetPos - myPos);
-        //}
-        //else
-        //{
-        //    grid.SetNode(myPos, targetPos);
-        //    List<Vector2> path = grid.GetPath();
-        //    angle = path[0];
-        //}
-
         grid.SetNode(myPos, targetPos);
         List<Vector2> path = grid.GetPath();
         Vector2 curVec = Vector2.zero;
         Vector2 sumVec = Vector2.zero;
         int changeCnt = -1;
+
+        if(path == null)
+        {
+            Debug.LogError("None Path!");
+            stateMachineClass.StartCoroutine("MoveAr", 0);
+            stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
+            return;
+        }
+
         foreach(Vector2 vec in path)
         {
             if(curVec != vec)
@@ -42,18 +40,20 @@ public class StateMove : State<ArFSM>
                 changeCnt++;
                 curVec = vec;
                 if (changeCnt == 2) break;
+
             }
             sumVec += vec;
         }
 
         angle = sumVec.normalized;
         
-        foreach(RaycastHit2D ray in Physics2D.RaycastAll(myPos, angle, 30f))
+        foreach(RaycastHit2D ray in Physics2D.RaycastAll(myPos, angle, sumVec.magnitude))
         {
-            if(ray.collider.CompareTag("Out") || ray.collider.CompareTag("Object"))
+            if(ray.collider.CompareTag("Out") || ray.collider.name.Contains("Obstacle"))
             {
+                Debug.Log($"Find Obstacle in Path : {ray.collider.name}");
                 angle = path[0];
-                break;
+                break;  
             }
         }
 
