@@ -101,10 +101,9 @@ public class AStarPathfind
         List<Vector2> dir = new List<Vector2>();
         List<AStarNode> path = CreatePath(start, end, diagonal);
 
-        if(path == null)
-        {
-            return null;    
-        }
+        if (path == null)
+            return null;
+
         for (int i = 0; i<path.Count - 1; i++)
         {
             float xDif = path[i+1].xPos - path[i].xPos;

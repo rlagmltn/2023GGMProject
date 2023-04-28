@@ -40,7 +40,7 @@ public class Warrior : Player
         {
             var a = Vector2.Distance(transform.position, target[1].collider.transform.position);
             skillRange.size = new Vector2(a / 2, 1);
-            skillBox.localPosition = new Vector2(a + 1, 0);
+            skillBox.localPosition = new Vector2(a / 2 + 1, 0);
         }
         else
         {
