@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd6096bb90998d0469d40c07acdda1e3, type: 3}
+  m_Name: WaterBowl
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: c8d966739c7e65947964aa4035df3cc2, type: 3}
+  itemName: "\uBB3C\uD1B5"
+  itemPrice: 0
+  stat:
+    MaxHP: 0
+    HP: 0
+    MaxSP: 0
+    SP: 0
+    ATK: 0
+    SATK: 0
+    CriPer: 0
+    CriDmg: 0
+    WEIGHT: 0
+  SkillCoolDown: 0
+  itemExplain: "\uC2DC\uC6D0\uD55C \uBB3C\uC774 \uB4E4\uC5B4\uC788\uB294 \uBB3C\uD1B5\uC774\uB2E4.
+    \uD55C \uBAA8\uAE08\uB9CC \uB9C8\uC2DC\uACE0 \uC2F6\uB2E4."
+  TAI:
+  - itemPassiveType: 9
+    Info: {fileID: -5534631288058364730, guid: 31e7af4af6c857049b8e863efe1577e9, type: 3}
+  armedPlayer: {fileID: 0}
