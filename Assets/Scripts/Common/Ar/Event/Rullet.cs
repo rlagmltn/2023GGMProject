@@ -56,6 +56,11 @@ public class Rullet : MonoBehaviour
         //    arSprites.Add(arInven.list[i].characterInfo.Image);
         //}
 
+        for (int i = arSprites.Count; i < arInven.list.Count; i++)
+        {
+            arSprites.Add(arInven.list[i].characterInfo.Image);
+        }
+
         for (int i = itemSprites.Count; i < itemInven.items.Count; i++)
         {
             itemSprites.Add(itemInven.items[i].itemIcon);
@@ -66,6 +71,14 @@ public class Rullet : MonoBehaviour
     {
         rolling = true;
         rollType = RollType.AR;
+        for (int i = 0; i < 3; i++)
+        {
+            slotImages[lastImage].sprite = arSprites[rollCount];
+            if (++rollCount >= arSprites.Count) rollCount = 0;
+        }
+        rollingSpeed = 30;
+
+        Invoke("Item_Stop", Random.Range(2.5f, 4f));
     }
 
     public void Item_RollStart()
@@ -74,35 +87,94 @@ public class Rullet : MonoBehaviour
         rollType = RollType.ITEM;
         for(int i=0; i<3; i++)
         {
-            slotImages[0].sprite = itemInven.items[0].itemIcon;
+            slotImages[lastImage].sprite = itemSprites[rollCount];
+            if (++rollCount >= itemSprites.Count) rollCount = 0;
         }
-        rollCount = 3;
+        rollingSpeed = 30;
+
+        Invoke("Item_Stop", Random.Range(2.5f, 4f));
     }
 
     private void Rolling()
     {
-        if (!rolling) return;
-
-        foreach(Image image in slotImages)
+        foreach (Image image in slotImages)
         {
             image.transform.Translate(Vector2.down * rollingSpeed * Time.deltaTime);
         }
-        if(slotImages[lastImage].transform.localPosition.y<-600)
+        if (rolling)
         {
-            var num = lastImage + 1;
-            if (num > 2) num = 0;
-            slotImages[lastImage].transform.localPosition = new Vector2(0, slotImages[num].transform.localPosition.y + 300);
-            if(rollType == 0)
+            if (slotImages[lastImage].transform.localPosition.y < -500)
             {
-                slotImages[lastImage].sprite = arInven.list[rollCount].characterInfo.Image;
-                if (++rollCount >= arInven.list.Count) rollCount = 0;
+                var num = lastImage + 1;
+                if (num > 2) num = 0;
+                slotImages[lastImage].transform.localPosition = new Vector2(0, slotImages[num].transform.localPosition.y + 250);
+                if (rollType == 0)
+                {
+                    slotImages[lastImage].sprite = arSprites[rollCount];
+                    if (++rollCount >= arSprites.Count) rollCount = 0;
+                }
+                else
+                {
+                    slotImages[lastImage].sprite = itemSprites[rollCount];
+                    if (++rollCount >= itemSprites.Count) rollCount = 0;
+                }
+                if (--lastImage < 0) lastImage = 2;
             }
+        }
+        else
+        {
+            int num = lastImage + 1 > 2 ? 0 : lastImage + 1;
+            if (slotImages[lastImage - 1 < 0 ? 2 : lastImage - 1].transform.localPosition.y >= -250f && slotImages[lastImage].transform.localPosition.y < -249.5f) return;
             else
             {
-                slotImages[lastImage].sprite = itemInven.items[rollCount].itemIcon;
-                if (++rollCount >= itemInven.items.Count) rollCount = 0;
+                rollingSpeed = 0;
+                slotImages[lastImage].transform.localPosition = new Vector2(0, slotImages[num].transform.localPosition.y + 250);
+                if (--lastImage < 0) lastImage = 2;
             }
-            if (--lastImage<0) lastImage = 2;
         }
+    }
+
+    private ArSO Ar_Stop()
+    {
+        int lengthCount;
+        lengthCount = itemInven.items.Count;
+        int num = lastImage + 1 > 2 ? 0 : lastImage + 1;
+        rollCount = Random.Range(0, lengthCount);
+
+        if (slotImages[lastImage < 0 ? 2 : lastImage].transform.localPosition.y > -249.5f)
+        {
+            slotImages[lastImage].sprite = arSprites[rollCount];
+        }
+        else
+        {
+            slotImages[num].sprite = arSprites[rollCount];
+        }
+
+        rolling = false;
+
+        Debug.Log(arInven.list[rollCount].name);
+        return arInven.list[rollCount];
+    }
+
+    private ItemSO Item_Stop()
+    {
+        int lengthCount;
+        lengthCount = itemInven.items.Count;
+        int num = lastImage + 1 > 2 ? 0 : lastImage + 1;
+        rollCount = Random.Range(0, lengthCount);
+
+        if (slotImages[lastImage < 0 ? 2 : lastImage].transform.localPosition.y > -249.5f)
+        {
+            slotImages[lastImage].sprite = itemSprites[rollCount];
+        }
+        else
+        {
+            slotImages[num].sprite = itemSprites[rollCount];
+        }
+
+        rolling = false;
+
+        Debug.Log(itemInven.items[rollCount].name);
+        return itemInven.items[rollCount];
     }
 }
