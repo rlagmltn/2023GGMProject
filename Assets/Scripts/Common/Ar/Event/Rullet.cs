@@ -35,7 +35,7 @@ public class Rullet : MonoBehaviour
     private int lastImage = 2;
 
     private bool rolling = false;
-    private float rollingSpeed = 30;
+    private float rollingSpeed;
     private int rollCount;
     private RollType rollType;
 
