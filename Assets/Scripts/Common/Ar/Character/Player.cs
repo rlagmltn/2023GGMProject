@@ -205,8 +205,7 @@ public class Player : Ar
     public virtual void Drag(float angle, float dis)
     {
         rangeContainer.rotation = Quaternion.Euler(0, 0, angle+180);
-        moveRange.size = new Vector2((dis * 2), 1);
-        attackRange.size = new Vector2((dis * 2), 1);
+        moveRange.size = new Vector2((dis * pushPower) / (1 + stat.WEIGHT * 0.1f) / 8, 1);
     }
 
     public void DragEnd(JoystickType joystickType, float charge, Vector2 angle)

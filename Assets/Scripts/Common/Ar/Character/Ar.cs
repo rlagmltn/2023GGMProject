@@ -137,8 +137,6 @@ public class Ar : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(rigid.velocity + name);
-        Debug.Log(lastVelocity + name);
         if (collision.transform.CompareTag("Object"))
         {
             //BeforeCrash?.Invoke();
