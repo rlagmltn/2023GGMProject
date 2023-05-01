@@ -12,23 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6096bb90998d0469d40c07acdda1e3, type: 3}
   m_Name: Mjolnir
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: a4b5f62f33b3e004e8aace652e009615, type: 3}
-  itemName: "\uBB3C\uD1B5"
+  itemIcon: {fileID: 21300000, guid: 0d5cc98638f30074789c76ff0bd4ccae, type: 3}
+  itemName: "\uBB20\uB2C8\uB974"
   itemPrice: 0
   stat:
     MaxHP: 0
     HP: 0
     MaxSP: 0
     SP: 0
-    ATK: 0
+    ATK: 4
     SATK: 0
     CriPer: 0
     CriDmg: 0
     WEIGHT: 0
   SkillCoolDown: 0
-  itemExplain: "\uC2DC\uC6D0\uD55C \uBB3C\uC774 \uB4E4\uC5B4\uC788\uB294 \uBB3C\uD1B5\uC774\uB2E4.
-    \uD55C \uBAA8\uAE08\uB9CC \uB9C8\uC2DC\uACE0 \uC2F6\uB2E4."
+  itemExplain: "\uD1A0\uB974\uAC00 \uC0AC\uC6A9\uD558\uB358 \uC804\uC124 \uC18D \uB9DD\uCE58.
+    \r\n\uB2F9\uC7A5\uC774\uB77C\uB3C4 \uBC88\uAC1C\uB97C \uB0B4\uBFDC\uC744 \uAC83
+    \uAC19\uB2E4"
   TAI:
-  - itemPassiveType: 9
-    Info: {fileID: -5534631288058364730, guid: 31e7af4af6c857049b8e863efe1577e9, type: 3}
+  - itemPassiveType: 14
+    Info: {fileID: 841409008912067360, guid: 57cb3fd269ef5f54bb92739818daf306, type: 3}
   armedPlayer: {fileID: 0}
