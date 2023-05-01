@@ -1,0 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Mjolnir : ItemInfo
+{
+    [SerializeField] private float Distance = 0f;
+
+    public override void Passive()
+    {
+        GetNearEnemyDamage();
+    }
+
+    void GetNearEnemyDamage()
+    {
+        if (!player._isMove) return;
+
+        //이펙트는 누군가 해줘야함 번개치는거
+
+        Collider2D[] hit = Physics2D.OverlapCircleAll(player.transform.position, Distance);
+
+        if (hit.Length <= 0) return;
+
+        for (int num = 0; num < hit.Length; num++)
+        {
+            if (!hit[num].GetComponent<Enemy>()) continue;
+
+            hit[num].GetComponent<Enemy>().Hit(3);
+        }
+    }
+}

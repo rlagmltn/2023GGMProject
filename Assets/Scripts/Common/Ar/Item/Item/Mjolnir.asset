@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd6096bb90998d0469d40c07acdda1e3, type: 3}
-  m_Name: SmellingFeather
+  m_Name: Mjolnir
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: d925bcee89ebf974c8f5f9639cae4f55, type: 3}
-  itemName: "\uB0C4\uC0C8\uB098\uB294 \uAE43\uD138"
+  itemIcon: {fileID: 21300000, guid: a4b5f62f33b3e004e8aace652e009615, type: 3}
+  itemName: "\uBB3C\uD1B5"
   itemPrice: 0
   stat:
     MaxHP: 0
@@ -24,10 +24,11 @@ MonoBehaviour:
     SATK: 0
     CriPer: 0
     CriDmg: 0
-    WEIGHT: -1
+    WEIGHT: 0
   SkillCoolDown: 0
-  itemExplain: "\uBAB8\uC774 \uC0C1\uCF8C\uD558\uACE0, \uAE30\uBD84\uC774 \uB098\uC058\uB2E4."
+  itemExplain: "\uC2DC\uC6D0\uD55C \uBB3C\uC774 \uB4E4\uC5B4\uC788\uB294 \uBB3C\uD1B5\uC774\uB2E4.
+    \uD55C \uBAA8\uAE08\uB9CC \uB9C8\uC2DC\uACE0 \uC2F6\uB2E4."
   TAI:
-  - itemPassiveType: 14
-    Info: {fileID: -4562380842885283148, guid: c27ed66f157bf374c840088ddf740831, type: 3}
+  - itemPassiveType: 9
+    Info: {fileID: -5534631288058364730, guid: 31e7af4af6c857049b8e863efe1577e9, type: 3}
   armedPlayer: {fileID: 0}

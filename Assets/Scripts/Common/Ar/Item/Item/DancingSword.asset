@@ -10,25 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd6096bb90998d0469d40c07acdda1e3, type: 3}
-  m_Name: WaterBowl
+  m_Name: DancingSword
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: a4b5f62f33b3e004e8aace652e009615, type: 3}
-  itemName: "\uBB3C\uD1B5"
+  itemName: "\uCDA4\uCD94\uB294 \uAC80"
   itemPrice: 0
   stat:
     MaxHP: 0
     HP: 0
     MaxSP: 0
     SP: 0
-    ATK: 0
+    ATK: 2
     SATK: 0
     CriPer: 0
     CriDmg: 0
     WEIGHT: 0
   SkillCoolDown: 0
-  itemExplain: "\uC2DC\uC6D0\uD55C \uBB3C\uC774 \uB4E4\uC5B4\uC788\uB294 \uBB3C\uD1B5\uC774\uB2E4.
-    \uD55C \uBAA8\uAE08\uB9CC \uB9C8\uC2DC\uACE0 \uC2F6\uB2E4."
+  itemExplain: "\uC2E0\uAE30\uD558\uB2E4\uACE0 \uAC00\uAE4C\uC774 \uB2E4\uAC00\uAC00\uBA74
+    \uBCA0\uC77C \uC218\uB3C4 \uC788\uB2E4."
   TAI:
+  - itemPassiveType: 12
+    Info: {fileID: 1085855309376315407, guid: fdb03be6da8b8654688d154a205d92e1, type: 3}
   - itemPassiveType: 9
-    Info: {fileID: -5534631288058364730, guid: 31e7af4af6c857049b8e863efe1577e9, type: 3}
+    Info: {fileID: 1704288354224663357, guid: baf695a573d69694d9ca402bcf88fda7, type: 3}
+  - itemPassiveType: 13
+    Info: {fileID: 1760030413768387045, guid: 6f1dd30886afda241a0fc5dec7cf643a, type: 3}
   armedPlayer: {fileID: 0}

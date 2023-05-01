@@ -46,6 +46,7 @@ public class Player : Ar
     protected PlayerController playerController;
     protected bool isAttack = false;
     protected bool isSkill = false;
+    public bool _isMove = false;
 
     [SerializeField] ItemSO[] itemSlots = new ItemSO[3];
 
@@ -162,7 +163,7 @@ public class Player : Ar
                     MouseUp.AddListener(TAI[num].Info.Passive);
                     break;
                 case ItemPassiveType.Alway:
-
+                    //이거 추가하지마셈 이거 그냥 update문 돌릴거임
 
                     break;
                 case ItemPassiveType.Once:
