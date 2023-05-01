@@ -8,7 +8,6 @@ public class Warrior : Player
     private Transform boxPoint;
     private Transform skillBox;
     private bool dashing = false;
-    private float range;
 
     protected override void Start()
     {
@@ -34,11 +33,11 @@ public class Warrior : Player
     {
         base.Drag(angle, dis);
 
-        var target = Physics2D.RaycastAll(transform.position, attackRange.transform.position - transform.position, range);
+        targets = Physics2D.RaycastAll(transform.position, attackRange.transform.position - transform.position, range);
 
-        if (target.Length > 1 && target[1].collider.CompareTag("Enemy"))
+        if (targets.Length > 1)
         {
-            var a = Vector2.Distance(transform.position, target[1].collider.transform.position);
+            var a = Vector2.Distance(transform.position, targets[1].point);
             skillRange.size = new Vector2(a / 2, 1);
             skillBox.localPosition = new Vector2(a / 2 + 1, 0);
         }

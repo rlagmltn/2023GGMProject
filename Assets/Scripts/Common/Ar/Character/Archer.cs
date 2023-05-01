@@ -10,7 +10,6 @@ public class Archer : Player
     float maxTime = 1;
     float currentTime = 0;
     bool timeGoing = false;
-    private float range;
 
     private Vector2 angle;
 
@@ -42,12 +41,12 @@ public class Archer : Player
     {
         base.Drag(angle, dis);
 
-        var target = Physics2D.RaycastAll(transform.position, attackRange.transform.position - transform.position, range);
+        var target = FindNearEnemy(range);
 
-        if(target.Length>1 && target[1].collider.CompareTag("Enemy"))
+        if (target != null)
         {
-            attackRange.size = new Vector2(Vector2.Distance(transform.position, target[1].collider.transform.position)/2, 1);
-            skillRange.size = new Vector2(Vector2.Distance(transform.position, target[1].collider.transform.position)/2, 1);
+            attackRange.size = new Vector2(Vector2.Distance(transform.position, target.transform.position) / 2, 1);
+            skillRange.size = new Vector2(Vector2.Distance(transform.position, target.position) / 2, 1);
         }
         else
         {
