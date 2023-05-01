@@ -94,9 +94,7 @@ public class Ar : MonoBehaviour
                     break;
                 }
             }
-
         }
-        
         lastVelocity = rigid.velocity;
     }
 
@@ -139,10 +137,13 @@ public class Ar : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log(rigid.velocity + name);
+        Debug.Log(lastVelocity + name);
         if (collision.transform.CompareTag("Object"))
         {
             //BeforeCrash?.Invoke();
 
+            Debug.Log("º®¿¡²Ç!");
             rigid.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal);
             cameraMove.Shake();
             EffectManager.Instance.InstantiateEffect(0, collision.contacts[0].point, transform.position, collision.contacts[0].point);

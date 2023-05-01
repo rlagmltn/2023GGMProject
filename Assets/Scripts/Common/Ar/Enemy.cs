@@ -27,12 +27,6 @@ public class Enemy : Ar
         StatReset();
     }
 
-    protected override void FixedUpdate()
-    {
-        if (TurnManager.Instance.IsPlayerTurn) return;
-        base.FixedUpdate();
-    }
-
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
@@ -47,12 +41,6 @@ public class Enemy : Ar
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
-        if (collision.CompareTag("Attack"))
-        {
-            if (collision.transform.IsChildOf(transform)) return;
-            var attacker = collision.transform.parent.GetComponent<Ar>();
-            BattleManager.Instance.SettingAr(this, attacker);
-        }
     }
 
     public void PassiveCoolDown()

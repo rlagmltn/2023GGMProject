@@ -175,12 +175,6 @@ public class Player : Ar
         }
     }
 
-    protected override void FixedUpdate()
-    {
-        if (!TurnManager.Instance.IsPlayerTurn) return;
-        base.FixedUpdate();
-    }
-
     public void DragBegin(JoystickType joystickType)
     {
         if (joystickType == JoystickType.None)
