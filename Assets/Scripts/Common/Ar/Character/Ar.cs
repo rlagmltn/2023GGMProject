@@ -38,6 +38,8 @@ public class Ar : MonoBehaviour
     [HideInInspector] public UnityEvent AfterMove;
     [HideInInspector] public UnityEvent OnOutDie;
     [HideInInspector] public UnityEvent OnBattleDie;
+    [HideInInspector] public UnityEvent OnUsedSkill;
+    [HideInInspector] public UnityEvent OnCrashed;
     [HideInInspector] public UnityEvent EndTurn;
 
     protected Transform character;
@@ -83,7 +85,7 @@ public class Ar : MonoBehaviour
         {
             Flip();
             lastVelocity = rigid.velocity;
-            Collider2D[] hit = Physics2D.OverlapBoxAll((Vector2)transform.position + lastVelocity/8, new Vector2(0.6f, lastVelocity.magnitude/4), Mathf.Atan2(lastVelocity.y, lastVelocity.x) * Mathf.Rad2Deg + 90);
+            Collider2D[] hit = Physics2D.OverlapBoxAll((Vector2)transform.position + lastVelocity/8, new Vector2(0.95f, lastVelocity.magnitude/4), Mathf.Atan2(lastVelocity.y, lastVelocity.x) * Mathf.Rad2Deg + 90);
 
             foreach(Collider2D col in hit)
             {
@@ -139,14 +141,11 @@ public class Ar : MonoBehaviour
     {
         if (collision.transform.CompareTag("Object"))
         {
-            //BeforeCrash?.Invoke();
-
-            Debug.Log("º®¿¡²Ç!");
             rigid.velocity = Vector2.Reflect(lastVelocity, collision.contacts[0].normal);
+            OnCrashed?.Invoke();
             cameraMove.Shake();
             EffectManager.Instance.InstantiateEffect(0, collision.contacts[0].point, transform.position, collision.contacts[0].point);
             InitTImeScale();
-            //AfterCrash?.Invoke();
         }
     }
 

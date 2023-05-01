@@ -161,6 +161,12 @@ public class Player : Ar
                 case ItemPassiveType.MouseUp:
                     MouseUp.AddListener(TAI[num].Info.Passive);
                     break;
+                case ItemPassiveType.OnUsedSkill:
+                    OnUsedSkill.AddListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.OnCrashed:
+                    OnCrashed.AddListener(TAI[num].Info.Passive);
+                    break;
                 case ItemPassiveType.Alway:
 
 
@@ -251,6 +257,7 @@ public class Player : Ar
     {
         isSkill = true;
         currentCooltime = skillCooltime;
+        OnUsedSkill?.Invoke();
         StartCoroutine(AnimTimingSkill());
     }
     public virtual IEnumerator AnimTimingSkill() { yield return null; }
