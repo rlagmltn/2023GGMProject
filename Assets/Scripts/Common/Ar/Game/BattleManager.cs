@@ -56,8 +56,8 @@ public class BattleManager : MonoSingleton<BattleManager>
     //충돌시 작동되는 배틀 시스템
     private bool CrushBattle()
     {
-        arOne.BeforeCrash.Invoke();
-        arTwo.BeforeCrash.Invoke();
+        arOne.BeforeCrash?.Invoke();
+        arTwo.BeforeCrash?.Invoke();
 
         Ar attacker = null;
         Ar defender = null;
@@ -98,8 +98,8 @@ public class BattleManager : MonoSingleton<BattleManager>
             }
         }
 
-        attacker.BeforeAttack.Invoke();
-        defender.BeforeDefence.Invoke();
+        attacker.BeforeAttack?.Invoke();
+        defender.BeforeDefence?.Invoke();
 
         attacker.AnimMoveStart();
         EffectManager.Instance.InstantiateEffect(Effect.CRASH, (attacker.transform.position+defender.transform.position)/2, attacker.transform.position, defender.transform.position);
@@ -112,10 +112,10 @@ public class BattleManager : MonoSingleton<BattleManager>
         else
             isDead = defender.Hit(attacker.stat.ATK);
 
-        attacker.AfterAttack.Invoke();
+        attacker.AfterAttack?.Invoke();
         if(!isDead)
         {
-            defender.AfterDefence.Invoke();
+            defender.AfterDefence?.Invoke();
 
             Vector2 a, b;
             (a, b) = D2c(attacker.lastVelocity, defender.lastVelocity, attacker.rigid.position, defender.rigid.position, 1+attacker.stat.WEIGHT*0.1f, 1+defender.stat.WEIGHT*0.1f);
@@ -123,9 +123,9 @@ public class BattleManager : MonoSingleton<BattleManager>
             attacker.Push(a);
             defender.Push(b);
 
-            defender.AfterCrash.Invoke();
+            defender.AfterCrash?.Invoke();
         }
-        attacker.AfterCrash.Invoke();
+        attacker.AfterCrash?.Invoke();
         cameraMove.MovetoTarget(attacker.transform);
         ResetAll();
         return true;

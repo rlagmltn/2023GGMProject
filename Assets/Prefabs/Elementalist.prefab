@@ -232,6 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: 
+  pushPower: 40
   StartTurn:
     m_PersistentCalls:
       m_Calls: []
@@ -272,7 +273,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isPaperBirdPlay: 0
-  ItemInfos: []
+  StickySlimeList: []
+  StickySlime_PoaerList: []
   TAI: []
   itemSlots:
   - {fileID: 0}
@@ -4407,7 +4409,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &113947671622880447
 Transform:
   m_ObjectHideFlags: 0

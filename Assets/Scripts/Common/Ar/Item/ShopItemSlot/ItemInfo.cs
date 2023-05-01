@@ -17,6 +17,8 @@ public enum ItemPassiveType:int
     OnOutDie,
     OnBattleDie,
     MouseUp,
+    OnUsedSkill,
+    OnCrashed,
     Alway,
     Once,
 }

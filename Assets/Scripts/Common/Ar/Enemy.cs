@@ -27,17 +27,12 @@ public class Enemy : Ar
         StatReset();
     }
 
-    protected override void FixedUpdate()
-    {
-        if (TurnManager.Instance.IsPlayerTurn) return;
-        base.FixedUpdate();
-    }
-
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
         if (!collision.transform.CompareTag("Object"))
         {
+            if (collision.transform.tag != transform.tag) OnCrashed?.Invoke();
             BattleManager.Instance.SettingAr(this);
             cameraMove.Shake();
             EffectManager.Instance.InstantiateEffect(Effect.HIT, collision.contacts[0].point, transform.position, collision.contacts[0].point);
@@ -47,12 +42,6 @@ public class Enemy : Ar
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
-        if (collision.CompareTag("Attack"))
-        {
-            if (collision.transform.IsChildOf(transform)) return;
-            var attacker = collision.transform.parent.GetComponent<Ar>();
-            BattleManager.Instance.SettingAr(this, attacker);
-        }
     }
 
     public void PassiveCoolDown()

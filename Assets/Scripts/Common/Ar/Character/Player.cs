@@ -162,6 +162,12 @@ public class Player : Ar
                 case ItemPassiveType.MouseUp:
                     MouseUp.AddListener(TAI[num].Info.Passive);
                     break;
+                case ItemPassiveType.OnUsedSkill:
+                    OnUsedSkill.AddListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.OnCrashed:
+                    OnCrashed.AddListener(TAI[num].Info.Passive);
+                    break;
                 case ItemPassiveType.Alway:
                     //이거 추가하지마셈 이거 그냥 update문 돌릴거임
 
@@ -174,12 +180,6 @@ public class Player : Ar
                     break;
             }
         }
-    }
-
-    protected override void FixedUpdate()
-    {
-        if (!TurnManager.Instance.IsPlayerTurn) return;
-        base.FixedUpdate();
     }
 
     public void DragBegin(JoystickType joystickType)
@@ -212,8 +212,7 @@ public class Player : Ar
     public virtual void Drag(float angle, float dis)
     {
         rangeContainer.rotation = Quaternion.Euler(0, 0, angle+180);
-        moveRange.size = new Vector2((dis * 2), 1);
-        attackRange.size = new Vector2((dis * 2), 1);
+        moveRange.size = new Vector2((dis * pushPower) / (1 + stat.WEIGHT * 0.1f) / 8, 1);
     }
 
     public void DragEnd(JoystickType joystickType, float charge, Vector2 angle)
@@ -259,6 +258,7 @@ public class Player : Ar
     {
         isSkill = true;
         currentCooltime = skillCooltime;
+        OnUsedSkill?.Invoke();
         StartCoroutine(AnimTimingSkill());
     }
     public virtual IEnumerator AnimTimingSkill() { yield return null; }
@@ -289,6 +289,7 @@ public class Player : Ar
         base.OnCollisionEnter2D(collision);
         if (!collision.transform.CompareTag("Object"))
         {
+            if (collision.transform.tag != transform.tag) OnCrashed?.Invoke();
             BattleManager.Instance.SettingAr(this);
             cameraMove.Shake();
             EffectManager.Instance.InstantiateEffect(0, collision.contacts[0].point, transform.position, collision.contacts[0].point);

@@ -12,7 +12,7 @@ public class Dummy : Enemy
         stat.SATK = 4;
         stat.CriPer = 5;
         stat.CriDmg = 1.5f;
-        stat.WEIGHT = 5;
+        stat.WEIGHT = 3;
 
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
