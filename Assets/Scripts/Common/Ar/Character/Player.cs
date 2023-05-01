@@ -288,6 +288,7 @@ public class Player : Ar
         base.OnCollisionEnter2D(collision);
         if (!collision.transform.CompareTag("Object"))
         {
+            if (collision.transform.tag != transform.tag) OnCrashed?.Invoke();
             BattleManager.Instance.SettingAr(this);
             cameraMove.Shake();
             EffectManager.Instance.InstantiateEffect(0, collision.contacts[0].point, transform.position, collision.contacts[0].point);
