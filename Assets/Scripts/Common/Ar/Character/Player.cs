@@ -17,7 +17,7 @@ public class Player : Ar
     [HideInInspector] public UnityEvent MouseUp;
 
     protected float power;
-    protected int skillCooltime;
+    public int skillCooltime { get; set; }
 
     public float Power { get { return power; } }
     public float PushPower { get { return pushPower; } }
@@ -117,14 +117,14 @@ public class Player : Ar
         base.StatReset();
     }
 
-    void Armed()
+    public void Armed()
     {
-
         for (int num = 0; num < itemSlots.Length; num++)
         {
             if (itemSlots[num] == null) continue;
             stat += itemSlots[num].stat;
             skillCooltime -= itemSlots[num].SkillCoolDown; //이거 언암드에도 해줘야함
+            itemSlots[num].armedPlayer = this;
         }
 
         for(int num = 0; num < TAI.Count; num++)

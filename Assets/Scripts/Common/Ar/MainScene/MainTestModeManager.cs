@@ -7,30 +7,25 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
     [SerializeField] private CameraMove cameraMove;
     [SerializeField] private Enemy pfDummy;
     [SerializeField] private ArSOArray arHolder;
+    [SerializeField] private ItemDBSO itemDB;
     [SerializeField] private MainTestSlot pfMainTestSlot;
     [SerializeField] private Transform testBtnSlot;
+    [SerializeField] private Transform testBtnSlot2;
 
     [SerializeField] MainTestJoyStick joystick;
     [SerializeField] StickCancel cancelButton;
     [SerializeField] GameObject actSellect;
+    [SerializeField] MainTestSlot sellectPlayer;
+    [SerializeField] MainTestSlot[] armedItems;
 
     private GameObject attackAct;
     private Transform testBtnSlotParent;
     private Player testPlayer;
     private Enemy dummy;
 
-    /* 
-     * 여기에 해야할 것들
-     * 2. 알을 골랐을 때 화면에 고른 알이 나오는 기능
-     * 3. 알과 더미 위치가 초기화되는 기능
-     * 4. 카메라를 알 위치로 이동(카메라무브 타겟을 알로)
-     */
-
-    //     * 1. 클릭하면 사용 가능한 알들을 표시하는 기능
-
     private void Start()
     {
-        testBtnSlotParent = testBtnSlot.parent.parent;
+        testBtnSlotParent = testBtnSlot.parent.parent.parent;
         MakeArTestSlot();
         joystick.gameObject.SetActive(false);
         cancelButton.gameObject.SetActive(false);
@@ -46,6 +41,11 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
             var instance = Instantiate(pfMainTestSlot, testBtnSlot);
             instance.SetSO(so);
         }
+        foreach (ItemSO so in itemDB.items)
+        {
+            var instance = Instantiate(pfMainTestSlot, testBtnSlot2);
+            instance.SetSO(so);
+        }
     }
 
     public void ToggleSellectArPanel()
@@ -53,25 +53,54 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         testBtnSlotParent.gameObject.SetActive(!testBtnSlotParent.gameObject.activeSelf);
     }
 
-    public void SummonPlayer(Player newPlayer)
+    public void SellectPlayer(Player player = null)
     {
-        if(testPlayer != newPlayer)
+        if(testPlayer!=null)
         {
-            testPlayer?.gameObject.SetActive(false);
-            testPlayer = newPlayer;
-            testPlayer.transform.position = Vector3.zero;
-            testBtnSlotParent.gameObject.SetActive(false);
-            joystick.joystickType = JoystickType.None;
-            joystick.gameObject.SetActive(false);
-            cancelButton.gameObject.SetActive(false);
-            actSellect.SetActive(true);
-            attackAct.SetActive(testPlayer.isRangeCharacter);
-            cameraMove.MovetoTarget(testPlayer.transform);
-            dummy.StatReset();
-            dummy.gameObject.SetActive(true);
-            dummy.transform.position = new Vector3(5, 0);
-            TurnManager.Instance.SomeoneIsMoving = false;
+            foreach (ItemSO item in testPlayer.so.E_Item.itmeSO)
+            {
+                if (item == null) continue;
+                item.UnArmed();
+            }
+            for (int i = 0; i < 3; i++) armedItems[i].UnSetItem();
+            testPlayer.so.E_Item.itmeSO = new ItemSO[3];
+            testPlayer.gameObject.SetActive(false);
         }
+        testPlayer = player;
+        if(player!=null)
+            sellectPlayer.GetAr(player.so);
+    }
+
+    public void ArmedItem(ItemSO item)
+    {
+        if (testPlayer == null) return;
+        foreach(MainTestSlot slot in armedItems)
+        {
+            if (slot.itemSO == null)
+            {
+                slot.GetItem(item);
+                break;
+            }
+        }
+    }
+
+    public void SummonPlayer()
+    {
+        testPlayer.gameObject.SetActive(true);
+        testPlayer.transform.position = Vector3.zero;
+        testBtnSlotParent.gameObject.SetActive(false);
+        for (int i = 0; i < 3; i++) testPlayer.so.E_Item.itmeSO[i] = armedItems[i].itemSO;
+        testPlayer.Armed();
+        joystick.joystickType = JoystickType.None;
+        joystick.gameObject.SetActive(false);
+        cancelButton.gameObject.SetActive(false);
+        actSellect.SetActive(true);
+        attackAct.SetActive(testPlayer.isRangeCharacter);
+        cameraMove.MovetoTarget(testPlayer.transform);
+        dummy.StatReset();
+        dummy.gameObject.SetActive(true);
+        dummy.transform.position = new Vector3(5, 0);
+        TurnManager.Instance.SomeoneIsMoving = false;
     }
 
     public void DragBegin()
