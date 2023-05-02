@@ -13,7 +13,7 @@ public class Arrow : Bullet
         base.SetSO();
 
         var particleMain = particle.main;
-        particleMain.startRotation = -(transform.rotation.eulerAngles.z) * Mathf.Deg2Rad;
+        particleMain.startRotation = (transform.rotation.eulerAngles.z) * Mathf.Deg2Rad;
 
     }
 }
