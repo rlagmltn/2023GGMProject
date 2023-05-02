@@ -131,7 +131,7 @@ public class Ar : MonoBehaviour
         }
     }
 
-    private void Flip()
+    protected void Flip()
     {
         if (rigid.velocity.x < 0) character.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         else if (rigid.velocity.x > 0) character.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
