@@ -203,8 +203,6 @@ public class Player : Ar
             JoystickType.Skill => skillRange.gameObject,
             _ => moveRange.gameObject,
         };
-
-        animationManager.SetState(CharacterState.Ready);
         ActiveRangesAndChangeColor(Range);
     }
 
@@ -233,7 +231,7 @@ public class Player : Ar
 
     public void DragEnd(JoystickType joystickType, float charge, Vector2 angle)
     {
-        if(joystickType == JoystickType.None)
+        if (joystickType == JoystickType.None)
         {
             return;
         }

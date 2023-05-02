@@ -137,12 +137,14 @@ public class BattleManager : MonoSingleton<BattleManager>
         if (arOne.isUsingSkill && arOne.stat.SATK < 0)
         {
             arTwo.stat.HP -= arOne.stat.SATK;
+            arTwo.HpMaxCheck();
             arTwo.DeadCheck();
             arOne.isUsingSkill = false;
         }
         if (arTwo.isUsingSkill && arTwo.stat.SATK < 0)
         {
             arOne.stat.HP -= arTwo.stat.SATK;
+            arOne.HpMaxCheck();
             arOne.DeadCheck();
             arTwo.isUsingSkill = false;
         }
