@@ -95,6 +95,7 @@ public class Warrior : Player
     {
         while (isSkill) yield return null;
         var attackSuccess = false;
+        EffectManager.Instance.InstantiateEffect_P(Effect.WARRIOR, boxPoint.position, angle);
         Collider2D[] colliders = Physics2D.OverlapBoxAll(boxPoint.position, new Vector2(4.2f, 2.2f), rangeContainer.rotation.z);
 
         foreach (Collider2D collider in colliders)
