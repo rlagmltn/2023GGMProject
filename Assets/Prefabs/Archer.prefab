@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: 
+  pushPower: 40
   StartTurn:
     m_PersistentCalls:
       m_Calls: []
@@ -241,6 +242,12 @@ MonoBehaviour:
   OnBattleDie:
     m_PersistentCalls:
       m_Calls: []
+  OnUsedSkill:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCrashed:
+    m_PersistentCalls:
+      m_Calls: []
   EndTurn:
     m_PersistentCalls:
       m_Calls: []
@@ -251,13 +258,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isPaperBirdPlay: 0
-  ItemInfos: []
+  StickySlimeList: []
+  StickySlime_PoaerList: []
   TAI: []
+  _isMove: 0
   itemSlots:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  arrow: {fileID: -6648937999456340901, guid: cad45bbbeb62b0f4992b25d550070cdf, type: 3}
+  arrow: {fileID: -6214125255935533321, guid: 9d3934880aff4044fa957fc739b51a48, type: 3}
 --- !u!50 &7374049995123050639
 Rigidbody2D:
   serializedVersion: 4

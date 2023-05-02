@@ -41,7 +41,8 @@ public enum Effect
     WARRIOR,
     SUNK,
     ElementExplode,
-    Heal
+    Heal,
+    BowShoot
 }
 public enum ePrefabs
 {
