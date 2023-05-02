@@ -37,7 +37,8 @@ public class EventManger : MonoSingleton<EventManger>
         
         switch(S_event)
         {
-            case Events.HealAll: { EventList[(int)Events.HealAll].EventStart();} break;
+            case Events.HOR: { EventList[(int)Events.HOR].EventStart(); } break;
+            case Events.HealAr: { EventList[(int)Events.HealAr].EventStart();} break;
             default: { EventList[(int)S_event].EventStart();} break;
         }
     }
@@ -63,7 +64,7 @@ public class EventManger : MonoSingleton<EventManger>
         ClearPannel.gameObject.SetActive(true);
     }
 
-    void StageClear()
+    public void StageClear()
     {
         Global.EnterStage.IsCleared = true;
         SceneMgr.Instance.LoadScene(eSceneName.Map);

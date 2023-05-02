@@ -151,5 +151,6 @@ public enum ArClasses
 
 public enum Events
 {
-    HealAll = 0,
+    HOR = 0,
+    HealAr,
 };
