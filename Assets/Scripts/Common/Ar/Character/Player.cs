@@ -217,16 +217,7 @@ public class Player : Ar
     {
         rangeContainer.rotation = Quaternion.Euler(0, 0, angle+180);
         moveDrag = (dis * pushPower) / (1 + stat.WEIGHT * 0.1f) / 4;
-        targets = Physics2D.RaycastAll(transform.position, attackRange.transform.position - transform.position, moveDrag);
-
-        if (targets.Length > 1)
-        {
-            moveRange.size = new Vector2(Vector2.Distance(transform.position, targets[1].point) / 2, 1);
-        }
-        else
-        {
-            moveRange.size = new Vector2(moveDrag / 2, 1);
-        }
+        moveRange.size = new Vector2(moveDrag / 2, 1);
     }
 
     public void DragEnd(JoystickType joystickType, float charge, Vector2 angle)
