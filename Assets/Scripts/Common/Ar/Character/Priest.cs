@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Priest : Player
 {
+    private bool isUsingSkill;
+
     protected override void Start()
     {
         base.Start();
-        AfterMove.AddListener(()=> { isUsingSkill = false; });
+        AfterMove.AddListener(() => { isUsingSkill = false; });
     }
 
     public override void StatReset()
@@ -18,6 +20,8 @@ public class Priest : Player
     public override void Drag(float angle, float dis)
     {
         base.Drag(angle, dis);
+
+        targets = Physics2D.RaycastAll(transform.position, attackRange.transform.position - transform.position, moveDrag);
 
         if (targets.Length > 1)
         {
@@ -33,6 +37,17 @@ public class Priest : Player
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
+        if(collision.collider.CompareTag("Player")&&isUsingSkill)
+        {
+            var healTarget = collision.gameObject.GetComponent<Player>();
+
+            healTarget.Heal(stat.SATK);
+            var effect = EffectManager.Instance.InstantiateEffect_P(Effect.Heal, healTarget.transform.position, Vector2.zero);
+            effect.transform.SetParent(healTarget.transform);
+            Passive();
+
+            isUsingSkill = false;
+        }
     }
 
     protected override void Attack(Vector2 angle)
@@ -43,15 +58,15 @@ public class Priest : Player
     protected override void Skill(Vector2 angle)
     {
         base.Skill(angle);
-        rigid.velocity = -(angle * power) * pushPower / (1 + stat.WEIGHT * 0.1f);
         isUsingSkill = true;
+        rigid.velocity = -(angle * power) * pushPower / (1 + stat.WEIGHT * 0.1f);
         cameraMove.Shake();
-        Passive();
     }
 
     protected override void Passive()
     {
-        stat.HP += stat.ATK;
-        HpMaxCheck();
+        Heal(stat.ATK);
+        var effect = EffectManager.Instance.InstantiateEffect_P(Effect.Heal, transform.position, Vector2.zero);
+        effect.transform.SetParent(transform);
     }
 }

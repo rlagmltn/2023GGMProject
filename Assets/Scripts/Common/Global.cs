@@ -40,7 +40,8 @@ public enum Effect
     DASH,
     WARRIOR,
     SUNK,
-    ElementExplode
+    ElementExplode,
+    Heal
 }
 public enum ePrefabs
 {
