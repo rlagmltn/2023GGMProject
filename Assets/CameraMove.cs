@@ -243,7 +243,7 @@ public class CameraMove : MonoBehaviour
 
     public void SetDefaultZoom()
     {
-        orthographicSize = defaultOrthographicSize;
+        orthographicSize = minOrthographicSize;
         ApplyCameraSize();
     }
 }

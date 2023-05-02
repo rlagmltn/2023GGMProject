@@ -57,7 +57,8 @@ public class Bullet : MonoBehaviour
 
     public void DamageToAr(Collider2D collision)
     {
-        BattleManager.Instance.SettingAr(collision.GetComponent<Ar>(), damage);
+        if(bulletSO.bulletType!=BulletType.Explosion)
+            BattleManager.Instance.SettingAr(collision.GetComponent<Ar>(), damage);
         EffectManager.Instance.InstantiateEffect(Effect.HIT, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
         EffectManager.Instance.InstantiateEffect(Effect.CRASH, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
         AfterCrush();

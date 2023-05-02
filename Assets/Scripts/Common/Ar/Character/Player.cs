@@ -48,6 +48,12 @@ public class Player : Ar
     protected bool isSkill = false;
     public bool _isMove = false;
 
+    protected float moveDrag;
+    protected RaycastHit2D[] targets;
+
+    protected float rangeDrag;
+    protected float range;
+
     [SerializeField] ItemSO[] itemSlots = new ItemSO[3];
 
     public Player()
@@ -197,8 +203,6 @@ public class Player : Ar
             JoystickType.Skill => skillRange.gameObject,
             _ => moveRange.gameObject,
         };
-
-        animationManager.SetState(CharacterState.Ready);
         ActiveRangesAndChangeColor(Range);
     }
 
@@ -212,12 +216,13 @@ public class Player : Ar
     public virtual void Drag(float angle, float dis)
     {
         rangeContainer.rotation = Quaternion.Euler(0, 0, angle+180);
-        moveRange.size = new Vector2((dis * pushPower) / (1 + stat.WEIGHT * 0.1f) / 8, 1);
+        moveDrag = (dis * pushPower) / (1 + stat.WEIGHT * 0.1f) / 4;
+        moveRange.size = new Vector2(moveDrag / 2, 1);
     }
 
     public void DragEnd(JoystickType joystickType, float charge, Vector2 angle)
     {
-        if(joystickType == JoystickType.None)
+        if (joystickType == JoystickType.None)
         {
             return;
         }
@@ -397,6 +402,7 @@ public class Player : Ar
     public override bool DeadCheck()
     {
         DeadSave();
+        if (stat.HP <= 0) so.isInGameTake = false;
         return base.DeadCheck();
     }
 
@@ -412,5 +418,18 @@ public class Player : Ar
         so.surviveStats.currentHP = stat.HP;
         so.surviveStats.currentWeight = stat.WEIGHT;
         if(!isDead) so.surviveStats.currentShield = so.surviveStats.MaxShield;
+    }
+
+    protected Transform FindNearEnemy(float distance)
+    {
+        targets = Physics2D.RaycastAll(transform.position, attackRange.transform.position - transform.position, distance);
+        foreach (RaycastHit2D hit in targets)
+        {
+            if (hit.collider.CompareTag("Enemy"))
+            {
+                return hit.transform;
+            }
+        }
+        return null;
     }
 }

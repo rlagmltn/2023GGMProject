@@ -12,7 +12,6 @@ public class Ar : MonoBehaviour
     public string Name;
 
     public bool isDead { get; set; }
-    public bool isUsingSkill { get; set; }
     public bool isMove { get; set; }
 
     public float pushPower = 40f;
@@ -131,7 +130,7 @@ public class Ar : MonoBehaviour
         }
     }
 
-    private void Flip()
+    protected void Flip()
     {
         if (rigid.velocity.x < 0) character.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         else if (rigid.velocity.x > 0) character.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
@@ -177,15 +176,14 @@ public class Ar : MonoBehaviour
             }
             else damage = 0;
         }
-        stat.HP -= damage;
-        HpMaxCheck();
+        stat.HP = Mathf.Clamp(stat.HP - damage, 0, stat.MaxHP);
         return DeadCheck();
     }
 
-
-    public void HpMaxCheck()
+    public virtual void Heal(int heal)
     {
-        stat.HP = Mathf.Clamp(stat.HP, 0, stat.MaxHP);
+        stat.HP = Mathf.Clamp(stat.HP + heal, 0, stat.MaxHP);
+        DeadCheck();
     }
 
     public virtual bool DeadCheck()

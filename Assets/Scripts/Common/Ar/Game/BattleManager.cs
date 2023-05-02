@@ -134,19 +134,6 @@ public class BattleManager : MonoSingleton<BattleManager>
     //같은 팀 끼리 충돌 시 작동되는 시스템
     private void Crush()
     {
-        if (arOne.isUsingSkill && arOne.stat.SATK < 0)
-        {
-            arTwo.stat.HP -= arOne.stat.SATK;
-            arTwo.DeadCheck();
-            arOne.isUsingSkill = false;
-        }
-        if (arTwo.isUsingSkill && arTwo.stat.SATK < 0)
-        {
-            arOne.stat.HP -= arTwo.stat.SATK;
-            arOne.DeadCheck();
-            arTwo.isUsingSkill = false;
-        }
-
         Vector2 a, b;
         (a, b) = D2c(arOne.lastVelocity, arTwo.lastVelocity, arOne.rigid.position, arTwo.rigid.position, 1+arOne.stat.WEIGHT*0.1f, 1+arTwo.stat.WEIGHT*0.1f);
         arOne.Push(a);

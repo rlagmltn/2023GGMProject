@@ -10,7 +10,6 @@ public class Archer : Player
     float maxTime = 1;
     float currentTime = 0;
     bool timeGoing = false;
-    private float range;
 
     private Vector2 angle;
 
@@ -42,12 +41,12 @@ public class Archer : Player
     {
         base.Drag(angle, dis);
 
-        var target = Physics2D.RaycastAll(transform.position, attackRange.transform.position - transform.position, range);
+        var target = FindNearEnemy(range);
 
-        if(target.Length>1 && target[1].collider.CompareTag("Enemy"))
+        if (target != null)
         {
-            attackRange.size = new Vector2(Vector2.Distance(transform.position, target[1].collider.transform.position)/2, 1);
-            skillRange.size = new Vector2(Vector2.Distance(transform.position, target[1].collider.transform.position)/2, 1);
+            attackRange.size = new Vector2(Vector2.Distance(transform.position, target.transform.position) / 2, 1);
+            skillRange.size = new Vector2(Vector2.Distance(transform.position, target.position) / 2, 1);
         }
         else
         {
@@ -65,6 +64,8 @@ public class Archer : Player
     {
         base.Attack(angle);
         this.angle = angle;
+        if (angle.x < 0) character.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
+        else if (angle.x > 0) character.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         StartCoroutine(AnimTimingAttack());
         WaitSec(1.5f);
     }
@@ -80,6 +81,8 @@ public class Archer : Player
         base.Skill(angle);
         animationManager.ShotBow();
         this.angle = angle;
+        if (angle.x < 0) character.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
+        else if (angle.x > 0) character.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         WaitSec(2f);
     }
 
@@ -94,11 +97,10 @@ public class Archer : Player
     void Shoot(Vector2 angle)
     {
         float zAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
+        EffectManager.Instance.InstantiateEffect_P(Effect.BowShoot, (Vector2)attackRange.transform.position - angle, angle);
         var bullet = Instantiate(arrow, transform.position, Quaternion.Euler(0, 0, zAngle-180));
         rigid.velocity = ((angle.normalized * 0.5f) * 25) / (1 + stat.WEIGHT * 0.1f);
         cameraMove.MovetoTarget(bullet.transform);
-        if (angle.x < 0) character.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
-        else if (angle.x > 0) character.localScale = new Vector3(0.5f, 0.5f, 0.5f);
     }
 
     void WaitSec(float sec)

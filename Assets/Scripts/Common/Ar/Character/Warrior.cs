@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.HeroEditor4D.Common.Scripts.Enums;
 
 public class Warrior : Player
 {
@@ -8,7 +9,6 @@ public class Warrior : Player
     private Transform boxPoint;
     private Transform skillBox;
     private bool dashing = false;
-    private float range;
 
     protected override void Start()
     {
@@ -34,11 +34,11 @@ public class Warrior : Player
     {
         base.Drag(angle, dis);
 
-        var target = Physics2D.RaycastAll(transform.position, attackRange.transform.position - transform.position, range);
+        targets = Physics2D.RaycastAll(transform.position, attackRange.transform.position - transform.position, range);
 
-        if (target.Length > 1 && target[1].collider.CompareTag("Enemy"))
+        if (targets.Length > 1)
         {
-            var a = Vector2.Distance(transform.position, target[1].collider.transform.position);
+            var a = Vector2.Distance(transform.position, targets[1].point);
             skillRange.size = new Vector2(a / 2, 1);
             skillBox.localPosition = new Vector2(a / 2 + 1, 0);
         }
@@ -60,6 +60,8 @@ public class Warrior : Player
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
+        if(dashing)
+            rigid.velocity = rigid.velocity.normalized * 3;
     }
 
     protected override void Skill(Vector2 angle)
@@ -78,7 +80,10 @@ public class Warrior : Player
 
     private IEnumerator Slash(Vector2 angle)
     {
+        isMove = true;
         rigid.velocity = -((angle.normalized * 1f) * pushPower) / (1 + stat.WEIGHT * 0.1f);
+        animationManager.SetState(CharacterState.Run);
+        Flip();
 
         yield return new WaitForSeconds(0.8f);
         
@@ -89,8 +94,8 @@ public class Warrior : Player
     public override IEnumerator AnimTimingSkill()
     {
         while (isSkill) yield return null;
-        rigid.velocity = Vector2.zero;
         var attackSuccess = false;
+        EffectManager.Instance.InstantiateEffect_P(Effect.WARRIOR, boxPoint.position, angle);
         Collider2D[] colliders = Physics2D.OverlapBoxAll(boxPoint.position, new Vector2(4.2f, 2.2f), rangeContainer.rotation.z);
 
         foreach (Collider2D collider in colliders)

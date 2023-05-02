@@ -77,6 +77,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
     public void DragBegin()
     {
         cancelButton.gameObject.SetActive(true);
+        cameraMove.MovetoTarget(testPlayer.transform);
         testPlayer?.DragBegin(joystick.joystickType);
     }
 
