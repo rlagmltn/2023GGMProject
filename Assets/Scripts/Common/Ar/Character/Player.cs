@@ -402,6 +402,7 @@ public class Player : Ar
     public override bool DeadCheck()
     {
         DeadSave();
+        if (stat.HP <= 0) so.isInGameTake = false;
         return base.DeadCheck();
     }
 
