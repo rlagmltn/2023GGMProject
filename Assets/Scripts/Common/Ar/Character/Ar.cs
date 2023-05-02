@@ -189,6 +189,7 @@ public class Ar : MonoBehaviour
     public virtual bool DeadCheck()
     {
         //ArInfoManager.Instance.ShowBulletInfo(this);
+        stat.HP = Mathf.Clamp(stat.HP, 0, stat.MaxHP);
         if (stat.HP <= 0)
         {
             OnBattleDie.Invoke();

@@ -90,7 +90,8 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         testPlayer.transform.position = Vector3.zero;
         testBtnSlotParent.gameObject.SetActive(false);
         for (int i = 0; i < 3; i++) testPlayer.so.E_Item.itmeSO[i] = armedItems[i].itemSO;
-        testPlayer.Armed();
+        testPlayer.GetItemEvents();
+        testPlayer.StatReset();
         joystick.joystickType = JoystickType.None;
         joystick.gameObject.SetActive(false);
         cancelButton.gameObject.SetActive(false);
