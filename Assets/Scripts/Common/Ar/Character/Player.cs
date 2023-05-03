@@ -110,8 +110,8 @@ public class Player : Ar
         TAI.Clear();
         for (int num = 0; num < itemSlots.Length; num++)
         {
-            if (so.E_Item.itmeSO[num] == null) continue;
             itemSlots[num] = so.E_Item.itmeSO[num];
+            if (so.E_Item.itmeSO[num] == null) continue;
 
             for (int j = 0; j < so.E_Item.itmeSO[num].TAI.Count; j++)
             {
