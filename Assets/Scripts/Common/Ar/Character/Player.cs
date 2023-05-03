@@ -125,12 +125,12 @@ public class Player : Ar
 
     private void Armed()
     {
+        Debug.Log("Armerd");
         for (int num = 0; num < itemSlots.Length; num++)
         {
             if (itemSlots[num] == null) continue;
             stat += itemSlots[num].stat;
             skillCooltime -= itemSlots[num].SkillCoolDown; //이거 언암드에도 해줘야함
-            itemSlots[num].armedPlayer = this;
         }
 
         for(int num = 0; num < TAI.Count; num++)
@@ -192,6 +192,79 @@ public class Player : Ar
                     break;
             }
         }
+        DeadCheck();
+    }
+
+    public void UnArmed()
+    {
+        Debug.Log("UnArmerd");
+        for (int num = 0; num < itemSlots.Length; num++)
+        {
+            if (itemSlots[num] == null) continue;
+            stat -= itemSlots[num].stat;
+            skillCooltime += itemSlots[num].SkillCoolDown;
+        }
+
+        for (int num = 0; num < TAI.Count; num++)
+        {
+            TAI[num].Info.GetPlayer(this);
+            switch (TAI[num].itemPassiveType)
+            {
+                case ItemPassiveType.StartTurn:
+                    StartTurn.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.EndTurn:
+                    EndTurn.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.BeforeCrash:
+                    BeforeCrash.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.AfterCrash:
+                    AfterCrash.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.BeforeAttack:
+                    BeforeAttack.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.AfterAttack:
+                    AfterAttack.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.BeforeDefence:
+                    BeforeDefence.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.AfterDefence:
+                    AfterDefence.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.AfterMove:
+                    AfterMove.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.OnOutDie:
+                    OnOutDie.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.OnBattleDie:
+                    OnBattleDie.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.MouseUp:
+                    MouseUp.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.OnUsedSkill:
+                    OnUsedSkill.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.OnCrashed:
+                    OnCrashed.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.Alway:
+                    //이거 추가하지마셈 이거 그냥 update문 돌릴거임
+
+                    break;
+                case ItemPassiveType.Once:
+                    TAI[num].Info.Passive();
+                    break;
+                default:
+                    Debug.LogError("아이템 타입이 정해지지 않았습니다!");
+                    break;
+            }
+        }
+        DeadCheck();
     }
 
     public void DragBegin(JoystickType joystickType)
