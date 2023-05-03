@@ -5,24 +5,72 @@ using UnityEngine.UI;
 
 public class MainTestSlot : MonoBehaviour
 {
-    private ArSO so;
+    public ArSO arSo { get; set; }
+    public ItemSO itemSO { get; set; }
     private Player player;
     private Button button;
     private Image image;
 
     public void SetSO(ArSO so)
     {
-        this.so = so;
-        button = GetComponent<Button>();
-        button.onClick.AddListener(SummonPlayer);
-        image = transform.GetChild(0).GetComponent<Image>();
+        arSo = so;
+        Init();
+        button.onClick.AddListener(SellectPlayer);
         image.sprite = so.characterInfo.Image;
         player = Instantiate(so.ArData, null);
     }
 
-    private void SummonPlayer()
+    public void SetSO(ItemSO so)
     {
-        player.gameObject.SetActive(true);
-        MainTestModeManager.Instance.SummonPlayer(player);
+        itemSO = so;
+        Init();
+        button.onClick.AddListener(ArmedItem);
+        image.sprite = so.itemIcon;
+    }
+
+    private void Start()
+    {
+        if (button == null) Init();
+    }
+
+    private void Init()
+    {
+        button = GetComponent<Button>();
+        image = transform.GetChild(0).GetComponent<Image>();
+    }
+
+    private void SellectPlayer()
+    {
+        MainTestModeManager.Instance.SellectPlayer(player);
+    }
+
+    private void ArmedItem()
+    {
+        MainTestModeManager.Instance.ArmedItem(itemSO);
+    }
+
+    public void GetAr(ArSO so)
+    {
+        arSo = so;
+        image.sprite = arSo.characterInfo.Image;
+    }
+
+    public void GetItem(ItemSO so)
+    {
+        itemSO = so;
+        image.sprite = itemSO.itemIcon;
+    }
+
+    public void UnSetAr()
+    {
+        arSo = null;
+        image.sprite = null;
+        MainTestModeManager.Instance.SellectPlayer();
+    }
+
+    public void UnSetItem()
+    {
+        itemSO = null;
+        image.sprite = null;
     }
 }
