@@ -63,7 +63,6 @@ public class HealAr : _Event
     void OptionButton3()
     {
         int Rnum = Random.Range(0, Ars.Count);
-        Debug.Log(Rnum);
         DecreaseArHP(Ars[Rnum], 10);
         OptionText_3.text = $"건방진 자식! 변장했던 악마가 저주를 걸고 사라졌다.\n{Ars[Rnum].characterInfo.Name} 체력{(int)((float)Ars[Rnum].surviveStats.MaxHP * 10f / 100f)}만큼 감소, 남은체력 : {(int)Ars[Rnum].surviveStats.currentHP}";
         BackGroundPannel.gameObject.SetActive(true);
