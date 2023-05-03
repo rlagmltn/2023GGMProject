@@ -78,6 +78,36 @@ public class Player : Ar
         playerController = FindObjectOfType<PlayerController>();
         DisableRanges();
 
+        GetItemEvents();
+
+        MouseUp.AddListener(() => { isMove = true; });
+    
+        StatReset();
+
+        gameObject.SetActive(false);
+    }
+
+    public override void StatReset()
+    {
+        stat.MaxHP = (int)so.surviveStats.MaxHP;
+        stat.HP = (int)so.surviveStats.currentHP;
+        stat.MaxSP = (int)so.surviveStats.MaxShield;
+        stat.SP = (int)so.surviveStats.currentShield;
+        stat.ATK = (int)so.attackStats.currentAtk;
+        stat.SATK = (int)so.attackStats.currentSkillAtk;
+        stat.CriPer = (int)so.criticalStats.currentCriticalPer;
+        stat.CriDmg = (int)so.criticalStats.currentCriticalDamage;
+        stat.WEIGHT = (int)so.surviveStats.currentWeight;
+        skillCooltime = so.skill.MaxSkillCoolTime;
+        minDragPower = 0.2f;
+        maxDragPower = 1.5f;
+        Armed();
+        base.StatReset();
+    }
+
+    public void GetItemEvents()
+    {
+        TAI.Clear();
         for (int num = 0; num < itemSlots.Length; num++)
         {
             if (so.E_Item.itmeSO[num] == null) continue;
@@ -91,33 +121,9 @@ public class Player : Ar
                 TAI.Add(_TAI);
             }
         }
-
-        MouseUp.AddListener(() => { isMove = true; });
-    
-        StatReset();
-
-        gameObject.SetActive(false);
     }
 
-    public override void StatReset()
-    {
-        Armed();
-        stat.MaxHP = (int)so.surviveStats.MaxHP;
-        stat.HP = (int)so.surviveStats.currentHP;
-        stat.MaxSP = (int)so.surviveStats.MaxShield;
-        stat.SP = (int)so.surviveStats.currentShield;
-        stat.ATK = (int)so.attackStats.currentAtk;
-        stat.SATK = (int)so.attackStats.currentSkillAtk;
-        stat.CriPer = (int)so.criticalStats.currentCriticalPer;
-        stat.CriDmg = (int)so.criticalStats.currentCriticalDamage;
-        stat.WEIGHT = (int)so.surviveStats.currentWeight;
-        skillCooltime = so.skill.MaxSkillCoolTime;
-        minDragPower = 0.2f;
-        maxDragPower = 1.5f;
-        base.StatReset();
-    }
-
-    public void Armed()
+    private void Armed()
     {
         for (int num = 0; num < itemSlots.Length; num++)
         {
