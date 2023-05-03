@@ -17,7 +17,7 @@ public class Player : Ar
     [HideInInspector] public UnityEvent MouseUp;
 
     protected float power;
-    protected int skillCooltime;
+    public int skillCooltime { get; set; }
 
     public float Power { get { return power; } }
     public float PushPower { get { return pushPower; } }
@@ -78,6 +78,36 @@ public class Player : Ar
         playerController = FindObjectOfType<PlayerController>();
         DisableRanges();
 
+        GetItemEvents();
+
+        MouseUp.AddListener(() => { isMove = true; });
+    
+        StatReset();
+
+        gameObject.SetActive(false);
+    }
+
+    public override void StatReset()
+    {
+        stat.MaxHP = (int)so.surviveStats.MaxHP;
+        stat.HP = (int)so.surviveStats.currentHP;
+        stat.MaxSP = (int)so.surviveStats.MaxShield;
+        stat.SP = (int)so.surviveStats.currentShield;
+        stat.ATK = (int)so.attackStats.currentAtk;
+        stat.SATK = (int)so.attackStats.currentSkillAtk;
+        stat.CriPer = (int)so.criticalStats.currentCriticalPer;
+        stat.CriDmg = (int)so.criticalStats.currentCriticalDamage;
+        stat.WEIGHT = (int)so.surviveStats.currentWeight;
+        skillCooltime = so.skill.MaxSkillCoolTime;
+        minDragPower = 0.2f;
+        maxDragPower = 1.5f;
+        Armed();
+        base.StatReset();
+    }
+
+    public void GetItemEvents()
+    {
+        TAI.Clear();
         for (int num = 0; num < itemSlots.Length; num++)
         {
             if (so.E_Item.itmeSO[num] == null) continue;
@@ -91,40 +121,16 @@ public class Player : Ar
                 TAI.Add(_TAI);
             }
         }
-
-        MouseUp.AddListener(() => { isMove = true; });
-    
-        StatReset();
-
-        gameObject.SetActive(false);
     }
 
-    public override void StatReset()
+    private void Armed()
     {
-        Armed();
-        stat.MaxHP = (int)so.surviveStats.MaxHP;
-        stat.HP = (int)so.surviveStats.currentHP;
-        stat.MaxSP = (int)so.surviveStats.MaxShield;
-        stat.SP = (int)so.surviveStats.currentShield;
-        stat.ATK = (int)so.attackStats.currentAtk;
-        stat.SATK = (int)so.attackStats.currentSkillAtk;
-        stat.CriPer = (int)so.criticalStats.currentCriticalPer;
-        stat.CriDmg = (int)so.criticalStats.currentCriticalDamage;
-        stat.WEIGHT = (int)so.surviveStats.currentWeight;
-        skillCooltime = so.skill.MaxSkillCoolTime;
-        minDragPower = 0.2f;
-        maxDragPower = 1.5f;
-        base.StatReset();
-    }
-
-    void Armed()
-    {
-
         for (int num = 0; num < itemSlots.Length; num++)
         {
             if (itemSlots[num] == null) continue;
             stat += itemSlots[num].stat;
             skillCooltime -= itemSlots[num].SkillCoolDown; //이거 언암드에도 해줘야함
+            itemSlots[num].armedPlayer = this;
         }
 
         for(int num = 0; num < TAI.Count; num++)
