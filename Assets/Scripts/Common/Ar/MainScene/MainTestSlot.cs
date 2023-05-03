@@ -28,7 +28,7 @@ public class MainTestSlot : MonoBehaviour
         image.sprite = so.itemIcon;
     }
 
-    private void Start()
+    private void OnEnable()
     {
         if (button == null) Init();
     }
@@ -70,6 +70,7 @@ public class MainTestSlot : MonoBehaviour
 
     public void UnSetItem()
     {
+        if(itemSO!=null) MainTestModeManager.Instance.UnArmedItem(itemSO);
         itemSO = null;
         image.sprite = null;
     }

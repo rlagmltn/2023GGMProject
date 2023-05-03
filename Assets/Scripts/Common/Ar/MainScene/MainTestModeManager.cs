@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class MainTestModeManager : MonoSingleton<MainTestModeManager>
 {
@@ -18,9 +19,12 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
     [SerializeField] MainTestSlot sellectPlayer;
     [SerializeField] MainTestSlot[] armedItems;
 
+    [SerializeField] TextMeshProUGUI[] statTexts;
+
     private GameObject attackAct;
     private Transform testBtnSlotParent;
     private Player testPlayer;
+    private Stat testPleyerStat;
     private Enemy dummy;
 
     private void Start()
@@ -51,22 +55,26 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
     public void ToggleSellectArPanel()
     {
         testBtnSlotParent.gameObject.SetActive(!testBtnSlotParent.gameObject.activeSelf);
+        if(testBtnSlotParent.gameObject.activeSelf) sellectPlayer.UnSetAr();
     }
 
     public void SellectPlayer(Player player = null)
     {
         if(testPlayer!=null)
         {
+            testPlayer.UnArmed();
             for (int i = 0; i < 3; i++) armedItems[i].UnSetItem();
             testPlayer.so.E_Item.itmeSO = new ItemSO[3];
             testPlayer.gameObject.SetActive(false);
         }
         testPlayer = player;
-        if(player!=null)
+        if (player != null)
         {
             sellectPlayer.GetAr(player.so);
-            testPlayer.UnArmed();
+            testPleyerStat = testPlayer.stat;
         }
+        else testPleyerStat = new Stat();
+        UpdateStatText();
     }
 
     public void ArmedItem(ItemSO item)
@@ -77,9 +85,17 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
             if (slot.itemSO == null)
             {
                 slot.GetItem(item);
+                testPleyerStat += item.stat;
+                UpdateStatText();
                 break;
             }
         }
+    }
+
+    public void UnArmedItem(ItemSO item)
+    {
+        testPleyerStat -= item.stat;
+        UpdateStatText();
     }
 
     public void SummonPlayer()
@@ -87,7 +103,6 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         testPlayer.gameObject.SetActive(true);
         testPlayer.transform.position = Vector3.zero;
         testBtnSlotParent.gameObject.SetActive(false);
-        testPlayer.UnArmed();
         for (int i = 0; i < 3; i++) testPlayer.so.E_Item.itmeSO[i] = armedItems[i].itemSO;
         testPlayer.GetItemEvents();
         testPlayer.StatReset();
@@ -138,5 +153,16 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         cameraMove.MovetoTarget(testPlayer.transform);
         joystick.gameObject.SetActive(true);
         joystick.joystickType = (JoystickType)n;
+    }
+
+    private void UpdateStatText()
+    {
+        statTexts[0].SetText(testPleyerStat.MaxHP.ToString());
+        statTexts[1].SetText(testPleyerStat.MaxSP.ToString());
+        statTexts[2].SetText(testPleyerStat.ATK.ToString());
+        statTexts[3].SetText(testPleyerStat.SATK.ToString());
+        statTexts[4].SetText(testPleyerStat.CriPer.ToString());
+        statTexts[5].SetText(testPleyerStat.CriDmg.ToString());
+        statTexts[6].SetText(testPleyerStat.WEIGHT.ToString());
     }
 }
