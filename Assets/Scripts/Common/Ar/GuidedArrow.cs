@@ -26,8 +26,8 @@ public class GuidedArrow : Arrow
 
     protected override void SetSO()
     {
-        summoner = ThisCharacter;
         base.SetSO();
+        summoner = ThisCharacter;
     }
 
     void GetNearCharacter()

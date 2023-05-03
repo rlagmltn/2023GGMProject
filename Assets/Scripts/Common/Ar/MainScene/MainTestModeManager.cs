@@ -57,18 +57,16 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
     {
         if(testPlayer!=null)
         {
-            foreach (ItemSO item in testPlayer.so.E_Item.itmeSO)
-            {
-                if (item == null) continue;
-                item.UnArmed();
-            }
             for (int i = 0; i < 3; i++) armedItems[i].UnSetItem();
             testPlayer.so.E_Item.itmeSO = new ItemSO[3];
             testPlayer.gameObject.SetActive(false);
         }
         testPlayer = player;
         if(player!=null)
+        {
             sellectPlayer.GetAr(player.so);
+            testPlayer.UnArmed();
+        }
     }
 
     public void ArmedItem(ItemSO item)
@@ -89,6 +87,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         testPlayer.gameObject.SetActive(true);
         testPlayer.transform.position = Vector3.zero;
         testBtnSlotParent.gameObject.SetActive(false);
+        testPlayer.UnArmed();
         for (int i = 0; i < 3; i++) testPlayer.so.E_Item.itmeSO[i] = armedItems[i].itemSO;
         testPlayer.GetItemEvents();
         testPlayer.StatReset();
