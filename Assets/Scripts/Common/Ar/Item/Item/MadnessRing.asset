@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd6096bb90998d0469d40c07acdda1e3, type: 3}
-  m_Name: MadnessNecklace
+  m_Name: MadnessRing
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: a4b5f62f33b3e004e8aace652e009615, type: 3}
-  itemName: "\uAD11\uAE30\uC758 \uBAA9\uAC78"
+  itemIcon: {fileID: 21300000, guid: adb8cb5487900404a9ffab0f0a0ea5f3, type: 3}
+  itemName: "\uAD11\uAE30\uC758 \uBC18\uC9C0"
   itemPrice: 0
   stat:
     MaxHP: -3
@@ -26,9 +26,8 @@ MonoBehaviour:
     CriDmg: 0
     WEIGHT: 0
   SkillCoolDown: 0
-  itemExplain: "\uBAA9\uAC78\uC774\uC5D0\uC11C \uB098\uC624\uB294 \uC18C\uB9AC\uC5D0
-    \uBBF8\uCCD0\uBC84\uB9B4 \uAC83 \uAC19\uB2E4."
+  itemExplain: "\uBC18\uC9C0\uC5D0\uC11C \uB098\uC624\uB294 \uC18C\uB9AC\uC5D0 \uBBF8\uCCD0\uBC84\uB9B4
+    \uAC83 \uAC19\uB2E4."
   TAI:
   - itemPassiveType: 13
     Info: {fileID: 5584614105296431615, guid: f550f90e42c15624da054aa1cb4d40a1, type: 3}
-  armedPlayer: {fileID: 0}
