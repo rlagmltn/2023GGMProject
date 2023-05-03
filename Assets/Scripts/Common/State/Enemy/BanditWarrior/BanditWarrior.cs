@@ -6,6 +6,7 @@ public class BanditWarrior : Enemy
 {
     private Ar lastAr = null;
     private bool canUsePassive = true;
+    [SerializeField] private bool isSandBack = false;
 
     protected override void Start()
     {
@@ -16,8 +17,16 @@ public class BanditWarrior : Enemy
 
     public override void StatReset()
     {
-        stat.MaxHP = 8;
-        stat.MaxSP = 8;
+        if(isSandBack)
+        {
+            stat.MaxHP = 1000;
+            stat.MaxSP = 1000;
+        }
+        else
+        {
+            stat.MaxHP = 8;
+            stat.MaxSP = 8;
+        }
         stat.ATK = 4;
         stat.SATK = 4;
         stat.CriPer = 5;
