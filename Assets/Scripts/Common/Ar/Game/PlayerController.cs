@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour
 
     public void ChooseStickType(int n)
     {
-        if ((JoystickType)n == JoystickType.Skill && sellectPlayer.currentCooltime > 0) return;
+        if ((JoystickType)n == JoystickType.Skill && sellectPlayer.currentCooltime < sellectPlayer.skillCooltime) return;
 
         attackBtn.SetActive(false);
         actSellect.SetActive(false);
@@ -159,10 +159,10 @@ public class PlayerController : MonoBehaviour
 
     private void SetSkillBtnText()
     {
-        if (sellectPlayer.currentCooltime > 0)
+        if (sellectPlayer.currentCooltime < sellectPlayer.skillCooltime)
         {
             skilCoolImage.SetActive(true);
-            skillCoolText.SetText(sellectPlayer.currentCooltime.ToString());
+            skillCoolText.SetText((sellectPlayer.skillCooltime - sellectPlayer.currentCooltime).ToString());
         }
         else
         {

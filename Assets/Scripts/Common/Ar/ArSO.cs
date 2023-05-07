@@ -145,6 +145,9 @@ public class Skill
     [SerializeField] private int skillCoolTime;
     public int SkillCoolTime => skillCoolTime;
 
+    [SerializeField] private int startskillCoolTime;
+    public int StartSkillCoolTime => skillCoolTime;
+
     public int MaxSkillCoolTime;
 
     public int currentSkillCoolTime;
@@ -154,7 +157,7 @@ public class Skill
     public void Reset()
     {
         MaxSkillCoolTime = skillCoolTime;
-        currentSkillCoolTime = skillCoolTime;
+        currentSkillCoolTime = startskillCoolTime;
     }
 }
 

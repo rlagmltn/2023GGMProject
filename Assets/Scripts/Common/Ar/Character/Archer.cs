@@ -41,7 +41,8 @@ public class Archer : Player
     {
         base.Drag(angle, dis);
 
-        var target = FindNearEnemy(range);
+        RayCastTargets(range);
+        var target = FindNearEnemy();
 
         if (target != null)
         {

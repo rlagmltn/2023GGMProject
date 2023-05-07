@@ -34,7 +34,7 @@ public class Warrior : Player
     {
         base.Drag(angle, dis);
 
-        targets = Physics2D.RaycastAll(transform.position, attackRange.transform.position - transform.position, range);
+        RayCastTargets(range);
 
         if (targets.Length > 1)
         {

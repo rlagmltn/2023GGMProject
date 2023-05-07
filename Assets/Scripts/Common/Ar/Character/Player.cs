@@ -99,9 +99,13 @@ public class Player : Ar
         stat.CriDmg = (int)so.criticalStats.currentCriticalDamage;
         stat.WEIGHT = (int)so.surviveStats.currentWeight;
         skillCooltime = so.skill.MaxSkillCoolTime;
+        currentCooltime = so.skill.currentSkillCoolTime;
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
         Armed();
+
+        slot?.SkillReady(skillCooltime, currentCooltime);
+
         base.StatReset();
     }
 
@@ -125,7 +129,6 @@ public class Player : Ar
 
     private void Armed()
     {
-        Debug.Log("Armerd");
         for (int num = 0; num < itemSlots.Length; num++)
         {
             if (itemSlots[num] == null) continue;
@@ -197,7 +200,6 @@ public class Player : Ar
 
     public void UnArmed()
     {
-        Debug.Log("UnArmerd");
         for (int num = 0; num < itemSlots.Length; num++)
         {
             if (itemSlots[num] == null) continue;
@@ -341,7 +343,7 @@ public class Player : Ar
     protected virtual void Skill(Vector2 angle)
     {
         isSkill = true;
-        currentCooltime = skillCooltime;
+        currentCooltime = 0;
         OnUsedSkill?.Invoke();
         StartCoroutine(AnimTimingSkill());
     }
@@ -425,20 +427,19 @@ public class Player : Ar
         this.slot = slot;
         OnBattleDie.AddListener(()=>this.slot.SetSlotActive(false));
         OnOutDie.AddListener(()=>this.slot.SetSlotActive(false));
-        slot.SkillReady(true);
         Collide = GetComponent<CircleCollider2D>();
     }
 
     public void CountCooltime()
     {
-        if (currentCooltime > 0)
+        if (currentCooltime < skillCooltime)
         {
-            currentCooltime--;
-            slot?.SkillReady(false);
+            currentCooltime++;
+            slot?.SkillReady(skillCooltime, currentCooltime);
         }
-        if (currentCooltime == 0)
+        if (currentCooltime >= skillCooltime)
         {
-            slot?.SkillReady(true);
+            slot?.SkillReady(skillCooltime, currentCooltime);
         }
     }
 
@@ -499,9 +500,13 @@ public class Player : Ar
         if(!isDead) so.surviveStats.currentShield = so.surviveStats.MaxShield;
     }
 
-    protected Transform FindNearEnemy(float distance)
+    protected void RayCastTargets(float distance)
     {
         targets = Physics2D.RaycastAll(transform.position, attackRange.transform.position - transform.position, distance);
+    }
+
+    protected Transform FindNearEnemy()
+    {
         foreach (RaycastHit2D hit in targets)
         {
             if (hit.collider.CompareTag("Enemy"))

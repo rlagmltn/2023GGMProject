@@ -148,7 +148,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
     public void ChooseStickType(int n)
     {
         if (testPlayer == null) return;
-        if ((JoystickType)n == JoystickType.Skill && testPlayer.currentCooltime > 0) return;
+        if ((JoystickType)n == JoystickType.Skill && testPlayer.currentCooltime < testPlayer.skillCooltime) return;
 
         cameraMove.MovetoTarget(testPlayer.transform);
         joystick.gameObject.SetActive(true);
