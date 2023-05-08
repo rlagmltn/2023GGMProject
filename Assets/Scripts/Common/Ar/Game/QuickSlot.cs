@@ -31,9 +31,9 @@ public class QuickSlot : MonoBehaviour
         outline = transform.GetChild(0).GetComponent<Image>();
         background = transform.GetChild(2).GetComponent<Image>();
         playerImage = transform.GetChild(3).GetComponent<Image>();
-        unableImage = transform.GetChild(4).GetComponent<Image>();
-        hpImage = transform.GetChild(5).GetComponent<Image>();
-        spImage = transform.GetChild(6).GetComponent<Image>();
+        hpImage = transform.GetChild(4).GetChild(0).GetComponent<Image>();
+        spImage = transform.GetChild(5).GetChild(0).GetComponent<Image>();
+        unableImage = transform.GetChild(6).GetComponent<Image>();
         MoveIcon = transform.GetChild(7).gameObject;
         AttackIcon = transform.GetChild(8).gameObject;
         SkillIcon = transform.GetChild(9).gameObject;
@@ -76,6 +76,12 @@ public class QuickSlot : MonoBehaviour
 
     public void SkillReady(float max, float current)
     {
+        if (unableImage.gameObject.activeSelf)
+        {
+            background.fillAmount = 0;
+            return;
+        }
+
         background.fillAmount = current / max;
 
         if(background.fillAmount < 1)
