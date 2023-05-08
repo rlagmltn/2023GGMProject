@@ -100,6 +100,8 @@ public class Player : Ar
         stat.WEIGHT = (int)so.surviveStats.currentWeight;
         skillCooltime = so.skill.MaxSkillCoolTime;
         currentCooltime = so.skill.currentSkillCoolTime;
+        //뎀감 만들어야함
+
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
         Armed();
@@ -134,6 +136,8 @@ public class Player : Ar
             if (itemSlots[num] == null) continue;
             stat += itemSlots[num].stat;
             skillCooltime -= itemSlots[num].SkillCoolDown; //이거 언암드에도 해줘야함
+            //여기다 뎀감 더해주기?
+            DamageDrcrease += itemSlots[num].DamageDecrease;
         }
 
         for(int num = 0; num < TAI.Count; num++)

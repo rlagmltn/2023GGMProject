@@ -10,6 +10,7 @@ public class ItemSO : ScriptableObject
     public int itemPrice;
     public Stat stat;
     public int SkillCoolDown;
+    public int DamageDecrease;
 
     [TextArea(15, 20)]
     public string itemExplain;

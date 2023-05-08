@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd6096bb90998d0469d40c07acdda1e3, type: 3}
+  m_Name: RoundShield
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: 9e085fc1068ae3c4daabb06c676b3137, type: 3}
+  itemName: "\uC6D0\uD615\uBC29\uD328"
+  itemPrice: 500
+  stat:
+    MaxHP: 0
+    HP: 0
+    MaxSP: 0
+    SP: 2
+    ATK: 0
+    SATK: 0
+    CriPer: 0
+    CriDmg: 0
+    WEIGHT: 0
+  SkillCoolDown: 0
+  DamageDecrease: 1
+  itemExplain: "\uC6D0\uD615 \uBC29\uD328. \uCD08\uBCF4\uC790\uAC00 \uC4F0\uAE30
+    \uAC00\uC7A5 \uC801\uD569\uD558\uB2E4."
+  TAI:
+  - itemPassiveType: 15
+    Info: {fileID: 5254662369093773814, guid: c8551483d7c4fca4d80e35b1b628af10, type: 3}

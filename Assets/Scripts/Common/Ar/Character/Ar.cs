@@ -48,6 +48,8 @@ public class Ar : MonoBehaviour
     [SerializeField] protected Transform battleTarget;
     private float slowMagnitude = 5f;
 
+    protected int DamageDrcrease = 0;
+
     protected virtual void Start()
     {
         stat = new Stat();
@@ -165,6 +167,7 @@ public class Ar : MonoBehaviour
 
     public virtual bool Hit(int damage)
     {
+        damage -= DamageDrcrease;
         EffectManager.Instance.InstantiateFloatDamage(transform.position).DamageText(damage);
         if (stat.SP > 0)
         {
