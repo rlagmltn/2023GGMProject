@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ArHeal_CharacterInventory : MonoBehaviour
+public class ArHeal_CharacterInventory : MonoSingleton<ArHeal_CharacterInventory>
 {
     [SerializeField] private Transform Content;
 
     [SerializeField] private Transform CharacterButton;
 
     [SerializeField] private ArSOList ArList;
+
+    private ArSO SelectedAR;
+
+    public List<Transform> CharacterButtons;
+
     private List<ArSO> Ars;
 
     private void Start()
@@ -29,7 +35,10 @@ public class ArHeal_CharacterInventory : MonoBehaviour
     { 
         for(int num = 0; num < Ars.Count; num++)
         {
-            Instantiate(Ars[num], Content);
+            Transform Btn = Instantiate(CharacterButton, Content);
+            Btn.GetComponent<ArHeal_Button>().SetAr(Ars[num]);
+            Btn.GetComponent<Button>().onClick.AddListener(Btn.GetComponent<ArHeal_Button>().ClickButton);
+            CharacterButtons.Add(Btn);
         }
     }
 
@@ -47,5 +56,18 @@ public class ArHeal_CharacterInventory : MonoBehaviour
             }
             Ars.Add(ar);
         }
+    }
+
+    public void ClickButton()
+    {
+        for(int num = 0; num < CharacterButtons.Count; num++)
+        {
+            CharacterButtons[num].GetComponent<Outline>().effectColor = new Color(0, 0, 0, 0);
+        }
+    }
+
+    public void GetAR(ArSO Ar)
+    {
+        SelectedAR = Ar;
     }
 }
