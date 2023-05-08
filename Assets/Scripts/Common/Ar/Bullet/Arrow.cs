@@ -14,6 +14,5 @@ public class Arrow : Bullet
 
         var particleMain = particle.main;
         particleMain.startRotation = -(transform.rotation.eulerAngles.z) * Mathf.Deg2Rad;
-
     }
 }
