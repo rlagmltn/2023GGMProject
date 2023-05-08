@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: c8d966739c7e65947964aa4035df3cc2, type: 3}
   itemName: "\uD06C\uB9AC\uC2A4\uD0C8 \uAC74\uD2C0\uB9BF"
-  itemPrice: 0
+  itemPrice: 1000
   stat:
     MaxHP: 0
     HP: 0
-    MaxSP: 0
+    MaxSP: 1
     SP: 1
     ATK: 0
     SATK: 0
@@ -31,4 +31,3 @@ MonoBehaviour:
   TAI:
   - itemPassiveType: 5
     Info: {fileID: -4248153018553944703, guid: b78f8a872ff5e3e4ab6763621c30a280, type: 3}
-  armedPlayer: {fileID: 0}

@@ -190,6 +190,7 @@ public class Ar : MonoBehaviour
     {
         //ArInfoManager.Instance.ShowBulletInfo(this);
         stat.HP = Mathf.Clamp(stat.HP, 0, stat.MaxHP);
+        stat.SP = Mathf.Clamp(stat.SP, 0, stat.MaxSP);
         if (stat.HP <= 0)
         {
             OnBattleDie.Invoke();

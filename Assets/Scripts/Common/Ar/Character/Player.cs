@@ -99,9 +99,13 @@ public class Player : Ar
         stat.CriDmg = (int)so.criticalStats.currentCriticalDamage;
         stat.WEIGHT = (int)so.surviveStats.currentWeight;
         skillCooltime = so.skill.MaxSkillCoolTime;
+        currentCooltime = so.skill.currentSkillCoolTime;
         minDragPower = 0.2f;
         maxDragPower = 1.5f;
         Armed();
+
+        slot?.SkillReady(skillCooltime, currentCooltime);
+
         base.StatReset();
     }
 
@@ -110,8 +114,8 @@ public class Player : Ar
         TAI.Clear();
         for (int num = 0; num < itemSlots.Length; num++)
         {
-            if (so.E_Item.itmeSO[num] == null) continue;
             itemSlots[num] = so.E_Item.itmeSO[num];
+            if (so.E_Item.itmeSO[num] == null) continue;
 
             for (int j = 0; j < so.E_Item.itmeSO[num].TAI.Count; j++)
             {
@@ -130,7 +134,6 @@ public class Player : Ar
             if (itemSlots[num] == null) continue;
             stat += itemSlots[num].stat;
             skillCooltime -= itemSlots[num].SkillCoolDown; //이거 언암드에도 해줘야함
-            itemSlots[num].armedPlayer = this;
         }
 
         for(int num = 0; num < TAI.Count; num++)
@@ -192,6 +195,78 @@ public class Player : Ar
                     break;
             }
         }
+        DeadCheck();
+    }
+
+    public void UnArmed()
+    {
+        for (int num = 0; num < itemSlots.Length; num++)
+        {
+            if (itemSlots[num] == null) continue;
+            stat -= itemSlots[num].stat;
+            skillCooltime += itemSlots[num].SkillCoolDown;
+        }
+
+        for (int num = 0; num < TAI.Count; num++)
+        {
+            TAI[num].Info.GetPlayer(this);
+            switch (TAI[num].itemPassiveType)
+            {
+                case ItemPassiveType.StartTurn:
+                    StartTurn.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.EndTurn:
+                    EndTurn.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.BeforeCrash:
+                    BeforeCrash.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.AfterCrash:
+                    AfterCrash.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.BeforeAttack:
+                    BeforeAttack.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.AfterAttack:
+                    AfterAttack.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.BeforeDefence:
+                    BeforeDefence.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.AfterDefence:
+                    AfterDefence.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.AfterMove:
+                    AfterMove.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.OnOutDie:
+                    OnOutDie.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.OnBattleDie:
+                    OnBattleDie.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.MouseUp:
+                    MouseUp.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.OnUsedSkill:
+                    OnUsedSkill.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.OnCrashed:
+                    OnCrashed.RemoveListener(TAI[num].Info.Passive);
+                    break;
+                case ItemPassiveType.Alway:
+                    //이거 추가하지마셈 이거 그냥 update문 돌릴거임
+
+                    break;
+                case ItemPassiveType.Once:
+                    TAI[num].Info.Passive();
+                    break;
+                default:
+                    Debug.LogError("아이템 타입이 정해지지 않았습니다!");
+                    break;
+            }
+        }
+        DeadCheck();
     }
 
     public void DragBegin(JoystickType joystickType)
@@ -268,7 +343,7 @@ public class Player : Ar
     protected virtual void Skill(Vector2 angle)
     {
         isSkill = true;
-        currentCooltime = skillCooltime;
+        currentCooltime = 0;
         OnUsedSkill?.Invoke();
         StartCoroutine(AnimTimingSkill());
     }
@@ -352,20 +427,19 @@ public class Player : Ar
         this.slot = slot;
         OnBattleDie.AddListener(()=>this.slot.SetSlotActive(false));
         OnOutDie.AddListener(()=>this.slot.SetSlotActive(false));
-        slot.SkillReady(true);
         Collide = GetComponent<CircleCollider2D>();
     }
 
     public void CountCooltime()
     {
-        if (currentCooltime > 0)
+        if (currentCooltime < skillCooltime)
         {
-            currentCooltime--;
-            slot?.SkillReady(false);
+            currentCooltime++;
+            slot?.SkillReady(skillCooltime, currentCooltime);
         }
-        if (currentCooltime == 0)
+        if (currentCooltime >= skillCooltime)
         {
-            slot?.SkillReady(true);
+            slot?.SkillReady(skillCooltime, currentCooltime);
         }
     }
 
@@ -426,9 +500,13 @@ public class Player : Ar
         if(!isDead) so.surviveStats.currentShield = so.surviveStats.MaxShield;
     }
 
-    protected Transform FindNearEnemy(float distance)
+    protected void RayCastTargets(float distance)
     {
         targets = Physics2D.RaycastAll(transform.position, attackRange.transform.position - transform.position, distance);
+    }
+
+    protected Transform FindNearEnemy()
+    {
         foreach (RaycastHit2D hit in targets)
         {
             if (hit.collider.CompareTag("Enemy"))

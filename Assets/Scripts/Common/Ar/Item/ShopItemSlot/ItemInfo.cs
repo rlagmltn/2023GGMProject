@@ -73,6 +73,8 @@ public class Stat
         result.ATK = a.ATK + b.ATK;
         result.SATK = a.SATK + b.SATK;
         result.WEIGHT = a.WEIGHT + b.WEIGHT;
+        result.CriPer = a.CriPer + b.CriPer;
+        result.CriDmg = a.CriDmg + b.CriDmg;
         return result;
     }
 
@@ -86,6 +88,8 @@ public class Stat
         result.ATK = a.ATK - b.ATK;
         result.SATK = a.SATK - b.SATK;
         result.WEIGHT = a.WEIGHT - b.WEIGHT;
+        result.CriPer = a.CriPer - b.CriPer;
+        result.CriDmg = a.CriDmg - b.CriDmg;
         return result;
     }
 }

@@ -29,14 +29,14 @@ public class QuickSlot : MonoBehaviour
         button = GetComponent<Button>();
         button.onClick.AddListener(SellectPlayer);
         outline = transform.GetChild(0).GetComponent<Image>();
-        background = transform.GetChild(1).GetComponent<Image>();
-        playerImage = transform.GetChild(2).GetComponent<Image>();
-        unableImage = transform.GetChild(3).GetComponent<Image>();
-        hpImage = transform.GetChild(4).GetComponent<Image>();
-        spImage = transform.GetChild(5).GetComponent<Image>();
-        MoveIcon = transform.GetChild(6).gameObject;
-        AttackIcon = transform.GetChild(7).gameObject;
-        SkillIcon = transform.GetChild(8).gameObject;
+        background = transform.GetChild(2).GetComponent<Image>();
+        playerImage = transform.GetChild(3).GetComponent<Image>();
+        hpImage = transform.GetChild(4).GetChild(0).GetComponent<Image>();
+        spImage = transform.GetChild(5).GetChild(0).GetComponent<Image>();
+        unableImage = transform.GetChild(6).GetComponent<Image>();
+        MoveIcon = transform.GetChild(7).gameObject;
+        AttackIcon = transform.GetChild(8).gameObject;
+        SkillIcon = transform.GetChild(9).gameObject;
 
         unableImage.gameObject.SetActive(false);
         playerImage.sprite = Player.so.characterInfo.Image;
@@ -74,12 +74,24 @@ public class QuickSlot : MonoBehaviour
         }
     }
 
-    public void SkillReady(bool isReady)
+    public void SkillReady(float max, float current)
     {
-        if (isReady)
-            background.color = Color.yellow;
+        if (unableImage.gameObject.activeSelf)
+        {
+            background.fillAmount = 0;
+            return;
+        }
+
+        background.fillAmount = current / max;
+
+        if(background.fillAmount < 1)
+        {
+            background.color = Color.gray;
+        }
         else
-            background.color = Color.black;
+        {
+            background.color = Color.yellow;
+        }    
     }
 
     public void SetSlotActive(bool value)

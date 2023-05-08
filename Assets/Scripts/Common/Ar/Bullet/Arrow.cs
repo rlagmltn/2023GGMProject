@@ -11,8 +11,11 @@ public class Arrow : Bullet
         particle = GetComponent<ParticleSystem>();
         summoner = FindObjectOfType<Archer>();
         base.SetSO();
-
-        var particleMain = particle.main;
-        particleMain.startRotation = -(transform.rotation.eulerAngles.z) * Mathf.Deg2Rad;
+        
+        if(particle!=null)
+        {
+            var particleMain = particle.main;
+            particleMain.startRotation = -(transform.rotation.eulerAngles.z) * Mathf.Deg2Rad;
+        }
     }
 }
