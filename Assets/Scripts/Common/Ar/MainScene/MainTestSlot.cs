@@ -10,6 +10,7 @@ public class MainTestSlot : MonoBehaviour
     private Player player;
     private Button button;
     private Image image;
+    [SerializeField] Image background;
 
     public void SetSO(ArSO so)
     {
@@ -18,6 +19,7 @@ public class MainTestSlot : MonoBehaviour
         button.onClick.AddListener(SellectPlayer);
         image.sprite = so.characterInfo.Image;
         player = Instantiate(so.ArData, null);
+        background.sprite = BackGroundHolder.Instance.BackGround(so.characterInfo.rarity);
     }
 
     public void SetSO(ItemSO so)
@@ -26,6 +28,7 @@ public class MainTestSlot : MonoBehaviour
         Init();
         button.onClick.AddListener(ArmedItem);
         image.sprite = so.itemIcon;
+        background.sprite = BackGroundHolder.Instance.BackGround(so.itemRarity);
     }
 
     private void OnEnable()
@@ -53,25 +56,29 @@ public class MainTestSlot : MonoBehaviour
     {
         arSo = so;
         image.sprite = arSo.characterInfo.Image;
+        background.sprite = BackGroundHolder.Instance.BackGround(so.characterInfo.rarity);
     }
 
     public void GetItem(ItemSO so)
     {
         itemSO = so;
         image.sprite = itemSO.itemIcon;
+        background.sprite = BackGroundHolder.Instance.BackGround(so.itemRarity);
     }
 
     public void UnSetAr()
     {
         arSo = null;
-        image.sprite = null;
+        image.sprite = BackGroundHolder.Instance.NullImage;
         MainTestModeManager.Instance.SellectPlayer();
+        background.sprite = BackGroundHolder.Instance.BackGround(ArRarity.NORMAL);
     }
 
     public void UnSetItem()
     {
         if(itemSO!=null) MainTestModeManager.Instance.UnArmedItem(itemSO);
         itemSO = null;
-        image.sprite = null;
+        image.sprite = BackGroundHolder.Instance.NullImage;
+        background.sprite = BackGroundHolder.Instance.BackGround(ItemRarity.Common);
     }
 }

@@ -105,12 +105,15 @@ public class BattleManager : MonoSingleton<BattleManager>
         EffectManager.Instance.InstantiateEffect(Effect.CRASH, (attacker.transform.position+defender.transform.position)/2, attacker.transform.position, defender.transform.position);
 
         var criChance = Random.Range(1, 101);
-        bool isDead;
+        bool isDead = false;
 
-        if(criChance<attacker.stat.CriPer)
-            isDead = defender.Hit(attacker.stat.ATK + (attacker.stat.ATK/100) * attacker.stat.CriPer);
-        else
-            isDead = defender.Hit(attacker.stat.ATK);
+        if(!attacker.isRangeCharacter)
+        {
+            if (criChance < attacker.stat.CriPer)
+                isDead = defender.Hit(attacker.stat.ATK + (attacker.stat.ATK / 100) * attacker.stat.CriPer);
+            else
+                isDead = defender.Hit(attacker.stat.ATK);
+        }
 
         attacker.AfterAttack?.Invoke();
         if(!isDead)

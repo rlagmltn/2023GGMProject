@@ -41,6 +41,8 @@ public class Ar : MonoBehaviour
     [HideInInspector] public UnityEvent OnCrashed;
     [HideInInspector] public UnityEvent EndTurn;
 
+    public bool isRangeCharacter { get; protected set; }
+
     protected Transform character;
     protected AnimationManager animationManager;
     protected CameraMove cameraMove;

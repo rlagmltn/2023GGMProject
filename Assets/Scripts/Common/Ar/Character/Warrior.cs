@@ -74,7 +74,7 @@ public class Warrior : Player
 
     protected override void Passive()
     {
-        stat.SP = (int)so.surviveStats.MaxShield;
+        stat.SP = Mathf.RoundToInt(so.surviveStats.MaxShield / 2);
         DeadCheck();
     }
 

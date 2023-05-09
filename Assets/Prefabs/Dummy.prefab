@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 12}
   - component: {fileID: 5574933641313153038}
   - component: {fileID: 8648868101781268644}
+  - component: {fileID: -4714802660617699094}
   m_Layer: 0
   m_Name: Dummy
   m_TagString: Enemy
@@ -232,6 +233,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: 
+  pushPower: 40
+  StartTurn:
+    m_PersistentCalls:
+      m_Calls: []
   BeforeCrash:
     m_PersistentCalls:
       m_Calls: []
@@ -259,7 +264,29 @@ MonoBehaviour:
   OnBattleDie:
     m_PersistentCalls:
       m_Calls: []
+  OnUsedSkill:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCrashed:
+    m_PersistentCalls:
+      m_Calls: []
+  EndTurn:
+    m_PersistentCalls:
+      m_Calls: []
   battleTarget: {fileID: 0}
+--- !u!114 &-4714802660617699094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063387080856860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eae4d7d6f8882174eabdc23295894e91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnFlag: 0
 --- !u!1 &1481269329147902
 GameObject:
   m_ObjectHideFlags: 0

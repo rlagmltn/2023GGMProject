@@ -8,6 +8,7 @@ public class QuickSlot : MonoBehaviour
 {
     private Button button;
     private Image outline;
+    public Image rarityBackGround;
     public Image background;
     private Image playerImage;
     private Image unableImage;
@@ -29,16 +30,18 @@ public class QuickSlot : MonoBehaviour
         button = GetComponent<Button>();
         button.onClick.AddListener(SellectPlayer);
         outline = transform.GetChild(0).GetComponent<Image>();
-        background = transform.GetChild(2).GetComponent<Image>();
-        playerImage = transform.GetChild(3).GetComponent<Image>();
-        hpImage = transform.GetChild(4).GetChild(0).GetComponent<Image>();
-        spImage = transform.GetChild(5).GetChild(0).GetComponent<Image>();
-        unableImage = transform.GetChild(6).GetComponent<Image>();
-        MoveIcon = transform.GetChild(7).gameObject;
-        AttackIcon = transform.GetChild(8).gameObject;
-        SkillIcon = transform.GetChild(9).gameObject;
+        rarityBackGround = transform.GetChild(2).GetComponent<Image>();
+        background = transform.GetChild(3).GetComponent<Image>();
+        playerImage = transform.GetChild(4).GetComponent<Image>();
+        hpImage = transform.GetChild(5).GetChild(0).GetComponent<Image>();
+        spImage = transform.GetChild(6).GetChild(0).GetComponent<Image>();
+        unableImage = transform.GetChild(7).GetComponent<Image>();
+        MoveIcon = transform.GetChild(8).gameObject;
+        AttackIcon = transform.GetChild(9).gameObject;
+        SkillIcon = transform.GetChild(10).gameObject;
 
         unableImage.gameObject.SetActive(false);
+        rarityBackGround.sprite = BackGroundHolder.Instance.BackGround(Player.so.characterInfo.rarity);
         playerImage.sprite = Player.so.characterInfo.Image;
         joyStick = FindObjectOfType<JoyStick>();
         playerController = FindObjectOfType<PlayerController>();

@@ -10,7 +10,6 @@ public class Player : Ar
 
     public bool isSellected { get; set; }
     public int currentCooltime { get; set; }
-    public bool isRangeCharacter { get; protected set; }
 
     public bool isEnd = true;
 
@@ -509,15 +508,27 @@ public class Player : Ar
         targets = Physics2D.RaycastAll(transform.position, attackRange.transform.position - transform.position, distance);
     }
 
-    protected Transform FindNearEnemy()
+    protected Vector2 FindNearEnemy()
     {
         foreach (RaycastHit2D hit in targets)
         {
             if (hit.collider.CompareTag("Enemy"))
             {
-                return hit.transform;
+                return hit.point;
             }
         }
-        return null;
+        return Vector2.zero;
+    }
+
+    protected Vector2 FindNearObject()
+    {
+        foreach (RaycastHit2D hit in targets)
+        {
+            if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Object"))
+            {
+                return hit.point;
+            }
+        }
+        return Vector2.zero;
     }
 }
