@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class Player : Ar
 {
@@ -395,7 +396,7 @@ public class Player : Ar
             cameraMove.isBatchmode = true;
             cameraMove.isDragmode = false;
         }
-        else if(!TurnManager.Instance.IsPlayerTurn || isDead || TurnManager.Instance.SomeoneIsMoving || TurnManager.Instance.IsUsedAllTurn()) return;
+        else if(!TurnManager.Instance.IsPlayerTurn || isDead || TurnManager.Instance.SomeoneIsMoving || TurnManager.Instance.IsUsedAllTurn() || EventSystem.current.IsPointerOverGameObject()) return;
         playerController?.SellectPlayer(slot);
     }
 
