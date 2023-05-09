@@ -41,7 +41,8 @@ public class Archer : Player
     {
         base.Drag(angle, dis);
 
-        var target = FindNearEnemy(range);
+        RayCastTargets(range);
+        var target = FindNearEnemy();
 
         if (target != null)
         {
@@ -73,7 +74,7 @@ public class Archer : Player
     public override IEnumerator AnimTimingAttack()
     {
         while (isAttack) yield return null;
-        Shoot(angle);
+        cameraMove.MovetoTarget(Shoot(angle).transform); 
     }
 
     protected override void Skill(Vector2 angle)
@@ -89,18 +90,19 @@ public class Archer : Player
     public override IEnumerator AnimTimingSkill()
     {
         while (isSkill) yield return null;
-        Shoot(angle);
+        cameraMove.MovetoTarget(Shoot(angle).transform);
         yield return new WaitForSeconds(0.2f);
         Shoot(angle);
     }
 
-    void Shoot(Vector2 angle)
+    Bullet Shoot(Vector2 angle)
     {
         float zAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
         EffectManager.Instance.InstantiateEffect_P(Effect.BowShoot, (Vector2)attackRange.transform.position - angle, new Vector2(angle.x, -angle.y));
         var bullet = Instantiate(arrow, transform.position, Quaternion.Euler(0, 0, zAngle-180));
         rigid.velocity = ((angle.normalized * 0.5f) * 25) / (1 + stat.WEIGHT * 0.1f);
-        cameraMove.MovetoTarget(bullet.transform);
+
+        return bullet;
     }
 
     void WaitSec(float sec)

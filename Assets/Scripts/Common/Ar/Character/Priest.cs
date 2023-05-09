@@ -21,7 +21,7 @@ public class Priest : Player
     {
         base.Drag(angle, dis);
 
-        targets = Physics2D.RaycastAll(transform.position, attackRange.transform.position - transform.position, moveDrag);
+        RayCastTargets(moveDrag);
 
         if (targets.Length > 1)
         {

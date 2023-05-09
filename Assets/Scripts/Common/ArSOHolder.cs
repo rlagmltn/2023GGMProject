@@ -7,12 +7,15 @@ public class ArSOHolder : MonoBehaviour
 {
     private ArSO Ar;
     private Image ArImage;
+    private Image BackGround;
 
     Color color = new Color(1, 1, 1);
 
     private void UpdateButtonUI()
     {
+        BackGround = GetComponent<Image>();
         ArImage = transform.GetChild(0).GetComponent<Image>();
+        BackGround.sprite = BackGroundHolder.Instance.BackGround(Ar.characterInfo.rarity);
         ArImage.sprite = Ar.characterInfo.Image;
     }
 

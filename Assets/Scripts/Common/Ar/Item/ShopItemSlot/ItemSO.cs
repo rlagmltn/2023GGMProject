@@ -8,8 +8,10 @@ public class ItemSO : ScriptableObject
     public Sprite itemIcon;
     public string itemName;
     public int itemPrice;
+    public ItemRarity itemRarity;
     public Stat stat;
     public int SkillCoolDown;
+    public int DamageDecrease;
 
     [TextArea(15, 20)]
     public string itemExplain;
