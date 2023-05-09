@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd6096bb90998d0469d40c07acdda1e3, type: 3}
+  m_Name: FangtianHuaji
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: 9e085fc1068ae3c4daabb06c676b3137, type: 3}
+  itemName: "\uBC29\uCC9C\uD654\uADF9"
+  itemPrice: 500
+  itemRarity: 2
+  stat:
+    MaxHP: 0
+    HP: 0
+    MaxSP: 0
+    SP: 0
+    ATK: 3
+    SATK: 0
+    CriPer: 0
+    CriDmg: 0
+    WEIGHT: 0
+  SkillCoolDown: 0
+  DamageDecrease: 0
+  itemExplain: "\uB204\uAD6C\uB4E0\uC9C0 \uCC0C\uB97C \uC218 \uC788\uC744 \uAC83
+    \uAC19\uB2E4"
+  TAI:
+  - itemPassiveType: 12
+    Info: {fileID: 1725034236118838674, guid: 91a85b0a4bf58a642a660f52a94cfa83, type: 3}
+  - itemPassiveType: 9
+    Info: {fileID: -3989573774109861436, guid: e2ac0b733f75e2e44a91c452a3f554ca, type: 3}

@@ -47,7 +47,7 @@ public class Stat
     public int SATK; // 스킬공격력
     public int CriPer; // 치명타 확률
     public float CriDmg; // 치명타 데미지
-    public int WEIGHT; // 무게
+    public float WEIGHT; // 무게
 
     public Stat()
     {
