@@ -36,7 +36,7 @@ public class TestStageManager : MonoSingleton<TestStageManager>
     
     private List<Transform> ClearedStages;
     private Transform currentStage;
-    private StageSO SelectedStage;
+    [SerializeField] private StageSO SelectedStage;
 
     void Start()
     {
@@ -111,6 +111,7 @@ public class TestStageManager : MonoSingleton<TestStageManager>
         BackPannel.gameObject.SetActive(true);
         SelectedStage = stage;
         MapImage.sprite = stage.stageInfo.stageImage;
+        MapInventory.Instance.UpdateUI();
         StageInfoPannelUpdate();
     }
 
@@ -312,6 +313,11 @@ public class TestStageManager : MonoSingleton<TestStageManager>
     void AddButtonListener(Button button, UnityAction action)
     {
         button.onClick.AddListener(action);
+    }
+
+    public StageSO GetStage()
+    {
+        return SelectedStage;
     }
 
     /// <summary>

@@ -13,10 +13,6 @@ public class Mjolnir : ItemInfo
 
     void GetNearEnemyDamage()
     {
-        if (!player._isMove) return;
-
-        //이펙트는 누군가 해줘야함 번개치는거
-
         Collider2D[] hit = Physics2D.OverlapCircleAll(player.transform.position, Distance);
 
         if (hit.Length <= 0) return;
