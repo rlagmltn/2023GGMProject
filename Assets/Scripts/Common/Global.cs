@@ -23,6 +23,11 @@ public class Global
     public static ArSO[] Selected_Ar_Preset = new ArSO[3];
 
     public static StageSO EnterStage = new StageSO();
+
+    public static bool isEventBattle = false;
+    public static bool isEvnetSave = false;
+
+    public static Events G_Event;
 }
 
 public enum Sound
@@ -92,6 +97,7 @@ public enum eSceneName
     InGame,
     Boss,
     MaxCount,
+    Event,
 }
 
 public class GameMapClass

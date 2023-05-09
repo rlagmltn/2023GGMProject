@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class HitOrRun : _Event
 {
@@ -66,8 +67,13 @@ public class HitOrRun : _Event
     void SecondOption()
     {
         //전투 시작
-        BackGroundPannel.gameObject.SetActive(true);
-        Option2Pannel.gameObject.SetActive(true);
+        //BackGroundPannel.gameObject.SetActive(true);
+        //Option2Pannel.gameObject.SetActive(true);
+        Global.isEventBattle = true;
+        Global.isEvnetSave = true;
+
+        SceneManager.LoadScene("TestScene");
+        
     }
 
     void ThirdOption()

@@ -32,9 +32,17 @@ public class Reward : Shop
         StageClear();
     }
 
-    void StageClear() //이거 나중에 버튼눌렀을때 실행되도록 바꿔야함`````12234443211``122
+    void StageClear() //이거 나중에 버튼눌렀을때 실행되도록 바꿔야함
     {
-        Global.EnterStage.IsCleared = true;
-        SceneMgr.Instance.LoadScene(eSceneName.Map);
+        if(!Global.isEventBattle)
+        {
+            Global.EnterStage.IsCleared = true;
+            SceneMgr.Instance.LoadScene(eSceneName.Map);
+            return;
+        }
+
+        Global.isEventBattle = false;
+        SceneMgr.Instance.LoadScene(eSceneName.Event);
+        return;
     }
 }

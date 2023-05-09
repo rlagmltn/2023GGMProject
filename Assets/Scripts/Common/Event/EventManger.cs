@@ -45,6 +45,14 @@ public class EventManger : MonoSingleton<EventManger>
 
     void EventSelect()
     {
+        if(Global.isEvnetSave)
+        {
+            S_event = Global.G_Event;
+            Global.isEvnetSave = false;
+            EventClear();
+            return;
+        }
+
         RandomNum = Random.Range(0, EventList.Count);
 
         foreach(Events num in Events.GetValues(typeof(Events)))
