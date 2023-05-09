@@ -50,11 +50,11 @@ public class Elementalist : Player
         base.Drag(angle, dis);
 
         RayCastTargets(range);
-        var target = FindNearEnemy();
+        var target = FindNearObject();
 
-        if (target != null)
+        if (target.magnitude != 0)
         {
-            var a = Vector2.Distance(transform.position, target.transform.position);
+            var a = Vector2.Distance(transform.position, target);
             skillRange.size = new Vector2(a / 2, 1);
             skillCircle.localPosition = new Vector2(a / 2 - 0.5f, 0);
         }
