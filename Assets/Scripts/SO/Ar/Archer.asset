@@ -38,20 +38,21 @@ MonoBehaviour:
     baseWeight: 3
     currentWeight: 3
   skill:
-    skillImage: {fileID: 21300004, guid: bb5aa57291071d2488516f6aaa3732bd, type: 3}
+    skillImage: {fileID: 21300000, guid: 626b9cddb29049e4cac50cd87b419945, type: 3}
     skillName: "\uC0AC\uACA9"
     skillCoolTime: 6
     startskillCoolTime: 0
     MaxSkillCoolTime: 6
     currentSkillCoolTime: 0
-    SkillSummary: "\uD654\uC0B4\uC744 \uBE60\uB974\uAC8C \uB450 \uBC1C\uC744 \uBC1C\uC0AC\uD55C\uB2E4"
+    SkillSummary: "\uAC15\uB824\uD06C\uD55C \uD654\uC0B4\uC744 \uBC1C\uC0AC\uD574
+      \uC801\uC744 \uACF5\uACA9\uD55C\uB2E4"
   E_Item:
     itmeSO:
-    - {fileID: 11400000, guid: f1e643a1dc139c7498e6127b89c52410, type: 2}
+    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
   isTake: 1
   isUse: 0
-  isInGameTake: 0
+  isInGameTake: 1
   ArData: {fileID: 940447669140484755, guid: b7147b9d847791746b0aa90e0be54b0b, type: 3}
   Summary: "\uBE60\uB974\uAC8C \uD654\uC0B4\uC744 2\uBC1C \uBC1C\uC0AC\uD55C\uB2E4"

@@ -30,11 +30,11 @@ public class Assassin : Player
         base.Drag(angle, dis);
 
         RayCastTargets(range);
-        var target = FindNearEnemy();
+        var target = FindNearObject();
 
-        if (target!=null)
+        if (target.magnitude != 0)
         {
-            skillRange.size = new Vector2(Vector2.Distance(transform.position, target.position) / 2, 1);
+            skillRange.size = new Vector2(Vector2.Distance(transform.position, target) / 2, 1);
         }
         else
         {

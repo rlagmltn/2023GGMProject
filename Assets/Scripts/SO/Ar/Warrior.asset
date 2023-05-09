@@ -41,13 +41,14 @@ MonoBehaviour:
     skillImage: {fileID: 21300000, guid: 3494dc956dfd7174abc07060940a2848, type: 3}
     skillName: "\uAC15\uD0C0"
     skillCoolTime: 9
+    startskillCoolTime: 0
     MaxSkillCoolTime: 9
-    currentSkillCoolTime: 9
+    currentSkillCoolTime: 0
     SkillSummary: "\uAD11\uBC94\uC704\uD55C \uBC94\uC704\uC5D0 \uAC15\uB825\uD06C\uD55C
       \uB370\uBBF8\uC9C0\uB97C \uC900\uB2E4"
   E_Item:
     itmeSO:
-    - {fileID: 0}
+    - {fileID: 11400000, guid: 4adf42bda2f286e448296f8d0ca20c95, type: 2}
     - {fileID: 0}
     - {fileID: 0}
   isTake: 1
