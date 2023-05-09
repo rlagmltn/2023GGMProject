@@ -9,6 +9,8 @@ public class GameShop_Inventory : MonoSingleton<GameShop_Inventory>
     [SerializeField] private ItemDBSO InventorySO;
     [SerializeField] private ItemSO EmptySO;
 
+    [SerializeField] private Button OutButton;
+
     private void Start()
     {
         Init();
@@ -17,6 +19,8 @@ public class GameShop_Inventory : MonoSingleton<GameShop_Inventory>
     void Init()
     {
         UpdateImage();
+        OutButton.onClick.RemoveAllListeners();
+        OutButton.onClick.AddListener(StageClear);
     }
 
     /// <summary>
@@ -73,4 +77,10 @@ public class GameShop_Inventory : MonoSingleton<GameShop_Inventory>
     //    for (int num = 0; num < InventorySO.items.Count; num++)
     //            InventorySO.items[num] = EmptySO;
     //}
+
+    public void StageClear()
+    {
+        Global.EnterStage.IsCleared = true;
+        SceneMgr.Instance.LoadScene(eSceneName.Map);
+    }
 }

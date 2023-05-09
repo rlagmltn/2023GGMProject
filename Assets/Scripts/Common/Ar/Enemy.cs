@@ -7,6 +7,8 @@ public class Enemy : Ar
     protected int currentPassiveCool;
     protected int passiveCool;
 
+    public bool isDancingSword_Damage = false;
+
     public override void StatReset()
     {
         isDead = false;
