@@ -19,6 +19,9 @@ public class MapInventory : MonoSingleton<MapInventory>
     [SerializeField] private Transform InfoSkillPannel;
     [SerializeField] private Button InfoStatButton;
     [SerializeField] private Button InfoSkillButton;
+    [SerializeField] private TextMeshProUGUI StageSumarryText;
+
+    private StageSO Selected_Stage;
 
     private bool isSkillPannel = false;
     private ArSO SelectedAR;
@@ -71,8 +74,19 @@ public class MapInventory : MonoSingleton<MapInventory>
         }
     }
 
-    void UpdateUI()
+    public void UpdateUI()
     {
+        if (TestStageManager.Instance.GetStage() is null) return;
+        string TempText = TestStageManager.Instance.GetStage().stageKind switch
+        {
+            eStageState.Battle => "전투 스테이지",
+            eStageState.Boss => "보스 스테이지",
+            eStageState.Event => "이벤트 스테이지",
+            eStageState.Shop => "상점 스테이지",
+            _ => "정체를 알 수 없는 스테이지",
+        };
+        StageSumarryText.text = TempText;
+
         InfoSkillPannel.gameObject.SetActive(isSkillPannel);
         InfoStatPannel.gameObject.SetActive(!isSkillPannel);
 
@@ -148,5 +162,10 @@ public class MapInventory : MonoSingleton<MapInventory>
             ar.isUse = false;
             ar.isInGameTake = false;
         }
+    }
+    
+    private void SetStage()
+    {
+        Selected_Stage = TestStageManager.Instance.GetStage();
     }
 }
