@@ -46,6 +46,7 @@ public class Player : Ar
     protected bool isAttack = false;
     protected bool isSkill = false;
     public bool _isMove = false;
+    public List<Transform> AxList; 
 
     protected float moveDrag;
     protected RaycastHit2D[] targets;

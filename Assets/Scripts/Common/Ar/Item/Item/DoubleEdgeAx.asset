@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd6096bb90998d0469d40c07acdda1e3, type: 3}
+  m_Name: DoubleEdgeAx
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: 9e085fc1068ae3c4daabb06c676b3137, type: 3}
+  itemName: "\uC591\uB0A0 \uB3C4\uB07C"
+  itemPrice: 500
+  itemRarity: 2
+  stat:
+    MaxHP: 0
+    HP: 0
+    MaxSP: 0
+    SP: 0
+    ATK: 1
+    SATK: 0
+    CriPer: 0
+    CriDmg: 0
+    WEIGHT: 0
+  SkillCoolDown: 0
+  DamageDecrease: 0
+  itemExplain: "\uD754\uD788 \uBCFC \uC218 \uC788\uB294 \uC774\uAC00 \uBE60\uC9C4
+    \uB3C4\uB07C\uB97C \uC8FC\uC6CC\uC654\uB2E4."
+  TAI:
+  - itemPassiveType: 3
+    Info: {fileID: -7333332643943539077, guid: a4a75abfc5532d34d946ba22a099c451, type: 3}
+  - itemPassiveType: 9
+    Info: {fileID: 555405721260083200, guid: 78831845e6e781b4c8c9265ee6446542, type: 3}
