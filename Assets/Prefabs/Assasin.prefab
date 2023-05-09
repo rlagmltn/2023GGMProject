@@ -61,10 +61,7 @@ MonoBehaviour:
   Parts:
   - {fileID: 1262752340133911472}
   Shadows:
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 8918425206650489872}
-  - {fileID: 0}
   Animator: {fileID: 95412966663271060}
   AnimationManager: {fileID: 114299399650273240}
   LayerManager: {fileID: 114391165987986440}
@@ -211,6 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: 
+  pushPower: 40
   StartTurn:
     m_PersistentCalls:
       m_Calls: []
@@ -241,6 +239,12 @@ MonoBehaviour:
   OnBattleDie:
     m_PersistentCalls:
       m_Calls: []
+  OnUsedSkill:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCrashed:
+    m_PersistentCalls:
+      m_Calls: []
   EndTurn:
     m_PersistentCalls:
       m_Calls: []
@@ -251,8 +255,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isPaperBirdPlay: 0
-  ItemInfos: []
+  StickySlimeList: []
+  StickySlime_PoaerList: []
   TAI: []
+  _isMove: 0
   itemSlots:
   - {fileID: 0}
   - {fileID: 0}
