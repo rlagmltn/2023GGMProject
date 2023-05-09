@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StateMove : State<ArFSM>
-{
+{   
     protected Enemy enemy;
     private AStarGrid grid;
-
+    
     public override void OnAwake()
     {
         enemy = stateMachineClass.GetComponent<Enemy>();
@@ -18,13 +18,13 @@ public class StateMove : State<ArFSM>
         Vector2 myPos = stateMachineClass.transform.position;
         Vector2 targetPos = stateMachineClass.SearchAr().position;
         Vector2 angle;
-
+    
         grid.SetNode(myPos, targetPos);
         List<Vector2> path = grid.GetPath();
         Vector2 curVec = Vector2.zero;
         Vector2 sumVec = Vector2.zero;
         int changeCnt = -1;
-
+    
         if(path == null)
         {
             Debug.LogError("None Path!");
@@ -32,7 +32,7 @@ public class StateMove : State<ArFSM>
             stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
             return;
         }
-
+    
         foreach(Vector2 vec in path)
         {
             if(curVec != vec)
@@ -40,14 +40,14 @@ public class StateMove : State<ArFSM>
                 changeCnt++;
                 curVec = vec;
                 if (changeCnt == 2) break;
-
+                
             }
             sumVec += vec;
         }
-
+    
         angle = sumVec.normalized;
         
-        foreach(RaycastHit2D ray in Physics2D.RaycastAll(myPos, angle, sumVec.magnitude))
+        foreach(RaycastHit2D ray in Physics2D.BoxCastAll(myPos, new Vector2(1.17f, 2.1f), Vector2.Angle(myPos, targetPos), angle, sumVec.magnitude))
         {
             if(ray.collider.CompareTag("Out") || ray.collider.name.Contains("Obstacle"))
             {
@@ -56,12 +56,13 @@ public class StateMove : State<ArFSM>
                 break;  
             }
         }
-
+    
         stateMachineClass.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
         float rangeAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
         stateMachineClass.transform.GetChild(0).rotation = Quaternion.Euler(new Vector3(0, 0, rangeAngle));
         stateMachineClass.StartCoroutine("MoveAr", angle * 30f);
-
+        
+    
         stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
     }
 
