@@ -52,11 +52,11 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         }
     }
 
-    public void ToggleSellectArPanel()
-    {
-        testBtnSlotParent.gameObject.SetActive(!testBtnSlotParent.gameObject.activeSelf);
-        if(testBtnSlotParent.gameObject.activeSelf) sellectPlayer.UnSetAr();
-    }
+    //public void ToggleSellectArPanel()
+    //{
+    //    testBtnSlotParent.gameObject.SetActive(!testBtnSlotParent.gameObject.activeSelf);
+    //    if(testBtnSlotParent.gameObject.activeSelf) sellectPlayer.UnSetAr();
+    //}
 
     public void SellectPlayer(Player player = null)
     {

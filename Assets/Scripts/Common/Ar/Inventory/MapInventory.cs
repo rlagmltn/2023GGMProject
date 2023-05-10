@@ -21,6 +21,8 @@ public class MapInventory : MonoSingleton<MapInventory>
     [SerializeField] private Button InfoSkillButton;
     [SerializeField] private TextMeshProUGUI StageSumarryText;
 
+    [SerializeField] private List<Image> ItemImage;
+
     private StageSO Selected_Stage;
 
     private bool isSkillPannel = false;
@@ -131,6 +133,20 @@ public class MapInventory : MonoSingleton<MapInventory>
     {
         SelectedAR = Ar;
         isSkillPannel = false;
+
+        for(int num = 0; num < 3; num++)
+        {
+            if(SelectedAR.E_Item.itmeSO[num] == null)
+            {
+                ItemImage[num].sprite = null;
+                ItemImage[num].color = new Color(0.78f, 0.78f, 0.78f, 0.78f);
+                continue;
+            }
+
+            ItemImage[num].sprite = SelectedAR.E_Item.itmeSO[num].itemIcon;
+            ItemImage[num].color = new Color(1, 1, 1, 1);
+        }
+
         UpdateUI();
     }
 

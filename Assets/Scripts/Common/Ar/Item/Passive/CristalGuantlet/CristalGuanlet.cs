@@ -15,9 +15,7 @@ public class CristalGuanlet : ItemInfo
     void StopEnemy_Random()
     {
         GetNearEnemy();
-        int Rnum = Random.Range(0, 101);
-        if (Rnum > triggerPercent) return;
-        nearEnemy.GetComponent<ArFSM>().SetTurnSkip();
+        SetTurnSkip();
     }
 
     void GetNearEnemy()
@@ -36,5 +34,12 @@ public class CristalGuanlet : ItemInfo
             Distance = Vector2.Distance(transform.position, hit[num].transform.position);
             nearEnemy = hit[num].transform;
         }
+    }
+
+    void SetTurnSkip()
+    {
+        int Rnum = Random.Range(0, 101);
+        if (Rnum > triggerPercent) return;
+        nearEnemy.GetComponent<ArFSM>().SetTurnSkip();
     }
 }

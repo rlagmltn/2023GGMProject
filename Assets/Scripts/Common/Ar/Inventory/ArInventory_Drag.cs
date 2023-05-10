@@ -28,6 +28,7 @@ public class ArInventory_Drag : MonoBehaviour
             if (Obj.GetComponent<ArSOHolder>() != null)
             {
                 AR = Obj.GetComponent<ArSOHolder>().GetArSO();
+                if (!AR.isTake) return;
                 GhostImage.sprite = AR.characterInfo.Image;
                 isFind = true;
                 break;
