@@ -115,6 +115,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         dummy.StatReset();
         dummy.gameObject.SetActive(true);
         dummy.transform.position = new Vector3(5, 0);
+        cameraMove.SetSkillBtnText(testPlayer);
         TurnManager.Instance.SomeoneIsMoving = false;
     }
 
@@ -143,6 +144,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         testPlayer.DragEnd(joystick.joystickType, power, angle);
         cancelButton.gameObject.SetActive(false);
         testPlayer.CountCooltime();
+        cameraMove.SetSkillBtnText(testPlayer);
     }
 
     public void ChooseStickType(int n)

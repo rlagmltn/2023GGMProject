@@ -8,17 +8,26 @@ public class ActSellect : MonoBehaviour
 
     public void Open()
     {
-        animator.SetTrigger("Open");
+        if (animator == null)
+            gameObject.SetActive(true);
+        else
+            animator.SetTrigger("Open");
     }
 
     public void Skip()
     {
-        animator.SetTrigger("Skip");
+        if (animator == null)
+            gameObject.SetActive(true);
+        else
+            animator.SetTrigger("Skip");
     }
 
     public void Close()
     {
-        animator.SetTrigger("Close");
+        if (animator == null)
+            gameObject.SetActive(true);
+        else
+            animator.SetTrigger("Close");
     }
 
     private void ActiveFalse()
