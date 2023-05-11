@@ -12,6 +12,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
     [SerializeField] private MainTestSlot pfMainTestSlot;
     [SerializeField] private Transform testBtnSlot;
     [SerializeField] private Transform testBtnSlot2;
+    [SerializeField] private Transform BackgroundPannel;
 
     [SerializeField] MainTestJoyStick joystick;
     [SerializeField] StickCancel cancelButton;
@@ -116,6 +117,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         dummy.gameObject.SetActive(true);
         dummy.transform.position = new Vector3(5, 0);
         TurnManager.Instance.SomeoneIsMoving = false;
+        BackgroundPannel.gameObject.SetActive(false);
     }
 
     public void DragBegin()
