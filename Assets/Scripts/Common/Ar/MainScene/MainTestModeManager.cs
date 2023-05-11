@@ -9,6 +9,8 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
     [SerializeField] private Enemy pfDummy;
     [SerializeField] private ArSOArray arHolder;
     [SerializeField] private ItemDBSO itemDB;
+    [SerializeField] private ItemDBSO itemInven;
+    [SerializeField] private ItemSO emptyItem;
     [SerializeField] private MainTestSlot pfMainTestSlot;
     [SerializeField] private Transform testBtnSlot;
     [SerializeField] private Transform testBtnSlot2;
@@ -44,11 +46,17 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         {
             var instance = Instantiate(pfMainTestSlot, testBtnSlot);
             instance.SetSO(so);
+            so.E_Item.itmeSO = new ItemSO[3];
         }
         foreach (ItemSO so in itemDB.items)
         {
             var instance = Instantiate(pfMainTestSlot, testBtnSlot2);
             instance.SetSO(so);
+        }
+        itemInven.items = new List<ItemSO>();
+        for(int i=0; i<20; i++)
+        {
+            itemInven.AddItemInItems(emptyItem);
         }
     }
 
