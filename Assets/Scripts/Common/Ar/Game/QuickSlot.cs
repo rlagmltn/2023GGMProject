@@ -22,6 +22,7 @@ public class QuickSlot : MonoBehaviour
     public bool isBatched;
     private JoyStick joyStick;
     private PlayerController playerController;
+    private bool isClicked;
 
     public Player Player { get; set; }
 
@@ -119,17 +120,18 @@ public class QuickSlot : MonoBehaviour
         Player.Collide.enabled = false;
         Player.transform.position = transform.position;
         outline.color = Color.white;
+        isClicked = true;
     }
 
     public void Drag()
     {
-        if (!playerController.IsBatchMode) return;
+        if (!playerController.IsBatchMode || !isClicked) return;
         Player.transform.position = Util.Instance.mousePosition;
     }
 
     public void Up()
     {
-        if (!playerController.IsBatchMode) return;
+        if (!playerController.IsBatchMode || !isClicked) return;
         RaycastHit2D ray = Physics2D.Raycast(Player.transform.position, new Vector3(0, -1, 0), 0.01f, LayerMask.GetMask("Batch"));
         if (ray.collider != null && !ray.collider.CompareTag("UI"))
         {
@@ -157,6 +159,7 @@ public class QuickSlot : MonoBehaviour
             Player.gameObject.SetActive(false);
             outline.color = Color.black;
         }
+        isClicked = false;
     }
 
     public void ActiveIcon(JoystickType joystickType)

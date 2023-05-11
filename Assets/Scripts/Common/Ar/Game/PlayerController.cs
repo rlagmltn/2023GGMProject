@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject batchZone;
     [SerializeField] JoyStick joystick;
     [SerializeField] StickCancel cancelButton;
-    [SerializeField] GameObject actSellect;
     [SerializeField] TextMeshProUGUI batchUnitText;
 
     public List<CONEntity> enemyList;
@@ -25,9 +24,6 @@ public class PlayerController : MonoBehaviour
 
     private List<QuickSlot> quickSlots = new List<QuickSlot>();
     public List<QuickSlot> quickSlotHolder = new List<QuickSlot>();
-    private GameObject attackBtn;
-    private GameObject skilCoolImage;
-    private TextMeshProUGUI skillCoolText;
     private CameraMove cameraMove;
 
     void Awake()
@@ -35,9 +31,6 @@ public class PlayerController : MonoBehaviour
         IsBatchMode = true;
         cameraMove = FindObjectOfType<CameraMove>();
         SummonPlayers();
-        attackBtn = actSellect.transform.GetChild(1).gameObject;
-        skilCoolImage = actSellect.transform.GetChild(2).GetChild(1).gameObject;
-        skillCoolText = skilCoolImage.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     //private void SetEnemyList()
@@ -66,20 +59,15 @@ public class PlayerController : MonoBehaviour
     {
         if (IsBatchMode) return;
         sellectPlayer = player.Player;
-        cameraMove.MovetoTarget(sellectPlayer.transform);
+        cameraMove.MovetoTarget(sellectPlayer);
         DisableQuickSlots();
-        actSellect.SetActive(true);
-        if (sellectPlayer.isRangeCharacter)
-            attackBtn.SetActive(true);
-        SetSkillBtnText();
+        cameraMove.SetSkillBtnText(sellectPlayer);
         player.ColorChange(true);
     }
 
     public void DisableQuickSlots()
     {
         if (IsBatchMode) return;
-        attackBtn.SetActive(false);
-        actSellect.SetActive(false);
         joystick.gameObject.SetActive(false);
         foreach (QuickSlot slot in quickSlots)
         {
@@ -150,25 +138,10 @@ public class PlayerController : MonoBehaviour
     {
         if ((JoystickType)n == JoystickType.Skill && sellectPlayer.currentCooltime < sellectPlayer.skillCooltime) return;
 
-        attackBtn.SetActive(false);
-        actSellect.SetActive(false);
+        cameraMove.CloseActSellect();
         joystick.gameObject.SetActive(true);
         joystick.joystickType = (JoystickType)n;
         sellectPlayer.slot.ActiveIcon(joystick.joystickType);
-    }
-
-    private void SetSkillBtnText()
-    {
-        if (sellectPlayer.currentCooltime < sellectPlayer.skillCooltime)
-        {
-            skilCoolImage.SetActive(true);
-            skillCoolText.SetText((sellectPlayer.skillCooltime - sellectPlayer.currentCooltime).ToString());
-        }
-        else
-        {
-            skilCoolImage.SetActive(false);
-            skillCoolText.SetText("");
-        }
     }
 
     public void SetQuickSlotsEnable(bool value)
