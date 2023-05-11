@@ -66,9 +66,9 @@ public class CameraMove : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
         SetDefaultZoom();
 
-        attackBtn = actSellect.transform.GetChild(1).gameObject;
-        skilCoolImage = actSellect.transform.GetChild(2).GetChild(1).gameObject;
-        skillCoolText = skilCoolImage.GetComponentInChildren<TextMeshProUGUI>();
+        attackBtn = actSellect?.transform.GetChild(1).gameObject;
+        skilCoolImage = actSellect?.transform.GetChild(2).GetChild(1).gameObject;
+        skillCoolText = skilCoolImage?.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void Update()
@@ -91,19 +91,19 @@ public class CameraMove : MonoBehaviour
             transform.position = target.position + moveDragPos + setCamPos;
             if(!openCheck)
             {
-                if (Vector2.Distance(cinemachineCam.transform.position, transform.position)>0.5f) return;
+                if (Vector2.Distance(cinemachineCam.transform.position, transform.position)>0.2f) return;
                 actSellect?.gameObject.SetActive(true);
                 actSellect?.Open();
                 openCheck = true;
-                if(attackActive)
-                    attackBtn?.SetActive(true);
+                attackBtn?.SetActive(attackActive);
+                attackActive = false;
             }
         }
     }
 
     public void MovetoTarget(Ar target)
     {
-        if (this.target == target) return;
+        if (this.target == target.transform && actSellect.gameObject.activeSelf) return;
         this.target = target.transform;
         actSellect.Skip();
         openCheck = false;
