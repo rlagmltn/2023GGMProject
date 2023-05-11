@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class CameraMove : MonoBehaviour
 {
@@ -46,6 +47,14 @@ public class CameraMove : MonoBehaviour
     [SerializeField] private float zoomSensitivity;
 
     private PlayerController playerController;
+    [SerializeField] ActSellect actSellect;
+
+    private GameObject attackBtn;
+    private GameObject skilCoolImage;
+    private TextMeshProUGUI skillCoolText;
+
+    private bool openCheck;
+    private bool attackActive;
 
     public float OrthographicSize { get { return cinemachineCam.m_Lens.OrthographicSize; } }
 
@@ -56,6 +65,10 @@ public class CameraMove : MonoBehaviour
         camTransposer = cinemachineCam.GetCinemachineComponent<CinemachineTransposer>();
         playerController = FindObjectOfType<PlayerController>();
         SetDefaultZoom();
+
+        attackBtn = actSellect.transform.GetChild(1).gameObject;
+        skilCoolImage = actSellect.transform.GetChild(2).GetChild(1).gameObject;
+        skillCoolText = skilCoolImage.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void Update()
@@ -76,7 +89,27 @@ public class CameraMove : MonoBehaviour
         if (target != null)
         {
             transform.position = target.position + moveDragPos + setCamPos;
+            if(!openCheck)
+            {
+                if (Vector2.Distance(cinemachineCam.transform.position, transform.position)>0.5f) return;
+                actSellect?.gameObject.SetActive(true);
+                actSellect?.Open();
+                openCheck = true;
+                if(attackActive)
+                    attackBtn?.SetActive(true);
+            }
         }
+    }
+
+    public void MovetoTarget(Ar target)
+    {
+        this.target = target.transform;
+        actSellect.Skip();
+        openCheck = false;
+        attackActive = false;
+        if (target.isRangeCharacter)
+            attackActive = true;
+        EndDrag();
     }
 
     public void MovetoTarget(Transform target)
@@ -211,9 +244,9 @@ public class CameraMove : MonoBehaviour
         {
             isDragmode = true;
             ResetTarget();
+            attackBtn.SetActive(false);
             playerController.ResetSellect();
             playerController.DisableQuickSlots();
-            playerController.ActSellectSkip();
             camTransposer.m_XDamping = 0;
             camTransposer.m_YDamping = 0;
             camTransposer.m_ZDamping = 0;
@@ -246,5 +279,25 @@ public class CameraMove : MonoBehaviour
     {
         orthographicSize = defaultOrthographicSize;
         ApplyCameraSize();
+    }
+
+    public void CloseActSellect()
+    {
+        attackBtn.SetActive(false);
+        actSellect.Close();
+    }
+
+    public void SetSkillBtnText(Player sellectPlayer)
+    {
+        if (sellectPlayer.currentCooltime < sellectPlayer.skillCooltime)
+        {
+            skilCoolImage.SetActive(true);
+            skillCoolText.SetText((sellectPlayer.skillCooltime - sellectPlayer.currentCooltime).ToString());
+        }
+        else
+        {
+            skilCoolImage.SetActive(false);
+            skillCoolText.SetText("");
+        }
     }
 }
