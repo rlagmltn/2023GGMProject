@@ -82,6 +82,8 @@ public class Player : Ar
         GetItemEvents();
 
         MouseUp.AddListener(() => { isMove = true; });
+        OnOutDie.AddListener(()=> { TurnManager.Instance.PlayerTurn -= 1; });
+        OnBattleDie.AddListener(()=> { TurnManager.Instance.PlayerTurn -= 1; });
     
         StatReset();
 

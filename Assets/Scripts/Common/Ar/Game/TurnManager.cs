@@ -23,6 +23,7 @@ public class TurnManager : MonoSingleton<TurnManager>
     public bool SomeoneIsMoving { get; set; }
 
     public int PassedTurn { get; private set; }
+    public int PlayerTurn { get { return playerTurn; } set { playerTurn = value; } }
 
     private void Start()
     {
