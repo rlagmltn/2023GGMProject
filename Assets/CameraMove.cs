@@ -103,6 +103,7 @@ public class CameraMove : MonoBehaviour
 
     public void MovetoTarget(Ar target)
     {
+        if (this.target == target) return;
         this.target = target.transform;
         actSellect.Skip();
         openCheck = false;
