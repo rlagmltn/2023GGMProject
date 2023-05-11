@@ -66,9 +66,9 @@ public class CameraMove : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
         SetDefaultZoom();
 
-        attackBtn = actSellect.transform.GetChild(1).gameObject;
-        skilCoolImage = actSellect.transform.GetChild(2).GetChild(1).gameObject;
-        skillCoolText = skilCoolImage.GetComponentInChildren<TextMeshProUGUI>();
+        attackBtn = actSellect?.transform.GetChild(1).gameObject;
+        skilCoolImage = actSellect?.transform.GetChild(2).GetChild(1).gameObject;
+        skillCoolText = skilCoolImage?.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void Update()
