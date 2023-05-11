@@ -7,11 +7,6 @@ public class ItemDBSO : ScriptableObject
 {
     public List<ItemSO> items;
 
-    public void Init()
-    {
-        items.Clear();
-    }
-
     public void AddItemsInItems(ItemSO[] _items)
     {
         foreach(ItemSO item in _items)

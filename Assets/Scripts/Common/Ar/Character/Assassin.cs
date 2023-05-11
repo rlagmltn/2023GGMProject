@@ -52,6 +52,7 @@ public class Assassin : Player
     public override IEnumerator AnimTimingSkill()
     {
         while (isSkill) yield return null;
+        EffectManager.Instance.InstantiateEffect_P(Effect.KuaniShoot, (Vector2)attackRange.transform.position - angle, new Vector2(angle.x, -angle.y));
         Shoot(angle);
     }
 
