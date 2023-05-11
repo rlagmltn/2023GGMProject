@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject batchZone;
     [SerializeField] JoyStick joystick;
     [SerializeField] StickCancel cancelButton;
-    [SerializeField] GameObject actSellect;
+    [SerializeField] ActSellect actSellect;
     [SerializeField] TextMeshProUGUI batchUnitText;
 
     public List<CONEntity> enemyList;
@@ -68,7 +68,8 @@ public class PlayerController : MonoBehaviour
         sellectPlayer = player.Player;
         cameraMove.MovetoTarget(sellectPlayer.transform);
         DisableQuickSlots();
-        actSellect.SetActive(true);
+        actSellect.gameObject.SetActive(true);
+        actSellect.Open();
         if (sellectPlayer.isRangeCharacter)
             attackBtn.SetActive(true);
         SetSkillBtnText();
@@ -79,12 +80,16 @@ public class PlayerController : MonoBehaviour
     {
         if (IsBatchMode) return;
         attackBtn.SetActive(false);
-        actSellect.SetActive(false);
         joystick.gameObject.SetActive(false);
         foreach (QuickSlot slot in quickSlots)
         {
             slot.ColorChange(false);
         }
+    }
+
+    public void ActSellectSkip()
+    {
+        actSellect.Skip();
     }
 
     public void DragBegin(JoystickType joystickType)
@@ -151,7 +156,7 @@ public class PlayerController : MonoBehaviour
         if ((JoystickType)n == JoystickType.Skill && sellectPlayer.currentCooltime < sellectPlayer.skillCooltime) return;
 
         attackBtn.SetActive(false);
-        actSellect.SetActive(false);
+        actSellect.Close();
         joystick.gameObject.SetActive(true);
         joystick.joystickType = (JoystickType)n;
         sellectPlayer.slot.ActiveIcon(joystick.joystickType);

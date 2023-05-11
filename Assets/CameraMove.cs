@@ -213,6 +213,7 @@ public class CameraMove : MonoBehaviour
             ResetTarget();
             playerController.ResetSellect();
             playerController.DisableQuickSlots();
+            playerController.ActSellectSkip();
             camTransposer.m_XDamping = 0;
             camTransposer.m_YDamping = 0;
             camTransposer.m_ZDamping = 0;
