@@ -2131,6 +2131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 156206622}
+  - component: {fileID: 156206623}
   m_Layer: 5
   m_Name: ActSellect
   m_TagString: Untagged
@@ -2161,6 +2162,19 @@ RectTransform:
   m_AnchoredPosition: {x: 250, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &156206623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156206621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f2197da9320d6d46a8c17711e228132, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &161199535
 GameObject:
   m_ObjectHideFlags: 0
@@ -4903,7 +4917,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &441102587
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9807,6 +9821,8 @@ MonoBehaviour:
   pfDummy: {fileID: 8648868101781268644, guid: 75d7b8106c6e0b24aa795a252529b004, type: 3}
   arHolder: {fileID: 11400000, guid: c0349a2e67d6a8b4bb7b0f45355720ad, type: 2}
   itemDB: {fileID: 11400000, guid: 6931aa12e23d47c428cd4b1a26f04d43, type: 2}
+  itemInven: {fileID: 11400000, guid: ee95ca39174dbe24b806fbbabc35b6fe, type: 2}
+  emptyItem: {fileID: 11400000, guid: 421b01e26eb8b1640b48456aeb6196a8, type: 2}
   pfMainTestSlot: {fileID: 8481438187926090889, guid: 0b285d7dda8cfd04595845ce9e0f89fc, type: 3}
   testBtnSlot: {fileID: 564160438}
   testBtnSlot2: {fileID: 1337558139}
@@ -10516,7 +10532,7 @@ MonoBehaviour:
   maxOrthographicSize: 12
   moveSensitivity: 0.02
   zoomSensitivity: 0.05
-  actSellect: {fileID: 0}
+  actSellect: {fileID: 156206623}
 --- !u!4 &1251686739
 Transform:
   m_ObjectHideFlags: 0
@@ -34593,7 +34609,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e2d1447fc1ece114e88de780edf139c5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2048f1ab772310e44bb4f3209b39f2a1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -34641,7 +34657,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &7048982081951210614
 MonoBehaviour:
   m_ObjectHideFlags: 0

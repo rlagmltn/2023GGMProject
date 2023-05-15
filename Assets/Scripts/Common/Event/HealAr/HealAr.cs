@@ -25,6 +25,8 @@ public class HealAr : _Event
     [SerializeField] private ArSOList ArList;
     private List<ArSO> Ars;
 
+    [SerializeField] private List<Button> ClearButtons;
+
     public override void EventStart()
     {
         GetIsTakeArs();
@@ -46,6 +48,12 @@ public class HealAr : _Event
         OptionButton_1.onClick.AddListener(OptionButton1);
         OptionButton_2.onClick.AddListener(OptionButton2);
         OptionButton_3.onClick.AddListener(OptionButton3);
+
+        for(int num = 0; num < ClearButtons.Count; num++)
+        {
+            ClearButtons[num].onClick.RemoveAllListeners();
+            ClearButtons[num].onClick.AddListener(EventManger.Instance.StageClear);
+        }
     }
 
     void OptionButton1()

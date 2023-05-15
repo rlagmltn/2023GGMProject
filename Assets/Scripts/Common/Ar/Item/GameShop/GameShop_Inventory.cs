@@ -19,6 +19,8 @@ public class GameShop_Inventory : MonoSingleton<GameShop_Inventory>
     void Init()
     {
         UpdateImage();
+
+        if (OutButton == null) return;
         OutButton.onClick.RemoveAllListeners();
         OutButton.onClick.AddListener(StageClear);
     }

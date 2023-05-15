@@ -9,9 +9,12 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
     [SerializeField] private Enemy pfDummy;
     [SerializeField] private ArSOArray arHolder;
     [SerializeField] private ItemDBSO itemDB;
+    [SerializeField] private ItemDBSO itemInven;
+    [SerializeField] private ItemSO emptyItem;
     [SerializeField] private MainTestSlot pfMainTestSlot;
     [SerializeField] private Transform testBtnSlot;
     [SerializeField] private Transform testBtnSlot2;
+    [SerializeField] private Transform BackgroundPannel;
 
     [SerializeField] MainTestJoyStick joystick;
     [SerializeField] StickCancel cancelButton;
@@ -44,11 +47,17 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         {
             var instance = Instantiate(pfMainTestSlot, testBtnSlot);
             instance.SetSO(so);
+            so.E_Item.itmeSO = new ItemSO[3];
         }
         foreach (ItemSO so in itemDB.items)
         {
             var instance = Instantiate(pfMainTestSlot, testBtnSlot2);
             instance.SetSO(so);
+        }
+        itemInven.items = new List<ItemSO>();
+        for(int i=0; i<20; i++)
+        {
+            itemInven.AddItemInItems(emptyItem);
         }
     }
 
@@ -115,7 +124,9 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         dummy.StatReset();
         dummy.gameObject.SetActive(true);
         dummy.transform.position = new Vector3(5, 0);
+        cameraMove.SetSkillBtnText(testPlayer);
         TurnManager.Instance.SomeoneIsMoving = false;
+        BackgroundPannel.gameObject.SetActive(false);
     }
 
     public void DragBegin()
@@ -143,6 +154,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         testPlayer.DragEnd(joystick.joystickType, power, angle);
         cancelButton.gameObject.SetActive(false);
         testPlayer.CountCooltime();
+        cameraMove.SetSkillBtnText(testPlayer);
     }
 
     public void ChooseStickType(int n)

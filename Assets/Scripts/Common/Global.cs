@@ -47,7 +47,10 @@ public enum Effect
     SUNK,
     ElementExplode,
     Heal,
-    BowShoot
+    BowShoot,
+    AssassinSmoke,
+    KuaniShoot,
+    Teleport
 }
 public enum ePrefabs
 {
