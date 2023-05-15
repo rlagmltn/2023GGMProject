@@ -22,7 +22,7 @@ public class ShopBuySlot : MonoBehaviour
 
     private void Init()
     {
-        gameObject.SetActive(true   );
+        gameObject.SetActive(true);
         itemImage.sprite = item.itemIcon;
         nameText.text = string.Format(item.itemName);
         priceText.text = string.Format(item.itemPrice.ToString());
@@ -40,6 +40,11 @@ public class ShopBuySlot : MonoBehaviour
     internal int GetItemPrice()
     {
         return price;
+    }
+
+    internal void SelectedItem()
+    {
+        GameShop.Instance.SelectedItem(item, this.transform);
     }
 
     internal void Buy() 
