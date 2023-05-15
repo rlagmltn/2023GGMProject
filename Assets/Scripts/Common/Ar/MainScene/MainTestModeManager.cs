@@ -120,7 +120,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         cancelButton.gameObject.SetActive(false);
         actSellect.SetActive(true);
         attackAct.SetActive(testPlayer.isRangeCharacter);
-        cameraMove.MovetoTarget(testPlayer.transform);
+        cameraMove.MovetoTarget(testPlayer);
         dummy.StatReset();
         dummy.gameObject.SetActive(true);
         dummy.transform.position = new Vector3(5, 0);

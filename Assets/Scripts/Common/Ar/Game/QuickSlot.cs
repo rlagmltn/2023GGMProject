@@ -31,15 +31,15 @@ public class QuickSlot : MonoBehaviour
         button = GetComponent<Button>();
         button.onClick.AddListener(SellectPlayer);
         outline = transform.GetChild(0).GetComponent<Image>();
-        rarityBackGround = transform.GetChild(2).GetComponent<Image>();
-        background = transform.GetChild(3).GetComponent<Image>();
-        playerImage = transform.GetChild(4).GetComponent<Image>();
-        hpImage = transform.GetChild(5).GetChild(0).GetComponent<Image>();
-        spImage = transform.GetChild(6).GetChild(0).GetComponent<Image>();
-        unableImage = transform.GetChild(7).GetComponent<Image>();
-        MoveIcon = transform.GetChild(8).gameObject;
-        AttackIcon = transform.GetChild(9).gameObject;
-        SkillIcon = transform.GetChild(10).gameObject;
+        rarityBackGround = transform.GetChild(1).GetComponent<Image>();
+        background = transform.GetChild(2).GetComponent<Image>();
+        playerImage = transform.GetChild(3).GetComponent<Image>();
+        hpImage = transform.GetChild(4).GetChild(0).GetComponent<Image>();
+        spImage = transform.GetChild(5).GetChild(0).GetComponent<Image>();
+        unableImage = transform.GetChild(6).GetComponent<Image>();
+        MoveIcon = transform.GetChild(7).gameObject;
+        AttackIcon = transform.GetChild(8).gameObject;
+        SkillIcon = transform.GetChild(9).gameObject;
 
         unableImage.gameObject.SetActive(false);
         rarityBackGround.sprite = BackGroundHolder.Instance.BackGround(Player.so.characterInfo.rarity);
@@ -67,13 +67,8 @@ public class QuickSlot : MonoBehaviour
 
     public void ColorChange(bool change)
     {
-        if (change)
+        if (!change)
         {
-            outline.color = Color.white;
-        }
-        else
-        {
-            outline.color = Color.black;
             UnActiveIcons();
         }
     }
@@ -90,11 +85,11 @@ public class QuickSlot : MonoBehaviour
 
         if(background.fillAmount < 1)
         {
-            background.color = Color.gray;
+            background.color = Color.gray - new Color(0, 0, 0, 0.4f);
         }
         else
         {
-            background.color = Color.yellow;
+            background.color = Color.yellow - new Color(0, 0, 0, 0.4f);
         }    
     }
 
