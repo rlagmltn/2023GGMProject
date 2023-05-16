@@ -18,11 +18,9 @@ public class Ar : MonoBehaviour
     protected float minDragPower = 0.4f;
     protected float maxDragPower = 1.5f;
 
-    protected Transform hpBar;
-    protected SpriteRenderer hpImage;
+    protected Bar hpBar;
 
-    protected Transform dpBar;
-    protected SpriteRenderer dpImage;
+    protected Bar spBar;
 
     public Rigidbody2D rigid { get; protected set; }
     public Vector2 lastVelocity { get; protected set; }
@@ -56,10 +54,8 @@ public class Ar : MonoBehaviour
     {
         stat = new Stat();
         rigid = GetComponent<Rigidbody2D>();
-        hpBar = transform.GetChild(1);
-        hpImage = hpBar.GetChild(0).GetComponent<SpriteRenderer>();
-        dpBar = transform.GetChild(2);
-        dpImage = dpBar.GetChild(0).GetComponent<SpriteRenderer>();
+        hpBar = transform.GetChild(1).GetComponent<Bar>();
+        spBar = transform.GetChild(2).GetComponent<Bar>();
         character = transform.GetChild(3);
         animationManager = GetComponent<AnimationManager>();
         cameraMove = FindObjectOfType<CameraMove>();
@@ -209,11 +205,11 @@ public class Ar : MonoBehaviour
 
         if (stat.SP > 0)
         {
-            dpBar.gameObject.SetActive(true);
-            dpImage.size = new Vector2((float)stat.SP / stat.MaxSP, 1);
+            spBar.gameObject.SetActive(true);
+            spBar.GageChange((float)stat.SP / stat.MaxSP);
         }
-        else dpBar.gameObject.SetActive(false);
-        hpImage.size = new Vector2((float)stat.HP / stat.MaxHP, 1);
+        else spBar.gameObject.SetActive(false);
+        hpBar.GageChange((float)stat.HP / stat.MaxHP);
         return false;
     }
 
