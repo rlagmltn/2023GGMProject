@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject batchUI;
     [SerializeField] GameObject batchZone;
     [SerializeField] JoyStick joystick;
-    [SerializeField] StickCancel cancelButton;
     [SerializeField] TextMeshProUGUI batchUnitText;
 
     public List<CONEntity> enemyList;
@@ -50,8 +49,8 @@ public class PlayerController : MonoBehaviour
             var quickSlot = Instantiate(pf_QuickSlot, batchHolderTrs);
             quickSlot.Connect(player);
         }
+        joystick.Started();
         joystick.gameObject.SetActive(false);
-        cancelButton.gameObject.SetActive(false);
         ChangeBatchCount();
     }
 
@@ -78,7 +77,6 @@ public class PlayerController : MonoBehaviour
     public void DragBegin(JoystickType joystickType)
     {
         if (IsBatchMode) return;
-        cancelButton.gameObject.SetActive(true);
         sellectPlayer?.DragBegin(joystickType);
         TurnManager.Instance.BlinkNextTurn();
     }
@@ -88,18 +86,12 @@ public class PlayerController : MonoBehaviour
         sellectPlayer?.Drag(angle, dis);
     }
 
-    public void DragEnd(float power, Vector2 angle)
+    public void DragEnd(float power, Vector2 angle, bool canShoot = true)
     {
         if (IsBatchMode) return;
         TurnManager.Instance.StopBlink();
-        if (cancelButton.entering)
-        {
-            sellectPlayer.DisableRanges();
-            cancelButton.gameObject.SetActive(false);
-            cancelButton.entering = false;
-            return;
-        }
 
+        if (!canShoot) return;
         StartCoroutine(DragEnd_Couroutine(power, angle));
     }
 
@@ -121,7 +113,6 @@ public class PlayerController : MonoBehaviour
         if (TurnManager.Instance.UseTurn())
         {
             sellectPlayer.DragEnd(joystick.joystickType, power, angle);
-            cancelButton.gameObject.SetActive(false);
             ResetSellect();
 
             foreach (QuickSlot quickSlot in quickSlots) quickSlot.Player.CountCooltime();
@@ -139,7 +130,6 @@ public class PlayerController : MonoBehaviour
         if ((JoystickType)n == JoystickType.Skill && sellectPlayer.currentCooltime < sellectPlayer.skillCooltime) return;
 
         cameraMove.CloseActSellect();
-        joystick.gameObject.SetActive(true);
         joystick.joystickType = (JoystickType)n;
         sellectPlayer.slot.ActiveIcon(joystick.joystickType);
     }
