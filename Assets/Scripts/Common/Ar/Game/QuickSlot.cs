@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 using UnityEngine.UI;
 
 public class QuickSlot : MonoBehaviour
@@ -23,25 +24,30 @@ public class QuickSlot : MonoBehaviour
     private JoyStick joyStick;
     private PlayerController playerController;
     private bool isClicked;
+    private bool isUnabled;
 
     public Player Player { get; set; }
+
+    private Color unableColor = new Color(0, 0, 0, 0.7f);
+    private Color enableColor = new Color(0, 0, 0, 0);
 
     private void Init()
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(SellectPlayer);
-        outline = transform.GetChild(0).GetComponent<Image>();
-        rarityBackGround = transform.GetChild(1).GetComponent<Image>();
-        background = transform.GetChild(2).GetComponent<Image>();
-        playerImage = transform.GetChild(3).GetComponent<Image>();
-        hpImage = transform.GetChild(4).GetComponent<Bar>();
-        spImage = transform.GetChild(5).GetComponent<Bar>();
-        unableImage = transform.GetChild(6).GetComponent<Image>();
-        MoveIcon = transform.GetChild(7).gameObject;
-        AttackIcon = transform.GetChild(8).gameObject;
-        SkillIcon = transform.GetChild(9).gameObject;
+        MoveIcon = transform.GetChild(0).gameObject;
+        AttackIcon = transform.GetChild(1).gameObject;
+        SkillIcon = transform.GetChild(2).gameObject;
+        outline = transform.GetChild(3).GetComponent<Image>();
+        rarityBackGround = transform.GetChild(4).GetComponent<Image>();
+        background = transform.GetChild(5).GetComponent<Image>();
+        playerImage = transform.GetChild(6).GetComponent<Image>();
+        hpImage = transform.GetChild(7).GetComponent<Bar>();
+        spImage = transform.GetChild(8).GetComponent<Bar>();
+        unableImage = transform.GetChild(9).GetComponent<Image>();
 
-        unableImage.gameObject.SetActive(false);
+        isUnabled = false;
+        unableImage.color = enableColor;
         rarityBackGround.sprite = BackGroundHolder.Instance.BackGround(Player.so.characterInfo.rarity);
         playerImage.sprite = Player.so.characterInfo.Image;
         joyStick = FindObjectOfType<JoyStick>();
@@ -75,7 +81,7 @@ public class QuickSlot : MonoBehaviour
 
     public void SkillReady(float max, float current)
     {
-        if (unableImage.gameObject.activeSelf)
+        if (isUnabled)
         {
             background.fillAmount = 0;
             return;
@@ -95,7 +101,16 @@ public class QuickSlot : MonoBehaviour
 
     public void SetSlotActive(bool value)
     {
-        unableImage.gameObject.SetActive(!value);
+        if(value)
+        {
+            isUnabled = false;
+            unableImage.DOColor(enableColor, 0.2f);
+        }
+        else
+        {
+            isUnabled = true;
+            unableImage.DOColor(unableColor, 0.2f);
+        }
     }
 
     public void SetHPBar(float value)
@@ -164,13 +179,13 @@ public class QuickSlot : MonoBehaviour
             JoystickType.Skill => SkillIcon,
             _ => null,
         };
-        icon.SetActive(true);
+        icon.transform.DOLocalMoveX(230, 0.3f);
     }
 
     private void UnActiveIcons()
     {
-        MoveIcon.SetActive(false);
-        AttackIcon.SetActive(false);
-        SkillIcon.SetActive(false);
+        MoveIcon.transform.DOLocalMoveX(0, 0.3f);
+        AttackIcon.transform.DOLocalMoveX(0, 0.3f);
+        SkillIcon.transform.DOLocalMoveX(0, 0.3f);
     }
 }
