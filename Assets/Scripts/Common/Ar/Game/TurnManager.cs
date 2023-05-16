@@ -168,13 +168,14 @@ public class TurnManager : MonoSingleton<TurnManager>
         Debug.Log($"enemys: {enemys.Length}");
 
         UnActiveNotUseTurn(enemyTurn);
-        //기다리는 시간 변수화!
-        yield return new WaitForSeconds(0.1f);
 
         for(int i = 0; i< enemyTurn; i++)
         {
             turns[turns.Count - i - 1].EnableEnemyTurn();
         }
+
+        //기다리는 시간 변수화!
+        yield return new WaitForSeconds(0.3f);
 
         cameraMove.SetDefaultZoom();
 

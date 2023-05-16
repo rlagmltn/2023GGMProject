@@ -2,27 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class Turn : MonoBehaviour
 {
     [SerializeField] Image turnImage;
     public bool active { get; private set; }
     private Coroutine coru;
+    private Sequence disableSequence;
 
     private void Start()
     {
         DisableTurn();
     }
 
+    private void OnEnable()
+    {
+        transform.localScale = new Vector3(0, 0);
+        transform.DOScale(1, 0.3f);
+    }
+
     public void EnableTurn()
     {
-        turnImage.color = Color.green;
+        turnImage.DOColor(Color.green, 0.3f);
         active = true;
     }
 
     public void EnableEnemyTurn()
     {
-        turnImage.color = Color.red;
+        turnImage.DOColor(Color.red, 0.3f);
         active = true;
     }
 
@@ -35,7 +43,8 @@ public class Turn : MonoBehaviour
     public void SetActiveTurnObj(bool value)
     {
         DisableTurn();
-        gameObject.SetActive(value);
+        if (!value) transform.DOScale(0, 0.3f).OnComplete(()=> { gameObject.SetActive(value); });
+        else gameObject.SetActive(true);
     }
 
     public void Blink()
