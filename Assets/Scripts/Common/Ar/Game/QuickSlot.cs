@@ -114,7 +114,6 @@ public class QuickSlot : MonoBehaviour
         Player.gameObject.SetActive(true);
         Player.Collide.enabled = false;
         Player.transform.position = transform.position;
-        outline.color = Color.white;
         isClicked = true;
     }
 
@@ -139,7 +138,6 @@ public class QuickSlot : MonoBehaviour
 
             isBatched = true;
             Player.Collide.enabled = true;
-            outline.color = Color.black;
         }
         else
         {
@@ -152,7 +150,6 @@ public class QuickSlot : MonoBehaviour
 
             isBatched = false;
             Player.gameObject.SetActive(false);
-            outline.color = Color.black;
         }
         isClicked = false;
     }
