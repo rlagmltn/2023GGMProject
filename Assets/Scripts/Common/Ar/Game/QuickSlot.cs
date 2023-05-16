@@ -12,8 +12,8 @@ public class QuickSlot : MonoBehaviour
     public Image background;
     private Image playerImage;
     private Image unableImage;
-    private Image hpImage;
-    private Image spImage;
+    private Bar hpImage;
+    private Bar spImage;
 
     private GameObject MoveIcon;
     private GameObject AttackIcon;
@@ -34,8 +34,8 @@ public class QuickSlot : MonoBehaviour
         rarityBackGround = transform.GetChild(1).GetComponent<Image>();
         background = transform.GetChild(2).GetComponent<Image>();
         playerImage = transform.GetChild(3).GetComponent<Image>();
-        hpImage = transform.GetChild(4).GetChild(0).GetComponent<Image>();
-        spImage = transform.GetChild(5).GetChild(0).GetComponent<Image>();
+        hpImage = transform.GetChild(4).GetComponent<Bar>();
+        spImage = transform.GetChild(5).GetComponent<Bar>();
         unableImage = transform.GetChild(6).GetComponent<Image>();
         MoveIcon = transform.GetChild(7).gameObject;
         AttackIcon = transform.GetChild(8).gameObject;
@@ -100,11 +100,11 @@ public class QuickSlot : MonoBehaviour
 
     public void SetHPBar(float value)
     {
-        hpImage.fillAmount = value;
+        hpImage.GageChange(value);
     }
     public void SetSPBar(float value)
     {
-        spImage.fillAmount = value;
+        spImage.GageChange(value);
     }
 
     public void Click()
@@ -114,7 +114,6 @@ public class QuickSlot : MonoBehaviour
         Player.gameObject.SetActive(true);
         Player.Collide.enabled = false;
         Player.transform.position = transform.position;
-        outline.color = Color.white;
         isClicked = true;
     }
 
@@ -139,7 +138,6 @@ public class QuickSlot : MonoBehaviour
 
             isBatched = true;
             Player.Collide.enabled = true;
-            outline.color = Color.black;
         }
         else
         {
@@ -152,7 +150,6 @@ public class QuickSlot : MonoBehaviour
 
             isBatched = false;
             Player.gameObject.SetActive(false);
-            outline.color = Color.black;
         }
         isClicked = false;
     }

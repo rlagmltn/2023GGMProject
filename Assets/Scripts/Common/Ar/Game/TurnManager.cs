@@ -23,14 +23,15 @@ public class TurnManager : MonoSingleton<TurnManager>
     public bool SomeoneIsMoving { get; set; }
 
     public int PassedTurn { get; private set; }
-    public int PlayerTurn { get { return playerTurn; } set { playerTurn = value; } }
+    public int NextPlayerTurn { get; set; }
 
     private void Start()
     {
         cameraMove = FindObjectOfType<CameraMove>();
         playerController = FindObjectOfType<PlayerController>();
+        NextPlayerTurn = playerTurn;
 
-        for(int i=0; i<10; i++)
+        for (int i=0; i<10; i++)
         {
             var turn = Instantiate(pf_Turn, transform);
             turns.Add(turn);
@@ -87,6 +88,7 @@ public class TurnManager : MonoSingleton<TurnManager>
     {
         turnText?.SetText("Enemy Turn");
         UnActiveNotUseTurn(playerTurn);
+        playerTurn = NextPlayerTurn;
 
         for (int i = 0; i < playerTurn; i++)
         {
