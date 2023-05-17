@@ -424,6 +424,7 @@ public class Player : Ar
             slot.isBatched = true;
             Collide.enabled = true;
             slot.background.color = Color.gray;
+            EffectManager.Instance.InstantiateEffect_P(Effect.LandingSmoke, transform.position - new Vector3(0, 0.3f, 0), Vector2.zero);
         }
         else
         {

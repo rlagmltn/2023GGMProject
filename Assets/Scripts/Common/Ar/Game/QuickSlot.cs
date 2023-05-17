@@ -153,6 +153,7 @@ public class QuickSlot : MonoBehaviour
 
             isBatched = true;
             Player.Collide.enabled = true;
+            EffectManager.Instance.InstantiateEffect_P(Effect.LandingSmoke, Player.transform.position - new Vector3(0, 0.3f, 0), Vector2.zero);
         }
         else
         {

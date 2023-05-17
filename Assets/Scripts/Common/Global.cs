@@ -50,7 +50,8 @@ public enum Effect
     BowShoot,
     AssassinSmoke,
     KuaniShoot,
-    Teleport
+    Teleport,
+    LandingSmoke
 }
 public enum ePrefabs
 {
