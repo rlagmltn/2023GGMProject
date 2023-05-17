@@ -11,6 +11,6 @@ public class Fade : MonoBehaviour
     private void Start()
     {
         image.enabled = true;
-        image.DOColor(new Color(0, 0, 0, 0), 2f).OnComplete(()=> { Destroy(gameObject); });
+        image.DOColor(new Color(0, 0, 0, 0), 1f).OnComplete(()=> { Destroy(gameObject); });
     }
 }
