@@ -17,7 +17,6 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
     [SerializeField] private Transform BackgroundPannel;
 
     [SerializeField] MainTestJoyStick joystick;
-    [SerializeField] StickCancel cancelButton;
     [SerializeField] GameObject actSellect;
     [SerializeField] MainTestSlot sellectPlayer;
     [SerializeField] MainTestSlot[] armedItems;
@@ -29,13 +28,13 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
     private Player testPlayer;
     private Stat testPleyerStat;
     private Enemy dummy;
+    public Player TestPlayer { get { return testPlayer; } }
 
     private void Start()
     {
         testBtnSlotParent = testBtnSlot.parent.parent.parent;
         MakeArTestSlot();
         joystick.gameObject.SetActive(false);
-        cancelButton.gameObject.SetActive(false);
         attackAct = actSellect.transform.GetChild(1).gameObject;
         actSellect.SetActive(false);
         dummy = Instantiate(pfDummy, new Vector3(5, 0), Quaternion.identity);
@@ -117,7 +116,6 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         testPlayer.StatReset();
         joystick.joystickType = JoystickType.None;
         joystick.gameObject.SetActive(false);
-        cancelButton.gameObject.SetActive(false);
         actSellect.SetActive(true);
         attackAct.SetActive(testPlayer.isRangeCharacter);
         cameraMove.MovetoTarget(testPlayer);
@@ -131,7 +129,6 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
 
     public void DragBegin()
     {
-        cancelButton.gameObject.SetActive(true);
         cameraMove.MovetoTarget(testPlayer.transform);
         testPlayer?.DragBegin(joystick.joystickType);
     }
@@ -141,18 +138,11 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         testPlayer?.Drag(angle, dis);
     }
 
-    public void DragEnd(float power, Vector2 angle)
+    public void DragEnd(float power, Vector2 angle, bool canShoot = true)
     {
         testPlayer.DisableRanges();
-        if (cancelButton.entering)
-        {
-            cancelButton.gameObject.SetActive(false);
-            cancelButton.entering = false;
-            return;
-        }
-
+        if (!canShoot) return;
         testPlayer.DragEnd(joystick.joystickType, power, angle);
-        cancelButton.gameObject.SetActive(false);
         testPlayer.CountCooltime();
         cameraMove.SetSkillBtnText(testPlayer);
     }
@@ -163,7 +153,6 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         if ((JoystickType)n == JoystickType.Skill && testPlayer.currentCooltime < testPlayer.skillCooltime) return;
 
         cameraMove.MovetoTarget(testPlayer.transform);
-        joystick.gameObject.SetActive(true);
         joystick.joystickType = (JoystickType)n;
     }
 

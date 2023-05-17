@@ -54,6 +54,7 @@ public class Player : Ar
 
     protected float rangeDrag;
     protected float range;
+    protected JoystickType joystickType;
 
     [SerializeField] ItemSO[] itemSlots = new ItemSO[3];
 
@@ -284,6 +285,8 @@ public class Player : Ar
             return;
         }
 
+        this.joystickType = joystickType;
+
         var Range = joystickType switch
         {
             JoystickType.Move => moveRange.gameObject,
@@ -371,10 +374,14 @@ public class Player : Ar
 
     public GameObject ActiveRange()
     {
-        if (moveRange.gameObject.activeSelf) return moveRange.gameObject;
-        else if (attackRange.gameObject.activeSelf) return attackRange.gameObject;
-        else if (skillRange.gameObject.activeSelf) return skillRange.gameObject;
-        else return null;
+        GameObject go = joystickType switch
+        {
+            JoystickType.Move => moveRange.gameObject,
+            JoystickType.Attack => attackRange.gameObject,
+            JoystickType.Skill => skillRange.gameObject,
+            _ => null,
+        };
+        return go;
     }
 
     protected override void OnCollisionEnter2D(Collision2D collision)
@@ -417,6 +424,7 @@ public class Player : Ar
             slot.isBatched = true;
             Collide.enabled = true;
             slot.background.color = Color.gray;
+            EffectManager.Instance.InstantiateEffect_P(Effect.LandingSmoke, transform.position - new Vector3(0, 0.3f, 0), Vector2.zero);
         }
         else
         {

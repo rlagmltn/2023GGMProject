@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class MainTestJoyStick : MonoBehaviour
 {
+    [SerializeField] float cancelRadius;
     [SerializeField] float radius;
     public JoystickType joystickType;
     private Transform stick;
@@ -13,35 +14,28 @@ public class MainTestJoyStick : MonoBehaviour
     private Vector3 stickVec;
     private Vector2 angle;
     private float zAngle;
-    EventTrigger eventTrigger;
 
     public bool isDraging { get; private set; }
 
     private void Start()
     {
-        stick = transform.GetChild(0);
-        eventTrigger = stick.GetComponent<EventTrigger>();
+        stick = transform.GetChild(1);
         cameraMove = FindObjectOfType<CameraMove>();
-
-        EventTrigger.Entry beginDragTrigger = new EventTrigger.Entry { eventID = EventTriggerType.BeginDrag };
-        EventTrigger.Entry dragTrigger = new EventTrigger.Entry { eventID = EventTriggerType.Drag };
-        EventTrigger.Entry endDragTrigger = new EventTrigger.Entry { eventID = EventTriggerType.EndDrag };
-        beginDragTrigger.callback.AddListener(OnDragBegin);
-        dragTrigger.callback.AddListener(OnDrag);
-        endDragTrigger.callback.AddListener(OnDragEnd);
-        eventTrigger.triggers.Add(beginDragTrigger);
-        eventTrigger.triggers.Add(dragTrigger);
-        eventTrigger.triggers.Add(endDragTrigger);
     }
 
-    public void OnDragBegin(BaseEventData data)
+    private void Update()
+    {
+        OnDrag();
+    }
+
+    public void OnDragBegin()
     {
         if (TurnManager.Instance.SomeoneIsMoving) return;
         isDraging = true;
         MainTestModeManager.Instance.DragBegin();
     }
 
-    public void OnDrag(BaseEventData data)
+    private void OnDrag()
     {
         if (TurnManager.Instance.SomeoneIsMoving || !isDraging) return;
         Vector3 Pos = Util.Instance.mousePosition;
@@ -56,24 +50,42 @@ public class MainTestJoyStick : MonoBehaviour
             stick.position = transform.position + stickVec * radius;
 
         var v = stick.position - transform.position;
-        var vDis = Vector2.Distance(stick.position, transform.position);
+        var vDis = Vector2.Distance(stick.position, transform.position) - cancelRadius;
+
+        if (Dis < cancelRadius)
+        {
+            MainTestModeManager.Instance.TestPlayer.DisableRanges();
+            v = Vector2.zero;
+            vDis = 0;
+        }
+        else
+            MainTestModeManager.Instance.TestPlayer.ActiveRange().SetActive(true);
+
         zAngle = Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
         MainTestModeManager.Instance.Drag(zAngle, vDis);
 
-        cameraMove.MoveDrag(new Vector2(-v.x * 0.9f, -v.y * 0.6f));
+        cameraMove.MoveDrag(new Vector2(-v.x * 0.5f, -v.y * 0.36f));
         cameraMove.ApplyCameraSize(1, vDis * 0.8f);
+
+        if (Input.GetMouseButtonUp(0)) OnDragEnd();
     }
 
-    public void OnDragEnd(BaseEventData data)
+    private void OnDragEnd()
     {
         if (TurnManager.Instance.SomeoneIsMoving || !isDraging) return;
         isDraging = false;
-        var power = Vector2.Distance(transform.position, Util.Instance.mousePosition);
+        var power = Vector2.Distance(stick.position, transform.position);
+        stick.position = transform.position;
+
         angle = transform.position - Util.Instance.mousePosition;
         angle /= angle.magnitude;
-        MainTestModeManager.Instance.DragEnd(power, angle);
+        var canShoot = false;
+        if (power < cancelRadius) canShoot = false;
+        else canShoot = true;
+        MainTestModeManager.Instance.DragEnd(power - cancelRadius, angle, canShoot);
         cameraMove.MoveDrag(Vector3.zero);
-        stick.position = transform.position;
         cameraMove.ApplyCameraSize();
+
+        gameObject.SetActive(false);
     }
 }
