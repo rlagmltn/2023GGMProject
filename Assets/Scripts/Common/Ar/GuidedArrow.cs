@@ -28,6 +28,7 @@ public class GuidedArrow : Arrow
     {
         base.SetSO();
         summoner = ThisCharacter;
+        SetDamage(1);
     }
 
     void GetNearCharacter()

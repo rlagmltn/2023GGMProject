@@ -73,6 +73,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
             testPlayer.UnArmed();
             for (int i = 0; i < 3; i++) armedItems[i].UnSetItem();
             testPlayer.so.E_Item.itmeSO = new ItemSO[3];
+            testPlayer.isMainScene = false;
             testPlayer.gameObject.SetActive(false);
         }
         testPlayer = player;
@@ -103,6 +104,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
     public void UnArmedItem(ItemSO item)
     {
         testPleyerStat -= item.stat;
+        testPlayer.UnArmed();
         UpdateStatText();
     }
 
@@ -110,6 +112,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
     {
         testPlayer.gameObject.SetActive(true);
         testPlayer.transform.position = Vector3.zero;
+        testPlayer.isMainScene = true;
         testBtnSlotParent.gameObject.SetActive(false);
         for (int i = 0; i < 3; i++) testPlayer.so.E_Item.itmeSO[i] = armedItems[i].itemSO;
         testPlayer.GetItemEvents();
