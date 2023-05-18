@@ -52,7 +52,7 @@ public class GameShop : Shop
         purchaseButton.onClick.RemoveAllListeners();
         purchaseButton.onClick.AddListener(Buy);
         CancleButton.onClick.RemoveAllListeners();
-        CancleButton.onClick.AddListener(() => ActivePurchasePopUp(false));
+        CancleButton.onClick.AddListener(Cancel);
     }
 
     internal void SelectedItem(ItemSO S_Item, Transform trans)
@@ -67,6 +67,7 @@ public class GameShop : Shop
     {
         purchasePannel.gameObject.SetActive(isActive);
         BackGroundPannel.gameObject.SetActive(isActive);
+        GameShop_Drag.Instance.CanClick = !isActive;
 
         if (!isActive) return;
 
@@ -79,6 +80,11 @@ public class GameShop : Shop
         GameShop_Inventory.Instance.SetItem(Item);
         Item_transform.gameObject.SetActive(false);
 
+        ActivePurchasePopUp(false);
+    }
+
+    private void Cancel()
+    {
         ActivePurchasePopUp(false);
     }
 }

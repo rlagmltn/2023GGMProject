@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class GameShop_Drag : MonoBehaviour
+public class GameShop_Drag : MonoSingleton<GameShop_Drag>
 {
     public Vector2 MousePosition;
     public ItemSO Item;
@@ -17,6 +17,8 @@ public class GameShop_Drag : MonoBehaviour
     private bool isClickUp = false;
     private Transform TempObj;
     private int T_num;
+
+    public bool CanClick = true;
 
     private void Start()
     {
@@ -60,6 +62,8 @@ public class GameShop_Drag : MonoBehaviour
 
     void OnMouseButtonDown()
     {
+        if (!CanClick) return;
+
         isClickDown = false;
         Isfind = false;
         MousePosition = GetMousePos();
