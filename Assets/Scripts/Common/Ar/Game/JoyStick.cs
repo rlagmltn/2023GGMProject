@@ -36,7 +36,6 @@ public class JoyStick : MonoBehaviour
         stick = transform.GetChild(1);
         cameraMove = FindObjectOfType<CameraMove>();
         playerController = FindObjectOfType<PlayerController>();
-        joystickType = JoystickType.None;
     }
 
     private void Update()
@@ -92,7 +91,6 @@ public class JoyStick : MonoBehaviour
         isDraging = false;
         var power = Vector2.Distance(stick.position, transform.position);
         stick.position = transform.position;
-        joystickType = JoystickType.None;
 
         angle = transform.position - Util.Instance.mousePosition;
         angle /= angle.magnitude;
