@@ -65,6 +65,7 @@ public class Assassin : Player
     {
         float zAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
         var bullet = Instantiate(kunai, transform.position, Quaternion.Euler(0, 0, zAngle - 180));
+        bullet.SetDamage(stat.SATK);
         cameraMove.MovetoTarget(bullet.transform);
         cameraMove.Shake();
     }

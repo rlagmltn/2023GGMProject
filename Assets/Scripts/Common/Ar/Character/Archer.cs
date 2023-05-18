@@ -74,7 +74,7 @@ public class Archer : Player
     public override IEnumerator AnimTimingAttack()
     {
         while (isAttack) yield return null;
-        cameraMove.MovetoTarget(Shoot(angle).transform); 
+        cameraMove.MovetoTarget(Shoot(angle, stat.ATK).transform); 
     }
 
     protected override void Skill(Vector2 angle)
@@ -90,16 +90,17 @@ public class Archer : Player
     public override IEnumerator AnimTimingSkill()
     {
         while (isSkill) yield return null;
-        cameraMove.MovetoTarget(Shoot(angle).transform);
+        cameraMove.MovetoTarget(Shoot(angle, stat.SATK).transform);
         yield return new WaitForSeconds(0.2f);
-        Shoot(angle);
+        Shoot(angle, stat.SATK);
     }
 
-    Bullet Shoot(Vector2 angle)
+    Bullet Shoot(Vector2 angle, int damage)
     {
         float zAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
         EffectManager.Instance.InstantiateEffect_P(Effect.BowShoot, (Vector2)attackRange.transform.position - angle, new Vector2(angle.x, -angle.y));
         var bullet = Instantiate(arrow, transform.position, Quaternion.Euler(0, 0, zAngle-180));
+        bullet.SetDamage(damage);
         rigid.velocity = ((angle.normalized * 0.5f) * 25) / (1 + stat.WEIGHT * 0.1f);
 
         return bullet;

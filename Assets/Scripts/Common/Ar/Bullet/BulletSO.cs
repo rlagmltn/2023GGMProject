@@ -30,7 +30,6 @@ public class BulletSO : ScriptableObject
     public TeamType teamType;
     public RangeType rangeType;
     public BulletType bulletType;
-    public int damage;
     public float speed;
     public float range;
 

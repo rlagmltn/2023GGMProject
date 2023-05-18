@@ -87,6 +87,7 @@ public class Elementalist : Player
         //전방 6칸 방향으로 정령을 보내 폭발 시키며, 주변 범위 2칸내에 있는 적에게 2.5칸 대미지를 준다.
         float zAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
         var bullet = Instantiate(elemental, transform.position, Quaternion.Euler(0, 0, zAngle - 180));
+        bullet.SetDamage(stat.SATK);
         cameraMove.MovetoTarget(bullet.transform);
     }
 

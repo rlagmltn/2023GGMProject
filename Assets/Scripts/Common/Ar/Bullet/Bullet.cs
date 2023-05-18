@@ -20,9 +20,13 @@ public class Bullet : MonoBehaviour
     {
         if (cameraMove == null) cameraMove = FindObjectOfType<CameraMove>();
         gameObject.name = bulletSO.name;
-        damage = bulletSO.damage;
         Destroy(gameObject, bulletSO.lifeTime);
         // lifeTime만큼 기다렸다가 풀링
+    }
+
+    public virtual void SetDamage(int damage)
+    {
+        this.damage = damage;
     }
 
     protected virtual void Update()
