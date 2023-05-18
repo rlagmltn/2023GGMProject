@@ -35,12 +35,12 @@ public class Warrior : Player
         base.Drag(angle, dis);
 
         RayCastTargets(range);
+        var target = FindNearObject();
 
-        if (targets.Length > 1)
+        if (target.magnitude != 0)
         {
-            var a = Vector2.Distance(transform.position, targets[1].point);
-            skillRange.size = new Vector2(a / 2, 1);
-            skillBox.localPosition = new Vector2(a / 2 + 1, 0);
+            skillRange.size = new Vector2(Vector2.Distance(transform.position, target) / 2, 1);
+            skillBox.localPosition = new Vector2(Vector2.Distance(transform.position, target) / 2 + 1, 0);
         }
         else
         {
