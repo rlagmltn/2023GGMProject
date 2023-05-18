@@ -115,7 +115,6 @@ public class PlayerController : MonoBehaviour
         {
             sellectPlayer.DragEnd(joystick.joystickType, power, angle);
             ResetSellect();
-            joystick.joystickType = JoystickType.None;
             foreach (QuickSlot quickSlot in quickSlots) quickSlot.Player.CountCooltime();
         }
     }
@@ -123,6 +122,7 @@ public class PlayerController : MonoBehaviour
     public void ResetSellect()
     {
         sellectPlayer = null;
+        joystick.joystickType = JoystickType.None;
         DisableQuickSlots();
     }
 

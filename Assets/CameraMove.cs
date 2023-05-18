@@ -246,8 +246,8 @@ public class CameraMove : MonoBehaviour
             isDragmode = true;
             ResetTarget();
             attackBtn.SetActive(false);
+            actSellect.Skip();
             playerController.ResetSellect();
-            playerController.DisableQuickSlots();
             camTransposer.m_XDamping = 0;
             camTransposer.m_YDamping = 0;
             camTransposer.m_ZDamping = 0;
