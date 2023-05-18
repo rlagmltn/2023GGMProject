@@ -104,6 +104,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
     public void UnArmedItem(ItemSO item)
     {
         testPleyerStat -= item.stat;
+        testPlayer.UnArmed();
         UpdateStatText();
     }
 
