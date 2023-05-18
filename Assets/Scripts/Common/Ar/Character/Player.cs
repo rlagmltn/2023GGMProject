@@ -56,6 +56,8 @@ public class Player : Ar
     protected float range;
     protected JoystickType joystickType;
 
+    public bool isMainScene = false;
+
     [SerializeField] ItemSO[] itemSlots = new ItemSO[3];
 
     public Player()
@@ -363,6 +365,12 @@ public class Player : Ar
     {
         isAttack = false;
         isSkill = false;
+    }
+
+    public override bool Hit(int damage)
+    {
+        if (isMainScene) return false;
+        return base.Hit(damage);
     }
 
     public void DisableRanges()
