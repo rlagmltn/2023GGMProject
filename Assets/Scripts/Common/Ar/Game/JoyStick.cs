@@ -92,6 +92,7 @@ public class JoyStick : MonoBehaviour
         isDraging = false;
         var power = Vector2.Distance(stick.position, transform.position);
         stick.position = transform.position;
+        joystickType = JoystickType.None;
 
         angle = transform.position - Util.Instance.mousePosition;
         angle /= angle.magnitude;

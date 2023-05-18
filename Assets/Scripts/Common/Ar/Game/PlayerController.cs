@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
     public void SellectPlayer(QuickSlot player)
     {
         if (IsBatchMode) return;
+        joystick.joystickType = JoystickType.None;
         sellectPlayer = player.Player;
         cameraMove.MovetoTarget(sellectPlayer);
         DisableQuickSlots();
