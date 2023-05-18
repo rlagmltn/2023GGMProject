@@ -63,6 +63,8 @@ public class Ar : MonoBehaviour
         AfterCrash.AddListener(InitTImeScale);
         AfterMove.AddListener(InitTImeScale);
         AfterMove.AddListener(TurnOver);
+        OnBattleDie.AddListener(InitTImeScale);
+        OnOutDie.AddListener(InitTImeScale);
     }
 
     protected void InitTImeScale()

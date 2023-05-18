@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
     public void SellectPlayer(QuickSlot player)
     {
         if (IsBatchMode) return;
+        joystick.joystickType = JoystickType.None;
         sellectPlayer = player.Player;
         cameraMove.MovetoTarget(sellectPlayer);
         DisableQuickSlots();
@@ -114,7 +115,6 @@ public class PlayerController : MonoBehaviour
         {
             sellectPlayer.DragEnd(joystick.joystickType, power, angle);
             ResetSellect();
-
             foreach (QuickSlot quickSlot in quickSlots) quickSlot.Player.CountCooltime();
         }
     }
@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour
     public void ResetSellect()
     {
         sellectPlayer = null;
+        joystick.joystickType = JoystickType.None;
         DisableQuickSlots();
     }
 

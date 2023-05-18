@@ -9,7 +9,6 @@ public class DynamicJoystick : MonoBehaviour
     private void OnMouseDown()
     {
         if (joyStick.joystickType == JoystickType.None || TurnManager.Instance.SomeoneIsMoving) return;
-        Debug.Log("실행히히");
         joyStick.gameObject.SetActive(true);
         joyStick.OnDragBegin();
         joyStick.transform.position = Util.Instance.mousePosition;

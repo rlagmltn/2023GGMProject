@@ -36,7 +36,6 @@ public class JoyStick : MonoBehaviour
         stick = transform.GetChild(1);
         cameraMove = FindObjectOfType<CameraMove>();
         playerController = FindObjectOfType<PlayerController>();
-        joystickType = JoystickType.None;
     }
 
     private void Update()
