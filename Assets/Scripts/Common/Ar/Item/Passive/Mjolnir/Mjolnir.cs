@@ -21,6 +21,9 @@ public class Mjolnir : ItemInfo
         {
             if (!hit[num].GetComponent<Enemy>()) continue;
 
+            player.cameraMove.Shake();
+            var effect = EffectManager.Instance.InstantiateEffect_P(Effect.Mjolnir, hit[num].transform.position);
+            effect.transform.SetParent(hit[num].transform);
             hit[num].GetComponent<Enemy>().Hit(3);
         }
     }

@@ -11,6 +11,7 @@ public class WaterBowl : ItemInfo
 
     void WaterBowl_Play()
     {
-        player.Hit(-2);
+        EffectManager.Instance.InstantiateEffect_P(Effect.Heal, player.transform.position);
+        player.Heal(2);
     }
 }

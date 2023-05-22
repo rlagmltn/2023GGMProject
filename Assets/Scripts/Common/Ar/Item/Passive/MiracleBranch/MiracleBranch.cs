@@ -48,6 +48,8 @@ public class MiracleBranch : ItemInfo
         }
 
         targetPos = (nearEnemy.position - transform.position).normalized;
+        var effectAngle = (nearEnemy.position - transform.position);
+        EffectManager.Instance.InstantiateEffect_P(Effect.MiracleBranch, (Vector2)transform.position, new Vector2(-effectAngle.x, effectAngle.y));
         deg = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
     }
 }

@@ -52,6 +52,14 @@ public enum Effect
     KuaniShoot,
     Teleport,
     LandingSmoke,
+    CristalGuntlet,
+    DuskSword,
+    MadRing,
+    MiracleBranch,
+    Mjolnir,
+    Blood,
+    Slime,
+
 }
 public enum ePrefabs
 {
