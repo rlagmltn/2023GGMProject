@@ -82,7 +82,7 @@ public class Warrior : Player
     {
         isMove = true;
         rigid.velocity = -((angle.normalized * 1f) * pushPower) / (1 + stat.WEIGHT * 0.1f);
-        EffectManager.Instance.InstantiateEffect_P(Effect.LandingSmoke, transform.position, Vector2.zero);
+        EffectManager.Instance.InstantiateEffect_P(Effect.LandingSmoke, transform.position);
         animationManager.SetState(CharacterState.Run);
         Flip();
 

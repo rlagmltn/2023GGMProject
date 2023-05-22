@@ -13,7 +13,7 @@ public class ElementalBullet : Bullet
 
     protected override void AfterCrush()
     {
-        EffectManager.Instance.InstantiateEffect_P(Effect.ElementExplode, transform.position, Vector2.zero);
+        EffectManager.Instance.InstantiateEffect_P(Effect.ElementExplode, transform.position);
         base.AfterCrush();
     }
 }

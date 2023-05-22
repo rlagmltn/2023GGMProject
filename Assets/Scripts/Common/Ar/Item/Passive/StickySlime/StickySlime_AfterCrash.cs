@@ -24,6 +24,9 @@ public class StickySlime_AfterCrash : ItemInfo
 
         player.StickySlimeList.Add(nearEnemy);
         player.StickySlime_PoaerList.Add(OwnPower / 10f * 3f);
+
+        var effect = EffectManager.Instance.InstantiateEffect_P(Effect.Slime, nearEnemy.transform.position);
+        effect.transform.SetParent(nearEnemy.transform);
     }
 
     void GetNearEnemy()

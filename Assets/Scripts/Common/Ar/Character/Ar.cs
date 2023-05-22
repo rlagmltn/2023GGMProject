@@ -43,7 +43,7 @@ public class Ar : MonoBehaviour
 
     protected Transform character;
     protected AnimationManager animationManager;
-    protected CameraMove cameraMove;
+    public CameraMove cameraMove { get; protected set; }
 
     [SerializeField] protected Transform battleTarget;
     private float slowMagnitude = 5f;
@@ -223,7 +223,7 @@ public class Ar : MonoBehaviour
         isMove = false;
         TurnManager.Instance.SomeoneIsMoving = false;
         GameManager.Instance.ArDead();
-        EffectManager.Instance.InstantiateEffect_P(Effect.SUNK, transform.position, Vector2.zero);
+        EffectManager.Instance.InstantiateEffect_P(Effect.SUNK, transform.position);
         animationManager.Die();
     }
 

@@ -33,6 +33,14 @@ public class EffectManager : MonoSingleton<EffectManager>
         return effect;
     }
 
+    public GameObject InstantiateEffect_P(Effect num, Vector3 pos)
+    {
+        var particle = effects[(int)num].GetComponentInChildren<ParticleSystem>();
+        var effect = Instantiate(particle.transform.parent.gameObject, pos, Quaternion.Euler(0, 0, 0));
+
+        return effect;
+    }
+
     public FloatDamage InstantiateFloatDamage(Vector3 pos)
     {
         var damage = Instantiate(floatDamage, pos, Quaternion.identity);

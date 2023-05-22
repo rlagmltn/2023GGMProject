@@ -42,7 +42,7 @@ public class Priest : Player
             var healTarget = collision.gameObject.GetComponent<Player>();
 
             healTarget.Heal(stat.SATK);
-            var effect = EffectManager.Instance.InstantiateEffect_P(Effect.Heal, healTarget.transform.position, Vector2.zero);
+            var effect = EffectManager.Instance.InstantiateEffect_P(Effect.Heal, healTarget.transform.position);
             effect.transform.SetParent(healTarget.transform);
             Passive();
 
@@ -66,7 +66,7 @@ public class Priest : Player
     protected override void Passive()
     {
         Heal(stat.ATK);
-        var effect = EffectManager.Instance.InstantiateEffect_P(Effect.Heal, transform.position, Vector2.zero);
+        var effect = EffectManager.Instance.InstantiateEffect_P(Effect.Heal, transform.position);
         effect.transform.SetParent(transform);
     }
 }

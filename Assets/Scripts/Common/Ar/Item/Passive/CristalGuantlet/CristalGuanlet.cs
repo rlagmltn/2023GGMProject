@@ -40,6 +40,8 @@ public class CristalGuanlet : ItemInfo
     {
         int Rnum = Random.Range(0, 101);
         if (Rnum > triggerPercent) return;
+        var effect = EffectManager.Instance.InstantiateEffect_P(Effect.CristalGuntlet, nearEnemy.transform.position);
+        effect.transform.SetParent(nearEnemy);
         nearEnemy.GetComponent<ArFSM>().SetTurnSkip();
     }
 }
