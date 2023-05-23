@@ -22,11 +22,11 @@ public class Priest : Player
         base.Drag(angle, dis);
 
         RayCastTargets(moveDrag);
+        var target = FindNearObject();
 
-        if (targets.Length > 1)
+        if (target.magnitude != 0)
         {
-            var a = Vector2.Distance(transform.position, targets[1].point);
-            skillRange.size = new Vector2(a / 2, 1);
+            skillRange.size = new Vector2(Vector2.Distance(transform.position, target) / 2, 1);
         }
         else
         {
