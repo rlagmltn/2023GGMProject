@@ -45,28 +45,7 @@ public class TestStageManager : MonoSingleton<TestStageManager>
 
     void Init()
     {
-        ClearedStages = new List<Transform>();
-
-        if(GlobalIsEmpty())
-        {
-            startStage.GetComponent<StageSOHolder>().GetStage().IsCleared = true;
-            currentStage = startStage;
-            SetStageState();
-            Debug.Log("빔");
-        }
-        else
-        {
-            foreach (Transform trans in AllButtons)
-            {
-                if(trans != startStage)
-                    if(trans.GetComponent<StageSOHolder>().GetStage().IsCleared)
-                        ClearedStages.Add(trans);
-
-                if (trans.GetComponent<StageSOHolder>().GetStage() == Global.EnterStage)
-                    currentStage = trans;
-            }
-        }
-
+        StageCheck();
         FindNextStage();
         StageDisable();
         ButtonInit();
@@ -74,6 +53,31 @@ public class TestStageManager : MonoSingleton<TestStageManager>
         //if (GlobalIsEmpty()) SetStageState(); 
 
         //DebugSetName(); //디버그용
+    }
+
+    void StageCheck()
+    {
+        ClearedStages = new List<Transform>();
+
+        if (GlobalIsEmpty()) //이게 전의 기록이 없을때 실행하는 코드
+        {
+            startStage.GetComponent<StageSOHolder>().GetStage().IsCleared = true;
+            currentStage = startStage;
+            SetStageState();
+            Debug.Log("처음 실행함");
+        }
+        else //전에 다른 스테이지에 들어갔을때 실행해주는 코드
+        {
+            foreach (Transform trans in AllButtons)
+            {
+                if (trans != startStage)
+                    if (trans.GetComponent<StageSOHolder>().GetStage().IsCleared)
+                        ClearedStages.Add(trans);
+
+                if (trans.GetComponent<StageSOHolder>().GetStage() == Global.EnterStage)
+                    currentStage = trans;
+            }
+        }
     }
 
     void ButtonInit()
@@ -282,6 +286,9 @@ public class TestStageManager : MonoSingleton<TestStageManager>
                 num++;
             }
         }
+
+        //여기서 스테이지so홀더의 이미지 바꿔주는 함수 실행
+        for(int num = 0; num < AllButtons.Count; num++) AllButtons[num].GetComponent<StageSOHolder>().ChangeImage();
     }
 
     bool GlobalIsEmpty()
