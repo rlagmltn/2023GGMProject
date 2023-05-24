@@ -8,31 +8,48 @@ public class BanditBoss_StateIdle : StateIdle
     private bool usedSkill3 = false;
     private int skilCool4 = 17;
 
-    private Enemy enemy;
+    private BanditBoss enemy;
 
     public override void OnAwake()
     {
-        enemy = stateMachineClass.GetComponent<Enemy>();
+        enemy = stateMachineClass.GetComponent<BanditBoss>();
     }
 
     public override void OnUpdate(float deltaTime)
     {
         if(!TurnManager.Instance.GetTurn() && stateMachineClass.turnFlag)
         {
-            if(enemy.stat.HP >= 20 && !usedSkill3)
+            if(!enemy.CanMove())
             {
-                //skill3
+                enemy.Passive();
+                stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
+                return;
+            }
+
+            enemy.Passive();
+            skilCool4--;
+            if(enemy.stat.HP <= 20 && !usedSkill3)
+            {
                 stateMachine.ChangeState<BanditBoss_StateSkill>();
             }
-            else if(enemy.stat.WEIGHT >= 50)
+            else if(skilCool4 <= 0)
             {
-                //skill2
+                enemy.SkillShield();
+                stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
             }
-            else if(enemy.stat.WEIGHT >= 15)
+            else if(enemy.stat.WEIGHT == 50)
             {
-                //skill1
-                
-                
+                enemy.SkillOverload();
+                stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
+            }
+            else if(enemy.stat.WEIGHT == 15)
+            {
+                enemy.SkillHeavyArmor();
+                stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
+            }
+            else
+            {
+                stateMachine.ChangeState<BanditBoss_StateMove>();
             }
         }
     }
