@@ -201,7 +201,7 @@ public class Ar : MonoBehaviour
             isDead = true;
             TurnManager.Instance.SomeoneIsMoving = false;
             GameManager.Instance.ArDead();
-            gameObject.SetActive(false);
+            animationManager.Die();
             return true;
         }
 
