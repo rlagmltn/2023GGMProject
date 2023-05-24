@@ -15,8 +15,9 @@ public class PaperBird_AfterCrash : ItemInfo
     IEnumerator PaperBird_AfterCrash_Play()
     {
         player.isPaperBirdPlay = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         nearEnemy.GetComponent<Ar>().Hit(2);
+        Debug.Log("2데미지 애프터 크러쉬");
         EffectManager.Instance.InstantiateEffect(Effect.HIT, nearEnemy.gameObject.transform.position, new Vector3(0, 0, 0)); //나중에 바꿔줘야함
     }
 

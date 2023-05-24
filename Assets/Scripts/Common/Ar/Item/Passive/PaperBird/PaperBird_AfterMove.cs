@@ -32,6 +32,7 @@ public class PaperBird_AfterMove : ItemInfo
         {
             if (!hit[num].GetComponent<Enemy>()) continue;
             hit[num].GetComponent<Ar>().Hit(2);
+            Debug.Log("2데미지 애프터 무브");
             EffectManager.Instance.InstantiateEffect(Effect.HIT, hit[num].gameObject.transform.position, new Vector3(0, 0, 0));//나중에 바꿔줘야함
         }
     }
