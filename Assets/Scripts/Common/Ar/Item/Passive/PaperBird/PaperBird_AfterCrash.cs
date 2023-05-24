@@ -5,6 +5,8 @@ using UnityEngine;
 public class PaperBird_AfterCrash : ItemInfo
 {
     private Transform nearEnemy;
+    private bool isFirst = true;
+    private int ItemNum = -1;
 
     public override void Passive()
     {
@@ -14,7 +16,13 @@ public class PaperBird_AfterCrash : ItemInfo
 
     IEnumerator PaperBird_AfterCrash_Play()
     {
-        player.isPaperBirdPlay = true;
+        if (isFirst)
+        {
+            isFirst = false;
+            player.isPaperBird.Add(false);
+            ItemNum = player.isPaperBird.Count - 1;
+        }
+        player.isPaperBird[ItemNum] = true;
         yield return new WaitForSeconds(0.1f);
         nearEnemy.GetComponent<Ar>().Hit(2);
         Debug.Log("2데미지 애프터 크러쉬");
