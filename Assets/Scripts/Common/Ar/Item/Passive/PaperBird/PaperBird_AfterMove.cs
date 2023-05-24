@@ -5,6 +5,8 @@ using UnityEngine;
 public class PaperBird_AfterMove : ItemInfo
 {
     [SerializeField] private int Can_Lengh;
+    private bool isFirst = true;
+    private int ItemNum = 0;
 
     public override void Passive()
     {
@@ -14,9 +16,16 @@ public class PaperBird_AfterMove : ItemInfo
 
     bool AfterCrash_PlayCheck()
     {
-        if (player.isPaperBirdPlay)
+        if (isFirst)
         {
-            player.isPaperBirdPlay = false;
+            isFirst = false;
+            ItemNum = player.PaperBirdNum;
+            player.PaperBirdNum++;
+        }
+
+        if (player.isPaperBird[ItemNum])
+        {
+            player.isPaperBird[ItemNum] = false;
             return true;
         }
         return false;
