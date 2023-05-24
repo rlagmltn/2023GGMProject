@@ -180,7 +180,7 @@ public class QuickSlot : MonoBehaviour
             JoystickType.Skill => SkillIcon,
             _ => null,
         };
-        icon.transform.DOLocalMoveX(230, 0.3f);
+        icon.transform.DOLocalMoveX(207, 0.3f);
     }
 
     private void UnActiveIcons()
