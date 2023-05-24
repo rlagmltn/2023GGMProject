@@ -34,6 +34,9 @@ public class Player : Ar
     protected Collider2D skillCollider;
 
     public bool isPaperBirdPlay = false;
+    public List<bool> isPaperBird;
+    public int PaperBirdNum = 0;
+
     public List<Transform> StickySlimeList;
     public List<float> StickySlime_PoaerList;
 
@@ -73,6 +76,9 @@ public class Player : Ar
     protected override void Start()
     {
         base.Start();
+        //히히 내자리
+        PaperBirdNum = 0;
+
 
         rangeContainer = transform.GetChild(0);
         moveRange = rangeContainer.GetChild(0).GetComponent<SpriteRenderer>();

@@ -54,7 +54,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
             instance.SetSO(so);
         }
         itemInven.items = new List<ItemSO>();
-        for(int i=0; i<20; i++)
+        for(int i=0; i<21; i++)
         {
             itemInven.AddItemInItems(emptyItem);
         }
@@ -113,6 +113,11 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         testPlayer.gameObject.SetActive(true);
         testPlayer.transform.position = Vector3.zero;
         testPlayer.isMainScene = true;
+        var count = testPlayer.transform.childCount;
+        while (count > 5)
+        {
+            Destroy(testPlayer.transform.GetChild(--count).gameObject);
+        }
         testBtnSlotParent.gameObject.SetActive(false);
         for (int i = 0; i < 3; i++) testPlayer.so.E_Item.itmeSO[i] = armedItems[i].itemSO;
         testPlayer.GetItemEvents();
