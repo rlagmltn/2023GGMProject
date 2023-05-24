@@ -515,7 +515,7 @@ public class Player : Ar
         return base.DeadCheck();
     }
 
-    private void DeadSave()
+    protected void DeadSave()
     {
         slot?.SetHPBar((float)stat.HP / stat.MaxHP);
         slot?.SetSPBar((float)stat.SP / stat.MaxSP);

@@ -9,6 +9,7 @@ public class Bar : MonoBehaviour
     private Image iGage;
     private float gageAmount = 1;
     private bool isGageChanged = false;
+    private int minus;
 
     private void Start()
     {
@@ -31,27 +32,29 @@ public class Bar : MonoBehaviour
         if (!isGageChanged) return;
         if(gage!=null)
         {
-            if (gage.size.x <= gageAmount)
+            if (gage.size.x * minus <= gageAmount * minus)
             {
                 isGageChanged = false;
                 return;
             }
-            gage.size = new Vector2(gage.size.x - Time.deltaTime, 1);
+            gage.size = new Vector2(gage.size.x - Time.deltaTime * minus, 1);
         }
         else
         {
-            if (iGage.fillAmount <= gageAmount)
+            if (iGage.fillAmount * minus <= gageAmount * minus)
             {
                 isGageChanged = false;
                 return;
             }
-            iGage.fillAmount = iGage.fillAmount - Time.deltaTime;
+            iGage.fillAmount = iGage.fillAmount - Time.deltaTime * minus;
         }
     }
 
     public void GageChange(float gageAmount)
     {
         if (gage == null && iGage == null) Set();
+        if (this.gageAmount >= gageAmount) minus = 1;
+        else minus = -1;
         this.gageAmount = gageAmount;
         isGageChanged = true;
     }
