@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GoldManager : MonoSingleton<GoldManager>
 {
@@ -11,11 +12,18 @@ public class GoldManager : MonoSingleton<GoldManager>
      * 게임이 끝나면 초기화?
     */
 
-    public int Gold { get; set; }
+    public static int Gold { get; private set; }
+    [SerializeField] TextMeshProUGUI tmp;
+
+    public void ResetGold()
+    {
+        Gold = 0;
+    }
 
     public bool AddGold(int amount)
     {
         Gold += amount;
+        tmp.SetText(Gold.ToString());
         return true;
     }
 
@@ -25,6 +33,7 @@ public class GoldManager : MonoSingleton<GoldManager>
         else
         {
             Gold -= amount;
+            tmp.SetText(Gold.ToString());
             return true;
         }
     }
