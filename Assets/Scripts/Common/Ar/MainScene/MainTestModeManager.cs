@@ -38,6 +38,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         attackAct = actSellect.transform.GetChild(1).gameObject;
         actSellect.SetActive(false);
         dummy = Instantiate(pfDummy, new Vector3(5, 0), Quaternion.identity);
+        GoldManager.Instance.ResetGold();
     }
 
     private void MakeArTestSlot()
