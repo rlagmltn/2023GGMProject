@@ -54,7 +54,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
             instance.SetSO(so);
         }
         itemInven.items = new List<ItemSO>();
-        for(int i=0; i<20; i++)
+        for(int i=0; i<21; i++)
         {
             itemInven.AddItemInItems(emptyItem);
         }

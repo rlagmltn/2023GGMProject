@@ -14,7 +14,7 @@ public class Kunai : Bullet
     {
         EffectManager.Instance.InstantiateEffect_P(Effect.AssassinSmoke, summoner.transform.position);
         summoner.transform.position = transform.position;
-        summoner.Push(new Vector2(0.1f, 0.1f));
+        summoner.Push(Vector2.zero);
         EffectManager.Instance.InstantiateEffect_P(Effect.AssassinSmoke, summoner.transform.position);
         base.AfterCrush();
     }

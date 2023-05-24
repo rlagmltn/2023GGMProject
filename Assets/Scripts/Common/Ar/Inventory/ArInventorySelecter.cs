@@ -327,6 +327,11 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
             return;
         }
 
+        foreach(ArSO ar in ArList.list)
+        {
+            ar.E_Item.itmeSO = new ItemSO[3];
+        }
+
         ArTOGlobal();
         SceneMgr.Instance.LoadScene("MapScene");
     }
