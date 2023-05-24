@@ -11,11 +11,31 @@ public class ItemDBSO : ScriptableObject
     {
         foreach(ItemSO item in _items)
         {
-            items.Add(item);
+            for(int i=0; i<items.Count; i++)
+            {
+                if(items[i].itemName=="EMPTY")
+                {
+                    items[i] = item;
+                    break;
+                }
+            }
         }
     }
+
     public void AddItemInItems(ItemSO _item)
     {
-        items.Add(_item);
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i].itemName == "EMPTY")
+            {
+                items[i] = _item;
+                break;
+            }
+        }
+    }
+
+    public void ResetInven(ItemSO item)
+    {
+        items.Add(item);
     }
 }
