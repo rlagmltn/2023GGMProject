@@ -333,7 +333,7 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
         }
 
         ArTOGlobal();
-        SceneMgr.Instance.LoadScene("MapScene");
+        SceneMgr.Instance.LoadScene("Stage1Map");
     }
 
     public void ArTOGlobal()

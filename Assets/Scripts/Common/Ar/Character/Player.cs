@@ -524,6 +524,7 @@ public class Player : Ar
 
     public void TakeAllStat()
     {
+        so.isDead = true;
         so.surviveStats.currentHP = stat.HP;
         so.surviveStats.currentWeight = stat.WEIGHT;
         if(!isDead) so.surviveStats.currentShield = so.surviveStats.MaxShield;

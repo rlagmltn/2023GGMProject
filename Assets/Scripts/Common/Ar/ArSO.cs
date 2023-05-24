@@ -22,6 +22,7 @@ public class ArSO : ScriptableObject
     public bool isUse = false;
 
     public bool isInGameTake = false;
+    public bool isDead = false;
 
     public Player ArData;
 

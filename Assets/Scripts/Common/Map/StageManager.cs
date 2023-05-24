@@ -4,76 +4,205 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
+using UnityEngine.SceneManagement;
+
+[System.Serializable]
+public class Road
+{
+    public Transform BeforeButton;
+    public Transform NextButton;
+    public List<Transform> Roads;
+}
+
 public class StageManager : MonoSingleton<StageManager>
 {
-    [SerializeField] private List<Button> stageButtons;
-    [SerializeField] private StageSOList s_List;
+    [SerializeField] private List<Road> AllRoads_Info;
 
-    [SerializeField] private Transform stagePanel;
-    [SerializeField] private TextMeshProUGUI stageNameText;
-    [SerializeField] private TextMeshProUGUI explanationText;
-    [SerializeField] private Image MapImage;
+    [SerializeField] private List<Transform> AllButtons;
 
-    [SerializeField] private Button closeButton;
-    [SerializeField] private Button startButton;
-    [SerializeField] private ArSOList ArList;
+    [SerializeField] private Button CancelButton;
+    [SerializeField] private StageSOList stageList;
+    [SerializeField] private Transform startStage; //그냥 아무것도 아닌 시작하는 스테이지 아마도 emptyStage가 아닐까?
+
+    private List<Transform> ClearedStages;
+
+    private Transform currentStage;
+    private StageSO Selected_Stage;
 
     private void Start()
     {
-        AllStageButtonAddEvent();
+        Init();
     }
 
-    void AllStageButtonAddEvent()
+    void Init()
     {
-        for(int num = 0; num < stageButtons.Count; num++)
+        StageCheck();
+        FindNextStage();
+        StageDisable();
+    }
+
+    void StageCheck()
+    {
+        ClearedStages = new List<Transform>();
+
+        if (GlobalIsEmpty()) //이게 전의 기록이 없을때 실행하는 코드
         {
-            stageButtons[num].GetComponent<StageHolder>().SetStageSO(s_List.stageList[num]);
-            RemoveAllButtonEvents(stageButtons[num]);
-            AddButtonEvent(stageButtons[num], stageButtons[num].GetComponent<StageHolder>().GetStageSO);
+            startStage.GetComponent<StageSOHolder>().GetStage().IsCleared = true;
+            currentStage = startStage;
+            SetStageState();
+            Debug.Log("처음 실행함");
+        }
+        else //전에 다른 스테이지에 들어갔을때 실행해주는 코드
+        {
+            foreach (Transform trans in AllButtons)
+            {
+                if (trans != startStage)
+                    if (trans.GetComponent<StageSOHolder>().GetStage().IsCleared)
+                        ClearedStages.Add(trans);
+
+                if (trans.GetComponent<StageSOHolder>().GetStage() == Global.EnterStage)
+                    currentStage = trans;
+            }
+        }
+    }
+
+    void SetStageState()
+    {
+        int eventNum = stageList.stageList.Count / 4;
+        int shopNum = stageList.stageList.Count / 9;
+
+        for (int num = 0; num < stageList.stageList.Count - 1; num++)
+            stageList.stageList[num].stageKind = eStageState.Battle;
+
+        StageKindChange(eStageState.Event, eventNum);
+        StageKindChange(eStageState.Shop, shopNum);
+        Debug.Log(shopNum);
+
+        //여기서 스테이지so홀더의 이미지 바꿔주는 함수 실행
+        for (int num = 0; num < AllButtons.Count; num++) AllButtons[num].GetComponent<StageSOHolder>().ChangeImage();
+    }
+
+    void StageKindChange(eStageState State, int StateNum)
+    {
+        for (int num = 0; num < StateNum;)
+        {
+            int temp = Random.Range(1, stageList.stageList.Count - 1);
+
+            if (stageList.stageList[temp].stageKind != eStageState.Battle) continue;
+
+            stageList.stageList[temp].stageKind = State;
+            num++;
+        }
+    }
+
+    bool GlobalIsEmpty()
+    {
+        foreach (Transform trans in AllButtons)
+            if (Global.EnterStage == trans.GetComponent<StageSOHolder>().GetStage())
+                return false;
+        return true;
+    }
+
+    void FindNextStage()
+    {
+        Color color = new Color(1, 1, 1);
+        StageSOHolder CurrentStage = currentStage.GetComponent<StageSOHolder>();
+
+        //현재의 입장 가능한 스테이지 전부 초기화
+        for (int num = 0; num < AllButtons.Count; num++)
+            AllButtons[num].GetComponent<StageSOHolder>().GetStage().IsCanEnter = false;
+
+        //입장 가능한 스테이지 설정
+        for (int num = 0; num < CurrentStage.NextStageList.Count; num++)
+            CurrentStage.NextStageList[num].GetComponent<StageSOHolder>().GetStage().IsCanEnter = true;
+
+        if (ClearedStages.Count <= 0)
+        {
+            color = new Color(0.56f, 0.56f, 0.56f, 0.78f);
+            for (int num = 0; num < AllRoads_Info.Count; num++)
+                ChangeRoadColor(AllRoads_Info[num].Roads, color);
+            return;
         }
 
-        RemoveAllButtonEvents(closeButton);
-        AddButtonEvent(closeButton, CloseStageInfo);
-        RemoveAllButtonEvents(startButton);
-        AddButtonEvent(startButton, StageStart);
+        for (int num = 0; num < AllRoads_Info.Count; num++)
+        {
+            //들어갈 수 있는길 활성화 해주기
+            color = new Color(0.56f, 0.56f, 0.56f, 0.78f);
+
+            if (AllRoads_Info[num].BeforeButton == ClearedStages[ClearedStages.Count - 1])
+                color = new Color(1f, 1f, 1f, 1f);
+
+            //길 활성화/비활성화
+            ChangeRoadColor(AllRoads_Info[num].Roads, color);
+        }
     }
 
-    public void ShowStageInfo(StageSO stage)
+    void ChangeRoadColor(List<Transform> roads, Color color)
     {
-        stagePanel.gameObject.SetActive(true);
-        stageNameText.text = stage.stageInfo.stageName;
-        explanationText.text = stage.stageInfo.explanationText;
-        MapImage.sprite = stage.stageInfo.stageImage;
-        Global.Map = stage.map;
+        for(int num = 0; num < roads.Count; num++)
+        {
+            roads[num].GetComponent<Image>().color = color;
+        }
     }
 
-    void CloseStageInfo()
+    /// <summary>
+    /// 스테이지를 비활성화를 다시 로드하는 함수
+    /// </summary>
+    void StageDisable()
     {
-        stagePanel.gameObject.SetActive(false);
+        ColorBlock color = new();
+        color = AllButtons[0].GetComponent<Button>().colors;
+
+        for (int num = 0; num < AllButtons.Count; num++)
+        {
+            Button btn = AllButtons[num].GetComponent<Button>();
+            StageSO stage = AllButtons[num].GetComponent<StageSOHolder>().GetStage();
+
+            btn.interactable = false;
+            color.disabledColor = new Color(0.78f, 0.78f, 0.78f, 0.5f);
+
+            if (stage.IsCleared) color.disabledColor = new Color(1f, 1f, 1f, 1f);
+
+            if (stage.IsCanEnter) btn.interactable = true;
+
+            btn.colors = color;
+        }
     }
 
-    void StageStart()
+    public void SetSelectedStage(StageSO stage)
     {
-        //MGScene.Instance.ChangeScene(eSceneName.InGame);
-        SceneMgr.Instance.LoadScene("TestScene");
-        Debug.Log("Change Scene to InGameScene");
+        Selected_Stage = stage;
     }
 
-    void RemoveAllButtonEvents(Button button)
+    /// <summary>
+    /// 게임에 들어갈 때 실행할 함수
+    /// </summary>
+    /// <param name="stageSO"></param>
+    public void StageEnter()
     {
-        button.onClick.RemoveAllListeners();
-    }
+        Global.EnterStage = Selected_Stage;
+        //맵 로딩 해줘야함
+        Global.Map = Selected_Stage.map;
+        //지금은 임시로 스테이지 클리어임
+        //StageClear();
 
-    void AddButtonEvent(Button button, UnityAction action)
-    {
-        button.onClick.AddListener(action);
+        UnityAction Action = Selected_Stage.stageKind switch
+        {
+            eStageState.Battle => () => SceneManager.LoadScene("TestScene"),
+            eStageState.Shop => () => SceneManager.LoadScene("ShopScene"),
+            eStageState.Event => () => SceneManager.LoadScene("EventScene"),
+            _ => () => SceneManager.LoadScene("TestScene"),
+        };
+
+        Action();
     }
 
     private void OnApplicationQuit()
     {
-        foreach (ArSO ar in ArList.list)
+        foreach (StageSO stage in stageList.stageList)
         {
-            ar.isUse = false;
+            stage.IsCanEnter = false;
+            stage.IsCleared = false;
         }
     }
 }

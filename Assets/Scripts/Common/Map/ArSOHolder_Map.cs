@@ -20,14 +20,10 @@ public class ArSOHolder_Map : MonoBehaviour
     {
         if (Ar.isInGameTake == false)
         {
-            gameObject.GetComponent<Button>().interactable = false;
-            color = gameObject.GetComponent<Button>().colors.disabledColor;
-            ArImage.color = color;
+            gameObject.SetActive(false);
             return;
         }
-
-        gameObject.GetComponent<Button>().interactable = true;
-        ArImage.color = new Color(1f, 1f, 1f, 1f);
+        gameObject.SetActive(true);
     }
 
     public void SetArSO(ArSO ar)

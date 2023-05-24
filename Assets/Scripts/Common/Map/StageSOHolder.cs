@@ -23,6 +23,8 @@ public class StageSOHolder : MonoBehaviour
 
     public void StageSelect()
     {
-        TestStageManager.Instance.InfoPannelActiveTrue(Stage);
+        //TestStageManager.Instance.InfoPannelActiveTrue(Stage);
+        StageManager.Instance.SetSelectedStage(Stage);
+        StageUIManager.Instance.SetSelectedStage(Stage);
     }
 }

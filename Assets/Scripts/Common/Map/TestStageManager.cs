@@ -7,7 +7,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 
 [System.Serializable]
-public class Road
+public class Road_2
 {
     public Transform BeforeButton;
     public Transform NextButton;
@@ -18,7 +18,7 @@ public class TestStageManager : MonoSingleton<TestStageManager>
 {
     [SerializeField] private Transform startStage; //그냥 아무것도 아닌 시작하는 스테이지 아마도 emptyStage가 아닐까?
     [SerializeField] private List<Transform> AllButtons;
-    [SerializeField] private List<Road> AllRoads_Info;
+    [SerializeField] private List<Road_2> AllRoads_Info;
     [SerializeField] private StageSOList stageList;
 
     [SerializeField] private Transform StageInfoPannel;
@@ -26,7 +26,7 @@ public class TestStageManager : MonoSingleton<TestStageManager>
     [SerializeField] private Button StartButton;
 
     [SerializeField] private List<Image> EnemyImages;
-    [SerializeField] private List<TextMeshProUGUI> EnemyTexts;
+
 
     [SerializeField] private Image MapImage;
 
@@ -99,16 +99,6 @@ public class TestStageManager : MonoSingleton<TestStageManager>
         AddButtonListener(InvnetoryQuitBtn, InfoPannelActiveFalse);
     }
 
-    void DebugSetName()
-    { 
-        for(int i = 0; i <stageList.stageList.Count; i++)
-        {
-            var stage = stageList.stageList[i].stageInfo;
-            stage.stageName = new string($"스테이지{i + 1}");
-            stage.explanationText = new string($"스테이지{i + 1} 이다.");
-        }
-    }
-
     public void InfoPannelActiveTrue(StageSO stage)
     {
         StageInfoPannel.gameObject.SetActive(true);
@@ -116,7 +106,6 @@ public class TestStageManager : MonoSingleton<TestStageManager>
         SelectedStage = stage;
         MapImage.sprite = stage.stageInfo.stageImage;
         MapInventory.Instance.UpdateUI();
-        StageInfoPannelUpdate();
     }
 
     void InfoPannelActiveFalse()
@@ -124,15 +113,6 @@ public class TestStageManager : MonoSingleton<TestStageManager>
         StageInfoPannel.gameObject.SetActive(false);
         InventoryPopUpPannel.gameObject.SetActive(false);
         BackPannel.gameObject.SetActive(false);
-    }
-
-    void StageInfoPannelUpdate()
-    {
-        for(int num = 0; num < EnemyTexts.Count; num++)
-        {
-            EnemyTexts[num].text = SelectedStage.stageEnmey[num].Name;
-        }
-        //스테이지의 정보로 ui업데이트
     }
 
     /// <summary>
