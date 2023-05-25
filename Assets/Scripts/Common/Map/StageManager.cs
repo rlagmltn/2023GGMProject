@@ -24,7 +24,7 @@ public class StageManager : MonoSingleton<StageManager>
     [SerializeField] private StageSOList stageList;
     [SerializeField] private Transform startStage; //그냥 아무것도 아닌 시작하는 스테이지 아마도 emptyStage가 아닐까?
 
-    private List<Transform> ClearedStages;
+    public List<Transform> ClearedStages;
 
     private Transform currentStage;
     private StageSO Selected_Stage;
@@ -49,20 +49,23 @@ public class StageManager : MonoSingleton<StageManager>
         {
             startStage.GetComponent<StageSOHolder>().GetStage().IsCleared = true;
             currentStage = startStage;
+            ClearedStages.Add(startStage);
             SetStageState();
             Debug.Log("처음 실행함");
         }
         else //전에 다른 스테이지에 들어갔을때 실행해주는 코드
         {
+            ClearedStages.Add(startStage);
             foreach (Transform trans in AllButtons)
             {
-                if (trans != startStage)
-                    if (trans.GetComponent<StageSOHolder>().GetStage().IsCleared)
-                        ClearedStages.Add(trans);
+                if (trans.GetComponent<StageSOHolder>().GetStage().IsCleared)
+                    ClearedStages.Add(trans);
 
                 if (trans.GetComponent<StageSOHolder>().GetStage() == Global.EnterStage)
                     currentStage = trans;
             }
+
+            for (int num = 0; num < AllButtons.Count; num++) AllButtons[num].GetComponent<StageSOHolder>().ChangeImage(); //스테이지 아이콘 바꿔주는 함수
         }
     }
 
@@ -134,6 +137,22 @@ public class StageManager : MonoSingleton<StageManager>
 
             //길 활성화/비활성화
             ChangeRoadColor(AllRoads_Info[num].Roads, color);
+        }
+
+        //클리어했던 길 활성화 해주기
+        if (ClearedStages.Count < 2) return;
+
+        color = new Color(1, 1, 1, 1);
+
+        for (int num = 0; num < AllRoads_Info.Count; num++)
+        {
+            for (int i = 0; i < ClearedStages.Count - 1; i++)
+            {
+                if (ClearedStages[i] != AllRoads_Info[num].BeforeButton) continue;
+                if (ClearedStages[i + 1] != AllRoads_Info[num].NextButton) continue;
+
+                ChangeRoadColor(AllRoads_Info[num].Roads, color);
+            }
         }
     }
 

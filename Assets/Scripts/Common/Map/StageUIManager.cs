@@ -86,9 +86,9 @@ public class StageUIManager : MonoSingleton<StageUIManager>
         {
             EnemyButtons[num].gameObject.SetActive(true);
 
-            if (num <= Selected_Stage.stageEnmeySprite.Count - 1)
+            if (num <= Selected_Stage.StageEnemy.Count - 1)
             {
-                EnemyButtons[num].GetChild(0).GetComponent<Image>().sprite = Selected_Stage.stageEnmeySprite[num];
+                EnemyButtons[num].GetChild(0).GetComponent<Image>().sprite = Selected_Stage.StageEnemy[num].EnemyImage;
                 continue;
             }
 

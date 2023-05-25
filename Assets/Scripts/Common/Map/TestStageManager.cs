@@ -68,6 +68,7 @@ public class TestStageManager : MonoSingleton<TestStageManager>
         }
         else //전에 다른 스테이지에 들어갔을때 실행해주는 코드
         {
+            Debug.Log("실행1");
             foreach (Transform trans in AllButtons)
             {
                 if (trans != startStage)
@@ -77,6 +78,8 @@ public class TestStageManager : MonoSingleton<TestStageManager>
                 if (trans.GetComponent<StageSOHolder>().GetStage() == Global.EnterStage)
                     currentStage = trans;
             }
+            Debug.Log("실행2");
+            for (int num = 0; num < AllButtons.Count; num++) AllButtons[num].GetComponent<StageSOHolder>().ChangeImage(); //스테이지 아이콘 바꿔주는 함수
         }
     }
 

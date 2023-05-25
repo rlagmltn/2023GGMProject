@@ -112,6 +112,8 @@ public class Player : Ar
         stat.WEIGHT = (int)so.surviveStats.currentWeight;
         skillCooltime = so.skill.MaxSkillCoolTime;
         currentCooltime = so.skill.currentSkillCoolTime;
+
+        so.isDead = false;
         //뎀감 만들어야함
 
         minDragPower = 0.2f;
@@ -398,6 +400,12 @@ public class Player : Ar
         return go;
     }
 
+    public override void OutDie()
+    {
+        so.isDead = true;
+        base.OutDie();
+    }
+
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
@@ -524,7 +532,6 @@ public class Player : Ar
 
     public void TakeAllStat()
     {
-        so.isDead = true;
         so.surviveStats.currentHP = stat.HP;
         so.surviveStats.currentWeight = stat.WEIGHT;
         if(!isDead) so.surviveStats.currentShield = so.surviveStats.MaxShield;
