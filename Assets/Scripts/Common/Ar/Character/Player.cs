@@ -400,6 +400,12 @@ public class Player : Ar
         return go;
     }
 
+    public override void OutDie()
+    {
+        so.isDead = true;
+        base.OutDie();
+    }
+
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
@@ -521,7 +527,6 @@ public class Player : Ar
     {
         slot?.SetHPBar((float)stat.HP / stat.MaxHP);
         slot?.SetSPBar((float)stat.SP / stat.MaxSP);
-        so.isDead = true;
         if (stat.HP <= 0) TakeAllStat();
     }
 

@@ -227,7 +227,7 @@ public class Ar : MonoBehaviour
         animationManager.Die();
     }
 
-    public void OutDie()
+    public virtual void OutDie()
     {
         gameObject.SetActive(false);
     }
