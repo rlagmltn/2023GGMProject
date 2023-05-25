@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class EventManger : MonoSingleton<EventManger>
 {
@@ -75,6 +76,6 @@ public class EventManger : MonoSingleton<EventManger>
     public void StageClear()
     {
         Global.EnterStage.IsCleared = true;
-        SceneMgr.Instance.LoadScene(eSceneName.Map);
+        SceneManager.LoadScene("Stage1Map");
     }
 }

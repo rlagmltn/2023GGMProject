@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameShop_Inventory : MonoSingleton<GameShop_Inventory>
 {
@@ -83,6 +84,6 @@ public class GameShop_Inventory : MonoSingleton<GameShop_Inventory>
     public void StageClear()
     {
         Global.EnterStage.IsCleared = true;
-        SceneMgr.Instance.LoadScene(eSceneName.Map);
+        SceneManager.LoadScene("Stage1Map");
     }
 }

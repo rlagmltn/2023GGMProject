@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class MGUI : MonoSingleton<MGUI>
 {
@@ -45,7 +46,7 @@ public class MGUI : MonoSingleton<MGUI>
 
     public void MoveToMapScene()
     {
-        SceneMgr.Instance.LoadScene(eSceneName.Map);
+        SceneManager.LoadScene("Stage1Map");
     }
     public void MoveToSelectScene()
     {
