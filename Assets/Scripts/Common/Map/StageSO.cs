@@ -10,6 +10,8 @@ public class StageSO : ScriptableObject
 
     public eStageState stageKind;
 
+    public List<EnemyInfoSO> StageEnemy;
+
     public List<Sprite> stageEnmeySprite;
 
     public List<Sprite> stageRewardSprite;
