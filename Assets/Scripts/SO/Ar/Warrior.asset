@@ -31,7 +31,7 @@ MonoBehaviour:
   surviveStats:
     baseHP: 16
     MaxHP: 16
-    currentHP: 15
+    currentHP: 16
     baseShield: 4
     MaxShield: 4
     currentShield: 4
@@ -48,12 +48,13 @@ MonoBehaviour:
       \uB370\uBBF8\uC9C0\uB97C \uC900\uB2E4"
   E_Item:
     itmeSO:
-    - {fileID: 11400000, guid: 4adf42bda2f286e448296f8d0ca20c95, type: 2}
+    - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
   isTake: 1
   isUse: 0
-  isInGameTake: 1
+  isInGameTake: 0
+  isDead: 0
   ArData: {fileID: 1064441778921728902, guid: 4272f0564a57ad94e88029d7e9e0918d, type: 3}
   Summary: "\uC9C0\uC815\uB41C \uBC29\uD5A5\uC73C\uB85C \uBC94\uC704 \uACF5\uACA9\uC744
     \uAC00\uD55C\uB2E4"
