@@ -30,12 +30,15 @@ public class ArInventoryManager : MonoSingleton<ArInventoryManager>
         }
     }
 
-    public void HolderToInven(int num)
+    public ArSO HolderToInven(int num)
     {
-        inven.list.Add(holder.list[num]);
-        holder.list[num].ResetAll();
-        holder.list[num].isInGameTake = true;
+        var ar = holder.list[num];
+        inven.list.Add(ar);
+        ar.ResetAll();
+        ar.isInGameTake = true;
         holder.list.RemoveAt(num);
+
+        return ar;
     }
 
     public void HolderToInven(ArSO ar)

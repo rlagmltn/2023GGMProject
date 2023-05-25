@@ -77,4 +77,16 @@ public class MGUI : MonoSingleton<MGUI>
     {
         win?.SetActive(true);
     }
+
+    public void KillAllEnemy()
+    {
+        var enemies = FindObjectsOfType<Enemy>();
+
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.Hit(5000);
+        }
+
+        escPanel.gameObject.SetActive(false);
+    }
 }

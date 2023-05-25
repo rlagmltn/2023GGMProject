@@ -82,14 +82,6 @@ public class GameManager : MonoSingleton<GameManager>
         MGUI.Instance.GameClear();
     }
 
-    public void KillAllEnemy()
-    {
-        foreach(Enemy enemy in enemies)
-        {
-            enemy.Hit(5000);
-        }
-    }
-
     private void OnApplicationQuit()
     {
         foreach (ArSO ar in ArList.list)
