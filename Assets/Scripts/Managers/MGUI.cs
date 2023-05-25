@@ -41,26 +41,17 @@ public class MGUI : MonoSingleton<MGUI>
 
     public void MoveToTitleScene()
     {
-        SceneMgr.Instance.LoadScene(eSceneName.Title);
+        SceneMgr.Instance.LoadScene(eSceneName.Main);
     }
 
     public void MoveToMapScene()
     {
         SceneManager.LoadScene("Stage1Map");
     }
-    public void MoveToSelectScene()
-    {
-        SceneMgr.Instance.LoadScene(eSceneName.Select);
-    }
 
     public void MoveToMainScene()
     {
         SceneMgr.Instance.LoadScene(eSceneName.Main);
-    }
-
-    public void MoveToLoadingScene()
-    {
-        SceneMgr.Instance.LoadScene(eSceneName.Loading);
     }
 
     public void ExitGame()
