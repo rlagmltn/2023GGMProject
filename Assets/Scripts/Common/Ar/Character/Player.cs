@@ -112,6 +112,8 @@ public class Player : Ar
         stat.WEIGHT = (int)so.surviveStats.currentWeight;
         skillCooltime = so.skill.MaxSkillCoolTime;
         currentCooltime = so.skill.currentSkillCoolTime;
+
+        so.isDead = false;
         //뎀감 만들어야함
 
         minDragPower = 0.2f;
@@ -519,12 +521,12 @@ public class Player : Ar
     {
         slot?.SetHPBar((float)stat.HP / stat.MaxHP);
         slot?.SetSPBar((float)stat.SP / stat.MaxSP);
+        so.isDead = true;
         if (stat.HP <= 0) TakeAllStat();
     }
 
     public void TakeAllStat()
     {
-        so.isDead = true;
         so.surviveStats.currentHP = stat.HP;
         so.surviveStats.currentWeight = stat.WEIGHT;
         if(!isDead) so.surviveStats.currentShield = so.surviveStats.MaxShield;

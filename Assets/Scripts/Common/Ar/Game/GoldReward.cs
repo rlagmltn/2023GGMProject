@@ -16,6 +16,19 @@ public class GoldReward : MonoBehaviour
         StartCoroutine(CoinCountUp());
     }
 
+    private void Update()
+    {
+        if(Input.GetMouseButton(0))
+        {
+            StopAllCoroutines();
+            tmp.SetText(getCoin.ToString());
+
+            okBtn.SetActive(true);
+            okBtn.transform.localScale = new Vector3(1, 1, 1);
+            okBtn.transform.localPosition = new Vector3(0, -360, 0);
+        }
+    }
+
     private IEnumerator CoinCountUp()
     {
         okBtn.transform.localScale = new Vector2(0, 0);
