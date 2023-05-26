@@ -10,9 +10,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform slotHolder;
     [SerializeField] Transform batchHolderTrs;
     [SerializeField] GameObject batchUI;
-    [SerializeField] GameObject batchZone;
     [SerializeField] JoyStick joystick;
     [SerializeField] TextMeshProUGUI batchUnitText;
+
+    private Transform map;
+    private GameObject batchZone;
 
     public List<CONEntity> enemyList;
 
@@ -32,13 +34,11 @@ public class PlayerController : MonoBehaviour
         SummonPlayers();
     }
 
-    //private void SetEnemyList()
-    //{
-    //    foreach(CONEntity con in MGPool.Instance.poolListDic[ePrefabs.Enemy])
-    //    {
-    //        enemyList.Add(con);
-    //    }
-    //}
+    private void Start()
+    {
+        map = FindObjectOfType<Stage>().transform;
+        batchZone = map.GetChild(0).Find("Batch").gameObject;
+    }
 
     private void SummonPlayers()
     {
