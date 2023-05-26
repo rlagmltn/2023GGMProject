@@ -4,66 +4,58 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public int EnemyCount = 0;
-
-    public List<ePrefabs> enemyKinds;
-
     public Dictionary<ePrefabs, List<CONEntity>> _SpawnObjDic;
 
-    void Start()
+    [SerializeField] private BattleMapSO battleMapSO;
+
+    [SerializeField] private Transform[] summonTrs;
+
+    void Awake()
     {
         _SpawnObjDic = new Dictionary<ePrefabs, List<CONEntity>>();
 
-        LoadPrefabs();
+        Summon();
 
         //_SpawnObjDic[ePrefabs.EnemyObj1][0].SetActive(true);
     }
 
-    private void Update()
+    private void Summon()
     {
-        ClearCheck();
-    }
-
-    /// <summary>
-    /// Enemy Prefab들을 들고오는 함수
-    /// </summary>
-    void LoadPrefabs()
-    {
-        foreach (ePrefabs prefab in enemyKinds)
+        var map = Instantiate(battleMapSO.Map);
+        
+        map.transform.position = new Vector3(0, 0, 0);
+        foreach(EnemyCount enemy in battleMapSO.Enemies)
         {
-            _SpawnObjDic[prefab] = new List<CONEntity>();
+            var numbers = GenerateRandomNumbers(summonTrs.Length, enemy.Count);
+            Debug.Log(numbers.Length);
+            Debug.Log(enemy.Count);
 
-            foreach (CONEntity con in MGPool.Instance.poolListDic[prefab])
+            for (int i=0; i < enemy.Count; i++)
             {
-                _SpawnObjDic[prefab].Add(con);
-                EnemyCount++;
+                var newEnemy = Instantiate(enemy.Enemy);
+                newEnemy.transform.position = summonTrs[numbers[i]].position;
             }
         }
     }
 
-    void StageSet()
+    private int[] GenerateRandomNumbers(int a, int b)
     {
+        List<int> numbers = new List<int>();
 
-    }
-
-    /// <summary>
-    /// true일때 스테이지 클리어
-    /// </summary>
-    /// <returns></returns>
-    void ClearCheck() //나중에 bool로 바꿔서 쓰면됨
-    {
-        foreach(ePrefabs prefab in enemyKinds)
+        for (int i = 0; i < a; i++)
         {
-            foreach(CONEntity con in _SpawnObjDic[prefab])
-            {
-                if(con.IsActive())
-                {
-                    Debug.Log("Don't Clear");
-                    //return false;
-                }
-            }
+            numbers.Add(i);
         }
 
-        //return true;
+        int[] randomNumbers = new int[b];
+
+        for (int i = 0; i < b; i++)
+        {
+            int index = Random.Range(0, numbers.Count);
+            randomNumbers[i] = numbers[index];
+            numbers.RemoveAt(index);
+        }
+
+        return randomNumbers;
     }
 }
