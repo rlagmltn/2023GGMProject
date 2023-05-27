@@ -146,6 +146,7 @@ public class Ar : MonoBehaviour
             OnCrashed?.Invoke();
             cameraMove.Shake();
             EffectManager.Instance.InstantiateEffect(0, collision.contacts[0].point, transform.position, collision.contacts[0].point);
+            BattleManager.Instance.PlayBumpSound();
             InitTImeScale();
         }
     }
