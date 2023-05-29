@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class StageInfo_EnemyButton : MonoBehaviour
 {
-    void SetEnemySO()
+    int Num = 0;
+    public void SetEnemyNum(int num)
     {
+        Num = num;
+    }
 
+    public int GetEnemyNum()
+    {
+        return Num;
     }
 }
