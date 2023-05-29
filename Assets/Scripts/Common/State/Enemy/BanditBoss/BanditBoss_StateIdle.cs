@@ -30,16 +30,23 @@ public class BanditBoss_StateIdle : StateIdle
             skilCool4--;
             if(enemy.stat.HP <= 20 && !usedSkill3)
             {
-                stateMachine.ChangeState<BanditBoss_StateSkill>();
+                enemy.SkillSpawn();
+                stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
             }
             else if(skilCool4 <= 0)
             {
+                skilCool4 = 17;
                 enemy.SkillShield();
                 stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
             }
-            else if(enemy.stat.WEIGHT == 50)
+            else if(enemy.stat.WEIGHT >= 30)
             {
                 enemy.SkillOverload();
+                stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
+            }
+            else if(enemy.stat.WEIGHT >= 20)
+            {
+
                 stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
             }
             else if(enemy.stat.WEIGHT == 15)
