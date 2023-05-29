@@ -152,6 +152,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         testPlayer.DisableRanges();
         if (!canShoot) return;
         testPlayer.DragEnd(joystick.joystickType, power, angle);
+        ResetSellect();
         testPlayer.CountCooltime();
         cameraMove.SetSkillBtnText(testPlayer);
     }
@@ -174,5 +175,11 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         statTexts[4].SetText(testPleyerStat.CriPer.ToString());
         statTexts[5].SetText(testPleyerStat.CriDmg.ToString());
         statTexts[6].SetText(testPleyerStat.WEIGHT.ToString());
+    }
+
+    public void ResetSellect()
+    {
+        sellectPlayer = null;
+        joystick.joystickType = JoystickType.None;
     }
 }
