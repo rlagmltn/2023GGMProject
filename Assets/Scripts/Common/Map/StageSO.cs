@@ -12,7 +12,7 @@ public class StageSO : ScriptableObject
 
     public List<EnemyInfoSO> StageEnemy;
 
-    public List<Sprite> stageRewardSprite;
+    public List<StageInfo_RewardSO> StageReward;
 
     public bool IsCleared;
 
