@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 114391165987986440}
   - component: {fileID: 95412966663271060}
   - component: {fileID: 210585855654267702}
-  - component: {fileID: 12}
   - component: {fileID: 940447669140484755}
   - component: {fileID: 7374049995123050639}
+  - component: {fileID: 8979743599959469493}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Player
@@ -182,22 +182,6 @@ SortingGroup:
   m_SortingLayerID: -1014572865
   m_SortingLayer: 1
   m_SortingOrder: 3
---- !u!58 &12
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1063387080856860}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.6
 --- !u!114 &940447669140484755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,6 +276,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!70 &8979743599959469493
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063387080856860}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0
 --- !u!1 &1481269329147902
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ public class Player : Ar
     public float PushPower { get { return pushPower; } }
 
 
-    public CircleCollider2D Collide { get; set; }
+    public CapsuleCollider2D Collide { get; set; }
 
     public QuickSlot slot { get; private set; }
 
@@ -470,7 +470,7 @@ public class Player : Ar
         this.slot = slot;
         OnBattleDie.AddListener(()=>this.slot.SetSlotActive(false));
         OnOutDie.AddListener(()=>this.slot.SetSlotActive(false));
-        Collide = GetComponent<CircleCollider2D>();
+        Collide = GetComponent<CapsuleCollider2D>();
     }
 
     public void CountCooltime()
