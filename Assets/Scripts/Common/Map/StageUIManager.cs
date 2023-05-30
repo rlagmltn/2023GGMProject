@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class StageUIManager : MonoSingleton<StageUIManager>
 {
@@ -26,6 +27,9 @@ public class StageUIManager : MonoSingleton<StageUIManager>
     [SerializeField] private Button RewardPannelCancelButton;
 
     [SerializeField] private Transform BackGroundPannel_2;
+
+    [SerializeField] private TextMeshProUGUI StageNameText;
+    [SerializeField] private TextMeshProUGUI StageSummaryText;
 
      
     private StageSO Selected_Stage;
@@ -101,6 +105,7 @@ public class StageUIManager : MonoSingleton<StageUIManager>
     void StageInfoPannelActive(bool isActive)
     {
         StageInfoPannel.gameObject.SetActive(isActive);
+        UpdateStageName();
     }
 
     private void ClassfyArSO()
@@ -111,6 +116,18 @@ public class StageUIManager : MonoSingleton<StageUIManager>
             if (ArList.list[num].isInGameTake && !ArList.list[num].isDead) sortedArSO.Add(ArList.list[num]);
 
         UpdateStageInfoPannel_Scrollview();
+    }
+
+    void UpdateStageName()
+    {
+        StageNameText.text = Selected_Stage.stageKind switch
+        {
+            eStageState.Battle => "배틀 스테이지",
+            eStageState.Shop => "상점 스테이지",
+            eStageState.Event => "이벤트 스테이지",
+            eStageState.Boss => "보스 스테이지",
+            _ => "배틀 스테이지",
+        };
     }
 
     void UpdateStageInfoPannel_Scrollview()
