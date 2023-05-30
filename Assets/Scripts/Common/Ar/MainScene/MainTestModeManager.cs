@@ -179,7 +179,6 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
 
     public void ResetSellect()
     {
-        sellectPlayer = null;
         joystick.joystickType = JoystickType.None;
     }
 }
