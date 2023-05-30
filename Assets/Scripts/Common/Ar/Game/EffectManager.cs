@@ -27,7 +27,17 @@ public class EffectManager : MonoSingleton<EffectManager>
     {
         var particle = effects[(int)num].GetComponentInChildren<ParticleSystem>();
         var ptMain = particle.main;
-        ptMain.startRotation = Mathf.Atan2(angle.y, angle.x);
+        var pAngle = Mathf.Atan2(angle.y, angle.x);
+        if (pAngle > -1.5f && pAngle < 1.5f)
+        {
+            particle.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            particle.transform.localScale = new Vector3(1, -1, 1);
+            pAngle *= -1;
+        }
+        ptMain.startRotation = pAngle;
         var effect = Instantiate(particle.transform.parent.gameObject, pos, Quaternion.Euler(0, 0, 0));
 
         return effect;
