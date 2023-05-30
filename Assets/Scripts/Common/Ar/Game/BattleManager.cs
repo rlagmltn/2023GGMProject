@@ -16,7 +16,7 @@ public class BattleManager : MonoSingleton<BattleManager>
 
     private void Start()
     {
-        bumpAudio = SoundManager.Instance.GetOrAddAudioClips("Bump/bump (13)", Sound.EFFECT);
+        bumpAudio = SoundManager.Instance.GetOrAddAudioClips("Bump/bump (4)", Sound.EFFECT);
     }
 
     public void SettingAr(Ar ar)

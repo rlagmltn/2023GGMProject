@@ -8,7 +8,7 @@ public class ButtonSoundAdder : MonoBehaviour
     [SerializeField] Button[] buttonsInScene;
     private void Start()
     {
-        AudioClip clip = SoundManager.Instance.GetOrAddAudioClips("click/btn (16)", Sound.EFFECT);
+        AudioClip clip = SoundManager.Instance.GetOrAddAudioClips("click/btn (18)", Sound.EFFECT);
 
         buttonsInScene = FindObjectsOfType<Button>(true);
 
