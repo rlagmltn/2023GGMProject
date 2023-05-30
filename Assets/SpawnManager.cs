@@ -22,6 +22,7 @@ public class SpawnManager : MonoBehaviour
     private void Summon()
     {
         var map = Instantiate(battleMapSO.Map);
+        summonTrs = battleMapSO.Map.transform.GetChild(2).GetComponentsInChildren<Transform>();
         
         map.transform.position = new Vector3(0, 0, 0);
         foreach(EnemyCount enemy in battleMapSO.Enemies)
@@ -42,7 +43,7 @@ public class SpawnManager : MonoBehaviour
     {
         List<int> numbers = new List<int>();
 
-        for (int i = 0; i < a; i++)
+        for (int i = 1; i < a; i++)
         {
             numbers.Add(i);
         }

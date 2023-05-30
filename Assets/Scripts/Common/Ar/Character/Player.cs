@@ -225,6 +225,13 @@ public class Player : Ar
             skillCooltime += itemSlots[num].SkillCoolDown;
         }
 
+        UnActiveEvent();
+        
+        DeadCheck();
+    }
+
+    public void UnActiveEvent()
+    {
         for (int num = 0; num < TAI.Count; num++)
         {
             TAI[num].Info.GetPlayer(this);
@@ -284,7 +291,6 @@ public class Player : Ar
                     break;
             }
         }
-        DeadCheck();
     }
 
     public void DragBegin(JoystickType joystickType)

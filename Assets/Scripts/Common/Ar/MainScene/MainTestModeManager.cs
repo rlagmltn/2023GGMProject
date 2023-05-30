@@ -25,8 +25,8 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
 
     private GameObject attackAct;
     private Transform testBtnSlotParent;
-    private Player testPlayer;
-    private Stat testPleyerStat;
+    [SerializeField] private Player testPlayer;
+    private Stat testPlayerStat;
     private Enemy dummy;
     public Player TestPlayer { get { return testPlayer; } }
 
@@ -61,6 +61,11 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         }
     }
 
+    private void Update()
+    {
+        testPlayer?.CountCooltime();
+    }
+
     //public void ToggleSellectArPanel()
     //{
     //    testBtnSlotParent.gameObject.SetActive(!testBtnSlotParent.gameObject.activeSelf);
@@ -73,7 +78,6 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         {
             testPlayer.UnArmed();
             for (int i = 0; i < 3; i++) armedItems[i].UnSetItem();
-            testPlayer.so.E_Item.itmeSO = new ItemSO[3];
             testPlayer.isMainScene = false;
             testPlayer.gameObject.SetActive(false);
         }
@@ -81,9 +85,9 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         if (player != null)
         {
             sellectPlayer.GetAr(player.so);
-            testPleyerStat = testPlayer.stat;
+            testPlayerStat = testPlayer.stat;
         }
-        else testPleyerStat = new Stat();
+        else testPlayerStat = new Stat();
         UpdateStatText();
     }
 
@@ -95,7 +99,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
             if (slot.itemSO == null)
             {
                 slot.GetItem(item);
-                testPleyerStat += item.stat;
+                testPlayerStat += item.stat;
                 UpdateStatText();
                 break;
             }
@@ -104,13 +108,14 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
 
     public void UnArmedItem(ItemSO item)
     {
-        testPleyerStat -= item.stat;
-        testPlayer.UnArmed();
+        testPlayerStat -= item.stat;
+        testPlayer.UnActiveEvent();
         UpdateStatText();
     }
 
     public void SummonPlayer()
     {
+        if (testPlayerStat.HP <= 0) return;
         testPlayer.gameObject.SetActive(true);
         testPlayer.transform.position = Vector3.zero;
         testPlayer.isMainScene = true;
@@ -168,13 +173,13 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
 
     private void UpdateStatText()
     {
-        statTexts[0].SetText(testPleyerStat.MaxHP.ToString());
-        statTexts[1].SetText(testPleyerStat.MaxSP.ToString());
-        statTexts[2].SetText(testPleyerStat.ATK.ToString());
-        statTexts[3].SetText(testPleyerStat.SATK.ToString());
-        statTexts[4].SetText(testPleyerStat.CriPer.ToString());
-        statTexts[5].SetText(testPleyerStat.CriDmg.ToString());
-        statTexts[6].SetText(testPleyerStat.WEIGHT.ToString());
+        statTexts[0].SetText(testPlayerStat.MaxHP.ToString());
+        statTexts[1].SetText(testPlayerStat.MaxSP.ToString());
+        statTexts[2].SetText(testPlayerStat.ATK.ToString());
+        statTexts[3].SetText(testPlayerStat.SATK.ToString());
+        statTexts[4].SetText(testPlayerStat.CriPer.ToString());
+        statTexts[5].SetText(testPlayerStat.CriDmg.ToString());
+        statTexts[6].SetText(testPlayerStat.WEIGHT.ToString());
     }
 
     public void ResetSellect()
