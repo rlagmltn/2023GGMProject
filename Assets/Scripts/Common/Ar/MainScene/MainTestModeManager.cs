@@ -25,20 +25,23 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
 
     private GameObject attackAct;
     private Transform testBtnSlotParent;
-    [SerializeField] private Player testPlayer;
+    private Player testPlayer;
     private Stat testPlayerStat;
     private Enemy dummy;
     public Player TestPlayer { get { return testPlayer; } }
 
+    private Player startPlayer;
+
     private void Start()
     {
         testBtnSlotParent = testBtnSlot.parent.parent.parent;
-        MakeArTestSlot();
         joystick.gameObject.SetActive(false);
         attackAct = actSellect.transform.GetChild(1).gameObject;
         actSellect.SetActive(false);
         dummy = Instantiate(pfDummy, new Vector3(5, 0), Quaternion.identity);
         GoldManager.Instance.ResetGold();
+        SoundManager.Instance.Play(SoundManager.Instance.GetOrAddAudioClips("BackGroundMusic/SampleBGM", Sound.BGM), Sound.BGM);
+        MakeArTestSlot();
     }
 
     private void MakeArTestSlot()
@@ -48,6 +51,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
             var instance = Instantiate(pfMainTestSlot, testBtnSlot);
             instance.SetSO(so);
             so.E_Item.itmeSO = new ItemSO[3];
+            if (startPlayer == null) startPlayer = instance.Player;
         }
         foreach (ItemSO so in itemDB.items)
         {
@@ -64,6 +68,11 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
     private void Update()
     {
         testPlayer?.CountCooltime();
+        if (testPlayer == null)
+        {
+            SellectPlayer(startPlayer);
+            SummonPlayer();
+        }
     }
 
     //public void ToggleSellectArPanel()
@@ -78,16 +87,19 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         {
             testPlayer.UnArmed();
             for (int i = 0; i < 3; i++) armedItems[i].UnSetItem();
-            testPlayer.isMainScene = false;
-            testPlayer.gameObject.SetActive(false);
         }
-        testPlayer = player;
+
         if (player != null)
         {
+            if (testPlayer != null)
+            {
+                testPlayer.isMainScene = false;
+                testPlayer.gameObject.SetActive(false);
+            }
+            testPlayer = player;
             sellectPlayer.GetAr(player.so);
             testPlayerStat = testPlayer.stat;
         }
-        else testPlayerStat = new Stat();
         UpdateStatText();
     }
 

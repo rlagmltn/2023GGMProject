@@ -14,7 +14,7 @@ public class ButtonSoundAdder : MonoBehaviour
 
         foreach(Button btn in buttonsInScene)
         {
-            btn.onClick.AddListener(() => { SoundManager.Instance.Play(clip, Sound.EFFECT); });
+            btn.onClick.AddListener(() => { SoundManager.Instance.Play(clip, Sound.UI); });
         }
     }
 }
