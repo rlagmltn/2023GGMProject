@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class BanditBoss : Enemy
 {
-    private int adSp;
-    private float adWeight;
+    private const float defaultWeight = 10f;
     
     private bool pHeavyArmor;
     private int pOverload;
 
     private int passiveCnt;
 
-    private int overloadSp;
-    private float overloadWeight;
-
     private bool pShield;
     private int shieldCnt;
+
+    [SerializeField] private Transform banditWarrior;
 
     protected override void Start()
     {
@@ -25,14 +23,23 @@ public class BanditBoss : Enemy
 
     public override void StatReset()
     {
-        adSp = 0;
-        adWeight = 0f;
         pHeavyArmor = false;
         pShield = false;
         pOverload = 0;
         passiveCnt = 4;
-        overloadSp = 0;
-        overloadWeight = 0f;
+        stat.WEIGHT = defaultWeight;
+        stat.MaxSP = 25;
+        stat.MaxHP = 35;
+        stat.ATK = 7;
+        stat.CriPer = 15;
+        stat.CriDmg = 1.5f;
+
+        base.StatReset();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
         
     }
 
@@ -43,57 +50,96 @@ public class BanditBoss : Enemy
             pOverload--;
             if(pOverload == 0)
             {
-                stat.SP = overloadSp;
-                stat.WEIGHT = overloadWeight;
-                overloadSp = 0;
-                overloadWeight = 0f;
+                stat.SP = stat.MaxSP;
+                stat.WEIGHT = defaultWeight;
             }
         }
-        else if(shieldCnt > 0)
+
+        if(shieldCnt > 0)
         {
             shieldCnt--;
             stat.HP = Mathf.Min(stat.MaxHP, stat.HP + 10);
             stat.ATK += 3;
             pShield = true;
+
         }
-        else
+        
+        passiveCnt--;
+        if(stat.SP == 0)
         {
-            passiveCnt--;
-            if(pHeavyArmor)
-            {
-                HeavyArmor();
-            }
-            if(passiveCnt == 0)
-            {
-                stat.SP += 7;
-                adSp += 7;
-                stat.WEIGHT += adSp / 5 * 2;
-                adWeight += adSp / 5 * 2;
-            }
+            pHeavyArmor = false;
         }
+
+        if(pHeavyArmor)
+        {
+            HeavyArmor();
+        }
+
+        if(passiveCnt == 0)
+        {
+            stat.SP += 7;
+        }
+        
+        stat.WEIGHT = defaultWeight + Mathf.Max(stat.SP - stat.MaxSP, 0);
+        
     }
 
     public void SkillHeavyArmor()
     {
         pHeavyArmor = true;
-        stat.SP -= adSp;
-        stat.WEIGHT -= adWeight;
-        adSp = 0;
-        adWeight = 0f;
+        if(stat.SP > stat.MaxSP)
+        {
+            stat.SP = stat.MaxSP;
+        }
+        stat.WEIGHT = defaultWeight;
+        
+
     }
 
     private void HeavyArmor()
     {
         stat.SP += 3;
-        adSp += 3;
     }
 
     public void SkillOverload()
     {
         pOverload = 2;
-        overloadSp = stat.SP;
-        overloadWeight = stat.WEIGHT;
         stat.SP = 25;
+    }
+
+    public void SkillSpawn()
+    {
+        for(int i = 0; i<2; i++)
+        {
+            Vector2 pos = new Vector2(transform.position.x + Random.Range(-5f, 5f), transform.position.y + Random.Range(-5f, 5f));
+            Instantiate(banditWarrior, pos, Quaternion.identity);
+        }
+        stat.SP = Mathf.Max(0, stat.SP - 10);
+    }
+
+    public void SkillShield()
+    {
+        stat.SP = 10;
+        shieldCnt = 1;
+    }
+
+    public void SkillBleed()
+    {
+        Player[] players = FindObjectsOfType<Player>();
+        if (players.Length == 0) return;
+
+        if (players.Length == 1)
+        {
+            players[0].stat.HP = Mathf.Max(0, players[0].stat.HP-0);
+            players[0].stat.SP += 5;
+        }
+        else
+        {
+            players[0].stat.HP = Mathf.Max(0, players[0].stat.HP - 0);
+            players[0].stat.SP += 5;
+            players[1].stat.HP = Mathf.Max(0, players[0].stat.HP - 0);
+            players[1].stat.SP += 5;
+        }
     }
 
     public bool CanMove()
@@ -101,12 +147,5 @@ public class BanditBoss : Enemy
         if (pOverload > 0 || shieldCnt > 0) return false;
 
         return true;
-    }
-
-    public void SkillShield()
-    {
-        overloadSp = stat.SP;
-        stat.SP = 10;
-        shieldCnt = 1;
     }
 }

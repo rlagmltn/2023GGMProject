@@ -9,7 +9,7 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     private void Awake()
     {
-        //Init();
+        Init();
         DontDestroyOnLoad(gameObject);
     }
 
@@ -19,7 +19,7 @@ public class SoundManager : MonoSingleton<SoundManager>
         DontDestroyOnLoad(root);
 
         string[] soundNames = System.Enum.GetNames(typeof(Sound));
-        for (int i = 0; i < soundNames.Length; i++)
+        for (int i = 0; i < (int)Sound.MAXCOUNT; i++)
         {
             GameObject obj = new GameObject { name = soundNames[i] };
             audioSources[i] = obj.AddComponent<AudioSource>();
@@ -27,6 +27,7 @@ public class SoundManager : MonoSingleton<SoundManager>
         }
 
         audioSources[(int)Sound.BGM].loop = true;
+        audioSources[(int)Sound.EFFECT].loop = false;
     }
 
     public void Play(AudioClip clip, Sound sound, float pitch = 1.0f)

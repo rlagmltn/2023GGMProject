@@ -8,10 +8,15 @@ public class BattleManager : MonoSingleton<BattleManager>
     private Ar arAtk;
     private int damage;
     private CameraMove cameraMove;
-
+    private AudioClip bumpAudio;
     private void Awake()
     {
         cameraMove = FindObjectOfType<CameraMove>();
+    }
+
+    private void Start()
+    {
+        bumpAudio = SoundManager.Instance.GetOrAddAudioClips("Bump/bump (13)", Sound.EFFECT);
     }
 
     public void SettingAr(Ar ar)
@@ -25,7 +30,8 @@ public class BattleManager : MonoSingleton<BattleManager>
             arTwo = ar;
             if (arOne != null && arTwo != null)
             {
-                if(arOne.tag == arTwo.tag)
+                SoundManager.Instance.Play(bumpAudio, Sound.EFFECT);
+                if (arOne.tag == arTwo.tag)
                 {
                     Crush();
                 }
@@ -232,5 +238,10 @@ public class BattleManager : MonoSingleton<BattleManager>
         u1 += u1.normalized;
         u2 += u2.normalized;
         return (u1, u2);
+    }
+
+    public void PlayBumpSound()
+    {
+        SoundManager.Instance.Play(bumpAudio, Sound.EFFECT);
     }
 }
