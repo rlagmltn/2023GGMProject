@@ -53,7 +53,7 @@ public class CameraMove : MonoBehaviour
     private GameObject skilCoolImage;
     private TextMeshProUGUI skillCoolText;
 
-    private bool openCheck;
+    private bool openCheck = true;
     private bool attackActive;
 
     public float OrthographicSize { get { return cinemachineCam.m_Lens.OrthographicSize; } }
@@ -245,7 +245,6 @@ public class CameraMove : MonoBehaviour
         {
             isDragmode = true;
             ResetTarget();
-            attackBtn.SetActive(false);
             actSellect.Skip();
             playerController.ResetSellect();
             camTransposer.m_XDamping = 0;

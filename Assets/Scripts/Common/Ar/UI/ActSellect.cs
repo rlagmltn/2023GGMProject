@@ -17,7 +17,9 @@ public class ActSellect : MonoBehaviour
     public void Skip()
     {
         if (animator == null)
-            gameObject.SetActive(true);
+        {
+
+        }
         else
             animator.SetTrigger("Skip");
     }
@@ -25,7 +27,9 @@ public class ActSellect : MonoBehaviour
     public void Close()
     {
         if (animator == null)
-            gameObject.SetActive(true);
+        {
+
+        }
         else
             animator.SetTrigger("Close");
     }
