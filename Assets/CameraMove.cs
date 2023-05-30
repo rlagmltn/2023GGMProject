@@ -292,13 +292,13 @@ public class CameraMove : MonoBehaviour
     {
         if (sellectPlayer.currentCooltime < sellectPlayer.skillCooltime)
         {
-            skilCoolImage.SetActive(true);
-            skillCoolText.SetText((sellectPlayer.skillCooltime - sellectPlayer.currentCooltime).ToString());
+            skilCoolImage?.SetActive(true);
+            skillCoolText?.SetText((sellectPlayer.skillCooltime - sellectPlayer.currentCooltime).ToString());
         }
         else
         {
-            skilCoolImage.SetActive(false);
-            skillCoolText.SetText("");
+            skilCoolImage?.SetActive(false);
+            skillCoolText?.SetText("");
         }
     }
 }

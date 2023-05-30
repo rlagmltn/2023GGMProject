@@ -36,6 +36,7 @@ public class ArSO : ScriptableObject
         criticalStats.Reset();
         surviveStats.Reset();
         skill.Reset();
+        E_Item = new EquipItem();
     }
 }
 
@@ -166,4 +167,9 @@ public class Skill
 public class EquipItem
 {
     public ItemSO[] itmeSO = new ItemSO[3];
+
+    public EquipItem()
+    {
+        itmeSO = new ItemSO[3];
+    }
 }
