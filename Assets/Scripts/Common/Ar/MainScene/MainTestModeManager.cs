@@ -40,7 +40,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         actSellect.SetActive(false);
         dummy = Instantiate(pfDummy, new Vector3(5, 0), Quaternion.identity);
         GoldManager.Instance.ResetGold();
-        SoundManager.Instance.Play(SoundManager.Instance.GetOrAddAudioClips("BackGroundMusic/SampleBGM", Sound.BGM), Sound.BGM);
+        SoundManager.Instance.Play(SoundManager.Instance.GetOrAddAudioClips("BackGroundMusic/Main", Sound.BGM), Sound.BGM);
         MakeArTestSlot();
     }
 
