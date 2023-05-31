@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour
+public class SpawnManager : MonoSingleton<SpawnManager>
 {
     public Dictionary<ePrefabs, List<CONEntity>> _SpawnObjDic;
 
-    [SerializeField] private BattleMapSO battleMapSO;
+    public BattleMapSO battleMapSO;
 
     [SerializeField] private Transform[] summonTrs;
+
+    [SerializeField] private Reward reward;
 
     void Awake()
     {
@@ -16,6 +18,7 @@ public class SpawnManager : MonoBehaviour
 
         Summon();
 
+        RewardSetting();
         //_SpawnObjDic[ePrefabs.EnemyObj1][0].SetActive(true);
     }
 
@@ -37,6 +40,11 @@ public class SpawnManager : MonoBehaviour
                 newEnemy.transform.position = summonTrs[numbers[i]].position;
             }
         }
+    }
+
+    private void RewardSetting()
+    {
+
     }
 
     private int[] GenerateRandomNumbers(int a, int b)

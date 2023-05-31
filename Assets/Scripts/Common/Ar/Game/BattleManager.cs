@@ -117,8 +117,9 @@ public class BattleManager : MonoSingleton<BattleManager>
         {
             if (criChance < attacker.stat.CriPer)
             {
-                isDead = defender.Hit(attacker.stat.ATK + (int)((float)attacker.stat.ATK / 100 * attacker.stat.CriDmg));
-                Debug.Log("Å©¸®ÅÍÁü");
+                var criDam = ((float)attacker.stat.ATK / 100 * attacker.stat.CriDmg);
+                isDead = defender.Hit(attacker.stat.ATK + (int)criDam);
+                Debug.Log(criDam);
             }
             else
                 isDead = defender.Hit(attacker.stat.ATK);
