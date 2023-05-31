@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     public List<QuickSlot> quickSlotHolder = new List<QuickSlot>();
     private CameraMove cameraMove;
 
+    private AudioClip bgm;
+
     void Awake()
     {
         IsBatchMode = true;
@@ -39,6 +41,8 @@ public class PlayerController : MonoBehaviour
     {
         map = FindObjectOfType<Stage>().transform;
         batchZone = map.GetChild(0).Find("Batch").gameObject;
+        SoundManager.Instance.Play(SoundManager.Instance.GetOrAddAudioClips("BackGroundMusic/Battle", Sound.BGM), Sound.BGM);
+
     }
 
     private void SummonPlayers()

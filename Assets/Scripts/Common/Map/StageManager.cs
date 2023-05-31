@@ -39,6 +39,7 @@ public class StageManager : MonoSingleton<StageManager>
         StageCheck();
         FindNextStage();
         StageDisable();
+        PlayBGM();
     }
 
     void StageCheck()
@@ -83,6 +84,11 @@ public class StageManager : MonoSingleton<StageManager>
 
         //여기서 스테이지so홀더의 이미지 바꿔주는 함수 실행
         for (int num = 0; num < AllButtons.Count; num++) AllButtons[num].GetComponent<StageSOHolder>().ChangeImage();
+    }
+
+    void PlayBGM()
+    {
+        SoundManager.Instance.Play(SoundManager.Instance.GetOrAddAudioClips("BackGroundMusic/EventStageBGM_1", Sound.BGM), Sound.BGM);
     }
 
     void StageKindChange(eStageState State, int StateNum)
