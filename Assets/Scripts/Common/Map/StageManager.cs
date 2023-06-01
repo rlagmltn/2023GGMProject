@@ -213,8 +213,7 @@ public class StageManager : MonoSingleton<StageManager>
         Global.EnterStage = Selected_Stage;
         //맵 로딩 해줘야함
         Global.Map = Selected_Stage.map;
-        //지금은 임시로 스테이지 클리어임
-        //StageClear();
+        //지금은 임시로 스테이지 정해둠
         battleMapHolder.map = Selected_Stage.battleMapSO;
 
         UnityAction Action = Selected_Stage.stageKind switch
