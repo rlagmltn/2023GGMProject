@@ -49,7 +49,8 @@ public class ShopBuySlot : MonoBehaviour
 
     internal void Buy() 
     {
-        //돈 있는지 확인 //돈없으면 리턴 //상현이가 해주겠지?
+        //돈 있는지 확인 //돈없으면 리턴 //상현이가 해주겠지? //에반데
+        if (!GoldManager.Instance.RemoveGold(price)) return;
         if (!GameShop_Inventory.Instance.CanAddItem()) return;
         GameShop_Inventory.Instance.SetItem(item as ItemSO);
         gameObject.SetActive(false);
