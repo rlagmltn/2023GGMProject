@@ -78,7 +78,10 @@ public class StageManager : MonoSingleton<StageManager>
         int shopNum = stageList.stageList.Count / 9;
 
         for (int num = 0; num < stageList.stageList.Count - 1; num++)
+        {
             stageList.stageList[num].stageKind = eStageState.Battle;
+            stageList.stageList[num].battleMapSO = battleMapHolder.map;
+        }
 
         StageKindChange(eStageState.Event, eventNum);
         StageKindChange(eStageState.Shop, shopNum);
