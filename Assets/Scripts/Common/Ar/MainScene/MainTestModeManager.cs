@@ -26,19 +26,22 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
     private GameObject attackAct;
     private Transform testBtnSlotParent;
     private Player testPlayer;
-    private Stat testPleyerStat;
+    private Stat testPlayerStat;
     private Enemy dummy;
     public Player TestPlayer { get { return testPlayer; } }
+
+    private Player startPlayer;
 
     private void Start()
     {
         testBtnSlotParent = testBtnSlot.parent.parent.parent;
-        MakeArTestSlot();
         joystick.gameObject.SetActive(false);
         attackAct = actSellect.transform.GetChild(1).gameObject;
         actSellect.SetActive(false);
         dummy = Instantiate(pfDummy, new Vector3(5, 0), Quaternion.identity);
         GoldManager.Instance.ResetGold();
+        SoundManager.Instance.Play(SoundManager.Instance.GetOrAddAudioClips("BackGroundMusic/Main", Sound.BGM), Sound.BGM);
+        MakeArTestSlot();
     }
 
     private void MakeArTestSlot()
@@ -48,6 +51,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
             var instance = Instantiate(pfMainTestSlot, testBtnSlot);
             instance.SetSO(so);
             so.E_Item.itmeSO = new ItemSO[3];
+            if (startPlayer == null) startPlayer = instance.Player;
         }
         foreach (ItemSO so in itemDB.items)
         {
@@ -58,6 +62,16 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         for(int i=0; i<21; i++)
         {
             itemInven.ResetInven(emptyItem);
+        }
+    }
+
+    private void Update()
+    {
+        testPlayer?.CountCooltime();
+        if (testPlayer == null)
+        {
+            SellectPlayer(startPlayer);
+            SummonPlayer();
         }
     }
 
@@ -73,17 +87,19 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         {
             testPlayer.UnArmed();
             for (int i = 0; i < 3; i++) armedItems[i].UnSetItem();
-            testPlayer.so.E_Item.itmeSO = new ItemSO[3];
-            testPlayer.isMainScene = false;
-            testPlayer.gameObject.SetActive(false);
         }
-        testPlayer = player;
+
         if (player != null)
         {
+            if (testPlayer != null)
+            {
+                testPlayer.isMainScene = false;
+                testPlayer.gameObject.SetActive(false);
+            }
+            testPlayer = player;
             sellectPlayer.GetAr(player.so);
-            testPleyerStat = testPlayer.stat;
+            testPlayerStat = testPlayer.stat;
         }
-        else testPleyerStat = new Stat();
         UpdateStatText();
     }
 
@@ -95,7 +111,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
             if (slot.itemSO == null)
             {
                 slot.GetItem(item);
-                testPleyerStat += item.stat;
+                testPlayerStat += item.stat;
                 UpdateStatText();
                 break;
             }
@@ -104,13 +120,14 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
 
     public void UnArmedItem(ItemSO item)
     {
-        testPleyerStat -= item.stat;
-        testPlayer.UnArmed();
+        testPlayerStat -= item.stat;
+        testPlayer.UnActiveEvent();
         UpdateStatText();
     }
 
     public void SummonPlayer()
     {
+        if (testPlayerStat.HP <= 0) return;
         testPlayer.gameObject.SetActive(true);
         testPlayer.transform.position = Vector3.zero;
         testPlayer.isMainScene = true;
@@ -152,7 +169,6 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         testPlayer.DisableRanges();
         if (!canShoot) return;
         testPlayer.DragEnd(joystick.joystickType, power, angle);
-        ResetSellect();
         testPlayer.CountCooltime();
         cameraMove.SetSkillBtnText(testPlayer);
     }
@@ -168,17 +184,12 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
 
     private void UpdateStatText()
     {
-        statTexts[0].SetText(testPleyerStat.MaxHP.ToString());
-        statTexts[1].SetText(testPleyerStat.MaxSP.ToString());
-        statTexts[2].SetText(testPleyerStat.ATK.ToString());
-        statTexts[3].SetText(testPleyerStat.SATK.ToString());
-        statTexts[4].SetText(testPleyerStat.CriPer.ToString());
-        statTexts[5].SetText(testPleyerStat.CriDmg.ToString());
-        statTexts[6].SetText(testPleyerStat.WEIGHT.ToString());
-    }
-
-    public void ResetSellect()
-    {
-        joystick.joystickType = JoystickType.None;
+        statTexts[0].SetText(testPlayerStat.MaxHP.ToString());
+        statTexts[1].SetText(testPlayerStat.MaxSP.ToString());
+        statTexts[2].SetText(testPlayerStat.ATK.ToString());
+        statTexts[3].SetText(testPlayerStat.SATK.ToString());
+        statTexts[4].SetText(testPlayerStat.CriPer.ToString());
+        statTexts[5].SetText(testPlayerStat.CriDmg.ToString());
+        statTexts[6].SetText(testPlayerStat.WEIGHT.ToString());
     }
 }

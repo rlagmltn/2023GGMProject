@@ -10,6 +10,7 @@ public class GoldReward : MonoBehaviour
     [SerializeField] GameObject okBtn;
     [SerializeField] TextMeshProUGUI tmp;
     [SerializeField] GameObject WinPanel;
+    [SerializeField] GameObject BossWinPanel;
 
     private void OnEnable()
     {
@@ -50,7 +51,14 @@ public class GoldReward : MonoBehaviour
     public void ActiveNextPanel()
     {
         GoldManager.Instance.AddGold(getCoin);
-        WinPanel.SetActive(true);
+        if(SpawnManager.Instance.battleMapSO.IsBossMap)
+        {
+            BossWinPanel.SetActive(true);
+        }
+        else
+        {
+            WinPanel.SetActive(true);
+        }
         gameObject.SetActive(false);
     }
 }

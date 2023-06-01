@@ -67,6 +67,5 @@ public class Assassin : Player
         var bullet = Instantiate(kunai, transform.position, Quaternion.Euler(0, 0, zAngle - 180));
         bullet.SetDamage(stat.SATK);
         cameraMove.MovetoTarget(bullet.transform);
-        cameraMove.Shake();
     }
 }

@@ -60,7 +60,9 @@ public class Priest : Player
         base.Skill(angle);
         isUsingSkill = true;
         rigid.velocity = -(angle * power) * pushPower / (1 + stat.WEIGHT * 0.1f);
-        cameraMove.Shake();
+        EffectManager.Instance.InstantiateEffect_P(Effect.DASH, transform.position, new Vector2(-angle.x, angle.y));
+        if (angle.x < 0) character.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
+        else if (angle.x > 0) character.localScale = new Vector3(0.5f, 0.5f, 0.5f);
     }
 
     protected override void Passive()

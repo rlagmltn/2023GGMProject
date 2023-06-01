@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc33080b8fafa27479602cce7b7008dd, type: 3}
+  m_Name: Warrior
+  m_EditorClassIdentifier: 
+  characterInfo:
+    image: {fileID: 21300000, guid: 6be4940ec78293443a5c9d41fd58e9e5, type: 3}
+    nameString: "\uC804\uC0AC"
+    Rarity: 0
+    arClass: 3
+    Level: 1
+  attackStats:
+    baseAtk: 6
+    currentAtk: 6
+    baseSkillAtk: 6
+    currentSkillAtk: 6
+  criticalStats:
+    baseCriticalPer: 10
+    currentCriticalPer: 10
+    baseCriticalDamage: 50
+    currentCriticalDamage: 50
+  surviveStats:
+    baseHP: 16
+    MaxHP: 16
+    currentHP: 8
+    baseShield: 4
+    MaxShield: 4
+    currentShield: 4
+    baseWeight: 5
+    currentWeight: 5
+  skill:
+    skillImage: {fileID: 21300000, guid: 3494dc956dfd7174abc07060940a2848, type: 3}
+    skillName: "\uAC15\uD0C0"
+    skillCoolTime: 9
+    startskillCoolTime: 0
+    MaxSkillCoolTime: 9
+    currentSkillCoolTime: 0
+    SkillSummary: "\uAD11\uBC94\uC704\uD55C \uBC94\uC704\uC5D0 \uAC15\uB825\uD06C\uD55C
+      \uB370\uBBF8\uC9C0\uB97C \uC900\uB2E4"
+  E_Item:
+    itmeSO:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  isTake: 1
+  isUse: 0
+  isInGameTake: 1
+  isDead: 0
+  ArData: {fileID: 1064441778921728902, guid: 4272f0564a57ad94e88029d7e9e0918d, type: 3}
+  Summary: "\uC9C0\uC815\uB41C \uBC29\uD5A5\uC73C\uB85C \uBC94\uC704 \uACF5\uACA9\uC744
+    \uAC00\uD55C\uB2E4"

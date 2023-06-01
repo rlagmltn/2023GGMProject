@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject batchUI;
     [SerializeField] JoyStick joystick;
     [SerializeField] TextMeshProUGUI batchUnitText;
+    [SerializeField] Transform sellectMarker;
 
     private Transform map;
     private GameObject batchZone;
@@ -27,6 +28,8 @@ public class PlayerController : MonoBehaviour
     public List<QuickSlot> quickSlotHolder = new List<QuickSlot>();
     private CameraMove cameraMove;
 
+    private AudioClip bgm;
+
     void Awake()
     {
         IsBatchMode = true;
@@ -38,6 +41,8 @@ public class PlayerController : MonoBehaviour
     {
         map = FindObjectOfType<Stage>().transform;
         batchZone = map.GetChild(0).Find("Batch").gameObject;
+        SoundManager.Instance.Play(SoundManager.Instance.GetOrAddAudioClips("BackGroundMusic/Battle", Sound.BGM), Sound.BGM);
+
     }
 
     private void SummonPlayers()
@@ -59,6 +64,9 @@ public class PlayerController : MonoBehaviour
         if (IsBatchMode) return;
         joystick.joystickType = JoystickType.None;
         sellectPlayer = player.Player;
+        sellectMarker.gameObject.SetActive(true);
+        sellectMarker.SetParent(sellectPlayer.transform);
+        sellectMarker.position = sellectPlayer.transform.position + new Vector3(0, -0.8f, 0);
         cameraMove.MovetoTarget(sellectPlayer);
         DisableQuickSlots();
         cameraMove.SetSkillBtnText(sellectPlayer);
@@ -123,6 +131,8 @@ public class PlayerController : MonoBehaviour
     {
         sellectPlayer = null;
         joystick.joystickType = JoystickType.None;
+        sellectMarker.SetParent(null);
+        sellectMarker.gameObject.SetActive(false);
         DisableQuickSlots();
     }
 

@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundManager : MonoSingleton<SoundManager>
 {
+    [SerializeField] AudioMixerGroup bgm;
+    [SerializeField] AudioMixerGroup effect;
+    [SerializeField] AudioMixerGroup ui;
     public AudioSource[] audioSources = new AudioSource[(int)Sound.MAXCOUNT];
     Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
 
@@ -27,7 +31,11 @@ public class SoundManager : MonoSingleton<SoundManager>
         }
 
         audioSources[(int)Sound.BGM].loop = true;
+        audioSources[(int)Sound.BGM].outputAudioMixerGroup = bgm;
         audioSources[(int)Sound.EFFECT].loop = false;
+        audioSources[(int)Sound.EFFECT].outputAudioMixerGroup = effect;
+        audioSources[(int)Sound.UI].loop = false;
+        audioSources[(int)Sound.UI].outputAudioMixerGroup = ui;
     }
 
     public void Play(AudioClip clip, Sound sound, float pitch = 1.0f)

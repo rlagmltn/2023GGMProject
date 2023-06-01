@@ -23,7 +23,7 @@ public class Player : Ar
     public float PushPower { get { return pushPower; } }
 
 
-    public CircleCollider2D Collide { get; set; }
+    public CapsuleCollider2D Collide { get; set; }
 
     public QuickSlot slot { get; private set; }
 
@@ -225,6 +225,13 @@ public class Player : Ar
             skillCooltime += itemSlots[num].SkillCoolDown;
         }
 
+        UnActiveEvent();
+        
+        DeadCheck();
+    }
+
+    public void UnActiveEvent()
+    {
         for (int num = 0; num < TAI.Count; num++)
         {
             TAI[num].Info.GetPlayer(this);
@@ -284,7 +291,6 @@ public class Player : Ar
                     break;
             }
         }
-        DeadCheck();
     }
 
     public void DragBegin(JoystickType joystickType)
@@ -464,7 +470,7 @@ public class Player : Ar
         this.slot = slot;
         OnBattleDie.AddListener(()=>this.slot.SetSlotActive(false));
         OnOutDie.AddListener(()=>this.slot.SetSlotActive(false));
-        Collide = GetComponent<CircleCollider2D>();
+        Collide = GetComponent<CapsuleCollider2D>();
     }
 
     public void CountCooltime()

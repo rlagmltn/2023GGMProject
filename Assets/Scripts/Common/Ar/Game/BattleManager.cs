@@ -16,7 +16,7 @@ public class BattleManager : MonoSingleton<BattleManager>
 
     private void Start()
     {
-        bumpAudio = SoundManager.Instance.GetOrAddAudioClips("Bump/bump (13)", Sound.EFFECT);
+        bumpAudio = SoundManager.Instance.GetOrAddAudioClips("Bump/bump (4)", Sound.EFFECT);
     }
 
     public void SettingAr(Ar ar)
@@ -116,7 +116,11 @@ public class BattleManager : MonoSingleton<BattleManager>
         if(!attacker.isRangeCharacter)
         {
             if (criChance < attacker.stat.CriPer)
-                isDead = defender.Hit(attacker.stat.ATK + (attacker.stat.ATK / 100) * attacker.stat.CriPer);
+            {
+                var criDam = ((float)attacker.stat.ATK / 100 * attacker.stat.CriDmg);
+                isDead = defender.Hit(attacker.stat.ATK + (int)criDam);
+                Debug.Log(criDam);
+            }
             else
                 isDead = defender.Hit(attacker.stat.ATK);
         }

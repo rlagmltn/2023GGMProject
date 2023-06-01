@@ -8,6 +8,7 @@ public class MainTestSlot : MonoBehaviour
     public ArSO arSo { get; set; }
     public ItemSO itemSO { get; set; }
     private Player player;
+    public Player Player { get { return player; } }
     private Button button;
     private Image image;
     [SerializeField] Image background;
@@ -54,6 +55,7 @@ public class MainTestSlot : MonoBehaviour
 
     public void GetAr(ArSO so)
     {
+        if (button == null) Init();
         arSo = so;
         image.sprite = arSo.characterInfo.Image;
         background.sprite = BackGroundHolder.Instance.BackGround(so.characterInfo.rarity);
@@ -61,6 +63,7 @@ public class MainTestSlot : MonoBehaviour
 
     public void GetItem(ItemSO so)
     {
+        if (button == null) Init();
         itemSO = so;
         image.sprite = itemSO.itemIcon;
         background.sprite = BackGroundHolder.Instance.BackGround(so.itemRarity);
@@ -68,10 +71,7 @@ public class MainTestSlot : MonoBehaviour
 
     public void UnSetAr()
     {
-        arSo = null;
-        image.sprite = BackGroundHolder.Instance.NullImage;
         MainTestModeManager.Instance.SellectPlayer();
-        background.sprite = BackGroundHolder.Instance.BackGround(ArRarity.NORMAL);
     }
 
     public void UnSetItem()

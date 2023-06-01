@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour
+public class SpawnManager : MonoSingleton<SpawnManager>
 {
     public Dictionary<ePrefabs, List<CONEntity>> _SpawnObjDic;
 
-    [SerializeField] private BattleMapSO battleMapSO;
+    public BattleMapSO battleMapSO;
 
     [SerializeField] private Transform[] summonTrs;
+
+    [SerializeField] private Reward reward;
 
     void Awake()
     {
@@ -16,12 +18,14 @@ public class SpawnManager : MonoBehaviour
 
         Summon();
 
+        RewardSetting();
         //_SpawnObjDic[ePrefabs.EnemyObj1][0].SetActive(true);
     }
 
     private void Summon()
     {
         var map = Instantiate(battleMapSO.Map);
+        summonTrs = battleMapSO.Map.transform.GetChild(2).GetComponentsInChildren<Transform>();
         
         map.transform.position = new Vector3(0, 0, 0);
         foreach(EnemyCount enemy in battleMapSO.Enemies)
@@ -38,11 +42,16 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    private void RewardSetting()
+    {
+
+    }
+
     private int[] GenerateRandomNumbers(int a, int b)
     {
         List<int> numbers = new List<int>();
 
-        for (int i = 0; i < a; i++)
+        for (int i = 1; i < a; i++)
         {
             numbers.Add(i);
         }
