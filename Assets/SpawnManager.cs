@@ -6,19 +6,18 @@ public class SpawnManager : MonoSingleton<SpawnManager>
 {
     public Dictionary<ePrefabs, List<CONEntity>> _SpawnObjDic;
 
+    [SerializeField] BattleMapHolder battleMapHolder;
     public BattleMapSO battleMapSO;
 
     [SerializeField] private Transform[] summonTrs;
 
-    [SerializeField] private Reward reward;
-
     void Awake()
     {
         _SpawnObjDic = new Dictionary<ePrefabs, List<CONEntity>>();
+        battleMapSO = battleMapHolder.map;
 
         Summon();
 
-        RewardSetting();
         //_SpawnObjDic[ePrefabs.EnemyObj1][0].SetActive(true);
     }
 
@@ -40,11 +39,6 @@ public class SpawnManager : MonoSingleton<SpawnManager>
                 newEnemy.transform.position = summonTrs[numbers[i]].position;
             }
         }
-    }
-
-    private void RewardSetting()
-    {
-
     }
 
     private int[] GenerateRandomNumbers(int a, int b)

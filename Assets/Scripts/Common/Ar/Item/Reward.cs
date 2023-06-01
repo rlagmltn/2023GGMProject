@@ -15,9 +15,9 @@ public class Reward : Shop
     [SerializeField] private Transform TakeHealPannel;
 
     [SerializeField] private Transform BossWinPanel;
-    //[SerializeField] private Transform TakeArPannel;
-    //[SerializeField] private Transform TakeItemPannel;
-    //[SerializeField] private Transform TakeHealPannel;
+    [SerializeField] private Transform TakeBossArPannel;
+    [SerializeField] private Transform TakeBossItemPannel;
+    [SerializeField] private Transform TakeBossHealPannel;
 
     public void TakeAr()
     {
@@ -29,6 +29,7 @@ public class Reward : Shop
         TakeArPannel.GetChild(2).GetComponent<TextMeshProUGUI>().SetText(newAr.characterInfo.Name);
 
         NomalWinPanel.gameObject.SetActive(false);
+        BossWinPanel.gameObject.SetActive(false);
     }
 
     public void TakeItem()
@@ -44,6 +45,7 @@ public class Reward : Shop
         TakeItemPannel.GetChild(3).GetComponent<TextMeshProUGUI>().SetText(newItem[0].itemExplain);
 
         NomalWinPanel.gameObject.SetActive(false);
+        BossWinPanel.gameObject.SetActive(false);
     }
 
     public void TakeHeal()
@@ -52,11 +54,13 @@ public class Reward : Shop
 
         foreach (ArSO ar in ArInventoryManager.Instance.InvenList)
         {
+            if (ar.isDead) continue;
             ar.ArData.so.surviveStats.currentHP = Mathf.Clamp(ar.ArData.so.surviveStats.currentHP + 
                 (ar.ArData.so.surviveStats.MaxHP / 10 * 3), 0, ar.ArData.so.surviveStats.MaxHP);
         }
 
         NomalWinPanel.gameObject.SetActive(false);
+        BossWinPanel.gameObject.SetActive(false);
     }
 
     public void StageClear() //이거 나중에 버튼눌렀을때 실행되도록 바꿔야함
@@ -71,5 +75,19 @@ public class Reward : Shop
         Global.isEventBattle = false;
         SceneMgr.Instance.LoadScene(eSceneName.Event);
         return;
+    }
+
+    public void BossHeal()
+    {
+        TakeBossHealPannel.gameObject.SetActive(false);
+
+        foreach (ArSO ar in ArInventoryManager.Instance.InvenList)
+        {
+            if (ar.isDead) continue;
+            ar.ArData.so.surviveStats.currentHP = ar.ArData.so.surviveStats.MaxHP;
+        }
+
+        TakeBossItemPannel.gameObject.SetActive(true);
+        TakeBossArPannel.gameObject.SetActive(true);
     }
 }

@@ -19,6 +19,8 @@ public class StageSO : ScriptableObject
     public bool IsCanEnter;
 
     public Transform map;
+
+    public BattleMapSO battleMapSO;
 }
 
 [System.Serializable]

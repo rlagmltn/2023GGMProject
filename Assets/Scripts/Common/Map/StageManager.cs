@@ -24,6 +24,8 @@ public class StageManager : MonoSingleton<StageManager>
     [SerializeField] private StageSOList stageList;
     [SerializeField] private Transform startStage; //그냥 아무것도 아닌 시작하는 스테이지 아마도 emptyStage가 아닐까?
 
+    [SerializeField] private BattleMapHolder battleMapHolder;
+
     public List<Transform> ClearedStages;
 
     private Transform currentStage;
@@ -210,6 +212,7 @@ public class StageManager : MonoSingleton<StageManager>
         Global.Map = Selected_Stage.map;
         //지금은 임시로 스테이지 클리어임
         //StageClear();
+        battleMapHolder.map = Selected_Stage.battleMapSO;
 
         UnityAction Action = Selected_Stage.stageKind switch
         {
