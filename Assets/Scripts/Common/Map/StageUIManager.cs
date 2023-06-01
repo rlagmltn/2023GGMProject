@@ -122,15 +122,24 @@ public class StageUIManager : MonoSingleton<StageUIManager>
     {
         StageNameText.text = Selected_Stage.stageKind switch
         {
-            eStageState.Battle => "배틀 스테이지",
+            eStageState.Battle => "전투 스테이지",
             eStageState.Shop => "상점 스테이지",
             eStageState.Event => "이벤트 스테이지",
             eStageState.Boss => "보스 스테이지",
-            _ => "배틀 스테이지",
+            _ => "전투 스테이지",
+        };
+
+        StageSummaryText.text = Selected_Stage.stageKind switch
+        {
+            eStageState.Battle => "전투 스테이지이다",
+            eStageState.Shop => "상점 스테이지이다",
+            eStageState.Event => "이벤트 스테이지이다",
+            eStageState.Boss => "보스 스테이지이다",
+            _ => "전투 스테이지이다",
         };
     }
 
-    void UpdateStageInfoPannel_Scrollview()
+    void UpdateStageInfoPannel_Scrollview()     
     {
         for(int num = 0; num < CharacterButtons.Count; num++)
         {

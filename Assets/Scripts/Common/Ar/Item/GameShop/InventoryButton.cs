@@ -17,6 +17,7 @@ public class InventoryButton : MonoBehaviour
             return;
         }
 
+        ItemImage = transform.GetChild(0).GetComponent<Image>();
         ItemImage.sprite = Item.itemIcon;
     }
 
