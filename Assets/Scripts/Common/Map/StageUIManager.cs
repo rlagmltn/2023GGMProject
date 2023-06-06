@@ -10,6 +10,8 @@ public class StageUIManager : MonoSingleton<StageUIManager>
     [SerializeField] private List<Transform> AllButtons;
     [SerializeField] private List<Transform> EnemyButtons;
     [SerializeField] private List<Transform> RewardButtons;
+    [SerializeField] private Button InventoryButton;
+    [SerializeField] private Button InventoryCancelButton;
         
     [SerializeField] private Button CancelButton;
     [SerializeField] private Button StartButton;
@@ -20,6 +22,7 @@ public class StageUIManager : MonoSingleton<StageUIManager>
     [SerializeField] private Transform BackgroundPannel;
     [SerializeField] private Transform _EnemyInfoPannel;
     [SerializeField] private Transform _RewardInfoPannel;
+    [SerializeField] private Transform InventoryPannel;
 
     [SerializeField] private List<Button> EnemyInfoButtons;
     [SerializeField] private Button RightArrowButton;
@@ -92,6 +95,12 @@ public class StageUIManager : MonoSingleton<StageUIManager>
         RightArrowButton.onClick.AddListener(EnemyInfoPlus);
         LeftArrowButton.onClick.AddListener(EnemyInfoMinus);
         RewardPannelCancelButton.onClick.AddListener(RewardInfoActiveFalse);
+
+        //인벤토리
+        InventoryButton.onClick.RemoveAllListeners();
+        InventoryButton.onClick.AddListener(() => InventoryPannelSetActive(true));
+        InventoryCancelButton.onClick.RemoveAllListeners();
+        InventoryCancelButton.onClick.AddListener(() => InventoryPannelSetActive(false));
     }
 
     public void SetSelectedStage(StageSO stage)
@@ -243,6 +252,11 @@ public class StageUIManager : MonoSingleton<StageUIManager>
         CurrentEnemyInfo = Mathf.Clamp(CurrentEnemyInfo, 0, EnemyInfos.Count - 1);
         EnemyButtonOutline();
         EnemyInfoPannel.Instance.EnemyInfoPannelUpdate(EnemyInfos[CurrentEnemyInfo]);
+    }
+
+    void InventoryPannelSetActive(bool isActive)
+    {
+        InventoryPannel.gameObject.SetActive(isActive);
     }
 
     void EnemyButtonOutline()

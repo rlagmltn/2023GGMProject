@@ -12,6 +12,7 @@ public class Map_Drag : MonoSingleton<Map_Drag>
     [SerializeField] private ItemSO EmptySO;
     [SerializeField] private ItemUIInfo ItemUI;
     [SerializeField] private ScrollRect ScroolView;
+    [SerializeField] private float DelayTime;
 
     private bool Isfind = false;
     private bool isClickDown = false;
@@ -20,6 +21,8 @@ public class Map_Drag : MonoSingleton<Map_Drag>
     private int T_num;
 
     public bool CanClick = true;
+
+    private float timer = 0f;
 
     private void Start()
     {
@@ -63,7 +66,10 @@ public class Map_Drag : MonoSingleton<Map_Drag>
 
     void OnMouseButtonDown()
     {
+        //코루틴 만들어야할듯?
+        timer += Time.deltaTime;
         if (!CanClick) return;
+        if (timer <= DelayTime) return;
 
         isClickDown = false;
         Isfind = false;
@@ -96,6 +102,7 @@ public class Map_Drag : MonoSingleton<Map_Drag>
 
     void OnMouseButtoneUp()
     {
+        timer = 0f;
         isClickUp = false;
         ScroolView.vertical = true;
         if (Item == EmptySO) return;

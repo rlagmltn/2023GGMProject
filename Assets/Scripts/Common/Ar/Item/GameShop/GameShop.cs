@@ -68,15 +68,18 @@ public class GameShop : Shop
         purchasePannel.gameObject.SetActive(isActive);
         BackGroundPannel.gameObject.SetActive(isActive);
         GameShop_Drag.Instance.CanClick = !isActive;
+        if (Item.itemPrice > GoldManager.Gold) purchaseButton.interactable = false;
+        else purchaseButton.interactable = true;
 
         if (!isActive) return;
 
-        purchaseText.text = $"{Item.itemName}을 {Item.itemPrice}에 구매하시겠습니까?";
+        purchaseText.text = $"{Item.itemName}을 {Item.itemPrice} 골드에 구매하시겠습니까?";
     }
 
     private void Buy()
     {
         if (!GameShop_Inventory.Instance.CanAddItem()) return;
+        //if (Item.itemPrice > GoldManager.Gold) return;
         GameShop_Inventory.Instance.SetItem(Item);
         Item_transform.gameObject.SetActive(false);
 
