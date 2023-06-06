@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0bce7227720074a45baf79fe437a451f, type: 3}
-  m_Name: Stage1
+  m_Name: BattleMap1
   m_EditorClassIdentifier: 
   MapName: "\uD788\uD788\uB9F5\uC774\uB2F9"
   Map: {fileID: 6942653577303563084, guid: 3d5fb0b21bd40d049b4f8647d06d40fe, type: 3}
   Enemies:
   - Enemy: {fileID: 5209284912838123193, guid: 4e133efdc7872974f9b998cbbf28b88a, type: 3}
     Count: 4
+  - Enemy: {fileID: 2198607056924021300, guid: e44765f48422b2d4ea807d22829d2fad, type: 3}
+    Count: 1
   MaxPlayers: 3
   BasePlayerTurn: 3
   IsBossMap: 0

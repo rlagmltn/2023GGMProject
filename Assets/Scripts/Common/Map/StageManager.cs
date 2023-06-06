@@ -24,6 +24,8 @@ public class StageManager : MonoSingleton<StageManager>
     [SerializeField] private StageSOList stageList;
     [SerializeField] private Transform startStage; //그냥 아무것도 아닌 시작하는 스테이지 아마도 emptyStage가 아닐까?
 
+    [SerializeField] private BattleMapHolder battleMapHolder;
+
     public List<Transform> ClearedStages;
 
     private Transform currentStage;
@@ -76,7 +78,10 @@ public class StageManager : MonoSingleton<StageManager>
         int shopNum = stageList.stageList.Count / 9;
 
         for (int num = 0; num < stageList.stageList.Count - 1; num++)
+        {
             stageList.stageList[num].stageKind = eStageState.Battle;
+            stageList.stageList[num].battleMapSO = battleMapHolder.map;
+        }
 
         StageKindChange(eStageState.Event, eventNum);
         StageKindChange(eStageState.Shop, shopNum);
@@ -208,8 +213,8 @@ public class StageManager : MonoSingleton<StageManager>
         Global.EnterStage = Selected_Stage;
         //맵 로딩 해줘야함
         Global.Map = Selected_Stage.map;
-        //지금은 임시로 스테이지 클리어임
-        //StageClear();
+        //지금은 임시로 스테이지 정해둠
+        battleMapHolder.map = Selected_Stage.battleMapSO;
 
         UnityAction Action = Selected_Stage.stageKind switch
         {

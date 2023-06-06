@@ -40,7 +40,23 @@ public class BanditBoss : Enemy
     protected override void Update()
     {
         base.Update();
-        
+        if(Input.GetKeyDown(KeyCode.Z))
+        {
+            SkillHeavyArmor();
+        }
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            SkillBleed();
+        }
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            SkillOverload();
+        }
+        if(Input.GetKeyDown(KeyCode.V))
+        {
+            SkillSpawn();
+        }
+
     }
 
     public void Passive()
@@ -61,6 +77,7 @@ public class BanditBoss : Enemy
             stat.HP = Mathf.Min(stat.MaxHP, stat.HP + 10);
             stat.ATK += 3;
             pShield = true;
+            
 
         }
         
@@ -113,6 +130,7 @@ public class BanditBoss : Enemy
         {
             Vector2 pos = new Vector2(transform.position.x + Random.Range(-5f, 5f), transform.position.y + Random.Range(-5f, 5f));
             Instantiate(banditWarrior, pos, Quaternion.identity);
+            
         }
         stat.SP = Mathf.Max(0, stat.SP - 10);
     }
@@ -125,20 +143,37 @@ public class BanditBoss : Enemy
 
     public void SkillBleed()
     {
+        Debug.Log("SkillBleed");
         Player[] players = FindObjectsOfType<Player>();
-        if (players.Length == 0) return;
+        if (players.Length == 0)
+        {
+            Debug.Log("None player");
+            return;
+        }
 
         if (players.Length == 1)
         {
-            players[0].stat.HP = Mathf.Max(0, players[0].stat.HP-0);
-            players[0].stat.SP += 5;
+            players[0].stat.HP = Mathf.Max(0, players[0].stat.HP-5);
+            players[0].transform.Find("HpBack").GetComponent<Bar>().GageChange(players[0].stat.HP / players[0].stat.MaxHP);
+            players[0].stat.SP = Mathf.Min(players[0].stat.MaxSP, players[0].stat.SP + 5);
+            players[0].transform.Find("DpBack").GetComponent<Bar>().GageChange(players[0].stat.SP / players[0].stat.MaxSP);
         }
         else
         {
-            players[0].stat.HP = Mathf.Max(0, players[0].stat.HP - 0);
-            players[0].stat.SP += 5;
-            players[1].stat.HP = Mathf.Max(0, players[0].stat.HP - 0);
-            players[1].stat.SP += 5;
+            for(int i = 0; i<2; i++)
+            {
+                players[i].stat.HP = Mathf.Max(0, players[0].stat.HP - 5);
+                players[i].transform.Find("HpBack").GetComponent<Bar>().GageChange(players[i].stat.HP / players[i].stat.MaxHP);
+                players[i].stat.SP = Mathf.Min(players[i].stat.MaxSP, players[i].stat.SP + 5);
+                players[i].transform.Find("DpBack").GetComponent<Bar>().GageChange(players[i].stat.SP / players[i].stat.MaxSP);
+
+                if(players[i].stat.HP == 0)
+                {
+                    players[i].DeadCheck();
+                    
+
+                }
+            }
         }
     }
 

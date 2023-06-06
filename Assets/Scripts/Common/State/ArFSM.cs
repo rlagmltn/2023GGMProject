@@ -88,7 +88,7 @@ public class ArFSM : MonoBehaviour
         return turnFlag;
     }
 
-    public virtual IEnumerator MoveAr(Vector2 vel)
+    public IEnumerator MoveAr(Vector2 vel)
     {
         yield return new WaitForSeconds(1f);
         TurnManager.Instance.UseTurn();

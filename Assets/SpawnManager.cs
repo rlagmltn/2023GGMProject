@@ -6,19 +6,18 @@ public class SpawnManager : MonoSingleton<SpawnManager>
 {
     public Dictionary<ePrefabs, List<CONEntity>> _SpawnObjDic;
 
+    [SerializeField] BattleMapHolder battleMapHolder;
     public BattleMapSO battleMapSO;
 
     [SerializeField] private Transform[] summonTrs;
 
-    [SerializeField] private Reward reward;
-
     void Awake()
     {
         _SpawnObjDic = new Dictionary<ePrefabs, List<CONEntity>>();
+        battleMapSO = battleMapHolder.map;
 
         Summon();
 
-        RewardSetting();
         //_SpawnObjDic[ePrefabs.EnemyObj1][0].SetActive(true);
     }
 
@@ -28,23 +27,25 @@ public class SpawnManager : MonoSingleton<SpawnManager>
         summonTrs = battleMapSO.Map.transform.GetChild(2).GetComponentsInChildren<Transform>();
         
         map.transform.position = new Vector3(0, 0, 0);
-        foreach(EnemyCount enemy in battleMapSO.Enemies)
-        {
-            var numbers = GenerateRandomNumbers(summonTrs.Length, enemy.Count);
-            Debug.Log(numbers.Length);
-            Debug.Log(enemy.Count);
 
+        int enemycount = 0;
+
+        foreach (EnemyCount enemy in battleMapSO.Enemies)
+        {
+            enemycount += enemy.Count;
+        }
+
+        var numbers = GenerateRandomNumbers(summonTrs.Length, enemycount);
+        enemycount = 0;
+        foreach (EnemyCount enemy in battleMapSO.Enemies)
+        {
             for (int i=0; i < enemy.Count; i++)
             {
                 var newEnemy = Instantiate(enemy.Enemy);
-                newEnemy.transform.position = summonTrs[numbers[i]].position;
+                newEnemy.transform.position = summonTrs[numbers[i+enemycount]].position;
             }
+            enemycount += enemy.Count;
         }
-    }
-
-    private void RewardSetting()
-    {
-
     }
 
     private int[] GenerateRandomNumbers(int a, int b)
