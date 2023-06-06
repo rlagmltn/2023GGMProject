@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CanDrop : MonoBehaviour
+public class Map_Candrop : MonoBehaviour
 {
     [SerializeField] private Image ItemImage;
     [SerializeField] private int Num;
@@ -33,13 +33,6 @@ public class CanDrop : MonoBehaviour
     internal void ImageActiveSelf(bool IsImage)
     {
         ItemImage.gameObject.SetActive(IsImage);
-    }
-
-    internal void Map_ItemUnEquip()
-    {
-        Map_Inventory.Instance.SetItem(Ar.E_Item.itmeSO[Num]);
-        this.Ar.E_Item.itmeSO[Num] = null;
-        GameShop_Character.Instance.AllArUpdateUI();
     }
 
     internal void ItemUnEquip()

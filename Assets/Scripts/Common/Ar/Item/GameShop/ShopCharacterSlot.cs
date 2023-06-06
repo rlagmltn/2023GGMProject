@@ -7,8 +7,8 @@ public class ShopCharacterSlot : MonoBehaviour
 {
     [SerializeField] private Image ArImage;
     [SerializeField] private List<Button> ItemButtons;
-    [SerializeField] private Button ImageButton;
 
+    public bool isMap = false;
     private ArSO AR;
 
     private void Start()
@@ -21,10 +21,15 @@ public class ShopCharacterSlot : MonoBehaviour
         for (int num = 0; num < AR.E_Item.itmeSO.Length; num++)
         {
             ItemButtons[num].onClick.RemoveAllListeners();
+            if(isMap)
+            {
+                ItemButtons[num].onClick.AddListener(ItemButtons[num].GetComponent<CanDrop>().Map_ItemUnEquip);
+                continue;
+            }
             ItemButtons[num].onClick.AddListener(ItemButtons[num].GetComponent<CanDrop>().ItemUnEquip);
         }
-        ImageButton.onClick.RemoveAllListeners();
-        ImageButton.onClick.AddListener(() => ItemUIInfo.Instance.UpdateUI_AR(AR));
+        //ImageButton.onClick.RemoveAllListeners();
+        //ImageButton.onClick.AddListener(() => ItemUIInfo.Instance.UpdateUI_AR(AR));
     }
 
     internal void UpdateUI()

@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameShop_Character : MonoSingleton<GameShop_Character>
+public class Map_Character : MonoSingleton<Map_Character>
 {
     [SerializeField] private ArSOList ArSOList;
     [SerializeField] private Transform CharacterSlot;
     [SerializeField] private Transform CharacterContent;
-
-    public bool isMap = false;
 
     private List<ArSO> TakeArList;
     private List<Transform> Pannels;
@@ -35,7 +33,7 @@ public class GameShop_Character : MonoSingleton<GameShop_Character>
     {
         ShopCharacterSlot[] Trash = FindObjectsOfType<ShopCharacterSlot>();
 
-        for(int num = 0; num < Trash.Length; num++) Destroy(Trash[num]);
+        for (int num = 0; num < Trash.Length; num++) Destroy(Trash[num]);
     }
 
     /// <summary>
@@ -43,8 +41,8 @@ public class GameShop_Character : MonoSingleton<GameShop_Character>
     /// </summary>
     void TakeArToList()
     {
-        for(int num = 0; num < ArSOList.list.Count; num++)
-            if(ArSOList.list[num].isInGameTake) TakeArList.Add(ArSOList.list[num]);
+        for (int num = 0; num < ArSOList.list.Count; num++)
+            if (ArSOList.list[num].isInGameTake) TakeArList.Add(ArSOList.list[num]);
     }
 
     /// <summary>
@@ -52,11 +50,10 @@ public class GameShop_Character : MonoSingleton<GameShop_Character>
     /// </summary>
     void InstantiateCharacterSlot()
     {
-        for(int num = 0; num < TakeArList.Count; num++)
+        for (int num = 0; num < TakeArList.Count; num++)
         {
             Transform tempObj = Instantiate(CharacterSlot, CharacterContent);
             tempObj.GetComponent<ShopCharacterSlot>().SetArSO(TakeArList[num]);
-            tempObj.GetComponent<ShopCharacterSlot>().isMap = isMap;
             Pannels.Add(tempObj);
         }
     }

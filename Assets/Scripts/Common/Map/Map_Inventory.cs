@@ -17,6 +17,16 @@ public class Map_Inventory : MonoSingleton<Map_Inventory>
     void Init()
     {
         UpdateImage();
+        ButtonInit();
+    }
+
+    void ButtonInit()
+    {
+        for (int num = 0; num < InventoryButtons.Count; num++)
+        {
+            InventoryButtons[num].onClick.RemoveAllListeners();
+            InventoryButtons[num].onClick.AddListener(InventoryButtons[num].GetComponent<InventoryButton>().ButtonClicked);
+        }
     }
 
     /// <summary>
@@ -25,7 +35,9 @@ public class Map_Inventory : MonoSingleton<Map_Inventory>
     void UpdateImage()
     {
         for (int num = 0; num < InventoryButtons.Count; num++)
+        {
             InventoryButtons[num].GetComponent<InventoryButton>().SetItem(InventorySO.items[num], num);
+        }
     }
 
     internal void SetItem(ItemSO Item)

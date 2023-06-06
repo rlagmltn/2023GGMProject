@@ -35,11 +35,21 @@ public class InventoryButton : MonoBehaviour
 
     internal void EquipItemToCharacter()
     {
-        GameShop_Inventory.Instance.InventoryClear(ButtonNum);
+        GameShop_Inventory.Instance.InventoryClear(ButtonNum);  
+    }
+
+    internal void Map_EquipItemToCharacter()
+    {
+        Map_Inventory.Instance.InventoryClear(ButtonNum);
     }
 
     internal int GetNum()
     {
         return ButtonNum;
+    }
+
+    internal void ButtonClicked()
+    {
+        Map_Inventory_Info.Instance.SetItem(Item);
     }
 }
