@@ -167,12 +167,6 @@ public class BanditBoss : Enemy
                 players[i].stat.SP = Mathf.Min(players[i].stat.MaxSP, players[i].stat.SP + 5);
                 players[i].transform.Find("DpBack").GetComponent<Bar>().GageChange(players[i].stat.SP / players[i].stat.MaxSP);
 
-                if(players[i].stat.HP == 0)
-                {
-                    players[i].DeadCheck();
-                    
-
-                }
             }
         }
     }

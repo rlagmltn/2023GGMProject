@@ -13,6 +13,5 @@ public class BanditBoss_ArFSM : ArFSM
     {
         base.Start();
         fsmManager.AddStateList(new BanditBoss_StateMove());
-        fsmManager.AddStateList(new BanditBoss_StateSkill());
     }
 }
