@@ -1,15 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Audio;
 
 public class SoundManager : MonoSingleton<SoundManager>
 {
+    [SerializeField] AudioMixer audioMixer;
     [SerializeField] AudioMixerGroup bgm;
     [SerializeField] AudioMixerGroup effect;
     [SerializeField] AudioMixerGroup ui;
     public AudioSource[] audioSources = new AudioSource[(int)Sound.MAXCOUNT];
     Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
+
+    [SerializeField] Slider masterS;
+    [SerializeField] Slider bgmS;
+    [SerializeField] Slider effectS;
+    [SerializeField] Slider uiS;
 
     private void Awake()
     {
@@ -91,5 +98,25 @@ public class SoundManager : MonoSingleton<SoundManager>
     public void LoadScene(eSceneName name)
     {
         Clear();
+    }
+
+    public void SetMasterVolume()
+    {
+        audioMixer.SetFloat("Master", Mathf.Log10(masterS.value) * 20);
+    }
+
+    public void SetBGMVolume()
+    {
+        audioMixer.SetFloat("BGM", Mathf.Log10(bgmS.value) * 20);
+    }
+
+    public void SetEffectVolume()
+    {
+        audioMixer.SetFloat("Effect", Mathf.Log10(effectS.value) * 20);
+    }
+
+    public void SetUIVolume()
+    {
+        audioMixer.SetFloat("UI", Mathf.Log10(uiS.value) * 20);
     }
 }

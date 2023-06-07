@@ -426,6 +426,7 @@ public class Player : Ar
 
     private void OnMouseDown()
     {
+        if (playerController == null) return;
         if(playerController.IsBatchMode)
         {
             Collide.enabled = false;
@@ -439,12 +440,14 @@ public class Player : Ar
 
     private void OnMouseDrag()
     {
+        if (playerController == null) return;
         if (!playerController.IsBatchMode) return;
         transform.position = Util.Instance.mousePosition;
     }
 
     private void OnMouseUp()
     {
+        if (playerController == null) return;
         if (!playerController.IsBatchMode) return;
         RaycastHit2D ray = Physics2D.Raycast(transform.position, new Vector3(0, -1, 0), 0.01f, LayerMask.GetMask("Batch"));
         if (ray.collider != null && !ray.collider.CompareTag("UI"))
