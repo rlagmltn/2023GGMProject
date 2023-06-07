@@ -52,7 +52,7 @@ public class Warrior : Player
     public override void Push(Vector2 velo)
     {
         if (dashing)
-            rigid.velocity = lastVelocity;
+            rigid.velocity = Vector2.zero;
         else
             base.Push(velo);    
     }
@@ -60,8 +60,6 @@ public class Warrior : Player
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
-        if(dashing)
-            rigid.velocity = rigid.velocity.normalized * 3;
     }
 
     protected override void Skill(Vector2 angle)
