@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3708985, g: 0.3783704, b: 0.35722548, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -693,6 +693,17 @@ RectTransform:
   m_AnchoredPosition: {x: 170, y: -110}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &53432237 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2135604649521342637, guid: f14a4f0a4e1888f4c83c66d4c94db565, type: 3}
+  m_PrefabInstance: {fileID: 855495425}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88feec43afdf1cd49a9af83488bd970f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &56124466
 GameObject:
   m_ObjectHideFlags: 0
@@ -3486,13 +3497,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 939860909}
   m_HandleRect: {fileID: 1832030861}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53432237}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: SetUIVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &233270449
 GameObject:
   m_ObjectHideFlags: 0
@@ -10381,6 +10404,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2135604649521342637, guid: f14a4f0a4e1888f4c83c66d4c94db565, type: 3}
+      propertyPath: uiS
+      value: 
+      objectReference: {fileID: 232227694}
+    - target: {fileID: 2135604649521342637, guid: f14a4f0a4e1888f4c83c66d4c94db565, type: 3}
+      propertyPath: bgmS
+      value: 
+      objectReference: {fileID: 3748507016782146870}
+    - target: {fileID: 2135604649521342637, guid: f14a4f0a4e1888f4c83c66d4c94db565, type: 3}
+      propertyPath: effectS
+      value: 
+      objectReference: {fileID: 8905862847121816954}
+    - target: {fileID: 2135604649521342637, guid: f14a4f0a4e1888f4c83c66d4c94db565, type: 3}
+      propertyPath: masterS
+      value: 
+      objectReference: {fileID: 8905862846454810631}
+    - target: {fileID: 2135604649521342637, guid: f14a4f0a4e1888f4c83c66d4c94db565, type: 3}
+      propertyPath: audioMixer
+      value: 
+      objectReference: {fileID: 24100000, guid: 291bfce9c126f4c4d94ea14e0e13844d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f14a4f0a4e1888f4c83c66d4c94db565, type: 3}
 --- !u!1 &859607401
@@ -131791,13 +131834,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 3888369412918065004}
   m_HandleRect: {fileID: 3888369413284421985}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53432237}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: SetBGMVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3765812331448337826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141755,13 +141810,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 2465758320074074569}
   m_HandleRect: {fileID: 2465758319319180318}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53432237}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: SetMasterVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8905862846470130498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142194,13 +142261,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 3888369412562922678}
   m_HandleRect: {fileID: 3888369414017317106}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53432237}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: SetEffectVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8905862847168424752
 MonoBehaviour:
   m_ObjectHideFlags: 0
