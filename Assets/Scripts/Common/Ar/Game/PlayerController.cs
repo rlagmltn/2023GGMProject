@@ -6,6 +6,7 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] int playerCount;
+    public int PlayerCount { get { return playerCount; } set { playerCount = value; } }
     [SerializeField] QuickSlot pf_QuickSlot;
     [SerializeField] Transform slotHolder;
     [SerializeField] Transform batchHolderTrs;

@@ -9,7 +9,8 @@ public class SpawnManager : MonoSingleton<SpawnManager>
     [SerializeField] BattleMapHolder battleMapHolder;
     public BattleMapSO battleMapSO;
 
-    [SerializeField] private Transform[] summonTrs;
+    private Transform[] summonTrs;
+    private PlayerController controller;
 
     void Awake()
     {
@@ -23,6 +24,8 @@ public class SpawnManager : MonoSingleton<SpawnManager>
 
     private void Summon()
     {
+        controller = FindObjectOfType<PlayerController>();
+
         var map = Instantiate(battleMapSO.Map);
         summonTrs = battleMapSO.Map.transform.GetChild(2).GetComponentsInChildren<Transform>();
         
@@ -46,6 +49,9 @@ public class SpawnManager : MonoSingleton<SpawnManager>
             }
             enemycount += enemy.Count;
         }
+
+        TurnManager.Instance.PlayerTurn = battleMapHolder.map.BasePlayerTurn;
+        controller.PlayerCount = battleMapHolder.map.MaxPlayers;
     }
 
     private int[] GenerateRandomNumbers(int a, int b)

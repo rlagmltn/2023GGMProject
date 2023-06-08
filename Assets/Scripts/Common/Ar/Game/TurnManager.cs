@@ -7,6 +7,8 @@ using TMPro;
 public class TurnManager : MonoSingleton<TurnManager>
 {
     [SerializeField] int playerTurn;
+    public int PlayerTurn { get { return playerTurn; } set { playerTurn = value; } }
+
     [SerializeField] int enemyTurn;
     [SerializeField] Turn pf_Turn;
     [SerializeField] GameObject turnObj;
