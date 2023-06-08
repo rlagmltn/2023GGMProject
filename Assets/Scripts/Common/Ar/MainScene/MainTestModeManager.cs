@@ -65,7 +65,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         }
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         testPlayer?.CountCooltime();
         if (testPlayer == null)
