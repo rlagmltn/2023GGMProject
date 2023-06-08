@@ -89,8 +89,8 @@ public class TurnManager : MonoSingleton<TurnManager>
     public void ResetTurn()
     {
         turnText?.SetText("Enemy Turn");
-        UnActiveNotUseTurn(playerTurn);
         playerTurn = NextPlayerTurn;
+        UnActiveNotUseTurn(playerTurn);
 
         for (int i = 0; i < playerTurn; i++)
         {
