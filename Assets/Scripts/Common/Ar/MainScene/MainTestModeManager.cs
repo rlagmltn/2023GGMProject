@@ -7,7 +7,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
 {
     [SerializeField] private CameraMove cameraMove;
     [SerializeField] private Enemy pfDummy;
-    [SerializeField] private ArSOArray arHolder;
+    [SerializeField] private ArSOList arHolder;
     [SerializeField] private ItemDBSO itemDB;
     [SerializeField] private ItemDBSO itemInven;
     [SerializeField] private ItemSO emptyItem;
