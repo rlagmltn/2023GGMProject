@@ -23,10 +23,6 @@ public class SaveManager : MonoSingleton<SaveManager>
         PlayerDataLoad();
         GameDataLoad();
     }
-    private void Start()
-    {
-        InvokeRepeating("SaveToJson", 1f, 60f);
-    }
 
     private void PlayerDataLoad()
     {
