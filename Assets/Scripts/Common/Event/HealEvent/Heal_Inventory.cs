@@ -13,7 +13,7 @@ public class Heal_Inventory : MonoSingleton<Heal_Inventory>
 
     private void Start()
     {
-        ClassfyArSO();
+        ClassfyArSO();          
     }
 
     /// <summary>
