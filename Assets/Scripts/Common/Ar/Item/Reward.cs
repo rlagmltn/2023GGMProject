@@ -19,6 +19,8 @@ public class Reward : Shop
     [SerializeField] private Transform TakeBossItemPannel;
     [SerializeField] private Transform TakeBossHealPannel;
 
+    [SerializeField] private Transform CancelPanel;
+
     public void TakeAr()
     {
         var newAr = ArInventoryManager.Instance.HolderToInven(Random.Range(0, ArInventoryManager.Instance.HolderList.Count));
@@ -89,5 +91,15 @@ public class Reward : Shop
 
         TakeBossItemPannel.gameObject.SetActive(true);
         TakeBossArPannel.gameObject.SetActive(true);
+    }
+
+    public void SkipReward()
+    {
+        CancelPanel.gameObject.SetActive(true);
+    }
+
+    public void SkipCancel()
+    {
+        CancelPanel.gameObject.SetActive(false);
     }
 }

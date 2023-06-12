@@ -11,6 +11,7 @@ public class GoldReward : MonoBehaviour
     [SerializeField] TextMeshProUGUI tmp;
     [SerializeField] GameObject WinPanel;
     [SerializeField] GameObject BossWinPanel;
+    [SerializeField] GameObject warningPanel;
 
     private void OnEnable()
     {
@@ -60,5 +61,28 @@ public class GoldReward : MonoBehaviour
             WinPanel.SetActive(true);
         }
         gameObject.SetActive(false);
+    }
+
+    public void SkipReward()
+    {
+        warningPanel.SetActive(true);
+    }
+
+    public void SkipAndNextPanel()
+    {
+        if (SpawnManager.Instance.battleMapSO.IsBossMap)
+        {
+            BossWinPanel.SetActive(true);
+        }
+        else
+        {
+            WinPanel.SetActive(true);
+        }
+        gameObject.SetActive(false);
+    }
+
+    public void SkipCancel()
+    {
+        warningPanel.SetActive(false);
     }
 }

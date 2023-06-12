@@ -39,14 +39,14 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         attackAct = actSellect.transform.GetChild(1).gameObject;
         actSellect.SetActive(false);
         dummy = Instantiate(pfDummy, new Vector3(5, 0), Quaternion.identity);
-        GoldManager.Instance.ResetGold();
         SoundManager.Instance.Play(SoundManager.Instance.GetOrAddAudioClips("BackGroundMusic/Main", Sound.BGM), Sound.BGM);
         MakeArTestSlot();
+        GameResult();
     }
 
     private void MakeArTestSlot()
     {
-        foreach(ArSO so in arHolder.list)
+        foreach (ArSO so in arHolder.list)
         {
             var instance = Instantiate(pfMainTestSlot, testBtnSlot);
             instance.SetSO(so);
@@ -59,7 +59,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
             instance.SetSO(so);
         }
         itemInven.items = new List<ItemSO>();
-        for(int i=0; i<21; i++)
+        for (int i = 0; i < 21; i++)
         {
             itemInven.ResetInven(emptyItem);
         }
@@ -83,7 +83,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
 
     public void SellectPlayer(Player player = null)
     {
-        if(testPlayer!=null)
+        if (testPlayer != null)
         {
             testPlayer.UnArmed();
             for (int i = 0; i < 3; i++) armedItems[i].UnSetItem();
@@ -106,7 +106,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
     public void ArmedItem(ItemSO item)
     {
         if (testPlayer == null) return;
-        foreach(MainTestSlot slot in armedItems)
+        foreach (MainTestSlot slot in armedItems)
         {
             if (slot.itemSO == null)
             {
@@ -191,5 +191,19 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         statTexts[4].SetText(testPlayerStat.CriPer.ToString());
         statTexts[5].SetText(testPlayerStat.CriDmg.ToString());
         statTexts[6].SetText(testPlayerStat.WEIGHT.ToString());
+    }
+
+    private void GameResult()
+    {
+        if (SaveManager.Instance.GameData.IsPlayingGame) return;
+        //여기에 남은 골드와 돌파한 스테이지의 수에 따라서 업그레이드포인트를 준다.
+        var gamedata = SaveManager.Instance.GameData;
+        gamedata.PointPoint += gamedata.Gold;
+
+        SaveManager.Instance.PlayerData.UpgradePoint += gamedata.PointPoint / 100;
+
+        GoldManager.Instance.ResetGold();
+        gamedata.PointPoint = 0;
+        gamedata.ClearStages = 0;
     }
 }
