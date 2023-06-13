@@ -91,9 +91,6 @@ public class Player : Ar
         GetItemEvents();
 
         MouseUp.AddListener(() => { isMove = true; });
-        OnOutDie.AddListener(()=> { TurnManager.Instance.NextPlayerTurn -= 1; });
-        OnBattleDie.AddListener(()=> { TurnManager.Instance.NextPlayerTurn -= 1; });
-    
         StatReset();
 
         gameObject.SetActive(false);
@@ -527,6 +524,7 @@ public class Player : Ar
 
     public override bool DeadCheck()
     {
+        if(!so.isDead) TurnManager.Instance.NextPlayerTurn -= 1;
         DeadSave();
         if (stat.HP <= 0) so.isInGameTake = false;
         return base.DeadCheck();
@@ -541,6 +539,7 @@ public class Player : Ar
 
     public void TakeAllStat()
     {
+        so.isDead = true;
         so.surviveStats.currentHP = stat.HP;
         so.surviveStats.currentWeight = stat.WEIGHT;
         if(!isDead) so.surviveStats.currentShield = so.surviveStats.MaxShield;
@@ -556,6 +555,18 @@ public class Player : Ar
         foreach (RaycastHit2D hit in targets)
         {
             if (hit.collider.CompareTag("Enemy"))
+            {
+                return hit.point;
+            }
+        }
+        return Vector2.zero;
+    }
+
+    protected Vector2 FindNearAr()
+    {
+        foreach (RaycastHit2D hit in targets)
+        {
+            if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Player") && hit.collider.gameObject != gameObject)
             {
                 return hit.point;
             }

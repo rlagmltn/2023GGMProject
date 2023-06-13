@@ -64,6 +64,10 @@ public class HealAr : _Event
 
     void OptionButton2()
     {
+        int Rnum = Random.Range(0, Ars.Count);
+        DecreaseArHP(Ars[Rnum], 30);
+        HealAll(Rnum, 50);
+        OptionText_2.text = $"제단에 손을 올리고 체력을 바쳤다.\n{Ars[Rnum].characterInfo.Name} 체력{(int)((float)Ars[Rnum].surviveStats.MaxHP * 30f / 100f)}만큼 감소, 남은체력 : {(int)Ars[Rnum].surviveStats.currentHP}\n모든 아군 체력 절반 회복";
         BackGroundPannel.gameObject.SetActive(true);
         OptionPopUp_2.gameObject.SetActive(true);
     }
@@ -81,6 +85,24 @@ public class HealAr : _Event
     {
         int MaxHP = (int)Ar.surviveStats.MaxHP;
         Ar.surviveStats.currentHP -= (int)((float)MaxHP * (float)percent / 100f);
+        if (Ar.surviveStats.currentHP <= 0)
+        {
+            Ar.surviveStats.currentHP = 0;
+            Ar.isDead = true;
+            Ar.isInGameTake = false;
+        }
+    }
+
+    void HealAll(int ExceptNum, float percent)
+    {
+        for(int i = 0; i < Ars.Count; i++)
+        {
+            if (i == ExceptNum) continue;
+            if (Ars[i].isDead) continue;
+            if (!Ars[i].isInGameTake) continue;
+            Ars[i].surviveStats.currentHP += (int)(Ars[i].surviveStats.MaxHP * (percent / 100f));
+            if (Ars[i].surviveStats.currentHP >= Ars[i].surviveStats.MaxHP) Ars[i].surviveStats.currentHP = Ars[i].surviveStats.MaxHP;
+        }
     }
 
     void GetIsTakeArs()

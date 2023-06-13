@@ -14,6 +14,11 @@ public class Event_DevoteItem : MonoSingleton<Event_DevoteItem>
     [SerializeField] private Transform BackGroundPannel;
     [SerializeField] private Transform ClearPannel;
 
+    [SerializeField] private ItemDBSO InventorySO;
+    [SerializeField] private ItemSO EmptySO;
+    [SerializeField] private ArSOList ArList;
+    [SerializeField] private float healPercent;
+
     private ItemSO Item;
     private int ItemNum;
 
@@ -58,7 +63,25 @@ public class Event_DevoteItem : MonoSingleton<Event_DevoteItem>
 
     void DevoteButtonClicked()
     {
+        DevoteItem();
+
         ClearPannel.gameObject.SetActive(true);
         BackGroundPannel.gameObject.SetActive(true);
+        HealPercent(healPercent);
+    }
+
+    void DevoteItem()
+    {
+        InventorySO.items[ItemNum] = EmptySO;
+    }
+
+    void HealPercent(float percent)
+    {
+        for(int i = 0; i < ArList.list.Count; i++)
+        {
+            if (!ArList.list[i].isInGameTake) continue;
+            if (ArList.list[i].isDead) continue;
+            ArList.list[i].surviveStats.currentHP = (int)((float)ArList.list[i].surviveStats.MaxHP * (percent / 100f));
+        }
     }
 }

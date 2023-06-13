@@ -34,7 +34,7 @@ public class Bullet : MonoBehaviour
         transform.Translate(Vector2.right * bulletSO.speed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Out"))
         {
