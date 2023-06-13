@@ -35,7 +35,7 @@ public class Wizard : Player
         
         if (joystickType == JoystickType.Attack)
             RayCastTargets(range);
-        else if (joystickType == JoystickType.Skill)
+        else
             RayCastTargets(moveDrag);
 
         var target = FindNearObject();

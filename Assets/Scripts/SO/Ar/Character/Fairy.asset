@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc33080b8fafa27479602cce7b7008dd, type: 3}
+  m_Name: Fairy
+  m_EditorClassIdentifier: 
+  characterInfo:
+    image: {fileID: 0}
+    nameString: "\uC694\uC815"
+    Rarity: 1
+    arClass: 4
+    Level: 1
+  attackStats:
+    baseAtk: 6
+    currentAtk: 6
+    baseSkillAtk: 12
+    currentSkillAtk: 12
+  criticalStats:
+    baseCriticalPer: 4
+    currentCriticalPer: 4
+    baseCriticalDamage: 50
+    currentCriticalDamage: 50
+  surviveStats:
+    baseHP: 2
+    MaxHP: 2
+    currentHP: 2
+    baseShield: 4
+    MaxShield: 4
+    currentShield: 4
+    baseWeight: 1
+    currentWeight: 1
+  skill:
+    skillImage: {fileID: 0}
+    skillName: "\uD22C\uC601"
+    skillCoolTime: 5
+    startskillCoolTime: 5
+    MaxSkillCoolTime: 5
+    currentSkillCoolTime: 5
+    SkillSummary: "\uBCBD\uC744\uBB34\uC2DC\uD574"
+  E_Item:
+    itmeSO:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  isTake: 0
+  isUse: 0
+  isInGameTake: 0
+  isDead: 0
+  ArData: {fileID: 1970261382623240040, guid: 846bff35f1451d543aec7539b308e327, type: 3}
+  Summary: 
