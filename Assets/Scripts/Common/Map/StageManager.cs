@@ -224,10 +224,10 @@ public class StageManager : MonoSingleton<StageManager>
 
         UnityAction Action = Selected_Stage.stageKind switch
         {
-            eStageState.Battle => () => SceneManager.LoadScene("TestScene"),
-            eStageState.Shop => () => SceneManager.LoadScene("ShopScene"),
-            eStageState.Event => () => SceneManager.LoadScene("EventScene"),
-            _ => () => SceneManager.LoadScene("TestScene"),
+            eStageState.Battle => () => { SceneManager.LoadScene("TestScene"); SaveManager.Instance.GameData.PointPoint += 50; },
+            eStageState.Shop => () => { SceneManager.LoadScene("ShopScene"); SaveManager.Instance.GameData.PointPoint += 20; },
+            eStageState.Event => () => { SceneManager.LoadScene("EventScene"); SaveManager.Instance.GameData.PointPoint += 30; },
+            _ => () => { SceneManager.LoadScene("TestScene"); SaveManager.Instance.GameData.PointPoint += 100; },
         };
 
         Action();

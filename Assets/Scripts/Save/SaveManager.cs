@@ -6,7 +6,10 @@ using UnityEngine;
 public class SaveManager : MonoSingleton<SaveManager>
 {
     [SerializeField] private PlayerData playerData;
+    public PlayerData PlayerData { get { return playerData; } set { playerData = value; PlayerDataSave(); } }
+
     [SerializeField] private GameData gameData;
+    public GameData GameData { get { return gameData; } set { gameData = value; GameDataSave(); } }
 
     private string SAVE_PATH = "";
     private string PLAYER_SAVE_FILENAME = "/PlayerSave.txt";
@@ -22,6 +25,7 @@ public class SaveManager : MonoSingleton<SaveManager>
         }
         PlayerDataLoad();
         GameDataLoad();
+        DontDestroyOnLoad(this);
     }
 
     private void PlayerDataLoad()
@@ -33,12 +37,6 @@ public class SaveManager : MonoSingleton<SaveManager>
         }
     }
 
-    private void PlayerDataSave()
-    {
-        string jsonPlayer = JsonUtility.ToJson(playerData, true);
-        File.WriteAllText(SAVE_PATH + PLAYER_SAVE_FILENAME, jsonPlayer, System.Text.Encoding.UTF8);
-    }
-
     private void GameDataLoad()
     {
         if (File.Exists(SAVE_PATH + GAME_SAVE_FILENAME))
@@ -46,6 +44,12 @@ public class SaveManager : MonoSingleton<SaveManager>
             string json = File.ReadAllText(SAVE_PATH + GAME_SAVE_FILENAME);
             gameData = JsonUtility.FromJson<GameData>(json);
         }
+    }
+
+    private void PlayerDataSave()
+    {
+        string jsonPlayer = JsonUtility.ToJson(playerData, true);
+        File.WriteAllText(SAVE_PATH + PLAYER_SAVE_FILENAME, jsonPlayer, System.Text.Encoding.UTF8);
     }
 
     private void GameDataSave()

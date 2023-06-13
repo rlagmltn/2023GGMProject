@@ -75,7 +75,6 @@ public class PopUpManager : MonoBehaviour
     void ReloadUIs()
     {
         HelpPannel.Instance.UpdateUI();
-        MainShop.Instance.Init();
     }
 
     /// <summary>
@@ -129,7 +128,6 @@ public class PopUpManager : MonoBehaviour
             return;
         }
 
-        MainShop.Instance.SetSelectedItem(null);
         backgroundPanel.gameObject.SetActive(false);
         ResetUIs();
     }

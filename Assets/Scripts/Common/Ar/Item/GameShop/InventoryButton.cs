@@ -13,8 +13,12 @@ public class InventoryButton : MonoBehaviour
     {
         if (Item.itemName == "EMPTY")
         {
-            ItemImage.sprite = null;
+            ItemImage.color = Color.clear;
             return;
+        }
+        else
+        {
+            ItemImage.color = Color.white;
         }
 
         ItemImage = transform.GetChild(0).GetComponent<Image>();

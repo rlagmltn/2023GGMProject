@@ -67,6 +67,7 @@ public class GameManager : MonoSingleton<GameManager>
         Time.timeScale = 0.3f;
         yield return new WaitForSeconds(0.5f);
         Time.timeScale = 1f;
+        SaveManager.Instance.GameData.IsPlayingGame = false;
         MGUI.Instance.GameOver();
     }
 
@@ -79,6 +80,7 @@ public class GameManager : MonoSingleton<GameManager>
         {
             player.TakeAllStat();
         }
+        SaveManager.Instance.GameData.ClearStages++;
         MGUI.Instance.GameClear();
     }
 

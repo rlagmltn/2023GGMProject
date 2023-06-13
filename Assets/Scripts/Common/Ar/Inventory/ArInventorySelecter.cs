@@ -332,6 +332,7 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
             ar.E_Item.itmeSO = new ItemSO[3];
         }
 
+        SaveManager.Instance.GameData.IsPlayingGame = true;
         ArTOGlobal();
         SceneMgr.Instance.LoadScene("Stage1Map");
     }
