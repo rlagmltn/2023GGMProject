@@ -56,7 +56,7 @@ public class StageUIManager : MonoSingleton<StageUIManager>
     {
         for (int num = 0; num < AllButtons.Count; num++)
         {
-            AllButtons[num].GetComponent<Button>().onClick.RemoveAllListeners();
+            AllButtons[num]?.GetComponent<Button>().onClick.RemoveAllListeners();
             AllButtons[num].GetComponent<Button>().onClick.AddListener(AllButtons[num].GetComponent<StageSOHolder>().StageSelect);
         }
 
