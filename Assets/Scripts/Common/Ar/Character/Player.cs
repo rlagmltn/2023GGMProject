@@ -566,7 +566,7 @@ public class Player : Ar
     {
         foreach (RaycastHit2D hit in targets)
         {
-            if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Player"))
+            if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Player") && hit.collider.gameObject != gameObject)
             {
                 return hit.point;
             }

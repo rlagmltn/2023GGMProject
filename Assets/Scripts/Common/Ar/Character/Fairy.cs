@@ -12,9 +12,9 @@ public class Fairy : Player
     protected override void Start()
     {
         base.Start();
-        range = (maxDragPower * pushPower) / (1 + stat.WEIGHT * 0.1f) / 4;
         capsule = GetComponent<CapsuleCollider2D>();
         AfterMove.AddListener(() => { dashing = false; capsule.isTrigger = false; });
+        AfterAttack.AddListener(Passive);
     }
 
     public override void StatReset()
@@ -33,7 +33,7 @@ public class Fairy : Player
     {
         base.Drag(angle, dis);
 
-        RayCastTargets(range);
+        RayCastTargets(moveDrag);
         var target = FindNearAr();
 
         if (target.magnitude != 0)
@@ -42,7 +42,7 @@ public class Fairy : Player
         }
         else
         {
-            skillRange.size = new Vector2(range / 2, 1);
+            skillRange.size = new Vector2(moveDrag / 2, 1);
         }
     }
 
@@ -75,7 +75,7 @@ public class Fairy : Player
 
     protected override void Passive()
     {
-        stat.SP += Mathf.RoundToInt(so.surviveStats.MaxShield / 2);
+        stat.SP += 1;
         DeadCheck();
     }
 
@@ -84,7 +84,7 @@ public class Fairy : Player
         capsule.isTrigger = true;
         isMove = true;
         dashing = true;
-        rigid.velocity = -(maxDragPower * (angle.normalized * 1f) * pushPower) / (1 + stat.WEIGHT * 0.1f);
+        rigid.velocity = -(angle * power) * pushPower / (1 + stat.WEIGHT * 0.1f);
         EffectManager.Instance.InstantiateEffect_P(Effect.LandingSmoke, transform.position);
         animationManager.SetState(CharacterState.Run);
         Flip();
