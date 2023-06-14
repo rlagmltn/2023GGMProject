@@ -29,6 +29,7 @@ public class PopUpManager : MonoBehaviour
     [SerializeField] private ButtonAndPopUp EnterStageBAP;
     [SerializeField] private Transform AnotherPannel;
     [SerializeField] private Button AnotherCancel;
+    [SerializeField] private Button AnotherClear;
 
     private void Awake()
     {
@@ -54,6 +55,9 @@ public class PopUpManager : MonoBehaviour
         EnterStageBAP.button.onClick.AddListener(EnterButtonClick);
         AnotherCancel.onClick.RemoveAllListeners();
         AnotherCancel.onClick.AddListener(EnterPannelPopDown);
+        AnotherClear.onClick.RemoveAllListeners();
+        AnotherClear.onClick.AddListener(ClearBtn);
+        AnotherClear.onClick.AddListener(EnterPannelPopDown);
 
         for (int num = 0; num < EnterStageBAP.Quitbuttons.Count; num++)
         {
@@ -96,6 +100,14 @@ public class PopUpManager : MonoBehaviour
     {
         EnterStageBAP.popUp.gameObject.SetActive(false);
         AnotherPannel.gameObject.SetActive(false);
+        backgroundPanel.gameObject.SetActive(false);
+    }
+
+    void ClearBtn()
+    {
+        SaveManager.Instance.GameData = new GameData();
+        ArInventoryManager.Instance.Init();
+        MainTestModeManager.Instance.ItemInvenReset();
     }
 
     /// <summary>
