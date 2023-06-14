@@ -4708,11 +4708,11 @@ GameObject:
   - component: {fileID: 8750571892844955192}
   - component: {fileID: 8769873486371661988}
   - component: {fileID: 8793848191924310278}
-  - component: {fileID: 2729750012859750853}
   - component: {fileID: 3420494315867535371}
   - component: {fileID: 2044061174347882993}
+  - component: {fileID: -8279759534146179031}
   m_Layer: 0
-  m_Name: Wizard
+  m_Name: Executioner
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4875,7 +4875,44 @@ SortingGroup:
   m_SortingLayerID: -1014572865
   m_SortingLayer: 1
   m_SortingOrder: 200
---- !u!114 &2729750012859750853
+--- !u!70 &3420494315867535371
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8711623917335482156}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0
+--- !u!50 &2044061174347882993
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8711623917335482156}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 4
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
+--- !u!114 &-8279759534146179031
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4884,10 +4921,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8711623917335482156}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3d8a95ed7fc6304c932d060b9eee122, type: 3}
+  m_Script: {fileID: 11500000, guid: b42c16be9d935944dba6e3c606ea2c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Wizard
+  Name: 
   pushPower: 40
   StartTurn:
     m_PersistentCalls:
@@ -4929,7 +4966,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   battleTarget: {fileID: 0}
-  so: {fileID: 11400000, guid: 858359dd0c858894c9ad2fd734d74eee, type: 2}
+  so: {fileID: 11400000, guid: ad070f47a09173a42bccc89406287a4d, type: 2}
   isEnd: 1
   MouseUp:
     m_PersistentCalls:
@@ -4947,44 +4984,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  fireBall: {fileID: 3667366158527638765, guid: 77e4b5248b8b9d040958a77fb55a35de, type: 3}
---- !u!70 &3420494315867535371
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8711623917335482156}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
-  m_Direction: 0
---- !u!50 &2044061174347882993
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8711623917335482156}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 1
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 4
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
+  chain: {fileID: 1501072402871971245, guid: 0015731d3a7b35547bfa1f06345015cf, type: 3}
 --- !u!1 &8815629248168906107
 GameObject:
   m_ObjectHideFlags: 0
