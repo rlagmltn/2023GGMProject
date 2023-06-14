@@ -44,6 +44,8 @@ public class KamenRider : Player
         stat.ATK *= 2;
         stat.SATK *= 2;
         stat.CriPer *= 2;
+        stat.WEIGHT *= 2;
+        pushPower *= 2;
         henshin = true;
         EffectManager.Instance.InstantiateEffect_P(Effect.Teleport, transform.position);
         TurnManager.Instance.NextPlayerTurn += 3;
