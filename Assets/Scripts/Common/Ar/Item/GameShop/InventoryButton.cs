@@ -56,5 +56,6 @@ public class InventoryButton : MonoBehaviour
     {
         Map_Inventory_Info.Instance.SetItem(Item);
         Event_DevoteItem.Instance.SetItem(Item, ButtonNum);
+        Event_EnhanceItem_2.Instance.SetItem(Item, ButtonNum);
     }
 }
