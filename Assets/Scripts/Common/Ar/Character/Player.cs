@@ -324,7 +324,7 @@ public class Player : Ar
         moveRange.size = new Vector2(moveDrag / 2, 1);
     }
 
-    public void DragEnd(JoystickType joystickType, float charge, Vector2 angle)
+    public virtual void DragEnd(JoystickType joystickType, float charge, Vector2 angle)
     {
         if (joystickType == JoystickType.None)
         {
@@ -518,13 +518,17 @@ public class Player : Ar
 
     protected override void Out()
     {
-        DeadSave();
         base.Out();
+        DeadSave();
     }
 
     public override bool DeadCheck()
     {
-        if(!so.isDead) TurnManager.Instance.NextPlayerTurn -= 1;
+        if (!so.isDead && stat.HP <= 0)
+        {
+            TurnManager.Instance.NextPlayerTurn -= 1;
+            Debug.Log("턴이줄어버렸어오 히히");
+        }
         DeadSave();
         if (stat.HP <= 0) so.isInGameTake = false;
         return base.DeadCheck();

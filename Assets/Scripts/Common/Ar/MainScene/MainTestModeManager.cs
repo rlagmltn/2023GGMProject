@@ -58,6 +58,12 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
             var instance = Instantiate(pfMainTestSlot, testBtnSlot2);
             instance.SetSO(so);
         }
+        if (SaveManager.Instance.GameData.IsPlayingGame) return;
+        ItemInvenReset();
+    }
+
+    public void ItemInvenReset()
+    {
         itemInven.items = new List<ItemSO>();
         for (int i = 0; i < 21; i++)
         {
