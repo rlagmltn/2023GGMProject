@@ -26,6 +26,10 @@ public class PopUpManager : MonoBehaviour
     [SerializeField] private Transform backgroundPanel2;
     [SerializeField] private List<ButtonAndPopUp> BAP2;
 
+    [SerializeField] private ButtonAndPopUp EnterStageBAP;
+    [SerializeField] private Transform AnotherPannel;
+    [SerializeField] private Button AnotherCancel;
+
     private void Awake()
     {
         Init();
@@ -46,7 +50,19 @@ public class PopUpManager : MonoBehaviour
     /// </summary>
     private void ButtonInit(List<ButtonAndPopUp> buttonAndPopUps)
     {
-        foreach(ButtonAndPopUp btn in buttonAndPopUps)
+        EnterStageBAP.button.onClick.RemoveAllListeners();
+        EnterStageBAP.button.onClick.AddListener(EnterButtonClick);
+        AnotherCancel.onClick.RemoveAllListeners();
+        AnotherCancel.onClick.AddListener(EnterPannelPopDown);
+
+        for (int num = 0; num < EnterStageBAP.Quitbuttons.Count; num++)
+        {
+            RemoveButtonEvnets(EnterStageBAP.Quitbuttons[num]);
+            AddButtonEvent(EnterStageBAP.Quitbuttons[num], EnterPannelPopDown);
+            AddButtonEvent(EnterStageBAP.Quitbuttons[num], BackGroundPanelActiveFalse);
+        }
+
+        foreach (ButtonAndPopUp btn in buttonAndPopUps)
         {
             SetButtonPopUp(btn.button, btn.popUp);
 
@@ -67,6 +83,19 @@ public class PopUpManager : MonoBehaviour
             AddButtonEvent(btn.button, BackGroundPanelActiveTrue);
             //AddButtonEvent(btn.quitButton, BackGroundPanelActiveFalse);
         }
+    }
+
+    void EnterButtonClick()
+    {
+        if (!SaveManager.Instance.GameData.IsPlayingGame) EnterStageBAP.popUp.gameObject.SetActive(true);
+        else AnotherPannel.gameObject.SetActive(true);
+        backgroundPanel.gameObject.SetActive(true);
+    }
+
+    void EnterPannelPopDown()
+    {
+        EnterStageBAP.popUp.gameObject.SetActive(false);
+        AnotherPannel.gameObject.SetActive(false);
     }
 
     /// <summary>

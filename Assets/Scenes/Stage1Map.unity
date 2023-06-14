@@ -23539,6 +23539,7 @@ GameObject:
   - component: {fileID: 760825368}
   - component: {fileID: 760825369}
   - component: {fileID: 760825365}
+  - component: {fileID: 760825370}
   m_Layer: 0
   m_Name: StageManager
   m_TagString: Untagged
@@ -23991,6 +23992,19 @@ MonoBehaviour:
   RewardImage: {fileID: 292785664}
   NameText: {fileID: 832683465}
   SummaryText: {fileID: 105130095}
+--- !u!114 &760825370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760825363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f6732cc116330c4fb9fa490bd2fd5b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GotoMainButton: {fileID: 1406380788}
 --- !u!224 &764672113 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9091144510413303682, guid: f78cf632f3181cc41a515c0b7a7ff323, type: 3}
