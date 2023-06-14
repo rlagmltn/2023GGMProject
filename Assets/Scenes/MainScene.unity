@@ -135590,6 +135590,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7221774096670887887}
   - component: {fileID: 7221774096670887886}
+  - component: {fileID: 7221774096670887888}
   m_Layer: 5
   m_Name: UIs
   m_TagString: Untagged
@@ -135614,10 +135615,6 @@ MonoBehaviour:
     popUp: {fileID: 8905862846912269591}
     Quitbuttons:
     - {fileID: 2465758320458397717}
-  - button: {fileID: 7221774095821983609}
-    popUp: {fileID: 2087104967}
-    Quitbuttons:
-    - {fileID: 1561944893}
   - button: {fileID: 583634388}
     popUp: {fileID: 441102587}
     Quitbuttons:
@@ -135625,6 +135622,13 @@ MonoBehaviour:
   backgroundPanel: {fileID: 7221774096350497887}
   backgroundPanel2: {fileID: 581987563320256705}
   BAP2: []
+  EnterStageBAP:
+    button: {fileID: 7221774095821983609}
+    popUp: {fileID: 2087104967}
+    Quitbuttons:
+    - {fileID: 1561944893}
+  AnotherPannel: {fileID: 641863710}
+  AnotherCancel: {fileID: 2098254178}
 --- !u!224 &7221774096670887887
 RectTransform:
   m_ObjectHideFlags: 0
@@ -135652,6 +135656,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7221774096670887888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7221774096670887872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25a7325407871c7409da6dbbdd9496ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GoToMapButton: {fileID: 139132343}
 --- !u!224 &7221774096715608062
 RectTransform:
   m_ObjectHideFlags: 0
