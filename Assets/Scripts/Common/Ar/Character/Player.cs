@@ -518,13 +518,17 @@ public class Player : Ar
 
     protected override void Out()
     {
-        DeadSave();
         base.Out();
+        DeadSave();
     }
 
     public override bool DeadCheck()
     {
-        if(!so.isDead) TurnManager.Instance.NextPlayerTurn -= 1;
+        if (!so.isDead && stat.HP <= 0)
+        {
+            TurnManager.Instance.NextPlayerTurn -= 1;
+            Debug.Log("턴이줄어버렸어오 히히");
+        }
         DeadSave();
         if (stat.HP <= 0) so.isInGameTake = false;
         return base.DeadCheck();
