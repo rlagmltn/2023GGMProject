@@ -84,7 +84,7 @@ public class Executioner : Player
         var moveVec = transform.position - target.transform.position;
         var col = target.GetComponent<CapsuleCollider2D>();
         col.isTrigger = true;
-        while (dis>1.5f)
+        while (dis>3f)
         {
             target.transform.position += moveVec * Time.deltaTime;
             dis = Vector2.Distance(transform.position, target.transform.position);
