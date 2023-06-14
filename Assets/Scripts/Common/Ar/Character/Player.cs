@@ -324,7 +324,7 @@ public class Player : Ar
         moveRange.size = new Vector2(moveDrag / 2, 1);
     }
 
-    public void DragEnd(JoystickType joystickType, float charge, Vector2 angle)
+    public virtual void DragEnd(JoystickType joystickType, float charge, Vector2 angle)
     {
         if (joystickType == JoystickType.None)
         {
