@@ -131,6 +131,7 @@ public class BanditBoss : Enemy
             Vector2 pos = new Vector2(transform.position.x + Random.Range(-5f, 5f), transform.position.y + Random.Range(-5f, 5f));
             Instantiate(banditWarrior, pos, Quaternion.identity);
             
+
         }
         stat.SP = Mathf.Max(0, stat.SP - 10);
     }
@@ -167,6 +168,7 @@ public class BanditBoss : Enemy
                 players[i].stat.SP = Mathf.Min(players[i].stat.MaxSP, players[i].stat.SP + 5);
                 players[i].transform.Find("DpBack").GetComponent<Bar>().GageChange(players[i].stat.SP / players[i].stat.MaxSP);
 
+
             }
         }
     }
@@ -176,5 +178,16 @@ public class BanditBoss : Enemy
         if (pOverload > 0 || shieldCnt > 0) return false;
 
         return true;
+    }
+
+    protected override void OnCollisionEnter2D(Collision2D collision)
+    {
+        base.OnCollisionEnter2D(collision);
+        if(shieldCnt == 1)
+        {
+            int curSP = stat.SP;
+            stat.SP = curSP;
+
+        }
     }
 }
