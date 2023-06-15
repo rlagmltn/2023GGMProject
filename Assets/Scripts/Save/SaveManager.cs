@@ -26,6 +26,8 @@ public class SaveManager : MonoSingleton<SaveManager>
         PlayerDataLoad();
         GameDataLoad();
         DontDestroyOnLoad(this);
+
+        ArInventoryManager.Instance.Init();
     }
 
     private void PlayerDataLoad()

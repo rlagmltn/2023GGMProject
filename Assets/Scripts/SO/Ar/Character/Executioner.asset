@@ -10,41 +10,41 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc33080b8fafa27479602cce7b7008dd, type: 3}
-  m_Name: Fairy
+  m_Name: Executioner
   m_EditorClassIdentifier: 
   characterInfo:
     image: {fileID: 0}
-    nameString: "\uC694\uC815"
+    nameString: "\uCC98\uD615in"
     Rarity: 1
-    arClass: 4
+    arClass: 3
     Level: 1
   attackStats:
-    baseAtk: 6
-    currentAtk: 6
-    baseSkillAtk: 12
-    currentSkillAtk: 12
+    baseAtk: 4
+    currentAtk: 4
+    baseSkillAtk: 2
+    currentSkillAtk: 2
   criticalStats:
-    baseCriticalPer: 4
-    currentCriticalPer: 4
+    baseCriticalPer: 0
+    currentCriticalPer: 0
     baseCriticalDamage: 50
     currentCriticalDamage: 50
   surviveStats:
-    baseHP: 2
-    MaxHP: 2
-    currentHP: 2
-    baseShield: 4
-    MaxShield: 4
-    currentShield: 4
-    baseWeight: 1
-    currentWeight: 1
+    baseHP: 14
+    MaxHP: 14
+    currentHP: 14
+    baseShield: 6
+    MaxShield: 6
+    currentShield: 6
+    baseWeight: 5
+    currentWeight: 5
   skill:
     skillImage: {fileID: 0}
-    skillName: "\uD22C\uC601"
-    skillCoolTime: 5
+    skillName: "\uCCB4\uC778 \uD06C\uB85C\uC2A4"
+    skillCoolTime: 8
     startskillCoolTime: 0
-    MaxSkillCoolTime: 5
-    currentSkillCoolTime: 5
-    SkillSummary: "\uBCBD\uC744\uBB34\uC2DC\uD574\uC624"
+    MaxSkillCoolTime: 8
+    currentSkillCoolTime: 6
+    SkillSummary: "\uC801\uC744 \uB561\uACA8\uC5B4!"
   E_Item:
     itmeSO:
     - {fileID: 0}
@@ -54,5 +54,5 @@ MonoBehaviour:
   isUse: 0
   isInGameTake: 0
   isDead: 0
-  ArData: {fileID: 1970261382623240040, guid: 846bff35f1451d543aec7539b308e327, type: 3}
+  ArData: {fileID: -8279759534146179031, guid: cd17f94108f10834287d64b9a7d52b2d, type: 3}
   Summary: 

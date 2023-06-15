@@ -219,13 +219,10 @@ public class Ar : MonoBehaviour
     protected virtual void Out()
     {
         OnOutDie?.Invoke();
-        isDead = true;
         rigid.velocity = lastVelocity/5;
         isMove = false;
-        TurnManager.Instance.SomeoneIsMoving = false;
-        GameManager.Instance.ArDead();
         EffectManager.Instance.InstantiateEffect_P(Effect.SUNK, transform.position);
-        animationManager.Die();
+        DeadCheck();
     }
 
     public virtual void OutDie()

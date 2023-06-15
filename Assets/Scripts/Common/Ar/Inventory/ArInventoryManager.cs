@@ -12,12 +12,12 @@ public class ArInventoryManager : MonoSingleton<ArInventoryManager>
 
     private void Awake()
     {
-        Init();
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Init()
+    public void Init()
     {
+        if (SaveManager.Instance.GameData.IsPlayingGame) return;
         inven.ResetArlist();
         holder.LoadArlist();
         foreach (ArSO so in inven.list)
