@@ -108,6 +108,7 @@ public class PopUpManager : MonoBehaviour
         SaveManager.Instance.GameData = new GameData();
         ArInventoryManager.Instance.Init();
         MainTestModeManager.Instance.ItemInvenReset();
+        SaveManager.Instance.GameDataSave();
     }
 
     /// <summary>

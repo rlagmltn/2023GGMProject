@@ -15,7 +15,6 @@ public class SaveManager : MonoSingleton<SaveManager>
         set
         {
             playerData = value;
-            PlayerDataSave();
         }
     }
 
@@ -27,10 +26,7 @@ public class SaveManager : MonoSingleton<SaveManager>
         } 
         set 
         { 
-            Debug.Log("버그는 알아서 고쳐저랴");
             gameData = value;
-            Debug.Log("버그는 알아서 고쳐저랴");
-            GameDataSave(); 
         } 
     }
 
@@ -72,13 +68,14 @@ public class SaveManager : MonoSingleton<SaveManager>
         }
     }
 
-    private void PlayerDataSave()
+    public void PlayerDataSave()
     {
         string jsonPlayer = JsonUtility.ToJson(playerData, true);
         File.WriteAllText(SAVE_PATH + PLAYER_SAVE_FILENAME, jsonPlayer, System.Text.Encoding.UTF8);
+        Debug.Log("저장...");
     }
 
-    private void GameDataSave()
+    public void GameDataSave()
     {
         string jsonGame = JsonUtility.ToJson(gameData, true);
         File.WriteAllText(SAVE_PATH + GAME_SAVE_FILENAME, jsonGame, System.Text.Encoding.UTF8);
