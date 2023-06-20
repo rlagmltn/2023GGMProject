@@ -24,6 +24,7 @@ public class GoldManager : MonoSingleton<GoldManager>
     {
         Gold = 0;
         SaveManager.Instance.GameData.Gold += Gold;
+        SaveManager.Instance.GameDataSave();
     }
 
     public bool AddGold(int amount)
@@ -31,6 +32,7 @@ public class GoldManager : MonoSingleton<GoldManager>
         Gold += amount;
         tmp?.SetText(Gold.ToString());
         SaveManager.Instance.GameData.Gold += amount;
+        SaveManager.Instance.GameDataSave();
         return true;
     }
 
@@ -42,6 +44,7 @@ public class GoldManager : MonoSingleton<GoldManager>
             Gold -= amount;
             tmp.SetText(Gold.ToString());
             SaveManager.Instance.GameData.Gold -= amount;
+            SaveManager.Instance.GameDataSave();
             return true;
         }
     }

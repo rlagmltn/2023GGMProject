@@ -28,9 +28,11 @@ public class Thief : Player
         if (target.magnitude != 0)
         {
             skillRange.size = new Vector2(Vector2.Distance(transform.position, target) / 2, 1);
+            range = Vector2.Distance(transform.position, target);
         }
         else
         {
+            range = moveDrag;
             skillRange.size = new Vector2(moveDrag / 2, 1);
         }
     }
@@ -38,20 +40,27 @@ public class Thief : Player
     protected override void Skill(Vector2 angle)
     {
         base.Skill(angle);
+
         if (target.magnitude != 0)
-            goalPoint = angle * moveDrag;
-        else
             goalPoint = (Vector2)transform.position - target;
+        else
+            goalPoint = angle * moveDrag;
 
-        var casts = Physics2D.RaycastAll(transform.position, angle, goalPoint.magnitude);
+        Debug.DrawRay(transform.position, angle, Color.red, 3f);
+        RaycastHit2D[] colliders = Physics2D.RaycastAll(attackRange.transform.position, -angle, range);
 
-        foreach(RaycastHit2D cast in casts)
+        foreach (RaycastHit2D collider in colliders)
         {
-            cast.collider.GetComponent<Ar>().Hit(stat.SATK, this);
-            EffectManager.Instance.InstantiateEffect_P(Effect.CristalGuntlet, cast.point);
+            var enemy = collider.collider.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.Push(-angle.normalized * 3);
+                BattleManager.Instance.SettingAr(enemy, this);
+                EffectManager.Instance.InstantiateEffect_P(Effect.CristalGuntlet, enemy.transform.position);
+            }
         }
 
-        transform.position += (Vector3)goalPoint;
+        transform.position -= (Vector3)goalPoint;
         EffectManager.Instance.InstantiateEffect_P(Effect.DASH, transform.position, new Vector2(-angle.x, angle.y));
         if (angle.x < 0) character.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
         else if (angle.x > 0) character.localScale = new Vector3(0.5f, 0.5f, 0.5f);
@@ -59,11 +68,12 @@ public class Thief : Player
 
     protected override void Passive()
     {
-        if(lastDealed.stat.SP>0)
+        if(lastDealed?.stat.SP>0)
         {
             lastDealed.Hit(1, null);
             stat.SP++;
 
+            lastDealed = null;
             DeadCheck();
         }
     }
