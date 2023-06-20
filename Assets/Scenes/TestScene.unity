@@ -5475,6 +5475,7 @@ GameObject:
   - component: {fileID: 750030344}
   - component: {fileID: 750030343}
   - component: {fileID: 750030342}
+  - component: {fileID: 750030345}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -5546,7 +5547,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 750030343}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 750030345}
+        m_TargetAssemblyTypeName: Exit, Assembly-CSharp
+        m_MethodName: GotoMap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: "\uD788\uD788"
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &750030343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5585,6 +5598,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750030340}
   m_CullTransparentMesh: 1
+--- !u!114 &750030345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750030340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f44debd5c028d543beac9fd2e02426a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &773502414
 GameObject:
   m_ObjectHideFlags: 0
@@ -6533,9 +6558,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: EscManager, Assembly-CSharp
-        m_MethodName: TogglePanel
+      - m_Target: {fileID: 645191979}
+        m_TargetAssemblyTypeName: MGUI, Assembly-CSharp
+        m_MethodName: ToggleEscPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16585,7 +16610,7 @@ MonoBehaviour:
   m_text: "\uD68D\uB4DD"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c2ba6a7215e2e0c468772fb74b2d452b, type: 2}
-  m_sharedMaterial: {fileID: -8676873354833741998, guid: 27ee0ff2a2df2674899de91711afde66, type: 2}
+  m_sharedMaterial: {fileID: -8359695250949598517, guid: c2ba6a7215e2e0c468772fb74b2d452b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -16648,7 +16673,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &2137724007
