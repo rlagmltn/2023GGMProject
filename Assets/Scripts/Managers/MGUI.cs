@@ -75,7 +75,7 @@ public class MGUI : MonoSingleton<MGUI>
 
         foreach (Enemy enemy in enemies)
         {
-            enemy.Hit(5000);
+            enemy.Hit(5000, null);
         }
 
         escPanel.gameObject.SetActive(false);

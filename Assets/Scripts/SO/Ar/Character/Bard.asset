@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc33080b8fafa27479602cce7b7008dd, type: 3}
+  m_Name: Bard
+  m_EditorClassIdentifier: 
+  characterInfo:
+    image: {fileID: 0}
+    nameString: "\uC74C\uC720\uC2DC\uC778"
+    Rarity: 1
+    arClass: 4
+    Level: 1
+  attackStats:
+    baseAtk: 2
+    currentAtk: 2
+    baseSkillAtk: 2
+    currentSkillAtk: 2
+  criticalStats:
+    baseCriticalPer: 0
+    currentCriticalPer: 0
+    baseCriticalDamage: 50
+    currentCriticalDamage: 50
+  surviveStats:
+    baseHP: 11
+    MaxHP: 11
+    currentHP: 11
+    baseShield: 4
+    MaxShield: 4
+    currentShield: 4
+    baseWeight: 3
+    currentWeight: 3
+  skill:
+    skillImage: {fileID: 0}
+    skillName: "\uBA78\uB9DD\uC758 \uB178\uB798"
+    skillCoolTime: 8
+    startskillCoolTime: 0
+    MaxSkillCoolTime: 8
+    currentSkillCoolTime: 8
+    SkillSummary: "\uC8FC\uBCC0 \uC544\uAD70\uC758 \uCCB4\uB825\uC744 \uD68C\uBCF5\uC2DC\uD0A8\uB2E4\uB77C\uB9AC\uB77C"
+  E_Item:
+    itmeSO:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  isTake: 0
+  isUse: 0
+  isInGameTake: 0
+  isDead: 0
+  ArData: {fileID: 2692469180626693345, guid: 2801c2bb7a7085647ab12c0e77f8a120, type: 3}
+  Summary: 

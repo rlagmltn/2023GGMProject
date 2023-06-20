@@ -15,7 +15,7 @@ public class HealAll : ItemInfo
             var healTarget = col.GetComponent<Player>();
             if(healTarget!=null)
             {
-                healTarget.Hit(-5);
+                healTarget.Heal(5, null);
             }
         }
     }

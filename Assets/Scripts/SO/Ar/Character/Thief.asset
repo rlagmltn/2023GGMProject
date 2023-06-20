@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc33080b8fafa27479602cce7b7008dd, type: 3}
-  m_Name: KamenRider
+  m_Name: Thief
   m_EditorClassIdentifier: 
   characterInfo:
-    image: {fileID: 21300000, guid: 709db8793dfa2054fb885ec0c540c8b6, type: 3}
-    nameString: "\uAC00\uBA74\uB77C\uC774\uB354"
-    Rarity: 3
-    arClass: 3
+    image: {fileID: 0}
+    nameString: "\uB3C4\uC801"
+    Rarity: 2
+    arClass: 2
     Level: 1
   attackStats:
-    baseAtk: 4
-    currentAtk: 4
-    baseSkillAtk: 8
-    currentSkillAtk: 8
+    baseAtk: 7
+    currentAtk: 7
+    baseSkillAtk: 6
+    currentSkillAtk: 6
   criticalStats:
-    baseCriticalPer: 25
-    currentCriticalPer: 25
+    baseCriticalPer: 20
+    currentCriticalPer: 20
     baseCriticalDamage: 50
     currentCriticalDamage: 50
   surviveStats:
-    baseHP: 12
-    MaxHP: 12
-    currentHP: 12
+    baseHP: 10
+    MaxHP: 10
+    currentHP: 10
     baseShield: 6
     MaxShield: 6
     currentShield: 6
@@ -39,21 +39,20 @@ MonoBehaviour:
     currentWeight: 3
   skill:
     skillImage: {fileID: 0}
-    skillName: "\uBCC0\uC2E0!"
-    skillCoolTime: 2
+    skillName: "\uAC15\uD0C0-\u3139"
+    skillCoolTime: 6
     startskillCoolTime: 0
-    MaxSkillCoolTime: 2
-    currentSkillCoolTime: 2
-    SkillSummary: "\uBAA8\uB4E0 \uB2A5\uB825\uCE58\uB97C 2\uBC30\uB85C \uB9CC\uB4E0\uB2E4.
-      \uB2E4\uC74C \uD134 \uBD80\uD130 3\uBC88 \uB354 \uD589\uB3D9 \uAC00\uB2A5\uD574\uC9C4\uB2E4."
+    MaxSkillCoolTime: 6
+    currentSkillCoolTime: 6
+    SkillSummary: "\uBC88\uAC1C\uC758 \uD638\uD761 1\uC758 \uD615, \uBCBD\uB825\uC77C\uC12C"
   E_Item:
     itmeSO:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
-  isTake: 1
+  isTake: 0
   isUse: 0
   isInGameTake: 0
   isDead: 0
-  ArData: {fileID: -5087553036942612109, guid: 2933c7e872b89e4489cc817c7bbf21b6, type: 3}
+  ArData: {fileID: 7824764452184293177, guid: b0a993cf8c637b844a50d43373b3bb04, type: 3}
   Summary: 

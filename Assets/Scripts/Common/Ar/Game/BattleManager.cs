@@ -6,7 +6,7 @@ public class BattleManager : MonoSingleton<BattleManager>
 {
     [SerializeField] private Ar arOne, arTwo;
     private Ar arAtk;
-    private int damage;
+    private Bullet damage;
     private CameraMove cameraMove;
     private AudioClip bumpAudio;
     private void Awake()
@@ -51,7 +51,7 @@ public class BattleManager : MonoSingleton<BattleManager>
         else ResetAll();
     }
 
-    public void SettingAr(Ar ar, int damage)
+    public void SettingAr(Ar ar, Bullet damage)
     {
         arOne = ar;
         this.damage = damage;
@@ -118,11 +118,11 @@ public class BattleManager : MonoSingleton<BattleManager>
             if (criChance < attacker.stat.CriPer)
             {
                 var criDam = ((float)attacker.stat.ATK / 100 * attacker.stat.CriDmg);
-                isDead = defender.Hit(attacker.stat.ATK + (int)criDam);
+                isDead = defender.Hit(attacker.stat.ATK + (int)criDam, attacker);
                 Debug.Log(criDam);
             }
             else
-                isDead = defender.Hit(attacker.stat.ATK);
+                isDead = defender.Hit(attacker.stat.ATK, attacker);
         }
 
         attacker.AfterAttack?.Invoke();
@@ -164,7 +164,7 @@ public class BattleManager : MonoSingleton<BattleManager>
         arAtk.BeforeAttack?.Invoke();
         arOne.BeforeDefence?.Invoke();
 
-        var isdead = arOne.Hit(arAtk.stat.SATK);
+        var isdead = arOne.Hit(arAtk.stat.SATK, arAtk);
 
         if (!isdead) arOne.AfterDefence?.Invoke();
         arAtk.AfterAttack?.Invoke();
@@ -175,7 +175,7 @@ public class BattleManager : MonoSingleton<BattleManager>
 
     private bool BulletDamage()
     {
-        var isdead = arOne.Hit(damage);
+        var isdead = arOne.Hit(damage.damage, damage.summoner);
         arOne.AfterDefence?.Invoke();
         ResetAll();
 
@@ -188,7 +188,7 @@ public class BattleManager : MonoSingleton<BattleManager>
         arOne = null;
         arTwo = null;
         arAtk = null;
-        damage = 0;
+        damage = null;
     }
 
     private (Vector2, Vector2) D2c(Vector2 v1, Vector2 v2, Vector2 c1, Vector2 c2, float w1, float w2,float e = 1)

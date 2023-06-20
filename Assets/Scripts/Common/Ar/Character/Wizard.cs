@@ -115,7 +115,7 @@ public class Wizard : Player
         EffectManager.Instance.InstantiateEffect_P(Effect.ElementExplode, target.transform.position);
         foreach (Collider2D hit in hits)
         {
-            BattleManager.Instance.SettingAr(hit.GetComponent<Enemy>(), deal);
+            BattleManager.Instance.SettingAr(hit.GetComponent<Enemy>(), this);
         }
 
         target = null;
