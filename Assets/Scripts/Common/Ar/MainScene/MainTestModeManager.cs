@@ -211,5 +211,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         GoldManager.Instance.ResetGold();
         gamedata.PointPoint = 0;
         gamedata.ClearStages = 0;
+        SaveManager.Instance.GameDataSave();
+        SaveManager.Instance.PlayerDataSave();
     }
 }

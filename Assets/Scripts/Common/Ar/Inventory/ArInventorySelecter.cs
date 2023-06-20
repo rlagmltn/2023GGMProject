@@ -333,6 +333,7 @@ public class ArInventorySelecter : MonoSingleton<ArInventorySelecter>
         }
 
         SaveManager.Instance.GameData.IsPlayingGame = true;
+        SaveManager.Instance.GameDataSave();
         ArTOGlobal();
         SceneMgr.Instance.LoadScene("Stage1Map");
     }

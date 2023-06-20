@@ -229,7 +229,7 @@ public class StageManager : MonoSingleton<StageManager>
             eStageState.Event => () => { SceneManager.LoadScene("EventScene"); SaveManager.Instance.GameData.PointPoint += 30; },
             _ => () => { SceneManager.LoadScene("TestScene"); SaveManager.Instance.GameData.PointPoint += 100; },
         };
-
+        SaveManager.Instance.GameDataSave();
         Action();
     }
 
