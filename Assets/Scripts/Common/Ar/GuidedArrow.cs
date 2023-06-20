@@ -15,7 +15,7 @@ public class GuidedArrow : Arrow
     {
         StartPos = transform.position;
         CharacterDistance = 100f;
-        GetNearCharacter();
+        
     }
 
     protected override void Update()
@@ -27,6 +27,7 @@ public class GuidedArrow : Arrow
     protected override void SetSO()
     {
         base.SetSO();
+        GetNearCharacter();
         summoner = ThisCharacter;
         SetDamage(1);
     }
@@ -34,16 +35,18 @@ public class GuidedArrow : Arrow
     void GetNearCharacter()
     {
         Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, 10);
+        Collider2D col = null;
 
         if (hit.Length <= 0) return;
 
         for (int num = 0; num < hit.Length; num++)
         {
-            if (!hit[num].GetComponent<Enemy>()) continue;
+            if (!hit[num].GetComponent<Player>()) continue;
 
             if (Vector2.Distance(transform.position, hit[num].transform.position) > CharacterDistance) continue;
             CharacterDistance = Vector2.Distance(transform.position, hit[num].transform.position);
-            ThisCharacter = hit[num].GetComponent<Player>();
+            col = hit[num];
         }
+        ThisCharacter = col.GetComponent<Player>();
     }
 }
