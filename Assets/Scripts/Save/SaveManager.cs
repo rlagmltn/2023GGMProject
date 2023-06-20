@@ -6,10 +6,33 @@ using UnityEngine;
 public class SaveManager : MonoSingleton<SaveManager>
 {
     [SerializeField] private PlayerData playerData;
-    public PlayerData PlayerData { get { return playerData; } set { playerData = value; PlayerDataSave(); } }
+    public PlayerData PlayerData
+    {
+        get
+        {
+            return playerData;
+        }
+        set
+        {
+            playerData = value;
+            PlayerDataSave();
+        }
+    }
 
     [SerializeField] private GameData gameData;
-    public GameData GameData { get { return gameData; } set { gameData = value; GameDataSave(); } }
+    public GameData GameData
+    { get 
+        {
+            return gameData;
+        } 
+        set 
+        { 
+            Debug.Log("버그는 알아서 고쳐저랴");
+            gameData = value;
+            Debug.Log("버그는 알아서 고쳐저랴");
+            GameDataSave(); 
+        } 
+    }
 
     private string SAVE_PATH = "";
     private string PLAYER_SAVE_FILENAME = "/PlayerSave.txt";
@@ -18,7 +41,8 @@ public class SaveManager : MonoSingleton<SaveManager>
     private void Awake()
     {
         SAVE_PATH = Application.dataPath + "/Save";
-        // Application.dataPath
+        //SAVE_PATH = Application.persistentDataPath + "/Save";
+
         if (!Directory.Exists(SAVE_PATH))
         {
             Directory.CreateDirectory(SAVE_PATH);

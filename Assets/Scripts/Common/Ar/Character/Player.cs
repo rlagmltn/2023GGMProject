@@ -378,10 +378,10 @@ public class Player : Ar
         isSkill = false;
     }
 
-    public override bool Hit(int damage)
+    public override bool Hit(int damage, Ar dealer)
     {
         if (isMainScene) return false;
-        return base.Hit(damage);
+        return base.Hit(damage, dealer);
     }
 
     public void DisableRanges()
@@ -583,6 +583,18 @@ public class Player : Ar
         foreach (RaycastHit2D hit in targets)
         {
             if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Object"))
+            {
+                return hit.point;
+            }
+        }
+        return Vector2.zero;
+    }
+
+    protected Vector2 FindNearWall()
+    {
+        foreach (RaycastHit2D hit in targets)
+        {
+            if (hit.collider.CompareTag("Object"))
             {
                 return hit.point;
             }

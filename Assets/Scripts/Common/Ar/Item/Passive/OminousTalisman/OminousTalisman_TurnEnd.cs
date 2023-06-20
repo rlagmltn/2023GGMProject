@@ -38,7 +38,7 @@ public class OminousTalisman_TurnEnd : ItemInfo
 
             Debug.Log(Damage);
             EffectManager.Instance.InstantiateEffect_P(Effect.Blood, Dic.Key.transform.position);
-            Dic.Key.GetComponent<Ar>().Hit(Damage);
+            Dic.Key.GetComponent<Ar>().Hit(Damage, player);
             player.OminousTalismanDic[Dic.Key]--;
 
             if (player.OminousTalismanDic[Dic.Key] < 1) player.OminousTalismanDic.Remove(Dic.Key);

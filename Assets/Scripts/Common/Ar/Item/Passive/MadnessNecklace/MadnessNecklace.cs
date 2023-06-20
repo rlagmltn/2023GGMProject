@@ -8,6 +8,6 @@ public class MadnessNecklace : ItemInfo
     {
         var effect =  EffectManager.Instance.InstantiateEffect_P(Effect.Blood, transform.position);
         effect.transform.SetParent(player.transform);
-        player.Hit(1);
+        player.Hit(1, null);
     }
 }

@@ -38,6 +38,11 @@ public class Ar : MonoBehaviour
     [HideInInspector] public UnityEvent OnUsedSkill;
     [HideInInspector] public UnityEvent OnCrashed;
     [HideInInspector] public UnityEvent EndTurn;
+    [HideInInspector] public UnityEvent Dealed;
+    [HideInInspector] public UnityEvent Healed;
+
+    public Ar lastDealed { get; set; }
+    public Ar lastHealed { get; set; }
 
     public bool isRangeCharacter { get; protected set; }
 
@@ -166,7 +171,7 @@ public class Ar : MonoBehaviour
         rigid.velocity = velo;
     }
 
-    public virtual bool Hit(int damage)
+    public virtual bool Hit(int damage, Ar dealer)
     {
         damage -= DamageDrcrease;
         EffectManager.Instance.InstantiateFloatDamage(transform.position).DamageText(damage);
@@ -181,12 +186,22 @@ public class Ar : MonoBehaviour
             else damage = 0;
         }
         stat.HP = Mathf.Clamp(stat.HP - damage, 0, stat.MaxHP);
+        if(dealer!=null)
+        {
+            dealer.lastDealed = this;
+            dealer.Dealed.Invoke();
+        }
         return DeadCheck();
     }
 
-    public virtual void Heal(int heal)
+    public virtual void Heal(int heal, Ar healer)
     {
         stat.HP = Mathf.Clamp(stat.HP + heal, 0, stat.MaxHP);
+        if(healer!=null)
+        {
+            healer.lastHealed = this;
+            healer.Healed.Invoke();
+        }
         DeadCheck();
     }
 

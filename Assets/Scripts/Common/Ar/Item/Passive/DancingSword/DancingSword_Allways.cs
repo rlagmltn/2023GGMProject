@@ -31,7 +31,7 @@ public class DancingSword_Allways : ItemInfo
             if (!hit[num].GetComponent<Enemy>()) continue;
             if (hit[num].GetComponent<Enemy>().isDancingSword_Damage) continue;
 
-            hit[num].GetComponent<Enemy>().Hit(3);
+            hit[num].GetComponent<Enemy>().Hit(3, player);
             hit[num].GetComponent<Enemy>().isDancingSword_Damage = true;
         }
     }

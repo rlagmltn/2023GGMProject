@@ -62,7 +62,7 @@ public class Bullet : MonoBehaviour
     public void DamageToAr(Collider2D collision)
     {
         if(bulletSO.bulletType!=BulletType.Explosion)
-            BattleManager.Instance.SettingAr(collision.GetComponent<Ar>(), damage);
+            BattleManager.Instance.SettingAr(collision.GetComponent<Ar>(), this);
         EffectManager.Instance.InstantiateEffect(Effect.HIT, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
         EffectManager.Instance.InstantiateEffect(Effect.CRASH, collision.ClosestPoint(transform.position), transform.position, collision.ClosestPoint(transform.position));
         AfterCrush();
@@ -88,7 +88,7 @@ public class Bullet : MonoBehaviour
                     var hits = Physics2D.OverlapCircleAll(transform.position, bulletSO.range);
                     foreach(Collider2D hit in hits)
                     {
-                        BattleManager.Instance.SettingAr(hit.GetComponent<Enemy>(), damage);
+                        BattleManager.Instance.SettingAr(hit.GetComponent<Enemy>(), this);
                     }
                     Destroy(gameObject);
                     // 주변 적들도 피해를 주고 풀링되는 코드
