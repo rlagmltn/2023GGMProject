@@ -56,7 +56,16 @@ public class Bullet : MonoBehaviour
         {
             DamageToAr(collision);
             //에너미에게 이 불렛의 데미지만큼의 피해를 줌
+            if(summoner.isFuckingRoot) EnemyPush(collision);
         }
+    }
+
+    void EnemyPush(Collider2D collision)
+    {
+        Vector2 vec = collision.transform.position - this.transform.position;
+        float Add = vec.x + vec.y;
+        vec = new Vector2(vec.x / Add, vec.y / Add);
+        collision.GetComponent<Ar>().Push(vec * 7);
     }
 
     public void DamageToAr(Collider2D collision)

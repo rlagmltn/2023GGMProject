@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd6096bb90998d0469d40c07acdda1e3, type: 3}
+  m_Name: RedFruit
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: 9e085fc1068ae3c4daabb06c676b3137, type: 3}
+  itemName: "\uBB3C\uD1B5"
+  itemPrice: 1500
+  itemRarity: 4
+  stat:
+    MaxHP: 2
+    HP: 2
+    MaxSP: 2
+    SP: 2
+    ATK: 0
+    SATK: 0
+    CriPer: 0
+    CriDmg: 0
+    WEIGHT: 0
+  SkillCoolDown: 0
+  DamageDecrease: 0
+  itemExplain: "\uBE68-\uBE68-\uBE68\uAC04 \uB9DB, \uAD81\uAE08\uD574 honey\r\n\uAE68\uBB3C\uBA74
+    \uC810\uC810 \uB179\uC544\uB4E0 strawberry \uADF8 \uB9DB\r\nCorner candy shop
+    \uCC3E\uC544\uBD10 baby\r\n\uB0B4\uAC00 \uC81C\uC77C \uC88B\uC544\uD558\uB294
+    \uAC74 \uC5EC\uB984 \uADF8 \uB9DB"
+  TAI:
+  - itemPassiveType: 6
+    Info: {fileID: 7376995778610405798, guid: 8eade772b6720cc4892352245b33e6f0, type: 3}
+  - itemPassiveType: 8
+    Info: {fileID: 7376995778610405798, guid: 8eade772b6720cc4892352245b33e6f0, type: 3}

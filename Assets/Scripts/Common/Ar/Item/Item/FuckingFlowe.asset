@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd6096bb90998d0469d40c07acdda1e3, type: 3}
+  m_Name: FuckingFlowe
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: 9e085fc1068ae3c4daabb06c676b3137, type: 3}
+  itemName: "\uC800\uC8FC\uBC2D\uC740\uAF43"
+  itemPrice: 700
+  itemRarity: 3
+  stat:
+    MaxHP: 2
+    HP: 2
+    MaxSP: 0
+    SP: 0
+    ATK: 0
+    SATK: 0
+    CriPer: 0
+    CriDmg: 0
+    WEIGHT: 0
+  SkillCoolDown: 0
+  DamageDecrease: 0
+  itemExplain: "\uC774\uB3D9\uC774 \uB05D\uB09C \uD6C4 \uC8FC\uBCC0 \uC801\uC744
+    \uBC00\uC5B4\uB0B8\uB2E4"
+  TAI:
+  - itemPassiveType: 6
+    Info: {fileID: 6504711350138846144, guid: e2a9fa9a18b79524780698d0c3831671, type: 3}
