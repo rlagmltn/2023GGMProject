@@ -41,12 +41,13 @@ public class Event_DevoteItem : MonoSingleton<Event_DevoteItem>
         Item = _Item;
         ItemNum = num;
 
+        Debug.Log($"{Item.itemName}, {ItemNum}");
+
         UpdateUI();
     }
 
     void UpdateUI()
     {
-        Info_ActiveSelf(false);
         Info_ActiveSelf(true);
 
         ItemImage.sprite = Item.itemIcon;

@@ -14,7 +14,7 @@ public class ArSOHolder_Map : MonoBehaviour
     private void UpdateButtonUI()
     {
         ArImage = transform.GetChild(0).GetComponent<Image>();
-        HPBar = transform.GetChild(3);
+        HPBar = transform.GetChild(3);  
         ArImage.sprite = Ar.characterInfo.Image;
         HPBar.localScale = new Vector3((float)(Ar.surviveStats.currentHP / Ar.surviveStats.MaxHP), 1, 1);
         HPBarColorChange();

@@ -23,7 +23,7 @@ public class Event_EnhanceItem_2 : MonoSingleton<Event_EnhanceItem_2>
 
     private void Start()
     {
-        Info_ActiveSelf(false);
+        Info_ActiveSelf(false);             
         ButtonInit();
     }
 
