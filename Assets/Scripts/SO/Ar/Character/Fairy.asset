@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fairy
   m_EditorClassIdentifier: 
   characterInfo:
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 9f1d4ae9f19e5e6448f0492843eb281b, type: 3}
     nameString: "\uC694\uC815"
     Rarity: 1
     arClass: 4
@@ -43,7 +43,7 @@ MonoBehaviour:
     skillCoolTime: 5
     startskillCoolTime: 0
     MaxSkillCoolTime: 5
-    currentSkillCoolTime: 5
+    currentSkillCoolTime: 0
     SkillSummary: "\uBCBD\uC744\uBB34\uC2DC\uD574\uC624"
   E_Item:
     itmeSO:
