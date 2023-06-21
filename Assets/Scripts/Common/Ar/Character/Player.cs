@@ -359,7 +359,6 @@ public class Player : Ar
     protected virtual void Attack(Vector2 angle) 
     {
         isAttack = true;
-        animationManager.Attack();
     }
     public virtual IEnumerator AnimTimingAttack() { yield return null; }
 

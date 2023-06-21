@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc33080b8fafa27479602cce7b7008dd, type: 3}
+  m_Name: Gambler
+  m_EditorClassIdentifier: 
+  characterInfo:
+    image: {fileID: 0}
+    nameString: "\uB3C4\uBC15\uD558\uB294\uC0AC\uB78C"
+    Rarity: 2
+    arClass: 1
+    Level: 1
+  attackStats:
+    baseAtk: 10
+    currentAtk: 10
+    baseSkillAtk: 0
+    currentSkillAtk: 0
+  criticalStats:
+    baseCriticalPer: 50
+    currentCriticalPer: 50
+    baseCriticalDamage: 50
+    currentCriticalDamage: 50
+  surviveStats:
+    baseHP: 8
+    MaxHP: 8
+    currentHP: 8
+    baseShield: 4
+    MaxShield: 4
+    currentShield: 4
+    baseWeight: 3
+    currentWeight: 3
+  skill:
+    skillImage: {fileID: 0}
+    skillName: "\uC154\uD50C"
+    skillCoolTime: 9
+    startskillCoolTime: 0
+    MaxSkillCoolTime: 9
+    currentSkillCoolTime: 9
+    SkillSummary: "\uB9C8\uBC95 \uBC1C\uB3D9! \uD558\uB298\uC5D0\uC11C\uC758 \uC120\uBB3C,
+      \uC11C\uB85C\uC758 \uD50C\uB808\uC774\uC5B4\uB294 \uD328\uAC00 6\uC7A5\uC774
+      \uB418\uB3C4\uB85D \uCE74\uB4DC\uB97C \uBF51\uB294\uB2E4!"
+  E_Item:
+    itmeSO:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  isTake: 0
+  isUse: 0
+  isInGameTake: 0
+  isDead: 0
+  ArData: {fileID: 0}
+  Summary: 

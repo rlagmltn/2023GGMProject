@@ -50,11 +50,6 @@ public class Priest : Player
         }
     }
 
-    protected override void Attack(Vector2 angle)
-    {
-        base.Attack(angle);
-    }
-
     protected override void Skill(Vector2 angle)
     {
         base.Skill(angle);

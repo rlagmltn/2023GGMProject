@@ -64,6 +64,7 @@ public class Archer : Player
     protected override void Attack(Vector2 angle)
     {
         base.Attack(angle);
+        animationManager.Attack();
         this.angle = angle;
         if (angle.x < 0) character.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
         else if (angle.x > 0) character.localScale = new Vector3(0.5f, 0.5f, 0.5f);
