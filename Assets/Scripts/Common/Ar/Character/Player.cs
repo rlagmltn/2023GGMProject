@@ -518,6 +518,7 @@ public class Player : Ar
     protected override void Out()
     {
         base.Out();
+        so.isDead = true;
         DeadSave();
     }
 
@@ -526,6 +527,7 @@ public class Player : Ar
         if (!so.isDead && stat.HP <= 0)
         {
             TurnManager.Instance.NextPlayerTurn -= 1;
+            so.isDead = true;
             Debug.Log("턴이줄어버렸어오 히히");
         }
         DeadSave();
@@ -542,7 +544,6 @@ public class Player : Ar
 
     public void TakeAllStat()
     {
-        so.isDead = true;
         so.surviveStats.currentHP = stat.HP;
         so.surviveStats.currentWeight = stat.WEIGHT;
         if(!isDead) so.surviveStats.currentShield = so.surviveStats.MaxShield;
