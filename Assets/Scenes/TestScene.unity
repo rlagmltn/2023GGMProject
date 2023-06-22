@@ -3595,7 +3595,7 @@ MonoBehaviour:
   m_Follow: {fileID: 686327556}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 5
+    OrthographicSize: 8
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -16934,6 +16934,10 @@ PrefabInstance:
     - target: {fileID: 6555354365469328089, guid: 11f5b3286664f7343ae3dd132b90d1de, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6555354365469328090, guid: 11f5b3286664f7343ae3dd132b90d1de, type: 3}
+      propertyPath: orthographic size
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11f5b3286664f7343ae3dd132b90d1de, type: 3}

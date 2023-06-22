@@ -32,6 +32,9 @@ public class Reward : Shop
 
         NomalWinPanel.gameObject.SetActive(false);
         BossWinPanel.gameObject.SetActive(false);
+
+        TwinManager_Event.Instance.SetDAP(0.1f, TakeArPannel);
+        TwinManager_Event.Instance.EventStart();
     }
 
     public void TakeItem()
@@ -48,6 +51,8 @@ public class Reward : Shop
 
         NomalWinPanel.gameObject.SetActive(false);
         BossWinPanel.gameObject.SetActive(false);
+        TwinManager_Event.Instance.SetDAP(0.1f, TakeItemPannel);
+        TwinManager_Event.Instance.EventStart();
     }
 
     public void TakeHeal()
@@ -63,6 +68,8 @@ public class Reward : Shop
 
         NomalWinPanel.gameObject.SetActive(false);
         BossWinPanel.gameObject.SetActive(false);
+        TwinManager_Event.Instance.SetDAP(0.1f, TakeHealPannel);
+        TwinManager_Event.Instance.EventStart();
     }
 
     public void StageClear() //이거 나중에 버튼눌렀을때 실행되도록 바꿔야함

@@ -30,6 +30,7 @@ public class TwinManager_Event : MonoSingleton<TwinManager_Event>
             yield return new WaitForSeconds(DAP[num].DelayTime);
             Animation(num);
         }
+        DAP.Clear();
     }
 
     private void Hide()
