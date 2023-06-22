@@ -55,6 +55,8 @@ public class Ar : MonoBehaviour
 
     protected int DamageDrcrease = 0;
 
+    public bool isFuckingRoot = false;
+
     protected virtual void Start()
     {
         stat = new Stat();

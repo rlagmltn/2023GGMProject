@@ -10,43 +10,43 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc33080b8fafa27479602cce7b7008dd, type: 3}
-  m_Name: Elementalist
+  m_Name: Gambler
   m_EditorClassIdentifier: 
   characterInfo:
-    image: {fileID: 21300000, guid: 8b76791dd3be5ac4abdae380d95b45f8, type: 3}
-    nameString: "\uC815\uB839\uC0AC"
-    Rarity: 1
-    arClass: 5
+    image: {fileID: 0}
+    nameString: "\uB3C4\uBC15\uD558\uB294\uC0AC\uB78C"
+    Rarity: 2
+    arClass: 1
     Level: 1
   attackStats:
-    baseAtk: 3
-    currentAtk: 3
-    baseSkillAtk: 5
-    currentSkillAtk: 5
+    baseAtk: 10
+    currentAtk: 10
+    baseSkillAtk: 0
+    currentSkillAtk: 0
   criticalStats:
-    baseCriticalPer: 10
-    currentCriticalPer: 10
+    baseCriticalPer: 50
+    currentCriticalPer: 50
     baseCriticalDamage: 50
     currentCriticalDamage: 50
   surviveStats:
     baseHP: 8
     MaxHP: 8
     currentHP: 8
-    baseShield: 6
-    MaxShield: 6
-    currentShield: 6
+    baseShield: 4
+    MaxShield: 4
+    currentShield: 4
     baseWeight: 3
     currentWeight: 3
   skill:
-    skillImage: {fileID: -1538489319, guid: 4debd922d8bdc104989f872e32075c99, type: 3}
-    skillName: "\uC2A4\uD53C\uB9BF \uBC84\uC2A4\uD2B8"
+    skillImage: {fileID: 0}
+    skillName: "\uC154\uD50C"
     skillCoolTime: 9
     startskillCoolTime: 0
     MaxSkillCoolTime: 9
     currentSkillCoolTime: 0
-    SkillSummary: "\uC804\uBC29\uC73C\uB85C \uC815\uB839\uC744 \uBCF4\uB0B4 \uD3ED\uBC1C
-      \uC2DC\uCF1C \uBC94\uC704\uB0B4\uC758 \uC801\uB4E4\uC5D0\uAC8C \uB370\uBBF8\uC9C0\uB97C
-      \uC900\uB2E4 "
+    SkillSummary: "\uB9C8\uBC95 \uBC1C\uB3D9! \uD558\uB298\uC5D0\uC11C\uC758 \uC120\uBB3C,
+      \uC11C\uB85C\uC758 \uD50C\uB808\uC774\uC5B4\uB294 \uD328\uAC00 6\uC7A5\uC774
+      \uB418\uB3C4\uB85D \uCE74\uB4DC\uB97C \uBF51\uB294\uB2E4!"
   E_Item:
     itmeSO:
     - {fileID: 0}
@@ -56,5 +56,5 @@ MonoBehaviour:
   isUse: 0
   isInGameTake: 0
   isDead: 0
-  ArData: {fileID: 395520965688050125, guid: ca071ceb3e023644c848fa630c76e164, type: 3}
+  ArData: {fileID: 712805128116294669, guid: b070e06bc1021404e93fb1328dab7b41, type: 3}
   Summary: 
