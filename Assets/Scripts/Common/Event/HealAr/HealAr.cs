@@ -37,6 +37,10 @@ public class HealAr : _Event
     {
         HealArPannel.gameObject.SetActive(true);
         ButtonInit();
+        TwinManager_Event.Instance.SetDAP(0.7f, OptionButton_1.transform);
+        TwinManager_Event.Instance.SetDAP(0.2f, OptionButton_2.transform);
+        TwinManager_Event.Instance.SetDAP(0.2f, OptionButton_3.transform);
+        TwinManager_Event.Instance.EventStart();
     }
 
     void ButtonInit()

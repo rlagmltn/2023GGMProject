@@ -35,6 +35,10 @@ public class HitOrRun : _Event
     {
         HORPannel.gameObject.SetActive(true);
         ButtonInit();
+        TwinManager_Event.Instance.SetDAP(0.7f, SelectedOptionButton[0].transform);
+        TwinManager_Event.Instance.SetDAP(0.2f, SelectedOptionButton[1].transform);
+        TwinManager_Event.Instance.SetDAP(0.2f, SelectedOptionButton[2].transform);
+        TwinManager_Event.Instance.EventStart();
     }
 
     void ButtonInit()
