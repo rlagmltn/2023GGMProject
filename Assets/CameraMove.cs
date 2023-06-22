@@ -56,16 +56,21 @@ public class CameraMove : MonoBehaviour
     private bool openCheck = true;
     private bool attackActive;
 
+    [SerializeField] private bool isMainScene;
+
     public float OrthographicSize { get { return cinemachineCam.m_Lens.OrthographicSize; } }
 
     private void Start()
     {
-        var mapInfo = SpawnManager.Instance.battleMapSO;
+        if(!isMainScene)
+        {
+            var mapInfo = SpawnManager.Instance.battleMapSO;
 
-        minSize = mapInfo.minSize;
-        maxSize = mapInfo.maxSize;
-        defaultOrthographicSize = mapInfo.camStartZoomAmount;
-        transform.position = mapInfo.camStartPos;
+            minSize = mapInfo.minSize;
+            maxSize = mapInfo.maxSize;
+            defaultOrthographicSize = mapInfo.camStartZoomAmount;
+            transform.position = mapInfo.camStartPos;
+        }
 
         orthographicSize = cinemachineCam.m_Lens.OrthographicSize;
         camNoise = cinemachineCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
