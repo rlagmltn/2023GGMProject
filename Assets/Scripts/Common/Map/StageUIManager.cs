@@ -269,11 +269,11 @@ public class StageUIManager : MonoSingleton<StageUIManager>
 
     private void OnApplicationQuit()
     {
-        foreach (ArSO Ar in ArList.list)
-        {
-            Ar.isInGameTake = false;
-            Ar.isDead = false;
-        }
+        //foreach (ArSO Ar in ArList.list)
+        //{
+        //    Ar.isInGameTake = false;
+        //    Ar.isDead = false;
+        //}
     }
 }
 ;

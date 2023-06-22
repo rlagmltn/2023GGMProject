@@ -29,7 +29,7 @@ public class StageManager : MonoSingleton<StageManager>
 
     public List<Transform> ClearedStages;
 
-    private Transform currentStage;
+    public Transform currentStage;
     private StageSO Selected_Stage;
 
     private void Start()
@@ -68,7 +68,12 @@ public class StageManager : MonoSingleton<StageManager>
                     Debug.Log(trans.GetComponent<StageSOHolder>().GetStage().stageInfo.stageName);
                 }
 
-                if (trans.GetComponent<StageSOHolder>().GetStage() == Global.EnterStage)
+                if(Global.EnterStage == null)
+                {
+                    if (trans.GetComponent<StageSOHolder>().GetStage().IsCleared)
+                        currentStage = trans;
+                }
+                else if (trans.GetComponent<StageSOHolder>().GetStage() == Global.EnterStage)
                 {
                     currentStage = trans;
                     Debug.Log(trans.GetComponent<StageSOHolder>().GetStage().stageInfo.stageName);
@@ -120,6 +125,14 @@ public class StageManager : MonoSingleton<StageManager>
 
     bool GlobalIsEmpty()
     {
+        int num = 0;
+        foreach(StageSO stage in stageList.stageList)
+        {
+            if (stage.IsCleared) num++;
+        }
+
+        if (num > 0) return false;
+
         foreach (Transform trans in AllButtons)
             if (Global.EnterStage == trans.GetComponent<StageSOHolder>().GetStage())
                 return false;
@@ -238,10 +251,10 @@ public class StageManager : MonoSingleton<StageManager>
 
     private void OnApplicationQuit()
     {
-        foreach (StageSO stage in stageList.stageList)
-        {
-            stage.IsCanEnter = false;
-            stage.IsCleared = false;
-        }
+        //foreach (StageSO stage in stageList.stageList)
+        //{
+        //    stage.IsCanEnter = false;
+        //    stage.IsCleared = false;
+        //}
     }
 }
