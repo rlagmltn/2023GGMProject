@@ -25,6 +25,7 @@ public class StageManager : MonoSingleton<StageManager>
     [SerializeField] private Transform startStage; //그냥 아무것도 아닌 시작하는 스테이지 아마도 emptyStage가 아닐까?
 
     [SerializeField] private BattleMapHolder battleMapHolder;
+    [SerializeField] private BattleMapList battleMapList;
 
     public List<Transform> ClearedStages;
 
@@ -86,12 +87,14 @@ public class StageManager : MonoSingleton<StageManager>
         for (int num = 0; num < stageList.stageList.Count - 1; num++)
         {
             stageList.stageList[num].stageKind = eStageState.Battle;
-            stageList.stageList[num].battleMapSO = battleMapHolder.map;
+            stageList.stageList[num].battleMapSO = battleMapList.stages[0].maps[Random.Range(0, battleMapList.stages[0].maps.Length-1)];
         }
 
         StageKindChange(eStageState.Event, eventNum);
         StageKindChange(eStageState.Shop, shopNum);
         Debug.Log(shopNum);
+
+        stageList.stageList[stageList.stageList.Count - 1].battleMapSO = battleMapList.stages[0].maps[battleMapList.stages[0].maps.Length - 1];
 
         //여기서 스테이지so홀더의 이미지 바꿔주는 함수 실행
         for (int num = 0; num < AllButtons.Count; num++) AllButtons[num].GetComponent<StageSOHolder>().ChangeImage();

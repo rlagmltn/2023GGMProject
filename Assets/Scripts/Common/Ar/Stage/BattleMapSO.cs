@@ -10,6 +10,10 @@ public class BattleMapSO : ScriptableObject
     public List<EnemyCount> Enemies;
     public int MaxPlayers;
     public int BasePlayerTurn;
+    public Vector2 minSize;
+    public Vector2 maxSize;
+    public Vector2 camStartPos;
+    public float camStartZoomAmount;
     public bool IsBossMap;
 }
 

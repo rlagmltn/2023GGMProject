@@ -9,7 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19a58c9a1e5f2714f87be5d24b2b6849, type: 3}
-  m_Name: BattleMapHolderSO
+  m_Script: {fileID: 11500000, guid: 0dc981e19cddf9248b1e2c1f1c7c72d0, type: 3}
+  m_Name: BattleMapList
   m_EditorClassIdentifier: 
-  map: {fileID: 11400000, guid: d0b354912f50da4488e68e7f760b9029, type: 2}
+  stages:
+  - maps:
+    - {fileID: 11400000, guid: 2216fd1286a4c7043949b15ea00f5e57, type: 2}
+    - {fileID: 11400000, guid: d0b354912f50da4488e68e7f760b9029, type: 2}

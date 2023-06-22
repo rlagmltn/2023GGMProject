@@ -60,6 +60,13 @@ public class CameraMove : MonoBehaviour
 
     private void Start()
     {
+        var mapInfo = SpawnManager.Instance.battleMapSO;
+
+        minSize = mapInfo.minSize;
+        maxSize = mapInfo.maxSize;
+        defaultOrthographicSize = mapInfo.camStartZoomAmount;
+        transform.position = mapInfo.camStartPos;
+
         orthographicSize = cinemachineCam.m_Lens.OrthographicSize;
         camNoise = cinemachineCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         camTransposer = cinemachineCam.GetCinemachineComponent<CinemachineTransposer>();
