@@ -68,16 +68,8 @@ public class StageManager : MonoSingleton<StageManager>
                     Debug.Log(trans.GetComponent<StageSOHolder>().GetStage().stageInfo.stageName);
                 }
 
-                if(Global.EnterStage == null)
-                {
-                    if (trans.GetComponent<StageSOHolder>().GetStage().IsCleared)
-                        currentStage = trans;
-                }
-                else if (trans.GetComponent<StageSOHolder>().GetStage() == Global.EnterStage)
-                {
+                if (trans.GetComponent<StageSOHolder>().GetStage().IsCleared)
                     currentStage = trans;
-                    Debug.Log(trans.GetComponent<StageSOHolder>().GetStage().stageInfo.stageName);
-                }
             }
 
             for (int num = 0; num < AllButtons.Count; num++) AllButtons[num].GetComponent<StageSOHolder>().ChangeImage(); //스테이지 아이콘 바꿔주는 함수

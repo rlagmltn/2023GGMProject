@@ -31,6 +31,9 @@ public class PopUpManager : MonoBehaviour
     [SerializeField] private Button AnotherCancel;
     [SerializeField] private Button AnotherClear;
 
+    [SerializeField] private StageSOList StageList;
+    [SerializeField] private ArSOList ArList;
+
     private void Awake()
     {
         Init();
@@ -109,6 +112,18 @@ public class PopUpManager : MonoBehaviour
         ArInventoryManager.Instance.Init();
         MainTestModeManager.Instance.ItemInvenReset();
         SaveManager.Instance.GameDataSave();
+
+        foreach(StageSO stage in StageList.stageList)
+        {
+            stage.IsCanEnter = false;
+            stage.IsCleared = false;
+        }
+
+        foreach(ArSO ar in ArList.list)
+        {
+            ar.isInGameTake = false;
+            ar.isDead = false;
+        }
     }
 
     /// <summary>

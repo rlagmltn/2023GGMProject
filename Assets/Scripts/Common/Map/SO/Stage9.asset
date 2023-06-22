@@ -16,11 +16,10 @@ MonoBehaviour:
     stageName: "\uC2A4\uD14C\uC774\uC9C09"
     stageImage: {fileID: 21300000, guid: 36c7000bccb766d469ed86a789fd599e, type: 3}
     explanationText: "\uC2A4\uD14C\uC774\uC9C09 \uC774\uB2E4."
-  stageKind: 2
-  stageEnmey:
-  - {fileID: 4190432432035387756, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
-  - {fileID: 4190432432035387756, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
-  - {fileID: 4190432432035387756, guid: 78ace60a9a44e2e44a26eb11b414440a, type: 3}
+  stageKind: 3
+  StageEnemy: []
+  StageReward: []
   IsCleared: 0
   IsCanEnter: 0
   map: {fileID: 8463493047440261946, guid: 185a9ebad82b460429c64b4e0fa97d2c, type: 3}
+  battleMapSO: {fileID: 11400000, guid: 2216fd1286a4c7043949b15ea00f5e57, type: 2}
