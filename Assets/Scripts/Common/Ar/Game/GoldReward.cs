@@ -55,10 +55,18 @@ public class GoldReward : MonoBehaviour
         if(SpawnManager.Instance.battleMapSO.IsBossMap)
         {
             BossWinPanel.SetActive(true);
+            TwinManager_Event.Instance.SetDAP(0.2f, BossWinPanel.transform.GetChild(1));
+            TwinManager_Event.Instance.SetDAP(0.5f, BossWinPanel.transform.GetChild(2));
+            TwinManager_Event.Instance.SetDAP(0.5f, BossWinPanel.transform.GetChild(0));
+            TwinManager_Event.Instance.EventStart();
         }
         else
         {
             WinPanel.SetActive(true);
+            TwinManager_Event.Instance.SetDAP(0.2f, WinPanel.transform.GetChild(1));
+            TwinManager_Event.Instance.SetDAP(0.5f, WinPanel.transform.GetChild(2));
+            TwinManager_Event.Instance.SetDAP(0.5f, WinPanel.transform.GetChild(0));
+            TwinManager_Event.Instance.EventStart();
         }
         gameObject.SetActive(false);
     }
