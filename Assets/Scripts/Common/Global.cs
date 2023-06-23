@@ -106,7 +106,7 @@ public enum eSceneName
     Main,
     Loading,
     Select,
-    Map,
+    Stage1Map,
     InGame,
     Boss,
     MaxCount,
