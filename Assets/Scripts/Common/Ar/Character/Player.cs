@@ -531,15 +531,20 @@ public class Player : Ar
 
     public override bool DeadCheck()
     {
-        if (!so.isDead && stat.HP <= 0)
+        if (playerController != null)
         {
-            TurnManager.Instance.NextPlayerTurn -= 1;
-            so.isDead = true;
-            Debug.Log("턴이줄어버렸어오 히히");
+            if (!so.isDead && stat.HP <= 0)
+            {
+                if (!playerController.IsBatchMode)
+                    TurnManager.Instance.NextPlayerTurn -= 1;
+                so.isDead = true;
+                Debug.Log("턴이줄어버렸어오 히히");
+            }
+            DeadSave();
+            if (stat.HP <= 0) so.isInGameTake = false;
+            return base.DeadCheck();
         }
-        DeadSave();
-        if (stat.HP <= 0) so.isInGameTake = false;
-        return base.DeadCheck();
+        else return false;
     }
 
     protected void DeadSave()
