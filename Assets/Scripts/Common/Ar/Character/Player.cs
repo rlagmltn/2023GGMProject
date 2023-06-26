@@ -96,8 +96,10 @@ public class Player : Ar
         gameObject.SetActive(false);
     }
 
-    public override void StatReset()
+    public void Init()
     {
+        stat = new Stat();
+
         stat.MaxHP = (int)so.surviveStats.MaxHP;
         stat.HP = (int)so.surviveStats.currentHP;
         stat.MaxSP = (int)so.surviveStats.MaxShield;
@@ -109,6 +111,11 @@ public class Player : Ar
         stat.WEIGHT = (int)so.surviveStats.currentWeight;
         skillCooltime = so.skill.MaxSkillCoolTime;
         currentCooltime = so.skill.currentSkillCoolTime;
+    }
+
+    public override void StatReset()
+    {
+        Init();
 
         so.isDead = false;
         //뎀감 만들어야함

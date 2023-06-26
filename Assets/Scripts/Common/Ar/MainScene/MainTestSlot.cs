@@ -19,7 +19,6 @@ public class MainTestSlot : MonoBehaviour
         Init();
         button.onClick.AddListener(SellectPlayer);
         image.sprite = so.characterInfo.Image;
-        player = Instantiate(so.ArData, null);
         background.sprite = BackGroundHolder.Instance.BackGround(so.characterInfo.rarity);
     }
 
@@ -43,8 +42,13 @@ public class MainTestSlot : MonoBehaviour
         image = transform.GetChild(0).GetComponent<Image>();
     }
 
-    private void SellectPlayer()
+    public void SellectPlayer()
     {
+        if(arSo!=null && player==null)
+        {
+            player = Instantiate(arSo.ArData, null);
+            player.Init();
+        }
         MainTestModeManager.Instance.SellectPlayer(player);
     }
 

@@ -26,11 +26,11 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
     private GameObject attackAct;
     private Transform testBtnSlotParent;
     private Player testPlayer;
-    private Stat testPlayerStat;
+    private Stat testPlayerStat = new Stat();
     private Enemy dummy;
-    public Player TestPlayer { get { return testPlayer; } }
+    private MainTestSlot slot = null;
 
-    private Player startPlayer;
+    public Player TestPlayer { get { return testPlayer; } }
 
     private void Start()
     {
@@ -42,6 +42,9 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         SoundManager.Instance.Play(SoundManager.Instance.GetOrAddAudioClips("BackGroundMusic/Main", Sound.BGM), Sound.BGM);
         MakeArTestSlot();
         GameResult();
+
+        slot.SellectPlayer();
+        Invoke("SummonPlayer", 0.005f);
     }
 
     private void MakeArTestSlot()
@@ -51,7 +54,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
             var instance = Instantiate(pfMainTestSlot, testBtnSlot);
             instance.SetSO(so);
             so.E_Item.itmeSO = new ItemSO[3];
-            if (startPlayer == null) startPlayer = instance.Player;
+            if (slot == null) slot = instance;
         }
         foreach (ItemSO so in itemDB.items)
         {
@@ -73,19 +76,9 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
 
     private void LateUpdate()
     {
-        testPlayer?.CountCooltime();
-        if (testPlayer == null)
-        {
-            SellectPlayer(startPlayer);
-            SummonPlayer();
-        }
+        if (testPlayer.currentCooltime<testPlayer.skillCooltime)
+            testPlayer?.CountCooltime();
     }
-
-    //public void ToggleSellectArPanel()
-    //{
-    //    testBtnSlotParent.gameObject.SetActive(!testBtnSlotParent.gameObject.activeSelf);
-    //    if(testBtnSlotParent.gameObject.activeSelf) sellectPlayer.UnSetAr();
-    //}
 
     public void SellectPlayer(Player player = null)
     {
@@ -104,7 +97,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
             }
             testPlayer = player;
             sellectPlayer.GetAr(player.so);
-            testPlayerStat = testPlayer.stat;
+            testPlayerStat = player.stat;
         }
         UpdateStatText();
     }
@@ -190,6 +183,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
 
     private void UpdateStatText()
     {
+        if (testPlayer == null) return;
         statTexts[0].SetText(testPlayerStat.MaxHP.ToString());
         statTexts[1].SetText(testPlayerStat.MaxSP.ToString());
         statTexts[2].SetText(testPlayerStat.ATK.ToString());
