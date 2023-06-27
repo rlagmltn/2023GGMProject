@@ -96,8 +96,10 @@ public class Player : Ar
         gameObject.SetActive(false);
     }
 
-    public override void StatReset()
+    public void Init()
     {
+        stat = new Stat();
+
         stat.MaxHP = (int)so.surviveStats.MaxHP;
         stat.HP = (int)so.surviveStats.currentHP;
         stat.MaxSP = (int)so.surviveStats.MaxShield;
@@ -109,6 +111,11 @@ public class Player : Ar
         stat.WEIGHT = (int)so.surviveStats.currentWeight;
         skillCooltime = so.skill.MaxSkillCoolTime;
         currentCooltime = so.skill.currentSkillCoolTime;
+    }
+
+    public override void StatReset()
+    {
+        Init();
 
         so.isDead = false;
         //뎀감 만들어야함
@@ -524,15 +531,20 @@ public class Player : Ar
 
     public override bool DeadCheck()
     {
-        if (!so.isDead && stat.HP <= 0)
+        if (playerController != null)
         {
-            TurnManager.Instance.NextPlayerTurn -= 1;
-            so.isDead = true;
-            Debug.Log("턴이줄어버렸어오 히히");
+            if (!so.isDead && stat.HP <= 0)
+            {
+                if (!playerController.IsBatchMode)
+                    TurnManager.Instance.NextPlayerTurn -= 1;
+                so.isDead = true;
+                Debug.Log("턴이줄어버렸어오 히히");
+            }
+            DeadSave();
+            if (stat.HP <= 0) so.isInGameTake = false;
+            return base.DeadCheck();
         }
-        DeadSave();
-        if (stat.HP <= 0) so.isInGameTake = false;
-        return base.DeadCheck();
+        else return false;
     }
 
     protected void DeadSave()

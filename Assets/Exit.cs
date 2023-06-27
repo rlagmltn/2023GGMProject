@@ -7,6 +7,6 @@ public class Exit : MonoBehaviour
 {
     public void GotoMap()
     {
-        SceneManager.LoadScene(2);
+        GameManager.Instance.GameExit();
     }
 }

@@ -62,6 +62,11 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
+    public void GameExit()
+    {
+        StartCoroutine(GameOver());
+    }
+
     private IEnumerator GameOver()
     {
         Time.timeScale = 0.3f;
