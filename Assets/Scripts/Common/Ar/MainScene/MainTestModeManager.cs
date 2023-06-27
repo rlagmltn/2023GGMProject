@@ -76,7 +76,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
 
     private void LateUpdate()
     {
-        if (testPlayer.currentCooltime<testPlayer.skillCooltime)
+        if (testPlayer != null && testPlayer.currentCooltime<testPlayer.skillCooltime)
             testPlayer?.CountCooltime();
     }
 
