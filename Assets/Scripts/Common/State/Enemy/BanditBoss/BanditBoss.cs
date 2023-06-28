@@ -40,22 +40,22 @@ public class BanditBoss : Enemy
     protected override void Update()
     {
         base.Update();
-        if(Input.GetKeyDown(KeyCode.Z))
-        {
-            SkillHeavyArmor();
-        }
-        if(Input.GetKeyDown(KeyCode.X))
-        {
-            SkillBleed();
-        }
-        if(Input.GetKeyDown(KeyCode.C))
-        {
-            SkillOverload();
-        }
-        if(Input.GetKeyDown(KeyCode.V))
-        {
-            SkillSpawn();
-        }
+        //if(Input.GetKeyDown(KeyCode.Z))
+        //{
+        //    SkillHeavyArmor();
+        //}
+        //if(Input.GetKeyDown(KeyCode.X))
+        //{
+        //    SkillBleed();
+        //}
+        //if(Input.GetKeyDown(KeyCode.C))
+        //{
+        //    SkillOverload();
+        //}
+        //if(Input.GetKeyDown(KeyCode.V))
+        //{
+        //    SkillSpawn();
+        //}
 
     }
 
@@ -94,7 +94,7 @@ public class BanditBoss : Enemy
 
         if(passiveCnt == 0)
         {
-            stat.SP += 7;
+            //stat.SP += 7;
         }
         
         stat.WEIGHT = defaultWeight + Mathf.Max(stat.SP - stat.MaxSP, 0);
@@ -168,7 +168,6 @@ public class BanditBoss : Enemy
                 players[i].stat.SP = Mathf.Min(players[i].stat.MaxSP, players[i].stat.SP + 5);
                 players[i].transform.Find("DpBack").GetComponent<Bar>().GageChange(players[i].stat.SP / players[i].stat.MaxSP);
 
-
             }
         }
     }
@@ -178,16 +177,5 @@ public class BanditBoss : Enemy
         if (pOverload > 0 || shieldCnt > 0) return false;
 
         return true;
-    }
-
-    protected override void OnCollisionEnter2D(Collision2D collision)
-    {
-        base.OnCollisionEnter2D(collision);
-        if(shieldCnt == 1)
-        {
-            int curSP = stat.SP;
-            stat.SP = curSP;
-
-        }
     }
 }
