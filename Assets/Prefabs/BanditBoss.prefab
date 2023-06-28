@@ -40,8 +40,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8887160766917981956}
-  - {fileID: 7408848830671422422}
   - {fileID: 1063669327342974584}
+  - {fileID: 7408848830671422422}
   - {fileID: 6037144387326465332}
   - {fileID: 5168420304886235941}
   m_Father: {fileID: 0}
@@ -244,6 +244,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   battleTarget: {fileID: 0}
+  isFuckingRoot: 0
   isDancingSword_Damage: 0
   banditWarrior: {fileID: 4609133417198370, guid: 4e133efdc7872974f9b998cbbf28b88a, type: 3}
 --- !u!114 &6730155891950687003
@@ -5256,7 +5257,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 494086942011426787, guid: 51cce2a59d2e4de44a18708952410bdc, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 494086942011426787, guid: 51cce2a59d2e4de44a18708952410bdc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5322,7 +5323,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3033529587415951809, guid: 9a27ee162304ca44ea1788192e2d7b06, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3033529587415951809, guid: 9a27ee162304ca44ea1788192e2d7b06, type: 3}
       propertyPath: m_LocalPosition.x

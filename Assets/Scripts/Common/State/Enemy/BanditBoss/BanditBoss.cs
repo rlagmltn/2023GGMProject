@@ -78,7 +78,6 @@ public class BanditBoss : Enemy
             stat.ATK += 3;
             pShield = true;
             
-
         }
         
         passiveCnt--;
@@ -175,7 +174,6 @@ public class BanditBoss : Enemy
     public bool CanMove()
     {
         if (pOverload > 0 || shieldCnt > 0) return false;
-
         return true;
     }
 }

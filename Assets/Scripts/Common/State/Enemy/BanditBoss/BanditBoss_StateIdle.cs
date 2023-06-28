@@ -30,8 +30,11 @@ public class BanditBoss_StateIdle : StateIdle
             skilCool4--;
             if(enemy.stat.HP <= 20 && !usedSkill3)
             {
+                usedSkill3 = true;
                 enemy.SkillSpawn();
                 stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
+                enemy.isMove = true;
+                TurnManager.Instance.UseTurn();
             }
             else if(skilCool4 <= 0)
             {
