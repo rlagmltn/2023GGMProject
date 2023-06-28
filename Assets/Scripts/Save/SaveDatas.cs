@@ -18,3 +18,14 @@ public class PlayerData
     public bool[] UpgradeCheck = { };
     public bool tutorialCheck = false;
 }
+
+[System.Serializable]
+public class TutoData
+{
+    public bool mainTuto;
+    public bool trainingTuto;
+    public bool adventrueTuto;
+    public bool beforeBattleTuto;
+    public bool battleTuto;
+    public bool battleEnemyTuto;
+}

@@ -23,6 +23,8 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
 
     [SerializeField] TextMeshProUGUI[] statTexts;
 
+    [SerializeField] GameObject mainTutoPanel;
+
     private GameObject attackAct;
     private Transform testBtnSlotParent;
     private Player testPlayer;
@@ -42,6 +44,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         SoundManager.Instance.Play(SoundManager.Instance.GetOrAddAudioClips("BackGroundMusic/Main", Sound.BGM), Sound.BGM);
         MakeArTestSlot();
         GameResult();
+        if (!SaveManager.Instance.TutoData.mainTuto) StartMainTuto();
 
         slot.SellectPlayer();
         Invoke("SummonPlayer", 0.005f);
@@ -207,5 +210,10 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         gamedata.ClearStages = 0;
         SaveManager.Instance.GameDataSave();
         SaveManager.Instance.PlayerDataSave();
+    }
+
+    private void StartMainTuto()
+    {
+        mainTutoPanel.SetActive(true);
     }
 }

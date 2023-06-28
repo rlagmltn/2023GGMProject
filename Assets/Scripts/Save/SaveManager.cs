@@ -30,9 +30,23 @@ public class SaveManager : MonoSingleton<SaveManager>
         } 
     }
 
+    [SerializeField] private TutoData tutoData;
+    public TutoData TutoData
+    {
+        get
+        {
+            return tutoData;
+        }
+        set
+        {
+            tutoData = value;
+        }
+    }
+
     private string SAVE_PATH = "";
     private string PLAYER_SAVE_FILENAME = "/PlayerSave.txt";
     private string GAME_SAVE_FILENAME = "/GameSave.txt";
+    private string TUTO_SAVE_FILENAME = "/TutoSave.txt";
 
     private void Awake()
     {
@@ -45,6 +59,7 @@ public class SaveManager : MonoSingleton<SaveManager>
         }
         PlayerDataLoad();
         GameDataLoad();
+        TutoDataLoad();
         DontDestroyOnLoad(this);
 
         ArInventoryManager.Instance.Init();
@@ -68,6 +83,15 @@ public class SaveManager : MonoSingleton<SaveManager>
         }
     }
 
+    private void TutoDataLoad()
+    {
+        if (File.Exists(SAVE_PATH + TUTO_SAVE_FILENAME))
+        {
+            string json = File.ReadAllText(SAVE_PATH + TUTO_SAVE_FILENAME);
+            tutoData = JsonUtility.FromJson<TutoData>(json);
+        }
+    }
+
     public void PlayerDataSave()
     {
         string jsonPlayer = JsonUtility.ToJson(playerData, true);
@@ -81,9 +105,16 @@ public class SaveManager : MonoSingleton<SaveManager>
         File.WriteAllText(SAVE_PATH + GAME_SAVE_FILENAME, jsonGame, System.Text.Encoding.UTF8);
     }
 
+    public void TutoDataSave()
+    {
+        string jsonTuto = JsonUtility.ToJson(tutoData, true);
+        File.WriteAllText(SAVE_PATH + TUTO_SAVE_FILENAME, jsonTuto, System.Text.Encoding.UTF8);
+    }
+
     private void OnApplicationQuit()
     {
         PlayerDataSave();
         GameDataSave();
+        TutoDataSave();
     }
 }

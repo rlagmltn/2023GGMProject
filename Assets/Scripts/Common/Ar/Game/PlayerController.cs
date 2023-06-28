@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] TextMeshProUGUI batchUnitText;
     [SerializeField] Transform sellectMarker;
 
+    [SerializeField] GameObject tutoPanel;
+
     private Transform map;
     private GameObject batchZone;
 
@@ -171,6 +173,8 @@ public class PlayerController : MonoBehaviour
 
         DisableQuickSlots();
         GameManager.Instance.Finding();
+
+        if (!SaveManager.Instance.TutoData.battleTuto) tutoPanel.SetActive(true);
     }
 
     public void ChangeBatchCount()
