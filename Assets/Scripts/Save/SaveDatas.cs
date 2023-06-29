@@ -27,5 +27,5 @@ public class TutoData
     public bool adventrueTuto;
     public bool beforeBattleTuto;
     public bool battleTuto;
-    public bool battleEnemyTuto;
+    public bool sellectTuto;
 }

@@ -5,13 +5,18 @@ using UnityEngine;
 public class ActSellect : MonoBehaviour
 {
     [SerializeField] Animator animator;
+    [SerializeField] GameObject sellectTutoPanel;
 
     public void Open()
     {
         if (animator == null)
             gameObject.SetActive(true);
         else
+        {
+            if(!SaveManager.Instance.TutoData.sellectTuto)
+                sellectTutoPanel.SetActive(true);
             animator.SetTrigger("Open");
+        }
     }
 
     public void Skip()

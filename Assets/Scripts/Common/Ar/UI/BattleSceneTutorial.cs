@@ -7,6 +7,7 @@ public class BattleSceneTutorial : MonoBehaviour
 {
     [SerializeField] private GameObject[] battleBeforeTutos;
     [SerializeField] private GameObject[] battleTutos;
+    [SerializeField] private GameObject[] sellectTutos;
 
     private void Start()
     {
@@ -37,5 +38,18 @@ public class BattleSceneTutorial : MonoBehaviour
         SaveManager.Instance.TutoData.battleTuto = true;
         SaveManager.Instance.TutoDataSave();
         battleTutos[battleTutos.Length - 1].SetActive(false);
+    }
+
+    public void ActiveSellectTuto(int i = 0)
+    {
+        sellectTutos[i].SetActive(true);
+        sellectTutos[i - 1].SetActive(false);
+    }
+
+    public void FinalSellectTuto()
+    {
+        SaveManager.Instance.TutoData.sellectTuto = true;
+        SaveManager.Instance.TutoDataSave();
+        sellectTutos[sellectTutos.Length - 1].SetActive(false);
     }
 }
