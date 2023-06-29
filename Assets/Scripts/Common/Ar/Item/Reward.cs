@@ -21,6 +21,8 @@ public class Reward : Shop
 
     [SerializeField] private Transform CancelPanel;
 
+    [SerializeField] private Transform betaFinishPanel;
+
     public void TakeAr()
     {
         var newAr = ArInventoryManager.Instance.HolderToInven(Random.Range(0, ArInventoryManager.Instance.HolderList.Count));
@@ -74,7 +76,13 @@ public class Reward : Shop
 
     public void StageClear() //이거 나중에 버튼눌렀을때 실행되도록 바꿔야함
     {
-        if(!Global.isEventBattle)
+        if(SpawnManager.Instance.battleMapSO.IsBossMap)
+        {
+            Global.EnterStage.IsCleared = true;
+            betaFinishPanel.gameObject.SetActive(true);
+            return;
+        }
+        else if(!Global.isEventBattle)
         {
             Global.EnterStage.IsCleared = true;
             SceneManager.LoadScene("Stage1Map");
@@ -108,5 +116,11 @@ public class Reward : Shop
     public void SkipCancel()
     {
         CancelPanel.gameObject.SetActive(false);
+    }
+
+    public void GameEnd()
+    {
+        SaveManager.Instance.GameData.IsPlayingGame = false;
+        SceneManager.LoadScene("MainScene");
     }
 }
