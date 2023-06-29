@@ -452,7 +452,7 @@ public class Player : Ar
     {
         if (playerController == null) return;
         if (!playerController.IsBatchMode) return;
-        RaycastHit2D ray = Physics2D.Raycast(transform.position, new Vector3(0, -1, 0), 0.01f, LayerMask.GetMask("Batch"));
+        RaycastHit2D ray = Physics2D.Raycast(transform.position, new Vector3(0, -1, 0.1f), 0.01f, LayerMask.GetMask("Batch"));
         if (ray.collider != null && !ray.collider.CompareTag("UI"))
         {
             slot.isBatched = true;
