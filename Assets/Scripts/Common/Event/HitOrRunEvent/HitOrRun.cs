@@ -21,6 +21,9 @@ public class HitOrRun : _Event
     [SerializeField] private TextMeshProUGUI Option2Pannel_Text;
     [SerializeField] private TextMeshProUGUI Option3Pannel_Text;
 
+    [SerializeField] private Image Option1Pannel_Image;
+    [SerializeField] private Image Option1Pannel_Image_HP;
+
     [SerializeField] private List<Button> StageButton;
 
     private List<ArSO> Ars;
@@ -63,7 +66,10 @@ public class HitOrRun : _Event
         int Rnum = Random.Range(0, Ars.Count);
         Ars[Rnum].surviveStats.currentHP -= 2f;
         //이거 하고 패널 띄워줘야함
-        Option1Pannel_Text.text = $"{Ars[Rnum].characterInfo.Name}의 체력을 2잃었습니다. 남은체력은 {Ars[Rnum].surviveStats.currentHP} 입니다.";
+        //Option1Pannel_Text.text = $"{Ars[Rnum].characterInfo.Name}의 체력을 2잃었습니다. 남은체력은 {Ars[Rnum].surviveStats.currentHP} 입니다.";
+        Option1Pannel_Text.text = $"체력 2감소 \n남은체력 : {Ars[Rnum].surviveStats.currentHP}";
+        Option1Pannel_Image_HP.fillAmount = (float)(Ars[Rnum].surviveStats.currentHP / Ars[Rnum].surviveStats.MaxHP);
+        Option1Pannel_Image.sprite = Ars[Rnum].characterInfo.Image;
         BackGroundPannel.gameObject.SetActive(true);
         Option1Pannel.gameObject.SetActive(true);
     }
