@@ -14,8 +14,9 @@ public class GameData
 [System.Serializable]
 public class PlayerData
 {
-    public int UpgradePoint = 0;
-    public bool[] UpgradeCheck = { };
+    public int PlayerLevel = 0;
+    public int PlayerExp = 0;
+    public bool[][] UpgradeCheck = { };
     public bool tutorialCheck = false;
 }
 
