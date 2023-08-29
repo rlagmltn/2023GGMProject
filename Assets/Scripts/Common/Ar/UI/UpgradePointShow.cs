@@ -16,6 +16,6 @@ public class UpgradePointShow : MonoBehaviour
     public void UpdateText()
     {
         levelText.SetText(SaveManager.Instance.PlayerData.PlayerLevel.ToString());
-        expImage.fillAmount = (float)SaveManager.Instance.PlayerData.PlayerExp / 500f;
+        expImage.fillAmount = ((float)SaveManager.Instance.PlayerData.PlayerExp % 500) / 500;
     }
 }

@@ -12,26 +12,28 @@ public class BanditArcher_StateIdle : StateIdle
         enemy = stateMachineClass.GetComponent<BanditArcher>();
     }
 
-    public override void OnStart()
+    public override void OnUpdate(float deltaTime)
     {
-        if(!TurnManager.Instance.GetTurn() && stateMachineClass.turnFlag)
+        if (!TurnManager.Instance.GetTurn() && stateMachineClass.turnFlag)
         {
             Transform target = stateMachineClass.SearchAr();
             if(target == null)
             {
                 return;
             }
-
+            Debug.Log("Barcher Start");
             float distance = Vector2.Distance(stateMachineClass.transform.position, target.position);
 
             if(skillCool == 11)
             {
                 skillCool = 0;
+                stateMachineClass.turnFlag = false;
                 stateMachine.ChangeState<BanditArcher_StateSkill>();
             }
             else if (distance <= enemy.AtkRange)
             {
                 skillCool++;
+                stateMachineClass.turnFlag = false;
                 stateMachine.ChangeState<BanditArcher_StateAtk>();
             }
             else
