@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bce7227720074a45baf79fe437a451f, type: 3}
+  m_Name: BattleMap2
+  m_EditorClassIdentifier: 
+  MapName: "\uD788\uD788\uB9F5\uC774\uB2F9"
+  Map: {fileID: 9026174877126022671, guid: 4cfc0857617d30d4d905bc1a926bfe21, type: 3}
+  Enemies:
+  - Enemy: {fileID: 5209284912838123193, guid: 4e133efdc7872974f9b998cbbf28b88a, type: 3}
+    Count: 4
+  MaxPlayers: 3
+  BasePlayerTurn: 3
+  minSize: {x: -12.5, y: -12.5}
+  maxSize: {x: 12.5, y: 12.5}
+  camStartPos: {x: 0, y: 0}
+  camStartZoomAmount: 8
+  IsBossMap: 0
