@@ -25,6 +25,8 @@ public class BanditArcher_StateAtk : StateAtk
             archer.ShootArrow(angle, reloadCnt == 1);
             reloadCnt--;
         }
+        stateMachineClass.enemy.isMove = true;
+        TurnManager.Instance.UseTurn();
         stateMachine.ChangeState<BanditArcher_StateIdle>();
     }
 }
