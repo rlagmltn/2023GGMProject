@@ -16,7 +16,7 @@ public class PlayerData
 {
     public int PlayerLevel = 0;
     public int PlayerExp = 0;
-    public bool[][] UpgradeCheck = { };
+    public bool[,] UpgradeCheck = new bool[8, 3];
     public bool tutorialCheck = false;
 }
 

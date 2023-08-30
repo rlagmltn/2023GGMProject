@@ -42,7 +42,8 @@ public class BanditArcher : Enemy
         if(isSkill)
         {
             bullet.GetComponent<Bullet>().damage = stat.ATK - 2;
-            //need deburf
+            //need deburf ÃâÇ÷
+            
         }
         if(isLast)
         {
