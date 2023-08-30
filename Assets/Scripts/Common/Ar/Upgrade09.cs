@@ -18,6 +18,7 @@ public class Upgrade09 : MonoBehaviour
     {
         btns = FindObjectsOfType<Upgrade09Btn>(true);
         ViewInfo = false;
+        UpgradeCheck = SaveManager.Instance.PlayerData.UpgradeCheck;
     }
 
     public void Upgrade(int rank, int num)
