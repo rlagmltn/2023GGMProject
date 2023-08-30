@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Upgrade09 : MonoBehaviour
 {
@@ -9,9 +10,14 @@ public class Upgrade09 : MonoBehaviour
     public bool ViewInfo { get; private set; }
     private Upgrade09Btn[] btns;
 
+    [SerializeField] private Sprite onimage;
+    [SerializeField] private Sprite offimage;
+    [SerializeField] private Image viewInfoBtn;
+
     private void Start()
     {
         btns = FindObjectsOfType<Upgrade09Btn>(true);
+        ViewInfo = false;
     }
 
     public void Upgrade(int rank, int num)
@@ -41,6 +47,15 @@ public class Upgrade09 : MonoBehaviour
     public void ToggleViewInfo()
     {
         ViewInfo = !ViewInfo;
+
+        if(ViewInfo)
+        {
+            viewInfoBtn.sprite = onimage;
+        }
+        else
+        {
+            viewInfoBtn.sprite = offimage;
+        }
     }
 
     //여기에 이제 각 업그레이드가 적용되었을 때의 효과 코딩

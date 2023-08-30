@@ -10,6 +10,8 @@ public class Upgrade09Text : MonoBehaviour
     [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI info;
 
+    private Upgrade09Btn setBtn;
+
     public void ShowText(Upgrade09Btn btn)
     {
         panel.SetActive(true);
@@ -17,5 +19,13 @@ public class Upgrade09Text : MonoBehaviour
         icon.sprite = btn.image.sprite;
 
         info.SetText(btn.info);
+
+        setBtn = btn;
+    }
+
+    public void Uppp()
+    {
+        setBtn.Upgrade();
+        panel.SetActive(false);
     }
 }
