@@ -16,8 +16,14 @@ public class PlayerData
 {
     public int PlayerLevel = 0;
     public int PlayerExp = 0;
-    public bool[,] UpgradeCheck = new bool[8, 3];
+    public Bool2Arr[] UpgradeCheck = new Bool2Arr[8];
     public bool tutorialCheck = false;
+}
+
+[System.Serializable]
+public class Bool2Arr
+{
+    public bool[] arr = new bool[3];
 }
 
 [System.Serializable]
