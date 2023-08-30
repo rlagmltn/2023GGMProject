@@ -7,7 +7,7 @@ public class BanditArcher : Enemy
     private float atkRange;
     public float AtkRange => atkRange;
 
-    [SerializeField] private GameObject arrowGameObject;
+    [SerializeField] private Bullet arrow;
     
     protected override void Start()
     {
@@ -16,7 +16,7 @@ public class BanditArcher : Enemy
     
     public override void StatReset()
     {
-        stat.MaxHP = 10;
+        stat.MaxHP = 8;
         stat.MaxSP = 4;
         stat.ATK = 3;
         stat.SATK = 3;
@@ -32,13 +32,13 @@ public class BanditArcher : Enemy
 
     public void ShootArrow(Vector2 angle, bool isLast, bool isSkill = false)
     {
-        if(arrowGameObject == null)
+        if(arrow == null)
         {
             Debug.LogWarning("arrowGameObject is Null");
             return;
         }
         float rangeAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
-        var bullet = Instantiate(arrowGameObject, transform.position, Quaternion.Euler(new Vector3(0, 0, rangeAngle)));
+        var bullet = Instantiate(arrow, transform.position, Quaternion.Euler(0, 0, rangeAngle));
         if(isSkill)
         {
             bullet.GetComponent<Bullet>().damage = stat.ATK - 2;
