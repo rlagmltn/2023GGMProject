@@ -54,7 +54,7 @@ public class StageManager : MonoSingleton<StageManager>
             startStage.GetComponent<StageSOHolder>().GetStage().IsCleared = true;
             currentStage = startStage;
             ClearedStages.Add(startStage);
-            SetStageState();
+            SetStageState(stageList);
             Debug.Log("처음 실행함");
         }
         else //전에 다른 스테이지에 들어갔을때 실행해주는 코드
@@ -76,22 +76,24 @@ public class StageManager : MonoSingleton<StageManager>
         }
     }
 
-    void SetStageState()
+    void SetStageState(StageSOList StageList)
     {
-        int eventNum = stageList.stageList.Count / 4;
-        int shopNum = stageList.stageList.Count / 9;
+        int eventNum = StageList.stageList.Count / 4;
+        int shopNum = StageList.stageList.Count / 9;
 
-        for (int num = 0; num < stageList.stageList.Count - 1; num++)
+        for (int num = 0; num < StageList.stageList.Count - 1; num++)
         {
-            stageList.stageList[num].stageKind = eStageState.Battle;
-            stageList.stageList[num].battleMapSO = battleMapList.stages[0].maps[Random.Range(0, battleMapList.stages[0].maps.Length-1)];
+            StageList.stageList[num].stageKind = eStageState.Battle;
+            StageList.stageList[num].battleMapSO = battleMapList.stages[0].maps[Random.Range(0, battleMapList.stages[0].maps.Length-1)];
         }
 
-        StageKindChange(eStageState.Event, eventNum);
-        StageKindChange(eStageState.Shop, shopNum);
+        StageKindChange(eStageState.Event, eventNum, StageList);
+        StageKindChange(eStageState.Shop, shopNum, StageList);
+        //
+        //
         Debug.Log(shopNum);
 
-        stageList.stageList[stageList.stageList.Count - 1].battleMapSO = battleMapList.stages[0].maps[battleMapList.stages[0].maps.Length - 1];
+        StageList.stageList[StageList.stageList.Count - 1].battleMapSO = battleMapList.stages[0].maps[battleMapList.stages[0].maps.Length - 1];
 
         //여기서 스테이지so홀더의 이미지 바꿔주는 함수 실행
         for (int num = 0; num < AllButtons.Count; num++) AllButtons[num].GetComponent<StageSOHolder>().ChangeImage();
@@ -102,15 +104,16 @@ public class StageManager : MonoSingleton<StageManager>
         SoundManager.Instance.Play(SoundManager.Instance.GetOrAddAudioClips("BackGroundMusic/EventStageBGM_1", Sound.BGM), Sound.BGM);
     }
 
-    void StageKindChange(eStageState State, int StateNum)
+    void StageKindChange(eStageState State, int StateNum, StageSOList StageList)
     {
         for (int num = 0; num < StateNum;)
         {
-            int temp = Random.Range(1, stageList.stageList.Count - 1);
+            int temp = Random.Range(1, StageList.stageList.Count - 1);
 
-            if (stageList.stageList[temp].stageKind != eStageState.Battle) continue;
+            if (temp == 10) continue;
+            if (StageList.stageList[temp].stageKind != eStageState.Battle) continue;
 
-            stageList.stageList[temp].stageKind = State;
+            StageList.stageList[temp].stageKind = State;
             num++;
         }
     }
