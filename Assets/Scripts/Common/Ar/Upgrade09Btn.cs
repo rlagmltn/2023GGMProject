@@ -27,7 +27,7 @@ public class Upgrade09Btn : MonoBehaviour
 
     public void CheckBtnChange()
     {
-        if (upgrade09.UpgradeCheck[rank, num])
+        if (upgrade09.UpgradeCheck[rank].arr[num])
         {
             btn.interactable = false;
             image.color = Color.green;
@@ -60,7 +60,7 @@ public class Upgrade09Btn : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            upgrade09.UpgradeCheck[rank, i] = false;
+            upgrade09.UpgradeCheck[rank].arr[i] = false;
         }
 
         upgrade09.Upgrade(rank, num);
