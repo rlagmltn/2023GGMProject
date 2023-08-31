@@ -23,7 +23,7 @@ public class BanditArcher_StateIdle : StateIdle
             }
             Debug.Log("Barcher Start");
             float distance = Vector2.Distance(stateMachineClass.transform.position, target.position);
-
+            Debug.Log($"Archer range: {enemy.AtkRange}, distance: {distance}");
             if(skillCool == 11)
             {
                 skillCool = 0;
