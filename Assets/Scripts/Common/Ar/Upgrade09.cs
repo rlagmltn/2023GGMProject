@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Upgrade09 : MonoBehaviour
 {
-    public bool[,] UpgradeCheck = new bool[8, 3];
-    
+    public Bool2Arr[] UpgradeCheck = new Bool2Arr[8];
+
     public bool ViewInfo { get; private set; }
     private Upgrade09Btn[] btns;
 
@@ -16,14 +16,14 @@ public class Upgrade09 : MonoBehaviour
 
     private void Start()
     {
+        if(SaveManager.Instance.PlayerData.UpgradeCheck!=null) UpgradeCheck = SaveManager.Instance.PlayerData.UpgradeCheck;
         btns = FindObjectsOfType<Upgrade09Btn>(true);
         ViewInfo = false;
-        UpgradeCheck = SaveManager.Instance.PlayerData.UpgradeCheck;
     }
 
     public void Upgrade(int rank, int num)
     {
-        UpgradeCheck[rank, num] = true;
+        UpgradeCheck[rank].arr[num] = true;
         for (int i=0; i<btns.Length; i++)
         {
             btns[i].CheckBtnChange();
@@ -39,7 +39,7 @@ public class Upgrade09 : MonoBehaviour
         bool result = false;
         for(int i=0; i<3; i++)
         {
-            if (UpgradeCheck[rank, i]) result = true;
+            if (UpgradeCheck[rank].arr[i]) result = true;
         }
 
         return result;
