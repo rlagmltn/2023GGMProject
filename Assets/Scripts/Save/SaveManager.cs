@@ -111,6 +111,17 @@ public class SaveManager : MonoSingleton<SaveManager>
         File.WriteAllText(SAVE_PATH + TUTO_SAVE_FILENAME, jsonTuto, System.Text.Encoding.UTF8);
     }
 
+    public void AllDataClear()
+    {
+        playerData = new PlayerData();
+        gameData = new GameData();
+        tutoData = new TutoData();
+
+        PlayerDataSave();
+        GameDataSave();
+        TutoDataSave();
+    }
+
     private void OnApplicationQuit()
     {
         PlayerDataSave();
