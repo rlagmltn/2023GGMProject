@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Upgrade09 : MonoBehaviour
+public class Upgrade09 : MonoSingleton<Upgrade09>
 {
+    [SerializeField] ArSOArray inven;
+    [SerializeField] ArSOArray holder;
+
     public Bool2Arr[] UpgradeCheck = new Bool2Arr[8];
 
     public bool ViewInfo { get; private set; }
@@ -60,4 +63,127 @@ public class Upgrade09 : MonoBehaviour
     }
 
     //여기에 이제 각 업그레이드가 적용되었을 때의 효과 코딩
+
+    public void ActUpgrade(ArSO ar)
+    {
+        Debug.Log("흐에에에에에!");
+        Rank0(ar);
+        Rank1(ar);
+        Rank2(ar);
+        Rank3(ar);
+        Rank4(ar);
+        Rank5(ar);
+        Rank6(ar);
+        Rank7(ar);
+    }
+
+    private void Rank0(ArSO ar)
+    {
+        ar.surviveStats.MaxHP += 20;
+        ar.surviveStats.currentHP += 20;
+    }
+
+    private void Rank1(ArSO ar)
+    {
+        if(UpgradeCheck[1].arr[0])
+        {
+            ar.attackStats.currentAtk += 20;
+        }
+        else if(UpgradeCheck[1].arr[1])
+        {
+            ar.attackStats.currentSkillAtk += 20;
+        }
+        else if(UpgradeCheck[1].arr[2])
+        {
+            ar.criticalStats.currentCriticalPer = 100;
+        }
+    }
+
+    private void Rank2(ArSO ar)
+    {
+        if (UpgradeCheck[2].arr[0])
+        {
+
+        }
+        else if (UpgradeCheck[2].arr[1])
+        {
+
+        }
+        else if (UpgradeCheck[2].arr[2])
+        {
+
+        }
+    }
+
+    private void Rank3(ArSO ar)
+    {
+        if (UpgradeCheck[3].arr[0])
+        {
+
+        }
+        else if (UpgradeCheck[3].arr[1])
+        {
+
+        }
+        else if (UpgradeCheck[3].arr[2])
+        {
+
+        }
+    }
+
+    private void Rank4(ArSO ar)
+    {
+        if (UpgradeCheck[4].arr[0])
+        {
+
+        }
+    }
+
+    private void Rank5(ArSO ar)
+    {
+        if (UpgradeCheck[5].arr[0])
+        {
+
+        }
+        else if (UpgradeCheck[5].arr[1])
+        {
+
+        }
+        else if (UpgradeCheck[5].arr[2])
+        {
+
+        }
+    }
+
+    private void Rank6(ArSO ar)
+    {
+        if (UpgradeCheck[6].arr[0])
+        {
+
+        }
+        else if (UpgradeCheck[6].arr[1])
+        {
+
+        }
+        else if (UpgradeCheck[6].arr[2])
+        {
+
+        }
+    }
+
+    private void Rank7(ArSO ar)
+    {
+        if (UpgradeCheck[7].arr[0])
+        {
+
+        }
+        else if (UpgradeCheck[7].arr[1])
+        {
+
+        }
+        else if (UpgradeCheck[7].arr[2])
+        {
+
+        }
+    }
 }
