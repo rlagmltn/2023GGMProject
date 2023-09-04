@@ -26,6 +26,7 @@ public class Global
 
     public static bool isEventBattle = false;
     public static bool isEvnetSave = false;
+    public static bool is2Stage = false;
 
     public static Events G_Event;
 }

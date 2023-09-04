@@ -38,6 +38,7 @@ public class ArInventoryManager : MonoSingleton<ArInventoryManager>
         ar.isInGameTake = true;
         holder.list.RemoveAt(num);
 
+        Upgrade09.Instance.ActUpgrade(ar);
         return ar;
     }
 
@@ -47,6 +48,8 @@ public class ArInventoryManager : MonoSingleton<ArInventoryManager>
         ar.ResetAll();
         ar.isInGameTake = true;
         holder.list.Remove(ar);
+
+        Upgrade09.Instance.ActUpgrade(ar);
         //ar.ResetAll();
     }
 }

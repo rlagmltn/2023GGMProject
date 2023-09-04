@@ -78,6 +78,7 @@ public class StageManager : MonoSingleton<StageManager>
                 //중간보스 스테이지를 클리어했을때 맵 바꾸기를 시전할 위치
                 if(currentStage.GetComponent<StageSOHolder>().GetStage().stageInfo.stageName == "BOSS STAGE")
                 {
+                    Global.is2Stage = true;
                     Content.transform.localPosition = new Vector3(0, 730, 0);
                     Map1.transform.localPosition = new Vector3(2100, 4000f, 0);
                     Map2.transform.localPosition = new Vector3(2100, 0f, 0);
