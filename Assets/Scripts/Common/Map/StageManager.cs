@@ -27,6 +27,10 @@ public class StageManager : MonoSingleton<StageManager>
     [SerializeField] private BattleMapHolder battleMapHolder;
     [SerializeField] private BattleMapList battleMapList;
 
+    [SerializeField] private Transform Map1;
+    [SerializeField] private Transform Map2;
+    [SerializeField] private Transform Content;
+
     public List<Transform> ClearedStages;
 
     public Transform currentStage;
@@ -70,6 +74,15 @@ public class StageManager : MonoSingleton<StageManager>
 
                 if (trans.GetComponent<StageSOHolder>().GetStage().IsCleared)
                     currentStage = trans;
+
+                //중간보스 스테이지를 클리어했을때 맵 바꾸기를 시전할 위치
+                if(currentStage.GetComponent<StageSOHolder>().GetStage().stageInfo.stageName == "BOSS STAGE")
+                {
+                    Global.is2Stage = true;
+                    Content.transform.localPosition = new Vector3(0, 730, 0);
+                    Map1.transform.localPosition = new Vector3(2100, 4000f, 0);
+                    Map2.transform.localPosition = new Vector3(2100, 0f, 0);
+                }
             }
 
             for (int num = 0; num < AllButtons.Count; num++) AllButtons[num].GetComponent<StageSOHolder>().ChangeImage(); //스테이지 아이콘 바꿔주는 함수
