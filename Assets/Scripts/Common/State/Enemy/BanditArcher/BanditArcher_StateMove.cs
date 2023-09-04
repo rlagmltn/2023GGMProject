@@ -8,6 +8,6 @@ public class BanditArcher_StateMove : StateMove
     public override void OnStart()
     {
         base.OnStart();
-        stateMachine.ChangeState<BanditWarrior_StateIdle>();
+        stateMachine.ChangeState<BanditArcher_StateIdle>();
     }
 }
