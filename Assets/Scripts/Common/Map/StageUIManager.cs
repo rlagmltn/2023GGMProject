@@ -264,7 +264,7 @@ public class StageUIManager : MonoSingleton<StageUIManager>
         for(int num = 0; num < EnemyInfoButtons.Count; num++)
             EnemyInfoButtons[num].GetComponent<Outline>().effectColor = new Color(0, 0, 0, 0);
 
-        EnemyInfoButtons[CurrentEnemyInfo].GetComponent<Outline>().effectColor = new Color(1, 0.83f, 0, 0.57f);
+        EnemyInfoButtons[CurrentEnemyInfo].GetComponent<Outline>().effectColor = new Color(1, 0.7f, 0, 1f);
     }
 
     private void OnApplicationQuit()
