@@ -128,7 +128,11 @@ public class TurnManager : MonoSingleton<TurnManager>
         IsWaitingTurn = true;
         while (SomeoneIsMoving) yield return null;
 
-        if(turnObj!=null) StartCoroutine(ActiveTurnPanel());
+        if (turnObj != null)
+        {
+            if (!GameManager.Instance.isGameDone_Enemy())
+                StartCoroutine(ActiveTurnPanel());
+        }
         yield return new WaitForSeconds(4f);
         IsWaitingTurn = false;
         isPlayerTurn = !isPlayerTurn;
@@ -149,8 +153,9 @@ public class TurnManager : MonoSingleton<TurnManager>
             {
                 p.StartTurn?.Invoke();
             }
+
             //적 턴 시작
-            StartCoroutine(ResetEnemyTurn());
+             StartCoroutine(ResetEnemyTurn());
         }
     }
 

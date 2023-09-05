@@ -62,6 +62,15 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
+    public bool isGameDone_Enemy()
+    {
+        if (enemyCount == 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public void GameExit()
     {
         StartCoroutine(GameOver());
