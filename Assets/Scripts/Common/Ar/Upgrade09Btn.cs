@@ -11,12 +11,10 @@ public class Upgrade09Btn : MonoBehaviour
     private Button btn;
     public Image image;
     public string info;
-    private Upgrade09 upgrade09;
     private Upgrade09Text upgrade09Text;
 
     void Start()
     {
-        upgrade09 = FindObjectOfType<Upgrade09>();
         upgrade09Text = FindObjectOfType<Upgrade09Text>();
         btn = GetComponent<Button>();
         image = GetComponent<Image>();
@@ -27,12 +25,12 @@ public class Upgrade09Btn : MonoBehaviour
 
     public void CheckBtnChange()
     {
-        if (upgrade09.UpgradeCheck[rank].arr[num])
+        if (Upgrade09.Instance.UpgradeCheck[rank].arr[num])
         {
             btn.interactable = false;
             image.color = Color.green;
         }
-        else if (upgrade09.CheckRankUpgraded(rank - 1))
+        else if (Upgrade09.Instance.CheckRankUpgraded(rank - 1) && SaveManager.Instance.PlayerData.PlayerLevel > rank)
         {
             btn.interactable = true;
             image.color = Color.white;
@@ -42,11 +40,18 @@ public class Upgrade09Btn : MonoBehaviour
             btn.interactable = false;
             image.color = Color.gray;
         }
+
+        if(Upgrade09.Instance.UpgradeCheck[rank].arr[num] && SaveManager.Instance.PlayerData.PlayerLevel <= rank)
+        {
+            btn.interactable = false;
+            image.color = Color.gray;
+            Upgrade09.Instance.UpgradeCheck[rank].arr[num] = false;
+        }
     }
 
     private void ClickBtn()
     {
-        if(upgrade09.ViewInfo)
+        if(Upgrade09.Instance.ViewInfo)
         {
             upgrade09Text.ShowText(this);
         }
@@ -60,9 +65,9 @@ public class Upgrade09Btn : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            upgrade09.UpgradeCheck[rank].arr[i] = false;
+            Upgrade09.Instance.UpgradeCheck[rank].arr[i] = false;
         }
 
-        upgrade09.Upgrade(rank, num);
+        Upgrade09.Instance.Upgrade(rank, num);
     }
 }
