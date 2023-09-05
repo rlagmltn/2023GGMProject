@@ -41,13 +41,13 @@ public class BanditArcher : Enemy
         var bullet = Instantiate(arrow, transform.position, Quaternion.Euler(0, 0, rangeAngle));
         if(isSkill)
         {
-            bullet.GetComponent<Bullet>().damage = stat.ATK - 2;
+            bullet.SetDamage(stat.ATK - 2);
             //need deburf ÃâÇ÷
             
         }
         if(isLast)
         {
-            bullet.GetComponent<Bullet>().damage = stat.ATK * 2;
+            bullet.SetDamage(stat.ATK * 2);
         }
         cameraMove.MovetoTarget(bullet.transform);
     }
