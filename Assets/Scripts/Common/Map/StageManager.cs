@@ -96,8 +96,10 @@ public class StageManager : MonoSingleton<StageManager>
         int eventNum = StageList.stageList.Count / 4;
         int shopNum = StageList.stageList.Count / 9;
 
-        for (int num = 0; num < StageList.stageList.Count - 1; num++)
+        for (int num = 0; num < StageList.stageList.Count; num++)
         {
+            if (num % 10 == 9) continue;
+
             StageList.stageList[num].stageKind = eStageState.Battle;
             StageList.stageList[num].battleMapSO = battleMapList.stages[0].maps[Random.Range(0, battleMapList.stages[0].maps.Length-1)];
         }
