@@ -17,6 +17,11 @@ public class Upgrade09 : MonoSingleton<Upgrade09>
     [SerializeField] private Sprite offimage;
     [SerializeField] private Image viewInfoBtn;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Start()
     {
         if(SaveManager.Instance.PlayerData.UpgradeCheck!=null) UpgradeCheck = SaveManager.Instance.PlayerData.UpgradeCheck;
@@ -27,12 +32,19 @@ public class Upgrade09 : MonoSingleton<Upgrade09>
     public void Upgrade(int rank, int num)
     {
         UpgradeCheck[rank].arr[num] = true;
-        for (int i=0; i<btns.Length; i++)
+
+        UpdateBtns();
+         
+        SaveManager.Instance.PlayerData.UpgradeCheck = UpgradeCheck;
+        SaveManager.Instance.PlayerDataSave();
+    }
+
+    public void UpdateBtns()
+    {
+        for (int i = 0; i < btns.Length; i++)
         {
             btns[i].CheckBtnChange();
         }
-        SaveManager.Instance.PlayerData.UpgradeCheck = UpgradeCheck;
-        SaveManager.Instance.PlayerDataSave();
     }
 
     public bool CheckRankUpgraded(int rank)

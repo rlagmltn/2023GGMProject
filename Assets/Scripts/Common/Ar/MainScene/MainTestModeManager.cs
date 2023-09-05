@@ -204,7 +204,6 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         gamedata.PointPoint += gamedata.Gold;
 
         SaveManager.Instance.PlayerData.PlayerExp += gamedata.PointPoint;
-        SaveManager.Instance.PlayerData.PlayerLevel = SaveManager.Instance.PlayerData.PlayerExp/500;
 
         GoldManager.Instance.ResetGold();
         gamedata.PointPoint = 0;
