@@ -32,6 +32,8 @@ public class BanditMiddleBoss_StateIdle : StateIdle
                 skillCool2++;
                 enemy.Howling();
                 stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
+                enemy.isMove = true;
+                TurnManager.Instance.UseTurn();
             }
             else if(skillCool1 >= 7)
             {
@@ -49,6 +51,8 @@ public class BanditMiddleBoss_StateIdle : StateIdle
                 skillCool2 = 1;
                 enemy.ThrowAxe(target.transform.position - stateMachineClass.transform.position);
                 stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
+                enemy.isMove = true;
+                TurnManager.Instance.UseTurn();
             }
             else
             {

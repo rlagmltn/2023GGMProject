@@ -235,7 +235,14 @@ MonoBehaviour:
   EndTurn:
     m_PersistentCalls:
       m_Calls: []
+  Dealed:
+    m_PersistentCalls:
+      m_Calls: []
+  Healed:
+    m_PersistentCalls:
+      m_Calls: []
   battleTarget: {fileID: 0}
+  isFuckingRoot: 0
   so: {fileID: 11400000, guid: 7d70b2370a5ac9745972abe2dfd68c21, type: 2}
   isEnd: 1
   MouseUp:
@@ -254,7 +261,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  arrow: {fileID: -6214125255935533321, guid: 9d3934880aff4044fa957fc739b51a48, type: 3}
+  arrow: {fileID: -6214125255935533321, guid: 5e9789ffd66fdca46b55953685502105, type: 3}
 --- !u!50 &7374049995123050639
 Rigidbody2D:
   serializedVersion: 4
