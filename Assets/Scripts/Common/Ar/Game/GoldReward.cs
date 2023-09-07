@@ -36,6 +36,7 @@ public class GoldReward : MonoBehaviour
         okBtn.transform.localScale = new Vector2(0, 0);
         okBtn.SetActive(false);
         getCoin = Random.Range(50, 300);
+        getCoin = Upgrade09.Instance.Rank6GoldUp(getCoin);
         tmp.SetText("0");
         int coinText = 0;
         while(coinText<getCoin)

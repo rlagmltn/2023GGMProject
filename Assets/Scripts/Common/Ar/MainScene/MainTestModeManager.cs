@@ -202,6 +202,7 @@ public class MainTestModeManager : MonoSingleton<MainTestModeManager>
         //여기에 남은 골드와 돌파한 스테이지의 수에 따라서 업그레이드포인트를 준다.
         var gamedata = SaveManager.Instance.GameData;
         gamedata.PointPoint += gamedata.Gold;
+        Upgrade09.Instance.Rank6ExpUp(gamedata.PointPoint);
 
         SaveManager.Instance.PlayerData.PlayerExp += gamedata.PointPoint;
 
