@@ -9,7 +9,7 @@ public class ArFSM : MonoBehaviour
     
     protected List<Ar> arList = new List<Ar>();
     [HideInInspector] public bool turnFlag = false;
-    public Enemy enemy;
+    [HideInInspector] public Enemy enemy;
     protected CameraMove cameraMove;
 
     protected bool turnSkip = false;

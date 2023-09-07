@@ -26,12 +26,22 @@ public class BanditMiddleBoss_StateIdle : StateIdle
 
             enemy.Passive();
 
-            if(skillCool1 >= 7)
+            if(enemy.stat.HP <= enemy.stat.MaxHP / 2)
+            {
+                skillCool1++;
+                skillCool2++;
+                enemy.Howling();
+                stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
+            }
+            else if(skillCool1 >= 7)
             {
                 skillCool1 = 1;
                 skillCool2++;
                 enemy.AxeAttack();
                 stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
+                enemy.isMove = true;
+                TurnManager.Instance.UseTurn();
+
             }
             else if(skillCool2 >= 10)
             {

@@ -28,7 +28,7 @@ public class BanditMiddleBoss : Enemy
 
     private void Phase1()
     {
-        stat.WEIGHT = 100000;
+        stat.WEIGHT = 10000000;
     }
 
     private void Phase2()
@@ -39,9 +39,9 @@ public class BanditMiddleBoss : Enemy
 
     public void Passive()
     {
-        if(GameManager.Instance.enemies.Length < enemyCnt)
+        if(enemyCnt - GameManager.Instance.enemies.Length > 0)
         {
-            stat.ATK++;
+            stat.ATK += enemyCnt - GameManager.Instance.enemies.Length;
             enemyCnt = GameManager.Instance.enemies.Length;
         }
 
@@ -52,11 +52,14 @@ public class BanditMiddleBoss : Enemy
         
     }
 
-    private void Howling()
+    public void Howling()
     {
+        //turn wait
+
         foreach(Player player in GameManager.Instance.friendly)
         {
             //ÃâÇ÷ µð¹öÇÁ
+
         }
     }
 
@@ -64,7 +67,7 @@ public class BanditMiddleBoss : Enemy
     {
         if (axe == null)
         {
-            Debug.LogWarning("axeGameObject is Null");
+            Debug.LogError("axeGameObject is Null");
             return;
         }
 
