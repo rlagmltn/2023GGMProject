@@ -9,19 +9,20 @@ public class BanditMiddleBoss : Enemy
     private float radius = 3f;
 
     private int enemyCnt;
+    private int phaseChange;
 
     [SerializeField] private GameObject axe;
     
-    
     public override void StatReset()
     {
-        stat.WEIGHT = 5;
         stat.MaxSP = 20;
         stat.MaxHP = 24;
         stat.ATK = 5;
         stat.CriPer = 20;
         stat.CriDmg = 1.5f;
         enemyCnt = GameManager.Instance.enemies.Length;
+        phaseChange = enemyCnt - 3;
+        Phase1();
         base.StatReset();
     }
 
@@ -32,6 +33,7 @@ public class BanditMiddleBoss : Enemy
 
     private void Phase2()
     {
+        stat.WEIGHT = 5;
         stat.SP = stat.MaxSP;
     }
 
@@ -42,6 +44,12 @@ public class BanditMiddleBoss : Enemy
             stat.ATK++;
             enemyCnt = GameManager.Instance.enemies.Length;
         }
+
+        if(GameManager.Instance.enemies.Length <= phaseChange)
+        {
+            Phase2();
+        }
+        
     }
 
     private void Howling()
