@@ -29,6 +29,8 @@ public class BanditMiddleBoss_StateIdle : StateIdle
                 stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
                 enemy.isMove = true;
                 TurnManager.Instance.UseTurn();
+                Debug.Log("Phase1");
+                return;
             }
 
             if(enemy.stat.HP <= enemy.stat.MaxHP / 2)

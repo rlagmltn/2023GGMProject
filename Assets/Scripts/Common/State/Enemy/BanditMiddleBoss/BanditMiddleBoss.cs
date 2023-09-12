@@ -43,22 +43,19 @@ public class BanditMiddleBoss : Enemy
 
     public bool Passive()
     {
+        
         if(enemyCnt - GameManager.Instance.enemies.Length > 0)
         {
             stat.ATK += enemyCnt - GameManager.Instance.enemies.Length;
             enemyCnt = GameManager.Instance.enemies.Length;
         }
 
-        if(GameManager.Instance.enemies.Length <= phaseChange)
+        if(FindObjectsOfType<Enemy>().Length <= phaseChange)
         {
             Phase2();
-            return false;
         }
-        else
-        {
-            return true;
-        }
-        
+        Debug.Log(FindObjectsOfType<Enemy>().Length + " " + phaseChange);
+        return isPhase1;
     }
 
     public void Howling()
@@ -106,5 +103,14 @@ public class BanditMiddleBoss : Enemy
                 }
             }
         }
+    }
+
+    protected override void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(isPhase1 && !collision.transform.CompareTag("Object"))
+        {
+
+        }
+        base.OnCollisionEnter2D(collision);
     }
 }
