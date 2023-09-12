@@ -43,18 +43,17 @@ public class BanditMiddleBoss : Enemy
 
     public bool Passive()
     {
-        
-        if(enemyCnt - GameManager.Instance.enemies.Length > 0)
+        if(enemyCnt - FindObjectsOfType<Enemy>().Length > 0)
         {
-            stat.ATK += enemyCnt - GameManager.Instance.enemies.Length;
-            enemyCnt = GameManager.Instance.enemies.Length;
+            stat.ATK += enemyCnt - FindObjectsOfType<Enemy>().Length;
+            enemyCnt = FindObjectsOfType<Enemy>().Length;
         }
 
         if(FindObjectsOfType<Enemy>().Length <= phaseChange)
         {
             Phase2();
         }
-        Debug.Log(FindObjectsOfType<Enemy>().Length + " " + phaseChange);
+
         return isPhase1;
     }
 
