@@ -24,7 +24,12 @@ public class BanditMiddleBoss_StateIdle : StateIdle
                 return;
             }
 
-            enemy.Passive();
+            if(enemy.Passive())
+            {
+                stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
+                enemy.isMove = true;
+                TurnManager.Instance.UseTurn();
+            }
 
             if(enemy.stat.HP <= enemy.stat.MaxHP / 2)
             {

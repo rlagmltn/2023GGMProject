@@ -11,6 +11,8 @@ public class BanditMiddleBoss : Enemy
     private int enemyCnt;
     private int phaseChange;
 
+    private bool isPhase1;
+
     [SerializeField] private GameObject axe;
     
     public override void StatReset()
@@ -29,15 +31,17 @@ public class BanditMiddleBoss : Enemy
     private void Phase1()
     {
         stat.WEIGHT = 10000000;
+        isPhase1 = true;
     }
 
     private void Phase2()
     {
         stat.WEIGHT = 5;
         stat.SP = stat.MaxSP;
+        isPhase1 = false;
     }
 
-    public void Passive()
+    public bool Passive()
     {
         if(enemyCnt - GameManager.Instance.enemies.Length > 0)
         {
@@ -48,6 +52,11 @@ public class BanditMiddleBoss : Enemy
         if(GameManager.Instance.enemies.Length <= phaseChange)
         {
             Phase2();
+            return false;
+        }
+        else
+        {
+            return true;
         }
         
     }
@@ -60,6 +69,7 @@ public class BanditMiddleBoss : Enemy
         {
             //ÃâÇ÷ µð¹öÇÁ
 
+            
         }
     }
 
