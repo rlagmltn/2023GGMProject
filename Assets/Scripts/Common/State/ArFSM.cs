@@ -91,8 +91,12 @@ public class ArFSM : MonoBehaviour
     public IEnumerator MoveAr(Vector2 vel)
     {
         yield return new WaitForSeconds(1f);
+
+        float pushPower = GetComponent<Enemy>().pushPower;
+        float weight = GetComponent<Enemy>().stat.WEIGHT;
         TurnManager.Instance.UseTurn();
-        GetComponent<Rigidbody2D>().velocity = vel;
+        GetComponent<Rigidbody2D>().velocity = ((vel.normalized) * pushPower) / (1 + weight * 0.1f);
+        Debug.Log(vel.normalized * pushPower / (1 + weight * 0.1f));
         transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
         enemy.isMove = true;
         

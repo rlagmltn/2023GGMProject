@@ -60,7 +60,7 @@ public class StateMove : State<ArFSM>
         stateMachineClass.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
         float rangeAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
         stateMachineClass.transform.GetChild(0).rotation = Quaternion.Euler(new Vector3(0, 0, rangeAngle));
-        stateMachineClass.StartCoroutine("MoveAr", angle * 30f);
+        stateMachineClass.StartCoroutine("MoveAr", angle);
         
     
         stateMachineClass.turnFlag = !stateMachineClass.turnFlag;

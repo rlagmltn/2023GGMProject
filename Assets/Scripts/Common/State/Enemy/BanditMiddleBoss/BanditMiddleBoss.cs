@@ -30,7 +30,7 @@ public class BanditMiddleBoss : Enemy
 
     private void Phase1()
     {
-        stat.WEIGHT = 10000000;
+        stat.WEIGHT = 20;
         isPhase1 = true;
     }
 
