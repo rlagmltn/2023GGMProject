@@ -78,7 +78,6 @@ public class Upgrade09 : MonoSingleton<Upgrade09>
 
     public void ActUpgrade(ArSO ar)
     {
-        Debug.Log("흐에에에에에!");
         Rank0(ar);
         Rank1(ar);
         Rank2(ar);
@@ -176,15 +175,28 @@ public class Upgrade09 : MonoSingleton<Upgrade09>
         {
 
         }
-        else if (UpgradeCheck[6].arr[1])
-        {
-
-        }
-        else if (UpgradeCheck[6].arr[2])
-        {
-
-        }
     }
+
+    public int Rank6GoldUp(int gold)
+    {
+        if (UpgradeCheck[6].arr[1])
+        {
+            float nGold = gold * 1.3f;
+            return (int)nGold;
+        }
+        else return gold;
+    }
+
+    public int Rank6ExpUp(int exp)
+    {
+        if (UpgradeCheck[6].arr[1])
+        {
+            float nExp = exp * 1.25f;
+            return (int)nExp;
+        }
+        else return exp;
+    }
+
 
     private void Rank7(ArSO ar)
     {
@@ -194,11 +206,11 @@ public class Upgrade09 : MonoSingleton<Upgrade09>
         }
         else if (UpgradeCheck[7].arr[1])
         {
-
+            //스킬공격력 25%
         }
         else if (UpgradeCheck[7].arr[2])
         {
-
+            //패시브스킬 강화
         }
     }
 }
