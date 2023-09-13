@@ -177,6 +177,7 @@ public class Ar : MonoBehaviour
     {
         damage -= DamageDrcrease;
         EffectManager.Instance.InstantiateFloatDamage(transform.position).DamageText(damage);
+        animationManager.Hit();
         if (stat.SP > 0)
         {
             stat.SP -= damage;
