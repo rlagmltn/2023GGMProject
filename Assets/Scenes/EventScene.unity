@@ -2209,7 +2209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &102092937
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5698,6 +5698,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!20 &370358396 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6555354365469328090, guid: 11f5b3286664f7343ae3dd132b90d1de, type: 3}
+  m_PrefabInstance: {fileID: 1190317543}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &376528759
 GameObject:
   m_ObjectHideFlags: 0
@@ -20304,11 +20309,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6555354365469328089, guid: 11f5b3286664f7343ae3dd132b90d1de, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6555354365469328089, guid: 11f5b3286664f7343ae3dd132b90d1de, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6555354365469328089, guid: 11f5b3286664f7343ae3dd132b90d1de, type: 3}
       propertyPath: m_LocalRotation.w
@@ -20337,6 +20342,10 @@ PrefabInstance:
     - target: {fileID: 6555354365469328089, guid: 11f5b3286664f7343ae3dd132b90d1de, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6555354365469328090, guid: 11f5b3286664f7343ae3dd132b90d1de, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11f5b3286664f7343ae3dd132b90d1de, type: 3}
@@ -23919,7 +23928,7 @@ MonoBehaviour:
   Option1Pannel_Text: {fileID: 802189848}
   Option2Pannel_Text: {fileID: 0}
   Option3Pannel_Text: {fileID: 1892440743}
-  Option1Pannel_Image: {fileID: 2113223089}
+  Option1Pannel_Image: {fileID: 0}
   Option1Pannel_Image_HP: {fileID: 770646980}
   StageButton:
   - {fileID: 1301317454}
@@ -28942,7 +28951,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 370358396}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1

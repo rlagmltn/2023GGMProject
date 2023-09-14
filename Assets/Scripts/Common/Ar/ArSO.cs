@@ -26,8 +26,10 @@ public class ArSO : ScriptableObject
 
     public Player ArData;
 
+    public Transform DMY;
+
     [Multiline(5)]
-    public string Summary;
+    public string Summary;  
 
     public void ResetAll()
     {
