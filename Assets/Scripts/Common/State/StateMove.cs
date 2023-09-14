@@ -28,7 +28,7 @@ public class StateMove : State<ArFSM>
         if(path == null)
         {
             Debug.LogError("None Path!");
-            stateMachineClass.StartCoroutine("MoveAr", 0);
+            stateMachineClass.StartCoroutine("MoveAr", Vector2.zero);
             stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
             return;
         }
