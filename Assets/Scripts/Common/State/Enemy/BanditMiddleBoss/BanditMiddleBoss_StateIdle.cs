@@ -42,7 +42,7 @@ public class BanditMiddleBoss_StateIdle : StateIdle
                 enemy.isMove = true;
                 TurnManager.Instance.UseTurn();
             }
-            else if(skillCool1 >= 7)
+            else if(skillCool1 >= 7 && !stateMachineClass.CheckWall())
             {
                 skillCool1 = 1;
                 skillCool2++;
