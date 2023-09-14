@@ -107,6 +107,8 @@ public class ArFSM : MonoBehaviour
         transform.GetChild(0).rotation = Quaternion.Euler(new Vector3(0, 0, rangeAngle));
         yield return new WaitForSeconds(0.7f);
         transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        enemy.isMove = true;
+        TurnManager.Instance.UseTurn();
     }
 
     public void SetTurnSkip()
