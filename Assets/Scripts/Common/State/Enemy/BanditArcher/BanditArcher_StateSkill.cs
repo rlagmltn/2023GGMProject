@@ -15,6 +15,7 @@ public class BanditArcher_StateSkill : State<ArFSM>
     {
         Vector2 angle = Vector3.Normalize(stateMachineClass.SearchAr().position - stateMachineClass.transform.position);
         archer.ShootArrow(angle, false, true);
+        stateMachineClass.RangeArrow(angle);
         stateMachineClass.enemy.isMove = true;
         TurnManager.Instance.UseTurn();
         stateMachine.ChangeState<BanditArcher_StateIdle>();

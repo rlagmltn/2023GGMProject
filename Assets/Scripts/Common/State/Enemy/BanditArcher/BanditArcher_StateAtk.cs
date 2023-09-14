@@ -22,6 +22,7 @@ public class BanditArcher_StateAtk : StateAtk
         else
         {
             Vector2 angle = Vector3.Normalize(stateMachineClass.SearchAr().position - stateMachineClass.transform.position);
+            stateMachineClass.RangeArrow(angle);
             archer.ShootArrow(angle, reloadCnt == 1);
             reloadCnt--;
         }
