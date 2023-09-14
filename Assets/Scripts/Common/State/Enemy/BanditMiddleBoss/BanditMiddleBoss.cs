@@ -79,6 +79,7 @@ public class BanditMiddleBoss : Enemy
 
         float rangeAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
         var bullet = Instantiate(axe, transform.position, Quaternion.Euler(0, 0, rangeAngle));
+        StartCoroutine("RangeArrow", angle);
         cameraMove.MovetoTarget(bullet.transform);
     }
 
@@ -111,5 +112,14 @@ public class BanditMiddleBoss : Enemy
 
         }
         base.OnCollisionEnter2D(collision);
+    }
+
+    private IEnumerator RangeArrow(Vector2 angle)
+    {
+        transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+        float rangeAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
+        transform.GetChild(0).rotation = Quaternion.Euler(new Vector3(0, 0, rangeAngle));
+        yield return new WaitForSeconds(0.7f);
+        transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
     }
 }

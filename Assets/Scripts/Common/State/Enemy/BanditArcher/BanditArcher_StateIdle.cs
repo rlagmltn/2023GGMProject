@@ -23,7 +23,7 @@ public class BanditArcher_StateIdle : StateIdle
             }
             float distance = Vector2.Distance(stateMachineClass.transform.position, target.position);
             
-            if(skillCool == 11 && !stateMachineClass.CheckWall())
+            if(skillCool >= 11 && !stateMachineClass.CheckWall())
             {
                 skillCool = 0;
                 stateMachineClass.turnFlag = false;
