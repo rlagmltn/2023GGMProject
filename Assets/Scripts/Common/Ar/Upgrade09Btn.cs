@@ -27,7 +27,7 @@ public class Upgrade09Btn : MonoBehaviour
     {
         if (Upgrade09.Instance.UpgradeCheck[rank].arr[num])
         {
-            btn.interactable = false;
+            btn.interactable = true;
             image.color = Color.green;
         }
         else if (Upgrade09.Instance.CheckRankUpgraded(rank - 1) && SaveManager.Instance.PlayerData.PlayerLevel > rank)
