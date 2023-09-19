@@ -16,10 +16,15 @@ MonoBehaviour:
     stageName: "\uC2A4\uD14C\uC774\uC9C02-9"
     stageImage: {fileID: 0}
     explanationText: 
-  stageKind: 3
-  StageEnemy: []
-  StageReward: []
+  stageKind: 1
+  StageEnemy:
+  - {fileID: 11400000, guid: 8c666309f1affe6469f841693b27875b, type: 2}
+  - {fileID: 11400000, guid: cb9f2735ba6b3bd42888fe9253f32018, type: 2}
+  StageReward:
+  - {fileID: 11400000, guid: bd8ed38ad2dc3844aa1deedc96e921f1, type: 2}
+  - {fileID: 11400000, guid: 5f5961a8ca711754b932a77bcc1be7b9, type: 2}
+  - {fileID: 11400000, guid: b3a1a75c3644a8d4183ae894db12f04b, type: 2}
   IsCleared: 0
   IsCanEnter: 0
   map: {fileID: 0}
-  battleMapSO: {fileID: 11400000, guid: 2216fd1286a4c7043949b15ea00f5e57, type: 2}
+  battleMapSO: {fileID: 11400000, guid: 234fa9f393ce909479d9246846933975, type: 2}
