@@ -120,6 +120,8 @@ public class SaveManager : MonoSingleton<SaveManager>
         PlayerDataSave();
         GameDataSave();
         TutoDataSave();
+
+        Application.Quit();
     }
 
     private void OnApplicationQuit()
