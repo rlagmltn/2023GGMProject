@@ -97,17 +97,17 @@ public class Upgrade09 : MonoSingleton<Upgrade09>
     {
         if(UpgradeCheck[1].arr[0])
         {
-            ar.attackStats.currentAtk += 2;
+            ar.attackStats.currentAtk += 1;
         }
         else if(UpgradeCheck[1].arr[1])
         {
-            ar.surviveStats.MaxHP += 5;
-            ar.surviveStats.currentHP += 5;
+            ar.surviveStats.MaxHP += 3;
+            ar.surviveStats.currentHP += 3;
         }
         else if(UpgradeCheck[1].arr[2])
         {
-            ar.surviveStats.MaxShield += 3;
-            ar.surviveStats.currentShield += 3;
+            ar.surviveStats.MaxShield += 2;
+            ar.surviveStats.currentShield += 2;
         }
     }
 
@@ -115,7 +115,7 @@ public class Upgrade09 : MonoSingleton<Upgrade09>
     {
         if (UpgradeCheck[2].arr[0])
         {
-            ar.surviveStats.currentWeight += 3;
+            ar.surviveStats.currentWeight += 2;
         }
         else if (UpgradeCheck[2].arr[1])
         {
@@ -131,17 +131,17 @@ public class Upgrade09 : MonoSingleton<Upgrade09>
     {
         if (UpgradeCheck[3].arr[0])
         {
-            ar.surviveStats.MaxShield += 5;
-            ar.surviveStats.currentShield += 5;
+            ar.surviveStats.MaxShield += 3;
+            ar.surviveStats.currentShield += 3;
         }
         else if (UpgradeCheck[3].arr[1])
         {
-            ar.surviveStats.MaxHP += 10;
-            ar.surviveStats.currentHP += 10;
+            ar.surviveStats.MaxHP += 5;
+            ar.surviveStats.currentHP += 5;
         }
         else if (UpgradeCheck[3].arr[2])
         {
-            ar.surviveStats.currentWeight += 5;
+            ar.surviveStats.currentWeight += 3;
         }
     }
 
@@ -165,21 +165,21 @@ public class Upgrade09 : MonoSingleton<Upgrade09>
         }
         else if (UpgradeCheck[5].arr[2])
         {
-            ar.attackStats.currentAtk += 5;
+            ar.attackStats.currentAtk += 2;
         }
     }
 
     private void Rank6(ArSO ar)
     {
-        if (UpgradeCheck[6].arr[0])
+        if (UpgradeCheck[6].arr[3])
         {
-
+            ar.surviveStats.currentWeight -= 1;
         }
     }
 
     public int Rank6GoldUp(int gold)
     {
-        if (UpgradeCheck[6].arr[1])
+        if (UpgradeCheck[6].arr[0])
         {
             float nGold = gold * 1.3f;
             return (int)nGold;
@@ -206,11 +206,11 @@ public class Upgrade09 : MonoSingleton<Upgrade09>
         }
         else if (UpgradeCheck[7].arr[1])
         {
-            //스킬공격력 25%
+            ar.attackStats.currentSkillAtk += 2;
         }
         else if (UpgradeCheck[7].arr[2])
         {
-            //패시브스킬 강화
+            ar.criticalStats.currentCriticalPer += 20;
         }
     }
 }
