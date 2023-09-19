@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88feec43afdf1cd49a9af83488bd970f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 291bfce9c126f4c4d94ea14e0e13844d, type: 2}
   bgm: {fileID: -5379676970890365623, guid: 291bfce9c126f4c4d94ea14e0e13844d, type: 2}
   effect: {fileID: 3767787361639800768, guid: 291bfce9c126f4c4d94ea14e0e13844d, type: 2}
   ui: {fileID: -3007041346771800071, guid: 291bfce9c126f4c4d94ea14e0e13844d, type: 2}
@@ -51,3 +52,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  masterS: {fileID: 0}
+  bgmS: {fileID: 0}
+  effectS: {fileID: 0}
+  uiS: {fileID: 0}
+  Master_ON: {fileID: 0}
+  Master_OFF: {fileID: 0}
+  BGM_ON: {fileID: 0}
+  BGM_OFF: {fileID: 0}
+  Effect_ON: {fileID: 0}
+  Effect_OFF: {fileID: 0}
+  UI_ON: {fileID: 0}
+  UI_OFF: {fileID: 0}
+  MasterValue: 0
+  BGMValue: 0
+  EffectValue: 0
+  UIValue: 0
