@@ -60,6 +60,7 @@ public class StageManager : MonoSingleton<StageManager>
             currentStage = startStage;
             ClearedStages.Add(startStage);
             SetStageState(stageList);
+            //스테이지에 맞춰서 so 넣어주기
             Debug.Log("처음 실행함");
         }
         else //전에 다른 스테이지에 들어갔을때 실행해주는 코드
@@ -257,6 +258,11 @@ public class StageManager : MonoSingleton<StageManager>
         };
         SaveManager.Instance.GameDataSave();
         Action();
+    }
+
+    void SetStageReward()
+    {
+
     }
 
     private void OnApplicationQuit()
