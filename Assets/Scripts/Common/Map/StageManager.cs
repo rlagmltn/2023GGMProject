@@ -101,7 +101,7 @@ public class StageManager : MonoSingleton<StageManager>
             if (num % 10 == 9) continue;
 
             StageList.stageList[num].stageKind = eStageState.Battle;
-            StageList.stageList[num].battleMapSO = battleMapList.stages[0].maps[Random.Range(0, battleMapList.stages[0].maps.Length-1)];
+            StageList.stageList[num].battleMapSO = battleMapList.stages[0].maps[Random.Range(0, battleMapList.stages[0].maps.Length)];
         }
 
         StageKindChange(eStageState.Event, eventNum, StageList);
@@ -109,8 +109,6 @@ public class StageManager : MonoSingleton<StageManager>
         //
         //
         Debug.Log(shopNum);
-
-        StageList.stageList[StageList.stageList.Count - 1].battleMapSO = battleMapList.stages[0].maps[battleMapList.stages[0].maps.Length - 1];
 
         //여기서 스테이지so홀더의 이미지 바꿔주는 함수 실행
         for (int num = 0; num < AllButtons.Count; num++) AllButtons[num].GetComponent<StageSOHolder>().ChangeImage();

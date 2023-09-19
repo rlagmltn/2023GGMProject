@@ -16,6 +16,5 @@ public class IntHolder : MonoBehaviour
 
     public void GetNum_Help()
     {
-        HelpPannel.Instance.SetPannelNum(_num);
     }
 }

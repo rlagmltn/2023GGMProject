@@ -15,7 +15,7 @@ MonoBehaviour:
   MapName: "\uC911\uAC04\uBCF4\uC2A4\uBC09\uC77B\uC544"
   Map: {fileID: 3889019438407941740, guid: 3d827966df014874f831a2c950f1a702, type: 3}
   Enemies:
-  - Enemy: {fileID: 2198607056924021300, guid: e44765f48422b2d4ea807d22829d2fad, type: 3}
+  - Enemy: {fileID: 7888460219755927749, guid: ded870cd4923c6e408b0c0c50979ef04, type: 3}
     Count: 1
   - Enemy: {fileID: 5209284912838123193, guid: 4e133efdc7872974f9b998cbbf28b88a, type: 3}
     Count: 2
@@ -23,8 +23,8 @@ MonoBehaviour:
     Count: 2
   MaxPlayers: 3
   BasePlayerTurn: 3
-  minSize: {x: -18, y: -48}
-  maxSize: {x: 50, y: 11}
-  camStartPos: {x: 18, y: -30}
+  minSize: {x: -8, y: -4}
+  maxSize: {x: 86, y: 51}
+  camStartPos: {x: 40, y: 5}
   camStartZoomAmount: 12
   IsBossMap: 1

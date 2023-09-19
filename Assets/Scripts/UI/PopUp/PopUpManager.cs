@@ -23,7 +23,6 @@ public class PopUpManager : MonoBehaviour
 {
     [SerializeField] private List<ButtonAndPopUp> BAP;
     [SerializeField] private Transform backgroundPanel;
-    [SerializeField] private Transform backgroundPanel2;
     [SerializeField] private List<ButtonAndPopUp> BAP2;
 
     [SerializeField] private ButtonAndPopUp EnterStageBAP;
@@ -131,7 +130,6 @@ public class PopUpManager : MonoBehaviour
     /// </summary>
     void ReloadUIs()
     {
-        HelpPannel.Instance.UpdateUI();
     }
 
     /// <summary>
@@ -139,7 +137,6 @@ public class PopUpManager : MonoBehaviour
     /// </summary>
     void ResetUIs()
     {
-        HelpPannel.Instance.ResetPannelNum();
     }
 
     /// <summary>
@@ -147,30 +144,12 @@ public class PopUpManager : MonoBehaviour
     /// </summary>
     void BackGroundPanelActiveTrue()
     {
-        if (backgroundPanel.gameObject.activeSelf)
-        {
-            BackGroundPanelActiveTrue2();
-            return;
-        }
-
         backgroundPanel.gameObject.SetActive(true);
-        ReloadUIs();
-    }
-
-    void BackGroundPanelActiveTrue2()
-    {
-        backgroundPanel2.gameObject.SetActive(true);
         ReloadUIs();
     }
 
     void FirstBackGroundPanelActiveFalse()
     {
-        if (backgroundPanel2.gameObject.activeSelf)
-        {
-            BackGroundPanelActiveFalse2();
-            return;
-        }
-
         backgroundPanel.gameObject.SetActive(false);
     }
 
@@ -179,19 +158,7 @@ public class PopUpManager : MonoBehaviour
     /// </summary>
     void BackGroundPanelActiveFalse()
     {
-        if (backgroundPanel2.gameObject.activeSelf)
-        {
-            BackGroundPanelActiveFalse2();
-            return;
-        }
-
         backgroundPanel.gameObject.SetActive(false);
-        ResetUIs();
-    }
-    
-    void BackGroundPanelActiveFalse2()
-    {
-        backgroundPanel2.gameObject.SetActive(false);
         ResetUIs();
     }
 
