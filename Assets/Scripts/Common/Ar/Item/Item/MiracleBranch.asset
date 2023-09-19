@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 6f464aca7259d0f4f8209e1f5c296612, type: 3}
   itemName: "\uB9C8\uBC95\uC758 \uB098\uBB47\uAC00\uC9C0"
-  itemPrice: 700
+  itemPrice: 300
   itemRarity: 3
   stat:
     MaxHP: 0
@@ -23,13 +23,13 @@ MonoBehaviour:
     SP: 0
     ATK: 0
     SATK: 0
-    CriPer: 5
-    CriDmg: 0
+    CriPer: 20
+    CriDmg: 10
     WEIGHT: 0
   SkillCoolDown: 0
   DamageDecrease: 0
-  itemExplain: "\uC5D8\uD504\uC758 \uC232\uC5D0\uC11C \uC8FC\uC6B4 \uBE5B\uC774\uB098\uB294
-    \uC2E0\uBE44\uB85C\uC6B4 \uB098\uBB47\uAC00\uC9C0\uC774\uB2E4."
+  itemExplain: "\uC774\uB3D9\uD558\uBA74\uC11C \uB098\uBB47\uC78E\uC744 \uBC1C\uC0AC\uD574
+    \uD53C\uD574\uB97C \uC900\uB2E4.\n"
   TAI:
   - itemPassiveType: 12
     Info: {fileID: 3692405128401988840, guid: bf80e2f45c06fec4aa81473abae3a25b, type: 3}
