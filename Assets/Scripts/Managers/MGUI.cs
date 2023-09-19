@@ -39,11 +39,6 @@ public class MGUI : MonoSingleton<MGUI>
         escPanel.gameObject.SetActive(!escPanel.gameObject.activeSelf);
     }
 
-    public void MoveToTitleScene()
-    {
-        SceneMgr.Instance.LoadScene(eSceneName.Main);
-    }
-
     public void MoveToMapScene()
     {
         SceneManager.LoadScene("Stage1Map");
