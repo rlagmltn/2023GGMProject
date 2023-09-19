@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+
+using Assets.HeroEditor4D.Common.Scripts.CharacterScripts;
 public class HitOrRun : _Event
 {
     [SerializeField] private Transform HORPannel;
@@ -21,7 +23,7 @@ public class HitOrRun : _Event
     [SerializeField] private TextMeshProUGUI Option2Pannel_Text;
     [SerializeField] private TextMeshProUGUI Option3Pannel_Text;
 
-    [SerializeField] private Image Option1Pannel_Image;
+    [SerializeField] private Transform Option1Pannel_Image;
     [SerializeField] private Image Option1Pannel_Image_HP;
 
     [SerializeField] private List<Button> StageButton;
@@ -69,9 +71,13 @@ public class HitOrRun : _Event
         //Option1Pannel_Text.text = $"{Ars[Rnum].characterInfo.Name}의 체력을 2잃었습니다. 남은체력은 {Ars[Rnum].surviveStats.currentHP} 입니다.";
         Option1Pannel_Text.text = $"체력 2감소 \n남은체력 : {Ars[Rnum].surviveStats.currentHP}";
         Option1Pannel_Image_HP.fillAmount = (float)(Ars[Rnum].surviveStats.currentHP / Ars[Rnum].surviveStats.MaxHP);
-        Option1Pannel_Image.sprite = Ars[Rnum].characterInfo.Image;
+        var dmy = Instantiate(Ars[Rnum].DMY, Option1Pannel_Image);
+        dmy.transform.localScale = new Vector3(100, 100, 0);
+        dmy.SetParent(Option1Pannel_Image);
+        dmy.localPosition = new Vector2(125, -125);
         BackGroundPannel.gameObject.SetActive(true);
         Option1Pannel.gameObject.SetActive(true);
+        dmy.transform.GetComponent<AnimationManager>().Hit();
     }
 
     void SecondOption()

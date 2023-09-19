@@ -24,14 +24,33 @@ public class BanditMiddleBoss_StateIdle : StateIdle
                 return;
             }
 
-            enemy.Passive();
+            if(enemy.Passive())
+            {
+                stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
+                enemy.isMove = true;
+                TurnManager.Instance.UseTurn();
+                Debug.Log("Phase1");
+                return;
+            }
 
-            if(skillCool1 >= 7)
+            if(enemy.stat.HP <= enemy.stat.MaxHP / 2)
+            {
+                skillCool1++;
+                skillCool2++;
+                enemy.Howling();
+                stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
+                enemy.isMove = true;
+                TurnManager.Instance.UseTurn();
+            }
+            else if(skillCool1 >= 7 && !stateMachineClass.CheckWall())
             {
                 skillCool1 = 1;
                 skillCool2++;
                 enemy.AxeAttack();
                 stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
+                enemy.isMove = true;
+                TurnManager.Instance.UseTurn();
+
             }
             else if(skillCool2 >= 10)
             {
@@ -39,6 +58,8 @@ public class BanditMiddleBoss_StateIdle : StateIdle
                 skillCool2 = 1;
                 enemy.ThrowAxe(target.transform.position - stateMachineClass.transform.position);
                 stateMachineClass.turnFlag = !stateMachineClass.turnFlag;
+                enemy.isMove = true;
+                TurnManager.Instance.UseTurn();
             }
             else
             {

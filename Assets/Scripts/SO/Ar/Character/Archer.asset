@@ -31,14 +31,14 @@ MonoBehaviour:
   surviveStats:
     baseHP: 10
     MaxHP: 10
-    currentHP: 10
+    currentHP: 5
     baseShield: 4
     MaxShield: 4
     currentShield: 4
     baseWeight: 3
     currentWeight: 3
   skill:
-    skillImage: {fileID: 21300000, guid: 626b9cddb29049e4cac50cd87b419945, type: 3}
+    skillImage: {fileID: 21300000, guid: 4527d59e3b759ac44b04920a4b34237a, type: 3}
     skillName: "\uC0AC\uACA9"
     skillCoolTime: 6
     startskillCoolTime: 0
@@ -55,4 +55,5 @@ MonoBehaviour:
   isInGameTake: 1
   isDead: 0
   ArData: {fileID: 940447669140484755, guid: b7147b9d847791746b0aa90e0be54b0b, type: 3}
+  DMY: {fileID: 4609133417198370, guid: 905d2874a34d4f7458c2734c77bc691b, type: 3}
   Summary: "\uBE60\uB974\uAC8C \uD654\uC0B4\uC744 2\uBC1C \uBC1C\uC0AC\uD55C\uB2E4"

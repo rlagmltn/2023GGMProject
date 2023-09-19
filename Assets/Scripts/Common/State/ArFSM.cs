@@ -9,7 +9,7 @@ public class ArFSM : MonoBehaviour
     
     protected List<Ar> arList = new List<Ar>();
     [HideInInspector] public bool turnFlag = false;
-    public Enemy enemy;
+    [HideInInspector] public Enemy enemy;
     protected CameraMove cameraMove;
 
     protected bool turnSkip = false;
@@ -91,11 +91,24 @@ public class ArFSM : MonoBehaviour
     public IEnumerator MoveAr(Vector2 vel)
     {
         yield return new WaitForSeconds(1f);
+        float pushPower = GetComponent<Enemy>().pushPower;
+        float weight = GetComponent<Enemy>().stat.WEIGHT;
         TurnManager.Instance.UseTurn();
-        GetComponent<Rigidbody2D>().velocity = vel;
+        GetComponent<Rigidbody2D>().velocity = ((vel.normalized) * pushPower) / (1 + weight * 0.1f);
+        Debug.Log(vel.normalized * pushPower / (1 + weight * 0.1f));
         transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
         enemy.isMove = true;
-        
+    }
+
+    public IEnumerator RangeArrow(Vector2 angle)
+    {
+        transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+        float rangeAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
+        transform.GetChild(0).rotation = Quaternion.Euler(new Vector3(0, 0, rangeAngle));
+        yield return new WaitForSeconds(0.7f);
+        transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        enemy.isMove = true;
+        TurnManager.Instance.UseTurn();
     }
 
     public void SetTurnSkip()

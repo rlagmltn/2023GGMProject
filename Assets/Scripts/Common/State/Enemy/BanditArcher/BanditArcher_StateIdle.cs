@@ -23,13 +23,13 @@ public class BanditArcher_StateIdle : StateIdle
             }
             float distance = Vector2.Distance(stateMachineClass.transform.position, target.position);
             
-            if(skillCool == 11)
+            if(skillCool >= 11 && !stateMachineClass.CheckWall())
             {
                 skillCool = 0;
                 stateMachineClass.turnFlag = false;
                 stateMachine.ChangeState<BanditArcher_StateSkill>();
             }
-            else if (distance <= enemy.AtkRange)
+            else if (distance <= enemy.AtkRange && !stateMachineClass.CheckWall())
             {
                 skillCool++;
                 stateMachineClass.turnFlag = false;

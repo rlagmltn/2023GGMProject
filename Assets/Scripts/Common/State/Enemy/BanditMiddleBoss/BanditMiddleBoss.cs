@@ -11,6 +11,8 @@ public class BanditMiddleBoss : Enemy
     private int enemyCnt;
     private int phaseChange;
 
+    private bool isPhase1;
+
     [SerializeField] private GameObject axe;
     
     public override void StatReset()
@@ -28,35 +30,42 @@ public class BanditMiddleBoss : Enemy
 
     private void Phase1()
     {
-        stat.WEIGHT = 100000;
+        stat.WEIGHT = 20;
+        isPhase1 = true;
     }
 
     private void Phase2()
     {
         stat.WEIGHT = 5;
         stat.SP = stat.MaxSP;
+        isPhase1 = false;
     }
 
-    public void Passive()
+    public bool Passive()
     {
-        if(GameManager.Instance.enemies.Length < enemyCnt)
+        if(enemyCnt - FindObjectsOfType<Enemy>().Length > 0)
         {
-            stat.ATK++;
-            enemyCnt = GameManager.Instance.enemies.Length;
+            stat.ATK += enemyCnt - FindObjectsOfType<Enemy>().Length;
+            enemyCnt = FindObjectsOfType<Enemy>().Length;
         }
 
-        if(GameManager.Instance.enemies.Length <= phaseChange)
+        if(FindObjectsOfType<Enemy>().Length <= phaseChange)
         {
             Phase2();
         }
-        
+
+        return isPhase1;
     }
 
-    private void Howling()
+    public void Howling()
     {
+        //turn wait
+
         foreach(Player player in GameManager.Instance.friendly)
         {
             //ÃâÇ÷ µð¹öÇÁ
+
+            
         }
     }
 
@@ -64,12 +73,13 @@ public class BanditMiddleBoss : Enemy
     {
         if (axe == null)
         {
-            Debug.LogWarning("axeGameObject is Null");
+            Debug.LogError("axeGameObject is Null");
             return;
         }
 
         float rangeAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
         var bullet = Instantiate(axe, transform.position, Quaternion.Euler(0, 0, rangeAngle));
+        StartCoroutine("RangeArrow", angle);
         cameraMove.MovetoTarget(bullet.transform);
     }
 
@@ -93,5 +103,23 @@ public class BanditMiddleBoss : Enemy
                 }
             }
         }
+    }
+
+    protected override void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(isPhase1 && !collision.transform.CompareTag("Object"))
+        {
+
+        }
+        base.OnCollisionEnter2D(collision);
+    }
+
+    private IEnumerator RangeArrow(Vector2 angle)
+    {
+        transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+        float rangeAngle = Mathf.Atan2(angle.y, angle.x) * Mathf.Rad2Deg;
+        transform.GetChild(0).rotation = Quaternion.Euler(new Vector3(0, 0, rangeAngle));
+        yield return new WaitForSeconds(0.7f);
+        transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
     }
 }
