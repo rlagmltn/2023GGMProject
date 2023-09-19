@@ -171,7 +171,7 @@ public class Upgrade09 : MonoSingleton<Upgrade09>
 
     private void Rank6(ArSO ar)
     {
-        if (UpgradeCheck[6].arr[3])
+        if (UpgradeCheck[6].arr[2])
         {
             ar.surviveStats.currentWeight -= 1;
         }
