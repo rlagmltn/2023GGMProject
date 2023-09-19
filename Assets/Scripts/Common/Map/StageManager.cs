@@ -37,6 +37,14 @@ public class StageManager : MonoSingleton<StageManager>
     public Transform currentStage;
     private StageSO Selected_Stage;
 
+    [SerializeField] private EnemyInfoSO Warrior;
+    [SerializeField] private EnemyInfoSO Archer;
+
+    [SerializeField] private StageInfo_RewardSO GOLD;
+    [SerializeField] private StageInfo_RewardSO AR;
+    [SerializeField] private StageInfo_RewardSO ARHP;
+    [SerializeField] private StageInfo_RewardSO ITEM;
+
     private void Start()
     {
         Init();
@@ -61,6 +69,7 @@ public class StageManager : MonoSingleton<StageManager>
             ClearedStages.Add(startStage);
             SetStageState(stageList);
             //스테이지에 맞춰서 so 넣어주기
+            SetStageReward();
             Debug.Log("처음 실행함");
         }
         else //전에 다른 스테이지에 들어갔을때 실행해주는 코드
@@ -262,7 +271,33 @@ public class StageManager : MonoSingleton<StageManager>
 
     void SetStageReward()
     {
+        for(int num = 0; num < stageList.stageList.Count; num++)
+        {
+            stageList.stageList[num].StageEnemy.Clear();
+            if(stageList.stageList[num].stageKind == eStageState.Battle)
+            {
+                stageList.stageList[num].StageEnemy.Add(Warrior);
+                stageList.stageList[num].StageEnemy.Add(Archer);
+            }
 
+            stageList.stageList[num].StageReward.Clear();
+            //if(stageList.stageList[num].stageKind )
+            switch(stageList.stageList[num].stageKind)
+            {
+                case eStageState.Battle:
+                    stageList.stageList[num].StageReward.Add(GOLD);
+                    stageList.stageList[num].StageReward.Add(AR);
+                    stageList.stageList[num].StageReward.Add(ITEM);
+                    break;
+                case eStageState.Shop:
+                    stageList.stageList[num].StageReward.Add(ITEM);
+                    break;
+                case eStageState.Event:
+                    stageList.stageList[num].StageReward.Add(ARHP);
+                    break;
+                default: break;
+            }
+        }
     }
 
     private void OnApplicationQuit()
